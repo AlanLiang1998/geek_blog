@@ -6,7 +6,7 @@ package site.alanliang.geekblog.common;
 public interface Constant {
     String HOME_TITLE = "首页";
 
-    String HOME_HREF = "/static/layuimini/page/welcome-3.html";
+    String HOME_HREF = "/api/page?pageName=dashboard";
 
     String LOGO_TITLE = "Geek Blog";
 

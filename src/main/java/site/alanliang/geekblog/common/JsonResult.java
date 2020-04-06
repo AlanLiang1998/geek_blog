@@ -1,6 +1,5 @@
 package site.alanliang.geekblog.common;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -22,26 +21,27 @@ public class JsonResult implements Serializable {
     /**
      * 响应消息
      */
-    private String message;
+    private String msg;
     /**
      * 响应数据
      */
     private Object data;
 
-    public JsonResult(){}
-
-    public JsonResult(Integer code, String message) {
-        this.code = code;
-        this.message = message;
+    public JsonResult() {
     }
 
-    public JsonResult(Integer code, String message, Object data) {
+    public JsonResult(Integer code, String msg) {
         this.code = code;
-        this.message = message;
+        this.msg = msg;
+    }
+
+    public JsonResult(Integer code, String msg, Object data) {
+        this.code = code;
+        this.msg = msg;
         this.data = data;
     }
 
-    public static  JsonResult build(Integer code, String message) {
+    public static JsonResult build(Integer code, String message) {
         return new JsonResult(code, message);
     }
 
@@ -49,17 +49,17 @@ public class JsonResult implements Serializable {
         return new JsonResult(code, message, data);
     }
 
-    public static  JsonResult ok() {
+    public static JsonResult ok() {
         JsonResult result = new JsonResult();
         result.setCode(200);
-        result.setMessage("OK");
+        result.setMsg("OK");
         return result;
     }
 
     public static JsonResult ok(Object data) {
         JsonResult result = new JsonResult();
         result.setCode(200);
-        result.setMessage("OK");
+        result.setMsg("OK");
         result.setData(data);
         return result;
     }

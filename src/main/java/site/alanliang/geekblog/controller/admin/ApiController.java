@@ -1,7 +1,12 @@
 package site.alanliang.geekblog.controller.admin;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * @Descriptin TODO
@@ -13,9 +18,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/api")
 public class ApiController {
 
-    @RequestMapping
-    public String index() {
-        return "index";
+    @GetMapping("/page")
+    public ModelAndView getPage(@RequestParam("pageName") String pageName) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName(pageName);
+        return modelAndView;
     }
-
 }
