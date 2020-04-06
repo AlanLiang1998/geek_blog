@@ -4,7 +4,6 @@ import lombok.Data;
 import site.alanliang.geekblog.common.Constant;
 import site.alanliang.geekblog.domain.SysMenu;
 import site.alanliang.geekblog.utils.MenuTreeUtil;
-import site.alanliang.geekblog.vo.MenuVo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,18 +15,18 @@ import java.util.List;
  * Version 1.0
  **/
 @Data
-public class InitInfo {
-    private List<MenuVo> menuInfo;
+public class InitInfoVO {
+    private List<MenuVO> menuInfo;
 
     private HomeInfo homeInfo;
 
     private LogoInfo logoInfo;
 
 
-    public static InitInfo init(List<SysMenu> menuList) {
-        List<MenuVo> menuInfo = new ArrayList<>();
+    public static InitInfoVO init(List<SysMenu> menuList) {
+        List<MenuVO> menuInfo = new ArrayList<>();
         for (SysMenu e : menuList) {
-            MenuVo menuVO = new MenuVo();
+            MenuVO menuVO = new MenuVO();
             menuVO.setId(e.getId());
             menuVO.setPid(e.getPid());
             menuVO.setHref(e.getHref());
@@ -44,10 +43,24 @@ public class InitInfo {
         logoInfo.setTitle(Constant.LOGO_TITLE);
         logoInfo.setImage(Constant.LOGO_IMAGE);
 
-        InitInfo initInfo = new InitInfo();
-        initInfo.setMenuInfo(MenuTreeUtil.toTree(menuInfo, 0L));
-        initInfo.setHomeInfo(homeInfo);
-        initInfo.setLogoInfo(logoInfo);
-        return initInfo;
+        InitInfoVO initInfoVO = new InitInfoVO();
+        initInfoVO.setMenuInfo(MenuTreeUtil.toTree(menuInfo, 0L));
+        initInfoVO.setHomeInfo(homeInfo);
+        initInfoVO.setLogoInfo(logoInfo);
+        return initInfoVO;
+    }
+
+    @Data
+    private static class HomeInfo {
+        private String title;
+
+        private String href;
+    }
+
+    @Data
+    private static class LogoInfo {
+        private String title;
+
+        private String image;
     }
 }

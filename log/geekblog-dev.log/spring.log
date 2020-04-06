@@ -303,3 +303,57 @@
 2020-04-06 16:27:28.025 DEBUG 11644 --- [http-nio-8080-exec-9] s.a.g.mapper.SysMenuMapper.selectList    : <==      Total: 3
 2020-04-06 16:27:28.028  INFO 11644 --- [http-nio-8080-exec-9] s.alanliang.geekblog.aspect.LogAspect    : Request ------ RequestLog {url = http://localhost:8080/admin/init, ip = 0:0:0:0:0:0:0:1, classMethod = site.alanliang.geekblog.controller.admin.IndexController.init, args = [], time = 87ms, description = }
 2020-04-06 16:27:28.028  INFO 11644 --- [http-nio-8080-exec-9] s.alanliang.geekblog.aspect.LogAspect    : Return ------ <200 OK OK,InitInfo(menuInfo=[MenuVo(id=1, pid=0, title=常规管理, icon=fa fa-address-book, href=/api/?pageName=user/user-list, target=_self, child=[MenuVo(id=2, pid=1, title=用户管理, icon=fa fa-lemon-o, href=null, target=null, child=null), MenuVo(id=3, pid=1, title=其它管理, icon=fa fa-slideshare, href=null, target=null, child=null)])], homeInfo=HomeInfo(title=首页, href=/static/layuimini/page/welcome-3.html), logoInfo=LogoInfo(title=Geek Blog, image=/static/layuimini/images/logo.png)),[]>
+2020-04-06 16:28:14.115  INFO 6852 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Starting GeekBlogApplication on DESKTOP-QNDK7AF with PID 6852 (D:\idea\geekblog\target\classes started by AlanLiang in D:\idea\geekblog)
+2020-04-06 16:28:14.118 DEBUG 6852 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Running with Spring Boot v2.2.6.RELEASE, Spring v5.2.5.RELEASE
+2020-04-06 16:28:14.119  INFO 6852 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : The following profiles are active: dev
+2020-04-06 16:28:14.176  INFO 6852 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2020-04-06 16:28:14.176  INFO 6852 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2020-04-06 16:28:15.215  INFO 6852 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-04-06 16:28:15.221  INFO 6852 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-04-06 16:28:15.222  INFO 6852 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.33]
+2020-04-06 16:28:15.281  INFO 6852 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-04-06 16:28:15.282  INFO 6852 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1106 ms
+2020-04-06 16:28:15.404  INFO 6852 --- [restartedMain] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2020-04-06 16:28:15.639  INFO 6852 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2020-04-06 16:28:16.296  INFO 6852 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-04-06 16:28:16.360  INFO 6852 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2020-04-06 16:28:16.498  INFO 6852 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2020-04-06 16:28:16.560  INFO 6852 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2020-04-06 16:28:16.562  INFO 6852 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Started GeekBlogApplication in 3.057 seconds (JVM running for 3.918)
+2020-04-06 16:28:18.779  INFO 6852 --- [http-nio-8080-exec-1] o.apache.tomcat.util.http.parser.Cookie  : A cookie header was received [1585710853,1585814449,1585883196; __utma=111872281.1359600596.1585919045.1585919045.1585919045.1; __utmz=111872281.1585919045.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); tale_remember_author=%E6%A2%81%E4%BC%9F%E4%BC%A6; tale_remember_mail=1114173646%40qq.com; tale_remember_url=www.baidu.com; JSESSIONID=83590E2B450C2C677ED11DC6D8D61F75] that contained an invalid cookie. That cookie will be ignored.
+ Note: further occurrences of this error will be logged at DEBUG level.
+2020-04-06 16:28:18.785  INFO 6852 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-04-06 16:28:18.785  INFO 6852 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-04-06 16:28:18.794  INFO 6852 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 8 ms
+2020-04-06 16:28:19.517 DEBUG 6852 --- [http-nio-8080-exec-9] s.a.g.mapper.SysMenuMapper.selectList    : ==>  Preparing: SELECT id,title,href,pid,icon,target,sort,status,remark,create_time,update_time FROM sys_menu WHERE (status = ?) 
+2020-04-06 16:28:19.537 DEBUG 6852 --- [http-nio-8080-exec-9] s.a.g.mapper.SysMenuMapper.selectList    : ==> Parameters: true(Boolean)
+2020-04-06 16:28:19.552 DEBUG 6852 --- [http-nio-8080-exec-9] s.a.g.mapper.SysMenuMapper.selectList    : <==      Total: 3
+2020-04-06 16:28:19.557  INFO 6852 --- [http-nio-8080-exec-9] s.alanliang.geekblog.aspect.LogAspect    : Request ------ RequestLog {url = http://localhost:8080/admin/init, ip = 0:0:0:0:0:0:0:1, classMethod = site.alanliang.geekblog.controller.admin.IndexController.init, args = [], time = 133ms, description = }
+2020-04-06 16:28:19.558  INFO 6852 --- [http-nio-8080-exec-9] s.alanliang.geekblog.aspect.LogAspect    : Return ------ <200 OK OK,InitInfo(menuInfo=[MenuVo(id=1, pid=0, title=常规管理, icon=fa fa-address-book, href=/api/?pageName=user/user-list, target=_self, child=[MenuVo(id=2, pid=1, title=用户管理, icon=fa fa-lemon-o, href=null, target=null, child=null), MenuVo(id=3, pid=1, title=其它管理, icon=fa fa-slideshare, href=null, target=null, child=null)])], homeInfo=HomeInfo(title=首页, href=/static/layuimini/page/welcome-3.html), logoInfo=LogoInfo(title=Geek Blog, image=/static/layuimini/images/logo.png)),[]>
+2020-04-06 16:36:04.928  INFO 13184 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Starting GeekBlogApplication on DESKTOP-QNDK7AF with PID 13184 (D:\idea\geekblog\target\classes started by AlanLiang in D:\idea\geekblog)
+2020-04-06 16:36:04.931 DEBUG 13184 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Running with Spring Boot v2.2.6.RELEASE, Spring v5.2.5.RELEASE
+2020-04-06 16:36:04.931  INFO 13184 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : The following profiles are active: dev
+2020-04-06 16:36:04.997  INFO 13184 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2020-04-06 16:36:04.997  INFO 13184 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2020-04-06 16:36:06.049  INFO 13184 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-04-06 16:36:06.056  INFO 13184 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-04-06 16:36:06.056  INFO 13184 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.33]
+2020-04-06 16:36:06.136  INFO 13184 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-04-06 16:36:06.136  INFO 13184 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1138 ms
+2020-04-06 16:36:06.284  INFO 13184 --- [restartedMain] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2020-04-06 16:36:06.540  INFO 13184 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2020-04-06 16:36:07.199  INFO 13184 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-04-06 16:36:07.260  INFO 13184 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2020-04-06 16:36:07.400  INFO 13184 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2020-04-06 16:36:07.468  INFO 13184 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2020-04-06 16:36:07.470  INFO 13184 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Started GeekBlogApplication in 3.244 seconds (JVM running for 4.149)
+2020-04-06 16:36:10.985  INFO 13184 --- [http-nio-8080-exec-1] o.apache.tomcat.util.http.parser.Cookie  : A cookie header was received [1585710853,1585814449,1585883196; __utma=111872281.1359600596.1585919045.1585919045.1585919045.1; __utmz=111872281.1585919045.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); tale_remember_author=%E6%A2%81%E4%BC%9F%E4%BC%A6; tale_remember_mail=1114173646%40qq.com; tale_remember_url=www.baidu.com; JSESSIONID=83590E2B450C2C677ED11DC6D8D61F75] that contained an invalid cookie. That cookie will be ignored.
+ Note: further occurrences of this error will be logged at DEBUG level.
+2020-04-06 16:36:10.992  INFO 13184 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-04-06 16:36:10.993  INFO 13184 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-04-06 16:36:10.998  INFO 13184 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 5 ms
+2020-04-06 16:36:11.656 DEBUG 13184 --- [http-nio-8080-exec-8] s.a.g.mapper.SysMenuMapper.selectList    : ==>  Preparing: SELECT id,title,href,pid,icon,target,sort,status,remark,create_time,update_time FROM sys_menu WHERE (status = ?) 
+2020-04-06 16:36:11.672 DEBUG 13184 --- [http-nio-8080-exec-8] s.a.g.mapper.SysMenuMapper.selectList    : ==> Parameters: true(Boolean)
+2020-04-06 16:36:11.687 DEBUG 13184 --- [http-nio-8080-exec-8] s.a.g.mapper.SysMenuMapper.selectList    : <==      Total: 3
+2020-04-06 16:36:11.691  INFO 13184 --- [http-nio-8080-exec-8] s.alanliang.geekblog.aspect.LogAspect    : Request ------ RequestLog {url = http://localhost:8080/admin/init, ip = 0:0:0:0:0:0:0:1, classMethod = site.alanliang.geekblog.controller.admin.IndexController.init, args = [], time = 93ms, description = 初始化后台主页}
+2020-04-06 16:36:11.693  INFO 13184 --- [http-nio-8080-exec-8] s.alanliang.geekblog.aspect.LogAspect    : Return ------ <200 OK OK,InitInfo(menuInfo=[MenuVo(id=1, pid=0, title=常规管理, icon=fa fa-address-book, href=/api/?pageName=user/user-list, target=_self, child=[MenuVo(id=2, pid=1, title=用户管理, icon=fa fa-lemon-o, href=null, target=null, child=null), MenuVo(id=3, pid=1, title=其它管理, icon=fa fa-slideshare, href=null, target=null, child=null)])], homeInfo=InitInfo.HomeInfo(title=首页, href=/static/layuimini/page/welcome-3.html), logoInfo=InitInfo.LogoInfo(title=Geek Blog, image=/static/layuimini/images/logo.png)),[]>

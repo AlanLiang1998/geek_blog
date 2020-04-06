@@ -1,6 +1,6 @@
 package site.alanliang.geekblog.service;
 
-import site.alanliang.geekblog.vo.init.InitInfo;
+import site.alanliang.geekblog.vo.init.InitInfoVO;
 
 /**
  * @Descriptin TODO
@@ -13,5 +13,5 @@ public interface SysMenuService {
      * 获取菜单树
      * @return
      */
-    InitInfo menu();
+    InitInfoVO menu();
 }

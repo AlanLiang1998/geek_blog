@@ -1,4 +1,4 @@
-package site.alanliang.geekblog.vo;
+package site.alanliang.geekblog.vo.init;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
@@ -13,7 +13,7 @@ import java.util.List;
  **/
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class MenuVo {
+public class MenuVO {
     private Long id;
 
     private Long pid;
@@ -26,5 +26,5 @@ public class MenuVo {
 
     private String target;
 
-    private List<MenuVo> child;
+    private List<MenuVO> child;
 }

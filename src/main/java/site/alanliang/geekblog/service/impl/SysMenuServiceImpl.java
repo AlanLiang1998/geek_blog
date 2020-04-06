@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import site.alanliang.geekblog.domain.SysMenu;
 import site.alanliang.geekblog.mapper.SysMenuMapper;
 import site.alanliang.geekblog.service.SysMenuService;
-import site.alanliang.geekblog.vo.init.InitInfo;
+import site.alanliang.geekblog.vo.init.InitInfoVO;
 
 
 import java.util.List;
@@ -24,11 +24,11 @@ public class SysMenuServiceImpl implements SysMenuService {
     private SysMenuMapper sysMenuMapper;
 
     @Override
-    public InitInfo menu() {
+    public InitInfoVO menu() {
         QueryWrapper<SysMenu> wrapper = new QueryWrapper<>();
         wrapper.eq("status", true);
         List<SysMenu> menuList = sysMenuMapper.selectList(wrapper);
-        return InitInfo.init(menuList);
+        return InitInfoVO.init(menuList);
 
     }
 }

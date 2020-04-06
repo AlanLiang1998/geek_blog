@@ -11,8 +11,8 @@ import java.lang.annotation.Target;
  * Date 2020/4/6 16:06
  * Version 1.0
  **/
-@Target(ElementType.METHOD)
-@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.METHOD)//作用于方法上
+@Retention(RetentionPolicy.RUNTIME)//保留至运行时
 public @interface Log {
     String value() default "";
 }

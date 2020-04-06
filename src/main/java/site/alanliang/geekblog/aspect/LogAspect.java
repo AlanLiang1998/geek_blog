@@ -1,9 +1,8 @@
 package site.alanliang.geekblog.aspect;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -17,7 +16,6 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import site.alanliang.geekblog.anntation.Log;
 
 import javax.servlet.http.HttpServletRequest;
-import java.lang.reflect.Array;
 import java.util.Arrays;
 
 /**
@@ -28,9 +26,8 @@ import java.util.Arrays;
  **/
 @Aspect
 @Component
+@Slf4j
 public class LogAspect {
-
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Pointcut("@annotation(site.alanliang.geekblog.anntation.Log)")
     public void log() {
@@ -48,7 +45,7 @@ public class LogAspect {
         Object result = joinPoint.proceed();
         long time = System.currentTimeMillis() - beginTime;
         //获取注解描述
-        Log log = signature.getMethod().getAnnotation(Log.class);
+        String description = signature.getMethod().getAnnotation(Log.class).value();
 
         RequestLog requestLog = new RequestLog();
         requestLog.setUrl(request.getRequestURL().toString());
@@ -56,14 +53,14 @@ public class LogAspect {
         requestLog.setClassMethod(classMethod);
         requestLog.setArgs(joinPoint.getArgs());
         requestLog.setTime(time);
-        requestLog.setDescription(log.value());
-        logger.info("Request ------ {}", requestLog);
+        requestLog.setDescription(description);
+        log.info("Request ------ {}", requestLog);
         return result;
     }
 
     @AfterReturning(returning = "result", pointcut = "log()")
     public void doAfterReturning(Object result) {
-        logger.info("Return ------ {}", result);
+        log.info("Return ------ {}", result);
     }
 
     @Data
