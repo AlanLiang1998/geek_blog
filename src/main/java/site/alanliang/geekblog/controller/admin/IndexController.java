@@ -31,4 +31,5 @@ public class IndexController {
         InitInfoVO initInfoVO = sysMenuService.menu();
         return new ResponseEntity<>(initInfoVO, HttpStatus.OK);
     }
+
 }
