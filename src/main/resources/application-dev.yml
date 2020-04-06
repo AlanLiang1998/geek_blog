@@ -1,0 +1,39 @@
+#配置数据源
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/geek_blog?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false
+    username: root
+    password: 1234
+    platform: mysql
+    # 连接池指定 springboot2.02版本默认使用HikariCP 此处要替换成Druid
+    # 下面为连接池的补充设置，应用到上面所有数据源中
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      # 初始化大小，最小，最大
+      initial-size: 1
+      min-idle: 3
+      max-active: 20
+      max-wait: 60000
+      # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+      time-between-eviction-runs-millis: 30000
+      # 配置一个连接在池中最小生存的时间，单位是毫秒
+      min-evictable-idle-time-millis: 30000
+      validation-query: select 'x'
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      max-pool-prepared-statement-per-connection-size: 20
+  #禁用thymeleaf模板缓存
+  thymeleaf:
+    cache: false
+
+logging:
+  level:
+    root: info
+    site.alanliang.geekblog: debug
+  file:
+    path: log/geekblog-dev.log
+
+
+

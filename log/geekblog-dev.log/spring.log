@@ -1,0 +1,305 @@
+2020-04-06 13:54:46.713  INFO 8292 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Starting GeekBlogApplication on DESKTOP-QNDK7AF with PID 8292 (D:\idea\geekblog\target\classes started by AlanLiang in D:\idea\geekblog)
+2020-04-06 13:54:46.716 DEBUG 8292 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Running with Spring Boot v2.2.6.RELEASE, Spring v5.2.5.RELEASE
+2020-04-06 13:54:46.716  INFO 8292 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : The following profiles are active: dev
+2020-04-06 13:54:46.768  INFO 8292 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2020-04-06 13:54:46.768  INFO 8292 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2020-04-06 13:54:47.872  INFO 8292 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-04-06 13:54:47.879  INFO 8292 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-04-06 13:54:47.879  INFO 8292 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.33]
+2020-04-06 13:54:47.938  INFO 8292 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-04-06 13:54:47.939  INFO 8292 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1171 ms
+2020-04-06 13:54:48.083  INFO 8292 --- [restartedMain] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2020-04-06 13:54:48.404  INFO 8292 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2020-04-06 13:54:49.181  INFO 8292 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-04-06 13:54:49.247  INFO 8292 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2020-04-06 13:54:49.484  INFO 8292 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2020-04-06 13:54:49.547  INFO 8292 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2020-04-06 13:54:49.549  INFO 8292 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Started GeekBlogApplication in 3.472 seconds (JVM running for 4.305)
+2020-04-06 13:54:59.592  INFO 8292 --- [http-nio-8080-exec-1] o.apache.tomcat.util.http.parser.Cookie  : A cookie header was received [1585710853,1585814449,1585883196; __utma=111872281.1359600596.1585919045.1585919045.1585919045.1; __utmz=111872281.1585919045.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); tale_remember_author=%E6%A2%81%E4%BC%9F%E4%BC%A6; tale_remember_mail=1114173646%40qq.com; tale_remember_url=www.baidu.com] that contained an invalid cookie. That cookie will be ignored.
+ Note: further occurrences of this error will be logged at DEBUG level.
+2020-04-06 13:54:59.596  INFO 8292 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-04-06 13:54:59.596  INFO 8292 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-04-06 13:54:59.603  INFO 8292 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 7 ms
+2020-04-06 13:55:00.106 DEBUG 8292 --- [http-nio-8080-exec-6] s.a.g.mapper.SysMenuMapper.selectList    : ==>  Preparing: SELECT id,title,href,pid,icon,target,sort,status,remark,create_time,update_time FROM sys_menu WHERE (status = ?) 
+2020-04-06 13:55:00.122 DEBUG 8292 --- [http-nio-8080-exec-6] s.a.g.mapper.SysMenuMapper.selectList    : ==> Parameters: true(Boolean)
+2020-04-06 13:55:00.138 DEBUG 8292 --- [http-nio-8080-exec-6] s.a.g.mapper.SysMenuMapper.selectList    : <==      Total: 3
+2020-04-06 13:55:23.140 DEBUG 8292 --- [http-nio-8080-exec-7] s.a.g.mapper.SysMenuMapper.selectList    : ==>  Preparing: SELECT id,title,href,pid,icon,target,sort,status,remark,create_time,update_time FROM sys_menu WHERE (status = ?) 
+2020-04-06 13:55:23.140 DEBUG 8292 --- [http-nio-8080-exec-7] s.a.g.mapper.SysMenuMapper.selectList    : ==> Parameters: true(Boolean)
+2020-04-06 13:55:23.144 DEBUG 8292 --- [http-nio-8080-exec-7] s.a.g.mapper.SysMenuMapper.selectList    : <==      Total: 3
+2020-04-06 13:56:52.644 DEBUG 8292 --- [http-nio-8080-exec-6] s.a.g.mapper.SysMenuMapper.selectList    : ==>  Preparing: SELECT id,title,href,pid,icon,target,sort,status,remark,create_time,update_time FROM sys_menu WHERE (status = ?) 
+2020-04-06 13:56:52.644 DEBUG 8292 --- [http-nio-8080-exec-6] s.a.g.mapper.SysMenuMapper.selectList    : ==> Parameters: true(Boolean)
+2020-04-06 13:56:52.646 DEBUG 8292 --- [http-nio-8080-exec-6] s.a.g.mapper.SysMenuMapper.selectList    : <==      Total: 3
+2020-04-06 15:13:24.018  INFO 8292 --- [Thread-12] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2020-04-06 15:13:24.021  INFO 8292 --- [Thread-12] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed
+2020-04-06 15:13:24.550  INFO 8292 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Starting GeekBlogApplication on DESKTOP-QNDK7AF with PID 8292 (D:\idea\geekblog\target\classes started by AlanLiang in D:\idea\geekblog)
+2020-04-06 15:13:24.550 DEBUG 8292 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Running with Spring Boot v2.2.6.RELEASE, Spring v5.2.5.RELEASE
+2020-04-06 15:13:24.550  INFO 8292 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : The following profiles are active: dev
+2020-04-06 15:13:24.899  INFO 8292 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-04-06 15:13:24.899  INFO 8292 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-04-06 15:13:24.899  INFO 8292 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.33]
+2020-04-06 15:13:24.927  INFO 8292 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-04-06 15:13:24.927  INFO 8292 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 373 ms
+2020-04-06 15:13:24.975  INFO 8292 --- [restartedMain] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2020-04-06 15:13:25.143  INFO 8292 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-2} inited
+2020-04-06 15:13:25.669  INFO 8292 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-04-06 15:13:25.734  INFO 8292 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2020-04-06 15:13:26.003  INFO 8292 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2020-04-06 15:13:26.068  INFO 8292 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2020-04-06 15:13:26.069  INFO 8292 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Started GeekBlogApplication in 1.566 seconds (JVM running for 4720.861)
+2020-04-06 15:13:26.071  INFO 8292 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2020-04-06 15:13:37.539  INFO 8292 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-04-06 15:13:37.540  INFO 8292 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-04-06 15:13:37.550  INFO 8292 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 9 ms
+2020-04-06 15:16:38.059  INFO 26176 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Starting GeekBlogApplication on DESKTOP-QNDK7AF with PID 26176 (D:\idea\geekblog\target\classes started by AlanLiang in D:\idea\geekblog)
+2020-04-06 15:16:38.062 DEBUG 26176 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Running with Spring Boot v2.2.6.RELEASE, Spring v5.2.5.RELEASE
+2020-04-06 15:16:38.062  INFO 26176 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : The following profiles are active: dev
+2020-04-06 15:16:38.119  INFO 26176 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2020-04-06 15:16:38.119  INFO 26176 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2020-04-06 15:16:39.302  INFO 26176 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-04-06 15:16:39.309  INFO 26176 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-04-06 15:16:39.309  INFO 26176 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.33]
+2020-04-06 15:16:39.376  INFO 26176 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-04-06 15:16:39.376  INFO 26176 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1257 ms
+2020-04-06 15:16:39.507  INFO 26176 --- [restartedMain] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2020-04-06 15:16:39.783  INFO 26176 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2020-04-06 15:16:40.488  INFO 26176 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-04-06 15:16:40.542  INFO 26176 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2020-04-06 15:16:40.690  INFO 26176 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2020-04-06 15:16:40.758  INFO 26176 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2020-04-06 15:16:40.760  INFO 26176 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Started GeekBlogApplication in 3.274 seconds (JVM running for 4.213)
+2020-04-06 15:16:45.311  INFO 26176 --- [http-nio-8080-exec-1] o.apache.tomcat.util.http.parser.Cookie  : A cookie header was received [1585710853,1585814449,1585883196; __utma=111872281.1359600596.1585919045.1585919045.1585919045.1; __utmz=111872281.1585919045.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); tale_remember_author=%E6%A2%81%E4%BC%9F%E4%BC%A6; tale_remember_mail=1114173646%40qq.com; tale_remember_url=www.baidu.com] that contained an invalid cookie. That cookie will be ignored.
+ Note: further occurrences of this error will be logged at DEBUG level.
+2020-04-06 15:16:45.315  INFO 26176 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-04-06 15:16:45.316  INFO 26176 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-04-06 15:16:45.321  INFO 26176 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 5 ms
+2020-04-06 15:27:17.283  INFO 20768 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Starting GeekBlogApplication on DESKTOP-QNDK7AF with PID 20768 (D:\idea\geekblog\target\classes started by AlanLiang in D:\idea\geekblog)
+2020-04-06 15:27:17.287 DEBUG 20768 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Running with Spring Boot v2.2.6.RELEASE, Spring v5.2.5.RELEASE
+2020-04-06 15:27:17.287  INFO 20768 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : The following profiles are active: dev
+2020-04-06 15:27:17.360  INFO 20768 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2020-04-06 15:27:17.360  INFO 20768 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2020-04-06 15:27:18.366  INFO 20768 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-04-06 15:27:18.372  INFO 20768 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-04-06 15:27:18.372  INFO 20768 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.33]
+2020-04-06 15:27:18.432  INFO 20768 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-04-06 15:27:18.433  INFO 20768 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1072 ms
+2020-04-06 15:27:18.575  INFO 20768 --- [restartedMain] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2020-04-06 15:27:18.821  INFO 20768 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2020-04-06 15:27:19.486  INFO 20768 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-04-06 15:27:19.540  INFO 20768 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2020-04-06 15:27:19.686  INFO 20768 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2020-04-06 15:27:19.745  INFO 20768 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2020-04-06 15:27:19.747  INFO 20768 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Started GeekBlogApplication in 3.057 seconds (JVM running for 3.933)
+2020-04-06 15:27:37.511  INFO 20768 --- [http-nio-8080-exec-1] o.apache.tomcat.util.http.parser.Cookie  : A cookie header was received [1585710853,1585814449,1585883196; __utma=111872281.1359600596.1585919045.1585919045.1585919045.1; __utmz=111872281.1585919045.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); tale_remember_author=%E6%A2%81%E4%BC%9F%E4%BC%A6; tale_remember_mail=1114173646%40qq.com; tale_remember_url=www.baidu.com; JSESSIONID=83590E2B450C2C677ED11DC6D8D61F75] that contained an invalid cookie. That cookie will be ignored.
+ Note: further occurrences of this error will be logged at DEBUG level.
+2020-04-06 15:27:37.518  INFO 20768 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-04-06 15:27:37.519  INFO 20768 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-04-06 15:27:37.524  INFO 20768 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 5 ms
+2020-04-06 15:27:37.974  INFO 20768 --- [http-nio-8080-exec-9] s.alanliang.geekblog.aspect.LogAspect    : ---doBefore---
+2020-04-06 15:27:38.036 DEBUG 20768 --- [http-nio-8080-exec-9] s.a.g.mapper.SysMenuMapper.selectList    : ==>  Preparing: SELECT id,title,href,pid,icon,target,sort,status,remark,create_time,update_time FROM sys_menu WHERE (status = ?) 
+2020-04-06 15:27:38.053 DEBUG 20768 --- [http-nio-8080-exec-9] s.a.g.mapper.SysMenuMapper.selectList    : ==> Parameters: true(Boolean)
+2020-04-06 15:27:38.069 DEBUG 20768 --- [http-nio-8080-exec-9] s.a.g.mapper.SysMenuMapper.selectList    : <==      Total: 3
+2020-04-06 15:38:25.039  INFO 11592 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Starting GeekBlogApplication on DESKTOP-QNDK7AF with PID 11592 (D:\idea\geekblog\target\classes started by AlanLiang in D:\idea\geekblog)
+2020-04-06 15:38:25.043 DEBUG 11592 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Running with Spring Boot v2.2.6.RELEASE, Spring v5.2.5.RELEASE
+2020-04-06 15:38:25.043  INFO 11592 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : The following profiles are active: dev
+2020-04-06 15:38:25.103  INFO 11592 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2020-04-06 15:38:25.103  INFO 11592 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2020-04-06 15:38:26.190  INFO 11592 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-04-06 15:38:26.197  INFO 11592 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-04-06 15:38:26.197  INFO 11592 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.33]
+2020-04-06 15:38:26.268  INFO 11592 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-04-06 15:38:26.268  INFO 11592 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1165 ms
+2020-04-06 15:38:26.429  INFO 11592 --- [restartedMain] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2020-04-06 15:38:26.750  INFO 11592 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2020-04-06 15:38:27.489  INFO 11592 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-04-06 15:38:27.558  INFO 11592 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2020-04-06 15:38:27.781  INFO 11592 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2020-04-06 15:38:27.844  INFO 11592 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2020-04-06 15:38:27.846  INFO 11592 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Started GeekBlogApplication in 3.399 seconds (JVM running for 4.311)
+2020-04-06 15:38:33.760  INFO 11592 --- [http-nio-8080-exec-1] o.apache.tomcat.util.http.parser.Cookie  : A cookie header was received [1585710853,1585814449,1585883196; __utma=111872281.1359600596.1585919045.1585919045.1585919045.1; __utmz=111872281.1585919045.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); tale_remember_author=%E6%A2%81%E4%BC%9F%E4%BC%A6; tale_remember_mail=1114173646%40qq.com; tale_remember_url=www.baidu.com; JSESSIONID=83590E2B450C2C677ED11DC6D8D61F75] that contained an invalid cookie. That cookie will be ignored.
+ Note: further occurrences of this error will be logged at DEBUG level.
+2020-04-06 15:38:33.765  INFO 11592 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-04-06 15:38:33.765  INFO 11592 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-04-06 15:38:33.772  INFO 11592 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 7 ms
+2020-04-06 15:38:34.206  INFO 11592 --- [http-nio-8080-exec-9] s.alanliang.geekblog.aspect.LogAspect    : Request ------ RequestLog{url='http://localhost:8080/admin/init', ip='0:0:0:0:0:0:0:1', classMethod='site.alanliang.geekblog.controller.admin.IndexController.init', args=[]}
+2020-04-06 15:38:34.262 DEBUG 11592 --- [http-nio-8080-exec-9] s.a.g.mapper.SysMenuMapper.selectList    : ==>  Preparing: SELECT id,title,href,pid,icon,target,sort,status,remark,create_time,update_time FROM sys_menu WHERE (status = ?) 
+2020-04-06 15:38:34.279 DEBUG 11592 --- [http-nio-8080-exec-9] s.a.g.mapper.SysMenuMapper.selectList    : ==> Parameters: true(Boolean)
+2020-04-06 15:38:34.292 DEBUG 11592 --- [http-nio-8080-exec-9] s.a.g.mapper.SysMenuMapper.selectList    : <==      Total: 3
+2020-04-06 15:38:34.294  INFO 11592 --- [http-nio-8080-exec-9] s.alanliang.geekblog.aspect.LogAspect    : Return ------ <200 OK OK,InitInfo(menuInfo=[MenuVo(id=1, pid=0, title=常规管理, icon=fa fa-address-book, href=/api/?pageName=user/user-list, target=_self, child=[MenuVo(id=2, pid=1, title=用户管理, icon=fa fa-lemon-o, href=null, target=null, child=null), MenuVo(id=3, pid=1, title=其它管理, icon=fa fa-slideshare, href=null, target=null, child=null)])], homeInfo=HomeInfo(title=首页, href=/static/layuimini/page/welcome-3.html), logoInfo=LogoInfo(title=Geek Blog, image=/static/layuimini/images/logo.png)),[]>
+2020-04-06 15:39:13.667  INFO 11592 --- [http-nio-8080-exec-8] s.alanliang.geekblog.aspect.LogAspect    : Request ------ RequestLog{url='http://localhost:8080/api/hello/alan', ip='0:0:0:0:0:0:0:1', classMethod='site.alanliang.geekblog.controller.admin.ApiController.hello', args=[alan]}
+2020-04-06 15:39:13.671  INFO 11592 --- [http-nio-8080-exec-8] s.alanliang.geekblog.aspect.LogAspect    : Return ------ hello,alan
+2020-04-06 15:57:25.315  INFO 23252 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Starting GeekBlogApplication on DESKTOP-QNDK7AF with PID 23252 (D:\idea\geekblog\target\classes started by AlanLiang in D:\idea\geekblog)
+2020-04-06 15:57:25.318 DEBUG 23252 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Running with Spring Boot v2.2.6.RELEASE, Spring v5.2.5.RELEASE
+2020-04-06 15:57:25.318  INFO 23252 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : The following profiles are active: dev
+2020-04-06 15:57:25.378  INFO 23252 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2020-04-06 15:57:25.379  INFO 23252 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2020-04-06 15:57:26.446  INFO 23252 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-04-06 15:57:26.453  INFO 23252 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-04-06 15:57:26.453  INFO 23252 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.33]
+2020-04-06 15:57:26.522  INFO 23252 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-04-06 15:57:26.523  INFO 23252 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1142 ms
+2020-04-06 15:57:26.715  INFO 23252 --- [restartedMain] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2020-04-06 15:57:27.012  INFO 23252 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2020-04-06 15:57:27.753  INFO 23252 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-04-06 15:57:27.811  INFO 23252 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2020-04-06 15:57:27.996  INFO 23252 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2020-04-06 15:57:28.071  INFO 23252 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2020-04-06 15:57:28.074  INFO 23252 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Started GeekBlogApplication in 3.336 seconds (JVM running for 4.165)
+2020-04-06 15:57:52.568  INFO 15780 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Starting GeekBlogApplication on DESKTOP-QNDK7AF with PID 15780 (D:\idea\geekblog\target\classes started by AlanLiang in D:\idea\geekblog)
+2020-04-06 15:57:52.572 DEBUG 15780 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Running with Spring Boot v2.2.6.RELEASE, Spring v5.2.5.RELEASE
+2020-04-06 15:57:52.572  INFO 15780 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : The following profiles are active: dev
+2020-04-06 15:57:52.639  INFO 15780 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2020-04-06 15:57:52.639  INFO 15780 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2020-04-06 15:57:53.759  INFO 15780 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-04-06 15:57:53.766  INFO 15780 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-04-06 15:57:53.766  INFO 15780 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.33]
+2020-04-06 15:57:53.826  INFO 15780 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-04-06 15:57:53.826  INFO 15780 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1186 ms
+2020-04-06 15:57:53.982  INFO 15780 --- [restartedMain] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2020-04-06 15:57:54.355  INFO 15780 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2020-04-06 15:57:55.343  INFO 15780 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-04-06 15:57:55.432  INFO 15780 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2020-04-06 15:57:55.693  INFO 15780 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2020-04-06 15:57:55.787  INFO 15780 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2020-04-06 15:57:55.791  INFO 15780 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Started GeekBlogApplication in 4.028 seconds (JVM running for 4.917)
+2020-04-06 15:57:58.208  INFO 15780 --- [Thread-12] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2020-04-06 15:57:58.215  INFO 15780 --- [Thread-12] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed
+2020-04-06 15:57:58.882  INFO 15780 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Starting GeekBlogApplication on DESKTOP-QNDK7AF with PID 15780 (D:\idea\geekblog\target\classes started by AlanLiang in D:\idea\geekblog)
+2020-04-06 15:57:58.882 DEBUG 15780 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Running with Spring Boot v2.2.6.RELEASE, Spring v5.2.5.RELEASE
+2020-04-06 15:57:58.883  INFO 15780 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : The following profiles are active: dev
+2020-04-06 15:57:59.293  INFO 15780 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-04-06 15:57:59.294  INFO 15780 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-04-06 15:57:59.294  INFO 15780 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.33]
+2020-04-06 15:57:59.323  INFO 15780 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-04-06 15:57:59.324  INFO 15780 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 437 ms
+2020-04-06 15:57:59.372  INFO 15780 --- [restartedMain] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2020-04-06 15:57:59.580  INFO 15780 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-2} inited
+2020-04-06 15:58:00.186  INFO 15780 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-04-06 15:58:00.229  INFO 15780 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2020-04-06 15:58:00.469  INFO 15780 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2020-04-06 15:58:00.541  INFO 15780 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2020-04-06 15:58:00.542  INFO 15780 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Started GeekBlogApplication in 1.718 seconds (JVM running for 9.668)
+2020-04-06 15:58:00.544  INFO 15780 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2020-04-06 15:58:05.792  INFO 15780 --- [http-nio-8080-exec-1] o.apache.tomcat.util.http.parser.Cookie  : A cookie header was received [1585710853,1585814449,1585883196; __utma=111872281.1359600596.1585919045.1585919045.1585919045.1; __utmz=111872281.1585919045.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); tale_remember_author=%E6%A2%81%E4%BC%9F%E4%BC%A6; tale_remember_mail=1114173646%40qq.com; tale_remember_url=www.baidu.com; JSESSIONID=83590E2B450C2C677ED11DC6D8D61F75] that contained an invalid cookie. That cookie will be ignored.
+ Note: further occurrences of this error will be logged at DEBUG level.
+2020-04-06 15:58:05.799  INFO 15780 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-04-06 15:58:05.799  INFO 15780 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-04-06 15:58:05.808  INFO 15780 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 9 ms
+2020-04-06 15:58:06.316 DEBUG 15780 --- [http-nio-8080-exec-9] s.a.g.mapper.SysMenuMapper.selectList    : ==>  Preparing: SELECT id,title,href,pid,icon,target,sort,status,remark,create_time,update_time FROM sys_menu WHERE (status = ?) 
+2020-04-06 15:58:06.333 DEBUG 15780 --- [http-nio-8080-exec-9] s.a.g.mapper.SysMenuMapper.selectList    : ==> Parameters: true(Boolean)
+2020-04-06 15:58:06.345 DEBUG 15780 --- [http-nio-8080-exec-9] s.a.g.mapper.SysMenuMapper.selectList    : <==      Total: 3
+2020-04-06 15:58:06.351  INFO 15780 --- [http-nio-8080-exec-9] s.alanliang.geekblog.aspect.LogAspect    : Request ------ RequestLog{url='http://localhost:8080/admin/init', ip='0:0:0:0:0:0:0:1', classMethod='site.alanliang.geekblog.controller.admin.IndexController.init', args=[], time=90ms}
+2020-04-06 15:58:06.352  INFO 15780 --- [http-nio-8080-exec-9] s.alanliang.geekblog.aspect.LogAspect    : Return ------ <200 OK OK,InitInfo(menuInfo=[MenuVo(id=1, pid=0, title=常规管理, icon=fa fa-address-book, href=/api/?pageName=user/user-list, target=_self, child=[MenuVo(id=2, pid=1, title=用户管理, icon=fa fa-lemon-o, href=null, target=null, child=null), MenuVo(id=3, pid=1, title=其它管理, icon=fa fa-slideshare, href=null, target=null, child=null)])], homeInfo=HomeInfo(title=首页, href=/static/layuimini/page/welcome-3.html), logoInfo=LogoInfo(title=Geek Blog, image=/static/layuimini/images/logo.png)),[]>
+2020-04-06 15:58:56.716  INFO 15780 --- [http-nio-8080-exec-8] s.alanliang.geekblog.aspect.LogAspect    : Request ------ RequestLog{url='http://localhost:8080/api/hello/alan', ip='0:0:0:0:0:0:0:1', classMethod='site.alanliang.geekblog.controller.admin.ApiController.hello', args=[alan], time=2ms}
+2020-04-06 15:58:56.717  INFO 15780 --- [http-nio-8080-exec-8] s.alanliang.geekblog.aspect.LogAspect    : Return ------ hello,alan
+2020-04-06 16:24:03.392  INFO 9332 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Starting GeekBlogApplication on DESKTOP-QNDK7AF with PID 9332 (D:\idea\geekblog\target\classes started by AlanLiang in D:\idea\geekblog)
+2020-04-06 16:24:03.394 DEBUG 9332 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Running with Spring Boot v2.2.6.RELEASE, Spring v5.2.5.RELEASE
+2020-04-06 16:24:03.395  INFO 9332 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : The following profiles are active: dev
+2020-04-06 16:24:03.445  INFO 9332 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2020-04-06 16:24:03.445  INFO 9332 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2020-04-06 16:24:04.589  INFO 9332 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-04-06 16:24:04.597  INFO 9332 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-04-06 16:24:04.598  INFO 9332 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.33]
+2020-04-06 16:24:04.694  INFO 9332 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-04-06 16:24:04.694  INFO 9332 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1249 ms
+2020-04-06 16:24:04.868  INFO 9332 --- [restartedMain] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2020-04-06 16:24:05.100  INFO 9332 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2020-04-06 16:24:05.753  INFO 9332 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-04-06 16:24:05.813  INFO 9332 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2020-04-06 16:24:05.946  INFO 9332 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2020-04-06 16:24:06.033  INFO 9332 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2020-04-06 16:24:06.036  INFO 9332 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Started GeekBlogApplication in 3.574 seconds (JVM running for 4.489)
+2020-04-06 16:24:15.834  INFO 9332 --- [http-nio-8080-exec-1] o.apache.tomcat.util.http.parser.Cookie  : A cookie header was received [1585710853,1585814449,1585883196; __utma=111872281.1359600596.1585919045.1585919045.1585919045.1; __utmz=111872281.1585919045.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); tale_remember_author=%E6%A2%81%E4%BC%9F%E4%BC%A6; tale_remember_mail=1114173646%40qq.com; tale_remember_url=www.baidu.com; JSESSIONID=83590E2B450C2C677ED11DC6D8D61F75] that contained an invalid cookie. That cookie will be ignored.
+ Note: further occurrences of this error will be logged at DEBUG level.
+2020-04-06 16:24:15.841  INFO 9332 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-04-06 16:24:15.841  INFO 9332 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-04-06 16:24:15.852  INFO 9332 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 10 ms
+2020-04-06 16:24:16.408 DEBUG 9332 --- [http-nio-8080-exec-9] s.a.g.mapper.SysMenuMapper.selectList    : ==>  Preparing: SELECT id,title,href,pid,icon,target,sort,status,remark,create_time,update_time FROM sys_menu WHERE (status = ?) 
+2020-04-06 16:24:16.424 DEBUG 9332 --- [http-nio-8080-exec-9] s.a.g.mapper.SysMenuMapper.selectList    : ==> Parameters: true(Boolean)
+2020-04-06 16:24:16.440 DEBUG 9332 --- [http-nio-8080-exec-9] s.a.g.mapper.SysMenuMapper.selectList    : <==      Total: 3
+2020-04-06 16:24:16.442  INFO 9332 --- [http-nio-8080-exec-9] s.alanliang.geekblog.aspect.LogAspect    : Request ------ RequestLog{url = http://localhost:8080/admin/init, ip = 0:0:0:0:0:0:0:1, classMethod = site.alanliang.geekblog.controller.admin.IndexController.init, args = [], time = 88ms, description = 初始化后台主页}
+2020-04-06 16:24:16.443  INFO 9332 --- [http-nio-8080-exec-9] s.alanliang.geekblog.aspect.LogAspect    : Return ------ <200 OK OK,InitInfo(menuInfo=[MenuVo(id=1, pid=0, title=常规管理, icon=fa fa-address-book, href=/api/?pageName=user/user-list, target=_self, child=[MenuVo(id=2, pid=1, title=用户管理, icon=fa fa-lemon-o, href=null, target=null, child=null), MenuVo(id=3, pid=1, title=其它管理, icon=fa fa-slideshare, href=null, target=null, child=null)])], homeInfo=HomeInfo(title=首页, href=/static/layuimini/page/welcome-3.html), logoInfo=LogoInfo(title=Geek Blog, image=/static/layuimini/images/logo.png)),[]>
+2020-04-06 16:25:08.611  INFO 9332 --- [Thread-12] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2020-04-06 16:25:08.613  INFO 9332 --- [Thread-12] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed
+2020-04-06 16:25:09.173  INFO 9332 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Starting GeekBlogApplication on DESKTOP-QNDK7AF with PID 9332 (D:\idea\geekblog\target\classes started by AlanLiang in D:\idea\geekblog)
+2020-04-06 16:25:09.173 DEBUG 9332 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Running with Spring Boot v2.2.6.RELEASE, Spring v5.2.5.RELEASE
+2020-04-06 16:25:09.173  INFO 9332 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : The following profiles are active: dev
+2020-04-06 16:25:09.487  INFO 9332 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-04-06 16:25:09.488  INFO 9332 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-04-06 16:25:09.489  INFO 9332 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.33]
+2020-04-06 16:25:09.525  INFO 9332 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-04-06 16:25:09.525  INFO 9332 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 350 ms
+2020-04-06 16:25:09.571  INFO 9332 --- [restartedMain] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2020-04-06 16:25:09.643  INFO 9332 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-2} inited
+2020-04-06 16:25:10.003  INFO 9332 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-04-06 16:25:10.030  INFO 9332 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2020-04-06 16:25:10.158  INFO 9332 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2020-04-06 16:25:10.217  INFO 9332 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2020-04-06 16:25:10.218  INFO 9332 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Started GeekBlogApplication in 1.08 seconds (JVM running for 68.672)
+2020-04-06 16:25:10.220  INFO 9332 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2020-04-06 16:25:14.376  INFO 9332 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-04-06 16:25:14.378  INFO 9332 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-04-06 16:25:14.388  INFO 9332 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 9 ms
+2020-04-06 16:25:14.659 DEBUG 9332 --- [http-nio-8080-exec-8] s.a.g.mapper.SysMenuMapper.selectList    : ==>  Preparing: SELECT id,title,href,pid,icon,target,sort,status,remark,create_time,update_time FROM sys_menu WHERE (status = ?) 
+2020-04-06 16:25:14.659 DEBUG 9332 --- [http-nio-8080-exec-8] s.a.g.mapper.SysMenuMapper.selectList    : ==> Parameters: true(Boolean)
+2020-04-06 16:25:14.661 DEBUG 9332 --- [http-nio-8080-exec-8] s.a.g.mapper.SysMenuMapper.selectList    : <==      Total: 3
+2020-04-06 16:25:14.666  INFO 9332 --- [http-nio-8080-exec-8] s.alanliang.geekblog.aspect.LogAspect    : Request ------ RequestLog {url = http://localhost:8080/admin/init, ip = 0:0:0:0:0:0:0:1, classMethod = site.alanliang.geekblog.controller.admin.IndexController.init, args = [], time = 11ms, description = 初始化后台主页}
+2020-04-06 16:25:14.667  INFO 9332 --- [http-nio-8080-exec-8] s.alanliang.geekblog.aspect.LogAspect    : Return ------ <200 OK OK,InitInfo(menuInfo=[MenuVo(id=1, pid=0, title=常规管理, icon=fa fa-address-book, href=/api/?pageName=user/user-list, target=_self, child=[MenuVo(id=2, pid=1, title=用户管理, icon=fa fa-lemon-o, href=null, target=null, child=null), MenuVo(id=3, pid=1, title=其它管理, icon=fa fa-slideshare, href=null, target=null, child=null)])], homeInfo=HomeInfo(title=首页, href=/static/layuimini/page/welcome-3.html), logoInfo=LogoInfo(title=Geek Blog, image=/static/layuimini/images/logo.png)),[]>
+2020-04-06 16:25:51.931 DEBUG 9332 --- [http-nio-8080-exec-5] s.a.g.mapper.SysMenuMapper.selectList    : ==>  Preparing: SELECT id,title,href,pid,icon,target,sort,status,remark,create_time,update_time FROM sys_menu WHERE (status = ?) 
+2020-04-06 16:25:51.931 DEBUG 9332 --- [http-nio-8080-exec-5] s.a.g.mapper.SysMenuMapper.selectList    : ==> Parameters: true(Boolean)
+2020-04-06 16:25:51.933 DEBUG 9332 --- [http-nio-8080-exec-5] s.a.g.mapper.SysMenuMapper.selectList    : <==      Total: 3
+2020-04-06 16:25:51.933  INFO 9332 --- [http-nio-8080-exec-5] s.alanliang.geekblog.aspect.LogAspect    : Request ------ RequestLog {url = http://localhost:8080/admin/init, ip = 0:0:0:0:0:0:0:1, classMethod = site.alanliang.geekblog.controller.admin.IndexController.init, args = [], time = 4ms, description = 初始化后台主页}
+2020-04-06 16:25:51.934  INFO 9332 --- [http-nio-8080-exec-5] s.alanliang.geekblog.aspect.LogAspect    : Return ------ <200 OK OK,InitInfo(menuInfo=[MenuVo(id=1, pid=0, title=常规管理, icon=fa fa-address-book, href=/api/?pageName=user/user-list, target=_self, child=[MenuVo(id=2, pid=1, title=用户管理, icon=fa fa-lemon-o, href=null, target=null, child=null), MenuVo(id=3, pid=1, title=其它管理, icon=fa fa-slideshare, href=null, target=null, child=null)])], homeInfo=HomeInfo(title=首页, href=/static/layuimini/page/welcome-3.html), logoInfo=LogoInfo(title=Geek Blog, image=/static/layuimini/images/logo.png)),[]>
+2020-04-06 16:26:29.415  INFO 9332 --- [Thread-19] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2020-04-06 16:26:29.416  INFO 9332 --- [Thread-19] com.alibaba.druid.pool.DruidDataSource   : {dataSource-2} closed
+2020-04-06 16:26:29.866  INFO 9332 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Starting GeekBlogApplication on DESKTOP-QNDK7AF with PID 9332 (D:\idea\geekblog\target\classes started by AlanLiang in D:\idea\geekblog)
+2020-04-06 16:26:29.866 DEBUG 9332 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Running with Spring Boot v2.2.6.RELEASE, Spring v5.2.5.RELEASE
+2020-04-06 16:26:29.866  INFO 9332 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : The following profiles are active: dev
+2020-04-06 16:26:30.091  INFO 9332 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-04-06 16:26:30.092  INFO 9332 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-04-06 16:26:30.092  INFO 9332 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.33]
+2020-04-06 16:26:30.103  INFO 9332 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-04-06 16:26:30.103  INFO 9332 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 234 ms
+2020-04-06 16:26:30.130  INFO 9332 --- [restartedMain] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2020-04-06 16:26:30.183  INFO 9332 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-3} inited
+2020-04-06 16:26:30.754  INFO 9332 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-04-06 16:26:30.778  INFO 9332 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2020-04-06 16:26:30.907  INFO 9332 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2020-04-06 16:26:30.953  INFO 9332 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2020-04-06 16:26:30.954  INFO 9332 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Started GeekBlogApplication in 1.12 seconds (JVM running for 149.407)
+2020-04-06 16:26:30.955  INFO 9332 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2020-04-06 16:26:33.384  INFO 9332 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-04-06 16:26:33.384  INFO 9332 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-04-06 16:26:33.389  INFO 9332 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 4 ms
+2020-04-06 16:26:33.635 DEBUG 9332 --- [http-nio-8080-exec-9] s.a.g.mapper.SysMenuMapper.selectList    : ==>  Preparing: SELECT id,title,href,pid,icon,target,sort,status,remark,create_time,update_time FROM sys_menu WHERE (status = ?) 
+2020-04-06 16:26:33.636 DEBUG 9332 --- [http-nio-8080-exec-9] s.a.g.mapper.SysMenuMapper.selectList    : ==> Parameters: true(Boolean)
+2020-04-06 16:26:33.638 DEBUG 9332 --- [http-nio-8080-exec-9] s.a.g.mapper.SysMenuMapper.selectList    : <==      Total: 3
+2020-04-06 16:26:48.336 DEBUG 9332 --- [http-nio-8080-exec-7] s.a.g.mapper.SysMenuMapper.selectList    : ==>  Preparing: SELECT id,title,href,pid,icon,target,sort,status,remark,create_time,update_time FROM sys_menu WHERE (status = ?) 
+2020-04-06 16:26:48.337 DEBUG 9332 --- [http-nio-8080-exec-7] s.a.g.mapper.SysMenuMapper.selectList    : ==> Parameters: true(Boolean)
+2020-04-06 16:26:48.339 DEBUG 9332 --- [http-nio-8080-exec-7] s.a.g.mapper.SysMenuMapper.selectList    : <==      Total: 3
+2020-04-06 16:27:17.684  INFO 11644 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Starting GeekBlogApplication on DESKTOP-QNDK7AF with PID 11644 (D:\idea\geekblog\target\classes started by AlanLiang in D:\idea\geekblog)
+2020-04-06 16:27:17.687 DEBUG 11644 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Running with Spring Boot v2.2.6.RELEASE, Spring v5.2.5.RELEASE
+2020-04-06 16:27:17.688  INFO 11644 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : The following profiles are active: dev
+2020-04-06 16:27:17.747  INFO 11644 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2020-04-06 16:27:17.747  INFO 11644 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2020-04-06 16:27:18.734  INFO 11644 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-04-06 16:27:18.741  INFO 11644 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-04-06 16:27:18.741  INFO 11644 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.33]
+2020-04-06 16:27:18.806  INFO 11644 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-04-06 16:27:18.806  INFO 11644 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1059 ms
+2020-04-06 16:27:18.932  INFO 11644 --- [restartedMain] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2020-04-06 16:27:19.157  INFO 11644 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2020-04-06 16:27:19.824  INFO 11644 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-04-06 16:27:19.884  INFO 11644 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2020-04-06 16:27:20.020  INFO 11644 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2020-04-06 16:27:20.094  INFO 11644 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2020-04-06 16:27:20.096  INFO 11644 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Started GeekBlogApplication in 2.97 seconds (JVM running for 3.794)
+2020-04-06 16:27:27.473  INFO 11644 --- [http-nio-8080-exec-1] o.apache.tomcat.util.http.parser.Cookie  : A cookie header was received [1585710853,1585814449,1585883196; __utma=111872281.1359600596.1585919045.1585919045.1585919045.1; __utmz=111872281.1585919045.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); tale_remember_author=%E6%A2%81%E4%BC%9F%E4%BC%A6; tale_remember_mail=1114173646%40qq.com; tale_remember_url=www.baidu.com; JSESSIONID=83590E2B450C2C677ED11DC6D8D61F75] that contained an invalid cookie. That cookie will be ignored.
+ Note: further occurrences of this error will be logged at DEBUG level.
+2020-04-06 16:27:27.478  INFO 11644 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-04-06 16:27:27.478  INFO 11644 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-04-06 16:27:27.484  INFO 11644 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 6 ms
+2020-04-06 16:27:27.994 DEBUG 11644 --- [http-nio-8080-exec-9] s.a.g.mapper.SysMenuMapper.selectList    : ==>  Preparing: SELECT id,title,href,pid,icon,target,sort,status,remark,create_time,update_time FROM sys_menu WHERE (status = ?) 
+2020-04-06 16:27:28.011 DEBUG 11644 --- [http-nio-8080-exec-9] s.a.g.mapper.SysMenuMapper.selectList    : ==> Parameters: true(Boolean)
+2020-04-06 16:27:28.025 DEBUG 11644 --- [http-nio-8080-exec-9] s.a.g.mapper.SysMenuMapper.selectList    : <==      Total: 3
+2020-04-06 16:27:28.028  INFO 11644 --- [http-nio-8080-exec-9] s.alanliang.geekblog.aspect.LogAspect    : Request ------ RequestLog {url = http://localhost:8080/admin/init, ip = 0:0:0:0:0:0:0:1, classMethod = site.alanliang.geekblog.controller.admin.IndexController.init, args = [], time = 87ms, description = }
+2020-04-06 16:27:28.028  INFO 11644 --- [http-nio-8080-exec-9] s.alanliang.geekblog.aspect.LogAspect    : Return ------ <200 OK OK,InitInfo(menuInfo=[MenuVo(id=1, pid=0, title=常规管理, icon=fa fa-address-book, href=/api/?pageName=user/user-list, target=_self, child=[MenuVo(id=2, pid=1, title=用户管理, icon=fa fa-lemon-o, href=null, target=null, child=null), MenuVo(id=3, pid=1, title=其它管理, icon=fa fa-slideshare, href=null, target=null, child=null)])], homeInfo=HomeInfo(title=首页, href=/static/layuimini/page/welcome-3.html), logoInfo=LogoInfo(title=Geek Blog, image=/static/layuimini/images/logo.png)),[]>

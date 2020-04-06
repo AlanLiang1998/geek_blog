@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @Descriptin TODO
+ * @Descriptin 后台初始化信息
  * @Author AlanLiang
  * Date 2020/4/6 10:49
  * Version 1.0
