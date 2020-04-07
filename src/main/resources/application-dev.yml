@@ -27,13 +27,13 @@ spring:
   #禁用thymeleaf模板缓存
   thymeleaf:
     cache: false
-
+#日志配置
 logging:
   level:
     root: info
     site.alanliang.geekblog: debug
   file:
     path: log/geekblog-dev.log
-
-
-
+#服务器端口
+server:
+  port: 8888
