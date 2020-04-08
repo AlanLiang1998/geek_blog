@@ -114,12 +114,15 @@
 <script src="../static/layuimini/js/lay-config.js?v=1.0.4" charset="utf-8"
         th:src="@{/layuimini/js/lay-config.js(v=1.0.4)}"></script>
 <script src="../static/xm-select/xm-select.js" th:src="@{/xm-select/xm-select.js}"></script>
+<script src="../static/layuimini/js/lay-module/layuimini/miniTab.js"
+        th:src="@{/layuimini/js/lay-module/layuimini/miniTab.js}"></script>
 <script type="text/javascript">
-    layui.use(['layer', 'wangEditor', 'form'], function () {
+    layui.use(['layer', 'wangEditor', 'form', 'miniTab'], function () {
         var $ = layui.jquery,
             layer = layui.layer,
             wangEditor = layui.wangEditor,
-            form = layui.form;
+            form = layui.form,
+            miniTab = layui.miniTab;
         var editor = new wangEditor('#editor');
         editor.customConfig.uploadImgServer = "../api/upload.json";
         editor.customConfig.uploadFileName = 'image';
@@ -227,7 +230,6 @@
                 }
             }
         });
-
         //保存文章
         function saveArticle(data, isPublish) {
             //获取标签列表
@@ -241,15 +243,18 @@
             data.field.content = editor.txt.html();
             //获取是否发布
             data.field.published = isPublish;
+
+            var saveResult = false;
+
             $.ajax({
                 url: '/admin/article',
                 type: 'POST',
                 contentType: 'application/json',
                 data: JSON.stringify(data.field),
+                async: false,
                 success: function (result) {
                     if (result.code == 200) {
-                        var str = isPublish ? '发布' : '保存';
-                        layer.msg(str + '成功', {icon: 6});
+                        saveResult = true;
                     }
                 },
                 error: function (XMLHttpRequest) {
@@ -257,16 +262,30 @@
                     layer.alert(result.msg, {icon: 5});
                 }
             });
+            return saveResult;
         }
 
         //监听保存草稿按钮
         form.on('submit(draft)', function (data) {
-            saveArticle(data, false);
+            var result = saveArticle(data, false);
+            if (result == true) {
+                layer.msg('保存成功', {icon: 6});
+            }
             return false;
         });
         //监听发布文章按钮
         form.on('submit(publish)', function (data) {
-            saveArticle(data, true);
+            var result = saveArticle(data, true);
+            if (result == true) {
+                var index = layer.confirm('发布成功,是否查看文章？', {icon: 6}, function () {
+                    layer.close(index);
+                    miniTab.openNewTabByIframe({
+                        href: "/api/page?pageName=article/article-list",
+                        title: "所有文章",
+                    });
+                });
+
+            }
             return false;
         });
     });

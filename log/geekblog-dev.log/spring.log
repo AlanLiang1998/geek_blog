@@ -3579,3 +3579,419 @@ Consider defining a bean of type 'site.alanliang.geekblog.service.ArticleService
 2020-04-08 17:03:59.505 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.mapper.ArticleMapper.selectCount   : ==>  Preparing: SELECT COUNT( 1 ) FROM t_article 
 2020-04-08 17:03:59.506 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.mapper.ArticleMapper.selectCount   : ==> Parameters: 
 2020-04-08 17:03:59.508 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.mapper.ArticleMapper.selectCount   : <==      Total: 1
+2020-04-08 17:06:25.831 DEBUG 24220 --- [http-nio-8888-exec-9] s.a.g.mapper.SysMenuMapper.selectList    : ==>  Preparing: SELECT id,title,href,pid,icon,target,sort,status,remark,create_time,update_time FROM sys_menu WHERE (status = ?) 
+2020-04-08 17:06:25.831 DEBUG 24220 --- [http-nio-8888-exec-9] s.a.g.mapper.SysMenuMapper.selectList    : ==> Parameters: true(Boolean)
+2020-04-08 17:06:25.835 DEBUG 24220 --- [http-nio-8888-exec-9] s.a.g.mapper.SysMenuMapper.selectList    : <==      Total: 5
+2020-04-08 17:06:25.836  INFO 24220 --- [http-nio-8888-exec-9] s.alanliang.geekblog.aspect.LogAspect    : Request ------ RequestLog {url = http://localhost:8888/admin/init, ip = 0:0:0:0:0:0:0:1, classMethod = site.alanliang.geekblog.controller.admin.IndexController.init, args = [], time = 8ms, description = 初始化后台主页}
+2020-04-08 17:06:25.836  INFO 24220 --- [http-nio-8888-exec-9] s.alanliang.geekblog.aspect.LogAspect    : Return ------ <200 OK OK,InitInfoVo(menuInfo=[MenuVo(id=1, pid=0, title=常规管理, icon=fa fa-dashboard, href=, target=_self, child=[MenuVo(id=2, pid=1, title=用户管理, icon=fa fa-users, href=/api/page?pageName=user/user-list, target=null, child=null), MenuVo(id=3, pid=1, title=撰写文章, icon=fa fa-book, href=/api/page?pageName=article/article-edit, target=null, child=null), MenuVo(id=4, pid=1, title=其它管理, icon=fa fa-slideshare, href=null, target=null, child=null), MenuVo(id=5, pid=1, title=所有文章, icon=fa fa-book, href=/api/page?pageName=article/article-list, target=null, child=null)])], homeInfo=InitInfoVo.HomeInfo(title=首页, href=/api/page?pageName=dashboard), logoInfo=InitInfoVo.LogoInfo(title=Geek Blog, image=/static/layuimini/images/logo.png)),[]>
+2020-04-08 17:06:26.152 DEBUG 24220 --- [http-nio-8888-exec-3] s.a.g.m.A.selectPageWithExtra            : ==>  Preparing: SELECT COUNT(1) FROM t_article ta 
+2020-04-08 17:06:26.153 DEBUG 24220 --- [http-nio-8888-exec-3] s.a.g.m.A.selectPageWithExtra            : ==> Parameters: 
+2020-04-08 17:06:26.156 DEBUG 24220 --- [http-nio-8888-exec-3] s.a.g.m.A.selectPageWithExtra            : ==>  Preparing: select ta.id, ta.title, ta.type, ta.commentable, ta.appreciable, ta.comments, ta.views, ta.likes, ta.published, ta.create_time, ta.update_time, tc.id, tc.name from t_article ta left join t_category tc on ta.category_id = tc.id LIMIT ?,? 
+2020-04-08 17:06:26.157 DEBUG 24220 --- [http-nio-8888-exec-3] s.a.g.m.A.selectPageWithExtra            : ==> Parameters: 0(Long), 15(Long)
+2020-04-08 17:06:26.172 DEBUG 24220 --- [http-nio-8888-exec-3] s.a.g.m.A.selectPageWithExtra            : <==      Total: 6
+2020-04-08 17:06:26.173 DEBUG 24220 --- [http-nio-8888-exec-3] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-08 17:06:26.174 DEBUG 24220 --- [http-nio-8888-exec-3] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 1(Long)
+2020-04-08 17:06:26.176 DEBUG 24220 --- [http-nio-8888-exec-3] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 0
+2020-04-08 17:06:26.177 DEBUG 24220 --- [http-nio-8888-exec-3] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-08 17:06:26.177 DEBUG 24220 --- [http-nio-8888-exec-3] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 2(Long)
+2020-04-08 17:06:26.179 DEBUG 24220 --- [http-nio-8888-exec-3] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 3
+2020-04-08 17:06:26.181 DEBUG 24220 --- [http-nio-8888-exec-3] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-08 17:06:26.181 DEBUG 24220 --- [http-nio-8888-exec-3] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 3(Long)
+2020-04-08 17:06:26.186 DEBUG 24220 --- [http-nio-8888-exec-3] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 3
+2020-04-08 17:06:26.187 DEBUG 24220 --- [http-nio-8888-exec-3] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-08 17:06:26.187 DEBUG 24220 --- [http-nio-8888-exec-3] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 4(Long)
+2020-04-08 17:06:26.190 DEBUG 24220 --- [http-nio-8888-exec-3] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 1
+2020-04-08 17:06:26.192 DEBUG 24220 --- [http-nio-8888-exec-3] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-08 17:06:26.193 DEBUG 24220 --- [http-nio-8888-exec-3] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 5(Long)
+2020-04-08 17:06:26.195 DEBUG 24220 --- [http-nio-8888-exec-3] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 1
+2020-04-08 17:06:26.197 DEBUG 24220 --- [http-nio-8888-exec-3] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-08 17:06:26.197 DEBUG 24220 --- [http-nio-8888-exec-3] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 6(Long)
+2020-04-08 17:06:26.199 DEBUG 24220 --- [http-nio-8888-exec-3] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 2
+2020-04-08 17:06:26.201 DEBUG 24220 --- [http-nio-8888-exec-3] s.a.g.mapper.ArticleMapper.selectCount   : ==>  Preparing: SELECT COUNT( 1 ) FROM t_article 
+2020-04-08 17:06:26.201 DEBUG 24220 --- [http-nio-8888-exec-3] s.a.g.mapper.ArticleMapper.selectCount   : ==> Parameters: 
+2020-04-08 17:06:26.204 DEBUG 24220 --- [http-nio-8888-exec-3] s.a.g.mapper.ArticleMapper.selectCount   : <==      Total: 1
+2020-04-08 17:07:08.899 DEBUG 24220 --- [http-nio-8888-exec-2] s.a.g.mapper.SysMenuMapper.selectList    : ==>  Preparing: SELECT id,title,href,pid,icon,target,sort,status,remark,create_time,update_time FROM sys_menu WHERE (status = ?) 
+2020-04-08 17:07:08.900 DEBUG 24220 --- [http-nio-8888-exec-2] s.a.g.mapper.SysMenuMapper.selectList    : ==> Parameters: true(Boolean)
+2020-04-08 17:07:08.903 DEBUG 24220 --- [http-nio-8888-exec-2] s.a.g.mapper.SysMenuMapper.selectList    : <==      Total: 5
+2020-04-08 17:07:08.903  INFO 24220 --- [http-nio-8888-exec-2] s.alanliang.geekblog.aspect.LogAspect    : Request ------ RequestLog {url = http://localhost:8888/admin/init, ip = 0:0:0:0:0:0:0:1, classMethod = site.alanliang.geekblog.controller.admin.IndexController.init, args = [], time = 6ms, description = 初始化后台主页}
+2020-04-08 17:07:08.904  INFO 24220 --- [http-nio-8888-exec-2] s.alanliang.geekblog.aspect.LogAspect    : Return ------ <200 OK OK,InitInfoVo(menuInfo=[MenuVo(id=1, pid=0, title=常规管理, icon=fa fa-dashboard, href=, target=_self, child=[MenuVo(id=2, pid=1, title=用户管理, icon=fa fa-users, href=/api/page?pageName=user/user-list, target=null, child=null), MenuVo(id=3, pid=1, title=撰写文章, icon=fa fa-book, href=/api/page?pageName=article/article-edit, target=null, child=null), MenuVo(id=4, pid=1, title=其它管理, icon=fa fa-slideshare, href=null, target=null, child=null), MenuVo(id=5, pid=1, title=所有文章, icon=fa fa-book, href=/api/page?pageName=article/article-list, target=null, child=null)])], homeInfo=InitInfoVo.HomeInfo(title=首页, href=/api/page?pageName=dashboard), logoInfo=InitInfoVo.LogoInfo(title=Geek Blog, image=/static/layuimini/images/logo.png)),[]>
+2020-04-08 17:07:09.270 DEBUG 24220 --- [http-nio-8888-exec-1] s.a.g.m.A.selectPageWithExtra            : ==>  Preparing: SELECT COUNT(1) FROM t_article ta 
+2020-04-08 17:07:09.270 DEBUG 24220 --- [http-nio-8888-exec-1] s.a.g.m.A.selectPageWithExtra            : ==> Parameters: 
+2020-04-08 17:07:09.276 DEBUG 24220 --- [http-nio-8888-exec-1] s.a.g.m.A.selectPageWithExtra            : ==>  Preparing: select ta.id, ta.title, ta.type, ta.commentable, ta.appreciable, ta.comments, ta.views, ta.likes, ta.published, ta.create_time, ta.update_time, tc.id, tc.name from t_article ta left join t_category tc on ta.category_id = tc.id LIMIT ?,? 
+2020-04-08 17:07:09.277 DEBUG 24220 --- [http-nio-8888-exec-1] s.a.g.m.A.selectPageWithExtra            : ==> Parameters: 0(Long), 15(Long)
+2020-04-08 17:07:09.300 DEBUG 24220 --- [http-nio-8888-exec-1] s.a.g.m.A.selectPageWithExtra            : <==      Total: 6
+2020-04-08 17:07:09.301 DEBUG 24220 --- [http-nio-8888-exec-1] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-08 17:07:09.302 DEBUG 24220 --- [http-nio-8888-exec-1] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 1(Long)
+2020-04-08 17:07:09.305 DEBUG 24220 --- [http-nio-8888-exec-1] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 0
+2020-04-08 17:07:09.310 DEBUG 24220 --- [http-nio-8888-exec-1] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-08 17:07:09.311 DEBUG 24220 --- [http-nio-8888-exec-1] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 2(Long)
+2020-04-08 17:07:09.313 DEBUG 24220 --- [http-nio-8888-exec-1] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 3
+2020-04-08 17:07:09.314 DEBUG 24220 --- [http-nio-8888-exec-1] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-08 17:07:09.315 DEBUG 24220 --- [http-nio-8888-exec-1] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 3(Long)
+2020-04-08 17:07:09.316 DEBUG 24220 --- [http-nio-8888-exec-1] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 3
+2020-04-08 17:07:09.323 DEBUG 24220 --- [http-nio-8888-exec-1] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-08 17:07:09.324 DEBUG 24220 --- [http-nio-8888-exec-1] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 4(Long)
+2020-04-08 17:07:09.326 DEBUG 24220 --- [http-nio-8888-exec-1] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 1
+2020-04-08 17:07:09.331 DEBUG 24220 --- [http-nio-8888-exec-1] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-08 17:07:09.331 DEBUG 24220 --- [http-nio-8888-exec-1] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 5(Long)
+2020-04-08 17:07:09.332 DEBUG 24220 --- [http-nio-8888-exec-1] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 1
+2020-04-08 17:07:09.334 DEBUG 24220 --- [http-nio-8888-exec-1] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-08 17:07:09.334 DEBUG 24220 --- [http-nio-8888-exec-1] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 6(Long)
+2020-04-08 17:07:09.336 DEBUG 24220 --- [http-nio-8888-exec-1] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 2
+2020-04-08 17:07:09.337 DEBUG 24220 --- [http-nio-8888-exec-1] s.a.g.mapper.ArticleMapper.selectCount   : ==>  Preparing: SELECT COUNT( 1 ) FROM t_article 
+2020-04-08 17:07:09.337 DEBUG 24220 --- [http-nio-8888-exec-1] s.a.g.mapper.ArticleMapper.selectCount   : ==> Parameters: 
+2020-04-08 17:07:09.339 DEBUG 24220 --- [http-nio-8888-exec-1] s.a.g.mapper.ArticleMapper.selectCount   : <==      Total: 1
+2020-04-08 17:07:18.828 DEBUG 24220 --- [http-nio-8888-exec-8] s.a.g.mapper.SysMenuMapper.selectList    : ==>  Preparing: SELECT id,title,href,pid,icon,target,sort,status,remark,create_time,update_time FROM sys_menu WHERE (status = ?) 
+2020-04-08 17:07:18.829 DEBUG 24220 --- [http-nio-8888-exec-8] s.a.g.mapper.SysMenuMapper.selectList    : ==> Parameters: true(Boolean)
+2020-04-08 17:07:18.831 DEBUG 24220 --- [http-nio-8888-exec-8] s.a.g.mapper.SysMenuMapper.selectList    : <==      Total: 5
+2020-04-08 17:07:18.832  INFO 24220 --- [http-nio-8888-exec-8] s.alanliang.geekblog.aspect.LogAspect    : Request ------ RequestLog {url = http://localhost:8888/admin/init, ip = 0:0:0:0:0:0:0:1, classMethod = site.alanliang.geekblog.controller.admin.IndexController.init, args = [], time = 6ms, description = 初始化后台主页}
+2020-04-08 17:07:18.832  INFO 24220 --- [http-nio-8888-exec-8] s.alanliang.geekblog.aspect.LogAspect    : Return ------ <200 OK OK,InitInfoVo(menuInfo=[MenuVo(id=1, pid=0, title=常规管理, icon=fa fa-dashboard, href=, target=_self, child=[MenuVo(id=2, pid=1, title=用户管理, icon=fa fa-users, href=/api/page?pageName=user/user-list, target=null, child=null), MenuVo(id=3, pid=1, title=撰写文章, icon=fa fa-book, href=/api/page?pageName=article/article-edit, target=null, child=null), MenuVo(id=4, pid=1, title=其它管理, icon=fa fa-slideshare, href=null, target=null, child=null), MenuVo(id=5, pid=1, title=所有文章, icon=fa fa-book, href=/api/page?pageName=article/article-list, target=null, child=null)])], homeInfo=InitInfoVo.HomeInfo(title=首页, href=/api/page?pageName=dashboard), logoInfo=InitInfoVo.LogoInfo(title=Geek Blog, image=/static/layuimini/images/logo.png)),[]>
+2020-04-08 17:07:19.177 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.m.A.selectPageWithExtra            : ==>  Preparing: SELECT COUNT(1) FROM t_article ta 
+2020-04-08 17:07:19.178 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.m.A.selectPageWithExtra            : ==> Parameters: 
+2020-04-08 17:07:19.180 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.m.A.selectPageWithExtra            : ==>  Preparing: select ta.id, ta.title, ta.type, ta.commentable, ta.appreciable, ta.comments, ta.views, ta.likes, ta.published, ta.create_time, ta.update_time, tc.id, tc.name from t_article ta left join t_category tc on ta.category_id = tc.id LIMIT ?,? 
+2020-04-08 17:07:19.180 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.m.A.selectPageWithExtra            : ==> Parameters: 0(Long), 15(Long)
+2020-04-08 17:07:19.192 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.m.A.selectPageWithExtra            : <==      Total: 6
+2020-04-08 17:07:19.194 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-08 17:07:19.194 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 1(Long)
+2020-04-08 17:07:19.196 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 0
+2020-04-08 17:07:19.198 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-08 17:07:19.198 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 2(Long)
+2020-04-08 17:07:19.200 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 3
+2020-04-08 17:07:19.201 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-08 17:07:19.201 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 3(Long)
+2020-04-08 17:07:19.204 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 3
+2020-04-08 17:07:19.207 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-08 17:07:19.208 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 4(Long)
+2020-04-08 17:07:19.210 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 1
+2020-04-08 17:07:19.211 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-08 17:07:19.211 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 5(Long)
+2020-04-08 17:07:19.213 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 1
+2020-04-08 17:07:19.214 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-08 17:07:19.215 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 6(Long)
+2020-04-08 17:07:19.216 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 2
+2020-04-08 17:07:19.218 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.mapper.ArticleMapper.selectCount   : ==>  Preparing: SELECT COUNT( 1 ) FROM t_article 
+2020-04-08 17:07:19.218 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.mapper.ArticleMapper.selectCount   : ==> Parameters: 
+2020-04-08 17:07:19.222 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.mapper.ArticleMapper.selectCount   : <==      Total: 1
+2020-04-08 17:07:45.107 DEBUG 24220 --- [http-nio-8888-exec-4] s.a.g.mapper.SysMenuMapper.selectList    : ==>  Preparing: SELECT id,title,href,pid,icon,target,sort,status,remark,create_time,update_time FROM sys_menu WHERE (status = ?) 
+2020-04-08 17:07:45.107 DEBUG 24220 --- [http-nio-8888-exec-4] s.a.g.mapper.SysMenuMapper.selectList    : ==> Parameters: true(Boolean)
+2020-04-08 17:07:45.109 DEBUG 24220 --- [http-nio-8888-exec-4] s.a.g.mapper.SysMenuMapper.selectList    : <==      Total: 5
+2020-04-08 17:07:45.110  INFO 24220 --- [http-nio-8888-exec-4] s.alanliang.geekblog.aspect.LogAspect    : Request ------ RequestLog {url = http://localhost:8888/admin/init, ip = 0:0:0:0:0:0:0:1, classMethod = site.alanliang.geekblog.controller.admin.IndexController.init, args = [], time = 4ms, description = 初始化后台主页}
+2020-04-08 17:07:45.110  INFO 24220 --- [http-nio-8888-exec-4] s.alanliang.geekblog.aspect.LogAspect    : Return ------ <200 OK OK,InitInfoVo(menuInfo=[MenuVo(id=1, pid=0, title=常规管理, icon=fa fa-dashboard, href=, target=_self, child=[MenuVo(id=2, pid=1, title=用户管理, icon=fa fa-users, href=/api/page?pageName=user/user-list, target=null, child=null), MenuVo(id=3, pid=1, title=撰写文章, icon=fa fa-book, href=/api/page?pageName=article/article-edit, target=null, child=null), MenuVo(id=4, pid=1, title=其它管理, icon=fa fa-slideshare, href=null, target=null, child=null), MenuVo(id=5, pid=1, title=所有文章, icon=fa fa-book, href=/api/page?pageName=article/article-list, target=null, child=null)])], homeInfo=InitInfoVo.HomeInfo(title=首页, href=/api/page?pageName=dashboard), logoInfo=InitInfoVo.LogoInfo(title=Geek Blog, image=/static/layuimini/images/logo.png)),[]>
+2020-04-08 17:07:45.426 DEBUG 24220 --- [http-nio-8888-exec-7] s.a.g.m.A.selectPageWithExtra            : ==>  Preparing: SELECT COUNT(1) FROM t_article ta 
+2020-04-08 17:07:45.427 DEBUG 24220 --- [http-nio-8888-exec-7] s.a.g.m.A.selectPageWithExtra            : ==> Parameters: 
+2020-04-08 17:07:45.429 DEBUG 24220 --- [http-nio-8888-exec-7] s.a.g.m.A.selectPageWithExtra            : ==>  Preparing: select ta.id, ta.title, ta.type, ta.commentable, ta.appreciable, ta.comments, ta.views, ta.likes, ta.published, ta.create_time, ta.update_time, tc.id, tc.name from t_article ta left join t_category tc on ta.category_id = tc.id LIMIT ?,? 
+2020-04-08 17:07:45.430 DEBUG 24220 --- [http-nio-8888-exec-7] s.a.g.m.A.selectPageWithExtra            : ==> Parameters: 0(Long), 15(Long)
+2020-04-08 17:07:45.444 DEBUG 24220 --- [http-nio-8888-exec-7] s.a.g.m.A.selectPageWithExtra            : <==      Total: 6
+2020-04-08 17:07:45.446 DEBUG 24220 --- [http-nio-8888-exec-7] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-08 17:07:45.447 DEBUG 24220 --- [http-nio-8888-exec-7] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 1(Long)
+2020-04-08 17:07:45.451 DEBUG 24220 --- [http-nio-8888-exec-7] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 0
+2020-04-08 17:07:45.454 DEBUG 24220 --- [http-nio-8888-exec-7] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-08 17:07:45.454 DEBUG 24220 --- [http-nio-8888-exec-7] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 2(Long)
+2020-04-08 17:07:45.456 DEBUG 24220 --- [http-nio-8888-exec-7] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 3
+2020-04-08 17:07:45.457 DEBUG 24220 --- [http-nio-8888-exec-7] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-08 17:07:45.458 DEBUG 24220 --- [http-nio-8888-exec-7] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 3(Long)
+2020-04-08 17:07:45.460 DEBUG 24220 --- [http-nio-8888-exec-7] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 3
+2020-04-08 17:07:45.461 DEBUG 24220 --- [http-nio-8888-exec-7] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-08 17:07:45.462 DEBUG 24220 --- [http-nio-8888-exec-7] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 4(Long)
+2020-04-08 17:07:45.464 DEBUG 24220 --- [http-nio-8888-exec-7] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 1
+2020-04-08 17:07:45.467 DEBUG 24220 --- [http-nio-8888-exec-7] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-08 17:07:45.467 DEBUG 24220 --- [http-nio-8888-exec-7] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 5(Long)
+2020-04-08 17:07:45.469 DEBUG 24220 --- [http-nio-8888-exec-7] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 1
+2020-04-08 17:07:45.470 DEBUG 24220 --- [http-nio-8888-exec-7] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-08 17:07:45.471 DEBUG 24220 --- [http-nio-8888-exec-7] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 6(Long)
+2020-04-08 17:07:45.472 DEBUG 24220 --- [http-nio-8888-exec-7] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 2
+2020-04-08 17:07:45.474 DEBUG 24220 --- [http-nio-8888-exec-7] s.a.g.mapper.ArticleMapper.selectCount   : ==>  Preparing: SELECT COUNT( 1 ) FROM t_article 
+2020-04-08 17:07:45.474 DEBUG 24220 --- [http-nio-8888-exec-7] s.a.g.mapper.ArticleMapper.selectCount   : ==> Parameters: 
+2020-04-08 17:07:45.475 DEBUG 24220 --- [http-nio-8888-exec-7] s.a.g.mapper.ArticleMapper.selectCount   : <==      Total: 1
+2020-04-08 17:07:54.739 DEBUG 24220 --- [http-nio-8888-exec-3] s.a.g.mapper.SysMenuMapper.selectList    : ==>  Preparing: SELECT id,title,href,pid,icon,target,sort,status,remark,create_time,update_time FROM sys_menu WHERE (status = ?) 
+2020-04-08 17:07:54.739 DEBUG 24220 --- [http-nio-8888-exec-3] s.a.g.mapper.SysMenuMapper.selectList    : ==> Parameters: true(Boolean)
+2020-04-08 17:07:54.742 DEBUG 24220 --- [http-nio-8888-exec-3] s.a.g.mapper.SysMenuMapper.selectList    : <==      Total: 5
+2020-04-08 17:07:54.742  INFO 24220 --- [http-nio-8888-exec-3] s.alanliang.geekblog.aspect.LogAspect    : Request ------ RequestLog {url = http://localhost:8888/admin/init, ip = 0:0:0:0:0:0:0:1, classMethod = site.alanliang.geekblog.controller.admin.IndexController.init, args = [], time = 5ms, description = 初始化后台主页}
+2020-04-08 17:07:54.742  INFO 24220 --- [http-nio-8888-exec-3] s.alanliang.geekblog.aspect.LogAspect    : Return ------ <200 OK OK,InitInfoVo(menuInfo=[MenuVo(id=1, pid=0, title=常规管理, icon=fa fa-dashboard, href=, target=_self, child=[MenuVo(id=2, pid=1, title=用户管理, icon=fa fa-users, href=/api/page?pageName=user/user-list, target=null, child=null), MenuVo(id=3, pid=1, title=撰写文章, icon=fa fa-book, href=/api/page?pageName=article/article-edit, target=null, child=null), MenuVo(id=4, pid=1, title=其它管理, icon=fa fa-slideshare, href=null, target=null, child=null), MenuVo(id=5, pid=1, title=所有文章, icon=fa fa-book, href=/api/page?pageName=article/article-list, target=null, child=null)])], homeInfo=InitInfoVo.HomeInfo(title=首页, href=/api/page?pageName=dashboard), logoInfo=InitInfoVo.LogoInfo(title=Geek Blog, image=/static/layuimini/images/logo.png)),[]>
+2020-04-08 17:07:55.089 DEBUG 24220 --- [http-nio-8888-exec-2] s.a.g.m.A.selectPageWithExtra            : ==>  Preparing: SELECT COUNT(1) FROM t_article ta 
+2020-04-08 17:07:55.089 DEBUG 24220 --- [http-nio-8888-exec-2] s.a.g.m.A.selectPageWithExtra            : ==> Parameters: 
+2020-04-08 17:07:55.091 DEBUG 24220 --- [http-nio-8888-exec-2] s.a.g.m.A.selectPageWithExtra            : ==>  Preparing: select ta.id, ta.title, ta.type, ta.commentable, ta.appreciable, ta.comments, ta.views, ta.likes, ta.published, ta.create_time, ta.update_time, tc.id, tc.name from t_article ta left join t_category tc on ta.category_id = tc.id LIMIT ?,? 
+2020-04-08 17:07:55.092 DEBUG 24220 --- [http-nio-8888-exec-2] s.a.g.m.A.selectPageWithExtra            : ==> Parameters: 0(Long), 15(Long)
+2020-04-08 17:07:55.103 DEBUG 24220 --- [http-nio-8888-exec-2] s.a.g.m.A.selectPageWithExtra            : <==      Total: 6
+2020-04-08 17:07:55.105 DEBUG 24220 --- [http-nio-8888-exec-2] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-08 17:07:55.105 DEBUG 24220 --- [http-nio-8888-exec-2] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 1(Long)
+2020-04-08 17:07:55.116 DEBUG 24220 --- [http-nio-8888-exec-2] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 0
+2020-04-08 17:07:55.118 DEBUG 24220 --- [http-nio-8888-exec-2] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-08 17:07:55.119 DEBUG 24220 --- [http-nio-8888-exec-2] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 2(Long)
+2020-04-08 17:07:55.120 DEBUG 24220 --- [http-nio-8888-exec-2] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 3
+2020-04-08 17:07:55.121 DEBUG 24220 --- [http-nio-8888-exec-2] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-08 17:07:55.121 DEBUG 24220 --- [http-nio-8888-exec-2] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 3(Long)
+2020-04-08 17:07:55.123 DEBUG 24220 --- [http-nio-8888-exec-2] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 3
+2020-04-08 17:07:55.124 DEBUG 24220 --- [http-nio-8888-exec-2] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-08 17:07:55.124 DEBUG 24220 --- [http-nio-8888-exec-2] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 4(Long)
+2020-04-08 17:07:55.125 DEBUG 24220 --- [http-nio-8888-exec-2] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 1
+2020-04-08 17:07:55.126 DEBUG 24220 --- [http-nio-8888-exec-2] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-08 17:07:55.127 DEBUG 24220 --- [http-nio-8888-exec-2] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 5(Long)
+2020-04-08 17:07:55.132 DEBUG 24220 --- [http-nio-8888-exec-2] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 1
+2020-04-08 17:07:55.133 DEBUG 24220 --- [http-nio-8888-exec-2] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-08 17:07:55.133 DEBUG 24220 --- [http-nio-8888-exec-2] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 6(Long)
+2020-04-08 17:07:55.135 DEBUG 24220 --- [http-nio-8888-exec-2] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 2
+2020-04-08 17:07:55.137 DEBUG 24220 --- [http-nio-8888-exec-2] s.a.g.mapper.ArticleMapper.selectCount   : ==>  Preparing: SELECT COUNT( 1 ) FROM t_article 
+2020-04-08 17:07:55.137 DEBUG 24220 --- [http-nio-8888-exec-2] s.a.g.mapper.ArticleMapper.selectCount   : ==> Parameters: 
+2020-04-08 17:07:55.139 DEBUG 24220 --- [http-nio-8888-exec-2] s.a.g.mapper.ArticleMapper.selectCount   : <==      Total: 1
+2020-04-08 17:08:02.389 DEBUG 24220 --- [http-nio-8888-exec-9] s.a.g.mapper.SysMenuMapper.selectList    : ==>  Preparing: SELECT id,title,href,pid,icon,target,sort,status,remark,create_time,update_time FROM sys_menu WHERE (status = ?) 
+2020-04-08 17:08:02.389 DEBUG 24220 --- [http-nio-8888-exec-9] s.a.g.mapper.SysMenuMapper.selectList    : ==> Parameters: true(Boolean)
+2020-04-08 17:08:02.392 DEBUG 24220 --- [http-nio-8888-exec-9] s.a.g.mapper.SysMenuMapper.selectList    : <==      Total: 5
+2020-04-08 17:08:02.393  INFO 24220 --- [http-nio-8888-exec-9] s.alanliang.geekblog.aspect.LogAspect    : Request ------ RequestLog {url = http://localhost:8888/admin/init, ip = 0:0:0:0:0:0:0:1, classMethod = site.alanliang.geekblog.controller.admin.IndexController.init, args = [], time = 5ms, description = 初始化后台主页}
+2020-04-08 17:08:02.394  INFO 24220 --- [http-nio-8888-exec-9] s.alanliang.geekblog.aspect.LogAspect    : Return ------ <200 OK OK,InitInfoVo(menuInfo=[MenuVo(id=1, pid=0, title=常规管理, icon=fa fa-dashboard, href=, target=_self, child=[MenuVo(id=2, pid=1, title=用户管理, icon=fa fa-users, href=/api/page?pageName=user/user-list, target=null, child=null), MenuVo(id=3, pid=1, title=撰写文章, icon=fa fa-book, href=/api/page?pageName=article/article-edit, target=null, child=null), MenuVo(id=4, pid=1, title=其它管理, icon=fa fa-slideshare, href=null, target=null, child=null), MenuVo(id=5, pid=1, title=所有文章, icon=fa fa-book, href=/api/page?pageName=article/article-list, target=null, child=null)])], homeInfo=InitInfoVo.HomeInfo(title=首页, href=/api/page?pageName=dashboard), logoInfo=InitInfoVo.LogoInfo(title=Geek Blog, image=/static/layuimini/images/logo.png)),[]>
+2020-04-08 17:08:02.741 DEBUG 24220 --- [http-nio-8888-exec-1] s.a.g.m.A.selectPageWithExtra            : ==>  Preparing: SELECT COUNT(1) FROM t_article ta 
+2020-04-08 17:08:02.743 DEBUG 24220 --- [http-nio-8888-exec-1] s.a.g.m.A.selectPageWithExtra            : ==> Parameters: 
+2020-04-08 17:08:02.749 DEBUG 24220 --- [http-nio-8888-exec-1] s.a.g.m.A.selectPageWithExtra            : ==>  Preparing: select ta.id, ta.title, ta.type, ta.commentable, ta.appreciable, ta.comments, ta.views, ta.likes, ta.published, ta.create_time, ta.update_time, tc.id, tc.name from t_article ta left join t_category tc on ta.category_id = tc.id LIMIT ?,? 
+2020-04-08 17:08:02.749 DEBUG 24220 --- [http-nio-8888-exec-1] s.a.g.m.A.selectPageWithExtra            : ==> Parameters: 0(Long), 15(Long)
+2020-04-08 17:08:02.762 DEBUG 24220 --- [http-nio-8888-exec-1] s.a.g.m.A.selectPageWithExtra            : <==      Total: 6
+2020-04-08 17:08:02.764 DEBUG 24220 --- [http-nio-8888-exec-1] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-08 17:08:02.765 DEBUG 24220 --- [http-nio-8888-exec-1] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 1(Long)
+2020-04-08 17:08:02.767 DEBUG 24220 --- [http-nio-8888-exec-1] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 0
+2020-04-08 17:08:02.768 DEBUG 24220 --- [http-nio-8888-exec-1] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-08 17:08:02.769 DEBUG 24220 --- [http-nio-8888-exec-1] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 2(Long)
+2020-04-08 17:08:02.771 DEBUG 24220 --- [http-nio-8888-exec-1] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 3
+2020-04-08 17:08:02.772 DEBUG 24220 --- [http-nio-8888-exec-1] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-08 17:08:02.772 DEBUG 24220 --- [http-nio-8888-exec-1] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 3(Long)
+2020-04-08 17:08:02.774 DEBUG 24220 --- [http-nio-8888-exec-1] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 3
+2020-04-08 17:08:02.777 DEBUG 24220 --- [http-nio-8888-exec-1] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-08 17:08:02.779 DEBUG 24220 --- [http-nio-8888-exec-1] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 4(Long)
+2020-04-08 17:08:02.781 DEBUG 24220 --- [http-nio-8888-exec-1] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 1
+2020-04-08 17:08:02.782 DEBUG 24220 --- [http-nio-8888-exec-1] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-08 17:08:02.783 DEBUG 24220 --- [http-nio-8888-exec-1] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 5(Long)
+2020-04-08 17:08:02.785 DEBUG 24220 --- [http-nio-8888-exec-1] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 1
+2020-04-08 17:08:02.786 DEBUG 24220 --- [http-nio-8888-exec-1] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-08 17:08:02.786 DEBUG 24220 --- [http-nio-8888-exec-1] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 6(Long)
+2020-04-08 17:08:02.788 DEBUG 24220 --- [http-nio-8888-exec-1] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 2
+2020-04-08 17:08:02.789 DEBUG 24220 --- [http-nio-8888-exec-1] s.a.g.mapper.ArticleMapper.selectCount   : ==>  Preparing: SELECT COUNT( 1 ) FROM t_article 
+2020-04-08 17:08:02.789 DEBUG 24220 --- [http-nio-8888-exec-1] s.a.g.mapper.ArticleMapper.selectCount   : ==> Parameters: 
+2020-04-08 17:08:02.791 DEBUG 24220 --- [http-nio-8888-exec-1] s.a.g.mapper.ArticleMapper.selectCount   : <==      Total: 1
+2020-04-08 17:08:26.801 DEBUG 24220 --- [http-nio-8888-exec-7] s.a.g.mapper.SysMenuMapper.selectList    : ==>  Preparing: SELECT id,title,href,pid,icon,target,sort,status,remark,create_time,update_time FROM sys_menu WHERE (status = ?) 
+2020-04-08 17:08:26.802 DEBUG 24220 --- [http-nio-8888-exec-7] s.a.g.mapper.SysMenuMapper.selectList    : ==> Parameters: true(Boolean)
+2020-04-08 17:08:26.806 DEBUG 24220 --- [http-nio-8888-exec-7] s.a.g.mapper.SysMenuMapper.selectList    : <==      Total: 5
+2020-04-08 17:08:26.806  INFO 24220 --- [http-nio-8888-exec-7] s.alanliang.geekblog.aspect.LogAspect    : Request ------ RequestLog {url = http://localhost:8888/admin/init, ip = 0:0:0:0:0:0:0:1, classMethod = site.alanliang.geekblog.controller.admin.IndexController.init, args = [], time = 7ms, description = 初始化后台主页}
+2020-04-08 17:08:26.807  INFO 24220 --- [http-nio-8888-exec-7] s.alanliang.geekblog.aspect.LogAspect    : Return ------ <200 OK OK,InitInfoVo(menuInfo=[MenuVo(id=1, pid=0, title=常规管理, icon=fa fa-dashboard, href=, target=_self, child=[MenuVo(id=2, pid=1, title=用户管理, icon=fa fa-users, href=/api/page?pageName=user/user-list, target=null, child=null), MenuVo(id=3, pid=1, title=撰写文章, icon=fa fa-book, href=/api/page?pageName=article/article-edit, target=null, child=null), MenuVo(id=4, pid=1, title=其它管理, icon=fa fa-slideshare, href=null, target=null, child=null), MenuVo(id=5, pid=1, title=所有文章, icon=fa fa-book, href=/api/page?pageName=article/article-list, target=null, child=null)])], homeInfo=InitInfoVo.HomeInfo(title=首页, href=/api/page?pageName=dashboard), logoInfo=InitInfoVo.LogoInfo(title=Geek Blog, image=/static/layuimini/images/logo.png)),[]>
+2020-04-08 17:08:27.151 DEBUG 24220 --- [http-nio-8888-exec-5] s.a.g.m.A.selectPageWithExtra            : ==>  Preparing: SELECT COUNT(1) FROM t_article ta 
+2020-04-08 17:08:27.152 DEBUG 24220 --- [http-nio-8888-exec-5] s.a.g.m.A.selectPageWithExtra            : ==> Parameters: 
+2020-04-08 17:08:27.156 DEBUG 24220 --- [http-nio-8888-exec-5] s.a.g.m.A.selectPageWithExtra            : ==>  Preparing: select ta.id, ta.title, ta.type, ta.commentable, ta.appreciable, ta.comments, ta.views, ta.likes, ta.published, ta.create_time, ta.update_time, tc.id, tc.name from t_article ta left join t_category tc on ta.category_id = tc.id LIMIT ?,? 
+2020-04-08 17:08:27.157 DEBUG 24220 --- [http-nio-8888-exec-5] s.a.g.m.A.selectPageWithExtra            : ==> Parameters: 0(Long), 15(Long)
+2020-04-08 17:08:27.164 DEBUG 24220 --- [http-nio-8888-exec-5] s.a.g.m.A.selectPageWithExtra            : <==      Total: 6
+2020-04-08 17:08:27.165 DEBUG 24220 --- [http-nio-8888-exec-5] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-08 17:08:27.166 DEBUG 24220 --- [http-nio-8888-exec-5] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 1(Long)
+2020-04-08 17:08:27.168 DEBUG 24220 --- [http-nio-8888-exec-5] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 0
+2020-04-08 17:08:27.170 DEBUG 24220 --- [http-nio-8888-exec-5] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-08 17:08:27.171 DEBUG 24220 --- [http-nio-8888-exec-5] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 2(Long)
+2020-04-08 17:08:27.175 DEBUG 24220 --- [http-nio-8888-exec-5] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 3
+2020-04-08 17:08:27.177 DEBUG 24220 --- [http-nio-8888-exec-5] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-08 17:08:27.177 DEBUG 24220 --- [http-nio-8888-exec-5] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 3(Long)
+2020-04-08 17:08:27.178 DEBUG 24220 --- [http-nio-8888-exec-5] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 3
+2020-04-08 17:08:27.179 DEBUG 24220 --- [http-nio-8888-exec-5] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-08 17:08:27.180 DEBUG 24220 --- [http-nio-8888-exec-5] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 4(Long)
+2020-04-08 17:08:27.181 DEBUG 24220 --- [http-nio-8888-exec-5] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 1
+2020-04-08 17:08:27.183 DEBUG 24220 --- [http-nio-8888-exec-5] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-08 17:08:27.183 DEBUG 24220 --- [http-nio-8888-exec-5] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 5(Long)
+2020-04-08 17:08:27.185 DEBUG 24220 --- [http-nio-8888-exec-5] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 1
+2020-04-08 17:08:27.186 DEBUG 24220 --- [http-nio-8888-exec-5] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-08 17:08:27.186 DEBUG 24220 --- [http-nio-8888-exec-5] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 6(Long)
+2020-04-08 17:08:27.190 DEBUG 24220 --- [http-nio-8888-exec-5] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 2
+2020-04-08 17:08:27.193 DEBUG 24220 --- [http-nio-8888-exec-5] s.a.g.mapper.ArticleMapper.selectCount   : ==>  Preparing: SELECT COUNT( 1 ) FROM t_article 
+2020-04-08 17:08:27.193 DEBUG 24220 --- [http-nio-8888-exec-5] s.a.g.mapper.ArticleMapper.selectCount   : ==> Parameters: 
+2020-04-08 17:08:27.195 DEBUG 24220 --- [http-nio-8888-exec-5] s.a.g.mapper.ArticleMapper.selectCount   : <==      Total: 1
+2020-04-08 17:08:38.385 DEBUG 24220 --- [http-nio-8888-exec-8] s.a.g.mapper.SysMenuMapper.selectList    : ==>  Preparing: SELECT id,title,href,pid,icon,target,sort,status,remark,create_time,update_time FROM sys_menu WHERE (status = ?) 
+2020-04-08 17:08:38.385 DEBUG 24220 --- [http-nio-8888-exec-8] s.a.g.mapper.SysMenuMapper.selectList    : ==> Parameters: true(Boolean)
+2020-04-08 17:08:38.387 DEBUG 24220 --- [http-nio-8888-exec-8] s.a.g.mapper.SysMenuMapper.selectList    : <==      Total: 5
+2020-04-08 17:08:38.388  INFO 24220 --- [http-nio-8888-exec-8] s.alanliang.geekblog.aspect.LogAspect    : Request ------ RequestLog {url = http://localhost:8888/admin/init, ip = 0:0:0:0:0:0:0:1, classMethod = site.alanliang.geekblog.controller.admin.IndexController.init, args = [], time = 6ms, description = 初始化后台主页}
+2020-04-08 17:08:38.388  INFO 24220 --- [http-nio-8888-exec-8] s.alanliang.geekblog.aspect.LogAspect    : Return ------ <200 OK OK,InitInfoVo(menuInfo=[MenuVo(id=1, pid=0, title=常规管理, icon=fa fa-dashboard, href=, target=_self, child=[MenuVo(id=2, pid=1, title=用户管理, icon=fa fa-users, href=/api/page?pageName=user/user-list, target=null, child=null), MenuVo(id=3, pid=1, title=撰写文章, icon=fa fa-book, href=/api/page?pageName=article/article-edit, target=null, child=null), MenuVo(id=4, pid=1, title=其它管理, icon=fa fa-slideshare, href=null, target=null, child=null), MenuVo(id=5, pid=1, title=所有文章, icon=fa fa-book, href=/api/page?pageName=article/article-list, target=null, child=null)])], homeInfo=InitInfoVo.HomeInfo(title=首页, href=/api/page?pageName=dashboard), logoInfo=InitInfoVo.LogoInfo(title=Geek Blog, image=/static/layuimini/images/logo.png)),[]>
+2020-04-08 17:08:38.706 DEBUG 24220 --- [http-nio-8888-exec-10] s.a.g.m.A.selectPageWithExtra            : ==>  Preparing: SELECT COUNT(1) FROM t_article ta 
+2020-04-08 17:08:38.706 DEBUG 24220 --- [http-nio-8888-exec-10] s.a.g.m.A.selectPageWithExtra            : ==> Parameters: 
+2020-04-08 17:08:38.708 DEBUG 24220 --- [http-nio-8888-exec-10] s.a.g.m.A.selectPageWithExtra            : ==>  Preparing: select ta.id, ta.title, ta.type, ta.commentable, ta.appreciable, ta.comments, ta.views, ta.likes, ta.published, ta.create_time, ta.update_time, tc.id, tc.name from t_article ta left join t_category tc on ta.category_id = tc.id LIMIT ?,? 
+2020-04-08 17:08:38.708 DEBUG 24220 --- [http-nio-8888-exec-10] s.a.g.m.A.selectPageWithExtra            : ==> Parameters: 0(Long), 15(Long)
+2020-04-08 17:08:38.717 DEBUG 24220 --- [http-nio-8888-exec-10] s.a.g.m.A.selectPageWithExtra            : <==      Total: 6
+2020-04-08 17:08:38.720 DEBUG 24220 --- [http-nio-8888-exec-10] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-08 17:08:38.720 DEBUG 24220 --- [http-nio-8888-exec-10] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 1(Long)
+2020-04-08 17:08:38.722 DEBUG 24220 --- [http-nio-8888-exec-10] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 0
+2020-04-08 17:08:38.724 DEBUG 24220 --- [http-nio-8888-exec-10] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-08 17:08:38.724 DEBUG 24220 --- [http-nio-8888-exec-10] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 2(Long)
+2020-04-08 17:08:38.726 DEBUG 24220 --- [http-nio-8888-exec-10] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 3
+2020-04-08 17:08:38.727 DEBUG 24220 --- [http-nio-8888-exec-10] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-08 17:08:38.728 DEBUG 24220 --- [http-nio-8888-exec-10] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 3(Long)
+2020-04-08 17:08:38.729 DEBUG 24220 --- [http-nio-8888-exec-10] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 3
+2020-04-08 17:08:38.731 DEBUG 24220 --- [http-nio-8888-exec-10] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-08 17:08:38.731 DEBUG 24220 --- [http-nio-8888-exec-10] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 4(Long)
+2020-04-08 17:08:38.736 DEBUG 24220 --- [http-nio-8888-exec-10] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 1
+2020-04-08 17:08:38.737 DEBUG 24220 --- [http-nio-8888-exec-10] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-08 17:08:38.738 DEBUG 24220 --- [http-nio-8888-exec-10] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 5(Long)
+2020-04-08 17:08:38.739 DEBUG 24220 --- [http-nio-8888-exec-10] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 1
+2020-04-08 17:08:38.741 DEBUG 24220 --- [http-nio-8888-exec-10] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-08 17:08:38.742 DEBUG 24220 --- [http-nio-8888-exec-10] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 6(Long)
+2020-04-08 17:08:38.744 DEBUG 24220 --- [http-nio-8888-exec-10] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 2
+2020-04-08 17:08:38.745 DEBUG 24220 --- [http-nio-8888-exec-10] s.a.g.mapper.ArticleMapper.selectCount   : ==>  Preparing: SELECT COUNT( 1 ) FROM t_article 
+2020-04-08 17:08:38.746 DEBUG 24220 --- [http-nio-8888-exec-10] s.a.g.mapper.ArticleMapper.selectCount   : ==> Parameters: 
+2020-04-08 17:08:38.747 DEBUG 24220 --- [http-nio-8888-exec-10] s.a.g.mapper.ArticleMapper.selectCount   : <==      Total: 1
+2020-04-08 17:08:55.140 DEBUG 24220 --- [http-nio-8888-exec-4] s.a.g.mapper.SysMenuMapper.selectList    : ==>  Preparing: SELECT id,title,href,pid,icon,target,sort,status,remark,create_time,update_time FROM sys_menu WHERE (status = ?) 
+2020-04-08 17:08:55.140 DEBUG 24220 --- [http-nio-8888-exec-4] s.a.g.mapper.SysMenuMapper.selectList    : ==> Parameters: true(Boolean)
+2020-04-08 17:08:55.142 DEBUG 24220 --- [http-nio-8888-exec-4] s.a.g.mapper.SysMenuMapper.selectList    : <==      Total: 5
+2020-04-08 17:08:55.142  INFO 24220 --- [http-nio-8888-exec-4] s.alanliang.geekblog.aspect.LogAspect    : Request ------ RequestLog {url = http://localhost:8888/admin/init, ip = 0:0:0:0:0:0:0:1, classMethod = site.alanliang.geekblog.controller.admin.IndexController.init, args = [], time = 4ms, description = 初始化后台主页}
+2020-04-08 17:08:55.142  INFO 24220 --- [http-nio-8888-exec-4] s.alanliang.geekblog.aspect.LogAspect    : Return ------ <200 OK OK,InitInfoVo(menuInfo=[MenuVo(id=1, pid=0, title=常规管理, icon=fa fa-dashboard, href=, target=_self, child=[MenuVo(id=2, pid=1, title=用户管理, icon=fa fa-users, href=/api/page?pageName=user/user-list, target=null, child=null), MenuVo(id=3, pid=1, title=撰写文章, icon=fa fa-book, href=/api/page?pageName=article/article-edit, target=null, child=null), MenuVo(id=4, pid=1, title=其它管理, icon=fa fa-slideshare, href=null, target=null, child=null), MenuVo(id=5, pid=1, title=所有文章, icon=fa fa-book, href=/api/page?pageName=article/article-list, target=null, child=null)])], homeInfo=InitInfoVo.HomeInfo(title=首页, href=/api/page?pageName=dashboard), logoInfo=InitInfoVo.LogoInfo(title=Geek Blog, image=/static/layuimini/images/logo.png)),[]>
+2020-04-08 17:08:55.492 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.m.A.selectPageWithExtra            : ==>  Preparing: SELECT COUNT(1) FROM t_article ta 
+2020-04-08 17:08:55.492 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.m.A.selectPageWithExtra            : ==> Parameters: 
+2020-04-08 17:08:55.494 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.m.A.selectPageWithExtra            : ==>  Preparing: select ta.id, ta.title, ta.type, ta.commentable, ta.appreciable, ta.comments, ta.views, ta.likes, ta.published, ta.create_time, ta.update_time, tc.id, tc.name from t_article ta left join t_category tc on ta.category_id = tc.id LIMIT ?,? 
+2020-04-08 17:08:55.495 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.m.A.selectPageWithExtra            : ==> Parameters: 0(Long), 15(Long)
+2020-04-08 17:08:55.507 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.m.A.selectPageWithExtra            : <==      Total: 6
+2020-04-08 17:08:55.509 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-08 17:08:55.509 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 1(Long)
+2020-04-08 17:08:55.510 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 0
+2020-04-08 17:08:55.513 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-08 17:08:55.514 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 2(Long)
+2020-04-08 17:08:55.518 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 3
+2020-04-08 17:08:55.519 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-08 17:08:55.519 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 3(Long)
+2020-04-08 17:08:55.521 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 3
+2020-04-08 17:08:55.522 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-08 17:08:55.523 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 4(Long)
+2020-04-08 17:08:55.525 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 1
+2020-04-08 17:08:55.526 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-08 17:08:55.526 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 5(Long)
+2020-04-08 17:08:55.530 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 1
+2020-04-08 17:08:55.534 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-08 17:08:55.534 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 6(Long)
+2020-04-08 17:08:55.536 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 2
+2020-04-08 17:08:55.537 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.mapper.ArticleMapper.selectCount   : ==>  Preparing: SELECT COUNT( 1 ) FROM t_article 
+2020-04-08 17:08:55.537 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.mapper.ArticleMapper.selectCount   : ==> Parameters: 
+2020-04-08 17:08:55.539 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.mapper.ArticleMapper.selectCount   : <==      Total: 1
+2020-04-08 17:09:12.295 DEBUG 24220 --- [http-nio-8888-exec-3] s.a.g.mapper.SysMenuMapper.selectList    : ==>  Preparing: SELECT id,title,href,pid,icon,target,sort,status,remark,create_time,update_time FROM sys_menu WHERE (status = ?) 
+2020-04-08 17:09:12.295 DEBUG 24220 --- [http-nio-8888-exec-3] s.a.g.mapper.SysMenuMapper.selectList    : ==> Parameters: true(Boolean)
+2020-04-08 17:09:12.298 DEBUG 24220 --- [http-nio-8888-exec-3] s.a.g.mapper.SysMenuMapper.selectList    : <==      Total: 5
+2020-04-08 17:09:12.298  INFO 24220 --- [http-nio-8888-exec-3] s.alanliang.geekblog.aspect.LogAspect    : Request ------ RequestLog {url = http://localhost:8888/admin/init, ip = 0:0:0:0:0:0:0:1, classMethod = site.alanliang.geekblog.controller.admin.IndexController.init, args = [], time = 5ms, description = 初始化后台主页}
+2020-04-08 17:09:12.298  INFO 24220 --- [http-nio-8888-exec-3] s.alanliang.geekblog.aspect.LogAspect    : Return ------ <200 OK OK,InitInfoVo(menuInfo=[MenuVo(id=1, pid=0, title=常规管理, icon=fa fa-dashboard, href=, target=_self, child=[MenuVo(id=2, pid=1, title=用户管理, icon=fa fa-users, href=/api/page?pageName=user/user-list, target=null, child=null), MenuVo(id=3, pid=1, title=撰写文章, icon=fa fa-book, href=/api/page?pageName=article/article-edit, target=null, child=null), MenuVo(id=4, pid=1, title=其它管理, icon=fa fa-slideshare, href=null, target=null, child=null), MenuVo(id=5, pid=1, title=所有文章, icon=fa fa-book, href=/api/page?pageName=article/article-list, target=null, child=null)])], homeInfo=InitInfoVo.HomeInfo(title=首页, href=/api/page?pageName=dashboard), logoInfo=InitInfoVo.LogoInfo(title=Geek Blog, image=/static/layuimini/images/logo.png)),[]>
+2020-04-08 17:09:12.637 DEBUG 24220 --- [http-nio-8888-exec-2] s.a.g.m.A.selectPageWithExtra            : ==>  Preparing: SELECT COUNT(1) FROM t_article ta 
+2020-04-08 17:09:12.638 DEBUG 24220 --- [http-nio-8888-exec-2] s.a.g.m.A.selectPageWithExtra            : ==> Parameters: 
+2020-04-08 17:09:12.639 DEBUG 24220 --- [http-nio-8888-exec-2] s.a.g.m.A.selectPageWithExtra            : ==>  Preparing: select ta.id, ta.title, ta.type, ta.commentable, ta.appreciable, ta.comments, ta.views, ta.likes, ta.published, ta.create_time, ta.update_time, tc.id, tc.name from t_article ta left join t_category tc on ta.category_id = tc.id LIMIT ?,? 
+2020-04-08 17:09:12.639 DEBUG 24220 --- [http-nio-8888-exec-2] s.a.g.m.A.selectPageWithExtra            : ==> Parameters: 0(Long), 15(Long)
+2020-04-08 17:09:12.650 DEBUG 24220 --- [http-nio-8888-exec-2] s.a.g.m.A.selectPageWithExtra            : <==      Total: 6
+2020-04-08 17:09:12.651 DEBUG 24220 --- [http-nio-8888-exec-2] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-08 17:09:12.651 DEBUG 24220 --- [http-nio-8888-exec-2] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 1(Long)
+2020-04-08 17:09:12.654 DEBUG 24220 --- [http-nio-8888-exec-2] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 0
+2020-04-08 17:09:12.655 DEBUG 24220 --- [http-nio-8888-exec-2] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-08 17:09:12.656 DEBUG 24220 --- [http-nio-8888-exec-2] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 2(Long)
+2020-04-08 17:09:12.657 DEBUG 24220 --- [http-nio-8888-exec-2] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 3
+2020-04-08 17:09:12.661 DEBUG 24220 --- [http-nio-8888-exec-2] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-08 17:09:12.662 DEBUG 24220 --- [http-nio-8888-exec-2] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 3(Long)
+2020-04-08 17:09:12.664 DEBUG 24220 --- [http-nio-8888-exec-2] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 3
+2020-04-08 17:09:12.665 DEBUG 24220 --- [http-nio-8888-exec-2] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-08 17:09:12.666 DEBUG 24220 --- [http-nio-8888-exec-2] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 4(Long)
+2020-04-08 17:09:12.667 DEBUG 24220 --- [http-nio-8888-exec-2] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 1
+2020-04-08 17:09:12.669 DEBUG 24220 --- [http-nio-8888-exec-2] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-08 17:09:12.669 DEBUG 24220 --- [http-nio-8888-exec-2] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 5(Long)
+2020-04-08 17:09:12.671 DEBUG 24220 --- [http-nio-8888-exec-2] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 1
+2020-04-08 17:09:12.672 DEBUG 24220 --- [http-nio-8888-exec-2] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-08 17:09:12.672 DEBUG 24220 --- [http-nio-8888-exec-2] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 6(Long)
+2020-04-08 17:09:12.673 DEBUG 24220 --- [http-nio-8888-exec-2] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 2
+2020-04-08 17:09:12.675 DEBUG 24220 --- [http-nio-8888-exec-2] s.a.g.mapper.ArticleMapper.selectCount   : ==>  Preparing: SELECT COUNT( 1 ) FROM t_article 
+2020-04-08 17:09:12.676 DEBUG 24220 --- [http-nio-8888-exec-2] s.a.g.mapper.ArticleMapper.selectCount   : ==> Parameters: 
+2020-04-08 17:09:12.677 DEBUG 24220 --- [http-nio-8888-exec-2] s.a.g.mapper.ArticleMapper.selectCount   : <==      Total: 1
+2020-04-08 17:09:20.529 DEBUG 24220 --- [http-nio-8888-exec-7] s.a.g.mapper.SysMenuMapper.selectList    : ==>  Preparing: SELECT id,title,href,pid,icon,target,sort,status,remark,create_time,update_time FROM sys_menu WHERE (status = ?) 
+2020-04-08 17:09:20.529 DEBUG 24220 --- [http-nio-8888-exec-7] s.a.g.mapper.SysMenuMapper.selectList    : ==> Parameters: true(Boolean)
+2020-04-08 17:09:20.531 DEBUG 24220 --- [http-nio-8888-exec-7] s.a.g.mapper.SysMenuMapper.selectList    : <==      Total: 5
+2020-04-08 17:09:20.532  INFO 24220 --- [http-nio-8888-exec-7] s.alanliang.geekblog.aspect.LogAspect    : Request ------ RequestLog {url = http://localhost:8888/admin/init, ip = 0:0:0:0:0:0:0:1, classMethod = site.alanliang.geekblog.controller.admin.IndexController.init, args = [], time = 6ms, description = 初始化后台主页}
+2020-04-08 17:09:20.532  INFO 24220 --- [http-nio-8888-exec-7] s.alanliang.geekblog.aspect.LogAspect    : Return ------ <200 OK OK,InitInfoVo(menuInfo=[MenuVo(id=1, pid=0, title=常规管理, icon=fa fa-dashboard, href=, target=_self, child=[MenuVo(id=2, pid=1, title=用户管理, icon=fa fa-users, href=/api/page?pageName=user/user-list, target=null, child=null), MenuVo(id=3, pid=1, title=撰写文章, icon=fa fa-book, href=/api/page?pageName=article/article-edit, target=null, child=null), MenuVo(id=4, pid=1, title=其它管理, icon=fa fa-slideshare, href=null, target=null, child=null), MenuVo(id=5, pid=1, title=所有文章, icon=fa fa-book, href=/api/page?pageName=article/article-list, target=null, child=null)])], homeInfo=InitInfoVo.HomeInfo(title=首页, href=/api/page?pageName=dashboard), logoInfo=InitInfoVo.LogoInfo(title=Geek Blog, image=/static/layuimini/images/logo.png)),[]>
+2020-04-08 17:09:20.924 DEBUG 24220 --- [http-nio-8888-exec-7] s.a.g.m.A.selectPageWithExtra            : ==>  Preparing: SELECT COUNT(1) FROM t_article ta 
+2020-04-08 17:09:20.924 DEBUG 24220 --- [http-nio-8888-exec-7] s.a.g.m.A.selectPageWithExtra            : ==> Parameters: 
+2020-04-08 17:09:20.928 DEBUG 24220 --- [http-nio-8888-exec-7] s.a.g.m.A.selectPageWithExtra            : ==>  Preparing: select ta.id, ta.title, ta.type, ta.commentable, ta.appreciable, ta.comments, ta.views, ta.likes, ta.published, ta.create_time, ta.update_time, tc.id, tc.name from t_article ta left join t_category tc on ta.category_id = tc.id LIMIT ?,? 
+2020-04-08 17:09:20.929 DEBUG 24220 --- [http-nio-8888-exec-7] s.a.g.m.A.selectPageWithExtra            : ==> Parameters: 0(Long), 15(Long)
+2020-04-08 17:09:20.938 DEBUG 24220 --- [http-nio-8888-exec-7] s.a.g.m.A.selectPageWithExtra            : <==      Total: 6
+2020-04-08 17:09:20.941 DEBUG 24220 --- [http-nio-8888-exec-7] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-08 17:09:20.942 DEBUG 24220 --- [http-nio-8888-exec-7] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 1(Long)
+2020-04-08 17:09:20.946 DEBUG 24220 --- [http-nio-8888-exec-7] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 0
+2020-04-08 17:09:20.948 DEBUG 24220 --- [http-nio-8888-exec-7] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-08 17:09:20.948 DEBUG 24220 --- [http-nio-8888-exec-7] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 2(Long)
+2020-04-08 17:09:20.951 DEBUG 24220 --- [http-nio-8888-exec-7] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 3
+2020-04-08 17:09:20.953 DEBUG 24220 --- [http-nio-8888-exec-7] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-08 17:09:20.953 DEBUG 24220 --- [http-nio-8888-exec-7] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 3(Long)
+2020-04-08 17:09:20.955 DEBUG 24220 --- [http-nio-8888-exec-7] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 3
+2020-04-08 17:09:20.958 DEBUG 24220 --- [http-nio-8888-exec-7] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-08 17:09:20.960 DEBUG 24220 --- [http-nio-8888-exec-7] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 4(Long)
+2020-04-08 17:09:20.962 DEBUG 24220 --- [http-nio-8888-exec-7] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 1
+2020-04-08 17:09:20.964 DEBUG 24220 --- [http-nio-8888-exec-7] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-08 17:09:20.964 DEBUG 24220 --- [http-nio-8888-exec-7] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 5(Long)
+2020-04-08 17:09:20.966 DEBUG 24220 --- [http-nio-8888-exec-7] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 1
+2020-04-08 17:09:20.968 DEBUG 24220 --- [http-nio-8888-exec-7] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-08 17:09:20.968 DEBUG 24220 --- [http-nio-8888-exec-7] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 6(Long)
+2020-04-08 17:09:20.970 DEBUG 24220 --- [http-nio-8888-exec-7] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 2
+2020-04-08 17:09:20.971 DEBUG 24220 --- [http-nio-8888-exec-7] s.a.g.mapper.ArticleMapper.selectCount   : ==>  Preparing: SELECT COUNT( 1 ) FROM t_article 
+2020-04-08 17:09:20.972 DEBUG 24220 --- [http-nio-8888-exec-7] s.a.g.mapper.ArticleMapper.selectCount   : ==> Parameters: 
+2020-04-08 17:09:20.975 DEBUG 24220 --- [http-nio-8888-exec-7] s.a.g.mapper.ArticleMapper.selectCount   : <==      Total: 1
+2020-04-08 17:10:50.989 DEBUG 24220 --- [http-nio-8888-exec-9] s.a.g.mapper.SysMenuMapper.selectList    : ==>  Preparing: SELECT id,title,href,pid,icon,target,sort,status,remark,create_time,update_time FROM sys_menu WHERE (status = ?) 
+2020-04-08 17:10:50.989 DEBUG 24220 --- [http-nio-8888-exec-9] s.a.g.mapper.SysMenuMapper.selectList    : ==> Parameters: true(Boolean)
+2020-04-08 17:10:50.992 DEBUG 24220 --- [http-nio-8888-exec-9] s.a.g.mapper.SysMenuMapper.selectList    : <==      Total: 5
+2020-04-08 17:10:50.993  INFO 24220 --- [http-nio-8888-exec-9] s.alanliang.geekblog.aspect.LogAspect    : Request ------ RequestLog {url = http://localhost:8888/admin/init, ip = 0:0:0:0:0:0:0:1, classMethod = site.alanliang.geekblog.controller.admin.IndexController.init, args = [], time = 7ms, description = 初始化后台主页}
+2020-04-08 17:10:50.993  INFO 24220 --- [http-nio-8888-exec-9] s.alanliang.geekblog.aspect.LogAspect    : Return ------ <200 OK OK,InitInfoVo(menuInfo=[MenuVo(id=1, pid=0, title=常规管理, icon=fa fa-dashboard, href=, target=_self, child=[MenuVo(id=2, pid=1, title=用户管理, icon=fa fa-users, href=/api/page?pageName=user/user-list, target=null, child=null), MenuVo(id=3, pid=1, title=撰写文章, icon=fa fa-book, href=/api/page?pageName=article/article-edit, target=null, child=null), MenuVo(id=4, pid=1, title=其它管理, icon=fa fa-slideshare, href=null, target=null, child=null), MenuVo(id=5, pid=1, title=所有文章, icon=fa fa-book, href=/api/page?pageName=article/article-list, target=null, child=null)])], homeInfo=InitInfoVo.HomeInfo(title=首页, href=/api/page?pageName=dashboard), logoInfo=InitInfoVo.LogoInfo(title=Geek Blog, image=/static/layuimini/images/logo.png)),[]>
+2020-04-08 17:10:51.283 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.m.A.selectPageWithExtra            : ==>  Preparing: SELECT COUNT(1) FROM t_article ta 
+2020-04-08 17:10:51.283 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.m.A.selectPageWithExtra            : ==> Parameters: 
+2020-04-08 17:10:51.290 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.m.A.selectPageWithExtra            : ==>  Preparing: select ta.id, ta.title, ta.type, ta.commentable, ta.appreciable, ta.comments, ta.views, ta.likes, ta.published, ta.create_time, ta.update_time, tc.id, tc.name from t_article ta left join t_category tc on ta.category_id = tc.id LIMIT ?,? 
+2020-04-08 17:10:51.290 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.m.A.selectPageWithExtra            : ==> Parameters: 0(Long), 15(Long)
+2020-04-08 17:10:51.298 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.m.A.selectPageWithExtra            : <==      Total: 6
+2020-04-08 17:10:51.298 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-08 17:10:51.299 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 1(Long)
+2020-04-08 17:10:51.301 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 0
+2020-04-08 17:10:51.305 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-08 17:10:51.306 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 2(Long)
+2020-04-08 17:10:51.308 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 3
+2020-04-08 17:10:51.309 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-08 17:10:51.310 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 3(Long)
+2020-04-08 17:10:51.311 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 3
+2020-04-08 17:10:51.313 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-08 17:10:51.313 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 4(Long)
+2020-04-08 17:10:51.314 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 1
+2020-04-08 17:10:51.315 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-08 17:10:51.316 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 5(Long)
+2020-04-08 17:10:51.319 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 1
+2020-04-08 17:10:51.322 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-08 17:10:51.323 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 6(Long)
+2020-04-08 17:10:51.324 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 2
+2020-04-08 17:10:51.326 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.mapper.ArticleMapper.selectCount   : ==>  Preparing: SELECT COUNT( 1 ) FROM t_article 
+2020-04-08 17:10:51.326 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.mapper.ArticleMapper.selectCount   : ==> Parameters: 
+2020-04-08 17:10:51.327 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.mapper.ArticleMapper.selectCount   : <==      Total: 1
+2020-04-08 17:11:24.893 DEBUG 24220 --- [http-nio-8888-exec-1] s.a.g.mapper.CategoryMapper.selectList   : ==>  Preparing: SELECT id,name,create_time FROM t_category 
+2020-04-08 17:11:24.894 DEBUG 24220 --- [http-nio-8888-exec-1] s.a.g.mapper.CategoryMapper.selectList   : ==> Parameters: 
+2020-04-08 17:11:24.897 DEBUG 24220 --- [http-nio-8888-exec-1] s.a.g.mapper.CategoryMapper.selectList   : <==      Total: 4
+2020-04-08 17:11:24.898 DEBUG 24220 --- [http-nio-8888-exec-8] s.a.g.mapper.TagMapper.selectList        : ==>  Preparing: SELECT id,name,create_time FROM t_tag 
+2020-04-08 17:11:24.898 DEBUG 24220 --- [http-nio-8888-exec-8] s.a.g.mapper.TagMapper.selectList        : ==> Parameters: 
+2020-04-08 17:11:24.900 DEBUG 24220 --- [http-nio-8888-exec-8] s.a.g.mapper.TagMapper.selectList        : <==      Total: 10
+2020-04-08 17:11:29.587 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.mapper.SysUserMapper.selectPage    : ==>  Preparing: SELECT COUNT(1) FROM sys_user 
+2020-04-08 17:11:29.587 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.mapper.SysUserMapper.selectPage    : ==> Parameters: 
+2020-04-08 17:11:29.590 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.mapper.SysUserMapper.selectPage    : ==>  Preparing: SELECT id,username,password,nickname,avatar,email,create_time,update_time FROM sys_user LIMIT ?,? 
+2020-04-08 17:11:29.591 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.mapper.SysUserMapper.selectPage    : ==> Parameters: 0(Long), 15(Long)
+2020-04-08 17:11:29.594 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.mapper.SysUserMapper.selectPage    : <==      Total: 15
+2020-04-08 17:11:29.595  INFO 24220 --- [http-nio-8888-exec-6] s.alanliang.geekblog.aspect.LogAspect    : Request ------ RequestLog {url = http://localhost:8888/admin/user, ip = 0:0:0:0:0:0:0:1, classMethod = site.alanliang.geekblog.controller.admin.SysUserController.list, args = [1, 15], time = 12ms, description = 分页查询用户}
+2020-04-08 17:11:29.595  INFO 24220 --- [http-nio-8888-exec-6] s.alanliang.geekblog.aspect.LogAspect    : Return ------ TableResult(count=100)
+2020-04-08 17:15:06.903 DEBUG 24220 --- [http-nio-8888-exec-10] s.a.g.mapper.SysMenuMapper.selectList    : ==>  Preparing: SELECT id,title,href,pid,icon,target,sort,status,remark,create_time,update_time FROM sys_menu WHERE (status = ?) 
+2020-04-08 17:15:06.904 DEBUG 24220 --- [http-nio-8888-exec-10] s.a.g.mapper.SysMenuMapper.selectList    : ==> Parameters: true(Boolean)
+2020-04-08 17:15:06.908 DEBUG 24220 --- [http-nio-8888-exec-10] s.a.g.mapper.SysMenuMapper.selectList    : <==      Total: 5
+2020-04-08 17:15:06.908  INFO 24220 --- [http-nio-8888-exec-10] s.alanliang.geekblog.aspect.LogAspect    : Request ------ RequestLog {url = http://localhost:8888/admin/init, ip = 0:0:0:0:0:0:0:1, classMethod = site.alanliang.geekblog.controller.admin.IndexController.init, args = [], time = 7ms, description = 初始化后台主页}
+2020-04-08 17:15:06.908  INFO 24220 --- [http-nio-8888-exec-10] s.alanliang.geekblog.aspect.LogAspect    : Return ------ <200 OK OK,InitInfoVo(menuInfo=[MenuVo(id=1, pid=0, title=常规管理, icon=fa fa-dashboard, href=, target=_self, child=[MenuVo(id=2, pid=1, title=用户管理, icon=fa fa-users, href=/api/page?pageName=user/user-list, target=null, child=null), MenuVo(id=3, pid=1, title=撰写文章, icon=fa fa-book, href=/api/page?pageName=article/article-edit, target=null, child=null), MenuVo(id=4, pid=1, title=其它管理, icon=fa fa-slideshare, href=null, target=null, child=null), MenuVo(id=5, pid=1, title=所有文章, icon=fa fa-book, href=/api/page?pageName=article/article-list, target=null, child=null)])], homeInfo=InitInfoVo.HomeInfo(title=首页, href=/api/page?pageName=dashboard), logoInfo=InitInfoVo.LogoInfo(title=Geek Blog, image=/static/layuimini/images/logo.png)),[]>
+2020-04-08 17:15:07.265 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.m.A.selectPageWithExtra            : ==>  Preparing: SELECT COUNT(1) FROM t_article ta 
+2020-04-08 17:15:07.265 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.m.A.selectPageWithExtra            : ==> Parameters: 
+2020-04-08 17:15:07.268 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.m.A.selectPageWithExtra            : ==>  Preparing: select ta.id, ta.title, ta.type, ta.commentable, ta.appreciable, ta.comments, ta.views, ta.likes, ta.published, ta.create_time, ta.update_time, tc.id, tc.name from t_article ta left join t_category tc on ta.category_id = tc.id LIMIT ?,? 
+2020-04-08 17:15:07.268 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.m.A.selectPageWithExtra            : ==> Parameters: 0(Long), 15(Long)
+2020-04-08 17:15:07.279 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.m.A.selectPageWithExtra            : <==      Total: 6
+2020-04-08 17:15:07.281 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-08 17:15:07.281 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 1(Long)
+2020-04-08 17:15:07.283 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 0
+2020-04-08 17:15:07.284 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-08 17:15:07.284 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 2(Long)
+2020-04-08 17:15:07.286 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 3
+2020-04-08 17:15:07.288 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-08 17:15:07.289 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 3(Long)
+2020-04-08 17:15:07.293 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 3
+2020-04-08 17:15:07.294 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-08 17:15:07.295 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 4(Long)
+2020-04-08 17:15:07.296 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 1
+2020-04-08 17:15:07.298 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-08 17:15:07.298 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 5(Long)
+2020-04-08 17:15:07.300 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 1
+2020-04-08 17:15:07.301 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-08 17:15:07.301 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 6(Long)
+2020-04-08 17:15:07.310 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 2
+2020-04-08 17:15:07.312 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.mapper.ArticleMapper.selectCount   : ==>  Preparing: SELECT COUNT( 1 ) FROM t_article 
+2020-04-08 17:15:07.312 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.mapper.ArticleMapper.selectCount   : ==> Parameters: 
+2020-04-08 17:15:07.314 DEBUG 24220 --- [http-nio-8888-exec-6] s.a.g.mapper.ArticleMapper.selectCount   : <==      Total: 1

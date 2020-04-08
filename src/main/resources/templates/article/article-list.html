@@ -37,8 +37,7 @@
 
         <script type="text/html" id="toolbarDemo">
             <div class="layui-btn-container">
-                <button class="layui-btn layui-btn-sm data-add-btn" lay-event="add"> 撰写文章</button>
-                <button class="layui-btn layui-btn-sm layui-btn-danger data-delete-btn" lay-event="delete"> 删除文章
+                <button class="layui-btn layui-btn-sm layui-btn-danger data-delete-btn" lay-event="delete"> 批量删除
                 </button>
             </div>
         </script>
@@ -75,12 +74,12 @@
                     {field: 'id', width: 50, title: 'ID', sort: true},
                     {field: 'title', width: 180, title: '标题'},
                     {
-                        field: 'type', width: 80, title: '类型', templet: function (data) {
+                        field: 'type', width: 80, title: '类型', sort: true, templet: function (data) {
                             return data.type == 1 ? '原创' : (data.type == 2 ? '转载' : '翻译')
                         }
                     },
                     {
-                        field: 'category', width: 100, title: '分类', templet: function (data) {
+                        field: 'category', width: 100, title: '分类', sort: true, templet: function (data) {
                             return data.category.name;
                         }
                     },
@@ -97,15 +96,17 @@
                             }
                         }
                     },
-                    {field: 'views', width: 80, title: '浏览量'},
-                    {field: 'likes', width: 80, title: '点赞数'},
-                    {field: 'comments', width: 80, title: '评论数'},
+                    {field: 'views', width: 80, title: '浏览量', sort: true},
+                    {field: 'likes', width: 80, title: '点赞数', sort: true},
+                    {field: 'comments', width: 80, title: '评论数', sort: true,},
                     {
-                        field: 'published', width: 80, title: '状态', templet: function (data) {
+                        field: 'published', width: 80, title: '状态', sort: true, templet: function (data) {
                             return data.published ? '发布' : '草稿';
                         }
                     },
-                    {title: '操作', minWidth: 80, toolbar: '#currentTableBar', fixed: "right", align: "center"}
+                    {field: 'createTime', width: 150, title: '创建时间', sort: true},
+                    {field: 'updateTime', width: 150, title: '更新时间', sort: true},
+                    {title: '操作', minWidth: 120, toolbar: '#currentTableBar', fixed: "right", align: "center"}
                 ]
             ],
             limits: [10, 15, 20, 25, 50, 100],
@@ -139,13 +140,12 @@
         table.on('toolbar(currentTableFilter)', function (obj) {
             if (obj.event === 'add') {  // 监听添加操作
                 var index = layer.open({
-                    title: '添加用户',
                     type: 2,
                     shade: 0.2,
                     maxmin: true,
                     shadeClose: true,
                     area: ['100%', '100%'],
-                    content: '/page/table/add.html',
+                    content: '/api/page?pageName=article/article-edit',
                 });
                 $(window).on("resize", function () {
                     layer.full(index);
@@ -188,9 +188,6 @@
         });
 
     });
-</script>
-<script>
-
 </script>
 
 </body>
