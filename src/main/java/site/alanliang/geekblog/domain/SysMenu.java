@@ -1,5 +1,8 @@
 package site.alanliang.geekblog.domain;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 /**
@@ -9,7 +12,9 @@ import lombok.Data;
  * Version 1.0
  **/
 @Data
+@TableName("sys_menu")
 public class SysMenu {
+    @TableId(type = IdType.AUTO)
     private Long id;
 
     private String title;

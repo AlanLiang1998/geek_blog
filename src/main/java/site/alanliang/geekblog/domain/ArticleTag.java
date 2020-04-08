@@ -1,5 +1,7 @@
 package site.alanliang.geekblog.domain;
 
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 /**
@@ -9,8 +11,10 @@ import lombok.Data;
  * Version 1.0
  **/
 @Data
+@TableName("t_article_tag")
 public class ArticleTag {
+    @TableId
     private Long articleId;
-
+    @TableId
     private Long tagId;
 }

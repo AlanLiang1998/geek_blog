@@ -2,10 +2,10 @@ package site.alanliang.geekblog.exception.handler;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import site.alanliang.geekblog.common.JsonResult;
 import site.alanliang.geekblog.common.ResultEnum;
@@ -20,14 +20,25 @@ import javax.servlet.http.HttpServletRequest;
  * Version 1.0
  **/
 @Slf4j
-@ControllerAdvice
+@RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ResponseBody
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public JsonResult handleMethodArgumentNotValidException(MethodArgumentNotValidException exception) {
+        log.error("参数验证失败", exception);
+        BindingResult bindingResult = exception.getBindingResult();
+        FieldError fieldError = bindingResult.getFieldError();
+        String field = fieldError.getField();
+        String defaultMessage = fieldError.getDefaultMessage();
+        String message = String.format("%s : %s", field, defaultMessage);
+        return JsonResult.build(HttpStatus.BAD_REQUEST.value(), message);
+    }
+
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public Object handleGlobalException(HttpServletRequest request, Exception e) {
-        log.error("Request URL : {}, Exception : {}", request.getRequestURL(), e.getMessage());
+    public Object handleGlobalException(HttpServletRequest request, Exception exception) {
+        log.error("Request URL : {}, Exception : {}", request.getRequestURL(), exception.getMessage());
         if (AjaxUtil.isAjaxRequest(request)) {
             return JsonResult.build(ResultEnum.UNKNOWN_ERROR.getCode(), ResultEnum.UNKNOWN_ERROR.getMessage());
         }

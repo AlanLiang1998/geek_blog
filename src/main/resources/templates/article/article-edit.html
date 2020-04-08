@@ -21,19 +21,18 @@
             </div>
         </div>
         <div class="layui-row">
-            <form class="layui-form layui-col-md12" action="">
+            <form class="layui-form layui-col-md12" action="" lay-filter="form-filter">
                 <div class="layui-col-md8" style="margin-right: 60px">
                     <div class="layui-form-item">
-                        <input type="text" name="title" required lay-verify="required" placeholder="请输入文章标题..."
+                        <input type="text" name="title" lay-verify="verTitle" placeholder="请输入文章标题..."
                                autocomplete="off" class="layui-input">
                     </div>
                     <div class="layui-form-item">
-                    <textarea name="" required lay-verify="required" placeholder="请输入文章摘要..."
+                    <textarea name="summary" lay-verify="" placeholder="请输入文章摘要..."
                               class="layui-textarea"></textarea>
                     </div>
                     <div class="layui-form-item">
-                        <div id="editor" style="background-color: #fff;color: #767676;">
-                            <p>请输入文章内容...</p>
+                        <div id="editor" style="background-color: #fff;" required lay-verify="verContent">
                         </div>
                     </div>
                 </div>
@@ -44,23 +43,25 @@
                             <div class="layui-form-item">
                                 <label class="layui-form-label">文章类型</label>
                                 <div class="layui-input-block">
-                                    <select name="city" lay-verify="">
-                                        <option value="010">原创</option>
-                                        <option value="021">转载</option>
-                                        <option value="0571">翻译</option>
+                                    <select name="type" lay-verify="">
+                                        <option value="1" selected>原创</option>
+                                        <option value="2">转载</option>
+                                        <option value="3">翻译</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="layui-form-item">
                                 <label class="layui-form-label">开启赞赏</label>
                                 <div class="layui-input-block">
-                                    <input type="checkbox" name="yyy" lay-skin="switch" lay-text="是|否" checked>
+                                    <input type="checkbox" name="appreciable" lay-skin="switch" lay-text="是|否" checked
+                                           value="true">
                                 </div>
                             </div>
                             <div class="layui-form-item">
                                 <label class="layui-form-label">开启评论</label>
                                 <div class="layui-input-block">
-                                    <input type="checkbox" name="yyy" lay-skin="switch" lay-text="是|否" checked>
+                                    <input type="checkbox" name="commentable" lay-skin="switch" lay-text="是|否" checked
+                                           value="true">
                                 </div>
                             </div>
 
@@ -73,10 +74,8 @@
                         <div class="layui-card-body">
                             <div class="layui-form-item">
                                 <div class="layui-input-inline">
-                                    <select name="city1" lay-verify="" lay-search>
-                                        <option value="010">读书笔记</option>
-                                        <option value="021">错误日志</option>
-                                        <option value="0571">生活分享</option>
+                                    <select name="categoryId" lay-verify="verCategory" lay-search id="category-select">
+                                        <option value="0">请选择一个分类</option>
                                     </select>
                                 </div>
                             </div>
@@ -87,7 +86,7 @@
                         <div class="layui-card-body">
                             <div class="layui-form-item">
                                 <div class="layui-input-inline">
-                                    <div id="demo1"></div>
+                                    <div id="tag-select" lay-verify="verTag"></div>
                                 </div>
                             </div>
                         </div>
@@ -95,8 +94,12 @@
                 </div>
                 <div class="layui-col-md12">
                     <div class="layui-inline">
-                        <button type="button" class="layui-btn layui-btn-warm layui-input-inline">保存草稿</button>
-                        <button type="button" class="layui-btn layui-input-inline">发布文章</button>
+                        <button type="button" class="layui-btn layui-btn-warm layui-input-inline" lay-filter="draft"
+                                lay-submit="">保存草稿
+                        </button>
+                        <button type="button" class="layui-btn layui-input-inline" lay-filter="publish" lay-submit="">
+                            发布文章
+                        </button>
                     </div>
                 </div>
             </form>
@@ -115,7 +118,8 @@
     layui.use(['layer', 'wangEditor', 'form'], function () {
         var $ = layui.jquery,
             layer = layui.layer,
-            wangEditor = layui.wangEditor;
+            wangEditor = layui.wangEditor,
+            form = layui.form;
         var editor = new wangEditor('#editor');
         editor.customConfig.uploadImgServer = "../api/upload.json";
         editor.customConfig.uploadFileName = 'image';
@@ -143,35 +147,131 @@
             layer.msg(info);
         };
         editor.create();
+        //渲染多选下拉框
+        var tagSelect = xmSelect.render({
+            el: '#tag-select',
+            language: 'zn',
+            //自动换行
+            autoRow: true,
+            //开启搜索
+            filterable: true,
+            max: 5,
+            theme: {
+                maxColor: 'orange',
+            },
+            maxMethod(seles, item) {
+                alert(`${item.name}不能选了, 已经超了`)
+            },
+            data: []
+        });
+        //获取分类列表
+        $.ajax({
+            url: '/admin/category',
+            type: 'GET',
+            success: function (result) {
+                if (result.code == 200) {
+                    $.each(result.data, function () {
+                        var categoryId = $(this)[0].id;
+                        var categoryName = $(this)[0].name;
+                        var categoryOption = $('<option></option>').val(categoryId).text(categoryName);
+                        $('#category-select').append(categoryOption);
+                    });
+                    form.render('select', 'form-filter');
+                }
+            }
+        });
+        //获取标签列表
+        $.ajax({
+            url: '/admin/tag',
+            type: 'GET',
+            success: function (result) {
+                if (result.code == 200) {
+                    var tagList = [];
+                    $.each(result.data, function () {
+                        var tag = {};
+                        tag.value = $(this)[0].id;
+                        tag.name = $(this)[0].name;
+                        tagList.push(tag);
+                    });
+                    tagSelect.update({
+                        data: tagList
+                    })
+                }
+            }
+        });
+        //表单验证
+        form.verify({
+            verTitle: function (value) {
+                if (value.length <= 0) {
+                    return '文章标题不能为空';
+                }
+                if (value.length > 100) {
+                    return '文章标题长度不能超过100';
+                }
+            },
+            verContent: function () {
+                var blankContent = "<p><br></p>"
+                var content = editor.txt.html();
+                if (content.length <= 0 || content == blankContent) {
+                    return '文章内容不能为空';
+                }
+            },
+            verCategory: function (value) {
+                if (value == 0) {
+                    return '请选择一个分类';
+                }
+            },
+            verTag: function () {
+                if (tagSelect.getValue('value').length <= 0) {
+                    return '请选择至少一个标签';
+                }
+            }
+        });
 
+        //保存文章
+        function saveArticle(data, isPublish) {
+            //获取标签列表
+            var tagIdList = [];
+            var tagIdListStr = data.field.select.split(',');
+            $.each(tagIdListStr, function () {
+                tagIdList.push(Number($(this)[0]));
+            })
+            data.field.tagIdList = tagIdList;
+            //获取文章内容
+            data.field.content = editor.txt.html();
+            //获取是否发布
+            data.field.published = isPublish;
+            $.ajax({
+                url: '/admin/article',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(data.field),
+                success: function (result) {
+                    if (result.code == 200) {
+                        var str = isPublish ? '发布' : '保存';
+                        layer.msg(str + '成功', {icon: 6});
+                    }
+                },
+                error: function (XMLHttpRequest) {
+                    var result = JSON.parse(XMLHttpRequest.responseText);
+                    layer.alert(result.msg, {icon: 5});
+                }
+            });
+        }
+
+        //监听保存草稿按钮
+        form.on('submit(draft)', function (data) {
+            saveArticle(data, false);
+            return false;
+        });
+        //监听发布文章按钮
+        form.on('submit(publish)', function (data) {
+            saveArticle(data, true);
+            return false;
+        });
     });
 
-    var demo1 = xmSelect.render({
-        el: '#demo1',
-        language: 'zn',
-        //自动换行
-        autoRow: true,
-        //开启搜索
-        filterable: true,
-        max: 5,
-        theme: {
-            maxColor: 'orange',
-        },
-        maxMethod(seles, item) {
-            alert(`${item.name}不能选了, 已经超了`)
-        },
-        data: [
-            {name: 'Java', value: 1},
-            {name: 'PHP', value: 2},
-            {name: 'Python', value: 3},
-            {name: 'C++', value: 4},
-            {name: 'C', value: 5},
-            {name: 'C#', value: 6},
-            {name: 'JavaScript', value: 7},
-            {name: 'SQL', value: 8},
-            {name: 'Android', value: 9},
-        ]
-    });
+
 </script>
 </body>
 </html>
