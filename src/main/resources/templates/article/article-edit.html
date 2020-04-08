@@ -21,11 +21,12 @@
             </div>
         </div>
         <div class="layui-row">
-            <form class="layui-form layui-col-md12" action="" lay-filter="form-filter">
+            <form class="layui-form layui-col-md12" action="" lay-filter="form-filter" id="article-form">
                 <div class="layui-col-md8" style="margin-right: 60px">
+                    <input type="hidden" name="id"/>
                     <div class="layui-form-item">
                         <input type="text" name="title" lay-verify="verTitle" placeholder="请输入文章标题..."
-                               autocomplete="off" class="layui-input">
+                               autocomplete="off" class="layui-input"/>
                     </div>
                     <div class="layui-form-item">
                     <textarea name="summary" lay-verify="" placeholder="请输入文章摘要..."
@@ -116,7 +117,7 @@
 <script src="../static/xm-select/xm-select.js" th:src="@{/xm-select/xm-select.js}"></script>
 <script src="../static/layuimini/js/lay-module/layuimini/miniTab.js"
         th:src="@{/layuimini/js/lay-module/layuimini/miniTab.js}"></script>
-<script type="text/javascript">
+<script type="text/javascript" th:inline="javascript">
     layui.use(['layer', 'wangEditor', 'form', 'miniTab'], function () {
         var $ = layui.jquery,
             layer = layui.layer,
@@ -173,10 +174,18 @@
             type: 'GET',
             success: function (result) {
                 if (result.code == 200) {
+                    //有cid则是编辑文章
+                    var cid;
+                    if (article != null) {
+                        cid = article.categoryId;
+                    }
                     $.each(result.data, function () {
                         var categoryId = $(this)[0].id;
                         var categoryName = $(this)[0].name;
                         var categoryOption = $('<option></option>').val(categoryId).text(categoryName);
+                        if (cid != null && cid == categoryId) {
+                            categoryOption.prop('selected', true);
+                        }
                         $('#category-select').append(categoryOption);
                     });
                     form.render('select', 'form-filter');
@@ -189,16 +198,31 @@
             type: 'GET',
             success: function (result) {
                 if (result.code == 200) {
-                    var tagList = [];
+                    var tags = [];
                     $.each(result.data, function () {
                         var tag = {};
                         tag.value = $(this)[0].id;
                         tag.name = $(this)[0].name;
-                        tagList.push(tag);
+                        tags.push(tag);
                     });
-                    tagSelect.update({
-                        data: tagList
-                    })
+                    if (article != null) {
+                        var tagListStr = [], tagList = [[${tagList}]];
+                        $.each(tagList, function () {
+                            var tag = {};
+                            tag.name = $(this)[0].name;
+                            tag.value = $(this)[0].id;
+                            tagListStr.push(tag);
+                        });
+                        tagSelect.update({
+                            data: tags
+                        });
+                        tagSelect.setValue(tagListStr);
+                    } else {
+                        tagSelect.update({
+                            data: tags
+                        });
+                    }
+
                 }
             }
         });
@@ -230,6 +254,7 @@
                 }
             }
         });
+
         //保存文章
         function saveArticle(data, isPublish) {
             //获取标签列表
@@ -288,9 +313,30 @@
             }
             return false;
         });
+        //渲染文章内容
+        var article = [[${article}]];
+        if (article != null) {
+            $('#article-form input[name="id"]').val(article.id);
+            $('#article-form input[name="title"]').val(article.title);
+            $('#article-form textarea[name="summary"]').val(article.summary);
+            editor.txt.html(article.content);
+            $('#article-form select[name="type"]').val([article.type]);
+            $('#article-form input[name="appreciable"]').prop('checked', article.appreciable);
+            $('#article-form input[name="commentable"]').prop('checked', article.commentable);
+            $('#article-form select[name="categoryId"]').val([article.categoryId]);
+            var tagListStr = [], tagList = [[${tagList}]];
+            $.each(tagList, function () {
+                var tag = {};
+                tag.name = $(this)[0].name;
+                tag.value = $(this)[0].id;
+                tagListStr.push(tag);
+            });
+            tagSelect.update({
+                data: tagListStr
+            });
+            form.render();
+        }
     });
-
-
 </script>
 </body>
 </html>

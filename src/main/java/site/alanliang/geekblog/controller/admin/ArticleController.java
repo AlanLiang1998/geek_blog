@@ -45,4 +45,12 @@ public class ArticleController {
         articleService.saveOrUpdate(articleDto);
         return JsonResult.ok();
     }
+
+    public JsonResult update(@Validated @RequestBody ArticleDto articleDto) {
+        articleDto.setAppreciable(articleDto.getAppreciable() != null);
+        articleDto.setCommentable(articleDto.getCommentable() != null);
+        articleDto.setUpdateTime(new Date());
+        articleService.saveOrUpdate(articleDto);
+        return JsonResult.ok();
+    }
 }

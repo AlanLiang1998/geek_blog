@@ -1,5 +1,6 @@
 package site.alanliang.geekblog.service;
 
+import site.alanliang.geekblog.domain.Article;
 import site.alanliang.geekblog.dto.ArticleDto;
 import site.alanliang.geekblog.vo.ArticleVo;
 
@@ -32,4 +33,12 @@ public interface ArticleService {
      * @return 记录总数
      */
     long countAll();
+
+    /**
+     * 根据ID查询文章
+     *
+     * @param id 文章ID
+     * @return 文章
+     */
+    Article findById(Long id);
 }

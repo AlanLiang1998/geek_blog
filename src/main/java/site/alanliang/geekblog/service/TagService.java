@@ -15,4 +15,11 @@ public interface TagService {
      * @return 标签列表
      */
     List<Tag> list();
+
+    /**
+     * 根据文章ID查询标签
+     * @param id    文章ID
+     * @return
+     */
+    List<Tag> findByArticleId(Long id);
 }

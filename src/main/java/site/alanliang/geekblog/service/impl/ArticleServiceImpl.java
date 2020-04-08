@@ -1,11 +1,13 @@
 package site.alanliang.geekblog.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import site.alanliang.geekblog.domain.Article;
+import site.alanliang.geekblog.domain.ArticleTag;
 import site.alanliang.geekblog.dto.ArticleDto;
 import site.alanliang.geekblog.mapper.ArticleMapper;
 import site.alanliang.geekblog.mapper.ArticleTagMapper;
@@ -29,6 +31,11 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Autowired
     private ArticleTagMapper articleTagMapper;
+
+    @Override
+    public Article findById(Long id) {
+        return articleMapper.selectById(id);
+    }
 
     @Override
     public long countAll() {
@@ -57,7 +64,11 @@ public class ArticleServiceImpl implements ArticleService {
             articleTagMapper.batchInsert(articleDto.getId(), articleDto.getTagIdList());
         } else {
             //编辑
-
+            articleMapper.updateById(articleDto);
+            QueryWrapper<ArticleTag> wrapper = new QueryWrapper<>();
+            wrapper.eq("article_id", articleDto.getId());
+            articleTagMapper.delete(wrapper);
+            articleTagMapper.batchInsert(articleDto.getId(), articleDto.getTagIdList());
         }
     }
 }

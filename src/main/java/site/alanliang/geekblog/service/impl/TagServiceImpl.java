@@ -21,6 +21,11 @@ public class TagServiceImpl implements TagService {
     private TagMapper tagMapper;
 
     @Override
+    public List<Tag> findByArticleId(Long id) {
+        return tagMapper.selectByArticleId(id);
+    }
+
+    @Override
     public List<Tag> list() {
         return tagMapper.selectList(null);
     }

@@ -53,12 +53,16 @@
 </div>
 <script src="../static/layuimini/lib/layui-v2.5.5/layui.js" charset="utf-8"
         th:src="@{/layuimini/lib/layui-v2.5.5/layui.js}"></script>
+<script src="../static/layuimini/js/lay-config.js?v=1.0.4" charset="utf-8"
+        th:src="@{/layuimini/js/lay-config.js(v=1.0.4)}"></script>
+<script src="../static/layuimini/js/lay-module/layuimini/miniTab.js"
+        th:src="@{/layuimini/js/lay-module/layuimini/miniTab.js}"></script>
 <script>
-    layui.use(['form', 'table'], function () {
+    layui.use(['layer', 'form', 'table', 'miniTab'], function () {
         var $ = layui.jquery,
             form = layui.form,
-            table = layui.table;
-
+            table = layui.table,
+            miniTab = layui.miniTab;
         table.render({
             elem: '#currentTableId',
             url: '/admin/article',
@@ -138,19 +142,7 @@
          * toolbar监听事件
          */
         table.on('toolbar(currentTableFilter)', function (obj) {
-            if (obj.event === 'add') {  // 监听添加操作
-                var index = layer.open({
-                    type: 2,
-                    shade: 0.2,
-                    maxmin: true,
-                    shadeClose: true,
-                    area: ['100%', '100%'],
-                    content: '/api/page?pageName=article/article-edit',
-                });
-                $(window).on("resize", function () {
-                    layer.full(index);
-                });
-            } else if (obj.event === 'delete') {  // 监听删除操作
+            if (obj.event === 'delete') {  // 监听删除操作
                 var checkStatus = table.checkStatus('currentTableId')
                     , data = checkStatus.data;
                 layer.alert(JSON.stringify(data));
@@ -165,18 +157,9 @@
         table.on('tool(currentTableFilter)', function (obj) {
             var data = obj.data;
             if (obj.event === 'edit') {
-
-                var index = layer.open({
-                    title: '编辑用户',
-                    type: 2,
-                    shade: 0.2,
-                    maxmin: true,
-                    shadeClose: true,
-                    area: ['100%', '100%'],
-                    content: '/page/table/edit.html',
-                });
-                $(window).on("resize", function () {
-                    layer.full(index);
+                miniTab.openNewTabByIframe({
+                    href: "/api/article/" + data.id,
+                    title: "编辑文章",
                 });
                 return false;
             } else if (obj.event === 'delete') {
