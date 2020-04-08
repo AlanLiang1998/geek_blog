@@ -1,14 +1,13 @@
 package site.alanliang.geekblog.domain;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @Descriptin 文章
@@ -54,4 +53,8 @@ public class Article {
     private Date updateTime;
 
     private Integer type;
+    @TableField(exist = false)
+    private Category category;
+    @TableField(exist = false)
+    private List<Tag> tagList;
 }

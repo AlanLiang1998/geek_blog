@@ -15,18 +15,18 @@ import java.util.List;
  * Version 1.0
  **/
 @Data
-public class InitInfoVO {
-    private List<MenuVO> menuInfo;
+public class InitInfoVo {
+    private List<MenuVo> menuInfo;
 
     private HomeInfo homeInfo;
 
     private LogoInfo logoInfo;
 
 
-    public static InitInfoVO init(List<SysMenu> menuList) {
-        List<MenuVO> menuInfo = new ArrayList<>();
+    public static InitInfoVo init(List<SysMenu> menuList) {
+        List<MenuVo> menuInfo = new ArrayList<>();
         for (SysMenu e : menuList) {
-            MenuVO menuVO = new MenuVO();
+            MenuVo menuVO = new MenuVo();
             menuVO.setId(e.getId());
             menuVO.setPid(e.getPid());
             menuVO.setHref(e.getHref());
@@ -43,7 +43,7 @@ public class InitInfoVO {
         logoInfo.setTitle(Constant.LOGO_TITLE);
         logoInfo.setImage(Constant.LOGO_IMAGE);
 
-        InitInfoVO initInfoVO = new InitInfoVO();
+        InitInfoVo initInfoVO = new InitInfoVo();
         initInfoVO.setMenuInfo(MenuTreeUtil.toTree(menuInfo, 0L));
         initInfoVO.setHomeInfo(homeInfo);
         initInfoVO.setLogoInfo(logoInfo);

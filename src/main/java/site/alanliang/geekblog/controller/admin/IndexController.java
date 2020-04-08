@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import site.alanliang.geekblog.anntation.Log;
 import site.alanliang.geekblog.service.SysMenuService;
-import site.alanliang.geekblog.vo.init.InitInfoVO;
+import site.alanliang.geekblog.vo.init.InitInfoVo;
 
 /**
  * @Descriptin TODO
@@ -28,7 +28,7 @@ public class IndexController {
     @ResponseBody
     @GetMapping("/init")
     public ResponseEntity<Object> init() {
-        InitInfoVO initInfoVO = sysMenuService.menu();
+        InitInfoVo initInfoVO = sysMenuService.menu();
         return new ResponseEntity<>(initInfoVO, HttpStatus.OK);
     }
 

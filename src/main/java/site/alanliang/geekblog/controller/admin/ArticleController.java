@@ -2,15 +2,15 @@ package site.alanliang.geekblog.controller.admin;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import site.alanliang.geekblog.common.JsonResult;
+import site.alanliang.geekblog.common.TableResult;
 import site.alanliang.geekblog.dto.ArticleDto;
 import site.alanliang.geekblog.service.ArticleService;
+import site.alanliang.geekblog.vo.ArticleVo;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @Descriptin TODO
@@ -24,6 +24,14 @@ public class ArticleController {
 
     @Autowired
     private ArticleService articleService;
+
+    @GetMapping
+    public TableResult list(@RequestParam(value = "page", defaultValue = "1") Integer page,
+                            @RequestParam(value = "limit", defaultValue = "10") Integer limit) {
+        List<ArticleVo> articleVos = articleService.listByPage(page, limit);
+        long count = articleService.countAll();
+        return TableResult.tableOk(articleVos, count);
+    }
 
     @PostMapping
     public JsonResult save(@Validated @RequestBody ArticleDto articleDto) {

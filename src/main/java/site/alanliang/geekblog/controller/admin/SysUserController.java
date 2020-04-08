@@ -28,8 +28,8 @@ public class SysUserController {
     @Log("分页查询用户")
     @ResponseBody
     @GetMapping
-    public TableResult listByPage(@RequestParam(value = "page", defaultValue = "1") Integer page,
-                                  @RequestParam(value = "limit", defaultValue = "10") Integer limit) {
+    public TableResult list(@RequestParam(value = "page", defaultValue = "1") Integer page,
+                            @RequestParam(value = "limit", defaultValue = "10") Integer limit) {
         Page<SysUser> pageInfo = sysUserService.listByPage(page, limit);
         return TableResult.tableOk(pageInfo.getRecords(), pageInfo.getTotal());
     }

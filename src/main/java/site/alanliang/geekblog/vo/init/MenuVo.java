@@ -13,7 +13,7 @@ import java.util.List;
  **/
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class MenuVO {
+public class MenuVo {
     private Long id;
 
     private Long pid;
@@ -26,5 +26,5 @@ public class MenuVO {
 
     private String target;
 
-    private List<MenuVO> child;
+    private List<MenuVo> child;
 }

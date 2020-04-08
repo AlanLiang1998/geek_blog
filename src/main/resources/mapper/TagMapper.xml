@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="site.alanliang.geekblog.mapper.TagMapper">
+    <resultMap id="baseResultMap" type="site.alanliang.geekblog.domain.Tag">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="createTime" column="create_time"/>
+    </resultMap>
+
+    <select id="selectByArticleId" resultType="site.alanliang.geekblog.domain.Tag">
+        select tt.id, tt.name
+        from t_tag tt
+        left join t_article_tag tat
+        on tt.id = tat.tag_id
+        where tat.article_id = #{articleId}
+    </select>
+
+</mapper>
