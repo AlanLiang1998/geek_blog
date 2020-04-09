@@ -6295,3 +6295,948 @@ site.alanliang.geekblog.exception.NameNotUniqueException: 分类名称已存在
 2020-04-09 17:02:08.467 DEBUG 23752 --- [http-nio-8888-exec-9] s.a.g.mapper.CategoryMapper.selectPage   : ==>  Preparing: SELECT id,name,display,introduction,create_time,update_time FROM t_category LIMIT ?,? 
 2020-04-09 17:02:08.467 DEBUG 23752 --- [http-nio-8888-exec-9] s.a.g.mapper.CategoryMapper.selectPage   : ==> Parameters: 0(Long), 15(Long)
 2020-04-09 17:02:08.469 DEBUG 23752 --- [http-nio-8888-exec-9] s.a.g.mapper.CategoryMapper.selectPage   : <==      Total: 6
+2020-04-09 17:20:20.611 DEBUG 23752 --- [http-nio-8888-exec-8] s.a.g.mapper.SysUserMapper.selectPage    : ==>  Preparing: SELECT COUNT(1) FROM sys_user 
+2020-04-09 17:20:20.611 DEBUG 23752 --- [http-nio-8888-exec-8] s.a.g.mapper.SysUserMapper.selectPage    : ==> Parameters: 
+2020-04-09 17:20:20.615 DEBUG 23752 --- [http-nio-8888-exec-8] s.a.g.mapper.SysUserMapper.selectPage    : ==>  Preparing: SELECT id,username,password,nickname,avatar,email,create_time,update_time FROM sys_user LIMIT ?,? 
+2020-04-09 17:20:20.616 DEBUG 23752 --- [http-nio-8888-exec-8] s.a.g.mapper.SysUserMapper.selectPage    : ==> Parameters: 0(Long), 15(Long)
+2020-04-09 17:20:20.621 DEBUG 23752 --- [http-nio-8888-exec-8] s.a.g.mapper.SysUserMapper.selectPage    : <==      Total: 15
+2020-04-09 17:20:20.621  INFO 23752 --- [http-nio-8888-exec-8] s.alanliang.geekblog.aspect.LogAspect    : Request ------ RequestLog {url = http://localhost:8888/admin/user, ip = 0:0:0:0:0:0:0:1, classMethod = site.alanliang.geekblog.controller.admin.SysUserController.list, args = [1, 15], time = 15ms, description = 分页查询用户}
+2020-04-09 17:20:20.621  INFO 23752 --- [http-nio-8888-exec-8] s.alanliang.geekblog.aspect.LogAspect    : Return ------ TableResult(count=100)
+2020-04-09 17:20:28.307 DEBUG 23752 --- [http-nio-8888-exec-1] s.a.g.mapper.TagMapper.selectList        : ==>  Preparing: SELECT id,name,create_time FROM t_tag 
+2020-04-09 17:20:28.307 DEBUG 23752 --- [http-nio-8888-exec-1] s.a.g.mapper.TagMapper.selectList        : ==> Parameters: 
+2020-04-09 17:20:28.311 DEBUG 23752 --- [http-nio-8888-exec-1] s.a.g.mapper.TagMapper.selectList        : <==      Total: 10
+2020-04-09 17:20:28.313 DEBUG 23752 --- [http-nio-8888-exec-6] s.a.g.mapper.CategoryMapper.selectList   : ==>  Preparing: SELECT id,name,display,introduction,create_time,update_time FROM t_category 
+2020-04-09 17:20:28.313 DEBUG 23752 --- [http-nio-8888-exec-6] s.a.g.mapper.CategoryMapper.selectList   : ==> Parameters: 
+2020-04-09 17:20:28.319 DEBUG 23752 --- [http-nio-8888-exec-6] s.a.g.mapper.CategoryMapper.selectList   : <==      Total: 6
+2020-04-09 17:21:19.748 DEBUG 23752 --- [http-nio-8888-exec-7] s.a.g.m.A.selectPageWithExtra            : ==>  Preparing: SELECT COUNT(1) FROM t_article ta 
+2020-04-09 17:21:19.749 DEBUG 23752 --- [http-nio-8888-exec-7] s.a.g.m.A.selectPageWithExtra            : ==> Parameters: 
+2020-04-09 17:21:19.752 DEBUG 23752 --- [http-nio-8888-exec-7] s.a.g.m.A.selectPageWithExtra            : ==>  Preparing: select ta.id, ta.title, ta.type, ta.commentable, ta.appreciable, ta.comments, ta.views, ta.likes, ta.published, ta.create_time, ta.update_time, tc.id, tc.name from t_article ta left join t_category tc on ta.category_id = tc.id LIMIT ?,? 
+2020-04-09 17:21:19.753 DEBUG 23752 --- [http-nio-8888-exec-7] s.a.g.m.A.selectPageWithExtra            : ==> Parameters: 0(Long), 15(Long)
+2020-04-09 17:21:19.799 DEBUG 23752 --- [http-nio-8888-exec-7] s.a.g.m.A.selectPageWithExtra            : <==      Total: 3
+2020-04-09 17:21:19.813 DEBUG 23752 --- [http-nio-8888-exec-7] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-09 17:21:19.814 DEBUG 23752 --- [http-nio-8888-exec-7] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 7(Long)
+2020-04-09 17:21:19.816 DEBUG 23752 --- [http-nio-8888-exec-7] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 2
+2020-04-09 17:21:19.817 DEBUG 23752 --- [http-nio-8888-exec-7] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-09 17:21:19.817 DEBUG 23752 --- [http-nio-8888-exec-7] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 11(Long)
+2020-04-09 17:21:19.818 DEBUG 23752 --- [http-nio-8888-exec-7] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 1
+2020-04-09 17:21:19.821 DEBUG 23752 --- [http-nio-8888-exec-7] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-09 17:21:19.823 DEBUG 23752 --- [http-nio-8888-exec-7] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 18(Long)
+2020-04-09 17:21:19.824 DEBUG 23752 --- [http-nio-8888-exec-7] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 1
+2020-04-09 17:21:19.826 DEBUG 23752 --- [http-nio-8888-exec-7] s.a.g.mapper.ArticleMapper.selectCount   : ==>  Preparing: SELECT COUNT( 1 ) FROM t_article 
+2020-04-09 17:21:19.827 DEBUG 23752 --- [http-nio-8888-exec-7] s.a.g.mapper.ArticleMapper.selectCount   : ==> Parameters: 
+2020-04-09 17:21:19.829 DEBUG 23752 --- [http-nio-8888-exec-7] s.a.g.mapper.ArticleMapper.selectCount   : <==      Total: 1
+2020-04-09 17:23:45.074 DEBUG 23752 --- [http-nio-8888-exec-8] s.a.g.mapper.SysMenuMapper.selectList    : ==>  Preparing: SELECT id,title,href,pid,icon,target,sort,status,remark,create_time,update_time FROM sys_menu WHERE (status = ?) 
+2020-04-09 17:23:45.074 DEBUG 23752 --- [http-nio-8888-exec-8] s.a.g.mapper.SysMenuMapper.selectList    : ==> Parameters: true(Boolean)
+2020-04-09 17:23:45.076 DEBUG 23752 --- [http-nio-8888-exec-8] s.a.g.mapper.SysMenuMapper.selectList    : <==      Total: 7
+2020-04-09 17:23:45.077  INFO 23752 --- [http-nio-8888-exec-8] s.alanliang.geekblog.aspect.LogAspect    : Request ------ RequestLog {url = http://localhost:8888/admin/init, ip = 0:0:0:0:0:0:0:1, classMethod = site.alanliang.geekblog.controller.admin.IndexController.init, args = [], time = 5ms, description = 初始化后台主页}
+2020-04-09 17:23:45.077  INFO 23752 --- [http-nio-8888-exec-8] s.alanliang.geekblog.aspect.LogAspect    : Return ------ <200 OK OK,InitInfoVo(menuInfo=[MenuVo(id=1, pid=0, title=常规管理, icon=fa fa-dashboard, href=, target=_self, child=[MenuVo(id=2, pid=1, title=用户管理, icon=fa fa-users, href=/api/page?pageName=user/user-list, target=null, child=null), MenuVo(id=3, pid=1, title=文章发布, icon=fa fa-book, href=/api/page?pageName=article/article-add, target=null, child=null), MenuVo(id=4, pid=1, title=其它管理, icon=fa fa-slideshare, href=null, target=null, child=null), MenuVo(id=5, pid=1, title=文章管理, icon=fa fa-book, href=/api/page?pageName=article/article-list, target=null, child=null), MenuVo(id=6, pid=1, title=分类管理, icon=fa fa-tasks, href=/api/page?pageName=category/category-list, target=null, child=null), MenuVo(id=7, pid=1, title=标签管理, icon=fa fa-tags, href=/api/page?pageName=tag/tag-list, target=null, child=null)])], homeInfo=InitInfoVo.HomeInfo(title=首页, href=/api/page?pageName=dashboard), logoInfo=InitInfoVo.LogoInfo(title=Geek Blog, image=/static/layuimini/images/logo.png)),[]>
+2020-04-09 17:26:54.193  INFO 2116 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Starting GeekBlogApplication on DESKTOP-QNDK7AF with PID 2116 (D:\idea\geekblog\target\classes started by AlanLiang in D:\idea\geekblog)
+2020-04-09 17:26:54.198 DEBUG 2116 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Running with Spring Boot v2.2.6.RELEASE, Spring v5.2.5.RELEASE
+2020-04-09 17:26:54.198  INFO 2116 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : The following profiles are active: dev
+2020-04-09 17:26:54.327  INFO 2116 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2020-04-09 17:26:54.327  INFO 2116 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2020-04-09 17:26:56.296  INFO 2116 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8888 (http)
+2020-04-09 17:26:56.309  INFO 2116 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-04-09 17:26:56.309  INFO 2116 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.33]
+2020-04-09 17:26:56.391  INFO 2116 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-04-09 17:26:56.392  INFO 2116 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 2065 ms
+2020-04-09 17:26:56.485  INFO 2116 --- [restartedMain] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2020-04-09 17:26:56.961  INFO 2116 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2020-04-09 17:26:58.570  INFO 2116 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-04-09 17:26:58.695  INFO 2116 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2020-04-09 17:26:58.944  INFO 2116 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2020-04-09 17:26:59.034  INFO 2116 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8888 (http) with context path ''
+2020-04-09 17:26:59.038  INFO 2116 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Started GeekBlogApplication in 5.488 seconds (JVM running for 6.363)
+2020-04-09 17:27:00.210  INFO 2116 --- [http-nio-8888-exec-1] o.apache.tomcat.util.http.parser.Cookie  : A cookie header was received [1585883995; remember-me=YWRtaW46MTU4NzA5NjIwNjA1MjpjOTE3Yjc5OGE4ODBkNDhlNjQxOTc2M2M0ZWM0NDU5Yw; JSESSIONID=4B0DAFEC1CE7567A2AC63074A94C7D19] that contained an invalid cookie. That cookie will be ignored.
+ Note: further occurrences of this error will be logged at DEBUG level.
+2020-04-09 17:27:00.220  INFO 2116 --- [http-nio-8888-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-04-09 17:27:00.221  INFO 2116 --- [http-nio-8888-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-04-09 17:27:00.232  INFO 2116 --- [http-nio-8888-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 11 ms
+2020-04-09 17:27:00.940 DEBUG 2116 --- [http-nio-8888-exec-9] s.a.g.mapper.SysMenuMapper.selectList    : ==>  Preparing: SELECT id,title,href,pid,icon,target,sort,status,remark,create_time,update_time FROM sys_menu WHERE (status = ?) 
+2020-04-09 17:27:00.964 DEBUG 2116 --- [http-nio-8888-exec-9] s.a.g.mapper.SysMenuMapper.selectList    : ==> Parameters: true(Boolean)
+2020-04-09 17:27:00.985 DEBUG 2116 --- [http-nio-8888-exec-9] s.a.g.mapper.SysMenuMapper.selectList    : <==      Total: 7
+2020-04-09 17:27:00.992  INFO 2116 --- [http-nio-8888-exec-9] s.alanliang.geekblog.aspect.LogAspect    : Request ------ RequestLog {url = http://localhost:8888/admin/init, ip = 0:0:0:0:0:0:0:1, classMethod = site.alanliang.geekblog.controller.admin.IndexController.init, args = [], time = 152ms, description = 初始化后台主页}
+2020-04-09 17:27:00.993  INFO 2116 --- [http-nio-8888-exec-9] s.alanliang.geekblog.aspect.LogAspect    : Return ------ <200 OK OK,InitInfoVo(menuInfo=[MenuVo(id=1, pid=0, title=常规管理, icon=fa fa-dashboard, href=, target=_self, child=[MenuVo(id=2, pid=1, title=用户管理, icon=fa fa-users, href=/api/page?pageName=user/user-list, target=null, child=null), MenuVo(id=3, pid=1, title=文章发布, icon=fa fa-book, href=/api/page?pageName=article/article-add, target=null, child=null), MenuVo(id=4, pid=1, title=其它管理, icon=fa fa-slideshare, href=null, target=null, child=null), MenuVo(id=5, pid=1, title=文章管理, icon=fa fa-book, href=/api/page?pageName=article/article-list, target=null, child=null), MenuVo(id=6, pid=1, title=分类管理, icon=fa fa-tasks, href=/api/page?pageName=category/category-list, target=null, child=null), MenuVo(id=7, pid=1, title=标签管理, icon=fa fa-tags, href=/api/page?pageName=tag/tag-list, target=null, child=null)])], homeInfo=InitInfoVo.HomeInfo(title=首页, href=/api/page?pageName=dashboard), logoInfo=InitInfoVo.LogoInfo(title=Geek Blog, image=/static/layuimini/images/logo.png)),[]>
+2020-04-09 17:27:04.749 ERROR 2116 --- [http-nio-8888-exec-8] org.thymeleaf.TemplateEngine             : [THYMELEAF][http-nio-8888-exec-8] Exception processing template "tag/tag-list": Error resolving template [tag/tag-list], template might not exist or might not be accessible by any of the configured Template Resolvers
+
+org.thymeleaf.exceptions.TemplateInputException: Error resolving template [tag/tag-list], template might not exist or might not be accessible by any of the configured Template Resolvers
+	at org.thymeleaf.engine.TemplateManager.resolveTemplate(TemplateManager.java:869)
+	at org.thymeleaf.engine.TemplateManager.parseAndProcess(TemplateManager.java:607)
+	at org.thymeleaf.TemplateEngine.process(TemplateEngine.java:1098)
+	at org.thymeleaf.TemplateEngine.process(TemplateEngine.java:1072)
+	at org.thymeleaf.spring5.view.ThymeleafView.renderFragment(ThymeleafView.java:362)
+	at org.thymeleaf.spring5.view.ThymeleafView.render(ThymeleafView.java:189)
+	at org.springframework.web.servlet.DispatcherServlet.render(DispatcherServlet.java:1373)
+	at org.springframework.web.servlet.DispatcherServlet.processDispatchResult(DispatcherServlet.java:1118)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1057)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:943)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:898)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:634)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:741)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at com.alibaba.druid.support.http.WebStatFilter.doFilter(WebStatFilter.java:123)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:541)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:373)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:868)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1594)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+
+2020-04-09 17:27:04.752 ERROR 2116 --- [http-nio-8888-exec-8] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is org.thymeleaf.exceptions.TemplateInputException: Error resolving template [tag/tag-list], template might not exist or might not be accessible by any of the configured Template Resolvers] with root cause
+
+org.thymeleaf.exceptions.TemplateInputException: Error resolving template [tag/tag-list], template might not exist or might not be accessible by any of the configured Template Resolvers
+	at org.thymeleaf.engine.TemplateManager.resolveTemplate(TemplateManager.java:869)
+	at org.thymeleaf.engine.TemplateManager.parseAndProcess(TemplateManager.java:607)
+	at org.thymeleaf.TemplateEngine.process(TemplateEngine.java:1098)
+	at org.thymeleaf.TemplateEngine.process(TemplateEngine.java:1072)
+	at org.thymeleaf.spring5.view.ThymeleafView.renderFragment(ThymeleafView.java:362)
+	at org.thymeleaf.spring5.view.ThymeleafView.render(ThymeleafView.java:189)
+	at org.springframework.web.servlet.DispatcherServlet.render(DispatcherServlet.java:1373)
+	at org.springframework.web.servlet.DispatcherServlet.processDispatchResult(DispatcherServlet.java:1118)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1057)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:943)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:898)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:634)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:741)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at com.alibaba.druid.support.http.WebStatFilter.doFilter(WebStatFilter.java:123)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:541)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:373)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:868)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1594)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+
+2020-04-09 17:30:09.976  INFO 23304 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Starting GeekBlogApplication on DESKTOP-QNDK7AF with PID 23304 (D:\idea\geekblog\target\classes started by AlanLiang in D:\idea\geekblog)
+2020-04-09 17:30:09.979 DEBUG 23304 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Running with Spring Boot v2.2.6.RELEASE, Spring v5.2.5.RELEASE
+2020-04-09 17:30:09.979  INFO 23304 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : The following profiles are active: dev
+2020-04-09 17:30:10.024  INFO 23304 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2020-04-09 17:30:10.024  INFO 23304 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2020-04-09 17:30:11.236  INFO 23304 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8888 (http)
+2020-04-09 17:30:11.243  INFO 23304 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-04-09 17:30:11.243  INFO 23304 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.33]
+2020-04-09 17:30:11.312  INFO 23304 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-04-09 17:30:11.313  INFO 23304 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1288 ms
+2020-04-09 17:30:11.503  INFO 23304 --- [restartedMain] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2020-04-09 17:30:11.946  INFO 23304 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2020-04-09 17:30:12.996  INFO 23304 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-04-09 17:30:13.061  INFO 23304 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2020-04-09 17:30:13.208  INFO 23304 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2020-04-09 17:30:13.250  INFO 23304 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8888 (http) with context path ''
+2020-04-09 17:30:13.252  INFO 23304 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Started GeekBlogApplication in 3.91 seconds (JVM running for 4.928)
+2020-04-09 17:30:37.753  INFO 12424 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Starting GeekBlogApplication on DESKTOP-QNDK7AF with PID 12424 (D:\idea\geekblog\target\classes started by AlanLiang in D:\idea\geekblog)
+2020-04-09 17:30:37.757 DEBUG 12424 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Running with Spring Boot v2.2.6.RELEASE, Spring v5.2.5.RELEASE
+2020-04-09 17:30:37.757  INFO 12424 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : The following profiles are active: dev
+2020-04-09 17:30:37.806  INFO 12424 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2020-04-09 17:30:37.806  INFO 12424 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2020-04-09 17:30:38.822  INFO 12424 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8888 (http)
+2020-04-09 17:30:38.829  INFO 12424 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-04-09 17:30:38.829  INFO 12424 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.33]
+2020-04-09 17:30:38.895  INFO 12424 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-04-09 17:30:38.895  INFO 12424 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1089 ms
+2020-04-09 17:30:39.056  INFO 12424 --- [restartedMain] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2020-04-09 17:30:39.315  INFO 12424 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2020-04-09 17:30:40.162  INFO 12424 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-04-09 17:30:40.219  INFO 12424 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2020-04-09 17:30:40.357  INFO 12424 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2020-04-09 17:30:40.403  INFO 12424 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8888 (http) with context path ''
+2020-04-09 17:30:40.406  INFO 12424 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Started GeekBlogApplication in 3.226 seconds (JVM running for 4.148)
+2020-04-09 17:30:43.290  INFO 12424 --- [http-nio-8888-exec-1] o.apache.tomcat.util.http.parser.Cookie  : A cookie header was received [1585883995; remember-me=YWRtaW46MTU4NzA5NjIwNjA1MjpjOTE3Yjc5OGE4ODBkNDhlNjQxOTc2M2M0ZWM0NDU5Yw; JSESSIONID=4B0DAFEC1CE7567A2AC63074A94C7D19] that contained an invalid cookie. That cookie will be ignored.
+ Note: further occurrences of this error will be logged at DEBUG level.
+2020-04-09 17:30:43.300  INFO 12424 --- [http-nio-8888-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-04-09 17:30:43.300  INFO 12424 --- [http-nio-8888-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-04-09 17:30:43.310  INFO 12424 --- [http-nio-8888-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 9 ms
+2020-04-09 17:30:43.817 DEBUG 12424 --- [http-nio-8888-exec-2] s.a.g.mapper.SysMenuMapper.selectList    : ==>  Preparing: SELECT id,title,href,pid,icon,target,sort,status,remark,create_time,update_time FROM sys_menu WHERE (status = ?) 
+2020-04-09 17:30:43.833 DEBUG 12424 --- [http-nio-8888-exec-2] s.a.g.mapper.SysMenuMapper.selectList    : ==> Parameters: true(Boolean)
+2020-04-09 17:30:43.848 DEBUG 12424 --- [http-nio-8888-exec-2] s.a.g.mapper.SysMenuMapper.selectList    : <==      Total: 7
+2020-04-09 17:30:43.852  INFO 12424 --- [http-nio-8888-exec-2] s.alanliang.geekblog.aspect.LogAspect    : Request ------ RequestLog {url = http://localhost:8888/admin/init, ip = 0:0:0:0:0:0:0:1, classMethod = site.alanliang.geekblog.controller.admin.IndexController.init, args = [], time = 112ms, description = 初始化后台主页}
+2020-04-09 17:30:43.853  INFO 12424 --- [http-nio-8888-exec-2] s.alanliang.geekblog.aspect.LogAspect    : Return ------ <200 OK OK,InitInfoVo(menuInfo=[MenuVo(id=1, pid=0, title=常规管理, icon=fa fa-dashboard, href=, target=_self, child=[MenuVo(id=2, pid=1, title=用户管理, icon=fa fa-users, href=/api/page?pageName=user/user-list, target=null, child=null), MenuVo(id=3, pid=1, title=文章发布, icon=fa fa-book, href=/api/page?pageName=article/article-add, target=null, child=null), MenuVo(id=4, pid=1, title=其它管理, icon=fa fa-slideshare, href=null, target=null, child=null), MenuVo(id=5, pid=1, title=文章管理, icon=fa fa-book, href=/api/page?pageName=article/article-list, target=null, child=null), MenuVo(id=6, pid=1, title=分类管理, icon=fa fa-tasks, href=/api/page?pageName=category/category-list, target=null, child=null), MenuVo(id=7, pid=1, title=标签管理, icon=fa fa-tags, href=/api/page?pageName=tag/tag-list, target=null, child=null)])], homeInfo=InitInfoVo.HomeInfo(title=首页, href=/api/page?pageName=dashboard), logoInfo=InitInfoVo.LogoInfo(title=Geek Blog, image=/static/layuimini/images/logo.png)),[]>
+2020-04-09 17:30:43.930 ERROR 12424 --- [http-nio-8888-exec-1] org.thymeleaf.TemplateEngine             : [THYMELEAF][http-nio-8888-exec-1] Exception processing template "tag/tag-list": Error resolving template [tag/tag-list], template might not exist or might not be accessible by any of the configured Template Resolvers
+
+org.thymeleaf.exceptions.TemplateInputException: Error resolving template [tag/tag-list], template might not exist or might not be accessible by any of the configured Template Resolvers
+	at org.thymeleaf.engine.TemplateManager.resolveTemplate(TemplateManager.java:869)
+	at org.thymeleaf.engine.TemplateManager.parseAndProcess(TemplateManager.java:607)
+	at org.thymeleaf.TemplateEngine.process(TemplateEngine.java:1098)
+	at org.thymeleaf.TemplateEngine.process(TemplateEngine.java:1072)
+	at org.thymeleaf.spring5.view.ThymeleafView.renderFragment(ThymeleafView.java:362)
+	at org.thymeleaf.spring5.view.ThymeleafView.render(ThymeleafView.java:189)
+	at org.springframework.web.servlet.DispatcherServlet.render(DispatcherServlet.java:1373)
+	at org.springframework.web.servlet.DispatcherServlet.processDispatchResult(DispatcherServlet.java:1118)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1057)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:943)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:898)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:634)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:741)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at com.alibaba.druid.support.http.WebStatFilter.doFilter(WebStatFilter.java:123)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:541)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:373)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:868)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1594)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+
+2020-04-09 17:30:43.934 ERROR 12424 --- [http-nio-8888-exec-1] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is org.thymeleaf.exceptions.TemplateInputException: Error resolving template [tag/tag-list], template might not exist or might not be accessible by any of the configured Template Resolvers] with root cause
+
+org.thymeleaf.exceptions.TemplateInputException: Error resolving template [tag/tag-list], template might not exist or might not be accessible by any of the configured Template Resolvers
+	at org.thymeleaf.engine.TemplateManager.resolveTemplate(TemplateManager.java:869)
+	at org.thymeleaf.engine.TemplateManager.parseAndProcess(TemplateManager.java:607)
+	at org.thymeleaf.TemplateEngine.process(TemplateEngine.java:1098)
+	at org.thymeleaf.TemplateEngine.process(TemplateEngine.java:1072)
+	at org.thymeleaf.spring5.view.ThymeleafView.renderFragment(ThymeleafView.java:362)
+	at org.thymeleaf.spring5.view.ThymeleafView.render(ThymeleafView.java:189)
+	at org.springframework.web.servlet.DispatcherServlet.render(DispatcherServlet.java:1373)
+	at org.springframework.web.servlet.DispatcherServlet.processDispatchResult(DispatcherServlet.java:1118)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1057)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:943)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:898)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:634)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:741)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at com.alibaba.druid.support.http.WebStatFilter.doFilter(WebStatFilter.java:123)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:541)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:373)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:868)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1594)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+
+2020-04-09 17:31:12.414 DEBUG 12424 --- [http-nio-8888-exec-7] s.a.g.mapper.SysMenuMapper.selectList    : ==>  Preparing: SELECT id,title,href,pid,icon,target,sort,status,remark,create_time,update_time FROM sys_menu WHERE (status = ?) 
+2020-04-09 17:31:12.415 DEBUG 12424 --- [http-nio-8888-exec-7] s.a.g.mapper.SysMenuMapper.selectList    : ==> Parameters: true(Boolean)
+2020-04-09 17:31:12.420 DEBUG 12424 --- [http-nio-8888-exec-7] s.a.g.mapper.SysMenuMapper.selectList    : <==      Total: 7
+2020-04-09 17:31:12.421  INFO 12424 --- [http-nio-8888-exec-7] s.alanliang.geekblog.aspect.LogAspect    : Request ------ RequestLog {url = http://localhost:8888/admin/init, ip = 0:0:0:0:0:0:0:1, classMethod = site.alanliang.geekblog.controller.admin.IndexController.init, args = [], time = 9ms, description = 初始化后台主页}
+2020-04-09 17:31:12.421  INFO 12424 --- [http-nio-8888-exec-7] s.alanliang.geekblog.aspect.LogAspect    : Return ------ <200 OK OK,InitInfoVo(menuInfo=[MenuVo(id=1, pid=0, title=常规管理, icon=fa fa-dashboard, href=, target=_self, child=[MenuVo(id=2, pid=1, title=用户管理, icon=fa fa-users, href=/api/page?pageName=user/user-list, target=null, child=null), MenuVo(id=3, pid=1, title=文章发布, icon=fa fa-book, href=/api/page?pageName=article/article-add, target=null, child=null), MenuVo(id=4, pid=1, title=其它管理, icon=fa fa-slideshare, href=null, target=null, child=null), MenuVo(id=5, pid=1, title=文章管理, icon=fa fa-book, href=/api/page?pageName=article/article-list, target=null, child=null), MenuVo(id=6, pid=1, title=分类管理, icon=fa fa-tasks, href=/api/page?pageName=category/category-list, target=null, child=null), MenuVo(id=7, pid=1, title=标签管理, icon=fa fa-tags, href=/api/page?pageName=tag/tag-list, target=null, child=null)])], homeInfo=InitInfoVo.HomeInfo(title=首页, href=/api/page?pageName=dashboard), logoInfo=InitInfoVo.LogoInfo(title=Geek Blog, image=/static/layuimini/images/logo.png)),[]>
+2020-04-09 17:31:12.466 ERROR 12424 --- [http-nio-8888-exec-2] org.thymeleaf.TemplateEngine             : [THYMELEAF][http-nio-8888-exec-2] Exception processing template "tag/tag-list": Error resolving template [tag/tag-list], template might not exist or might not be accessible by any of the configured Template Resolvers
+
+org.thymeleaf.exceptions.TemplateInputException: Error resolving template [tag/tag-list], template might not exist or might not be accessible by any of the configured Template Resolvers
+	at org.thymeleaf.engine.TemplateManager.resolveTemplate(TemplateManager.java:869)
+	at org.thymeleaf.engine.TemplateManager.parseAndProcess(TemplateManager.java:607)
+	at org.thymeleaf.TemplateEngine.process(TemplateEngine.java:1098)
+	at org.thymeleaf.TemplateEngine.process(TemplateEngine.java:1072)
+	at org.thymeleaf.spring5.view.ThymeleafView.renderFragment(ThymeleafView.java:362)
+	at org.thymeleaf.spring5.view.ThymeleafView.render(ThymeleafView.java:189)
+	at org.springframework.web.servlet.DispatcherServlet.render(DispatcherServlet.java:1373)
+	at org.springframework.web.servlet.DispatcherServlet.processDispatchResult(DispatcherServlet.java:1118)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1057)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:943)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:898)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:634)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:741)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at com.alibaba.druid.support.http.WebStatFilter.doFilter(WebStatFilter.java:123)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:541)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:373)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:868)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1594)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+
+2020-04-09 17:31:12.468 ERROR 12424 --- [http-nio-8888-exec-2] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is org.thymeleaf.exceptions.TemplateInputException: Error resolving template [tag/tag-list], template might not exist or might not be accessible by any of the configured Template Resolvers] with root cause
+
+org.thymeleaf.exceptions.TemplateInputException: Error resolving template [tag/tag-list], template might not exist or might not be accessible by any of the configured Template Resolvers
+	at org.thymeleaf.engine.TemplateManager.resolveTemplate(TemplateManager.java:869)
+	at org.thymeleaf.engine.TemplateManager.parseAndProcess(TemplateManager.java:607)
+	at org.thymeleaf.TemplateEngine.process(TemplateEngine.java:1098)
+	at org.thymeleaf.TemplateEngine.process(TemplateEngine.java:1072)
+	at org.thymeleaf.spring5.view.ThymeleafView.renderFragment(ThymeleafView.java:362)
+	at org.thymeleaf.spring5.view.ThymeleafView.render(ThymeleafView.java:189)
+	at org.springframework.web.servlet.DispatcherServlet.render(DispatcherServlet.java:1373)
+	at org.springframework.web.servlet.DispatcherServlet.processDispatchResult(DispatcherServlet.java:1118)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1057)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:943)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:898)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:634)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:741)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at com.alibaba.druid.support.http.WebStatFilter.doFilter(WebStatFilter.java:123)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:541)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:373)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:868)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1594)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+
+2020-04-09 17:31:29.452  INFO 20268 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Starting GeekBlogApplication on DESKTOP-QNDK7AF with PID 20268 (D:\idea\geekblog\target\classes started by AlanLiang in D:\idea\geekblog)
+2020-04-09 17:31:29.455 DEBUG 20268 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Running with Spring Boot v2.2.6.RELEASE, Spring v5.2.5.RELEASE
+2020-04-09 17:31:29.455  INFO 20268 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : The following profiles are active: dev
+2020-04-09 17:31:29.512  INFO 20268 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2020-04-09 17:31:29.512  INFO 20268 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2020-04-09 17:31:30.526  INFO 20268 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8888 (http)
+2020-04-09 17:31:30.533  INFO 20268 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-04-09 17:31:30.533  INFO 20268 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.33]
+2020-04-09 17:31:30.592  INFO 20268 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-04-09 17:31:30.593  INFO 20268 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1081 ms
+2020-04-09 17:31:30.684  INFO 20268 --- [restartedMain] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2020-04-09 17:31:30.982  INFO 20268 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2020-04-09 17:31:31.780  INFO 20268 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-04-09 17:31:31.848  INFO 20268 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2020-04-09 17:31:31.984  INFO 20268 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2020-04-09 17:31:32.026  INFO 20268 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8888 (http) with context path ''
+2020-04-09 17:31:32.028  INFO 20268 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Started GeekBlogApplication in 3.15 seconds (JVM running for 4.025)
+2020-04-09 17:31:34.995  INFO 20268 --- [http-nio-8888-exec-1] o.apache.tomcat.util.http.parser.Cookie  : A cookie header was received [1585883995; remember-me=YWRtaW46MTU4NzA5NjIwNjA1MjpjOTE3Yjc5OGE4ODBkNDhlNjQxOTc2M2M0ZWM0NDU5Yw; JSESSIONID=4B0DAFEC1CE7567A2AC63074A94C7D19] that contained an invalid cookie. That cookie will be ignored.
+ Note: further occurrences of this error will be logged at DEBUG level.
+2020-04-09 17:31:35.001  INFO 20268 --- [http-nio-8888-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-04-09 17:31:35.001  INFO 20268 --- [http-nio-8888-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-04-09 17:31:35.009  INFO 20268 --- [http-nio-8888-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 7 ms
+2020-04-09 17:31:35.649 DEBUG 20268 --- [http-nio-8888-exec-5] s.a.g.mapper.SysMenuMapper.selectList    : ==>  Preparing: SELECT id,title,href,pid,icon,target,sort,status,remark,create_time,update_time FROM sys_menu WHERE (status = ?) 
+2020-04-09 17:31:35.672 DEBUG 20268 --- [http-nio-8888-exec-5] s.a.g.mapper.SysMenuMapper.selectList    : ==> Parameters: true(Boolean)
+2020-04-09 17:31:35.689 DEBUG 20268 --- [http-nio-8888-exec-5] s.a.g.mapper.SysMenuMapper.selectList    : <==      Total: 7
+2020-04-09 17:31:35.692  INFO 20268 --- [http-nio-8888-exec-5] s.alanliang.geekblog.aspect.LogAspect    : Request ------ RequestLog {url = http://localhost:8888/admin/init, ip = 0:0:0:0:0:0:0:1, classMethod = site.alanliang.geekblog.controller.admin.IndexController.init, args = [], time = 114ms, description = 初始化后台主页}
+2020-04-09 17:31:35.693  INFO 20268 --- [http-nio-8888-exec-5] s.alanliang.geekblog.aspect.LogAspect    : Return ------ <200 OK OK,InitInfoVo(menuInfo=[MenuVo(id=1, pid=0, title=常规管理, icon=fa fa-dashboard, href=, target=_self, child=[MenuVo(id=2, pid=1, title=用户管理, icon=fa fa-users, href=/api/page?pageName=user/user-list, target=null, child=null), MenuVo(id=3, pid=1, title=文章发布, icon=fa fa-book, href=/api/page?pageName=article/article-add, target=null, child=null), MenuVo(id=4, pid=1, title=其它管理, icon=fa fa-slideshare, href=null, target=null, child=null), MenuVo(id=5, pid=1, title=文章管理, icon=fa fa-book, href=/api/page?pageName=article/article-list, target=null, child=null), MenuVo(id=6, pid=1, title=分类管理, icon=fa fa-tasks, href=/api/page?pageName=category/category-list, target=null, child=null), MenuVo(id=7, pid=1, title=标签管理, icon=fa fa-tags, href=/api/page?pageName=tag/tag-list, target=null, child=null)])], homeInfo=InitInfoVo.HomeInfo(title=首页, href=/api/page?pageName=dashboard), logoInfo=InitInfoVo.LogoInfo(title=Geek Blog, image=/static/layuimini/images/logo.png)),[]>
+2020-04-09 17:45:41.195  INFO 16020 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Starting GeekBlogApplication on DESKTOP-QNDK7AF with PID 16020 (D:\idea\geekblog\target\classes started by AlanLiang in D:\idea\geekblog)
+2020-04-09 17:45:41.199 DEBUG 16020 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Running with Spring Boot v2.2.6.RELEASE, Spring v5.2.5.RELEASE
+2020-04-09 17:45:41.200  INFO 16020 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : The following profiles are active: dev
+2020-04-09 17:45:41.255  INFO 16020 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2020-04-09 17:45:41.255  INFO 16020 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2020-04-09 17:45:42.437  INFO 16020 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8888 (http)
+2020-04-09 17:45:42.443  INFO 16020 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-04-09 17:45:42.444  INFO 16020 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.33]
+2020-04-09 17:45:42.513  INFO 16020 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-04-09 17:45:42.513  INFO 16020 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1258 ms
+2020-04-09 17:45:42.681  INFO 16020 --- [restartedMain] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2020-04-09 17:45:42.973  INFO 16020 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2020-04-09 17:45:43.790  INFO 16020 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-04-09 17:45:43.847  INFO 16020 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2020-04-09 17:45:44.008  INFO 16020 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2020-04-09 17:45:44.058  INFO 16020 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8888 (http) with context path ''
+2020-04-09 17:45:44.063  INFO 16020 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Started GeekBlogApplication in 3.531 seconds (JVM running for 4.519)
+2020-04-09 17:45:48.824  INFO 16020 --- [http-nio-8888-exec-1] o.apache.tomcat.util.http.parser.Cookie  : A cookie header was received [1585883995; remember-me=YWRtaW46MTU4NzA5NjIwNjA1MjpjOTE3Yjc5OGE4ODBkNDhlNjQxOTc2M2M0ZWM0NDU5Yw; JSESSIONID=4B0DAFEC1CE7567A2AC63074A94C7D19] that contained an invalid cookie. That cookie will be ignored.
+ Note: further occurrences of this error will be logged at DEBUG level.
+2020-04-09 17:45:48.833  INFO 16020 --- [http-nio-8888-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-04-09 17:45:48.833  INFO 16020 --- [http-nio-8888-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-04-09 17:45:48.840  INFO 16020 --- [http-nio-8888-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 7 ms
+2020-04-09 17:45:49.414 DEBUG 16020 --- [http-nio-8888-exec-9] s.a.g.mapper.SysMenuMapper.selectList    : ==>  Preparing: SELECT id,title,href,pid,icon,target,sort,status,remark,create_time,update_time FROM sys_menu WHERE (status = ?) 
+2020-04-09 17:45:49.431 DEBUG 16020 --- [http-nio-8888-exec-9] s.a.g.mapper.SysMenuMapper.selectList    : ==> Parameters: true(Boolean)
+2020-04-09 17:45:49.447 DEBUG 16020 --- [http-nio-8888-exec-9] s.a.g.mapper.SysMenuMapper.selectList    : <==      Total: 7
+2020-04-09 17:45:49.450  INFO 16020 --- [http-nio-8888-exec-9] s.alanliang.geekblog.aspect.LogAspect    : Request ------ RequestLog {url = http://localhost:8888/admin/init, ip = 0:0:0:0:0:0:0:1, classMethod = site.alanliang.geekblog.controller.admin.IndexController.init, args = [], time = 98ms, description = 初始化后台主页}
+2020-04-09 17:45:49.451  INFO 16020 --- [http-nio-8888-exec-9] s.alanliang.geekblog.aspect.LogAspect    : Return ------ <200 OK OK,InitInfoVo(menuInfo=[MenuVo(id=1, pid=0, title=常规管理, icon=fa fa-dashboard, href=, target=_self, child=[MenuVo(id=2, pid=1, title=用户管理, icon=fa fa-users, href=/api/page?pageName=user/user-list, target=null, child=null), MenuVo(id=3, pid=1, title=文章发布, icon=fa fa-book, href=/api/page?pageName=article/article-add, target=null, child=null), MenuVo(id=4, pid=1, title=其它管理, icon=fa fa-slideshare, href=null, target=null, child=null), MenuVo(id=5, pid=1, title=文章管理, icon=fa fa-book, href=/api/page?pageName=article/article-list, target=null, child=null), MenuVo(id=6, pid=1, title=分类管理, icon=fa fa-tasks, href=/api/page?pageName=category/category-list, target=null, child=null), MenuVo(id=7, pid=1, title=标签管理, icon=fa fa-tags, href=/api/page?pageName=tag/tag-list, target=null, child=null)])], homeInfo=InitInfoVo.HomeInfo(title=首页, href=/api/page?pageName=dashboard), logoInfo=InitInfoVo.LogoInfo(title=Geek Blog, image=/static/layuimini/images/logo.png)),[]>
+2020-04-09 17:45:49.868 DEBUG 16020 --- [http-nio-8888-exec-4] s.a.g.mapper.TagMapper.selectPage        : ==>  Preparing: SELECT COUNT(1) FROM t_tag 
+2020-04-09 17:45:49.868 DEBUG 16020 --- [http-nio-8888-exec-4] s.a.g.mapper.TagMapper.selectPage        : ==> Parameters: 
+2020-04-09 17:45:49.880 DEBUG 16020 --- [http-nio-8888-exec-4] s.a.g.mapper.TagMapper.selectPage        : ==>  Preparing: SELECT id,name,create_time,update_time FROM t_tag LIMIT ?,? 
+2020-04-09 17:45:49.881 DEBUG 16020 --- [http-nio-8888-exec-4] s.a.g.mapper.TagMapper.selectPage        : ==> Parameters: 0(Long), 15(Long)
+2020-04-09 17:45:49.884 DEBUG 16020 --- [http-nio-8888-exec-4] s.a.g.mapper.TagMapper.selectPage        : <==      Total: 10
+2020-04-09 17:46:28.973 DEBUG 16020 --- [http-nio-8888-exec-9] s.a.g.mapper.SysMenuMapper.selectList    : ==>  Preparing: SELECT id,title,href,pid,icon,target,sort,status,remark,create_time,update_time FROM sys_menu WHERE (status = ?) 
+2020-04-09 17:46:28.973 DEBUG 16020 --- [http-nio-8888-exec-9] s.a.g.mapper.SysMenuMapper.selectList    : ==> Parameters: true(Boolean)
+2020-04-09 17:46:28.978 DEBUG 16020 --- [http-nio-8888-exec-9] s.a.g.mapper.SysMenuMapper.selectList    : <==      Total: 7
+2020-04-09 17:46:28.978  INFO 16020 --- [http-nio-8888-exec-9] s.alanliang.geekblog.aspect.LogAspect    : Request ------ RequestLog {url = http://localhost:8888/admin/init, ip = 0:0:0:0:0:0:0:1, classMethod = site.alanliang.geekblog.controller.admin.IndexController.init, args = [], time = 10ms, description = 初始化后台主页}
+2020-04-09 17:46:28.978  INFO 16020 --- [http-nio-8888-exec-9] s.alanliang.geekblog.aspect.LogAspect    : Return ------ <200 OK OK,InitInfoVo(menuInfo=[MenuVo(id=1, pid=0, title=常规管理, icon=fa fa-dashboard, href=, target=_self, child=[MenuVo(id=2, pid=1, title=用户管理, icon=fa fa-users, href=/api/page?pageName=user/user-list, target=null, child=null), MenuVo(id=3, pid=1, title=文章发布, icon=fa fa-book, href=/api/page?pageName=article/article-add, target=null, child=null), MenuVo(id=4, pid=1, title=其它管理, icon=fa fa-slideshare, href=null, target=null, child=null), MenuVo(id=5, pid=1, title=文章管理, icon=fa fa-book, href=/api/page?pageName=article/article-list, target=null, child=null), MenuVo(id=6, pid=1, title=分类管理, icon=fa fa-tasks, href=/api/page?pageName=category/category-list, target=null, child=null), MenuVo(id=7, pid=1, title=标签管理, icon=fa fa-tags, href=/api/page?pageName=tag/tag-list, target=null, child=null)])], homeInfo=InitInfoVo.HomeInfo(title=首页, href=/api/page?pageName=dashboard), logoInfo=InitInfoVo.LogoInfo(title=Geek Blog, image=/static/layuimini/images/logo.png)),[]>
+2020-04-09 17:46:29.302 DEBUG 16020 --- [http-nio-8888-exec-8] s.a.g.mapper.TagMapper.selectPage        : ==>  Preparing: SELECT COUNT(1) FROM t_tag 
+2020-04-09 17:46:29.303 DEBUG 16020 --- [http-nio-8888-exec-8] s.a.g.mapper.TagMapper.selectPage        : ==> Parameters: 
+2020-04-09 17:46:29.305 DEBUG 16020 --- [http-nio-8888-exec-8] s.a.g.mapper.TagMapper.selectPage        : ==>  Preparing: SELECT id,name,create_time,update_time FROM t_tag LIMIT ?,? 
+2020-04-09 17:46:29.305 DEBUG 16020 --- [http-nio-8888-exec-8] s.a.g.mapper.TagMapper.selectPage        : ==> Parameters: 0(Long), 15(Long)
+2020-04-09 17:46:29.310 DEBUG 16020 --- [http-nio-8888-exec-8] s.a.g.mapper.TagMapper.selectPage        : <==      Total: 10
+2020-04-09 17:46:40.921 DEBUG 16020 --- [http-nio-8888-exec-4] s.a.g.mapper.SysMenuMapper.selectList    : ==>  Preparing: SELECT id,title,href,pid,icon,target,sort,status,remark,create_time,update_time FROM sys_menu WHERE (status = ?) 
+2020-04-09 17:46:40.921 DEBUG 16020 --- [http-nio-8888-exec-4] s.a.g.mapper.SysMenuMapper.selectList    : ==> Parameters: true(Boolean)
+2020-04-09 17:46:40.926 DEBUG 16020 --- [http-nio-8888-exec-4] s.a.g.mapper.SysMenuMapper.selectList    : <==      Total: 7
+2020-04-09 17:46:40.926  INFO 16020 --- [http-nio-8888-exec-4] s.alanliang.geekblog.aspect.LogAspect    : Request ------ RequestLog {url = http://localhost:8888/admin/init, ip = 0:0:0:0:0:0:0:1, classMethod = site.alanliang.geekblog.controller.admin.IndexController.init, args = [], time = 7ms, description = 初始化后台主页}
+2020-04-09 17:46:40.926  INFO 16020 --- [http-nio-8888-exec-4] s.alanliang.geekblog.aspect.LogAspect    : Return ------ <200 OK OK,InitInfoVo(menuInfo=[MenuVo(id=1, pid=0, title=常规管理, icon=fa fa-dashboard, href=, target=_self, child=[MenuVo(id=2, pid=1, title=用户管理, icon=fa fa-users, href=/api/page?pageName=user/user-list, target=null, child=null), MenuVo(id=3, pid=1, title=文章发布, icon=fa fa-book, href=/api/page?pageName=article/article-add, target=null, child=null), MenuVo(id=4, pid=1, title=其它管理, icon=fa fa-slideshare, href=null, target=null, child=null), MenuVo(id=5, pid=1, title=文章管理, icon=fa fa-book, href=/api/page?pageName=article/article-list, target=null, child=null), MenuVo(id=6, pid=1, title=分类管理, icon=fa fa-tasks, href=/api/page?pageName=category/category-list, target=null, child=null), MenuVo(id=7, pid=1, title=标签管理, icon=fa fa-tags, href=/api/page?pageName=tag/tag-list, target=null, child=null)])], homeInfo=InitInfoVo.HomeInfo(title=首页, href=/api/page?pageName=dashboard), logoInfo=InitInfoVo.LogoInfo(title=Geek Blog, image=/static/layuimini/images/logo.png)),[]>
+2020-04-09 17:46:41.210 DEBUG 16020 --- [http-nio-8888-exec-1] s.a.g.mapper.TagMapper.selectPage        : ==>  Preparing: SELECT COUNT(1) FROM t_tag 
+2020-04-09 17:46:41.210 DEBUG 16020 --- [http-nio-8888-exec-1] s.a.g.mapper.TagMapper.selectPage        : ==> Parameters: 
+2020-04-09 17:46:41.214 DEBUG 16020 --- [http-nio-8888-exec-1] s.a.g.mapper.TagMapper.selectPage        : ==>  Preparing: SELECT id,name,create_time,update_time FROM t_tag LIMIT ?,? 
+2020-04-09 17:46:41.216 DEBUG 16020 --- [http-nio-8888-exec-1] s.a.g.mapper.TagMapper.selectPage        : ==> Parameters: 0(Long), 15(Long)
+2020-04-09 17:46:41.222 DEBUG 16020 --- [http-nio-8888-exec-1] s.a.g.mapper.TagMapper.selectPage        : <==      Total: 10
+2020-04-09 17:47:47.004 DEBUG 16020 --- [http-nio-8888-exec-10] s.a.g.mapper.SysMenuMapper.selectList    : ==>  Preparing: SELECT id,title,href,pid,icon,target,sort,status,remark,create_time,update_time FROM sys_menu WHERE (status = ?) 
+2020-04-09 17:47:47.004 DEBUG 16020 --- [http-nio-8888-exec-10] s.a.g.mapper.SysMenuMapper.selectList    : ==> Parameters: true(Boolean)
+2020-04-09 17:47:47.008 DEBUG 16020 --- [http-nio-8888-exec-10] s.a.g.mapper.SysMenuMapper.selectList    : <==      Total: 7
+2020-04-09 17:47:47.008  INFO 16020 --- [http-nio-8888-exec-10] s.alanliang.geekblog.aspect.LogAspect    : Request ------ RequestLog {url = http://localhost:8888/admin/init, ip = 0:0:0:0:0:0:0:1, classMethod = site.alanliang.geekblog.controller.admin.IndexController.init, args = [], time = 7ms, description = 初始化后台主页}
+2020-04-09 17:47:47.008  INFO 16020 --- [http-nio-8888-exec-10] s.alanliang.geekblog.aspect.LogAspect    : Return ------ <200 OK OK,InitInfoVo(menuInfo=[MenuVo(id=1, pid=0, title=常规管理, icon=fa fa-dashboard, href=, target=_self, child=[MenuVo(id=2, pid=1, title=用户管理, icon=fa fa-users, href=/api/page?pageName=user/user-list, target=null, child=null), MenuVo(id=3, pid=1, title=文章发布, icon=fa fa-book, href=/api/page?pageName=article/article-add, target=null, child=null), MenuVo(id=4, pid=1, title=其它管理, icon=fa fa-slideshare, href=null, target=null, child=null), MenuVo(id=5, pid=1, title=文章管理, icon=fa fa-book, href=/api/page?pageName=article/article-list, target=null, child=null), MenuVo(id=6, pid=1, title=分类管理, icon=fa fa-tasks, href=/api/page?pageName=category/category-list, target=null, child=null), MenuVo(id=7, pid=1, title=标签管理, icon=fa fa-tags, href=/api/page?pageName=tag/tag-list, target=null, child=null)])], homeInfo=InitInfoVo.HomeInfo(title=首页, href=/api/page?pageName=dashboard), logoInfo=InitInfoVo.LogoInfo(title=Geek Blog, image=/static/layuimini/images/logo.png)),[]>
+2020-04-09 17:47:47.302 DEBUG 16020 --- [http-nio-8888-exec-4] s.a.g.mapper.TagMapper.selectPage        : ==>  Preparing: SELECT COUNT(1) FROM t_tag 
+2020-04-09 17:47:47.302 DEBUG 16020 --- [http-nio-8888-exec-4] s.a.g.mapper.TagMapper.selectPage        : ==> Parameters: 
+2020-04-09 17:47:47.304 DEBUG 16020 --- [http-nio-8888-exec-4] s.a.g.mapper.TagMapper.selectPage        : ==>  Preparing: SELECT id,name,create_time,update_time FROM t_tag LIMIT ?,? 
+2020-04-09 17:47:47.304 DEBUG 16020 --- [http-nio-8888-exec-4] s.a.g.mapper.TagMapper.selectPage        : ==> Parameters: 0(Long), 15(Long)
+2020-04-09 17:47:47.306 DEBUG 16020 --- [http-nio-8888-exec-4] s.a.g.mapper.TagMapper.selectPage        : <==      Total: 10
+2020-04-09 17:48:12.470 DEBUG 16020 --- [http-nio-8888-exec-1] s.a.g.mapper.SysMenuMapper.selectList    : ==>  Preparing: SELECT id,title,href,pid,icon,target,sort,status,remark,create_time,update_time FROM sys_menu WHERE (status = ?) 
+2020-04-09 17:48:12.471 DEBUG 16020 --- [http-nio-8888-exec-1] s.a.g.mapper.SysMenuMapper.selectList    : ==> Parameters: true(Boolean)
+2020-04-09 17:48:12.477 DEBUG 16020 --- [http-nio-8888-exec-1] s.a.g.mapper.SysMenuMapper.selectList    : <==      Total: 7
+2020-04-09 17:48:12.478  INFO 16020 --- [http-nio-8888-exec-1] s.alanliang.geekblog.aspect.LogAspect    : Request ------ RequestLog {url = http://localhost:8888/admin/init, ip = 0:0:0:0:0:0:0:1, classMethod = site.alanliang.geekblog.controller.admin.IndexController.init, args = [], time = 11ms, description = 初始化后台主页}
+2020-04-09 17:48:12.479  INFO 16020 --- [http-nio-8888-exec-1] s.alanliang.geekblog.aspect.LogAspect    : Return ------ <200 OK OK,InitInfoVo(menuInfo=[MenuVo(id=1, pid=0, title=常规管理, icon=fa fa-dashboard, href=, target=_self, child=[MenuVo(id=2, pid=1, title=用户管理, icon=fa fa-users, href=/api/page?pageName=user/user-list, target=null, child=null), MenuVo(id=3, pid=1, title=文章发布, icon=fa fa-book, href=/api/page?pageName=article/article-add, target=null, child=null), MenuVo(id=4, pid=1, title=其它管理, icon=fa fa-slideshare, href=null, target=null, child=null), MenuVo(id=5, pid=1, title=文章管理, icon=fa fa-book, href=/api/page?pageName=article/article-list, target=null, child=null), MenuVo(id=6, pid=1, title=分类管理, icon=fa fa-tasks, href=/api/page?pageName=category/category-list, target=null, child=null), MenuVo(id=7, pid=1, title=标签管理, icon=fa fa-tags, href=/api/page?pageName=tag/tag-list, target=null, child=null)])], homeInfo=InitInfoVo.HomeInfo(title=首页, href=/api/page?pageName=dashboard), logoInfo=InitInfoVo.LogoInfo(title=Geek Blog, image=/static/layuimini/images/logo.png)),[]>
+2020-04-09 17:48:12.834 DEBUG 16020 --- [http-nio-8888-exec-7] s.a.g.mapper.TagMapper.selectPage        : ==>  Preparing: SELECT COUNT(1) FROM t_tag 
+2020-04-09 17:48:12.834 DEBUG 16020 --- [http-nio-8888-exec-7] s.a.g.mapper.TagMapper.selectPage        : ==> Parameters: 
+2020-04-09 17:48:12.836 DEBUG 16020 --- [http-nio-8888-exec-7] s.a.g.mapper.TagMapper.selectPage        : ==>  Preparing: SELECT id,name,create_time,update_time FROM t_tag LIMIT ?,? 
+2020-04-09 17:48:12.836 DEBUG 16020 --- [http-nio-8888-exec-7] s.a.g.mapper.TagMapper.selectPage        : ==> Parameters: 0(Long), 15(Long)
+2020-04-09 17:48:12.841 DEBUG 16020 --- [http-nio-8888-exec-7] s.a.g.mapper.TagMapper.selectPage        : <==      Total: 10
+2020-04-09 17:48:21.660 DEBUG 16020 --- [http-nio-8888-exec-7] s.a.g.mapper.SysMenuMapper.selectList    : ==>  Preparing: SELECT id,title,href,pid,icon,target,sort,status,remark,create_time,update_time FROM sys_menu WHERE (status = ?) 
+2020-04-09 17:48:21.662 DEBUG 16020 --- [http-nio-8888-exec-7] s.a.g.mapper.SysMenuMapper.selectList    : ==> Parameters: true(Boolean)
+2020-04-09 17:48:21.668 DEBUG 16020 --- [http-nio-8888-exec-7] s.a.g.mapper.SysMenuMapper.selectList    : <==      Total: 7
+2020-04-09 17:48:21.670  INFO 16020 --- [http-nio-8888-exec-7] s.alanliang.geekblog.aspect.LogAspect    : Request ------ RequestLog {url = http://localhost:8888/admin/init, ip = 0:0:0:0:0:0:0:1, classMethod = site.alanliang.geekblog.controller.admin.IndexController.init, args = [], time = 18ms, description = 初始化后台主页}
+2020-04-09 17:48:21.670  INFO 16020 --- [http-nio-8888-exec-7] s.alanliang.geekblog.aspect.LogAspect    : Return ------ <200 OK OK,InitInfoVo(menuInfo=[MenuVo(id=1, pid=0, title=常规管理, icon=fa fa-dashboard, href=, target=_self, child=[MenuVo(id=2, pid=1, title=用户管理, icon=fa fa-users, href=/api/page?pageName=user/user-list, target=null, child=null), MenuVo(id=3, pid=1, title=文章发布, icon=fa fa-book, href=/api/page?pageName=article/article-add, target=null, child=null), MenuVo(id=4, pid=1, title=其它管理, icon=fa fa-slideshare, href=null, target=null, child=null), MenuVo(id=5, pid=1, title=文章管理, icon=fa fa-book, href=/api/page?pageName=article/article-list, target=null, child=null), MenuVo(id=6, pid=1, title=分类管理, icon=fa fa-tasks, href=/api/page?pageName=category/category-list, target=null, child=null), MenuVo(id=7, pid=1, title=标签管理, icon=fa fa-tags, href=/api/page?pageName=tag/tag-list, target=null, child=null)])], homeInfo=InitInfoVo.HomeInfo(title=首页, href=/api/page?pageName=dashboard), logoInfo=InitInfoVo.LogoInfo(title=Geek Blog, image=/static/layuimini/images/logo.png)),[]>
+2020-04-09 17:48:22.123 DEBUG 16020 --- [http-nio-8888-exec-3] s.a.g.mapper.TagMapper.selectPage        : ==>  Preparing: SELECT COUNT(1) FROM t_tag 
+2020-04-09 17:48:22.124 DEBUG 16020 --- [http-nio-8888-exec-3] s.a.g.mapper.TagMapper.selectPage        : ==> Parameters: 
+2020-04-09 17:48:22.127 DEBUG 16020 --- [http-nio-8888-exec-3] s.a.g.mapper.TagMapper.selectPage        : ==>  Preparing: SELECT id,name,create_time,update_time FROM t_tag LIMIT ?,? 
+2020-04-09 17:48:22.128 DEBUG 16020 --- [http-nio-8888-exec-3] s.a.g.mapper.TagMapper.selectPage        : ==> Parameters: 0(Long), 15(Long)
+2020-04-09 17:48:22.131 DEBUG 16020 --- [http-nio-8888-exec-3] s.a.g.mapper.TagMapper.selectPage        : <==      Total: 10
+2020-04-09 17:48:36.612 DEBUG 16020 --- [http-nio-8888-exec-1] s.a.geekblog.mapper.TagMapper.selectOne  : ==>  Preparing: SELECT id,name,create_time,update_time FROM t_tag WHERE (name = ?) 
+2020-04-09 17:48:36.613 DEBUG 16020 --- [http-nio-8888-exec-1] s.a.geekblog.mapper.TagMapper.selectOne  : ==> Parameters: 测试标签1(String)
+2020-04-09 17:48:36.613 DEBUG 16020 --- [http-nio-8888-exec-1] s.a.geekblog.mapper.TagMapper.selectOne  : <==      Total: 0
+2020-04-09 17:48:36.615 DEBUG 16020 --- [http-nio-8888-exec-1] s.a.geekblog.mapper.TagMapper.insert     : ==>  Preparing: INSERT INTO t_tag ( name, create_time, update_time ) VALUES ( ?, ?, ? ) 
+2020-04-09 17:48:36.617 DEBUG 16020 --- [http-nio-8888-exec-1] s.a.geekblog.mapper.TagMapper.insert     : ==> Parameters: 测试标签1(String), 2020-04-09 17:48:36.607(Timestamp), 2020-04-09 17:48:36.607(Timestamp)
+2020-04-09 17:48:36.620 DEBUG 16020 --- [http-nio-8888-exec-1] s.a.geekblog.mapper.TagMapper.insert     : <==    Updates: 1
+2020-04-09 17:48:37.979 DEBUG 16020 --- [http-nio-8888-exec-5] s.a.g.mapper.TagMapper.selectPage        : ==>  Preparing: SELECT COUNT(1) FROM t_tag 
+2020-04-09 17:48:37.980 DEBUG 16020 --- [http-nio-8888-exec-5] s.a.g.mapper.TagMapper.selectPage        : ==> Parameters: 
+2020-04-09 17:48:37.981 DEBUG 16020 --- [http-nio-8888-exec-5] s.a.g.mapper.TagMapper.selectPage        : ==>  Preparing: SELECT id,name,create_time,update_time FROM t_tag LIMIT ?,? 
+2020-04-09 17:48:37.981 DEBUG 16020 --- [http-nio-8888-exec-5] s.a.g.mapper.TagMapper.selectPage        : ==> Parameters: 0(Long), 15(Long)
+2020-04-09 17:48:37.982 DEBUG 16020 --- [http-nio-8888-exec-5] s.a.g.mapper.TagMapper.selectPage        : <==      Total: 11
+2020-04-09 17:48:59.557 DEBUG 16020 --- [http-nio-8888-exec-1] s.a.g.mapper.SysMenuMapper.selectList    : ==>  Preparing: SELECT id,title,href,pid,icon,target,sort,status,remark,create_time,update_time FROM sys_menu WHERE (status = ?) 
+2020-04-09 17:48:59.558 DEBUG 16020 --- [http-nio-8888-exec-1] s.a.g.mapper.SysMenuMapper.selectList    : ==> Parameters: true(Boolean)
+2020-04-09 17:48:59.561 DEBUG 16020 --- [http-nio-8888-exec-1] s.a.g.mapper.SysMenuMapper.selectList    : <==      Total: 7
+2020-04-09 17:48:59.562  INFO 16020 --- [http-nio-8888-exec-1] s.alanliang.geekblog.aspect.LogAspect    : Request ------ RequestLog {url = http://localhost:8888/admin/init, ip = 0:0:0:0:0:0:0:1, classMethod = site.alanliang.geekblog.controller.admin.IndexController.init, args = [], time = 8ms, description = 初始化后台主页}
+2020-04-09 17:48:59.564  INFO 16020 --- [http-nio-8888-exec-1] s.alanliang.geekblog.aspect.LogAspect    : Return ------ <200 OK OK,InitInfoVo(menuInfo=[MenuVo(id=1, pid=0, title=常规管理, icon=fa fa-dashboard, href=, target=_self, child=[MenuVo(id=2, pid=1, title=用户管理, icon=fa fa-users, href=/api/page?pageName=user/user-list, target=null, child=null), MenuVo(id=3, pid=1, title=文章发布, icon=fa fa-book, href=/api/page?pageName=article/article-add, target=null, child=null), MenuVo(id=4, pid=1, title=其它管理, icon=fa fa-slideshare, href=null, target=null, child=null), MenuVo(id=5, pid=1, title=文章管理, icon=fa fa-book, href=/api/page?pageName=article/article-list, target=null, child=null), MenuVo(id=6, pid=1, title=分类管理, icon=fa fa-tasks, href=/api/page?pageName=category/category-list, target=null, child=null), MenuVo(id=7, pid=1, title=标签管理, icon=fa fa-tags, href=/api/page?pageName=tag/tag-list, target=null, child=null)])], homeInfo=InitInfoVo.HomeInfo(title=首页, href=/api/page?pageName=dashboard), logoInfo=InitInfoVo.LogoInfo(title=Geek Blog, image=/static/layuimini/images/logo.png)),[]>
+2020-04-09 17:48:59.870 DEBUG 16020 --- [http-nio-8888-exec-3] s.a.g.mapper.TagMapper.selectPage        : ==>  Preparing: SELECT COUNT(1) FROM t_tag 
+2020-04-09 17:48:59.870 DEBUG 16020 --- [http-nio-8888-exec-3] s.a.g.mapper.TagMapper.selectPage        : ==> Parameters: 
+2020-04-09 17:48:59.872 DEBUG 16020 --- [http-nio-8888-exec-3] s.a.g.mapper.TagMapper.selectPage        : ==>  Preparing: SELECT id,name,create_time,update_time FROM t_tag LIMIT ?,? 
+2020-04-09 17:48:59.872 DEBUG 16020 --- [http-nio-8888-exec-3] s.a.g.mapper.TagMapper.selectPage        : ==> Parameters: 0(Long), 15(Long)
+2020-04-09 17:48:59.875 DEBUG 16020 --- [http-nio-8888-exec-3] s.a.g.mapper.TagMapper.selectPage        : <==      Total: 11
+2020-04-09 17:49:06.286 DEBUG 16020 --- [http-nio-8888-exec-4] s.a.geekblog.mapper.TagMapper.selectOne  : ==>  Preparing: SELECT id,name,create_time,update_time FROM t_tag WHERE (name = ?) 
+2020-04-09 17:49:06.286 DEBUG 16020 --- [http-nio-8888-exec-4] s.a.geekblog.mapper.TagMapper.selectOne  : ==> Parameters: 测试标签1(String)
+2020-04-09 17:49:06.287 DEBUG 16020 --- [http-nio-8888-exec-4] s.a.geekblog.mapper.TagMapper.selectOne  : <==      Total: 1
+2020-04-09 17:49:06.291 ERROR 16020 --- [http-nio-8888-exec-4] s.a.g.e.handler.GlobalExceptionHandler   : 参数验证失败
+
+site.alanliang.geekblog.exception.NameNotUniqueException: 标签名称已存在
+	at site.alanliang.geekblog.service.impl.TagServiceImpl.saveOfUpdate(TagServiceImpl.java:44)
+	at site.alanliang.geekblog.service.impl.TagServiceImpl$$FastClassBySpringCGLIB$$d213d658.invoke(<generated>)
+	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:771)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:749)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:366)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:118)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:749)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:691)
+	at site.alanliang.geekblog.service.impl.TagServiceImpl$$EnhancerBySpringCGLIB$$242edc5f.saveOfUpdate(<generated>)
+	at site.alanliang.geekblog.controller.admin.TagController.save(TagController.java:54)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:190)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:138)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:105)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:879)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:793)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1040)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:943)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:660)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:741)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at com.alibaba.druid.support.http.WebStatFilter.doFilter(WebStatFilter.java:123)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:541)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:373)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:868)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1594)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+
+2020-04-09 17:49:06.293  WARN 16020 --- [http-nio-8888-exec-4] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [site.alanliang.geekblog.exception.NameNotUniqueException: 标签名称已存在]
+2020-04-09 17:49:17.572 DEBUG 16020 --- [http-nio-8888-exec-8] s.a.g.mapper.SysMenuMapper.selectList    : ==>  Preparing: SELECT id,title,href,pid,icon,target,sort,status,remark,create_time,update_time FROM sys_menu WHERE (status = ?) 
+2020-04-09 17:49:17.573 DEBUG 16020 --- [http-nio-8888-exec-8] s.a.g.mapper.SysMenuMapper.selectList    : ==> Parameters: true(Boolean)
+2020-04-09 17:49:17.578 DEBUG 16020 --- [http-nio-8888-exec-8] s.a.g.mapper.SysMenuMapper.selectList    : <==      Total: 7
+2020-04-09 17:49:17.579  INFO 16020 --- [http-nio-8888-exec-8] s.alanliang.geekblog.aspect.LogAspect    : Request ------ RequestLog {url = http://localhost:8888/admin/init, ip = 0:0:0:0:0:0:0:1, classMethod = site.alanliang.geekblog.controller.admin.IndexController.init, args = [], time = 9ms, description = 初始化后台主页}
+2020-04-09 17:49:17.579  INFO 16020 --- [http-nio-8888-exec-8] s.alanliang.geekblog.aspect.LogAspect    : Return ------ <200 OK OK,InitInfoVo(menuInfo=[MenuVo(id=1, pid=0, title=常规管理, icon=fa fa-dashboard, href=, target=_self, child=[MenuVo(id=2, pid=1, title=用户管理, icon=fa fa-users, href=/api/page?pageName=user/user-list, target=null, child=null), MenuVo(id=3, pid=1, title=文章发布, icon=fa fa-book, href=/api/page?pageName=article/article-add, target=null, child=null), MenuVo(id=4, pid=1, title=其它管理, icon=fa fa-slideshare, href=null, target=null, child=null), MenuVo(id=5, pid=1, title=文章管理, icon=fa fa-book, href=/api/page?pageName=article/article-list, target=null, child=null), MenuVo(id=6, pid=1, title=分类管理, icon=fa fa-tasks, href=/api/page?pageName=category/category-list, target=null, child=null), MenuVo(id=7, pid=1, title=标签管理, icon=fa fa-tags, href=/api/page?pageName=tag/tag-list, target=null, child=null)])], homeInfo=InitInfoVo.HomeInfo(title=首页, href=/api/page?pageName=dashboard), logoInfo=InitInfoVo.LogoInfo(title=Geek Blog, image=/static/layuimini/images/logo.png)),[]>
+2020-04-09 17:49:17.883 DEBUG 16020 --- [http-nio-8888-exec-1] s.a.g.mapper.TagMapper.selectPage        : ==>  Preparing: SELECT COUNT(1) FROM t_tag 
+2020-04-09 17:49:17.883 DEBUG 16020 --- [http-nio-8888-exec-1] s.a.g.mapper.TagMapper.selectPage        : ==> Parameters: 
+2020-04-09 17:49:17.885 DEBUG 16020 --- [http-nio-8888-exec-1] s.a.g.mapper.TagMapper.selectPage        : ==>  Preparing: SELECT id,name,create_time,update_time FROM t_tag LIMIT ?,? 
+2020-04-09 17:49:17.885 DEBUG 16020 --- [http-nio-8888-exec-1] s.a.g.mapper.TagMapper.selectPage        : ==> Parameters: 0(Long), 15(Long)
+2020-04-09 17:49:17.887 DEBUG 16020 --- [http-nio-8888-exec-1] s.a.g.mapper.TagMapper.selectPage        : <==      Total: 11
+2020-04-09 17:49:25.028 DEBUG 16020 --- [http-nio-8888-exec-10] s.a.g.mapper.SysMenuMapper.selectList    : ==>  Preparing: SELECT id,title,href,pid,icon,target,sort,status,remark,create_time,update_time FROM sys_menu WHERE (status = ?) 
+2020-04-09 17:49:25.029 DEBUG 16020 --- [http-nio-8888-exec-10] s.a.g.mapper.SysMenuMapper.selectList    : ==> Parameters: true(Boolean)
+2020-04-09 17:49:25.031 DEBUG 16020 --- [http-nio-8888-exec-10] s.a.g.mapper.SysMenuMapper.selectList    : <==      Total: 7
+2020-04-09 17:49:25.032  INFO 16020 --- [http-nio-8888-exec-10] s.alanliang.geekblog.aspect.LogAspect    : Request ------ RequestLog {url = http://localhost:8888/admin/init, ip = 0:0:0:0:0:0:0:1, classMethod = site.alanliang.geekblog.controller.admin.IndexController.init, args = [], time = 6ms, description = 初始化后台主页}
+2020-04-09 17:49:25.032  INFO 16020 --- [http-nio-8888-exec-10] s.alanliang.geekblog.aspect.LogAspect    : Return ------ <200 OK OK,InitInfoVo(menuInfo=[MenuVo(id=1, pid=0, title=常规管理, icon=fa fa-dashboard, href=, target=_self, child=[MenuVo(id=2, pid=1, title=用户管理, icon=fa fa-users, href=/api/page?pageName=user/user-list, target=null, child=null), MenuVo(id=3, pid=1, title=文章发布, icon=fa fa-book, href=/api/page?pageName=article/article-add, target=null, child=null), MenuVo(id=4, pid=1, title=其它管理, icon=fa fa-slideshare, href=null, target=null, child=null), MenuVo(id=5, pid=1, title=文章管理, icon=fa fa-book, href=/api/page?pageName=article/article-list, target=null, child=null), MenuVo(id=6, pid=1, title=分类管理, icon=fa fa-tasks, href=/api/page?pageName=category/category-list, target=null, child=null), MenuVo(id=7, pid=1, title=标签管理, icon=fa fa-tags, href=/api/page?pageName=tag/tag-list, target=null, child=null)])], homeInfo=InitInfoVo.HomeInfo(title=首页, href=/api/page?pageName=dashboard), logoInfo=InitInfoVo.LogoInfo(title=Geek Blog, image=/static/layuimini/images/logo.png)),[]>
+2020-04-09 17:49:25.334 DEBUG 16020 --- [http-nio-8888-exec-5] s.a.g.mapper.TagMapper.selectPage        : ==>  Preparing: SELECT COUNT(1) FROM t_tag 
+2020-04-09 17:49:25.335 DEBUG 16020 --- [http-nio-8888-exec-5] s.a.g.mapper.TagMapper.selectPage        : ==> Parameters: 
+2020-04-09 17:49:25.336 DEBUG 16020 --- [http-nio-8888-exec-5] s.a.g.mapper.TagMapper.selectPage        : ==>  Preparing: SELECT id,name,create_time,update_time FROM t_tag LIMIT ?,? 
+2020-04-09 17:49:25.336 DEBUG 16020 --- [http-nio-8888-exec-5] s.a.g.mapper.TagMapper.selectPage        : ==> Parameters: 0(Long), 15(Long)
+2020-04-09 17:49:25.338 DEBUG 16020 --- [http-nio-8888-exec-5] s.a.g.mapper.TagMapper.selectPage        : <==      Total: 11
+2020-04-09 17:49:31.506 DEBUG 16020 --- [http-nio-8888-exec-1] s.a.geekblog.mapper.TagMapper.selectOne  : ==>  Preparing: SELECT id,name,create_time,update_time FROM t_tag WHERE (name = ?) 
+2020-04-09 17:49:31.507 DEBUG 16020 --- [http-nio-8888-exec-1] s.a.geekblog.mapper.TagMapper.selectOne  : ==> Parameters: 测试标签1(String)
+2020-04-09 17:49:31.508 DEBUG 16020 --- [http-nio-8888-exec-1] s.a.geekblog.mapper.TagMapper.selectOne  : <==      Total: 1
+2020-04-09 17:49:31.509 ERROR 16020 --- [http-nio-8888-exec-1] s.a.g.e.handler.GlobalExceptionHandler   : 参数验证失败
+
+site.alanliang.geekblog.exception.NameNotUniqueException: 标签名称已存在
+	at site.alanliang.geekblog.service.impl.TagServiceImpl.saveOfUpdate(TagServiceImpl.java:44)
+	at site.alanliang.geekblog.service.impl.TagServiceImpl$$FastClassBySpringCGLIB$$d213d658.invoke(<generated>)
+	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:771)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:749)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:366)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:118)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:749)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:691)
+	at site.alanliang.geekblog.service.impl.TagServiceImpl$$EnhancerBySpringCGLIB$$242edc5f.saveOfUpdate(<generated>)
+	at site.alanliang.geekblog.controller.admin.TagController.save(TagController.java:54)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:190)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:138)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:105)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:879)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:793)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1040)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:943)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:660)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:741)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at com.alibaba.druid.support.http.WebStatFilter.doFilter(WebStatFilter.java:123)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:541)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:373)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:868)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1594)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+
+2020-04-09 17:49:31.510  WARN 16020 --- [http-nio-8888-exec-1] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [site.alanliang.geekblog.exception.NameNotUniqueException: 标签名称已存在]
+2020-04-09 17:49:39.187 DEBUG 16020 --- [http-nio-8888-exec-2] s.a.geekblog.mapper.TagMapper.selectOne  : ==>  Preparing: SELECT id,name,create_time,update_time FROM t_tag WHERE (name = ?) 
+2020-04-09 17:49:39.187 DEBUG 16020 --- [http-nio-8888-exec-2] s.a.geekblog.mapper.TagMapper.selectOne  : ==> Parameters: 测试标签1(String)
+2020-04-09 17:49:39.188 DEBUG 16020 --- [http-nio-8888-exec-2] s.a.geekblog.mapper.TagMapper.selectOne  : <==      Total: 1
+2020-04-09 17:49:39.189 ERROR 16020 --- [http-nio-8888-exec-2] s.a.g.e.handler.GlobalExceptionHandler   : 参数验证失败
+
+site.alanliang.geekblog.exception.NameNotUniqueException: 标签名称已存在
+	at site.alanliang.geekblog.service.impl.TagServiceImpl.saveOfUpdate(TagServiceImpl.java:44)
+	at site.alanliang.geekblog.service.impl.TagServiceImpl$$FastClassBySpringCGLIB$$d213d658.invoke(<generated>)
+	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:771)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:749)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:366)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:118)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:749)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:691)
+	at site.alanliang.geekblog.service.impl.TagServiceImpl$$EnhancerBySpringCGLIB$$242edc5f.saveOfUpdate(<generated>)
+	at site.alanliang.geekblog.controller.admin.TagController.save(TagController.java:54)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:190)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:138)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:105)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:879)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:793)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1040)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:943)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:660)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:741)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at com.alibaba.druid.support.http.WebStatFilter.doFilter(WebStatFilter.java:123)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:541)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:373)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:868)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1594)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+
+2020-04-09 17:49:39.190  WARN 16020 --- [http-nio-8888-exec-2] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [site.alanliang.geekblog.exception.NameNotUniqueException: 标签名称已存在]
+2020-04-09 17:49:44.381 DEBUG 16020 --- [http-nio-8888-exec-6] s.a.geekblog.mapper.TagMapper.selectOne  : ==>  Preparing: SELECT id,name,create_time,update_time FROM t_tag WHERE (name = ?) 
+2020-04-09 17:49:44.381 DEBUG 16020 --- [http-nio-8888-exec-6] s.a.geekblog.mapper.TagMapper.selectOne  : ==> Parameters: 测试标签2(String)
+2020-04-09 17:49:44.382 DEBUG 16020 --- [http-nio-8888-exec-6] s.a.geekblog.mapper.TagMapper.selectOne  : <==      Total: 0
+2020-04-09 17:49:44.383 DEBUG 16020 --- [http-nio-8888-exec-6] s.a.geekblog.mapper.TagMapper.insert     : ==>  Preparing: INSERT INTO t_tag ( name, create_time, update_time ) VALUES ( ?, ?, ? ) 
+2020-04-09 17:49:44.383 DEBUG 16020 --- [http-nio-8888-exec-6] s.a.geekblog.mapper.TagMapper.insert     : ==> Parameters: 测试标签2(String), 2020-04-09 17:49:44.379(Timestamp), 2020-04-09 17:49:44.379(Timestamp)
+2020-04-09 17:49:44.384 DEBUG 16020 --- [http-nio-8888-exec-6] s.a.geekblog.mapper.TagMapper.insert     : <==    Updates: 1
+2020-04-09 17:49:45.709 DEBUG 16020 --- [http-nio-8888-exec-1] s.a.g.mapper.TagMapper.selectPage        : ==>  Preparing: SELECT COUNT(1) FROM t_tag 
+2020-04-09 17:49:45.709 DEBUG 16020 --- [http-nio-8888-exec-1] s.a.g.mapper.TagMapper.selectPage        : ==> Parameters: 
+2020-04-09 17:49:45.710 DEBUG 16020 --- [http-nio-8888-exec-1] s.a.g.mapper.TagMapper.selectPage        : ==>  Preparing: SELECT id,name,create_time,update_time FROM t_tag LIMIT ?,? 
+2020-04-09 17:49:45.710 DEBUG 16020 --- [http-nio-8888-exec-1] s.a.g.mapper.TagMapper.selectPage        : ==> Parameters: 0(Long), 15(Long)
+2020-04-09 17:49:45.712 DEBUG 16020 --- [http-nio-8888-exec-1] s.a.g.mapper.TagMapper.selectPage        : <==      Total: 12
+2020-04-09 17:50:50.356 DEBUG 16020 --- [http-nio-8888-exec-4] s.a.g.mapper.SysMenuMapper.selectList    : ==>  Preparing: SELECT id,title,href,pid,icon,target,sort,status,remark,create_time,update_time FROM sys_menu WHERE (status = ?) 
+2020-04-09 17:50:50.356 DEBUG 16020 --- [http-nio-8888-exec-4] s.a.g.mapper.SysMenuMapper.selectList    : ==> Parameters: true(Boolean)
+2020-04-09 17:50:50.358 DEBUG 16020 --- [http-nio-8888-exec-4] s.a.g.mapper.SysMenuMapper.selectList    : <==      Total: 7
+2020-04-09 17:50:50.358  INFO 16020 --- [http-nio-8888-exec-4] s.alanliang.geekblog.aspect.LogAspect    : Request ------ RequestLog {url = http://localhost:8888/admin/init, ip = 0:0:0:0:0:0:0:1, classMethod = site.alanliang.geekblog.controller.admin.IndexController.init, args = [], time = 4ms, description = 初始化后台主页}
+2020-04-09 17:50:50.358  INFO 16020 --- [http-nio-8888-exec-4] s.alanliang.geekblog.aspect.LogAspect    : Return ------ <200 OK OK,InitInfoVo(menuInfo=[MenuVo(id=1, pid=0, title=常规管理, icon=fa fa-dashboard, href=, target=_self, child=[MenuVo(id=2, pid=1, title=用户管理, icon=fa fa-users, href=/api/page?pageName=user/user-list, target=null, child=null), MenuVo(id=3, pid=1, title=文章发布, icon=fa fa-book, href=/api/page?pageName=article/article-add, target=null, child=null), MenuVo(id=4, pid=1, title=其它管理, icon=fa fa-slideshare, href=null, target=null, child=null), MenuVo(id=5, pid=1, title=文章管理, icon=fa fa-book, href=/api/page?pageName=article/article-list, target=null, child=null), MenuVo(id=6, pid=1, title=分类管理, icon=fa fa-tasks, href=/api/page?pageName=category/category-list, target=null, child=null), MenuVo(id=7, pid=1, title=标签管理, icon=fa fa-tags, href=/api/page?pageName=tag/tag-list, target=null, child=null)])], homeInfo=InitInfoVo.HomeInfo(title=首页, href=/api/page?pageName=dashboard), logoInfo=InitInfoVo.LogoInfo(title=Geek Blog, image=/static/layuimini/images/logo.png)),[]>
+2020-04-09 17:50:50.580 DEBUG 16020 --- [http-nio-8888-exec-6] s.a.g.mapper.TagMapper.selectPage        : ==>  Preparing: SELECT COUNT(1) FROM t_tag 
+2020-04-09 17:50:50.580 DEBUG 16020 --- [http-nio-8888-exec-6] s.a.g.mapper.TagMapper.selectPage        : ==> Parameters: 
+2020-04-09 17:50:50.582 DEBUG 16020 --- [http-nio-8888-exec-6] s.a.g.mapper.TagMapper.selectPage        : ==>  Preparing: SELECT id,name,create_time,update_time FROM t_tag LIMIT ?,? 
+2020-04-09 17:50:50.582 DEBUG 16020 --- [http-nio-8888-exec-6] s.a.g.mapper.TagMapper.selectPage        : ==> Parameters: 0(Long), 15(Long)
+2020-04-09 17:50:50.584 DEBUG 16020 --- [http-nio-8888-exec-6] s.a.g.mapper.TagMapper.selectPage        : <==      Total: 12
+2020-04-09 17:51:23.358  INFO 21120 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Starting GeekBlogApplication on DESKTOP-QNDK7AF with PID 21120 (D:\idea\geekblog\target\classes started by AlanLiang in D:\idea\geekblog)
+2020-04-09 17:51:23.361 DEBUG 21120 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Running with Spring Boot v2.2.6.RELEASE, Spring v5.2.5.RELEASE
+2020-04-09 17:51:23.362  INFO 21120 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : The following profiles are active: dev
+2020-04-09 17:51:23.417  INFO 21120 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2020-04-09 17:51:23.418  INFO 21120 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2020-04-09 17:51:24.774  INFO 21120 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8888 (http)
+2020-04-09 17:51:24.787  INFO 21120 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-04-09 17:51:24.787  INFO 21120 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.33]
+2020-04-09 17:51:24.852  INFO 21120 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-04-09 17:51:24.852  INFO 21120 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1434 ms
+2020-04-09 17:51:25.038  INFO 21120 --- [restartedMain] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2020-04-09 17:51:25.319  INFO 21120 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2020-04-09 17:51:26.246  INFO 21120 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-04-09 17:51:26.307  INFO 21120 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2020-04-09 17:51:26.477  INFO 21120 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2020-04-09 17:51:26.537  INFO 21120 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8888 (http) with context path ''
+2020-04-09 17:51:26.541  INFO 21120 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Started GeekBlogApplication in 3.805 seconds (JVM running for 5.657)
+2020-04-09 17:53:06.909  INFO 4368 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Starting GeekBlogApplication on DESKTOP-QNDK7AF with PID 4368 (D:\idea\geekblog\target\classes started by AlanLiang in D:\idea\geekblog)
+2020-04-09 17:53:06.913 DEBUG 4368 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Running with Spring Boot v2.2.6.RELEASE, Spring v5.2.5.RELEASE
+2020-04-09 17:53:06.914  INFO 4368 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : The following profiles are active: dev
+2020-04-09 17:53:06.969  INFO 4368 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2020-04-09 17:53:06.970  INFO 4368 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2020-04-09 17:53:08.027  INFO 4368 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8888 (http)
+2020-04-09 17:53:08.034  INFO 4368 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-04-09 17:53:08.034  INFO 4368 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.33]
+2020-04-09 17:53:08.094  INFO 4368 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-04-09 17:53:08.094  INFO 4368 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1124 ms
+2020-04-09 17:53:08.232  INFO 4368 --- [restartedMain] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2020-04-09 17:53:08.466  INFO 4368 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2020-04-09 17:53:09.249  INFO 4368 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-04-09 17:53:09.307  INFO 4368 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2020-04-09 17:53:09.445  INFO 4368 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2020-04-09 17:53:09.488  INFO 4368 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8888 (http) with context path ''
+2020-04-09 17:53:09.491  INFO 4368 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Started GeekBlogApplication in 3.246 seconds (JVM running for 4.256)
+2020-04-09 17:53:11.993  INFO 4368 --- [http-nio-8888-exec-1] o.apache.tomcat.util.http.parser.Cookie  : A cookie header was received [1585883995; remember-me=YWRtaW46MTU4NzA5NjIwNjA1MjpjOTE3Yjc5OGE4ODBkNDhlNjQxOTc2M2M0ZWM0NDU5Yw; JSESSIONID=4B0DAFEC1CE7567A2AC63074A94C7D19] that contained an invalid cookie. That cookie will be ignored.
+ Note: further occurrences of this error will be logged at DEBUG level.
+2020-04-09 17:53:11.999  INFO 4368 --- [http-nio-8888-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-04-09 17:53:12.001  INFO 4368 --- [http-nio-8888-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-04-09 17:53:12.007  INFO 4368 --- [http-nio-8888-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 6 ms
+2020-04-09 17:53:12.560 DEBUG 4368 --- [http-nio-8888-exec-9] s.a.g.mapper.SysMenuMapper.selectList    : ==>  Preparing: SELECT id,title,href,pid,icon,target,sort,status,remark,create_time,update_time FROM sys_menu WHERE (status = ?) 
+2020-04-09 17:53:12.580 DEBUG 4368 --- [http-nio-8888-exec-9] s.a.g.mapper.SysMenuMapper.selectList    : ==> Parameters: true(Boolean)
+2020-04-09 17:53:12.596 DEBUG 4368 --- [http-nio-8888-exec-9] s.a.g.mapper.SysMenuMapper.selectList    : <==      Total: 7
+2020-04-09 17:53:12.601  INFO 4368 --- [http-nio-8888-exec-9] s.alanliang.geekblog.aspect.LogAspect    : Request ------ RequestLog {url = http://localhost:8888/admin/init, ip = 0:0:0:0:0:0:0:1, classMethod = site.alanliang.geekblog.controller.admin.IndexController.init, args = [], time = 116ms, description = 初始化后台主页}
+2020-04-09 17:53:12.602  INFO 4368 --- [http-nio-8888-exec-9] s.alanliang.geekblog.aspect.LogAspect    : Return ------ <200 OK OK,InitInfoVo(menuInfo=[MenuVo(id=1, pid=0, title=常规管理, icon=fa fa-dashboard, href=, target=_self, child=[MenuVo(id=2, pid=1, title=用户管理, icon=fa fa-users, href=/api/page?pageName=user/user-list, target=null, child=null), MenuVo(id=3, pid=1, title=文章发布, icon=fa fa-book, href=/api/page?pageName=article/article-add, target=null, child=null), MenuVo(id=4, pid=1, title=其它管理, icon=fa fa-slideshare, href=null, target=null, child=null), MenuVo(id=5, pid=1, title=文章管理, icon=fa fa-book, href=/api/page?pageName=article/article-list, target=null, child=null), MenuVo(id=6, pid=1, title=分类管理, icon=fa fa-tasks, href=/api/page?pageName=category/category-list, target=null, child=null), MenuVo(id=7, pid=1, title=标签管理, icon=fa fa-tags, href=/api/page?pageName=tag/tag-list, target=null, child=null)])], homeInfo=InitInfoVo.HomeInfo(title=首页, href=/api/page?pageName=dashboard), logoInfo=InitInfoVo.LogoInfo(title=Geek Blog, image=/static/layuimini/images/logo.png)),[]>
+2020-04-09 17:53:12.952 DEBUG 4368 --- [http-nio-8888-exec-3] s.a.g.mapper.TagMapper.selectPage        : ==>  Preparing: SELECT COUNT(1) FROM t_tag 
+2020-04-09 17:53:12.953 DEBUG 4368 --- [http-nio-8888-exec-3] s.a.g.mapper.TagMapper.selectPage        : ==> Parameters: 
+2020-04-09 17:53:12.961 DEBUG 4368 --- [http-nio-8888-exec-3] s.a.g.mapper.TagMapper.selectPage        : ==>  Preparing: SELECT id,name,create_time,update_time FROM t_tag LIMIT ?,? 
+2020-04-09 17:53:12.962 DEBUG 4368 --- [http-nio-8888-exec-3] s.a.g.mapper.TagMapper.selectPage        : ==> Parameters: 0(Long), 15(Long)
+2020-04-09 17:53:12.965 DEBUG 4368 --- [http-nio-8888-exec-3] s.a.g.mapper.TagMapper.selectPage        : <==      Total: 12
+2020-04-09 17:53:21.050 DEBUG 4368 --- [http-nio-8888-exec-5] s.a.g.mapper.TagMapper.selectById        : ==>  Preparing: SELECT id,name,create_time,update_time FROM t_tag WHERE id=? 
+2020-04-09 17:53:21.051 DEBUG 4368 --- [http-nio-8888-exec-5] s.a.g.mapper.TagMapper.selectById        : ==> Parameters: 1(Long)
+2020-04-09 17:53:21.053 DEBUG 4368 --- [http-nio-8888-exec-5] s.a.g.mapper.TagMapper.selectById        : <==      Total: 1
+2020-04-09 17:54:02.460 DEBUG 4368 --- [http-nio-8888-exec-6] s.a.g.mapper.SysMenuMapper.selectList    : ==>  Preparing: SELECT id,title,href,pid,icon,target,sort,status,remark,create_time,update_time FROM sys_menu WHERE (status = ?) 
+2020-04-09 17:54:02.461 DEBUG 4368 --- [http-nio-8888-exec-6] s.a.g.mapper.SysMenuMapper.selectList    : ==> Parameters: true(Boolean)
+2020-04-09 17:54:02.465 DEBUG 4368 --- [http-nio-8888-exec-6] s.a.g.mapper.SysMenuMapper.selectList    : <==      Total: 7
+2020-04-09 17:54:02.465  INFO 4368 --- [http-nio-8888-exec-6] s.alanliang.geekblog.aspect.LogAspect    : Request ------ RequestLog {url = http://localhost:8888/admin/init, ip = 0:0:0:0:0:0:0:1, classMethod = site.alanliang.geekblog.controller.admin.IndexController.init, args = [], time = 12ms, description = 初始化后台主页}
+2020-04-09 17:54:02.466  INFO 4368 --- [http-nio-8888-exec-6] s.alanliang.geekblog.aspect.LogAspect    : Return ------ <200 OK OK,InitInfoVo(menuInfo=[MenuVo(id=1, pid=0, title=常规管理, icon=fa fa-dashboard, href=, target=_self, child=[MenuVo(id=2, pid=1, title=用户管理, icon=fa fa-users, href=/api/page?pageName=user/user-list, target=null, child=null), MenuVo(id=3, pid=1, title=文章发布, icon=fa fa-book, href=/api/page?pageName=article/article-add, target=null, child=null), MenuVo(id=4, pid=1, title=其它管理, icon=fa fa-slideshare, href=null, target=null, child=null), MenuVo(id=5, pid=1, title=文章管理, icon=fa fa-book, href=/api/page?pageName=article/article-list, target=null, child=null), MenuVo(id=6, pid=1, title=分类管理, icon=fa fa-tasks, href=/api/page?pageName=category/category-list, target=null, child=null), MenuVo(id=7, pid=1, title=标签管理, icon=fa fa-tags, href=/api/page?pageName=tag/tag-list, target=null, child=null)])], homeInfo=InitInfoVo.HomeInfo(title=首页, href=/api/page?pageName=dashboard), logoInfo=InitInfoVo.LogoInfo(title=Geek Blog, image=/static/layuimini/images/logo.png)),[]>
+2020-04-09 17:54:02.791 DEBUG 4368 --- [http-nio-8888-exec-1] s.a.g.mapper.TagMapper.selectPage        : ==>  Preparing: SELECT COUNT(1) FROM t_tag 
+2020-04-09 17:54:02.792 DEBUG 4368 --- [http-nio-8888-exec-1] s.a.g.mapper.TagMapper.selectPage        : ==> Parameters: 
+2020-04-09 17:54:02.794 DEBUG 4368 --- [http-nio-8888-exec-1] s.a.g.mapper.TagMapper.selectPage        : ==>  Preparing: SELECT id,name,create_time,update_time FROM t_tag LIMIT ?,? 
+2020-04-09 17:54:02.794 DEBUG 4368 --- [http-nio-8888-exec-1] s.a.g.mapper.TagMapper.selectPage        : ==> Parameters: 0(Long), 15(Long)
+2020-04-09 17:54:02.799 DEBUG 4368 --- [http-nio-8888-exec-1] s.a.g.mapper.TagMapper.selectPage        : <==      Total: 12
+2020-04-09 17:54:04.332 DEBUG 4368 --- [http-nio-8888-exec-8] s.a.g.mapper.TagMapper.selectById        : ==>  Preparing: SELECT id,name,create_time,update_time FROM t_tag WHERE id=? 
+2020-04-09 17:54:04.333 DEBUG 4368 --- [http-nio-8888-exec-8] s.a.g.mapper.TagMapper.selectById        : ==> Parameters: 1(Long)
+2020-04-09 17:54:04.335 DEBUG 4368 --- [http-nio-8888-exec-8] s.a.g.mapper.TagMapper.selectById        : <==      Total: 1
+2020-04-09 17:54:07.316 DEBUG 4368 --- [http-nio-8888-exec-5] s.a.g.mapper.TagMapper.selectList        : ==>  Preparing: SELECT id,name,create_time,update_time FROM t_tag WHERE (name = ?) 
+2020-04-09 17:54:07.317 DEBUG 4368 --- [http-nio-8888-exec-5] s.a.g.mapper.TagMapper.selectList        : ==> Parameters: JavaEE1(String)
+2020-04-09 17:54:07.317 DEBUG 4368 --- [http-nio-8888-exec-5] s.a.g.mapper.TagMapper.selectList        : <==      Total: 0
+2020-04-09 17:54:07.321 DEBUG 4368 --- [http-nio-8888-exec-5] s.a.g.mapper.TagMapper.updateById        : ==>  Preparing: UPDATE t_tag SET name=?, update_time=? WHERE id=? 
+2020-04-09 17:54:07.323 DEBUG 4368 --- [http-nio-8888-exec-5] s.a.g.mapper.TagMapper.updateById        : ==> Parameters: JavaEE1(String), 2020-04-09 17:54:07.31(Timestamp), 1(Long)
+2020-04-09 17:54:07.324 DEBUG 4368 --- [http-nio-8888-exec-5] s.a.g.mapper.TagMapper.updateById        : <==    Updates: 1
+2020-04-09 17:54:08.680 DEBUG 4368 --- [http-nio-8888-exec-1] s.a.g.mapper.TagMapper.selectPage        : ==>  Preparing: SELECT COUNT(1) FROM t_tag 
+2020-04-09 17:54:08.680 DEBUG 4368 --- [http-nio-8888-exec-1] s.a.g.mapper.TagMapper.selectPage        : ==> Parameters: 
+2020-04-09 17:54:08.682 DEBUG 4368 --- [http-nio-8888-exec-1] s.a.g.mapper.TagMapper.selectPage        : ==>  Preparing: SELECT id,name,create_time,update_time FROM t_tag LIMIT ?,? 
+2020-04-09 17:54:08.682 DEBUG 4368 --- [http-nio-8888-exec-1] s.a.g.mapper.TagMapper.selectPage        : ==> Parameters: 0(Long), 15(Long)
+2020-04-09 17:54:08.684 DEBUG 4368 --- [http-nio-8888-exec-1] s.a.g.mapper.TagMapper.selectPage        : <==      Total: 12
+2020-04-09 17:54:09.798 DEBUG 4368 --- [http-nio-8888-exec-8] s.a.g.mapper.TagMapper.selectById        : ==>  Preparing: SELECT id,name,create_time,update_time FROM t_tag WHERE id=? 
+2020-04-09 17:54:09.799 DEBUG 4368 --- [http-nio-8888-exec-8] s.a.g.mapper.TagMapper.selectById        : ==> Parameters: 1(Long)
+2020-04-09 17:54:09.800 DEBUG 4368 --- [http-nio-8888-exec-8] s.a.g.mapper.TagMapper.selectById        : <==      Total: 1
+2020-04-09 17:54:12.197 DEBUG 4368 --- [http-nio-8888-exec-2] s.a.g.mapper.TagMapper.selectList        : ==>  Preparing: SELECT id,name,create_time,update_time FROM t_tag WHERE (name = ?) 
+2020-04-09 17:54:12.197 DEBUG 4368 --- [http-nio-8888-exec-2] s.a.g.mapper.TagMapper.selectList        : ==> Parameters: JavaEE(String)
+2020-04-09 17:54:12.198 DEBUG 4368 --- [http-nio-8888-exec-2] s.a.g.mapper.TagMapper.selectList        : <==      Total: 0
+2020-04-09 17:54:12.199 DEBUG 4368 --- [http-nio-8888-exec-2] s.a.g.mapper.TagMapper.updateById        : ==>  Preparing: UPDATE t_tag SET name=?, update_time=? WHERE id=? 
+2020-04-09 17:54:12.200 DEBUG 4368 --- [http-nio-8888-exec-2] s.a.g.mapper.TagMapper.updateById        : ==> Parameters: JavaEE(String), 2020-04-09 17:54:12.196(Timestamp), 1(Long)
+2020-04-09 17:54:12.200 DEBUG 4368 --- [http-nio-8888-exec-2] s.a.g.mapper.TagMapper.updateById        : <==    Updates: 1
+2020-04-09 17:54:13.522 DEBUG 4368 --- [http-nio-8888-exec-1] s.a.g.mapper.TagMapper.selectPage        : ==>  Preparing: SELECT COUNT(1) FROM t_tag 
+2020-04-09 17:54:13.523 DEBUG 4368 --- [http-nio-8888-exec-1] s.a.g.mapper.TagMapper.selectPage        : ==> Parameters: 
+2020-04-09 17:54:13.524 DEBUG 4368 --- [http-nio-8888-exec-1] s.a.g.mapper.TagMapper.selectPage        : ==>  Preparing: SELECT id,name,create_time,update_time FROM t_tag LIMIT ?,? 
+2020-04-09 17:54:13.524 DEBUG 4368 --- [http-nio-8888-exec-1] s.a.g.mapper.TagMapper.selectPage        : ==> Parameters: 0(Long), 15(Long)
+2020-04-09 17:54:13.526 DEBUG 4368 --- [http-nio-8888-exec-1] s.a.g.mapper.TagMapper.selectPage        : <==      Total: 12
+2020-04-09 17:54:22.972 DEBUG 4368 --- [http-nio-8888-exec-5] s.a.g.mapper.TagMapper.deleteById        : ==>  Preparing: DELETE FROM t_tag WHERE id=? 
+2020-04-09 17:54:22.973 DEBUG 4368 --- [http-nio-8888-exec-5] s.a.g.mapper.TagMapper.deleteById        : ==> Parameters: 11(Long)
+2020-04-09 17:54:22.973 DEBUG 4368 --- [http-nio-8888-exec-5] s.a.g.mapper.TagMapper.deleteById        : <==    Updates: 1
+2020-04-09 17:54:32.382 DEBUG 4368 --- [http-nio-8888-exec-8] s.a.g.mapper.TagMapper.deleteBatchIds    : ==>  Preparing: DELETE FROM t_tag WHERE id IN ( ? , ? ) 
+2020-04-09 17:54:32.383 DEBUG 4368 --- [http-nio-8888-exec-8] s.a.g.mapper.TagMapper.deleteBatchIds    : ==> Parameters: 8(Long), 12(Long)
+2020-04-09 17:54:32.383 DEBUG 4368 --- [http-nio-8888-exec-8] s.a.g.mapper.TagMapper.deleteBatchIds    : <==    Updates: 2
+2020-04-09 17:54:32.395 DEBUG 4368 --- [http-nio-8888-exec-9] s.a.g.mapper.TagMapper.selectPage        : ==>  Preparing: SELECT COUNT(1) FROM t_tag 
+2020-04-09 17:54:32.395 DEBUG 4368 --- [http-nio-8888-exec-9] s.a.g.mapper.TagMapper.selectPage        : ==> Parameters: 
+2020-04-09 17:54:32.397 DEBUG 4368 --- [http-nio-8888-exec-9] s.a.g.mapper.TagMapper.selectPage        : ==>  Preparing: SELECT id,name,create_time,update_time FROM t_tag LIMIT ?,? 
+2020-04-09 17:54:32.398 DEBUG 4368 --- [http-nio-8888-exec-9] s.a.g.mapper.TagMapper.selectPage        : ==> Parameters: 0(Long), 15(Long)
+2020-04-09 17:54:32.400 DEBUG 4368 --- [http-nio-8888-exec-9] s.a.g.mapper.TagMapper.selectPage        : <==      Total: 9
+2020-04-09 17:54:39.587 DEBUG 4368 --- [http-nio-8888-exec-7] s.a.g.mapper.TagMapper.selectPage        : ==>  Preparing: SELECT COUNT(1) FROM t_tag WHERE (name LIKE ?) 
+2020-04-09 17:54:39.587 DEBUG 4368 --- [http-nio-8888-exec-7] s.a.g.mapper.TagMapper.selectPage        : ==> Parameters: %C%(String)
+2020-04-09 17:54:39.588 DEBUG 4368 --- [http-nio-8888-exec-7] s.a.g.mapper.TagMapper.selectPage        : ==>  Preparing: SELECT id,name,create_time,update_time FROM t_tag WHERE (name LIKE ?) LIMIT ?,? 
+2020-04-09 17:54:39.589 DEBUG 4368 --- [http-nio-8888-exec-7] s.a.g.mapper.TagMapper.selectPage        : ==> Parameters: %C%(String), 0(Long), 15(Long)
+2020-04-09 17:54:39.590 DEBUG 4368 --- [http-nio-8888-exec-7] s.a.g.mapper.TagMapper.selectPage        : <==      Total: 3
+2020-04-09 17:54:45.122 DEBUG 4368 --- [http-nio-8888-exec-10] s.a.g.mapper.TagMapper.selectPage        : ==>  Preparing: SELECT COUNT(1) FROM t_tag WHERE (name LIKE ?) 
+2020-04-09 17:54:45.122 DEBUG 4368 --- [http-nio-8888-exec-10] s.a.g.mapper.TagMapper.selectPage        : ==> Parameters: %Java%(String)
+2020-04-09 17:54:45.123 DEBUG 4368 --- [http-nio-8888-exec-10] s.a.g.mapper.TagMapper.selectPage        : ==>  Preparing: SELECT id,name,create_time,update_time FROM t_tag WHERE (name LIKE ?) LIMIT ?,? 
+2020-04-09 17:54:45.124 DEBUG 4368 --- [http-nio-8888-exec-10] s.a.g.mapper.TagMapper.selectPage        : ==> Parameters: %Java%(String), 0(Long), 15(Long)
+2020-04-09 17:54:45.125 DEBUG 4368 --- [http-nio-8888-exec-10] s.a.g.mapper.TagMapper.selectPage        : <==      Total: 2

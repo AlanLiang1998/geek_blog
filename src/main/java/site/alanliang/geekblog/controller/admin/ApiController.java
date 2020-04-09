@@ -48,4 +48,10 @@ public class ApiController {
         model.addAttribute("category", categoryService.findById(id));
         return "category/category-edit";
     }
+
+    @GetMapping("/tag/{id}")
+    public String editTag(@PathVariable("id") Long id, Model model) {
+        model.addAttribute("tag", tagService.findById(id));
+        return "tag/tag-edit";
+    }
 }

@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
+import java.util.Date;
+
 /**
  * @Descriptin 文章标签
  * @Author AlanLiang
@@ -19,5 +21,7 @@ public class Tag {
 
     private String name;
 
-    private String createTime;
+    private Date createTime;
+
+    private Date updateTime;
 }
