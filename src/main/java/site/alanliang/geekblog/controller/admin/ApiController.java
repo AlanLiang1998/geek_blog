@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import site.alanliang.geekblog.common.JsonResult;
 import site.alanliang.geekblog.service.ArticleService;
+import site.alanliang.geekblog.service.CategoryService;
 import site.alanliang.geekblog.service.TagService;
 
 /**
@@ -26,6 +26,8 @@ public class ApiController {
     private ArticleService articleService;
     @Autowired
     private TagService tagService;
+    @Autowired
+    private CategoryService categoryService;
 
     @GetMapping("/page")
     public ModelAndView getPage(@RequestParam("pageName") String pageName) {
@@ -39,5 +41,11 @@ public class ApiController {
         model.addAttribute("article", articleService.findById(id));
         model.addAttribute("tagList", tagService.findByArticleId(id));
         return "article/article-edit";
+    }
+
+    @GetMapping("/category/{id}")
+    public String editCategory(@PathVariable("id") Long id, Model model) {
+        model.addAttribute("category", categoryService.findById(id));
+        return "category/category-edit";
     }
 }

@@ -5,10 +5,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.ModelAndView;
 import site.alanliang.geekblog.common.JsonResult;
 import site.alanliang.geekblog.common.ResultEnum;
+import site.alanliang.geekblog.exception.NameNotUniqueException;
 import site.alanliang.geekblog.utils.AjaxUtil;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,6 +25,13 @@ import javax.servlet.http.HttpServletRequest;
 @Slf4j
 @RestControllerAdvice
 public class GlobalExceptionHandler {
+
+    @ExceptionHandler(NameNotUniqueException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public JsonResult handleNameNotUniqueException(NameNotUniqueException exception) {
+        log.error("参数验证失败", exception);
+        return JsonResult.build(HttpStatus.BAD_REQUEST.value(), exception.getMessage());
+    }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)

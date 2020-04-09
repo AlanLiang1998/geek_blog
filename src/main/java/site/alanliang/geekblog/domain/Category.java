@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
+import javax.validation.constraints.NotBlank;
 import java.util.Date;
 
 /**
@@ -18,8 +19,14 @@ import java.util.Date;
 public class Category {
     @TableId(type = IdType.AUTO)
     private Long id;
-
+    @NotBlank(message = "分类名称不能为空")
     private String name;
 
+    private Boolean display;
+    @NotBlank(message = "分类简介不能为空")
+    private String introduction;
+
     private Date createTime;
+
+    private Date updateTime;
 }
