@@ -22,7 +22,7 @@
                         <div class="layui-inline">
                             <label class="layui-form-label">文章标题</label>
                             <div class="layui-input-inline">
-                                <input type="text" name="title" autocomplete="off" class="layui-input">
+                                <input type="text" name="keyword" autocomplete="off" class="layui-input">
                             </div>
                         </div>
                         <div class="layui-inline">
@@ -120,18 +120,14 @@
 
         // 监听搜索操作
         form.on('submit(data-search-btn)', function (data) {
-            var result = JSON.stringify(data.field);
-            layer.alert(result, {
-                title: '最终的搜索信息'
-            });
-
+            var keyword = data.field.keyword;
             //执行搜索重载
             table.reload('currentTableId', {
                 page: {
                     curr: 1
                 }
                 , where: {
-                    searchParams: result
+                    keyword: keyword
                 }
             }, 'data');
 
@@ -145,13 +141,30 @@
             if (obj.event === 'delete') {  // 监听删除操作
                 var checkStatus = table.checkStatus('currentTableId')
                     , data = checkStatus.data;
-                layer.alert(JSON.stringify(data));
-            }
-        });
+                var idList = [];
+                $.each(data, function () {
+                    idList.push($(this)[0].id);
+                });
+                if (idList.length <= 0) {
+                    return false;
+                }
+                layer.confirm('确定删除选中的' + idList.length + '篇文章吗？', {icon: 3}, function (index) {
+                    $.ajax({
+                        url: '/admin/article',
+                        type: 'DELETE',
+                        data: JSON.stringify(idList),
+                        contentType: 'application/json',
+                        success: function (result) {
+                            if (result.code == 200) {
+                                table.reload('currentTableId');
+                                layer.close(index);
+                                layer.msg('删除成功', {icon: 1});
+                            }
+                        }
+                    });
+                })
 
-        //监听表格复选框选择
-        table.on('checkbox(currentTableFilter)', function (obj) {
-            console.log(obj)
+            }
         });
 
         table.on('tool(currentTableFilter)', function (obj) {
@@ -163,9 +176,18 @@
                 });
                 return false;
             } else if (obj.event === 'delete') {
-                layer.confirm('真的删除行么', function (index) {
-                    obj.del();
-                    layer.close(index);
+                layer.confirm('确定删除这篇文章吗？', {icon: 3}, function (index) {
+                    $.ajax({
+                        url: '/admin/article/' + data.id,
+                        type: 'DELETE',
+                        success: function (result) {
+                            if (result.code == 200) {
+                                obj.del();
+                                layer.close(index);
+                                layer.msg('删除成功', {icon: 1});
+                            }
+                        }
+                    });
                 });
             }
         });

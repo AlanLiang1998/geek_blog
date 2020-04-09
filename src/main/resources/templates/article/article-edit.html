@@ -267,7 +267,7 @@
 
             $.ajax({
                 url: '/admin/article',
-                type: 'POST',
+                type: 'PUT',
                 contentType: 'application/json',
                 data: JSON.stringify(data.field),
                 async: false,
@@ -282,6 +282,16 @@
                 }
             });
             return saveResult;
+        }
+
+        function ok() {
+            var index = layer.confirm('发布成功,是否查看文章？', {icon: 6}, function () {
+                layer.close(index);
+                miniTab.openNewTabByIframe({
+                    href: "/api/page?pageName=article/article-list&rad=" + Math.random(),
+                    title: "所有文章",
+                });
+            });
         }
 
         //监听保存草稿按钮
@@ -303,7 +313,6 @@
                         title: "所有文章",
                     });
                 });
-
             }
             return false;
         });

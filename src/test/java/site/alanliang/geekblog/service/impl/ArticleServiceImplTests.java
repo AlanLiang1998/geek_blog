@@ -1,5 +1,6 @@
 package site.alanliang.geekblog.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.BeanUtils;
@@ -27,7 +28,9 @@ public class ArticleServiceImplTests {
     @Test
     void testListByPage() {
         Page<Article> page = new Page<>(1, 5);
-        List<Article> articles = articleMapper.selectPageWithExtra(page, null);
+        QueryWrapper<Article> wrapper = new QueryWrapper<>();
+        wrapper.like("title", "1");
+        List<Article> articles = articleMapper.selectPageWithExtra(page, wrapper);
         List<ArticleVo> articleVos = new ArrayList<>();
         for (Article article : articles) {
             ArticleVo articleVo = new ArticleVo();

@@ -38,14 +38,26 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public long countAll() {
-        return articleMapper.selectCount(null);
+    public long countAll(QueryWrapper<Article> wrapper) {
+        return articleMapper.selectCount(wrapper);
     }
 
     @Override
-    public List<ArticleVo> listByPage(Integer current, Integer size) {
+    @Transactional(rollbackFor = Exception.class)
+    public void removeByIds(List<Long> idList) {
+        articleMapper.deleteBatchIds(idList);
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void remove(Long id) {
+        articleMapper.deleteById(id);
+    }
+
+    @Override
+    public List<ArticleVo> listByPage(Integer current, Integer size, QueryWrapper<Article> wrapper) {
         Page<Article> page = new Page<>(current, size);
-        List<Article> articles = articleMapper.selectPageWithExtra(page, null);
+        List<Article> articles = articleMapper.selectPageWithExtra(page, wrapper);
         List<ArticleVo> articleVos = new ArrayList<>();
         for (Article article : articles) {
             ArticleVo articleVo = new ArticleVo();

@@ -1,11 +1,12 @@
 package site.alanliang.geekblog.mapper;
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 import site.alanliang.geekblog.domain.Article;
+import site.alanliang.geekblog.vo.ArticleVo;
 
 import java.util.List;
 
@@ -21,5 +22,5 @@ public interface ArticleMapper extends BaseMapper<Article> {
      * @param queryWrapper 条件
      * @return 文章列表
      */
-    List<Article> selectPageWithExtra(IPage<Article> page, @Param("ew") Wrapper<Article> queryWrapper);
+    List<Article> selectPageWithExtra(IPage<Article> page, @Param("ew") QueryWrapper<Article> queryWrapper);
 }

@@ -33,9 +33,9 @@ public class ArticleVo {
     private Integer comments;
 
     private Boolean published;
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+
     private Date createTime;
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+
     private Date updateTime;
 
     private Integer type;
