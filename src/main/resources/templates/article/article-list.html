@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
-    <title>文章管理</title>
+    <title>GeekBlog-文章管理</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -76,7 +76,7 @@
                 [
                     {type: "checkbox", width: 50, fixed: "left"},
                     {field: 'id', width: 50, title: 'ID', sort: true},
-                    {field: 'title', width: 180, title: '标题'},
+                    {field: 'title', width: 220, title: '标题'},
                     {
                         field: 'type', width: 80, title: '类型', sort: true, templet: function (data) {
                             return data.type == 1 ? '原创' : (data.type == 2 ? '转载' : '翻译')
@@ -159,7 +159,7 @@
             if (obj.event === 'edit') {
                 miniTab.openNewTabByIframe({
                     href: "/api/article/" + data.id,
-                    title: "编辑文章",
+                    title: "文章编辑",
                 });
                 return false;
             } else if (obj.event === 'delete') {

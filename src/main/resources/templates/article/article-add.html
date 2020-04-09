@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>GeekBlog-内容发布</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../static/layuimini/lib/layui-v2.5.5/css/layui.css" media="all"
+          th:href="@{/layuimini/lib/layui-v2.5.5/css/layui.css}">
+    <link rel="stylesheet" href="../static/layuimini/css/public.css" media="all" th:href="@{/layuimini/css/public.css}">
+    <link rel="stylesheet" href="../static/layuimini/lib/font-awesome-4.7.0/css/font-awesome.min.css"
+          th:href="@{/layuimini/lib/font-awesome-4.7.0/css/font-awesome.min.css}">
+</head>
+<body>
+<div class="layuimini-container" style="background-color: #F2F2F2">
+    <div class="layuimini-main">
+        <div class="layui-row">
+            <div class="layui-col-md12" style="margin-bottom: 20px">
+                <h2><i class="fa fa-edit"></i>&nbsp;文章发布</h2>
+            </div>
+        </div>
+        <div class="layui-row">
+            <form class="layui-form layui-col-md12" action="" lay-filter="form-filter" id="article-form">
+                <div class="layui-col-md8" style="margin-right: 60px">
+                    <div class="layui-form-item">
+                        <input type="text" name="title" lay-verify="verTitle" placeholder="请输入文章标题(必填)..."
+                               autocomplete="off" class="layui-input"/>
+                    </div>
+                    <div class="layui-form-item">
+                    <textarea name="summary" lay-verify="" placeholder="请输入文章摘要..."
+                              class="layui-textarea"></textarea>
+                    </div>
+                    <div class="layui-form-item">
+                        <div id="editor" style="background-color: #fff;" required lay-verify="verContent">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md3" style="margin-bottom: 15px">
+                    <div class="layui-card">
+                        <div class="layui-card-header">设置</div>
+                        <div class="layui-card-body">
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">文章类型</label>
+                                <div class="layui-input-block">
+                                    <select name="type" lay-verify="">
+                                        <option value="1" selected>原创</option>
+                                        <option value="2">转载</option>
+                                        <option value="3">翻译</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">开启赞赏</label>
+                                <div class="layui-input-block">
+                                    <input type="checkbox" name="appreciable" lay-skin="switch" lay-text="是|否" checked
+                                           value="true">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">开启评论</label>
+                                <div class="layui-input-block">
+                                    <input type="checkbox" name="commentable" lay-skin="switch" lay-text="是|否" checked
+                                           value="true">
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md3">
+                    <div class="layui-card">
+                        <div class="layui-card-header">选择分类</div>
+                        <div class="layui-card-body">
+                            <div class="layui-form-item">
+                                <div class="layui-input-inline">
+                                    <select name="categoryId" lay-verify="verCategory" lay-search id="category-select">
+                                        <option value="0">请选择一个分类</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-card">
+                        <div class="layui-card-header">选择标签</div>
+                        <div class="layui-card-body">
+                            <div class="layui-form-item">
+                                <div class="layui-input-inline">
+                                    <div id="tag-select" lay-verify="verTag"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md12">
+                    <div class="layui-inline">
+                        <button type="button" class="layui-btn layui-btn-warm layui-input-inline" lay-filter="draft"
+                                lay-submit="">保存草稿
+                        </button>
+                        <button type="button" class="layui-btn layui-input-inline" lay-filter="publish" lay-submit="">
+                            发布文章
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+<!-- 注意， 只需要引用 JS，无需引用任何 CSS ！！！-->
+<script src="../static/layuimini/lib/layui-v2.5.5/layui.js" charset="utf-8"
+        th:src="@{/layuimini/lib/layui-v2.5.5/layui.js}"></script>
+<script src="../static/layuimini/js/lay-config.js?v=1.0.4" charset="utf-8"
+        th:src="@{/layuimini/js/lay-config.js(v=1.0.4)}"></script>
+<script src="../static/xm-select/xm-select.js" th:src="@{/xm-select/xm-select.js}"></script>
+<script src="../static/layuimini/js/lay-module/layuimini/miniTab.js"
+        th:src="@{/layuimini/js/lay-module/layuimini/miniTab.js}"></script>
+<script type="text/javascript" th:inline="javascript">
+    layui.use(['layer', 'wangEditor', 'form', 'miniTab'], function () {
+        var $ = layui.jquery,
+            layer = layui.layer,
+            wangEditor = layui.wangEditor,
+            form = layui.form,
+            miniTab = layui.miniTab;
+        var editor = new wangEditor('#editor');
+        editor.customConfig.uploadImgServer = "../api/upload.json";
+        editor.customConfig.uploadFileName = 'image';
+        editor.customConfig.pasteFilterStyle = false;
+        editor.customConfig.uploadImgMaxLength = 5;
+        editor.customConfig.uploadImgHooks = {
+            // 上传超时
+            timeout: function (xhr, editor) {
+                layer.msg('上传超时！')
+            },
+            // 如果服务器端返回的不是 {errno:0, data: [...]} 这种格式，可使用该配置
+            customInsert: function (insertImg, result, editor) {
+                console.log(result);
+                if (result.code == 1) {
+                    var url = result.data.url;
+                    url.forEach(function (e) {
+                        insertImg(e);
+                    })
+                } else {
+                    layer.msg(result.msg);
+                }
+            }
+        };
+        editor.customConfig.customAlert = function (info) {
+            layer.msg(info);
+        };
+        editor.create();
+        //渲染多选下拉框
+        var tagSelect = xmSelect.render({
+            el: '#tag-select',
+            language: 'zn',
+            //自动换行
+            autoRow: true,
+            //开启搜索
+            filterable: true,
+            max: 5,
+            theme: {
+                maxColor: 'orange',
+            },
+            maxMethod(seles, item) {
+                alert(`${item.name}不能选了, 已经超了`)
+            },
+            data: []
+        });
+        //获取分类列表
+        $.ajax({
+            url: '/admin/category',
+            type: 'GET',
+            success: function (result) {
+                if (result.code == 200) {
+                    $.each(result.data, function () {
+                        var categoryId = $(this)[0].id;
+                        var categoryName = $(this)[0].name;
+                        var categoryOption = $('<option></option>').val(categoryId).text(categoryName);
+                        $('#category-select').append(categoryOption);
+                    });
+                    form.render('select', 'form-filter');
+                }
+            }
+        });
+        //获取标签列表
+        $.ajax({
+            url: '/admin/tag',
+            type: 'GET',
+            success: function (result) {
+                if (result.code == 200) {
+                    var tagList = [];
+                    $.each(result.data, function () {
+                        var tag = {};
+                        tag.value = $(this)[0].id;
+                        tag.name = $(this)[0].name;
+                        tagList.push(tag);
+                    });
+                    tagSelect.update({
+                        data: tagList
+                    });
+                }
+            }
+        });
+        //表单验证
+        form.verify({
+            verTitle: function (value) {
+                if (value.length <= 0) {
+                    return '文章标题不能为空';
+                }
+                if (value.length > 100) {
+                    return '文章标题长度不能超过100';
+                }
+            },
+            verContent: function () {
+                var blankContent = "<p><br></p>"
+                var content = editor.txt.html();
+                if (content.length <= 0 || content == blankContent) {
+                    return '文章内容不能为空';
+                }
+            },
+            verCategory: function (value) {
+                if (value == 0) {
+                    return '请选择一个分类';
+                }
+            },
+            verTag: function () {
+                if (tagSelect.getValue('value').length <= 0) {
+                    return '请选择至少一个标签';
+                }
+            }
+        });
+
+        //保存文章
+        function saveArticle(data, isPublish) {
+            //获取标签列表
+            var tagIdList = [];
+            var tagIdListStr = data.field.select.split(',');
+            $.each(tagIdListStr, function () {
+                tagIdList.push(Number($(this)[0]));
+            })
+            data.field.tagIdList = tagIdList;
+            //获取文章内容
+            data.field.content = editor.txt.html();
+            //获取是否发布
+            data.field.published = isPublish;
+
+            var saveResult = false;
+
+            $.ajax({
+                url: '/admin/article',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(data.field),
+                async: false,
+                success: function (result) {
+                    if (result.code == 200) {
+                        saveResult = true;
+                    }
+                },
+                error: function (XMLHttpRequest) {
+                    var result = JSON.parse(XMLHttpRequest.responseText);
+                    layer.alert(result.msg, {icon: 5});
+                }
+            });
+            return saveResult;
+        };
+        //监听保存草稿按钮
+        form.on('submit(draft)', function (data) {
+            var result = saveArticle(data, false);
+            if (result == true) {
+                layer.msg('保存成功', {icon: 6});
+            }
+            return false;
+        });
+        //监听发布文章按钮
+        form.on('submit(publish)', function (data) {
+            var result = saveArticle(data, true);
+            if (result == true) {
+                var index = layer.confirm('发布成功,是否查看文章？', {icon: 6}, function () {
+                    layer.close(index);
+                    miniTab.openNewTabByIframe({
+                        href: "/api/page?pageName=article/article-list",
+                        title: "所有文章",
+                    });
+                });
+
+            }
+            return false;
+        });
+    });
+</script>
+</body>
+</html>
