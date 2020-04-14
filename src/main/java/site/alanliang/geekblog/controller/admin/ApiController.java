@@ -19,7 +19,7 @@ import site.alanliang.geekblog.service.TagService;
  * Version 1.0
  **/
 @Controller
-@RequestMapping("/api")
+@RequestMapping("/admin")
 public class ApiController {
 
     @Autowired
@@ -29,10 +29,11 @@ public class ApiController {
     @Autowired
     private CategoryService categoryService;
 
-    @GetMapping("/page")
-    public ModelAndView getPage(@RequestParam("pageName") String pageName) {
+
+    @GetMapping("/api/{moduleName}/{pageName}")
+    public ModelAndView getPage(@PathVariable("moduleName") String moduleName, @PathVariable("pageName") String pageName) {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName(pageName);
+        modelAndView.setViewName("admin/" + moduleName + "/" + pageName);
         return modelAndView;
     }
 
@@ -40,18 +41,18 @@ public class ApiController {
     public String editArticle(@PathVariable("id") Long id, Model model) {
         model.addAttribute("article", articleService.findById(id));
         model.addAttribute("tagList", tagService.findByArticleId(id));
-        return "article/article-edit";
+        return "admin/article/article-edit";
     }
 
     @GetMapping("/category/{id}")
     public String editCategory(@PathVariable("id") Long id, Model model) {
         model.addAttribute("category", categoryService.findById(id));
-        return "category/category-edit";
+        return "admin/category/category-edit";
     }
 
     @GetMapping("/tag/{id}")
     public String editTag(@PathVariable("id") Long id, Model model) {
         model.addAttribute("tag", tagService.findById(id));
-        return "tag/tag-edit";
+        return "admin/tag/tag-edit";
     }
 }

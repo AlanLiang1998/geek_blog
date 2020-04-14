@@ -24,6 +24,11 @@ public class IndexController {
     @Autowired
     private SysMenuService sysMenuService;
 
+    @GetMapping
+    public String index() {
+        return "admin/home/index";
+    }
+
     @Log("初始化后台主页")
     @ResponseBody
     @GetMapping("/init")

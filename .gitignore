@@ -18,7 +18,7 @@ target/
 *.iws
 *.iml
 *.ipr
-
+log/
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/
