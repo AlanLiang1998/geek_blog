@@ -1,0 +1,709 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1.0, user-scalable=no" name="viewport">
+    <meta content="webkit|ie-stand|ie-comp" name="renderer">
+    <meta content="yes" name="mobile-web-app-capable">
+    <meta content="telephone=no" name="format-detection">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style">
+
+    <title>GeekBlog - 个人博客</title>
+
+    <link href="/static/web/css/all.css" rel="stylesheet" type="text/css">
+    <link href="/static/web/css/materialize.min.css" rel="stylesheet" type="text/css">
+    <link href="/static/web/css/aos.css" rel="stylesheet" type="text/css">
+    <link href="/static/web/css/animate.min.css" rel="stylesheet" type="text/css">
+    <link href="/static/web/css/lightgallery.min.css" rel="stylesheet" type="text/css">
+    <link href="/static/web/css/matery.css" rel="stylesheet" type="text/css">
+    <link href="/static/web/css/my.css" rel="stylesheet" type="text/css">
+    <link href="/static/web/css/prism-tomorrow.css" rel="stylesheet" type="text/css">
+    <link href="/static/web/css/prism-line-numbers.css" rel="stylesheet" type="text/css">
+    <style>
+        .nav-transparent .github-corner {
+            display: none !important;
+        }
+
+        .github-corner {
+            position: absolute;
+            z-index: 10;
+            top: 0;
+            right: 0;
+            border: 0;
+            transform: scale(1.1);
+        }
+
+        .github-corner svg {
+            color: #0f9d58;
+            fill: #fff;
+            height: 64px;
+            width: 64px;
+        }
+
+        .github-corner:hover .octo-arm {
+            animation: a 0.56s ease-in-out;
+        }
+
+        .github-corner .octo-arm {
+            animation: none;
+        }
+
+        @keyframes a {
+            0%,
+            to {
+                transform: rotate(0);
+            }
+            20%,
+            60% {
+                transform: rotate(-25deg);
+            }
+            40%,
+            80% {
+                transform: rotate(10deg);
+            }
+        }
+    </style>
+    <style>
+        .carousel-control {
+            width: 45px;
+            height: 45px;
+            line-height: 55px;
+            border-radius: 45px;
+            background: transparent;
+            cursor: pointer;
+            z-index: 100;
+        }
+
+        #prev-cover {
+            position: absolute;
+            top: 48%;
+            left: 8px;
+        }
+
+        #next-cover {
+            position: absolute;
+            top: 48%;
+            right: 8px;;
+        }
+
+        #prev-cover i {
+            margin-right: 3px;
+        }
+
+        #next-cover i {
+            margin-left: 3px;
+        }
+
+        .carousel-control:hover {
+            background-color: rgba(0, 0, 0, .4);
+        }
+
+        .carousel-control i {
+            color: #fff;
+            font-size: 2.4rem;
+        }
+    </style>
+    <script src="/static/web/js/jquery.min.js"></script>
+</head>
+
+<body>
+<!--navbar-->
+<header class="navbar-fixed">
+    <nav class="bg-color nav-transparent" id="headNav">
+        <div class="nav-wrapper container" id="navContainer">
+            <!--LOGO-->
+            <div class="brand-logo">
+                <a class="waves-effect waves-light" href="">
+                    <span class="logo-span">GeekBlog</span>
+                </a>
+            </div>
+            <!--移动设备导航栏-->
+            <a class="sidenav-trigger button-collapse" data-target="mobile-nav" href="#"><i class="fas fa-bars"></i></a>
+            <!--导航栏菜单-->
+            <ul class="right nav-menu">
+                <li class="hide-on-med-and-down nav-item">
+                    <a class="waves-effect waves-light" href="">
+                        <i class="fas fa-home" style="zoom: 0.6;"></i>
+                        <span>首页</span>
+                    </a>
+                </li>
+                <li class="hide-on-med-and-down nav-item">
+                    <a class="waves-effect waves-light" href="#">
+                        <i class="fas fa-tags" style="zoom: 0.6;"></i>
+                        <span>标签</span>
+                    </a>
+                </li>
+                <li class="hide-on-med-and-down nav-item">
+
+                    <a class="waves-effect waves-light" href="#">
+
+                        <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+
+                        <span>分类</span>
+                    </a>
+
+                </li>
+                <li class="hide-on-med-and-down nav-item">
+
+                    <a class="waves-effect waves-light" href="#">
+
+                        <i class="fas fa-calendar" style="zoom: 0.6;"></i>
+
+                        <span>归档</span>
+                    </a>
+
+                </li>
+                <li class="hide-on-med-and-down nav-item">
+                    <a class="waves-effect waves-light" href="#">
+                        <i class="fas fa-paper-plane" style="zoom: 0.6;"></i>
+                        <span>关于</span>
+                    </a>
+
+                </li>
+                <li class="hide-on-med-and-down nav-item">
+                    <a class="waves-effect waves-light" href="#">
+                        <i class="fas fa-comment" style="zoom: 0.6;"></i>
+                        <span>友情链接</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="modal-trigger waves-effect waves-light" href="#searchModal">
+                        <i class="fas fa-search" id="searchIcon" style="zoom: 0.85;" title="搜索"></i>
+                    </a>
+                </li>
+            </ul>
+            <!--侧边导航栏-->
+            <div class="side-nav sidenav" id="mobile-nav">
+                <!--头部-->
+                <div class="mobile-head bg-color">
+                    <div class="logo-name" style="margin-top: 10px">GeekBlog</div>
+                    <div class="logo-desc">
+                        热爱编程，热爱生活
+                    </div>
+                </div>
+                <!--侧边导航菜单-->
+                <ul class="menu-list mobile-menu-list">
+                    <li class="m-nav-item">
+                        <a class="waves-effect waves-light" href=""><i class="fa-fw fas fa-home"></i>首页</a>
+                    </li>
+                    <li class="m-nav-item">
+                        <a class="waves-effect waves-light" href="#"><i class="fa-fw fas fa-tags"></i>标签</a>
+                    </li>
+                    <li class="m-nav-item">
+                        <a class="waves-effect waves-light" href="#"><i class="fa-fw fas fa-bookmark"></i>分类</a>
+                    </li>
+                    <li class="m-nav-item">
+                        <a class="waves-effect waves-light" href="#"><i class="fa-fw fas fa-calendar"></i>归档</a>
+                    </li>
+                    <li class="m-nav-item">
+                        <a class="waves-effect waves-light" href="#"><i class="fa-fw fas fa-paper-plane"></i>关于</a>
+                    </li>
+                    <li class="m-nav-item">
+                        <a class="waves-effect waves-light" href="#"><i class="fa-fw fas fa-comment"></i>友情链接</a>
+                    </li>
+                    <li>
+                        <div class="divider"></div>
+                    </li>
+                    <li>
+                        <a class="waves-effect waves-light" href="javascript:;" target="_blank">
+                            <i class="fab fa-github-square fa-fw"></i>Fork Me
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!--github-corner-->
+        <a class="github-corner tooltipped hide-on-med-and-down" data-delay="50" data-position="left"
+           data-tooltip="Fork Me" href="javascript:;" target="_blank">
+            <svg aria-hidden="true" viewbox="0 0 250 250">
+                <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+                <path class="octo-arm"
+                      d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+                      fill="currentColor" style="transform-origin: 130px 106px;"></path>
+                <path class="octo-body"
+                      d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+                      fill="currentColor"></path>
+            </svg>
+        </a>
+        <!--end github-corner-->
+    </nav>
+
+</header>
+<!--end navbar-->
+
+<!--carousel-->
+<div class="carousel carousel-slider center index-cover" data-indicators="true" style="margin-top: -64px;">
+    <div class="left waves-effect carousel-control" id="prev-cover">
+        <i class="icon fa fa-angle-left"></i>
+    </div>
+    <div class="right waves-effect carousel-control" id="next-cover">
+        <i class="icon fa fa-angle-right"></i>
+    </div>
+    <!--carousel-item-first-->
+    <div class="carousel-item white-text bg-cover about-cover">
+        <div class="container">
+            <div class="row">
+                <div class="col s10 offset-s1 m8 offset-m2 l8 offset-l2">
+                    <div class="brand">
+                        <!--标题-->
+                        <div class="title center-align">GeekBlog</div>
+                        <!--副标题-->
+                        <div class="description center-align">
+                            <span id="subtitle"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="cover-btns">
+                <a class="waves-effect waves-light btn" href="#indexCard">
+                    <i class="fa fa-angle-double-down"></i>开始阅读
+                </a>
+            </div>
+            <div class="cover-social-link">
+                <a class="tooltipped" data-delay="50" data-position="top" data-tooltip="访问我的GitHub" href="javascript:;"
+                   target="_blank">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a class="tooltipped" data-delay="50" data-position="top" data-tooltip="邮件联系我"
+                   href="mailto:1656927346@qq.com" target="_blank">
+                    <i class="fas fa-envelope-open"></i>
+                </a>
+                <a class="tooltipped" data-delay="50" data-position="top" data-tooltip="QQ联系我: 1656927346"
+                   href="javascript:;" target="_blank">
+                    <i class="fab fa-qq"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    <!--end carousel-item-first-->
+    <div class="carousel-item  white-text carousel-post bg-cover"
+         style="background-image: url('/static/web/image/10.jpg');">
+        <div class="container">
+            <div class="row">
+                <div class="col s10 offset-s1">
+                    <div class="title center-align">AQS简单过一过</div>
+                    <div class="description center-align">
+
+                        JUC下锁的基础-AQS
+
+                    </div>
+                    <div class="cover-btns">
+                        <a class="waves-effect waves-light btn" href="index1.html" target="_blank">
+                            <i class="icon fa fa-eye fa-fw"></i>阅读更多
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--end carousel-->
+
+<!--content-->
+<main class="content">
+    <div class="index-card" id="indexCard">
+        <div class="container">
+            <div class="card">
+                <div class="card-content">
+                    <!--名言-->
+                    <div class="dream">
+                        <div class="title center-align">
+                            <i class="far fa-lightbulb"></i>&nbsp;&nbsp;钱钟书《围城》
+                        </div>
+
+                        <div class="row">
+                            <div class="col l8 offset-l2 m10 offset-m1 s10 offset-s1 center-align text">
+                                满天的星又密又忙，它们声息全无，而看来只觉得天上热闹。一梳月亮像形容未长成的女孩子，但见人己不羞缩，光明和轮廓都清新露，渐渐可烘衬夜景。小园草地里的小虫琐琐屑屑地在夜谈。不知那里的蛙群齐心协力地干号，像声浪给火煮得发沸。几星萤火优游来去，不像飞行，像在厚密的空气里漂浮；月光不到的阴黑处，一点萤火忽明，像夏夜的一只微绿的小眼睛。
+                            </div>
+                        </div>
+                    </div>
+                    <!--推荐文章-->
+                    <div class="recommend" id="recommend-sections">
+                        <div class="title"><i class="far fa-thumbs-up"></i>&nbsp;&nbsp;推荐文章</div>
+                        <div class="row">
+                            <!--文章1-->
+                            <div class="col s12 m6">
+                                <div class="post-card" style="background-image: url('/static/web/image/12.jpg')">
+                                    <div class="post-body">
+                                        <!--分类-->
+                                        <div class="post-categories">
+                                            <a class="category" href="index26.html">hexo</a>
+                                        </div>
+                                        <!--标题-->
+                                        <a href="index27.html">
+                                            <h3 class="post-title">hexo+gitee快速搭建个人博客</h3>
+                                        </a>
+                                        <!--描述-->
+                                        <p class="post-description">Hexo+码云快速搭建个人博客教程</p>
+                                        <!--阅读更多-->
+                                        <a class="read-more btn waves-effect waves-light" href="index27.html"
+                                           style="background: linear-gradient(to right, #FF5E3A 0%, #FF2A68 100%)"
+                                           target="_blank">
+                                            <i class="icon far fa-eye fa-fw"></i>阅读更多
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--文章2-->
+                            <div class="col s12 m6" data-aos="zoom-in-up">
+                                <div class="post-card" style="background-image: url('/static/web/image/7.jpg')">
+                                    <div class="post-body">
+                                        <div class="post-categories">
+                                            <a class="category" href="index29.html">通信</a>
+                                        </div>
+                                        <a href="index15.html">
+                                            <h3 class="post-title">别再问我http好还是rpc好了</h3>
+                                        </a>
+                                        <p class="post-description">http和rpc原理过程解析</p>
+                                        <a class="read-more btn waves-effect waves-light" href="index15.html"
+                                           style="background: linear-gradient(to right, #1AD6FD 0%, #1D62F0 100%)"
+                                           target="_blank">
+                                            <i class="icon far fa-eye fa-fw"></i>阅读更多
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 所有文章卡片 -->
+    <article class="container articles" id="articles">
+        <div class="row article-row">
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <!--卡片上部-->
+                    <a href="#">
+                        <div class="card-image">
+                            <!--文章图片-->
+                            <img alt="Java注解使用与自定义注解" class="responsive-img" src="/static/web/picture/12.jpg">
+                            <!--文章标题-->
+                            <span class="card-title">Java注解使用与自定义注解</span>
+                        </div>
+                    </a>
+                    <!--卡片下部-->
+                    <div class="card-content article-content">
+                        <!--文章描述-->
+                        <div class="summary block-with-text">Java注解使用与自定义注解</div>
+                        <!--文章信息-->
+                        <div class="publish-info">
+                            <!--发布日期-->
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-23
+                            </span>
+                            <!--文章标签-->
+                            <span class="publish-author">
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                <a class="post-category" href="javascript:;">Java基础</a>
+                            </span>
+                        </div>
+                    </div>
+                    <!--文章标签-->
+                    <div class="card-action article-tags">
+                        <a href="index32.html">
+                            <span class="chip bg-color">注解</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+</main>
+<!--end content-->
+
+<!--pagination-->
+<div class="container paging">
+    <div class="row">
+        <!--左边按钮-->
+        <div class="col s6 m4 l4">
+            <a class="left btn-floating btn-large disabled">
+                <i class="fas fa-angle-left"></i>
+            </a>
+        </div>
+        <!--分页信息-->
+        <div class="page-info col m4 l4 hide-on-small-only">
+            <div class="center-align b-text-gray">1 / 3</div>
+        </div>
+        <!--右边按钮-->
+        <div class="col s6 m4 l4">
+            <a class="right btn-floating btn-large waves-effect waves-light bg-color" href="#">
+                <i class="fas fa-angle-right"></i>
+            </a>
+        </div>
+    </div>
+</div>
+<!--end pagination-->
+
+<!--footer-->
+<footer class="page-footer bg-color">
+    <!--网站信息-->
+    <div class="container row center-align" style="margin-bottom: 15px !important;">
+        <!--copyright-->
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2020</span>
+            <a href="javascript:;" target="_blank">AlanLiang</a>
+            |&nbsp;Powered by&nbsp;<a href="javascript:;" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="javascript:;" target="_blank">Matery</a>
+            <br>
+            <!--网站字数-->
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span class="white-color">97.2k</span>&nbsp;字
+            <br>
+            <!--网站运行时间-->
+            <span id="sitetime">载入运行时间...</span>
+            <script>
+                function siteTime() {
+                    var seconds = 1000;
+                    var minutes = seconds * 60;
+                    var hours = minutes * 60;
+                    var days = hours * 24;
+                    var years = days * 365;
+                    var today = new Date();
+                    var startYear = "2020";
+                    var startMonth = "2";
+                    var startDate = "16";
+                    var startHour = "0";
+                    var startMinute = "0";
+                    var startSecond = "0";
+                    var todayYear = today.getFullYear();
+                    var todayMonth = today.getMonth() + 1;
+                    var todayDate = today.getDate();
+                    var todayHour = today.getHours();
+                    var todayMinute = today.getMinutes();
+                    var todaySecond = today.getSeconds();
+                    var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                    var diff = t2 - t1;
+                    var diffYears = Math.floor(diff / years);
+                    var diffDays = Math.floor((diff / days) - diffYears * 365);
+                    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                        minutes);
+                    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                        diffMinutes * minutes) / seconds);
+                    if (startYear == todayYear) {
+                        document.getElementById("year").innerHTML = todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                            " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    } else {
+                        document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                            " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    }
+                }
+
+                setInterval(siteTime, 1000);
+            </script>
+            <br>
+        </div>
+        <!--联系方式-->
+        <div class="col s12 m4 l4 social-link social-statis">
+            <!--联系图标-->
+            <a class="tooltipped" data-delay="50" data-position="top" data-tooltip="访问我的GitHub" href="javascript:;"
+               target="_blank">
+                <i class="fab fa-github"></i>
+            </a>
+            <a class="tooltipped" data-delay="50" data-position="top" data-tooltip="邮件联系我"
+               href="mailto:1656927346@qq.com" target="_blank">
+                <i class="fas fa-envelope-open"></i>
+            </a>
+            <a class="tooltipped" data-delay="50" data-position="top" data-tooltip="QQ联系我: 1656927346"
+               href="javascript:;" target="_blank">
+                <i class="fab fa-qq"></i>
+            </a>
+        </div>
+    </div>
+</footer>
+<!--end footer-->
+
+<!--进度条-->
+<div class="progress-bar"></div>
+<!-- 搜索遮罩框 -->
+<div class="modal" id="searchModal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input class="search-input" id="searchInput" name="s" placeholder="请输入搜索的关键字" type="search">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+<!-- 回到顶部按钮 -->
+<div class="top-scroll" id="backTop">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+<!--今日诗词-->
+<script charset="utf-8" src="/static/web/js/jinrishici.js"></script>
+<!--搜索-->
+<script src="/static/web/js/search.js"></script>
+<!--materialize框架-->
+<script src="/static/web/js/materialize.min.js"></script>
+<!--瀑布流-->
+<script src="/static/web/js/masonry.pkgd.min.js"></script>
+<!--页面滚动动画-->
+<script src="/static/web/js/aos.js"></script>
+<!--滚动进度条-->
+<script src="/static/web/js/scrollProgress.min.js"></script>
+<!--多媒体播放-->
+<script src="/static/web/js/lightgallery-all.min.js"></script>
+<!--matery主题-->
+<script src="/static/web/js/matery.js"></script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async="" src="/static/web/js/js.js"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+    gtag('config', '');
+</script>
+<!-- Baidu Analytics -->
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+<!-- Baidu Push -->
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+<!--鼠标点击特效-->
+<script async="async" src="/static/web/js/clicklove.js"></script>
+<!--网页计数器-->
+<script async="" src="/static/web/js/busuanzi.pure.mini.js"></script>
+<!--网页离子背景-->
+<script color="0,0,255" count="99" opacity='0.7' pointcolor="0,0,255" src="/static/web/js/canvas-nest.js"
+        type="text/javascript"
+        zindex="-1"></script>
+<!--未知-->
+<script async="async" src="/static/web/js/ribbon-dynamic.js" type="text/javascript"></script>
+<!--网页预加载-->
+<script src="/static/web/js/instantpage.js" type="module"></script>
+<!--网站标题切换-->
+<script type="text/javascript">
+    var OriginTitile = document.title, st;
+    document.addEventListener("visibilitychange", function () {
+        document.hidden ? (document.title = "点这里，我这里有好康的！", clearTimeout(st)) : (document.title = "宁来啦！", st = setTimeout(function () {
+            document.title = OriginTitile
+        }, 3e3))
+    })
+</script>
+<script color="122 103 238" count="200" opacity='0.7' src="/static/web/js/canvas-nest.min.js" type="text/javascript"
+        zindex="-2"></script>
+<!--樱花特效配置-->
+<script type="text/javascript">
+    // //只在桌面版网页启用特效
+    // var windowWidth = $(window).width();
+    // if (windowWidth > 768) {
+    //     document.write('<script type="text/javascript" src="/static/web/js/sakura.js"><\/script>');
+    // }
+</script>
+<!--轮播图配置-->
+<script>
+    // TODO 此处的轮播尚需优化，PC/Mobile 在触摸切换时都感觉相当不灵活
+    $(function () {
+        let coverSlider = $('.carousel');
+
+        //用户触摸轮播自动 restartPlay 是否生效
+        let initUserPressedOrDraggedActive = false
+
+        //用户触摸轮播自动 restartPlay
+        function initUserPressedOrDragged(instance) {
+            setInterval(() => {
+                if (instance.pressed || instance.dragged) {
+                    // console.log('initUserPressedOrDragged: ',instance.pressed,instance.dragged)
+                    restartPlay()
+                }
+            }, 1000)
+        }
+
+        coverSlider.carousel({
+            duration: Number('120'),
+            fullWidth: true,
+            indicators: 'true' === 'true',
+            onCycleTo() {
+                if (!initUserPressedOrDraggedActive) {
+                    // console.log('initUserPressedOrDraggedActive')
+                    initUserPressedOrDragged(this)
+                    initUserPressedOrDraggedActive = true
+                }
+            },
+        })
+
+        let carouselIntervalId;
+
+        // Loop to call the next cover article picture.
+        let autoCarousel = function () {
+            carouselIntervalId = setInterval(function () {
+                coverSlider.carousel('next');
+            }, 10000);
+        };
+        autoCarousel();
+
+
+        function restartPlay() {
+
+            clearInterval(carouselIntervalId);
+            autoCarousel();
+
+        };
+
+
+        // prev and next cover post.
+        $('#prev-cover').click(function () {
+            coverSlider.carousel('prev');
+            restartPlay();
+        });
+        $('#next-cover').click(function () {
+            coverSlider.carousel('next');
+            restartPlay();
+        });
+
+    });
+</script>
+<!--打字机效果-->
+<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"></script>
+<script>
+
+    var typed = new Typed("#subtitle", {
+        strings: ['挑战无处不在，自己才是真正的敌人。', 'Challenges are everywhere, and you are the real enemy.'],
+        startDelay: 300,
+        typeSpeed: 100,
+        loop: true,
+        backSpeed: 50,
+        showCursor: true
+    });
+</script>
+<!--vue-->
+<script src="/static/web/js/vue.js"></script>
+<script type="text/javascript">
+   const app = new Vue({
+        el:'#'
+   });
+</script>
+</body>
+
+</html>

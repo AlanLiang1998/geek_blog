@@ -10,5 +10,5 @@ public interface Constant {
 
     String LOGO_TITLE = "Geek Blog";
 
-    String LOGO_IMAGE = "/static/layuimini/images/logo.png";
+    String LOGO_IMAGE = "/static/admin/layuimini/images/logo.png";
 }
