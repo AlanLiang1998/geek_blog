@@ -39,7 +39,7 @@ public class ArticleController {
             wrapper = new QueryWrapper<>();
             wrapper.like("title", keyword);
         }
-        List<ArticleVo> articleVos = articleService.listByPage(page, limit, wrapper);
+        List<ArticleVo> articleVos = articleService.listByPageForAdmin(page, limit, wrapper);
         long count = articleService.countAll(wrapper);
         return TableResult.tableOk(articleVos, count);
     }

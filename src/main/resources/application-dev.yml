@@ -30,10 +30,12 @@ spring:
   #禁用thymeleaf模板缓存
   thymeleaf:
     cache: false
-  #设置JSON数据的时区和格式
   jackson:
+    #设置JSON数据的时区和格式
     time-zone: GMT+8
     date-format: yyyy-MM-dd HH:mm:ss
+    #不序列化为null的属性
+    default-property-inclusion: non_null
 #日志配置
 logging:
   level:
@@ -44,4 +46,10 @@ logging:
 mybatis-plus:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: site.alanliang.geekblog.domain
+  configuration:
+    #开启驼峰映射
+    map-underscore-to-camel-case: true
+    lazy-loading-enabled: true
+    aggressive-lazy-loading: false
+
 

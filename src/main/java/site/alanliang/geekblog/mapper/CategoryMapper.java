@@ -10,4 +10,11 @@ import site.alanliang.geekblog.domain.Category;
  */
 @Repository
 public interface CategoryMapper extends BaseMapper<Category> {
+    /**
+     * 根据ID查询分类
+     *
+     * @param id 分类ID
+     * @return 分类
+     */
+    Category selectCategoryById(long id);
 }

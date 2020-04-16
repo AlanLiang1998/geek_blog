@@ -3,10 +3,10 @@ package site.alanliang.geekblog.mapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 import site.alanliang.geekblog.domain.Article;
-import site.alanliang.geekblog.vo.ArticleVo;
 
 import java.util.List;
 
@@ -16,11 +16,28 @@ import java.util.List;
 @Repository
 public interface ArticleMapper extends BaseMapper<Article> {
     /**
-     * 分页查询文章信息（附带文章分类和标签信息）
+     * 后台分页查询所有文章
      *
      * @param page         分页参数
      * @param queryWrapper 条件
      * @return 文章列表
      */
-    List<Article> selectPageWithExtra(IPage<Article> page, @Param("ew") QueryWrapper<Article> queryWrapper);
+    List<Article> selectPageForAdmin(IPage<Article> page, @Param("ew") QueryWrapper<Article> queryWrapper);
+
+    /**
+     * 查询推荐文章
+     *
+     * @param limit 最大限制
+     * @return 推荐文章列表
+     */
+    List<Article> listByRecommend(int limit);
+
+    /**
+     * 前台分页查询所有文章
+     *
+     * @param page    分页参数
+     * @param queryWrapper 条件
+     * @return 文章列表
+     */
+    List<Article> selectPageForWeb(IPage<Article> page, @Param("ew") QueryWrapper<Article> queryWrapper);
 }

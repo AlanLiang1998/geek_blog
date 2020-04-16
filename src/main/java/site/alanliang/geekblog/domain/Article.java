@@ -1,6 +1,7 @@
 package site.alanliang.geekblog.domain;
 
 import com.baomidou.mybatisplus.annotation.*;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
@@ -17,6 +18,7 @@ import java.util.List;
  **/
 @Data
 @TableName("t_article")
+@JsonIgnoreProperties("handler")
 public class Article {
     @TableId(type = IdType.AUTO)
     private Long id;
@@ -57,4 +59,8 @@ public class Article {
     private Category category;
     @TableField(exist = false)
     private List<Tag> tagList;
+
+    private Boolean top;
+
+    private Boolean recommend;
 }

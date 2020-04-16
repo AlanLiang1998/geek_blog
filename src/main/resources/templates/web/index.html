@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<html lang="zh-CN">
 <head>
     <meta charset="utf-8">
     <meta content="IE=edge" http-equiv="X-UA-Compatible">
@@ -216,7 +216,7 @@
         </div>
         <!--github-corner-->
         <a class="github-corner tooltipped hide-on-med-and-down" data-delay="50" data-position="left"
-           data-tooltip="Fork Me" href="javascript:;" target="_blank">
+           data-tooltip="Fork Me" href="https://github.com/AlanLiang1998" target="_blank">
             <svg aria-hidden="true" viewbox="0 0 250 250">
                 <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
                 <path class="octo-arm"
@@ -234,7 +234,8 @@
 <!--end navbar-->
 
 <!--carousel-->
-<div class="carousel carousel-slider center index-cover" data-indicators="true" style="margin-top: -64px;">
+<div class="carousel carousel-slider center index-cover" data-indicators="true" style="margin-top: -64px;"
+     id="carousel">
     <div class="left waves-effect carousel-control" id="prev-cover">
         <i class="icon fa fa-angle-left"></i>
     </div>
@@ -262,42 +263,42 @@
                 </a>
             </div>
             <div class="cover-social-link">
-                <a class="tooltipped" data-delay="50" data-position="top" data-tooltip="访问我的GitHub" href="javascript:;"
+                <a class="tooltipped" data-delay="50" data-position="top" data-tooltip="访问我的GitHub"
+                   href="https://github.com/AlanLiang1998"
                    target="_blank">
                     <i class="fab fa-github"></i>
                 </a>
                 <a class="tooltipped" data-delay="50" data-position="top" data-tooltip="邮件联系我"
-                   href="mailto:1656927346@qq.com" target="_blank">
+                   href="mailto:1114173646@qq.com" target="_blank">
                     <i class="fas fa-envelope-open"></i>
                 </a>
-                <a class="tooltipped" data-delay="50" data-position="top" data-tooltip="QQ联系我: 1656927346"
-                   href="javascript:;" target="_blank">
+                <a class="tooltipped" data-delay="50" data-position="top" data-tooltip="QQ联系我: 1114173646"
+                   href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1114173646" target="_blank">
                     <i class="fab fa-qq"></i>
                 </a>
             </div>
         </div>
     </div>
     <!--end carousel-item-first-->
-    <div class="carousel-item  white-text carousel-post bg-cover"
-         style="background-image: url('/static/web/image/10.jpg');">
-        <div class="container">
-            <div class="row">
-                <div class="col s10 offset-s1">
-                    <div class="title center-align">AQS简单过一过</div>
-                    <div class="description center-align">
-
-                        JUC下锁的基础-AQS
-
-                    </div>
-                    <div class="cover-btns">
-                        <a class="waves-effect waves-light btn" href="index1.html" target="_blank">
-                            <i class="icon fa fa-eye fa-fw"></i>阅读更多
-                        </a>
+    <div v-for="(article, index) in topArticles" :key="index">
+        <div class="carousel-item  white-text carousel-post bg-cover"
+             :style="{backgroundImage: 'url(' + article.cover + ')' }">
+            <div class="container">
+                <div class="row">
+                    <div class="col s10 offset-s1">
+                        <div class="title center-align">{{article.title}}</div>
+                        <div class="description center-align">{{article.summary}}</div>
+                        <div class="cover-btns">
+                            <a class="waves-effect waves-light btn" href="index1.html" target="_blank">
+                                <i class="icon fa fa-eye fa-fw"></i>阅读更多
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
 </div>
 <!--end carousel-->
 
@@ -306,7 +307,7 @@
     <div class="index-card" id="indexCard">
         <div class="container">
             <div class="card">
-                <div class="card-content">
+                <div class="card-content" data-aos="fade-up">
                     <!--名言-->
                     <div class="dream">
                         <div class="title center-align">
@@ -320,48 +321,30 @@
                         </div>
                     </div>
                     <!--推荐文章-->
-                    <div class="recommend" id="recommend-sections">
+                    <div class="recommend" id="recommend-sections" data-aos="fade-up">
                         <div class="title"><i class="far fa-thumbs-up"></i>&nbsp;&nbsp;推荐文章</div>
                         <div class="row">
-                            <!--文章1-->
-                            <div class="col s12 m6">
-                                <div class="post-card" style="background-image: url('/static/web/image/12.jpg')">
-                                    <div class="post-body">
-                                        <!--分类-->
-                                        <div class="post-categories">
-                                            <a class="category" href="index26.html">hexo</a>
+                            <div v-for="(article, index) in recommendArticles" :key="index">
+                                <div class="col s12 m6" data-aos="zoom-in-up">
+                                    <div class="post-card" :style="{backgroundImage: 'url(' + article.cover + ')' }">
+                                        <div class="post-body">
+                                            <!--分类-->
+                                            <div class="post-categories">
+                                                <a class="category" href="#">{{article.category.name}}</a>
+                                            </div>
+                                            <!--标题-->
+                                            <a href="#">
+                                                <h3 class="post-title">{{article.title}}</h3>
+                                            </a>
+                                            <!--描述-->
+                                            <p class="post-description">{{article.summary}}</p>
+                                            <!--阅读更多-->
+                                            <a class="read-more btn waves-effect waves-light" href="#"
+                                               style="background: linear-gradient(to right, #FF5E3A 0%, #FF2A68 100%)"
+                                               target="_blank">
+                                                <i class="icon far fa-eye fa-fw"></i>阅读更多
+                                            </a>
                                         </div>
-                                        <!--标题-->
-                                        <a href="index27.html">
-                                            <h3 class="post-title">hexo+gitee快速搭建个人博客</h3>
-                                        </a>
-                                        <!--描述-->
-                                        <p class="post-description">Hexo+码云快速搭建个人博客教程</p>
-                                        <!--阅读更多-->
-                                        <a class="read-more btn waves-effect waves-light" href="index27.html"
-                                           style="background: linear-gradient(to right, #FF5E3A 0%, #FF2A68 100%)"
-                                           target="_blank">
-                                            <i class="icon far fa-eye fa-fw"></i>阅读更多
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--文章2-->
-                            <div class="col s12 m6" data-aos="zoom-in-up">
-                                <div class="post-card" style="background-image: url('/static/web/image/7.jpg')">
-                                    <div class="post-body">
-                                        <div class="post-categories">
-                                            <a class="category" href="index29.html">通信</a>
-                                        </div>
-                                        <a href="index15.html">
-                                            <h3 class="post-title">别再问我http好还是rpc好了</h3>
-                                        </a>
-                                        <p class="post-description">http和rpc原理过程解析</p>
-                                        <a class="read-more btn waves-effect waves-light" href="index15.html"
-                                           style="background: linear-gradient(to right, #1AD6FD 0%, #1D62F0 100%)"
-                                           target="_blank">
-                                            <i class="icon far fa-eye fa-fw"></i>阅读更多
-                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -374,39 +357,41 @@
     <!-- 所有文章卡片 -->
     <article class="container articles" id="articles">
         <div class="row article-row">
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <!--卡片上部-->
-                    <a href="#">
-                        <div class="card-image">
-                            <!--文章图片-->
-                            <img alt="Java注解使用与自定义注解" class="responsive-img" src="/static/web/picture/12.jpg">
-                            <!--文章标题-->
-                            <span class="card-title">Java注解使用与自定义注解</span>
-                        </div>
-                    </a>
-                    <!--卡片下部-->
-                    <div class="card-content article-content">
-                        <!--文章描述-->
-                        <div class="summary block-with-text">Java注解使用与自定义注解</div>
-                        <!--文章信息-->
-                        <div class="publish-info">
-                            <!--发布日期-->
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-23
-                            </span>
-                            <!--文章标签-->
-                            <span class="publish-author">
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                <a class="post-category" href="javascript:;">Java基础</a>
-                            </span>
-                        </div>
-                    </div>
-                    <!--文章标签-->
-                    <div class="card-action article-tags">
-                        <a href="index32.html">
-                            <span class="chip bg-color">注解</span>
+            <div v-for="(article, index) in articles" :key="index">
+                <div class="article col s12 m6 l4" data-aos="zoom-in">
+                    <div class="card">
+                        <!--卡片上部-->
+                        <a href="#">
+                            <div class="card-image">
+                                <!--文章图片-->
+                                <img class="responsive-img" :src="article.cover">
+                                <!--文章标题-->
+                                <span class="card-title">{{article.title}}</span>
+                            </div>
                         </a>
+                        <!--卡片下部-->
+                        <div class="card-content article-content">
+                            <!--文章描述-->
+                            <div class="summary block-with-text">{{article.summary}}</div>
+                            <!--文章信息-->
+                            <div class="publish-info">
+                                <!--发布日期-->
+                                <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>{{article.createTime | dateFormat}}
+                                </span>
+                                <!--文章标签-->
+                                <span class="publish-author">
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                <a class="post-category" href="#">{{article.category.name}}</a>
+                            </span>
+                            </div>
+                        </div>
+                        <!--文章标签-->
+                        <div class="card-action article-tags">
+                            <a href="#" v-for="(tag, index) in article.tagList">
+                                <span class="chip bg-color">{{tag.name}}</span>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -538,8 +523,80 @@
         <i class="fas fa-arrow-up"></i>
     </a>
 </div>
-<!--今日诗词-->
-<script charset="utf-8" src="/static/web/js/jinrishici.js"></script>
+
+<!--vue-->
+<script src="/static/web/js/vue.js"></script>
+<!--axios异步工具-->
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script type="text/javascript">
+    const carouselVM = new Vue({
+        el: '#carousel',
+        data: {
+            topArticles: [],
+        },
+        methods: {
+            getTopArticles: function () {
+                axios({
+                    url: '/top-articles',
+                    method: 'GET'
+                }).then((result) => {
+                    this.topArticles = result.data;
+                })
+            },
+        },
+        mounted() {
+            this.getTopArticles();
+        }
+    });
+
+    const recommendVM = new Vue({
+        el: '#recommend-sections',
+        data: {
+            recommendArticles: []
+        },
+        methods: {
+            getRecommendArticles: function () {
+                axios({
+                    url: '/recommend-articles',
+                    method: 'GET'
+                }).then((result) => {
+                    this.recommendArticles = result.data;
+                })
+            }
+        },
+        mounted() {
+            this.getRecommendArticles();
+        }
+    });
+
+    const articlesVM = new Vue({
+        el: '#articles',
+        data: {
+            articles: []
+        },
+        methods: {
+            getArticles: function (current) {
+                axios({
+                    url: '/articles/' + current,
+                    method: 'GET',
+
+                }).then((result) => {
+                    this.articles = result.data;
+                })
+            }
+        },
+        filters: {
+            dateFormat: function (value) {
+                if (!value) return ''
+                value = value.toString()
+                return value.split(' ')[0];
+            }
+        },
+        mounted() {
+            this.getArticles(1);
+        }
+    });
+</script>
 <!--搜索-->
 <script src="/static/web/js/search.js"></script>
 <!--materialize框架-->
@@ -626,7 +683,6 @@
     // TODO 此处的轮播尚需优化，PC/Mobile 在触摸切换时都感觉相当不灵活
     $(function () {
         let coverSlider = $('.carousel');
-
         //用户触摸轮播自动 restartPlay 是否生效
         let initUserPressedOrDraggedActive = false
 
@@ -665,12 +721,9 @@
 
 
         function restartPlay() {
-
             clearInterval(carouselIntervalId);
             autoCarousel();
-
         };
-
 
         // prev and next cover post.
         $('#prev-cover').click(function () {
@@ -681,13 +734,11 @@
             coverSlider.carousel('next');
             restartPlay();
         });
-
     });
 </script>
 <!--打字机效果-->
 <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"></script>
 <script>
-
     var typed = new Typed("#subtitle", {
         strings: ['挑战无处不在，自己才是真正的敌人。', 'Challenges are everywhere, and you are the real enemy.'],
         startDelay: 300,
@@ -696,13 +747,6 @@
         backSpeed: 50,
         showCursor: true
     });
-</script>
-<!--vue-->
-<script src="/static/web/js/vue.js"></script>
-<script type="text/javascript">
-   const app = new Vue({
-        el:'#'
-   });
 </script>
 </body>
 

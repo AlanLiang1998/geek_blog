@@ -30,7 +30,7 @@ public class ArticleServiceImplTests {
         Page<Article> page = new Page<>(1, 5);
         QueryWrapper<Article> wrapper = new QueryWrapper<>();
         wrapper.like("title", "1");
-        List<Article> articles = articleMapper.selectPageWithExtra(page, wrapper);
+        List<Article> articles = articleMapper.selectPageForAdmin(page, wrapper);
         List<ArticleVo> articleVos = new ArrayList<>();
         for (Article article : articles) {
             ArticleVo articleVo = new ArticleVo();

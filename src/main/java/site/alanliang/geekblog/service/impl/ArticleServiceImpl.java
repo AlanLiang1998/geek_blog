@@ -43,6 +43,11 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
+    public List<Article> listByWrapper(QueryWrapper<Article> wrapper) {
+        return articleMapper.selectList(wrapper);
+    }
+
+    @Override
     @Transactional(rollbackFor = Exception.class)
     public void removeByIds(List<Long> idList) {
         articleMapper.deleteBatchIds(idList);
@@ -55,9 +60,20 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public List<ArticleVo> listByPage(Integer current, Integer size, QueryWrapper<Article> wrapper) {
+    public List<Article> listByPageForWeb(Integer current, Integer size, QueryWrapper<Article> wrapper) {
+        Page<Article> articlePage = new Page<>(current, size);
+        return articleMapper.selectPageForWeb(articlePage, wrapper);
+    }
+
+    @Override
+    public List<Article> listByRecommend(Integer limit) {
+        return articleMapper.listByRecommend(limit);
+    }
+
+    @Override
+    public List<ArticleVo> listByPageForAdmin(Integer current, Integer size, QueryWrapper<Article> wrapper) {
         Page<Article> page = new Page<>(current, size);
-        List<Article> articles = articleMapper.selectPageWithExtra(page, wrapper);
+        List<Article> articles = articleMapper.selectPageForAdmin(page, wrapper);
         List<ArticleVo> articleVos = new ArrayList<>();
         for (Article article : articles) {
             ArticleVo articleVo = new ArticleVo();

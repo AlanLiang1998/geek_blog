@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="site.alanliang.geekblog.mapper.ArticleMapper">
-    <resultMap id="listColumnResultMap" type="site.alanliang.geekblog.domain.Article">
+    <resultMap id="adminListResultMap" type="site.alanliang.geekblog.domain.Article">
         <id property="id" column="id"/>
         <result property="title" column="title"/>
         <result property="type" column="type"/>
@@ -9,29 +9,71 @@
         <result property="views" column="views"/>
         <result property="likes" column="likes"/>
         <result property="published" column="published"/>
+        <result property="commentable" column="commentable"/>
+        <result property="appreciable" column="appreciable"/>
+        <result property="top" column="top"/>
+        <result property="recommend" column="recommend"/>
         <result property="createTime" column="create_time"/>
         <result property="updateTime" column="update_time"/>
-        <association property="category" javaType="site.alanliang.geekblog.domain.Category">
-            <id property="id" column="id"/>
-            <result property="name" column="name"/>
-        </association>
-        <collection property="tagList" column="id" select="site.alanliang.geekblog.mapper.TagMapper.selectByArticleId"
-                    fetchType="lazy"/>
+        <association property="category" column="category_id"
+                     select="site.alanliang.geekblog.mapper.CategoryMapper.selectCategoryById"/>
+        <collection property="tagList" column="id" select="site.alanliang.geekblog.mapper.TagMapper.selectByArticleId"/>
     </resultMap>
-    <sql id="listColumnSql">
-        ta.id, ta.title, ta.type, ta.commentable, ta.appreciable, ta.comments, ta.views, ta.likes, ta.published, ta.create_time, ta.update_time,
-        tc.id, tc.name
+
+    <resultMap id="recommendArticlesResultMap" type="site.alanliang.geekblog.domain.Article">
+        <id property="id" column="id"/>
+        <result property="title" column="title"/>
+        <result property="summary" column="summary"/>
+        <association property="category" column="category_id"
+                     select="site.alanliang.geekblog.mapper.CategoryMapper.selectCategoryById"/>
+    </resultMap>
+
+    <resultMap id="webListResultMap" type="site.alanliang.geekblog.domain.Article">
+        <id property="id" column="id"/>
+        <result property="title" column="title"/>
+        <result property="createTime" column="create_time"/>
+        <association property="category" column="category_id" select="site.alanliang.geekblog.mapper.CategoryMapper.selectCategoryById"/>
+        <collection property="tagList" column="id" select="site.alanliang.geekblog.mapper.TagMapper.selectByArticleId"/>
+    </resultMap>
+
+    <sql id="adminListColumn">
+        id, title, type, comments, views, likes, published, commentable, appreciable, top, recommend, create_time, update_time,
+        category_id
     </sql>
 
-    <select id="selectPageWithExtra" resultMap="listColumnResultMap"
+    <sql id="recommendColumn">
+        id, title, summary, cover, category_id
+    </sql>
+
+    <sql id="webListColumn">
+        id, title, summary, create_time, cover, category_id
+    </sql>
+
+    <select id="selectPageForAdmin" resultMap="adminListResultMap"
             parameterType="com.baomidou.mybatisplus.extension.plugins.pagination.Page">
         select
-        <include refid="listColumnSql"/>
-        from t_article ta left join t_category tc on ta.category_id = tc.id
+        <include refid="adminListColumn"/>
+        from t_article
         <if test="ew != null and ew.emptyOfWhere == false">
             ${ew.customSqlSegment}
         </if>
     </select>
 
+    <select id="listByRecommend" resultMap="recommendArticlesResultMap">
+        select
+        <include refid="recommendColumn"/>
+        from t_article
+        where recommend = 1
+        and published = 1
+    </select>
+
+    <select id="selectPageForWeb" resultMap="webListResultMap">
+        select
+        <include refid="webListColumn"/>
+        from t_article
+        <if test="ew != null and ew.emptyOfWhere == false">
+            ${ew.customSqlSegment}
+        </if>
+    </select>
 
 </mapper>
