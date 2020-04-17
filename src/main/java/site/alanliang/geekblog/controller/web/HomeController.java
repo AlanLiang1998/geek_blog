@@ -1,6 +1,6 @@
 package site.alanliang.geekblog.controller.web;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,32 +27,24 @@ public class HomeController {
     private ArticleService articleService;
 
     @GetMapping("/top-articles")
-    public ResponseEntity<Object> getTopArticles() {
-        QueryWrapper<Article> wrapper = new QueryWrapper<>();
-        wrapper.select("id", "title", "summary", "cover")
-                .eq("published", true)
-                .eq("top", true)
-                .last("limit " + Constant.MAX_TOP_ARTICLES);
-        List<Article> articles = articleService.listByWrapper(wrapper);
+    public ResponseEntity<Object> listTopArticles() {
+        List<Article> articles = articleService.listTopArticles();
         return new ResponseEntity<>(articles, HttpStatus.OK);
     }
 
     @GetMapping("/recommend-articles")
-    public ResponseEntity<Object> getRecommendArticles() {
-        List<Article> articles = articleService.listByRecommend(Constant.MAX_RECOMMEND_ARTICLES);
+    public ResponseEntity<Object> listRecommendArticles() {
+        List<Article> articles = articleService.listRecommendArticles();
         return new ResponseEntity<>(articles, HttpStatus.OK);
     }
 
     @GetMapping("/articles/{current}")
-    public ResponseEntity<Object> getArticlesByPage(@PathVariable(value = "current") Integer current,
-                                                    @RequestParam(value = "size", defaultValue = Constant.PAGE_SIZE) Integer size) {
+    public ResponseEntity<Object> listArticlesByPage(@PathVariable(value = "current") Integer current,
+                                                     @RequestParam(value = "size", defaultValue = Constant.PAGE_SIZE) Integer size) {
         if (current == null) {
             current = 1;
         }
-        QueryWrapper<Article> wrapper = new QueryWrapper<>();
-        wrapper.eq("published", true)
-                .orderByDesc("create_time");
-        List<Article> articles = articleService.listByPageForWeb(current, size, wrapper);
-        return new ResponseEntity<>(articles, HttpStatus.OK);
+        Page<Article> articlePage = articleService.listArticlesByPage(current, size);
+        return new ResponseEntity<>(articlePage, HttpStatus.OK);
     }
 }

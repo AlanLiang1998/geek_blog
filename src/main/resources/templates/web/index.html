@@ -233,117 +233,120 @@
 </header>
 <!--end navbar-->
 
-<!--carousel-->
-<div class="carousel carousel-slider center index-cover" data-indicators="true" style="margin-top: -64px;"
-     id="carousel">
-    <div class="left waves-effect carousel-control" id="prev-cover">
-        <i class="icon fa fa-angle-left"></i>
-    </div>
-    <div class="right waves-effect carousel-control" id="next-cover">
-        <i class="icon fa fa-angle-right"></i>
-    </div>
-    <!--carousel-item-first-->
-    <div class="carousel-item white-text bg-cover about-cover">
-        <div class="container">
-            <div class="row">
-                <div class="col s10 offset-s1 m8 offset-m2 l8 offset-l2">
-                    <div class="brand">
-                        <!--标题-->
-                        <div class="title center-align">GeekBlog</div>
-                        <!--副标题-->
-                        <div class="description center-align">
-                            <span id="subtitle"></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="cover-btns">
-                <a class="waves-effect waves-light btn" href="#indexCard">
-                    <i class="fa fa-angle-double-down"></i>开始阅读
-                </a>
-            </div>
-            <div class="cover-social-link">
-                <a class="tooltipped" data-delay="50" data-position="top" data-tooltip="访问我的GitHub"
-                   href="https://github.com/AlanLiang1998"
-                   target="_blank">
-                    <i class="fab fa-github"></i>
-                </a>
-                <a class="tooltipped" data-delay="50" data-position="top" data-tooltip="邮件联系我"
-                   href="mailto:1114173646@qq.com" target="_blank">
-                    <i class="fas fa-envelope-open"></i>
-                </a>
-                <a class="tooltipped" data-delay="50" data-position="top" data-tooltip="QQ联系我: 1114173646"
-                   href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1114173646" target="_blank">
-                    <i class="fab fa-qq"></i>
-                </a>
-            </div>
+<div id="app">
+    <!--carousel-->
+    <div class="carousel carousel-slider center index-cover" data-indicators="true" style="margin-top: -64px;"
+         id="carousel">
+        <div class="left waves-effect carousel-control" id="prev-cover">
+            <i class="icon fa fa-angle-left"></i>
         </div>
-    </div>
-    <!--end carousel-item-first-->
-    <div v-for="(article, index) in topArticles" :key="index">
-        <div class="carousel-item  white-text carousel-post bg-cover"
-             :style="{backgroundImage: 'url(' + article.cover + ')' }">
+        <div class="right waves-effect carousel-control" id="next-cover">
+            <i class="icon fa fa-angle-right"></i>
+        </div>
+        <!--carousel-item-first-->
+        <div class="carousel-item white-text bg-cover about-cover">
             <div class="container">
                 <div class="row">
-                    <div class="col s10 offset-s1">
-                        <div class="title center-align">{{article.title}}</div>
-                        <div class="description center-align">{{article.summary}}</div>
-                        <div class="cover-btns">
-                            <a class="waves-effect waves-light btn" href="index1.html" target="_blank">
-                                <i class="icon fa fa-eye fa-fw"></i>阅读更多
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-</div>
-<!--end carousel-->
-
-<!--content-->
-<main class="content">
-    <div class="index-card" id="indexCard">
-        <div class="container">
-            <div class="card">
-                <div class="card-content" data-aos="fade-up">
-                    <!--名言-->
-                    <div class="dream">
-                        <div class="title center-align">
-                            <i class="far fa-lightbulb"></i>&nbsp;&nbsp;钱钟书《围城》
-                        </div>
-
-                        <div class="row">
-                            <div class="col l8 offset-l2 m10 offset-m1 s10 offset-s1 center-align text">
-                                满天的星又密又忙，它们声息全无，而看来只觉得天上热闹。一梳月亮像形容未长成的女孩子，但见人己不羞缩，光明和轮廓都清新露，渐渐可烘衬夜景。小园草地里的小虫琐琐屑屑地在夜谈。不知那里的蛙群齐心协力地干号，像声浪给火煮得发沸。几星萤火优游来去，不像飞行，像在厚密的空气里漂浮；月光不到的阴黑处，一点萤火忽明，像夏夜的一只微绿的小眼睛。
+                    <div class="col s10 offset-s1 m8 offset-m2 l8 offset-l2">
+                        <div class="brand">
+                            <!--标题-->
+                            <div class="title center-align">GeekBlog</div>
+                            <!--副标题-->
+                            <div class="description center-align">
+                                <span id="subtitle"></span>
                             </div>
                         </div>
                     </div>
-                    <!--推荐文章-->
-                    <div class="recommend" id="recommend-sections" data-aos="fade-up">
-                        <div class="title"><i class="far fa-thumbs-up"></i>&nbsp;&nbsp;推荐文章</div>
-                        <div class="row">
-                            <div v-for="(article, index) in recommendArticles" :key="index">
-                                <div class="col s12 m6" data-aos="zoom-in-up">
-                                    <div class="post-card" :style="{backgroundImage: 'url(' + article.cover + ')' }">
-                                        <div class="post-body">
-                                            <!--分类-->
-                                            <div class="post-categories">
-                                                <a class="category" href="#">{{article.category.name}}</a>
+                </div>
+                <div class="cover-btns">
+                    <a class="waves-effect waves-light btn" href="#indexCard">
+                        <i class="fa fa-angle-double-down"></i>开始阅读
+                    </a>
+                </div>
+                <div class="cover-social-link">
+                    <a class="tooltipped" data-delay="50" data-position="top" data-tooltip="访问我的GitHub"
+                       href="https://github.com/AlanLiang1998"
+                       target="_blank">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a class="tooltipped" data-delay="50" data-position="top" data-tooltip="邮件联系我"
+                       href="mailto:1114173646@qq.com" target="_blank">
+                        <i class="fas fa-envelope-open"></i>
+                    </a>
+                    <a class="tooltipped" data-delay="50" data-position="top" data-tooltip="QQ联系我: 1114173646"
+                       href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1114173646" target="_blank">
+                        <i class="fab fa-qq"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!--end carousel-item-first-->
+        <div v-for="(article, index) in topArticles" :key="article.id">
+            <div class="carousel-item  white-text carousel-post bg-cover"
+                 :style="{backgroundImage: 'url(' + article.cover + ')' }">
+                <div class="container">
+                    <div class="row">
+                        <div class="col s10 offset-s1">
+                            <div class="title center-align">{{article.title}}</div>
+                            <div class="description center-align">{{article.summary}}</div>
+                            <div class="cover-btns">
+                                <a class="waves-effect waves-light btn" href="index1.html" target="_blank">
+                                    <i class="icon fa fa-eye fa-fw"></i>阅读更多
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!--end carousel-->
+
+    <!--content-->
+    <main class="content">
+        <div class="index-card" id="indexCard">
+            <div class="container">
+                <div class="card">
+                    <div class="card-content" data-aos="fade-up">
+                        <!--名言-->
+                        <div class="dream">
+                            <div class="title center-align">
+                                <i class="far fa-lightbulb"></i>&nbsp;&nbsp;钱钟书《围城》
+                            </div>
+
+                            <div class="row">
+                                <div class="col l8 offset-l2 m10 offset-m1 s10 offset-s1 center-align text">
+                                    满天的星又密又忙，它们声息全无，而看来只觉得天上热闹。一梳月亮像形容未长成的女孩子，但见人己不羞缩，光明和轮廓都清新露，渐渐可烘衬夜景。小园草地里的小虫琐琐屑屑地在夜谈。不知那里的蛙群齐心协力地干号，像声浪给火煮得发沸。几星萤火优游来去，不像飞行，像在厚密的空气里漂浮；月光不到的阴黑处，一点萤火忽明，像夏夜的一只微绿的小眼睛。
+                                </div>
+                            </div>
+                        </div>
+                        <!--推荐文章-->
+                        <div class="recommend" id="recommend-sections" data-aos="fade-up">
+                            <div class="title"><i class="far fa-thumbs-up"></i>&nbsp;&nbsp;推荐文章</div>
+                            <div class="row">
+                                <div v-for="(article, index) in recommendArticles" :key="article.id">
+                                    <div class="col s12 m6" data-aos="zoom-in-up">
+                                        <div class="post-card"
+                                             :style="{backgroundImage: 'url(' + article.cover + ')' }">
+                                            <div class="post-body">
+                                                <!--分类-->
+                                                <div class="post-categories">
+                                                    <a class="category" href="#">{{article.category.name}}</a>
+                                                </div>
+                                                <!--标题-->
+                                                <a href="#">
+                                                    <h3 class="post-title">{{article.title}}</h3>
+                                                </a>
+                                                <!--描述-->
+                                                <p class="post-description">{{article.summary}}</p>
+                                                <!--阅读更多-->
+                                                <a class="read-more btn waves-effect waves-light" href="#"
+                                                   style="background: linear-gradient(to right, #FF5E3A 0%, #FF2A68 100%)"
+                                                   target="_blank">
+                                                    <i class="icon far fa-eye fa-fw"></i>阅读更多
+                                                </a>
                                             </div>
-                                            <!--标题-->
-                                            <a href="#">
-                                                <h3 class="post-title">{{article.title}}</h3>
-                                            </a>
-                                            <!--描述-->
-                                            <p class="post-description">{{article.summary}}</p>
-                                            <!--阅读更多-->
-                                            <a class="read-more btn waves-effect waves-light" href="#"
-                                               style="background: linear-gradient(to right, #FF5E3A 0%, #FF2A68 100%)"
-                                               target="_blank">
-                                                <i class="icon far fa-eye fa-fw"></i>阅读更多
-                                            </a>
                                         </div>
                                     </div>
                                 </div>
@@ -353,75 +356,75 @@
                 </div>
             </div>
         </div>
-    </div>
-    <!-- 所有文章卡片 -->
-    <article class="container articles" id="articles">
-        <div class="row article-row">
-            <div v-for="(article, index) in articles" :key="index">
-                <div class="article col s12 m6 l4" data-aos="zoom-in">
-                    <div class="card">
-                        <!--卡片上部-->
-                        <a href="#">
-                            <div class="card-image">
-                                <!--文章图片-->
-                                <img class="responsive-img" :src="article.cover">
-                                <!--文章标题-->
-                                <span class="card-title">{{article.title}}</span>
-                            </div>
-                        </a>
-                        <!--卡片下部-->
-                        <div class="card-content article-content">
-                            <!--文章描述-->
-                            <div class="summary block-with-text">{{article.summary}}</div>
-                            <!--文章信息-->
-                            <div class="publish-info">
-                                <!--发布日期-->
-                                <span class="publish-date">
+        <!-- 所有文章卡片 -->
+        <article class="container articles">
+            <div class="row article-row">
+                <div v-for="(article, index) in articles" :key="article.id">
+                    <div class="article col s12 m6 l4" data-aos="zoom-in">
+                        <div class="card">
+                            <!--卡片上部-->
+                            <a href="#">
+                                <div class="card-image">
+                                    <!--文章图片-->
+                                    <img class="responsive-img" :src="article.cover">
+                                    <!--文章标题-->
+                                    <span class="card-title">{{article.title}}</span>
+                                </div>
+                            </a>
+                            <!--卡片下部-->
+                            <div class="card-content article-content">
+                                <!--文章描述-->
+                                <div class="summary block-with-text">{{article.summary}}</div>
+                                <!--文章信息-->
+                                <div class="publish-info">
+                                    <!--发布日期-->
+                                    <span class="publish-date">
                                 <i class="far fa-clock fa-fw icon-date"></i>{{article.createTime | dateFormat}}
                                 </span>
-                                <!--文章标签-->
-                                <span class="publish-author">
+                                    <!--文章标签-->
+                                    <span class="publish-author">
                                 <i class="fas fa-bookmark fa-fw icon-category"></i>
                                 <a class="post-category" href="#">{{article.category.name}}</a>
                             </span>
+                                </div>
                             </div>
-                        </div>
-                        <!--文章标签-->
-                        <div class="card-action article-tags">
-                            <a href="#" v-for="(tag, index) in article.tagList">
-                                <span class="chip bg-color">{{tag.name}}</span>
-                            </a>
+                            <!--文章标签-->
+                            <div class="card-action article-tags">
+                                <a href="#" v-for="(tag, index) in article.tagList">
+                                    <span class="chip bg-color">{{tag.name}}</span>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </article>
-</main>
-<!--end content-->
+        </article>
+    </main>
+    <!--end content-->
 
-<!--pagination-->
-<div class="container paging">
-    <div class="row">
-        <!--左边按钮-->
-        <div class="col s6 m4 l4">
-            <a class="left btn-floating btn-large disabled">
-                <i class="fas fa-angle-left"></i>
-            </a>
-        </div>
-        <!--分页信息-->
-        <div class="page-info col m4 l4 hide-on-small-only">
-            <div class="center-align b-text-gray">1 / 3</div>
-        </div>
-        <!--右边按钮-->
-        <div class="col s6 m4 l4">
-            <a class="right btn-floating btn-large waves-effect waves-light bg-color" href="#">
-                <i class="fas fa-angle-right"></i>
-            </a>
+    <!--pagination-->
+    <div class="container paging">
+        <div class="row">
+            <!--左边按钮-->
+            <div class="col s6 m4 l4">
+                <a class="left btn-floating btn-large" @click="prevPage">
+                    <i class="fas fa-angle-left"></i>
+                </a>
+            </div>
+            <!--分页信息-->
+            <div class="page-info col m4 l4 hide-on-small-only">
+                <div class="center-align b-text-gray">{{current}} / {{pages}}</div>
+            </div>
+            <!--右边按钮-->
+            <div class="col s6 m4 l4">
+                <a class="right btn-floating btn-large waves-effect waves-light bg-color" @click="nextPage">
+                    <i class="fas fa-angle-right"></i>
+                </a>
+            </div>
         </div>
     </div>
+    <!--end pagination-->
 </div>
-<!--end pagination-->
 
 <!--footer-->
 <footer class="page-footer bg-color">
@@ -432,8 +435,8 @@
             Copyright&nbsp;&copy;
             <span id="year">2020</span>
             <a href="javascript:;" target="_blank">AlanLiang</a>
-            |&nbsp;Powered by&nbsp;<a href="javascript:;" target="_blank">Hexo</a>
-            |&nbsp;Theme&nbsp;<a href="javascript:;" target="_blank">Matery</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
             <br>
             <!--网站字数-->
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span class="white-color">97.2k</span>&nbsp;字
@@ -488,16 +491,16 @@
         <!--联系方式-->
         <div class="col s12 m4 l4 social-link social-statis">
             <!--联系图标-->
-            <a class="tooltipped" data-delay="50" data-position="top" data-tooltip="访问我的GitHub" href="javascript:;"
+            <a class="tooltipped" data-delay="50" data-position="top" data-tooltip="访问我的GitHub" href="https://github.com/AlanLiang1998"
                target="_blank">
                 <i class="fab fa-github"></i>
             </a>
             <a class="tooltipped" data-delay="50" data-position="top" data-tooltip="邮件联系我"
-               href="mailto:1656927346@qq.com" target="_blank">
+               href="mailto:1114173646@qq.com" target="_blank">
                 <i class="fas fa-envelope-open"></i>
             </a>
             <a class="tooltipped" data-delay="50" data-position="top" data-tooltip="QQ联系我: 1656927346"
-               href="javascript:;" target="_blank">
+               href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1114173646" target="_blank">
                 <i class="fab fa-qq"></i>
             </a>
         </div>
@@ -529,10 +532,14 @@
 <!--axios异步工具-->
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script type="text/javascript">
-    const carouselVM = new Vue({
-        el: '#carousel',
+    const vm = new Vue({
+        el: '#app',
         data: {
             topArticles: [],
+            recommendArticles: [],
+            articles: [],
+            current: 1,
+            pages: 1,
         },
         methods: {
             getTopArticles: function () {
@@ -543,18 +550,6 @@
                     this.topArticles = result.data;
                 })
             },
-        },
-        mounted() {
-            this.getTopArticles();
-        }
-    });
-
-    const recommendVM = new Vue({
-        el: '#recommend-sections',
-        data: {
-            recommendArticles: []
-        },
-        methods: {
             getRecommendArticles: function () {
                 axios({
                     url: '/recommend-articles',
@@ -562,28 +557,33 @@
                 }).then((result) => {
                     this.recommendArticles = result.data;
                 })
-            }
-        },
-        mounted() {
-            this.getRecommendArticles();
-        }
-    });
-
-    const articlesVM = new Vue({
-        el: '#articles',
-        data: {
-            articles: []
-        },
-        methods: {
+            },
             getArticles: function (current) {
                 axios({
                     url: '/articles/' + current,
                     method: 'GET',
 
                 }).then((result) => {
-                    this.articles = result.data;
+                    this.articles = result.data.records;
+                    this.current = result.data.current;
+                    this.pages = result.data.pages;
                 })
+            },
+            prevPage: function () {
+                if (this.current > 1) {
+                    this.getArticles(this.current - 1);
+                }
+            },
+            nextPage: function () {
+                if (this.current < this.pages) {
+                    this.getArticles(this.current + 1);
+                }
             }
+        },
+        mounted() {
+            this.getTopArticles();
+            this.getRecommendArticles();
+            this.getArticles(1);
         },
         filters: {
             dateFormat: function (value) {
@@ -592,9 +592,6 @@
                 return value.split(' ')[0];
             }
         },
-        mounted() {
-            this.getArticles(1);
-        }
     });
 </script>
 <!--搜索-->

@@ -30,7 +30,7 @@ public interface ArticleMapper extends BaseMapper<Article> {
      * @param limit 最大限制
      * @return 推荐文章列表
      */
-    List<Article> listByRecommend(int limit);
+    List<Article> listRecommendArticles(int limit);
 
     /**
      * 前台分页查询所有文章
@@ -39,5 +39,5 @@ public interface ArticleMapper extends BaseMapper<Article> {
      * @param queryWrapper 条件
      * @return 文章列表
      */
-    List<Article> selectPageForWeb(IPage<Article> page, @Param("ew") QueryWrapper<Article> queryWrapper);
+    Page<Article> listArticlesByPage(IPage<Article> page, @Param("ew") QueryWrapper<Article> queryWrapper);
 }

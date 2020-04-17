@@ -6,6 +6,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import site.alanliang.geekblog.common.Constant;
 import site.alanliang.geekblog.domain.Article;
 import site.alanliang.geekblog.domain.ArticleTag;
 import site.alanliang.geekblog.dto.ArticleDto;
@@ -43,7 +44,12 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public List<Article> listByWrapper(QueryWrapper<Article> wrapper) {
+    public List<Article> listTopArticles() {
+        QueryWrapper<Article> wrapper = new QueryWrapper<>();
+        wrapper.select("id", "title", "summary", "cover")
+                .eq("published", true)
+                .eq("top", true)
+                .last("limit " + Constant.MAX_TOP_ARTICLES);
         return articleMapper.selectList(wrapper);
     }
 
@@ -60,14 +66,17 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public List<Article> listByPageForWeb(Integer current, Integer size, QueryWrapper<Article> wrapper) {
+    public Page<Article> listArticlesByPage(Integer current, Integer size) {
+        QueryWrapper<Article> wrapper = new QueryWrapper<>();
+        wrapper.eq("published", true)
+                .orderByDesc("create_time");
         Page<Article> articlePage = new Page<>(current, size);
-        return articleMapper.selectPageForWeb(articlePage, wrapper);
+        return articleMapper.listArticlesByPage(articlePage, wrapper);
     }
 
     @Override
-    public List<Article> listByRecommend(Integer limit) {
-        return articleMapper.listByRecommend(limit);
+    public List<Article> listRecommendArticles() {
+        return articleMapper.listRecommendArticles(Constant.MAX_RECOMMEND_ARTICLES);
     }
 
     @Override

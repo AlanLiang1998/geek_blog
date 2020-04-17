@@ -22,16 +22,8 @@ public class ArticleMapperTests {
 
     @Test
     void listByRecommend() {
-        List<Article> articles = articleMapper.listByRecommend(4);
+        List<Article> articles = articleMapper.listRecommendArticles(4);
         System.out.println(articles);
-    }
-
-    @Test
-    void listByPageForWeb(){
-        Page<Article> articlePage = new Page<>(1, 6);
-        List<Article> articles = articleMapper.selectPageForWeb(articlePage, null);
-        List<Tag> tagList = articles.get(0).getTagList();
-        System.out.println(tagList);
     }
 
 }
