@@ -1,0 +1,1208 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta th:include="/web/fragments :: head(~{::title})">
+    <title>文章详情</title>
+    <!--代码高亮-->
+    <link rel="stylesheet" href="/static/web/css/prism-tomorrow.css" type="text/css">
+    <link rel="stylesheet" href="/static/web/css/tocbot.css">
+    <style>
+        #articleContent h1::before,
+        #articleContent h2::before,
+        #articleContent h3::before,
+        #articleContent h4::before,
+        #articleContent h5::before,
+        #articleContent h6::before {
+            display: block;
+            content: " ";
+            height: 100px;
+            margin-top: -100px;
+            visibility: hidden;
+        }
+
+        #articleContent :focus {
+            outline: none;
+        }
+
+        .toc-fixed {
+            position: fixed;
+            top: 64px;
+        }
+
+        .toc-widget {
+            width: 345px;
+            padding-left: 20px;
+        }
+
+        .toc-widget .toc-title {
+            margin: 35px 0 15px 0;
+            padding-left: 17px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            line-height: 1.5rem;
+        }
+
+        .toc-widget ol {
+            padding: 0;
+            list-style: none;
+        }
+
+        #toc-content {
+            height: calc(100vh - 250px);
+            overflow: auto;
+        }
+
+        #toc-content ol {
+            padding-left: 10px;
+        }
+
+        #toc-content ol li {
+            padding-left: 10px;
+        }
+
+        #toc-content .toc-link:hover {
+            color: #42b983;
+            font-weight: 700;
+            text-decoration: underline;
+        }
+
+        #toc-content .toc-link::before {
+            background-color: transparent;
+            max-height: 25px;
+        }
+
+        #toc-content .is-active-link {
+            color: #42b983;
+        }
+
+        #toc-content .is-active-link::before {
+            background-color: #42b983;
+        }
+
+        #floating-toc-btn {
+            position: fixed;
+            right: 15px;
+            bottom: 76px;
+            padding-top: 15px;
+            margin-bottom: 0;
+            z-index: 998;
+        }
+
+        #floating-toc-btn .btn-floating {
+            width: 48px;
+            height: 48px;
+        }
+
+        #floating-toc-btn .btn-floating i {
+            line-height: 48px;
+            font-size: 1.4rem;
+        }
+    </style>
+    <style>
+        #reward {
+            margin: 40px 0;
+            text-align: center;
+        }
+
+        #reward .reward-link {
+            font-size: 1.4rem;
+            line-height: 38px;
+        }
+
+        #reward .btn-floating:hover {
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        #rewardModal {
+            width: 320px;
+            height: 350px;
+        }
+
+        #rewardModal .reward-title {
+            margin: 15px auto;
+            padding-bottom: 5px;
+        }
+
+        #rewardModal .modal-content {
+            padding: 10px;
+        }
+
+        #rewardModal .close {
+            position: absolute;
+            right: 15px;
+            top: 15px;
+            color: rgba(0, 0, 0, 0.5);
+            font-size: 1.3rem;
+            line-height: 20px;
+            cursor: pointer;
+        }
+
+        #rewardModal .close:hover {
+            color: #ef5350;
+            transform: scale(1.3);
+            -moz-transform: scale(1.3);
+            -webkit-transform: scale(1.3);
+            -o-transform: scale(1.3);
+        }
+
+        #rewardModal .reward-tabs {
+            margin: 0 auto;
+            width: 210px;
+        }
+
+        .reward-tabs .tabs {
+            height: 38px;
+            margin: 10px auto;
+            padding-left: 0;
+        }
+
+        .reward-content ul {
+            padding-left: 0 !important;
+        }
+
+        .reward-tabs .tabs .tab {
+            height: 38px;
+            line-height: 38px;
+        }
+
+        .reward-tabs .tab a {
+            color: #fff;
+            background-color: #ccc;
+        }
+
+        .reward-tabs .tab a:hover {
+            background-color: #ccc;
+            color: #fff;
+        }
+
+        .reward-tabs .wechat-tab .active {
+            color: #fff !important;
+            background-color: #22AB38 !important;
+        }
+
+        .reward-tabs .alipay-tab .active {
+            color: #fff !important;
+            background-color: #019FE8 !important;
+        }
+
+        .reward-tabs .reward-img {
+            width: 210px;
+            height: 210px;
+        }
+    </style>
+    <style>
+        .valine-card {
+            margin: 1.5rem auto;
+        }
+
+        .valine-card .card-content {
+            padding: 20px 20px 5px 20px;
+        }
+
+        #vcomments textarea {
+            box-sizing: border-box;
+            background: url("/static/web/image/comment_bg.png") 100% 100% no-repeat;
+        }
+
+        #vcomments p {
+            margin: 2px 2px 10px;
+            font-size: 1.05rem;
+            line-height: 1.78rem;
+        }
+
+        #vcomments blockquote p {
+            text-indent: 0.2rem;
+        }
+
+        #vcomments a {
+            padding: 0 2px;
+            color: #4cbf30;
+            font-weight: 500;
+            text-decoration: none;
+        }
+
+        #vcomments img {
+            max-width: 100%;
+            height: auto;
+            cursor: pointer;
+        }
+
+        #vcomments ol li {
+            list-style-type: decimal;
+        }
+
+        #vcomments ol,
+        ul {
+            display: block;
+            padding-left: 2em;
+            word-spacing: 0.05rem;
+        }
+
+        #vcomments ul li,
+        ol li {
+            display: list-item;
+            line-height: 1.8rem;
+            font-size: 1rem;
+        }
+
+        #vcomments ul li {
+            list-style-type: disc;
+        }
+
+        #vcomments ul ul li {
+            list-style-type: circle;
+        }
+
+        #vcomments table, th, td {
+            padding: 12px 13px;
+            border: 1px solid #dfe2e5;
+        }
+
+        #vcomments table, th, td {
+            border: 0;
+        }
+
+        table tr:nth-child(2n), thead {
+            background-color: #fafafa;
+        }
+
+        #vcomments table th {
+            background-color: #f2f2f2;
+            min-width: 80px;
+        }
+
+        #vcomments table td {
+            min-width: 80px;
+        }
+
+        #vcomments h1 {
+            font-size: 1.85rem;
+            font-weight: bold;
+            line-height: 2.2rem;
+        }
+
+        #vcomments h2 {
+            font-size: 1.65rem;
+            font-weight: bold;
+            line-height: 1.9rem;
+        }
+
+        #vcomments h3 {
+            font-size: 1.45rem;
+            font-weight: bold;
+            line-height: 1.7rem;
+        }
+
+        #vcomments h4 {
+            font-size: 1.25rem;
+            font-weight: bold;
+            line-height: 1.5rem;
+        }
+
+        #vcomments h5 {
+            font-size: 1.1rem;
+            font-weight: bold;
+            line-height: 1.4rem;
+        }
+
+        #vcomments h6 {
+            font-size: 1rem;
+            line-height: 1.3rem;
+        }
+
+        #vcomments p {
+            font-size: 1rem;
+            line-height: 1.5rem;
+        }
+
+        #vcomments hr {
+            margin: 12px 0;
+            border: 0;
+            border-top: 1px solid #ccc;
+        }
+
+        #vcomments blockquote {
+            margin: 15px 0;
+            border-left: 5px solid #42b983;
+            padding: 1rem 0.8rem 0.3rem 0.8rem;
+            color: #666;
+            background-color: rgba(66, 185, 131, .1);
+        }
+
+        #vcomments pre {
+            font-family: monospace, monospace;
+            padding: 1.2em;
+            margin: .5em 0;
+            background: #272822;
+            overflow: auto;
+            border-radius: 0.3em;
+            tab-size: 4;
+        }
+
+        #vcomments code {
+            font-family: monospace, monospace;
+            padding: 1px 3px;
+            font-size: 0.92rem;
+            color: #e96900;
+            background-color: #f8f8f8;
+            border-radius: 2px;
+        }
+
+        #vcomments pre code {
+            font-family: monospace, monospace;
+            padding: 0;
+            color: #e8eaf6;
+            background-color: #272822;
+        }
+
+        #vcomments pre[class*="language-"] {
+            padding: 1.2em;
+            margin: .5em 0;
+        }
+
+        #vcomments code[class*="language-"],
+        pre[class*="language-"] {
+            color: #e8eaf6;
+        }
+
+        #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+            position: inherit;
+            margin-left: -1.3rem;
+            margin-right: 0.4rem;
+            margin-top: -1px;
+            vertical-align: middle;
+            left: unset;
+            visibility: visible;
+        }
+
+        #vcomments b,
+        strong {
+            font-weight: bold;
+        }
+
+        #vcomments dfn {
+            font-style: italic;
+        }
+
+        #vcomments small {
+            font-size: 85%;
+        }
+
+        #vcomments cite {
+            font-style: normal;
+        }
+
+        #vcomments mark {
+            background-color: #fcf8e3;
+            padding: .2em;
+        }
+
+        #vcomments table, th, td {
+            padding: 12px 13px;
+            border: 1px solid #dfe2e5;
+        }
+
+        table tr:nth-child(2n), thead {
+            background-color: #fafafa;
+        }
+
+        #vcomments table th {
+            background-color: #f2f2f2;
+            min-width: 80px;
+        }
+
+        #vcomments table td {
+            min-width: 80px;
+        }
+
+        #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+            position: inherit;
+            margin-left: -1.3rem;
+            margin-right: 0.4rem;
+            margin-top: -1px;
+            vertical-align: middle;
+            left: unset;
+            visibility: visible;
+        }
+    </style>
+</head>
+
+<body>
+<!--navbar-->
+<header th:replace="/web/fragments :: header"></header>
+<!--end navbar-->
+
+<!--bgcover-->
+<div class="bg-cover pd-header post-cover" style="background-image: url('/static/web/image/13.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <!--标题-->
+                <div class="brand">
+                    <h1 class="description center-align post-title">Java反射初体验</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--end bgcover-->
+
+<!--content-->
+<main class="post-container content">
+    <div class="row">
+        <!-- 文章内容详情 -->
+        <div id="main-content" class="col s12 m12 l9">
+            <div id="artDetail">
+                <div class="card">
+                    <div class="card-content article-info">
+                        <div class="row tag-cate">
+                            <!--文章标签-->
+                            <div class="col s7">
+                                <div class="article-tag">
+                                    <a href="#">
+                                        <span class="chip bg-color">Java反射</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <!--文章分类-->
+                            <div class="col s5 right-align">
+                                <div class="post-cate">
+                                    <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                    <a href="#" class="post-category">Java基础</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="post-info">
+                            <!--发布日期-->
+                            <div class="post-date info-break-policy">
+                                <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;2020-03-10
+                            </div>
+                            <!--文章字数-->
+                            <div class="info-break-policy">
+                                <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;5.4k
+                            </div>
+                            <!--阅读时长-->
+                            <div class="info-break-policy">
+                                <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;21 分
+                            </div>
+                            <!--浏览次数-->
+                            <div id="busuanzi_container_page_pv" class="info-break-policy">
+                                <i class="fa fa-eye fa-fw"></i>浏览次数:&nbsp;&nbsp;
+                                <span id="busuanzi_value_page_pv"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="clearfix">
+                    <div class="card-content article-card-content">
+                        <!--文章内容-->
+                        <div id="articleContent" data-aos="fade-up">
+
+                            <h1>Mybatis中两种级联方式的介绍和性能对比</h1>
+                            <h2>基本介绍</h2>
+                            <p>最近在做一个基于SpringBoot+MybatisPlus博客系统的项目，在管理后台需要列出所有文章，效果是这样的：</p>
+                            <p><img src="http://q8rsjstig.bkt.clouddn.com/note/1.png" referrerpolicy="no-referrer"
+                                    alt="avatar"></p>
+                            <p>注意红色部分，查出文章的信息时，还需要查文章的分类和文章的标签。这很容易想到需要使用Mybatis的级联查询，但是在写mapper文件代码的时候，想到级联其实有两种方式：</p>
+                            <ul>
+                                <li>基于分层次查询的</li>
+                                <li>基于SQL表连接的</li>
+
+                            </ul>
+                            <p>这样说，大家可能会觉得云里雾里的，啥叫分层次的，啥又叫SQL表连接的，这里给出代码，想必平时使用过Mybatis的小伙伴就会明白了。</p>
+                            <ul>
+                                <li>基于分层次查询的</li>
+
+                            </ul>
+                            <pre><code class='language-xml' lang='xml'>&lt;resultMap id=&quot;resultMap1&quot; type=&quot;site.alanliang.geekblog.domain.Article&quot;&gt;
+    &lt;id property=&quot;id&quot; column=&quot;id&quot;/&gt;
+    &lt;result property=&quot;title&quot; column=&quot;title&quot;/&gt;
+
+    &lt;association property=&quot;category&quot; column=&quot;category_id&quot;                 select=&quot;site.alanliang.geekblog.mapper.ArticleMapper.selectCategoryById&quot;/&gt;
+
+&lt;/resultMap&gt;
+
+&lt;select id=&quot;selectCategoryById&quot; resultType=&quot;site.alanliang.geekblog.domain.Category&quot;&gt;
+    select id, name from t_category where id = #{id}
+&lt;/select&gt;
+
+&lt;select id=&quot;selectArticleById1&quot; parameterType=&quot;long&quot; resultMap=&quot;resultMap1&quot;&gt;
+    select id, title, category_id from t_article where id = #{id}
+&lt;/select&gt;
+</code></pre>
+                            <ul>
+                                <li>基于SQL表连接的</li>
+
+                            </ul>
+                            <pre><code class='language-xml' lang='xml'>&lt;resultMap id=&quot;resultMap2&quot; type=&quot;site.alanliang.geekblog.domain.Article&quot;&gt;
+    &lt;id property=&quot;id&quot; column=&quot;id&quot;/&gt;
+    &lt;result property=&quot;title&quot; column=&quot;title&quot;/&gt;
+
+    &lt;association property=&quot;category&quot; javaType=&quot;site.alanliang.geekblog.domain.Category&quot;&gt;
+        &lt;id property=&quot;id&quot; column=&quot;id&quot;/&gt;
+        &lt;result property=&quot;name&quot; column=&quot;name&quot;/&gt;
+    &lt;/association&gt;
+
+&lt;/resultMap&gt;
+
+&lt;select id=&quot;selectArticleById2&quot; parameterType=&quot;long&quot; resultMap=&quot;resultMap2&quot;&gt;
+    select ta.id, ta.title, tc.id, tc.name
+    from t_article ta
+    inner join t_category tc
+    on ta.category_id = tc.id
+    where ta.id = #{aid}
+&lt;/select&gt;
+</code></pre>
+                            <p>
+                                注意association和select标签的区别。我平时比较粗心，根本没在意它们的区别，但是这次做项目的时候再次碰到，这次才引起了我的注意，也激起了我的好奇心，究竟它们的区别在哪呢？</p>
+                            <p>查过资料后，我终于明白了：</p>
+                            <p>
+                                分层次查询的方式是单表查询，首先发送1条SQL查询文章(Article)的信息，然后查询文章的分类(category)时再发送1条SQL，也就是查询1条文章记录需要发送2条SQL。</p>
+                            <p>基于SQL表连接的方式是多表查询，在这里也就是Article表和Category表连接查询，只需要发送1条SQL。</p>
+                            <p>我们做个测试，测试代码如下：</p>
+                            <pre><code class='language-java' lang='java'>@Autowired
+private ArticleMapper articleMapper;
+
+@Test
+void selectArticleById1(){
+    Article article = articleMapper.selectArticleById1(7L);
+    System.out.println(article);
+}
+
+@Test
+void selectArticleById2(){
+    Article article = articleMapper.selectArticleById2(7L);
+    System.out.println(article);
+}
+</code></pre>
+                            <p>测试结果如下：</p>
+                            <p><img src="http://q8rsjstig.bkt.clouddn.com/note/3.png" referrerpolicy="no-referrer"
+                                    alt="avatar"></p>
+                            <p><img src="http://q8rsjstig.bkt.clouddn.com/note/4.png" referrerpolicy="no-referrer"
+                                    alt="avatar"></p>
+                            <p>结果显而易见。</p>
+                            <h2>过程分析</h2>
+                            <ul>
+                                <li>基于分层次查询</li>
+
+                            </ul>
+                            <p>我认为的大致过程是这样的。首先，测试中执行代码：</p>
+                            <pre><code class='language-java' lang='java'> Article article = articleMapper.selectArticleById1(7L);
+</code></pre>
+                            <p>Mybatis会找到相应mapper文件中的这部分代码：</p>
+                            <pre><code class='language-xml' lang='xml'>&lt;select id=&quot;selectArticleById1&quot; parameterType=&quot;long&quot; resultMap=&quot;resultMap1&quot;&gt;
+    select id, title, category_id from t_article where id = #{id}
+&lt;/select&gt;
+</code></pre>
+                            <p>
+                                Mybatis发送完这条SQL语句，查询到字段id，title和category_id。将字段id和title映射至resultMap1中的相应属性，category_id后面会用到（注意！SQL语句中不能缺少这个字段，否则将查不到对应的category）而resultMap1中代码：</p>
+                            <pre><code class='language-xml' lang='xml'>&lt;resultMap id=&quot;resultMap1&quot; type=&quot;site.alanliang.geekblog.domain.Article&quot;&gt;
+    &lt;id property=&quot;id&quot; column=&quot;id&quot;/&gt;
+    &lt;result property=&quot;title&quot; column=&quot;title&quot;/&gt;
+
+    &lt;association property=&quot;category&quot; column=&quot;category_id&quot;                 select=&quot;site.alanliang.geekblog.mapper.ArticleMapper.selectCategoryById&quot;/&gt;
+
+&lt;/resultMap&gt;
+</code></pre>
+                            <p>中可发现还需要映射的属性有category，因此此时Mybatis会根据column属性的值，也就是对应Article表中的字段名（外键）category_id，拿到之前查出来的
+                                category_id（这里是7），然后在把id值传到select属性对应的语句中：</p>
+                            <pre><code class='language-xml' lang='xml'>&lt;select id=&quot;selectCategoryById&quot; resultType=&quot;site.alanliang.geekblog.domain.Category&quot;&gt;
+    select id, name from t_category where id = #{id}
+&lt;/select&gt;
+</code></pre>
+                            <p>接着发送这条SQL语句，返回结果后映射至category对象中id和name属性，最后完成所有属性的映射。</p>
+                            <ul>
+                                <li>基于SQL表连接</li>
+
+                            </ul>
+                            <p>
+                                这个比较好理解，直接就是多表连接查询。需要注意的是，当两个表中存在字段名一样的时候，需要给表起别名，我这里Article和Category的主键名字都是id，所以分别起了别名ta和tc，否则没有办法映射，Mybatis会报错。</p>
+                            <h2>性能对比</h2>
+                            <p>首先我们先了解一下数据库表的结构和对应POJO对象：</p>
+                            <h3>数据库表结构如下：</h3>
+                            <p><img src="http://q8rsjstig.bkt.clouddn.com/note/2.png" referrerpolicy="no-referrer"
+                                    alt="avatat"></p>
+                            <h3>POJO - Article(文章)如下：</h3>
+                            <pre><code class='language-java' lang='java'>@Data
+@TableName(&quot;t_article&quot;)
+public class Article {
+    @TableId(type = IdType.AUTO)
+    private Long id;
+	...
+    @TableField(exist = false)
+    private Category category;
+
+    @TableField(exist = false)
+    private List&lt;Tag&gt; tagList;
+}
+
+</code></pre>
+                            <h3>POJO - Category(分类)如下：</h3>
+                            <pre><code class='language-java' lang='java'>@Data
+@TableName(&quot;t_category&quot;)
+public class Category {
+    @TableId(type = IdType.AUTO)
+    private Long id;
+
+    private String name;
+    ...
+}
+
+</code></pre>
+                            <h3>POJO - Tag(标签)如下：</h3>
+                            <pre><code class='language-java' lang='java'>@Data
+@TableName(&quot;t_tag&quot;)
+public class Tag {
+    @TableId(type = IdType.AUTO)
+    private Long id;
+
+    private String name;
+
+    ...
+}
+
+</code></pre>
+                            <h3>POJO - ArticleTag(文章标签关联)如下：</h3>
+                            <pre><code class='language-java' lang='java'>@Data
+@TableName(&quot;t_article_tag&quot;)
+public class ArticleTag {
+    @TableId
+    private Long articleId;
+    @TableId
+    private Long tagId;
+}
+
+</code></pre>
+                            <p>需要特别说明一下的是，这里用到的<code>@Data</code>注解是一个叫lombok的插件提供的，使用这个注解作用在类上可以帮我们生成类的getter和setter方法等，因此代码中不需要写getter和setter。然后，为了简化，我把无关的属性剔除了。最后，<code>@TableName</code>、<code>@TableId</code>和
+                                <code>@TableField</code>是MyBatisPlus提供的注解，其中<code>@TableName(&quot;t_article&quot;)</code>指明该实体类(Article)对应数据库表t_article，<code>@TableId(type
+                                    = IdType.AUTO)</code>指定该属性(id)是对应表的注解，主键策略为ID自增。<code>@TableField(exist =
+                                    false)</code>指明该属性在表中没有对应的字段，详细说明可以查看MybatisPlus官方文档 <a
+                                        href='https://mp.baomidou.com/guide/annotation.html' target='_blank'
+                                        class='url'>https://mp.baomidou.com/guide/annotation.html</a></p>
+                            <p>
+                                从数据库结构中，我们很明显可以看到，文章(t_article)和分类(t_category)是多对一的关系，文章(t_article)和标签(t_tag)是一对多的关系，那么在配置文章的mapper文件(ArticleMapper)时可以这样配置，代码如下：</p>
+                            <pre><code class='language-xml' lang='xml'>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;!DOCTYPE mapper PUBLIC &quot;-//mybatis.org//DTD Mapper 3.0//EN&quot; &quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;&gt;
+&lt;mapper namespace=&quot;site.alanliang.geekblog.mapper.ArticleMapper&quot;&gt;
+    &lt;resultMap id=&quot;adminListResultMap&quot; type=&quot;site.alanliang.geekblog.domain.Article&quot;&gt;
+        &lt;id property=&quot;id&quot; column=&quot;id&quot;/&gt;
+       	...
+        &lt;association property=&quot;category&quot; column=&quot;category_id&quot;
+                     select=&quot;site.alanliang.geekblog.mapper.CategoryMapper.selectByCid&quot;/&gt;
+        &lt;collection property=&quot;tagList&quot; column=&quot;id&quot; select=&quot;site.alanliang.geekblog.mapper.TagMapper.selectByArticleId&quot;/&gt;
+    &lt;/resultMap&gt;
+&lt;/mapper&gt;
+</code></pre>
+                            <p>其中&lt;association&gt;标签配置了Article与Category的级联关系，&lt;collection&gt;配置了Article与Tag的级联关系。说到级联我们先了解一下它的概念：</p>
+                            <p>
+                                级联是一个数据库实体的概念。比如文章就需要存在标签与之对应，这样就有了文章标签表，一篇文章可能有多个标签，这就是一对多的级联；除此之外，还有一对一的级联，比如身份证和公民是一对一的关系。</p>
+                            <p>级联不是必须的，级联的好处是获取关联数据十分便捷，但是级联过多会增加系统复杂度，同时降低系统的性能。</p>
+                            <p>Mybatis中有3种级联：</p>
+                            <ul>
+                                <li>鉴别器：它是一个根据某些条件决定采用具体实现类级联的方案，比如体检表要根据性别去区分。这里我们不讨论。</li>
+                                <li>一对一（association）：比如学生证和学生就是一种一对一的级联，雇员和工牌表也是一种一对一级联。</li>
+                                <li>一对多（collection）：比如班级和学生就是一种一对多的级联。</li>
+
+                            </ul>
+                            <p>
+                                看到这里，有的小伙伴可能会疑惑，既然文章和分类是多对一关系，为啥用association？其实这里是站在文章的角度看的，一篇文章就对应一个分类，这不就是一对一级联关系了吗，但是站在分类的角度上看，一个分类有多篇文章，这就是一对多级联关系，在代码中就需要用到collection。总而言之，当POJO类中，其中一个属性是另外一个类的引用，这就需要association级联，而一个属性是一个集合的时候，这就需要collection级联。</p>
+                            <p>
+                                关键来了，前面提到，级联方式有两种，一种是分层查询，一种是连接查询。那么对t_article进行全表查询，而且还需要查询Article的category和tagList，那么究竟哪个更快呢？假设有100个Article，1个Article有1个Category，1个Article有3个Tag，那么根据N+1问题，查询所有数据需要201条SQL（查询所有Article只需要1条，而查询Article的Category和Tag分别需要100条），而连接查询只需要1条，但是将4个表连接起来查询（t_article，t_category，t_article_tag,
+                                t_tag）规模好像也不小，感觉也不会太快，本人弱鸡不懂SQL底层，所以没有直观感觉。只好做一个测试：</p>
+                            <ul>
+                                <li>分层查询</li>
+
+                            </ul>
+                            <pre><code class='language-xml' lang='xml'>&lt;resultMap id=&quot;resultMap1&quot; type=&quot;site.alanliang.geekblog.domain.Article&quot;&gt;
+    &lt;id property=&quot;id&quot; column=&quot;id&quot;/&gt;
+    &lt;result property=&quot;title&quot; column=&quot;title&quot;/&gt;
+    &lt;association property=&quot;category&quot; column=&quot;category_id&quot;
+               select=&quot;site.alanliang.geekblog.mapper.ArticleMapper.selectCategoryById&quot;/&gt;
+    &lt;collection property=&quot;tagList&quot; column=&quot;id&quot; 		             	select=&quot;site.alanliang.geekblog.mapper.ArticleMapper.listTagsByArticleId&quot;/&gt;
+&lt;/resultMap&gt;
+
+&lt;select id=&quot;selectCategoryById&quot; resultType=&quot;site.alanliang.geekblog.domain.Category&quot;&gt;
+    select id, name from t_category where id = #{id}
+&lt;/select&gt;
+
+&lt;select id=&quot;listTagsByArticleId&quot; resultType=&quot;site.alanliang.geekblog.domain.Tag&quot;&gt;
+    select tt.id, tt.name
+    from t_tag tt
+    left join t_article_tag tat
+    on tt.id = tat.tag_id
+    where tat.article_id = #{articleId}
+&lt;/select&gt;
+
+&lt;select id=&quot;listArticles1&quot; resultMap=&quot;resultMap1&quot;&gt;
+    select id, title, category_id
+    from t_article
+&lt;/select&gt;
+</code></pre>
+                            <pre><code class='language-java' lang='java'>@Test
+void listArticles1(){
+    long startTime = System.currentTimeMillis();
+    List&lt;Article&gt; articles = articleMapper.listArticles1();
+    long endTime = System.currentTimeMillis();
+    System.out.println(&quot;-----执行时间为&quot;+(endTime-startTime)+&quot;ms-----&quot;);
+    System.out.println(articles);
+}
+</code></pre>
+                            <p>3次执行结果：</p>
+                            <pre><code>-----执行时间为146ms-----
+-----执行时间为143ms-----
+-----执行时间为140ms-----
+</code></pre>
+                            <ul>
+                                <li>分层查询</li>
+
+                            </ul>
+                            <pre><code class='language-xml' lang='xml'>&lt;resultMap id=&quot;resultMap2&quot; type=&quot;site.alanliang.geekblog.domain.Article&quot;&gt;
+    &lt;id property=&quot;id&quot; column=&quot;id&quot;/&gt;
+    &lt;result property=&quot;title&quot; column=&quot;title&quot;/&gt;
+    &lt;association property=&quot;category&quot; javaType=&quot;site.alanliang.geekblog.domain.Category&quot;&gt;
+        &lt;id property=&quot;id&quot; column=&quot;id&quot;/&gt;
+        &lt;result property=&quot;name&quot; column=&quot;name&quot;/&gt;
+    &lt;/association&gt;
+    &lt;collection property=&quot;tagList&quot; ofType=&quot;site.alanliang.geekblog.domain.Tag&quot;&gt;
+        &lt;id property=&quot;id&quot; column=&quot;id&quot;/&gt;
+        &lt;id property=&quot;name&quot; column=&quot;name&quot;/&gt;
+    &lt;/collection&gt;
+&lt;/resultMap&gt;
+</code></pre>
+                            <pre><code class='language-xml' lang='xml'>&lt;select id=&quot;listArticles2&quot; resultMap=&quot;resultMap2&quot;&gt;
+    select ta.id, ta.title, ta.type, ta.comments, ta.views, ta.likes, ta.published, ta.appreciable, ta.commentable, ta.top, ta.recommend, ta.create_time, ta.update_time,
+    tc.id, tc.name, tt.id, tt.name
+    from t_article ta
+    inner join t_category tc
+    on ta.category_id = tc.id
+    inner join t_article_tag tat
+    on ta.id = tat.article_id
+    inner join t_tag tt
+    on tat.tag_id = tt.id
+&lt;/select&gt;
+</code></pre>
+                            <pre><code class='language-java' lang='java'>@Test
+void listArticles2(){
+    long startTime = System.currentTimeMillis();
+    List&lt;Article&gt; articles = articleMapper.listArticles2();
+    long endTime = System.currentTimeMillis();
+    System.out.println(&quot;-----执行时间为&quot;+(endTime-startTime)+&quot;ms-----&quot;);
+    System.out.println(articles);
+}
+</code></pre>
+                            <pre><code>-----执行时间为99ms-----
+-----执行时间为112ms-----
+-----执行时间为97ms-----
+</code></pre>
+                            <p>这里的数据确保了每个Article都只有1个Category，每个Article都至少有1个Tag。可以看出连接查询比分层查询快了50%左右。</p>
+                            <p>原来的数据是我项目里，记录总共大概只有二三十多条，为了进一步测试，所以再增加记录1000条。</p>
+                            <p>分层查询的时间分别是：</p>
+                            <pre><code>-----执行时间为2187ms-----
+-----执行时间为2275ms-----
+-----执行时间为2165ms-----
+</code></pre>
+                            <p>连接查询的时间分别是：</p>
+                            <pre><code>-----执行时间为230ms-----
+-----执行时间为188ms-----
+-----执行时间为186ms-----
+</code></pre>
+                            <p>
+                                这里的差距就很明显了，连接查询所需要的时间只需要分层查询的10%，可以看出需要查询所有数据，进行全表关联查询时，连接查询方式速度更快。但是连接查询有个很明显的缺点，就是SQL语句复杂，日后维护起来比较困难。</p>
+                            <h2>总结</h2>
+                            <ul>
+                                <li><p>分层查询</p>
+                                    <p>优点：SQL语句简单，容易理解和维护；</p>
+                                    <p>缺点：存在N+1问题，在进行大量数据查询时效率慢（当然这可以通过延迟加载和分页等进行优化）</p>
+                                </li>
+                                <li><p>连接查询</p>
+                                    <p>优点：消除了N+1问题，在进行大量数据查询时效率比较高</p>
+                                    <p>缺点：SQL语句复杂，不易理解和维护。</p>
+                                </li>
+
+                            </ul>
+                            <p>
+                                总而言之，连接查询一般用于那些比较简单且关联不多的场景下，在这种场景下效率更高。而分层查询获取关联数据十分便捷，但如果层次过多也会增加系统的复杂度，同时降低系统的性能，一般当级联的层级超过3层时就不考虑使用级联了，因为这样会造成多个对象的关联，导致系统的耦合、复杂和难以维护，在现实的使用过程中，要根据实际情况判断使用。按照我的理解，分层查询像一棵树的层次遍历，复杂度随着层次纵向增加而快速增加。而连接查询的复杂度随着表数量的增加而横向扩展。具体使用还需要结合实际情况。</p>
+                            <p>以上结论均基于个人的理解和总结，如果有不当之处还望指正！</p>
+                            <p>&nbsp;</p>
+
+                        </div>
+                        <hr>
+                        <!--复制-->
+                        <div class="reprint" id="reprint-statement">
+                            <!--文章作者-->
+                            <div class="reprint__author">
+                                <span class="reprint-meta" style="font-weight: bold;">
+                                    <i class="fas fa-user">文章作者:</i>
+                                </span>
+                                <span class="reprint-info">
+                                    <a href="#" rel="external nofollow noreferrer">jackey</a>
+                                </span>
+                            </div>
+                            <!--文章链接-->
+                            <div class="reprint__type">
+                                <span class="reprint-meta" style="font-weight: bold;">
+                                    <i class="fas fa-link">文章链接:</i>
+                                </span>
+                                <span class="reprint-info">
+                                    <a href="#">http://hcj123123.gitee.io/hcj123123/2020/03/10/java-fan-she-chu-ti-yan/</a>
+                                </span>
+                            </div>
+                            <!--文章复制提醒-->
+                            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="javascript:;" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="javascript:;" target="_blank">jackey</a>
+                    !
+                </span>
+                            </div>
+                        </div>
+                        <!--分享-->
+                        <div class="tag_share" style="display: block;">
+                            <!--文章标签-->
+                            <div class="post-meta__tag-list" style="display: inline-block;">
+                                <div class="article-tag">
+                                    <a href="#">
+                                        <span class="chip bg-color">Java反射</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <!--文章分享-->
+                            <div class="post_share"
+                                 style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                                <link rel="stylesheet" type="text/css" href="/static/web/css/share.min.css">
+                                <div id="article-share">
+                                    <div class="social-share"
+                                         data-sites="qq,qzone,wechat,weibo"
+                                         data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+                                    <script src="/static/web/js/social-share.min.js"></script>
+                                </div>
+
+                            </div>
+                        </div>
+                        <!--打赏-->
+                        <div id="reward">
+                            <a href="#rewardModal"
+                               class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+                            <!-- Modal Structure -->
+                            <div id="rewardModal" class="modal">
+                                <div class="modal-content">
+                                    <a class="close modal-close"><i class="fas fa-times"></i></a>
+                                    <h4 class="reward-title">你的赏识是我前进的动力</h4>
+                                    <div class="reward-content">
+                                        <div class="reward-tabs">
+                                            <ul class="tabs row">
+                                                <li class="tab col s6 alipay-tab waves-effect waves-light"><a
+                                                        href="#">支付宝</a></li>
+                                                <li class="tab col s6 wechat-tab waves-effect waves-light"><a
+                                                        href="#">微 信</a></li>
+                                            </ul>
+                                            <div id="alipay">
+                                                <img src="/static/web/picture/alipay.jpg" class="reward-img"
+                                                     alt="支付宝打赏二维码">
+                                            </div>
+                                            <div id="wechat">
+                                                <img src="/static/web/picture/wechat.png" class="reward-img"
+                                                     alt="微信打赏二维码">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--评论区-->
+                <div class="card valine-card" data-aos="fade-up">
+                    <div class="comment_headling"
+                         style="font-size: 20px; font-weight: 700; position: relative; left: 20px; top: 15px; padding-bottom: 5px;">
+                        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+                        <span>评论</span>
+                    </div>
+                    <div id="vcomments" class="card-content" style="display: grid">
+                    </div>
+                </div>
+                <!--上、下一篇文章-->
+                <article id="prenext-posts" class="prev-next articles">
+                    <div class="row article-row">
+                        <!--上一篇-->
+                        <div class="article col s12 m6" data-aos="fade-up">
+                            <div class="article-badge left-badge text-color">
+                                <i class="fas fa-chevron-left"></i>&nbsp;上一篇
+                            </div>
+                            <div class="card">
+                                <a href="#">
+                                    <div class="card-image">
+                                        <img src="/static/web/picture/7.jpg" class="responsive-img" alt="什么是Java泛型">
+                                        <span class="card-title">什么是Java泛型</span>
+                                    </div>
+                                </a>
+                                <div class="card-content article-content">
+                                    <div class="summary block-with-text">Java泛型</div>
+                                    <div class="publish-info">
+                                        <span class="publish-date">
+                                            <i class="far fa-clock fa-fw icon-date"></i>2020-03-11
+                                        </span>
+                                        <span class="publish-author">
+                                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                            <a href="#" class="post-category">Java基础</a>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="card-action article-tags">
+                                    <a href="#">
+                                        <span class="chip bg-color">泛型</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <!--下一篇-->
+                        <div class="article col s12 m6" data-aos="fade-up">
+                            <div class="article-badge right-badge text-color">
+                                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+                            </div>
+                            <div class="card">
+                                <a href="#">
+                                    <div class="card-image">
+                                        <img src="/static/web/picture/13.jpg" class="responsive-img"
+                                             alt="Java之ThreadLocal的使用及源码解析">
+                                        <span class="card-title">Java之ThreadLocal的使用及源码解析</span>
+                                    </div>
+                                </a>
+                                <div class="card-content article-content">
+                                    <div class="summary block-with-text">Java之ThreadLocal的使用及源码解析</div>
+                                    <div class="publish-info">
+                                        <span class="publish-date">
+                                            <i class="far fa-clock fa-fw icon-date"></i>2020-03-09
+                                        </span>
+                                        <span class="publish-author">
+                                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                            <a href="#" class="post-category">Java多线程</a>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="card-action article-tags">
+                                    <a href="#">
+                                        <span class="chip bg-color">ThreadLocal</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+        <!--文章幕布-->
+        <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+            <div class="toc-widget">
+                <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+                <div id="toc-content"></div>
+            </div>
+        </div>
+    </div>
+    <!-- TOC 悬浮按钮. -->
+    <div id="floating-toc-btn" class="hide-on-med-and-down">
+        <a class="btn-floating btn-large bg-color">
+            <i class="fas fa-list-ul"></i>
+        </a>
+    </div>
+</main>
+<!--end content-->
+
+<!--footer-->
+<footer th:replace="/web/fragments :: footer"></footer>
+<!--end footer-->
+
+<!--commons-->
+<div th:replace="/web/fragments :: commons"></div>
+<!--end commons-->
+
+<!--scripts-->
+<div th:replace="/web/fragments :: scripts"></div>
+<!--end scripts-->
+<!--评论区-->
+<script src="/static/web/js/av-min.js"></script>
+<script src="/static/web/js/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: 'FtvcGzxkRnOmkryGU2VOXSe6-gzGzoHsz',
+        appKey: 'YVftCMoGoOKzQDD80KcLfCQa',
+        notify: 'false' === 'true',
+        verify: 'false' === 'true',
+        visitor: 'true' === 'true',
+        avatar: 'mm',
+        pageSize: '10',
+        lang: 'zh-cn',
+        placeholder: 'just go go'
+    });
+</script>
+<!--目录-->
+<script src="/static/web/js/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+
+    });
+</script>
+<!--文章复制-->
+<script async="" defer="">
+    document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+    });
+
+    function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+    }
+</script>
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: coffee`mus1c<br />'
+            + '文章作者: Jackey<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {
+            bodyElement.removeChild(newdiv);
+        }, 200);
+    });
+</script>
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/static/web/js/codeBlockFuction.js"></script>
+<!-- 代码语言 -->
+<script type="text/javascript" src="/static/web/js/codeLang.js"></script>
+<!-- 代码块复制 -->
+<script type="text/javascript" src="/static/web/js/codeCopy.js"></script>
+<!-- 代码块收缩 -->
+<script type="text/javascript" src="/static/web/js/codeShrink.js"></script>
+<!-- 代码块折行 -->
+<style type="text/css">
+    code[class*="language-"], pre[class*="language-"] {
+        white-space: pre !important;
+    }
+</style>
+<!--代码高亮-->
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.17.1/prism.min.js"></script>
+<script src="https://cdn.bootcss.com/prism/1.17.1/components/prism-java.js"></script>
+<!--打赏tab-->
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+<!--未知-->
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+    gtag('config', '');
+</script>
+</body>
+<script type="text/javascript">
+    Prism.highlightAllUnder(document.getElementById("articleContent"));
+</script>
+</html>

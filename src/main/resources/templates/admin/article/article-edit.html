@@ -8,104 +8,110 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="../../../static/admin/layuimini/lib/layui-v2.5.5/css/layui.css" media="all"
           th:href="@{/static/admin/layuimini/lib/layui-v2.5.5/css/layui.css}">
-    <link rel="stylesheet" href="../../../static/admin/layuimini/css/public.css" media="all" th:href="@{/static/admin/layuimini/css/public.css}">
+    <link rel="stylesheet" href="../../../static/admin/layuimini/css/public.css" media="all"
+          th:href="@{/static/admin/layuimini/css/public.css}">
     <link rel="stylesheet" href="../../../static/admin/layuimini/lib/font-awesome-4.7.0/css/font-awesome.min.css"
           th:href="@{/static/admin/layuimini/lib/font-awesome-4.7.0/css/font-awesome.min.css}">
+    <link rel="stylesheet" href="/static/admin/editormd/css/editormd.min.css">
+    <link rel="stylesheet" href="/static/admin/my/css/my.css">
 </head>
 <body>
 <div class="layuimini-container" style="background-color: #F2F2F2">
     <div class="layuimini-main">
-        <div class="layui-row">
-            <div class="layui-col-md12" style="margin-bottom: 20px">
-                <h2><i class="fa fa-edit"></i>&nbsp;文章编辑</h2>
+        <h2><i class="fa fa-edit"></i>&nbsp;文章发布</h2>
+        <form class="layui-form layui-form-pane" action="" lay-filter="form-filter" id="article-form">
+            <input name="id" type="hidden"/>
+            <div class="layui-form-item">
+                <label class="layui-form-label">文章标题</label>
+                <div class="layui-input-block">
+                    <input type="text" name="title" lay-verify="verTitle" placeholder="请输入文章标题(必填)..."
+                           autocomplete="off" class="layui-input"/>
+                </div>
             </div>
-        </div>
-        <div class="layui-row">
-            <form class="layui-form layui-col-md12" action="" lay-filter="form-filter" id="article-form">
-                <div class="layui-col-md8" style="margin-right: 60px">
-                    <input type="hidden" name="id"/>
-                    <div class="layui-form-item">
-                        <input type="text" name="title" lay-verify="verTitle" placeholder="请输入文章标题..."
-                               autocomplete="off" class="layui-input"/>
-                    </div>
-                    <div class="layui-form-item">
-                    <textarea name="summary" lay-verify="" placeholder="请输入文章摘要..."
-                              class="layui-textarea"></textarea>
-                    </div>
-                    <div class="layui-form-item">
-                        <div id="editor" style="background-color: #fff;" required lay-verify="verContent">
-                        </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">封面链接</label>
+                <div class="layui-input-block">
+                    <input type="text" name="cover" lay-verify="verTitle" placeholder="请输入封面链接..."
+                           autocomplete="off" class="layui-input"/>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div id="test-editor" required lay-verify="verContent">
+                    <textarea name="content" style="display:none;"></textarea>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">文章标签</label>
+                <div class="layui-input-block">
+                    <div id="tag-select" lay-verify="verTag"></div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">文章类型</label>
+                    <div class="layui-input-inline">
+                        <select name="type" lay-verify="">
+                            <option value="1" selected>原创</option>
+                            <option value="2">转载</option>
+                            <option value="3">翻译</option>
+                        </select>
                     </div>
                 </div>
-                <div class="layui-col-md3" style="margin-bottom: 15px">
-                    <div class="layui-card">
-                        <div class="layui-card-header">设置</div>
-                        <div class="layui-card-body">
-                            <div class="layui-form-item">
-                                <label class="layui-form-label">文章类型</label>
-                                <div class="layui-input-block">
-                                    <select name="type" lay-verify="">
-                                        <option value="1" selected>原创</option>
-                                        <option value="2">转载</option>
-                                        <option value="3">翻译</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="layui-form-item">
-                                <label class="layui-form-label">开启赞赏</label>
-                                <div class="layui-input-block">
-                                    <input type="checkbox" name="appreciable" lay-skin="switch" lay-text="是|否" checked
-                                           value="true">
-                                </div>
-                            </div>
-                            <div class="layui-form-item">
-                                <label class="layui-form-label">开启评论</label>
-                                <div class="layui-input-block">
-                                    <input type="checkbox" name="commentable" lay-skin="switch" lay-text="是|否" checked
-                                           value="true">
-                                </div>
-                            </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">文章分类</label>
+                    <div class="layui-input-inline">
+                        <select name="categoryId" lay-verify="verCategory" lay-search id="category-select">
+                            <option value="0">请选择一个分类</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
 
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">开启赞赏</label>
+                        <div class="layui-input-inline pane">
+                            <input type="checkbox" name="appreciable" lay-skin="switch" lay-text="是|否" checked
+                                   value="true">
                         </div>
                     </div>
                 </div>
-                <div class="layui-col-md3">
-                    <div class="layui-card">
-                        <div class="layui-card-header">选择分类</div>
-                        <div class="layui-card-body">
-                            <div class="layui-form-item">
-                                <div class="layui-input-inline">
-                                    <select name="categoryId" lay-verify="verCategory" lay-search id="category-select">
-                                        <option value="0">请选择一个分类</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="layui-card">
-                        <div class="layui-card-header">选择标签</div>
-                        <div class="layui-card-body">
-                            <div class="layui-form-item">
-                                <div class="layui-input-inline">
-                                    <div id="tag-select" lay-verify="verTag"></div>
-                                </div>
-                            </div>
+                <div class="layui-inline">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">开启评论</label>
+                        <div class="layui-input-inline pane">
+                            <input type="checkbox" name="commentable" lay-skin="switch" lay-text="是|否" checked
+                                   value="true">
                         </div>
                     </div>
                 </div>
-                <div class="layui-col-md12">
-                    <div class="layui-inline">
-                        <button type="button" class="layui-btn layui-btn-warm layui-input-inline" lay-filter="draft"
-                                lay-submit="">保存草稿
-                        </button>
-                        <button type="button" class="layui-btn layui-input-inline" lay-filter="publish" lay-submit="">
-                            更新文章
-                        </button>
-                    </div>
-                </div>
-            </form>
-        </div>
+            </div>
 
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">是否置顶</label>
+                    <div class="layui-input-inline pane">
+                        <input type="checkbox" name="top" lay-skin="switch" lay-text="是|否" checked
+                               value="true">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">是否推荐</label>
+                    <div class="layui-input-inline pane">
+                        <input type="checkbox" name="recommend" lay-skin="switch" lay-text="是|否" checked
+                               value="true">
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" class="layui-btn layui-btn-warm" lay-filter="draft" lay-submit="">
+                    保存草稿
+                </button>
+                <button type="button" class="layui-btn" lay-filter="publish" lay-submit="">更新文章</button>
+            </div>
+        </form>
     </div>
 </div>
 
@@ -117,40 +123,14 @@
 <script src="../../../static/admin/xm-select/xm-select.js" th:src="@{/static/admin/xm-select/xm-select.js}"></script>
 <script src="../../../static/admin/layuimini/js/lay-module/layuimini/miniTab.js"
         th:src="@{/static/admin/layuimini/js/lay-module/layuimini/miniTab.js}"></script>
+<script src="/static/admin/layuimini/lib/jquery-3.4.1/jquery-3.4.1.min.js"></script>
+<script src="/static/admin/editormd/editormd.min.js"></script>
 <script type="text/javascript" th:inline="javascript">
-    layui.use(['layer', 'wangEditor', 'form', 'miniTab'], function () {
+    layui.use(['layer', 'form', 'miniTab'], function () {
         var $ = layui.jquery,
             layer = layui.layer,
-            wangEditor = layui.wangEditor,
             form = layui.form,
             miniTab = layui.miniTab;
-        var editor = new wangEditor('#editor');
-        editor.customConfig.uploadImgServer = "../api/upload.json";
-        editor.customConfig.uploadFileName = 'image';
-        editor.customConfig.pasteFilterStyle = false;
-        editor.customConfig.uploadImgMaxLength = 5;
-        editor.customConfig.uploadImgHooks = {
-            // 上传超时
-            timeout: function (xhr, editor) {
-                layer.msg('上传超时！')
-            },
-            // 如果服务器端返回的不是 {errno:0, data: [...]} 这种格式，可使用该配置
-            customInsert: function (insertImg, result, editor) {
-                console.log(result);
-                if (result.code == 1) {
-                    var url = result.data.url;
-                    url.forEach(function (e) {
-                        insertImg(e);
-                    })
-                } else {
-                    layer.msg(result.msg);
-                }
-            }
-        };
-        editor.customConfig.customAlert = function (info) {
-            layer.msg(info);
-        };
-        editor.create();
         //渲染多选下拉框
         var tagSelect = xmSelect.render({
             el: '#tag-select',
@@ -231,9 +211,8 @@
                 }
             },
             verContent: function () {
-                var blankContent = "<p><br></p>"
-                var content = editor.txt.html();
-                if (content.length <= 0 || content == blankContent) {
+                var content = editor.getMarkdown()
+                if (content.length <= 0) {
                     return '文章内容不能为空';
                 }
             },
@@ -259,7 +238,9 @@
             })
             data.field.tagIdList = tagIdList;
             //获取文章内容
-            data.field.content = editor.txt.html();
+            data.field.content = editor.getHTML();
+            //获取文章markdown
+            data.field.textContent = editor.getMarkdown();
             //获取是否发布
             data.field.published = isPublish;
 
@@ -284,16 +265,6 @@
             return saveResult;
         }
 
-        function ok() {
-            var index = layer.confirm('发布成功,是否查看文章？', {icon: 6}, function () {
-                layer.close(index);
-                miniTab.openNewTabByIframe({
-                    href: "/admin/api/article/article-list&rad=" + Math.random(),
-                    title: "所有文章",
-                });
-            });
-        }
-
         //监听保存草稿按钮
         form.on('submit(draft)', function (data) {
             var result = saveArticle(data, false);
@@ -306,10 +277,10 @@
         form.on('submit(publish)', function (data) {
             var result = saveArticle(data, true);
             if (result == true) {
-                var index = layer.confirm('发布成功,是否查看文章？', {icon: 6}, function () {
+                var index = layer.confirm('更新成功,是否查看文章？', {icon: 6}, function () {
                     layer.close(index);
                     miniTab.openNewTabByIframe({
-                        href: "/admin/api/article/article-list&rad=" + Math.random(),
+                        href: "/admin/api/article/article-list?rad=" + Math.random(),
                         title: "所有文章",
                     });
                 });
@@ -320,15 +291,27 @@
         var article = [[${article}]];
         if (article != null) {
             $('#article-form input[name="id"]').val(article.id);
+            $('#article-form input[name="cover"]').val(article.cover);
             $('#article-form input[name="title"]').val(article.title);
             $('#article-form textarea[name="summary"]').val(article.summary);
-            editor.txt.html(article.content);
+            $('#article-form textarea[name="content"]').val(article.textContent);
             $('#article-form select[name="type"]').val([article.type]);
             $('#article-form input[name="appreciable"]').prop('checked', article.appreciable);
             $('#article-form input[name="commentable"]').prop('checked', article.commentable);
+            $('#article-form input[name="top"]').prop('checked', article.top);
+            $('#article-form input[name="recommend"]').prop('checked', article.recommend);
             $('#article-form select[name="categoryId"]').val([article.categoryId]);
             form.render();
         }
+
+        //编辑器
+        var editor = editormd("test-editor", {
+            placeholder: '本编辑器支持Markdown编辑，左边编写，右边预览',  //默认显示的文字，这里就不解释了
+            width: "100%",
+            height: "500px",
+            saveHTMLToTextarea: true,
+            path: "/static/admin/editormd/lib/"
+        });
     });
 </script>
 </body>

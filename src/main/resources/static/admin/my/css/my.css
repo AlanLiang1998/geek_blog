@@ -1,0 +1,13 @@
+.layuimini-container {
+    background-color: #F2F2F2;
+}
+
+.layuimini-container h2 {
+    margin-bottom: 10px
+}
+
+#article-form .pane {
+    border: 1px solid #e6e6e6;
+    background-color: #fff;
+    padding-bottom: 6px;
+}

@@ -51,6 +51,8 @@ public class ArticleController {
         articleDto.setComments(0);
         articleDto.setAppreciable(articleDto.getAppreciable() != null);
         articleDto.setCommentable(articleDto.getCommentable() != null);
+        articleDto.setTop(articleDto.getTop() != null);
+        articleDto.setRecommend(articleDto.getRecommend() != null);
         articleDto.setCreateTime(new Date());
         articleDto.setUpdateTime(articleDto.getCreateTime());
         articleService.saveOrUpdate(articleDto);
@@ -61,6 +63,8 @@ public class ArticleController {
     public JsonResult update(@Validated @RequestBody ArticleDto articleDto) {
         articleDto.setAppreciable(articleDto.getAppreciable() != null);
         articleDto.setCommentable(articleDto.getCommentable() != null);
+        articleDto.setTop(articleDto.getTop() != null);
+        articleDto.setRecommend(articleDto.getRecommend() != null);
         articleDto.setUpdateTime(new Date());
         articleService.saveOrUpdate(articleDto);
         return JsonResult.ok();
