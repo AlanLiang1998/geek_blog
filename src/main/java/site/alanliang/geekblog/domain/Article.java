@@ -63,4 +63,6 @@ public class Article {
     private Boolean top;
 
     private Boolean recommend;
+    @TableField(exist = false)
+    private SysUser author;
 }

@@ -30,7 +30,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">封面链接</label>
                 <div class="layui-input-block">
-                    <input type="text" name="cover" lay-verify="verTitle" placeholder="请输入封面链接..."
+                    <input type="text" name="cover"  placeholder="请输入封面链接..."
                            autocomplete="off" class="layui-input"/>
                 </div>
             </div>
@@ -223,6 +223,7 @@
             data.field.tagIdList = tagIdList;
             //获取文章内容
             data.field.content = editor.getHTML();
+            console.log(editor.getHTML());
             //获取文章markdown
             data.field.textContent = editor.getMarkdown();
             //获取是否发布

@@ -82,4 +82,19 @@ public interface ArticleService {
      * @return 文章列表
      */
     Page<Article> listArticlesByPage(Integer current, Integer size);
+
+    /**
+     * 前台根据ID查询文章
+     *
+     * @param id 文章ID
+     * @return 文章
+     */
+    Article getArticleById(Long id);
+
+    /**
+     * 增加文章点赞量
+     *
+     * @param id 文章ID
+     */
+    void increaseLikes(Long id);
 }

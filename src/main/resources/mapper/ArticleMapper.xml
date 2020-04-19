@@ -35,7 +35,31 @@
         <id property="id" column="id"/>
         <result property="title" column="title"/>
         <result property="createTime" column="create_time"/>
-        <association property="category" column="category_id" select="site.alanliang.geekblog.mapper.CategoryMapper.selectCategoryById"/>
+        <association property="category" column="category_id"
+                     select="site.alanliang.geekblog.mapper.CategoryMapper.selectCategoryById"/>
+        <collection property="tagList" column="id" select="site.alanliang.geekblog.mapper.TagMapper.selectByArticleId"/>
+    </resultMap>
+
+    <resultMap id="articleDetailResultMap" type="site.alanliang.geekblog.domain.Article">
+        <id property="id" column="id"/>
+        <result property="title" column="title"/>
+        <result property="cover" column="cover"/>
+        <result property="content" column="content"/>
+        <result property="type" column="type"/>
+        <result property="comments" column="comments"/>
+        <result property="views" column="views"/>
+        <result property="likes" column="likes"/>
+        <result property="commentable" column="commentable"/>
+        <result property="appreciable" column="appreciable"/>
+        <result property="createTime" column="create_time"/>
+        <association property="author" javaType="site.alanliang.geekblog.domain.SysUser">
+            <id property="id" column="id"/>
+            <result property="username" column="username"/>
+        </association>
+        <association property="category" javaType="site.alanliang.geekblog.domain.Category">
+            <id property="id" column="id"/>
+            <result property="name" column="name"/>
+        </association>
         <collection property="tagList" column="id" select="site.alanliang.geekblog.mapper.TagMapper.selectByArticleId"/>
     </resultMap>
 
@@ -77,6 +101,15 @@
         <if test="ew != null and ew.emptyOfWhere == false">
             ${ew.customSqlSegment}
         </if>
+    </select>
+
+    <select id="getArticleById" resultMap="articleDetailResultMap">
+        select ta.id, ta.title, ta.content, ta.cover, ta.create_time, ta.type, ta.likes, ta.views, ta.comments, ta.commentable, ta.appreciable, tc.id, tc.name, su.id, su.username from t_article ta
+        left join t_category tc
+        on ta.category_id = tc.id
+        left join sys_user su
+        on ta.author_id = su.id
+        where ta.id = #{id}
     </select>
 
 </mapper>

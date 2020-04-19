@@ -34,6 +34,21 @@ public class ArticleServiceImpl implements ArticleService {
     private ArticleTagMapper articleTagMapper;
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void increaseLikes(Long id) {
+        QueryWrapper<Article> wrapper = new QueryWrapper<>();
+        wrapper.select("id", "likes").eq("id", id);
+        Article article = articleMapper.selectOne(wrapper);
+        article.setLikes(article.getLikes() + 1);
+        articleMapper.updateById(article);
+    }
+
+    @Override
+    public Article getArticleById(Long id) {
+        return articleMapper.getArticleById(id);
+    }
+
+    @Override
     public Article findById(Long id) {
         return articleMapper.selectById(id);
     }

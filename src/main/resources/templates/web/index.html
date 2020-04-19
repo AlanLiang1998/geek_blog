@@ -108,7 +108,7 @@
                             <div class="title center-align">{{article.title}}</div>
                             <div class="description center-align">{{article.summary}}</div>
                             <div class="cover-btns">
-                                <a class="waves-effect waves-light btn" href="index1.html" target="_blank">
+                                <a class="waves-effect waves-light btn" :href="'/article/'+article.id" target="_blank">
                                     <i class="icon fa fa-eye fa-fw"></i>阅读更多
                                 </a>
                             </div>
@@ -159,7 +159,7 @@
                                                 <!--描述-->
                                                 <p class="post-description">{{article.summary}}</p>
                                                 <!--阅读更多-->
-                                                <a class="read-more btn waves-effect waves-light" href="#"
+                                                <a class="read-more btn waves-effect waves-light" :href="'/article/'+article.id"
                                                    style="background: linear-gradient(to right, #FF5E3A 0%, #FF2A68 100%)"
                                                    target="_blank">
                                                     <i class="icon far fa-eye fa-fw"></i>阅读更多
@@ -181,7 +181,7 @@
                     <div class="article col s12 m6 l4" data-aos="zoom-in">
                         <div class="card">
                             <!--卡片上部-->
-                            <a href="#">
+                            <a :href="'/article/'+article.id" target="_blank">
                                 <div class="card-image">
                                     <!--文章图片-->
                                     <img class="responsive-img" :src="article.cover">

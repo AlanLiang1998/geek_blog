@@ -40,4 +40,11 @@ public interface ArticleMapper extends BaseMapper<Article> {
      * @return 文章列表
      */
     Page<Article> listArticlesByPage(IPage<Article> page, @Param("ew") QueryWrapper<Article> queryWrapper);
+
+    /**
+     * 前台根据ID查询文章
+     * @param id    文章ID
+     * @return  文章
+     */
+    Article getArticleById(Long id);
 }
