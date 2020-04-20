@@ -22,7 +22,7 @@ public interface ArticleMapper extends BaseMapper<Article> {
      * @param queryWrapper 条件
      * @return 文章列表
      */
-    List<Article> selectPageForAdmin(IPage<Article> page, @Param("ew") QueryWrapper<Article> queryWrapper);
+    List<Article> listArticlesTableByPage(IPage<Article> page, @Param("ew") QueryWrapper<Article> queryWrapper);
 
     /**
      * 查询推荐文章
@@ -33,18 +33,35 @@ public interface ArticleMapper extends BaseMapper<Article> {
     List<Article> listRecommendArticles(int limit);
 
     /**
-     * 前台分页查询所有文章
+     * 前台分页查询所有文章预览
      *
-     * @param page    分页参数
+     * @param page         分页参数
      * @param queryWrapper 条件
-     * @return 文章列表
+     * @return 文章预览列表
      */
-    Page<Article> listArticlesByPage(IPage<Article> page, @Param("ew") QueryWrapper<Article> queryWrapper);
+    Page<Article> listArticlesPreviewByPage(IPage<Article> page, @Param("ew") QueryWrapper<Article> queryWrapper);
 
     /**
      * 前台根据ID查询文章
-     * @param id    文章ID
-     * @return  文章
+     *
+     * @param id 文章ID
+     * @return 文章
      */
-    Article getArticleById(Long id);
+    Article selectArticleById(Long id);
+
+    /**
+     * 获取当前文章的上一篇文章预览
+     *
+     * @param id 当前文章ID
+     * @return 上一篇文章预览
+     */
+    Article selectPrevArticlePreview(Long id);
+
+    /**
+     * 获取当前文章的下一篇文章预览
+     *
+     * @param id 当前文章ID
+     * @return 下一篇文章预览
+     */
+    Article selectNextArticlePreview(Long id);
 }

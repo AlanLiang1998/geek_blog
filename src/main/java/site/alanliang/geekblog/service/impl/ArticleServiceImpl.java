@@ -37,15 +37,39 @@ public class ArticleServiceImpl implements ArticleService {
     @Transactional(rollbackFor = Exception.class)
     public void increaseLikes(Long id) {
         QueryWrapper<Article> wrapper = new QueryWrapper<>();
-        wrapper.select("id", "likes").eq("id", id);
+        wrapper.select("likes").eq("id", id);
         Article article = articleMapper.selectOne(wrapper);
+        article.setId(id);
         article.setLikes(article.getLikes() + 1);
         articleMapper.updateById(article);
     }
 
     @Override
+    public Article getNextArticlePreview(Long id) {
+        return articleMapper.selectNextArticlePreview(id);
+    }
+
+    @Override
+    public Article getPrevArticlePreview(Long id) {
+        return articleMapper.selectPrevArticlePreview(id);
+    }
+
+    @Override
     public Article getArticleById(Long id) {
-        return articleMapper.getArticleById(id);
+        //浏览次数加1
+        increaseViews(id);
+        return articleMapper.selectArticleById(id);
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void increaseViews(Long id) {
+        QueryWrapper<Article> wrapper = new QueryWrapper<>();
+        wrapper.select("views").eq("id", id);
+        Article article = articleMapper.selectOne(wrapper);
+        article.setId(id);
+        article.setViews(article.getViews() + 1);
+        articleMapper.updateById(article);
     }
 
     @Override
@@ -86,7 +110,7 @@ public class ArticleServiceImpl implements ArticleService {
         wrapper.eq("published", true)
                 .orderByDesc("create_time");
         Page<Article> articlePage = new Page<>(current, size);
-        return articleMapper.listArticlesByPage(articlePage, wrapper);
+        return articleMapper.listArticlesPreviewByPage(articlePage, wrapper);
     }
 
     @Override
@@ -97,7 +121,7 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public List<ArticleVo> listByPageForAdmin(Integer current, Integer size, QueryWrapper<Article> wrapper) {
         Page<Article> page = new Page<>(current, size);
-        List<Article> articles = articleMapper.selectPageForAdmin(page, wrapper);
+        List<Article> articles = articleMapper.listArticlesTableByPage(page, wrapper);
         List<ArticleVo> articleVos = new ArrayList<>();
         for (Article article : articles) {
             ArticleVo articleVo = new ArticleVo();

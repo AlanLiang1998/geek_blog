@@ -1,5 +1,6 @@
 package site.alanliang.geekblog.controller.web;
 
+import com.sun.media.sound.SoftTuning;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,8 +27,9 @@ public class ArticleDetailController {
 
     @GetMapping("/{id}")
     public String articleDetail(@PathVariable("id") Long id, Model model) {
-        Article article = articleService.getArticleById(id);
-        model.addAttribute("article", article);
+        model.addAttribute("article", articleService.getArticleById(id));
+        model.addAttribute("prevPreview", articleService.getPrevArticlePreview(id));
+        model.addAttribute("nextPreview", articleService.getNextArticlePreview(id));
         return "web/article";
     }
 
@@ -37,4 +39,5 @@ public class ArticleDetailController {
         articleService.increaseLikes(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
 }

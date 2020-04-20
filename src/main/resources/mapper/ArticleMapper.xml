@@ -23,7 +23,7 @@
         <collection property="tagList" column="id" select="site.alanliang.geekblog.mapper.TagMapper.selectByArticleId"/>
     </resultMap>
 
-    <resultMap id="recommendArticlesResultMap" type="site.alanliang.geekblog.domain.Article">
+    <resultMap id="recommendResultMap" type="site.alanliang.geekblog.domain.Article">
         <id property="id" column="id"/>
         <result property="title" column="title"/>
         <result property="summary" column="summary"/>
@@ -31,16 +31,20 @@
                      select="site.alanliang.geekblog.mapper.CategoryMapper.selectCategoryById"/>
     </resultMap>
 
-    <resultMap id="webListResultMap" type="site.alanliang.geekblog.domain.Article">
+    <resultMap id="previewResultMap" type="site.alanliang.geekblog.domain.Article">
         <id property="id" column="id"/>
         <result property="title" column="title"/>
+        <result property="summary" column="summary"/>
+        <result property="cover" column="cover"/>
         <result property="createTime" column="create_time"/>
-        <association property="category" column="category_id"
-                     select="site.alanliang.geekblog.mapper.CategoryMapper.selectCategoryById"/>
+        <association property="category" javaType="site.alanliang.geekblog.domain.Category">
+            <id property="id" column="id"/>
+            <result property="name" column="name"/>
+        </association>
         <collection property="tagList" column="id" select="site.alanliang.geekblog.mapper.TagMapper.selectByArticleId"/>
     </resultMap>
 
-    <resultMap id="articleDetailResultMap" type="site.alanliang.geekblog.domain.Article">
+    <resultMap id="detailResultMap" type="site.alanliang.geekblog.domain.Article">
         <id property="id" column="id"/>
         <result property="title" column="title"/>
         <result property="cover" column="cover"/>
@@ -72,11 +76,11 @@
         id, title, summary, cover, category_id
     </sql>
 
-    <sql id="webListColumn">
-        id, title, summary, create_time, cover, category_id
+    <sql id="previewColumn">
+        ta.id, ta.title, ta.summary, ta.create_time, ta.cover, tc.id, tc.name
     </sql>
 
-    <select id="selectPageForAdmin" resultMap="adminListResultMap"
+    <select id="listArticlesTableByPage" resultMap="adminListResultMap"
             parameterType="com.baomidou.mybatisplus.extension.plugins.pagination.Page">
         select
         <include refid="adminListColumn"/>
@@ -86,7 +90,7 @@
         </if>
     </select>
 
-    <select id="listRecommendArticles" resultMap="recommendArticlesResultMap">
+    <select id="listRecommendArticles" resultMap="recommendResultMap">
         select
         <include refid="recommendColumn"/>
         from t_article
@@ -94,16 +98,18 @@
         and published = 1
     </select>
 
-    <select id="listArticlesByPage" resultMap="webListResultMap">
+    <select id="listArticlesPreviewByPage" resultMap="previewResultMap">
         select
-        <include refid="webListColumn"/>
-        from t_article
+        <include refid="previewColumn"/>
+        from t_article ta
+        left join t_category tc
+        on ta.category_id = tc.id
         <if test="ew != null and ew.emptyOfWhere == false">
             ${ew.customSqlSegment}
         </if>
     </select>
 
-    <select id="getArticleById" resultMap="articleDetailResultMap">
+    <select id="selectArticleById" resultMap="detailResultMap">
         select ta.id, ta.title, ta.content, ta.cover, ta.create_time, ta.type, ta.likes, ta.views, ta.comments, ta.commentable, ta.appreciable, tc.id, tc.name, su.id, su.username from t_article ta
         left join t_category tc
         on ta.category_id = tc.id
@@ -112,4 +118,21 @@
         where ta.id = #{id}
     </select>
 
+    <select id="selectPrevArticlePreview" resultMap="previewResultMap">
+        select
+        <include refid="previewColumn"/>
+        from t_article ta
+        left join t_category tc
+        on ta.category_id = tc.id
+        where ta.id = (select max(id) from t_article where id &lt; #{id})
+    </select>
+
+    <select id="selectNextArticlePreview" resultMap="previewResultMap">
+        select
+        <include refid="previewColumn"/>
+        from t_article ta
+        left join t_category tc
+        on ta.category_id = tc.id
+        where ta.id = (select min(id) from t_article where id &gt; #{id})
+    </select>
 </mapper>

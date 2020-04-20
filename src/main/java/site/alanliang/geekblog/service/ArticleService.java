@@ -97,4 +97,27 @@ public interface ArticleService {
      * @param id 文章ID
      */
     void increaseLikes(Long id);
+
+    /**
+     * 增加文章浏览次数
+     *
+     * @param id 文章ID
+     */
+    void increaseViews(Long id);
+
+    /**
+     * 获取当前文章的上一篇文章预览
+     *
+     * @param id 当前文章ID
+     * @return 上一篇文章预览
+     */
+    Article getPrevArticlePreview(Long id);
+
+    /**
+     * 获取当前文章的下一篇文章预览
+     *
+     * @param id 当前文章ID
+     * @return 下一篇文章预览
+     */
+    Article getNextArticlePreview(Long id);
 }

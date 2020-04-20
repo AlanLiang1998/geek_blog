@@ -5,6 +5,7 @@
     <title>文章详情</title>
     <!--代码高亮-->
     <link rel="stylesheet" href="/static/web/css/prism-tomorrow.css" type="text/css">
+    <link rel="stylesheet" href="/static/web/css/prism-line-numbers.css" type="text/css">
     <link rel="stylesheet" href="/static/web/css/tocbot.css">
     <style>
         #articleContent h1::before,
@@ -518,8 +519,7 @@
                                     <i class="fas fa-link">文章链接:</i>
                                 </span>
                                     <span class="reprint-info">
-                                    <a th:href="@{${#httpServletRequest.requestURL}}"
-                                       th:text="${#httpServletRequest.requestURL}">文章链接</a>
+
                                 </span>
                                 </div>
                                 <!--文章复制提醒-->
@@ -604,64 +604,66 @@
                     <article id="prenext-posts" class="prev-next articles">
                         <div class="row article-row">
                             <!--上一篇-->
-                            <div class="article col s12 m6" data-aos="fade-up">
+                            <div class="article col s12 m6" data-aos="fade-up" th:if="${prevPreview != null}">
                                 <div class="article-badge left-badge text-color">
                                     <i class="fas fa-chevron-left"></i>&nbsp;上一篇
                                 </div>
                                 <div class="card">
-                                    <a href="#">
+                                    <a th:href="@{/article/{id}(id=${prevPreview.id})}">
                                         <div class="card-image">
-                                            <img src="/static/web/picture/7.jpg" class="responsive-img" alt="什么是Java泛型">
-                                            <span class="card-title">什么是Java泛型</span>
+                                            <img th:src="@{${prevPreview.cover}}" class="responsive-img">
+                                            <span class="card-title" th:text="${prevPreview.title}">文章标题</span>
                                         </div>
                                     </a>
                                     <div class="card-content article-content">
-                                        <div class="summary block-with-text">Java泛型</div>
+                                        <div class="summary block-with-text" th:text="${prevPreview.summary}">文章摘要</div>
                                         <div class="publish-info">
                                         <span class="publish-date">
-                                            <i class="far fa-clock fa-fw icon-date"></i>2020-03-11
+                                            <i class="far fa-clock fa-fw icon-date"></i><span
+                                                th:text="${#dates.format(prevPreview.createTime,'yyyy-MM-dd')}">2020-03-11</span>
                                         </span>
                                             <span class="publish-author">
                                             <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                            <a href="#" class="post-category">Java基础</a>
+                                            <a href="#" class="post-category" th:text="${prevPreview.category.name}">分类名称</a>
                                         </span>
                                         </div>
                                     </div>
                                     <div class="card-action article-tags">
-                                        <a href="#">
-                                            <span class="chip bg-color">泛型</span>
+                                        <a href="#" th:each="tag : ${prevPreview.tagList}">
+                                            <span class="chip bg-color" th:text="${tag.name}">标签名称</span>
                                         </a>
                                     </div>
                                 </div>
                             </div>
                             <!--下一篇-->
-                            <div class="article col s12 m6" data-aos="fade-up">
+                            <div class="article col s12 m6" data-aos="fade-up" th:if="${nextPreview != null}">
                                 <div class="article-badge right-badge text-color">
                                     下一篇&nbsp;<i class="fas fa-chevron-right"></i>
                                 </div>
                                 <div class="card">
-                                    <a href="#">
+                                    <a th:href="@{/article/{id}(id=${nextPreview.id})}">
                                         <div class="card-image">
                                             <img src="/static/web/picture/13.jpg" class="responsive-img"
                                                  alt="Java之ThreadLocal的使用及源码解析">
-                                            <span class="card-title">Java之ThreadLocal的使用及源码解析</span>
+                                            <span class="card-title" th:text="${nextPreview.title}">文章标题</span>
                                         </div>
                                     </a>
                                     <div class="card-content article-content">
-                                        <div class="summary block-with-text">Java之ThreadLocal的使用及源码解析</div>
+                                        <div class="summary block-with-text" th:text="${nextPreview.summary}">文章摘要</div>
                                         <div class="publish-info">
                                         <span class="publish-date">
-                                            <i class="far fa-clock fa-fw icon-date"></i>2020-03-09
+                                            <i class="far fa-clock fa-fw icon-date"></i><span
+                                                th:text="${#dates.format(nextPreview.createTime,'yyyy-MM-dd')}">2020-03-11</span>
                                         </span>
                                             <span class="publish-author">
                                             <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                            <a href="#" class="post-category">Java多线程</a>
+                                            <a href="#" class="post-category" th:text="${nextPreview.category.name}">标签名称</a>
                                         </span>
                                         </div>
                                     </div>
                                     <div class="card-action article-tags">
-                                        <a href="#">
-                                            <span class="chip bg-color">ThreadLocal</span>
+                                        <a href="#" th:each="tag : ${nextPreview.tagList}">
+                                            <span class="chip bg-color" th:text="${tag.name}">标签名称</span>
                                         </a>
                                     </div>
                                 </div>
@@ -707,13 +709,10 @@
         el: '#vcomments',
         appId: 'SDxrhXkjLgCDr5ke5x7qg8gl-gzGzoHsz',
         appKey: 'S4XFSBkHr5ThpoAuYQvSKKbM',
-        notify: 'false' === 'true',
-        verify: 'false' === 'true',
-        visitor: 'true' === 'true',
-        avatar: 'mm',
+        avatar:('mp'),
         pageSize: '10',
         lang: 'zh-cn',
-        placeholder: '你想要对博主说什么呢...'
+        placeholder: '你想要对博主说什么呢...',
     });
 </script>
 <!--目录-->
@@ -858,6 +857,7 @@
 <!--代码高亮-->
 <script src="https://cdn.jsdelivr.net/npm/prismjs@1.17.1/prism.min.js"></script>
 <script src="https://cdn.bootcss.com/prism/1.17.1/components/prism-java.js"></script>
+<script src="/static/web/js/prism-line-numbers.js"></script>
 <!--打赏tab-->
 <script>
     $(function () {
@@ -887,7 +887,6 @@
             console.log(result);
             $('#likeBtn').addClass('disabled');
         })
-
         return false;
     });
 </script>

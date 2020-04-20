@@ -21,9 +21,14 @@ public class ArticleMapperTests {
     private ArticleMapper articleMapper;
 
     @Test
-    void listByRecommend() {
-        List<Article> articles = articleMapper.listRecommendArticles(4);
-        System.out.println(articles);
+    void selectPrevArticlePreview() {
+        Article article = articleMapper.selectPrevArticlePreview(7L);
+        System.out.println(article);
     }
 
+    @Test
+    void selectNextArticlePreview() {
+        Article article = articleMapper.selectNextArticlePreview(1040L);
+        System.out.println(article);
+    }
 }
