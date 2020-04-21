@@ -2,6 +2,7 @@ package site.alanliang.geekblog.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import site.alanliang.geekblog.domain.Article;
 import site.alanliang.geekblog.domain.Category;
 
 import java.util.List;
@@ -55,4 +56,12 @@ public interface CategoryService {
      * @param idList 分类ID列表
      */
     void batchRemove(List<Long> idList);
+
+    /**
+     * 查询所有分类（统计文章数目）
+     *
+     * @return 分类列表
+     */
+    List<Category> listByArticleCount();
+
 }

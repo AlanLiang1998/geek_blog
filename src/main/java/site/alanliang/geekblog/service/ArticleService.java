@@ -120,4 +120,12 @@ public interface ArticleService {
      * @return 下一篇文章预览
      */
     Article getNextArticlePreview(Long id);
+
+    /**
+     * 根据分类ID分页获取分类的所有文章
+     *
+     * @param categoryId 分类ID
+     * @return 文章列表
+     */
+    Page<Article> listPageArticlePreviewByCategoryId(Integer current, Integer size, Long categoryId);
 }

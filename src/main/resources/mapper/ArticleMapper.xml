@@ -135,4 +135,13 @@
         on ta.category_id = tc.id
         where ta.id = (select min(id) from t_article where id &gt; #{id})
     </select>
+    <select id="listPageArticlePreviewByCategoryId" resultMap="previewResultMap"
+            parameterType="com.baomidou.mybatisplus.extension.plugins.pagination.Page">
+        select
+        <include refid="previewColumn"/>
+        from t_article ta
+        left join t_category tc
+        on ta.category_id = tc.id
+        where tc.id = #{categoryId}
+    </select>
 </mapper>

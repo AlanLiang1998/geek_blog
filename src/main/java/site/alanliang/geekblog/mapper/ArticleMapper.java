@@ -64,4 +64,13 @@ public interface ArticleMapper extends BaseMapper<Article> {
      * @return 下一篇文章预览
      */
     Article selectNextArticlePreview(Long id);
+
+    /**
+     * 根据分类ID分页查询分类的所有文章预览
+     *
+     * @param page 分页参数
+     * @param categoryId  分类ID
+     * @return 文章预览分页
+     */
+    Page<Article> listPageArticlePreviewByCategoryId(IPage<Article> page, @Param("categoryId") Long categoryId);
 }

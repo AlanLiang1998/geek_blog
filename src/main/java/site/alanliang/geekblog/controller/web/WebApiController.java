@@ -18,4 +18,9 @@ public class WebApiController {
         return "web/index";
     }
 
+    @GetMapping("/api/categories")
+    public String categories() {
+        return "web/categories";
+    }
+
 }

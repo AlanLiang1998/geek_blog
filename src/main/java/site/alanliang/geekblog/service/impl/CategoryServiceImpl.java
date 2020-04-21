@@ -45,6 +45,11 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
+    public List<Category> listByArticleCount() {
+        return categoryMapper.listByArticleCount();
+    }
+
+    @Override
     @Transactional(rollbackFor = Exception.class)
     public void saveOfUpdate(Category category) {
         QueryWrapper<Category> wrapper = new QueryWrapper<>();

@@ -45,6 +45,12 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
+    public Page<Article> listPageArticlePreviewByCategoryId(Integer current, Integer size, Long categoryId) {
+        Page<Article> articlePage = new Page<>(current, size);
+        return articleMapper.listPageArticlePreviewByCategoryId(articlePage, categoryId);
+    }
+
+    @Override
     public Article getNextArticlePreview(Long id) {
         return articleMapper.selectNextArticlePreview(id);
     }

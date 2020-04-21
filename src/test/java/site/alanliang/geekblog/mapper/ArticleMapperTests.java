@@ -31,4 +31,11 @@ public class ArticleMapperTests {
         Article article = articleMapper.selectNextArticlePreview(1040L);
         System.out.println(article);
     }
+
+    @Test
+    void listPageArticlePreviewByCategoryId() {
+        Page<Article> articlePage = new Page<>(1, 3);
+        Page<Article> pageInfo = articleMapper.listPageArticlePreviewByCategoryId(articlePage, 1L);
+        System.out.println(pageInfo);
+    }
 }

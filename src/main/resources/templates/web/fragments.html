@@ -87,7 +87,7 @@
             <!--导航栏菜单-->
             <ul class="right nav-menu">
                 <li class="hide-on-med-and-down nav-item">
-                    <a class="waves-effect waves-light" href="">
+                    <a class="waves-effect waves-light" th:href="@{/}">
                         <i class="fas fa-home" style="zoom: 0.6;"></i>
                         <span>首页</span>
                     </a>
@@ -99,7 +99,7 @@
                     </a>
                 </li>
                 <li class="hide-on-med-and-down nav-item">
-                    <a class="waves-effect waves-light" href="#">
+                    <a class="waves-effect waves-light" th:href="@{/api/categories}">
                         <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
                         <span>分类</span>
                     </a>
@@ -244,6 +244,7 @@
                             " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
                     }
                 }
+
                 setInterval(siteTime, 1000);
             </script>
             <br>
@@ -251,7 +252,8 @@
         <!--联系方式-->
         <div class="col s12 m4 l4 social-link social-statis">
             <!--联系图标-->
-            <a class="tooltipped" data-delay="50" data-position="top" data-tooltip="访问我的GitHub" href="https://github.com/AlanLiang1998"
+            <a class="tooltipped" data-delay="50" data-position="top" data-tooltip="访问我的GitHub"
+               href="https://github.com/AlanLiang1998"
                target="_blank">
                 <i class="fab fa-github"></i>
             </a>
@@ -301,11 +303,11 @@
             zindex="-2"></script>
     <!--搜索-->
     <script src="/static/web/js/search.js"></script>
-   <!-- <script type="text/javascript">
-        $(function () {
-            searchFunc("" + "", '', '');
-        });
-    </script>-->
+    <!-- <script type="text/javascript">
+         $(function () {
+             searchFunc("" + "", '', '');
+         });
+     </script>-->
     <!--materialize框架-->
     <script src="/static/web/js/materialize.min.js"></script>
     <!--瀑布流-->

@@ -2,7 +2,7 @@
 <html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta th:include="/web/fragments :: head(~{::title})">
-    <title>文章详情</title>
+    <title th:text="${article.title}+' | GeekBlog'">文章标题</title>
     <!--代码高亮-->
     <link rel="stylesheet" href="/static/web/css/prism-tomorrow.css" type="text/css">
     <link rel="stylesheet" href="/static/web/css/prism-line-numbers.css" type="text/css">
@@ -882,7 +882,7 @@
     $('#likeBtn').click(function () {
         axios({
             url: '/article/' + [[${article.id}]] + '/likes',
-            method: 'POST'
+            method: 'PUT'
         }).then((result) => {
             console.log(result);
             $('#likeBtn').addClass('disabled');

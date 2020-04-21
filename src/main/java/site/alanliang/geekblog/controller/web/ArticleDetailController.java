@@ -19,13 +19,12 @@ import javax.validation.constraints.NotNull;
  * Version 1.0
  **/
 @Controller
-@RequestMapping("/article")
 public class ArticleDetailController {
 
     @Autowired
     private ArticleService articleService;
 
-    @GetMapping("/{id}")
+    @GetMapping("/article/{id}")
     public String articleDetail(@PathVariable("id") Long id, Model model) {
         model.addAttribute("article", articleService.getArticleById(id));
         model.addAttribute("prevPreview", articleService.getPrevArticlePreview(id));
@@ -34,7 +33,7 @@ public class ArticleDetailController {
     }
 
     @ResponseBody
-    @PostMapping("/{id}/likes")
+    @PutMapping("/article/{id}/likes")
     public ResponseEntity<Object> likes(@NotNull @PathVariable("id") Long id) {
         articleService.increaseLikes(id);
         return new ResponseEntity<>(HttpStatus.OK);

@@ -4,4 +4,13 @@
     <select id="selectCategoryById" resultType="site.alanliang.geekblog.domain.Category">
         select id, name from t_category where id = #{id}
     </select>
+
+    <select id="listByArticleCount" resultType="site.alanliang.geekblog.domain.Category">
+        select tc.id, tc.name, count(ta.id) articleCount
+        from t_category tc
+        left join t_article ta
+        on tc.id = ta.category_id
+        where tc.display = 1
+        group by tc.id having articleCount &gt; 0
+    </select>
 </mapper>

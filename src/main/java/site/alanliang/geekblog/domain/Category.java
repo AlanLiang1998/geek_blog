@@ -1,6 +1,7 @@
 package site.alanliang.geekblog.domain;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
@@ -29,4 +30,6 @@ public class Category {
     private Date createTime;
 
     private Date updateTime;
+    @TableField(exist = false)
+    private Integer articleCount;
 }
