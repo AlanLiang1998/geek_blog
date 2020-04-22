@@ -73,4 +73,13 @@ public interface ArticleMapper extends BaseMapper<Article> {
      * @return 文章预览分页
      */
     Page<Article> listPageArticlePreviewByCategoryId(IPage<Article> page, @Param("categoryId") Long categoryId);
+
+    /**
+     * 根据标签ID分页查询标签的所有文章预览
+     *
+     * @param page 分页参数
+     * @param tagId  标签ID
+     * @return 文章预览分页
+     */
+    Page<Article> listPageArticlePreviewByTagId(Page<Article> page, @Param("tagId") Long tagId);
 }

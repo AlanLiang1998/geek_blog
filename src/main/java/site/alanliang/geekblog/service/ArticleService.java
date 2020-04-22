@@ -128,4 +128,12 @@ public interface ArticleService {
      * @return 文章列表
      */
     Page<Article> listPageArticlePreviewByCategoryId(Integer current, Integer size, Long categoryId);
+
+    /**
+     * 根据标签ID分页获取标签的所有文章
+     *
+     * @param tagId 标签ID
+     * @return 文章列表
+     */
+    Page<Article> listPageArticlePreviewByTagId(Integer current, Integer size, Long tagId);
 }

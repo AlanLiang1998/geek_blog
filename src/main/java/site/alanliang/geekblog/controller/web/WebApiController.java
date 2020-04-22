@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * @Descriptin TODO
@@ -18,9 +19,10 @@ public class WebApiController {
         return "web/index";
     }
 
-    @GetMapping("/api/categories")
-    public String categories() {
-        return "web/categories";
+    @GetMapping("/api/{pageName}")
+    public ModelAndView getPage(@PathVariable("pageName") String pageName) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("web/" + pageName);
+        return modelAndView;
     }
-
 }

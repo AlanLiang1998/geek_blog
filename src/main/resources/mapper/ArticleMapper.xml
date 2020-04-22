@@ -144,4 +144,16 @@
         on ta.category_id = tc.id
         where tc.id = #{categoryId}
     </select>
+
+    <select id="listPageArticlePreviewByTagId" resultMap="previewResultMap"
+            parameterType="com.baomidou.mybatisplus.extension.plugins.pagination.Page">
+        select
+        <include refid="previewColumn"/>
+        from t_article ta
+        left join t_category tc
+        on ta.category_id = tc.id
+        left join t_article_tag tat
+        on ta.id = tat.article_id
+        where tat.tag_id = #{tagId}
+    </select>
 </mapper>

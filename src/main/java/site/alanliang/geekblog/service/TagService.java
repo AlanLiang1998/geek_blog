@@ -64,4 +64,11 @@ public interface TagService {
      * @return 标签
      */
     Tag findById(Long id);
+
+    /**
+     * 查询所有标签（统计文章数目）
+     *
+     * @return 标签列表
+     */
+    List<Tag> listByArticleCount();
 }

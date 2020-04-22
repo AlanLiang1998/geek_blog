@@ -38,4 +38,11 @@ public class ArticleMapperTests {
         Page<Article> pageInfo = articleMapper.listPageArticlePreviewByCategoryId(articlePage, 1L);
         System.out.println(pageInfo);
     }
+
+    @Test
+    void listPageArticlePreviewByTagId(){
+        Page<Article> articlePage = new Page<>(1, 3);
+        Page<Article> pageInfo = articleMapper.listPageArticlePreviewByTagId(articlePage, 1L);
+        System.out.println(pageInfo);
+    }
 }

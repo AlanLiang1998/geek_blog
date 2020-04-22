@@ -2,15 +2,15 @@
 <html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta th:include="/web/fragments :: head(~{::title})">
-    <title>分类 | GeekBlog</title>
+    <title>标签 | GeekBlog</title>
+    <link rel="stylesheet" type="text/css" href="/static/web/css/jqcloud.css"/>
     <style type="text/css">
-        #category-radar {
+        #tag-wordcloud {
             width: 100%;
-            height: 360px;
+            height: 250px;
         }
     </style>
 </head>
-
 
 <body>
 <!--header-->
@@ -21,35 +21,42 @@
 <div th:replace="/web/fragments :: bgcover"></div>
 <!--end bgcover-->
 
+
 <div id="app">
     <!--content-->
     <main class="content">
-        <!--分类云-->
-        <div id="category-cloud" class="container chip-container">
+        <!--标签云-->
+        <div id="tags" class="container chip-container">
             <div class="card">
                 <div class="card-content">
                     <div class="tag-title center-align">
-                        <i class="fas fa-bookmark"></i>&nbsp;&nbsp;文章分类
+                        <i class="fas fa-tags"></i>&nbsp;&nbsp;文章标签
                     </div>
-                    <!--分类列表-->
+                    <!--标签列表-->
                     <div class="tag-chips">
-                        <a href="javascript:;" v-for="(cate,index) in categories" :key="cate.id"
-                           @click="getArticlesByCategoryId(cate.id, 1)">
+                        <a href="javascript:;" v-for="(tag,index) in tags" :key="tag.id"
+                           @click="getArticlesByTagId(tag.id, 1)">
                     <span class="chip center-align waves-effect waves-light
                              chip-default" :style="{backgroundColor : getRandomColor()}"
-                          :class="{'chip-active' : cate.id == categoryId}">{{cate.name}}
-                        <span class="tag-length">{{cate.articleCount}}</span>
+                          :class="{'chip-active' : tag.id == tagId}">{{tag.name}}
+                        <span class="tag-length">{{tag.articleCount}}</span>
                     </span>
                         </a>
                     </div>
                 </div>
             </div>
         </div>
-        <!--分类雷达图-->
-        <div class="container" data-aos="fade-up" v-if="articles.length===0">
+        <!--动态标签云-->
+        <div id="tag-cloud" class="container" data-aos="fade-up" v-if="articles.length===0">
             <div class="card">
-                <div id="category-radar" class="card-content"></div>
+                <div class="card-content">
+                    <div class="my-tag-title center-align" style=" font-size: 1.75rem;">
+                        <i class="fas fa-cloud"></i>&nbsp;&nbsp;文章标签云
+                    </div>
+                </div>
+                <div id="tag-wordcloud" class="card-content jqcloud"></div>
             </div>
+
         </div>
         <!-- 所有文章卡片 -->
         <article class="container articles">
@@ -121,112 +128,67 @@
     <!--end content-->
 </div>
 
-
 <!--Vue-->
 <script type="module">
     let app = new Vue({
         el: '#app',
         data: {
-            categories: [],
+            tags: [],
             colors: ['#D5F5E3', '#E8F8F5', '#82E0AA', '#A3E4D7', '#FEF9E7', '#F9E79F', '#F8C471', '#F9EBEA'],
             articles: [],
             current: 1,
             pages: 1,
-            categoryId: null,
+            tagId: null,
         },
         methods: {
-            getCategories: function () {
+            getTags: function () {
                 axios({
-                    url: '/categories',
+                    url: '/tags',
                     method: 'GET'
                 }).then((result) => {
-                    this.categories = result.data;
-                    this.initEcharts();
+                    this.tags = result.data;
+                    this.getWordArray();
                 })
             },
             getRandomColor: function () {
                 let num = Math.floor(Math.random() * (this.colors.length));
                 return this.colors[num];
             },
-            initEcharts: function () {
-                let radarChart = echarts.init(document.getElementById('category-radar'));
-                let indicator = [];
-                let value = [];
-                let maxValue = this.categories.sort((a, b) => {
-                    return b.articleCount - a.articleCount;
-                })[0].articleCount;
-                $.each(this.categories, function (index, cate) {
-                    if (cate.articleCount > maxValue) {
-                        maxValue = cate.articleCount;
-                    }
-                    let category = {};
-                    category.name = cate.name;
-                    category.max = maxValue;
-                    indicator.push(category);
-                    value.push(cate.articleCount);
-                });
-
-                let option = {
-                    title: {
-                        left: 'center',
-                        text: '文章分类雷达图',
-                        textStyle: {
-                            fontWeight: 500,
-                            fontSize: 22
-                        }
-                    },
-                    tooltip: {},
-                    radar: {
-                        name: {
-                            textStyle: {
-                                color: '#3C4858'
-                            }
-                        },
-                        max: 8,
-                        indicator: indicator,
-                        nameGap: 5,
-                        center: ['50%', '55%'],
-                        radius: '66%'
-                    },
-                    series: [{
-                        type: 'radar',
-                        color: ['#3ecf8e'],
-                        itemStyle: {normal: {areaStyle: {type: 'default'}}},
-                        data: [
-                            {
-                                value: value,
-                                name: '文章分类数量'
-                            }
-                        ]
-                    }]
-                };
-
-                radarChart.setOption(option);
-            },
-            getArticlesByCategoryId: function (categoryId, current) {
+            getArticlesByTagId: function (tagId, current) {
                 axios({
-                    url: '/category/' + categoryId + '/articles?current=' + current,
+                    url: '/tag/' + tagId + '/articles?current=' + current,
                     method: 'GET'
                 }).then((result) => {
                     this.articles = result.data.records;
                     this.current = result.data.current;
                     this.pages = result.data.pages;
-                    this.categoryId = categoryId;
+                    this.tagId = tagId;
                 })
             },
             prevPage: function () {
                 if (this.current > 1) {
-                    this.getArticlesByCategoryId(this.tagId, this.current - 1);
+                    this.getArticlesByTagId(this.tagId, this.current - 1);
                 }
             },
             nextPage: function () {
                 if (this.current < this.pages) {
-                    this.getArticlesByCategoryId(this.tagId, this.current + 1);
+                    this.getArticlesByTagId(this.tagId, this.current + 1);
                 }
+            },
+            getWordArray: function () {
+                let wordArray = [];
+                $.each(this.tags, function (index, tag) {
+                    let word = {};
+                    word.text = tag.name;
+                    word.weight = tag.articleCount;
+                    word.link = '/tag/' + tag.id + '/articles';
+                    wordArray.push(word);
+                });
+                $("#tag-wordcloud").jQCloud(wordArray, {autoResize: true});
             }
         },
         created() {
-            this.getCategories();
+            this.getTags();
         },
         filters: {
             dateFormat: function (value) {
@@ -249,12 +211,6 @@
 <!--scripts-->
 <div th:replace="/web/fragments :: scripts"></div>
 <!--end scripts-->
-
-<!--雷达图-->
-<script type="text/javascript" src="/static/web/js/echarts.min.js"></script>
-<script type="text/javascript">
-
-</script>
 <!--打字机效果-->
 <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"></script>
 <script>
@@ -267,5 +223,8 @@
         showCursor: true
     });
 </script>
+<script type="text/javascript" src="/static/web/js/jqcloud-1.0.4.min.js"></script>
+
 </body>
+
 </html>

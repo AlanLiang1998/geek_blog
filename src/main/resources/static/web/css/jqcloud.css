@@ -1,3 +1,5 @@
+/* fonts */
+
 div.jqcloud {
   font-family: "Helvetica", "Arial", sans-serif;
   font-size: 10px;
@@ -20,7 +22,7 @@ div.jqcloud span.w3 { font-size: 200%; }
 div.jqcloud span.w2 { font-size: 150%; }
 div.jqcloud span.w1 { font-size: 100%; }
 
-
+/* colors */
 
 div.jqcloud { color: #09f; }
 div.jqcloud a { color: inherit; }
@@ -37,7 +39,7 @@ div.jqcloud span.w3 { color: #a0ddff; }
 div.jqcloud span.w2 { color: #99ccee; }
 div.jqcloud span.w1 { color: #aab5f0; }
 
-
+/* layout */
 
 div.jqcloud {
   overflow: hidden;

@@ -15,4 +15,14 @@
         where tat.article_id = #{articleId}
     </select>
 
+    <select id="listByArticleCount" resultType="site.alanliang.geekblog.domain.Tag">
+        select tt.id, tt.name, count(ta.id) articleCount
+        from t_tag tt
+        left join t_article_tag tat
+        on tt.id = tat.tag_id
+        left join t_article ta
+        on ta.id = tat.article_id
+        group by tt.id having articleCount &gt; 0
+    </select>
+
 </mapper>

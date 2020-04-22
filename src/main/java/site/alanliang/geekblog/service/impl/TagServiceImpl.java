@@ -73,6 +73,11 @@ public class TagServiceImpl implements TagService {
     }
 
     @Override
+    public List<Tag> listByArticleCount() {
+        return tagMapper.listByArticleCount();
+    }
+
+    @Override
     public List<Tag> findByArticleId(Long id) {
         return tagMapper.selectByArticleId(id);
     }
