@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import site.alanliang.geekblog.domain.Article;
 import site.alanliang.geekblog.domain.Tag;
+import site.alanliang.geekblog.vo.ArticleDateVO;
 
 import java.util.List;
 
@@ -40,9 +41,24 @@ public class ArticleMapperTests {
     }
 
     @Test
-    void listPageArticlePreviewByTagId(){
+    void listPageArticlePreviewByTagId() {
         Page<Article> articlePage = new Page<>(1, 3);
         Page<Article> pageInfo = articleMapper.listPageArticlePreviewByTagId(articlePage, 1L);
         System.out.println(pageInfo);
+    }
+
+    @Test
+    void countArticleByDate() {
+        List<ArticleDateVO> articleDates = articleMapper.countArticleByDate();
+        System.out.println(articleDates);
+    }
+
+    @Test
+    void listPageArticlePreviewByDate() {
+        Page<Article> articlePage = new Page<>(1, 6);
+        Page<Article> pageInfo = articleMapper.listPageArticlePreviewByDate(articlePage);
+        for (Article article : pageInfo.getRecords()) {
+            System.out.println(article.getCreateTime());
+        }
     }
 }

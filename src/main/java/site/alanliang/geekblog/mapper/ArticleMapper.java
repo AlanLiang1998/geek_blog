@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 import site.alanliang.geekblog.domain.Article;
+import site.alanliang.geekblog.vo.ArticleDateVO;
 
 import java.util.List;
 
@@ -68,8 +69,8 @@ public interface ArticleMapper extends BaseMapper<Article> {
     /**
      * 根据分类ID分页查询分类的所有文章预览
      *
-     * @param page 分页参数
-     * @param categoryId  分类ID
+     * @param page       分页参数
+     * @param categoryId 分类ID
      * @return 文章预览分页
      */
     Page<Article> listPageArticlePreviewByCategoryId(IPage<Article> page, @Param("categoryId") Long categoryId);
@@ -77,9 +78,24 @@ public interface ArticleMapper extends BaseMapper<Article> {
     /**
      * 根据标签ID分页查询标签的所有文章预览
      *
-     * @param page 分页参数
-     * @param tagId  标签ID
+     * @param page  分页参数
+     * @param tagId 标签ID
      * @return 文章预览分页
      */
     Page<Article> listPageArticlePreviewByTagId(Page<Article> page, @Param("tagId") Long tagId);
+
+    /**
+     * 根据日期统计文章数量
+     *
+     * @return 文章日期统计
+     */
+    List<ArticleDateVO> countArticleByDate();
+
+    /**
+     * 根据日期分页查询所有文章预览
+     *
+     * @param page 分页参数
+     * @return 文章预览列表
+     */
+    Page<Article> listPageArticlePreviewByDate(Page<Article> page);
 }

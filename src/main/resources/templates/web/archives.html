@@ -1,0 +1,323 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta th:include="/web/fragments :: head(~{::title})">
+    <title>归档 | GeekBlog</title>
+</head>
+
+<body>
+<!--header-->
+<header th:replace="/web/fragments :: header"></header>
+<!--end header-->
+
+<!--bgcover-->
+<div th:replace="/web/fragments :: bgcover"></div>
+<!--end bgcover-->
+
+<div id="app">
+    <!--content-->
+    <main class="content">
+        <div class="container archive-calendar">
+            <div class="card">
+                <div id="post-calendar" class="card-content"></div>
+            </div>
+        </div>
+
+        <div id="cd-timeline" class="container">
+            <div class="cd-timeline-block" v-for="(article, index) in articles" :key="article.id">
+                <div class="cd-timeline-img year" data-aos="zoom-in-up" v-show="isShow(article.createTime,'y')">
+                    <a href="#">{{getSpecific(article.createTime,'y')}}</a>
+                </div>
+                <div class="cd-timeline-img month" data-aos="zoom-in-up" v-show="isShow(article.createTime,'m')">
+                    <a href="#">{{getSpecific(article.createTime,'m')}}</a>
+                </div>
+                <div class="cd-timeline-img day" data-aos="zoom-in-up">
+                    <span>{{getSpecific(article.createTime,'d')}}</span>
+                </div>
+                <article class="cd-timeline-content" data-aos="fade-up">
+                    <div class="article col s12 m6">
+                        <div class="card">
+                            <a :href="'/article/'+article.id">
+                                <div class="card-image">
+                                    <img :src="article.cover" class="responsive-img">
+                                    <span class="card-title">{{article.title}}</span>
+                                </div>
+                            </a>
+                            <div class="card-content article-content">
+                                <div class="summary block-with-text">{{article.summary}}</div>
+                                <div class="publish-info">
+                                    <span class="publish-date">
+                                        <i class="far fa-clock fa-fw icon-date"></i>{{article.createTime | dateFormat}}</span>
+                                    <span class="publish-author">
+                                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                        <a href="#" class="post-category">{{article.category.name}}</a>
+                                     </span>
+                                </div>
+                            </div>
+                            <div class="card-action article-tags">
+                                <a href="#" v-for="(tag, index) in article.tagList"><span class="chip bg-color">{{tag.name}}</span></a>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </main>
+    <!--end content-->
+    <!--pagination-->
+    <div class="container paging">
+        <div class="row">
+            <!--左边按钮-->
+            <div class="col s6 m4 l4">
+                <a class="left btn-floating btn-large" @click="prevPage">
+                    <i class="fas fa-angle-left"></i>
+                </a>
+            </div>
+            <!--分页信息-->
+            <div class="page-info col m4 l4 hide-on-small-only">
+                <div class="center-align b-text-gray">{{current}} / {{pages}}</div>
+            </div>
+            <!--右边按钮-->
+            <div class="col s6 m4 l4">
+                <a data-aos-anchor-placement class="right btn-floating btn-large waves-effect waves-light bg-color"
+                   @click="nextPage">
+                    <i class="fas fa-angle-right"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    <!--end pagination-->
+</div>
+
+<!--vue-->
+<script type="text/javascript">
+    Date.prototype.format = function (fmt) {
+        var o = {
+            "M+": this.getMonth() + 1, //月份
+            "d+": this.getDate(), //日
+            "h+": this.getHours(), //小时
+            "m+": this.getMinutes(), //分
+            "s+": this.getSeconds(), //秒
+            "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+            "S": this.getMilliseconds() //毫秒
+        };
+        if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+        for (var k in o)
+            if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+        return fmt;
+    }
+    let curYear = 0, curMonth = 0;
+    const app = new Vue({
+        el: '#app',
+        data: {
+            calendarData: [],
+            current: 1,
+            pages: 1,
+            articles: [],
+        },
+        methods: {
+            getCalendarData: function () {
+                axios({
+                    url: '/archives/calendar-data',
+                    method: 'GET'
+                }).then((result) => {
+                    this.calendarData = result.data.map(item => {
+                        return [item.date, item.articleCount];
+                    });
+                    this.initCalendar(this.calendarData);
+                })
+            },
+            prevPage: function () {
+                if (this.current > 1) {
+                    this.getArchives(this.current - 1);
+                    $(window).scrollTop(200);
+                    curYear = 0, curMonth = 0
+                }
+            },
+            nextPage: function () {
+                if (this.current < this.pages) {
+                    this.getArchives(this.current + 1);
+                    $(window).scrollTop(200);
+                    curYear = 0, curMonth = 0
+                }
+            },
+            initCalendar: function (data) {
+                let myChart = echarts.init(document.getElementById('post-calendar'));
+
+                let dayTime = 3600 * 24 * 1000;
+                let startTime = +echarts.number.parseDate(data[0][0]) - 30 * dayTime;
+                let endTime = +echarts.number.parseDate(data[data.length - 1][0]) + 30 * dayTime;
+                let startDate = new Date(startTime);
+                let endDate = new Date(endTime);
+
+                function getData() {
+                    if (data.length === 0) {
+                        return null;
+                    }
+                    var date = data.map(item => item[0]);
+                    var res = [];
+                    endTime += dayTime;
+                    for (var time = startTime; time < endTime; time += dayTime) {
+                        let formatTime = echarts.format.formatTime('yyyy-MM-dd', time);
+                        let count = 0;
+                        let index = date.indexOf(formatTime);
+                        if (index !== -1) {
+                            count = data[index][1];
+                        }
+                        res.push([formatTime, count]);
+                    }
+                    return res;
+                }
+
+                let option = {
+                    title: {
+                        top: 0,
+                        text: '文章日历',
+                        left: 'center',
+                        textStyle: {
+                            color: '#3C4858'
+                        }
+                    },
+                    height: '250px',
+                    tooltip: {
+                        padding: 10,
+                        backgroundColor: '#555',
+                        borderColor: '#777',
+                        borderWidth: 1,
+                        formatter: function (obj) {
+                            var value = obj.value;
+                            return '<div style="font-size: 14px;">' + value[0] + '：' + value[1] + '</div>';
+                        }
+                    },
+                    visualMap: {
+                        show: true,
+                        showLabel: true,
+                        categories: [0, 1, 2, 3, 4],
+                        calculable: true,
+                        inRange: {
+                            symbol: 'rect',
+                            color: ['#ebedf0', '#c6e48b', '#7bc96f', '#239a3b', '#196127']
+                        },
+                        itemWidth: 12,
+                        itemHeight: 12,
+                        orient: 'horizontal',
+                        left: 'center',
+                        bottom: 0
+                    },
+                    calendar: [{
+                        left: 'center',
+                        range: [startDate, endDate],
+                        cellSize: [20, 20],
+                        splitLine: {
+                            show: false
+                        },
+                        itemStyle: {
+                            color: '#196127',
+                            borderColor: '#fff',
+                            borderWidth: 2
+                        },
+                        yearLabel: {
+                            show: false
+                        },
+                        monthLabel: {
+                            nameMap: 'cn',
+                            fontSize: 11
+                        },
+                        dayLabel: {
+                            formatter: '{start}  1st',
+                            nameMap: 'cn',
+                            fontSize: 11
+                        }
+                    }],
+                    series: [{
+                        type: 'heatmap',
+                        coordinateSystem: 'calendar',
+                        calendarIndex: 0,
+                        data: getData(this.calendarData)
+                    }],
+                };
+
+                myChart.setOption(option);
+            },
+            getArchives: function (current) {
+                axios({
+                    url: '/archives?current=' + current,
+                    method: 'GET'
+                }).then((result) => {
+                    this.articles = result.data.records;
+                    this.current = result.data.current;
+                    this.pages = result.data.pages;
+                })
+            },
+            getSpecific: function (date, type) {
+                date = this.$options.filters['dateFormat'](date);
+                let arr = date.split('-');
+                if (type === 'y') {
+                    return arr[0];
+                } else if (type === 'm') {
+                    return arr[1];
+                } else if (type === 'd') {
+                    return arr[2];
+                }
+            },
+            isShow: function (time, type) {
+                let date = this.$options.filters['dateFormat'](time);
+                if (type === 'y') {
+                    let year = this.getSpecific(date, type);
+                    if (year !== curYear) {
+                        curYear = year;
+                        return true;
+                    }
+                    return false;
+                } else if (type === 'm') {
+                    let month = this.getSpecific(date, type);
+                    if (month !== curMonth) {
+                        curMonth = month;
+                        return true;
+                    }
+                    return false;
+                }
+            },
+        },
+        created() {
+            this.getCalendarData();
+            this.getArchives(1);
+        },
+        filters: {
+            dateFormat: function (value) {
+                if (!value) return ''
+                value = value.toString()
+                return value.split(' ')[0];
+            }
+        },
+    });
+
+</script>
+
+<!--footer-->
+<footer th:replace="/web/fragments :: footer"></footer>
+<!--end footer-->
+
+<!--commons-->
+<div th:replace="/web/fragments :: commons"></div>
+<!--end commons-->
+
+<!--scripts-->
+<div th:replace="/web/fragments :: scripts"></div>
+<!--end scripts-->
+<!--打字机效果-->
+<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"></script>
+<script>
+    var typed = new Typed("#subtitle", {
+        strings: ['挑战无处不在，自己才是真正的敌人。', 'Challenges are everywhere, and you are the real enemy.'],
+        startDelay: 300,
+        typeSpeed: 100,
+        loop: true,
+        backSpeed: 50,
+        showCursor: true
+    });
+</script>
+<script type="text/javascript" src="/static/web/js/echarts.min.js"></script>
+</body>
+
+</html>

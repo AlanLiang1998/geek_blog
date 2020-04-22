@@ -13,6 +13,7 @@ import site.alanliang.geekblog.dto.ArticleDto;
 import site.alanliang.geekblog.mapper.ArticleMapper;
 import site.alanliang.geekblog.mapper.ArticleTagMapper;
 import site.alanliang.geekblog.service.ArticleService;
+import site.alanliang.geekblog.vo.ArticleDateVO;
 import site.alanliang.geekblog.vo.ArticleVo;
 
 import java.util.ArrayList;
@@ -42,6 +43,17 @@ public class ArticleServiceImpl implements ArticleService {
         article.setId(id);
         article.setLikes(article.getLikes() + 1);
         articleMapper.updateById(article);
+    }
+
+    @Override
+    public Page<Article> listPageArticlePreviewByDate(Integer current, Integer size) {
+        Page<Article> articlePage = new Page<>(current, size);
+        return articleMapper.listPageArticlePreviewByDate(articlePage);
+    }
+
+    @Override
+    public List<ArticleDateVO> countArticleByDate() {
+        return articleMapper.countArticleByDate();
     }
 
     @Override

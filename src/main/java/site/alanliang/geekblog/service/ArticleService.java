@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import site.alanliang.geekblog.domain.Article;
 import site.alanliang.geekblog.dto.ArticleDto;
+import site.alanliang.geekblog.vo.ArticleDateVO;
 import site.alanliang.geekblog.vo.ArticleVo;
 
 import java.util.List;
@@ -136,4 +137,20 @@ public interface ArticleService {
      * @return 文章列表
      */
     Page<Article> listPageArticlePreviewByTagId(Integer current, Integer size, Long tagId);
+
+    /**
+     * 根据日期统计文章数量
+     *
+     * @return 文章日期统计
+     */
+    List<ArticleDateVO> countArticleByDate();
+
+    /**
+     * 根据日期分页获取所有文章预览
+     *
+     * @param current 当前页
+     * @param size    页面大小
+     * @return 文章预览列表
+     */
+    Page<Article> listPageArticlePreviewByDate(Integer current, Integer size);
 }

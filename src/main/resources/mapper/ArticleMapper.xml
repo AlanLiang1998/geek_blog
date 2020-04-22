@@ -156,4 +156,19 @@
         on ta.id = tat.article_id
         where tat.tag_id = #{tagId}
     </select>
+
+    <select id="countArticleByDate" resultType="site.alanliang.geekblog.vo.ArticleDateVO">
+        select year(create_time) 'year', month(create_time) 'month', day(create_time) 'day', count(id) 'articleCount'
+        from t_article group by  year(create_time) ,month(create_time), day(create_time)
+    </select>
+
+    <select id="listPageArticlePreviewByDate" resultMap="previewResultMap"
+            parameterType="com.baomidou.mybatisplus.extension.plugins.pagination.Page">
+        select
+        <include refid="previewColumn"/>
+        from t_article ta
+        left join t_category tc
+        on ta.category_id = tc.id
+        order by ta.create_time desc
+    </select>
 </mapper>
