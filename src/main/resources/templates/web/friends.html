@@ -1,0 +1,688 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta th:include="/web/fragments :: head(~{::title})">
+    <title>标签 | GeekBlog</title>
+    <link rel="stylesheet" type="text/css" href="/static/web/css/jqcloud.css"/>
+    <style>
+        .friends-container {
+            margin-top: -100px;
+            margin-bottom: 30px;
+        }
+
+        .friends-container .tag-title {
+            margin-bottom: 10px;
+            color: #3C4858;
+            font-size: 1.75rem;
+            font-weight: 400;
+        }
+
+        .frind-ship img {
+            border-radius: 50%;
+        }
+
+        /* 一下是按钮样式 */
+
+        .frind-ship {
+            padding: 10px 20px;
+        }
+
+        .frind-ship .title {
+            display: flex;
+            align-items: center;
+        }
+
+        .frind-ship .title div {
+            color: #fff;
+            padding-left: 10px;
+        }
+
+        .frind-ship .title img {
+            width: 100px;
+            height: 100px;
+            flex-shrink: 0;
+        }
+
+        .frind-ship .title h1 {
+            padding-bottom: 5px;
+            border-bottom: 2px solid #fff;
+            position: relative;
+            top: -15px;
+            left: 3px;
+        }
+
+        .friend-button {
+            display: flex;
+            justify-content: center;
+            margin-bottom: -27px;
+        }
+
+        .friend-button a {
+            border-radius: 40px;
+        }
+
+        .friend-all .tag-post {
+            margin-bottom: 30px;
+        }
+
+        .button-caution {
+            background-color: #FF4351;
+            border-color: #FF4351;
+            color: #FFF;
+        }
+
+        .button {
+            font-weight: 300;
+            font-size: 16px;
+            font-family: "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+            text-decoration: none;
+            text-align: center;
+            line-height: 40px;
+            height: 40px;
+            padding: 0 40px;
+            margin: 0;
+            display: inline-block;
+            appearance: none;
+            cursor: pointer;
+            border: none;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            -webkit-transition-property: all;
+            transition-property: all;
+            -webkit-transition-duration: .3s;
+            transition-duration: .3s;
+        }
+
+        .title {
+            margin-bottom: 0rem !important;
+        }
+
+        .card {
+            margin: 3rem 0 1rem 0 !important;
+        }
+
+        .button-glow.button-caution {
+            -webkit-animation-name: glowing-caution;
+            animation-name: glowing-caution;
+        }
+
+        @-webkit-keyframes glowing-caution {
+            from {
+                -webkit-box-shadow: 0 0 0 rgba(255, 67, 81, 0.3);
+                box-shadow: 0 0 0 rgba(255, 67, 81, 0.3);
+            }
+
+            50% {
+                -webkit-box-shadow: 0 0 20px rgba(255, 67, 81, 0.8);
+                box-shadow: 0 0 20px rgba(255, 67, 81, 0.8);
+            }
+
+            to {
+                -webkit-box-shadow: 0 0 0 rgba(255, 67, 81, 0.3);
+                box-shadow: 0 0 0 rgba(255, 67, 81, 0.3);
+            }
+        }
+
+        @keyframes glowing-caution {
+            from {
+                -webkit-box-shadow: 0 0 0 rgba(255, 67, 81, 0.3);
+                box-shadow: 0 0 0 rgba(255, 67, 81, 0.3);
+            }
+
+            50% {
+                -webkit-box-shadow: 0 0 20px rgba(255, 67, 81, 0.8);
+                box-shadow: 0 0 20px rgba(255, 67, 81, 0.8);
+            }
+
+            to {
+                -webkit-box-shadow: 0 0 0 rgba(255, 67, 81, 0.3);
+                box-shadow: 0 0 0 rgba(255, 67, 81, 0.3);
+            }
+        }
+
+        .button-caution:hover {
+            background-color: #ff7680;
+            border-color: #ff7680;
+            color: #FFF;
+            text-decoration: none;
+        }
+
+        .frind-card1 {
+            background-image: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .frind-card2 {
+            background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .frind-card3 {
+            background-image: linear-gradient(to right, #b8cbb8 0%, #b8cbb8 0%, #b465da 0%, #cf6cc9 33%, #ee609c 66%, #ee609c 100%);
+        }
+
+        .frind-card4 {
+            background-image: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
+        }
+
+        .frind-card5 {
+            background-image: linear-gradient(to top, #c471f5 0%, #fa71cd 100%);
+        }
+
+        .frind-card6 {
+            background-image: linear-gradient(to top, #48c6ef 0%, #6f86d6 100%);
+        }
+
+        .frind-card7 {
+            background-image: linear-gradient(to top, #0ba360 0%, #3cba92 100%);
+        }
+
+        .frind-card8 {
+            background-image: linear-gradient(to top, #0c3483 0%, #a2b6df 100%, #6b8cce 100%, #a2b6df 100%);
+        }
+
+        .frind-card9 {
+            background-image: linear-gradient(to right, #ff758c 0%, #ff7eb3 100%);
+        }
+
+        .frind-card10 {
+            background-image: linear-gradient(to top, #f77062 0%, #fe5196 100%);
+        }
+
+        article .card {
+            overflow: visible !important;
+        }
+    </style>
+    <style>
+        .valine-card {
+            margin: 1.5rem auto;
+        }
+
+        .valine-card .card-content {
+            padding: 20px 20px 5px 20px;
+        }
+
+        #vcomments textarea {
+            box-sizing: border-box;
+            background: url("/static/web/image/comment_bg.png") 100% 100% no-repeat;
+        }
+
+        #vcomments p {
+            margin: 2px 2px 10px;
+            font-size: 1.05rem;
+            line-height: 1.78rem;
+        }
+
+        #vcomments blockquote p {
+            text-indent: 0.2rem;
+        }
+
+        #vcomments a {
+            padding: 0 2px;
+            color: #4cbf30;
+            font-weight: 500;
+            text-decoration: none;
+        }
+
+        #vcomments img {
+            max-width: 100%;
+            height: auto;
+            cursor: pointer;
+        }
+
+        #vcomments ol li {
+            list-style-type: decimal;
+        }
+
+        #vcomments ol,
+        ul {
+            display: block;
+            padding-left: 2em;
+            word-spacing: 0.05rem;
+        }
+
+        #vcomments ul li,
+        ol li {
+            display: list-item;
+            line-height: 1.8rem;
+            font-size: 1rem;
+        }
+
+        #vcomments ul li {
+            list-style-type: disc;
+        }
+
+        #vcomments ul ul li {
+            list-style-type: circle;
+        }
+
+        #vcomments table, th, td {
+            padding: 12px 13px;
+            border: 1px solid #dfe2e5;
+        }
+
+        #vcomments table, th, td {
+            border: 0;
+        }
+
+        table tr:nth-child(2n), thead {
+            background-color: #fafafa;
+        }
+
+        #vcomments table th {
+            background-color: #f2f2f2;
+            min-width: 80px;
+        }
+
+        #vcomments table td {
+            min-width: 80px;
+        }
+
+        #vcomments h1 {
+            font-size: 1.85rem;
+            font-weight: bold;
+            line-height: 2.2rem;
+        }
+
+        #vcomments h2 {
+            font-size: 1.65rem;
+            font-weight: bold;
+            line-height: 1.9rem;
+        }
+
+        #vcomments h3 {
+            font-size: 1.45rem;
+            font-weight: bold;
+            line-height: 1.7rem;
+        }
+
+        #vcomments h4 {
+            font-size: 1.25rem;
+            font-weight: bold;
+            line-height: 1.5rem;
+        }
+
+        #vcomments h5 {
+            font-size: 1.1rem;
+            font-weight: bold;
+            line-height: 1.4rem;
+        }
+
+        #vcomments h6 {
+            font-size: 1rem;
+            line-height: 1.3rem;
+        }
+
+        #vcomments p {
+            font-size: 1rem;
+            line-height: 1.5rem;
+        }
+
+        #vcomments hr {
+            margin: 12px 0;
+            border: 0;
+            border-top: 1px solid #ccc;
+        }
+
+        #vcomments blockquote {
+            margin: 15px 0;
+            border-left: 5px solid #42b983;
+            padding: 1rem 0.8rem 0.3rem 0.8rem;
+            color: #666;
+            background-color: rgba(66, 185, 131, .1);
+        }
+
+        #vcomments pre {
+            font-family: monospace, monospace;
+            padding: 1.2em;
+            margin: .5em 0;
+            background: #272822;
+            overflow: auto;
+            border-radius: 0.3em;
+            tab-size: 4;
+        }
+
+        #vcomments code {
+            font-family: monospace, monospace;
+            padding: 1px 3px;
+            font-size: 0.92rem;
+            color: #e96900;
+            background-color: #f8f8f8;
+            border-radius: 2px;
+        }
+
+        #vcomments pre code {
+            font-family: monospace, monospace;
+            padding: 0;
+            color: #e8eaf6;
+            background-color: #272822;
+        }
+
+        #vcomments pre[class*="language-"] {
+            padding: 1.2em;
+            margin: .5em 0;
+        }
+
+        #vcomments code[class*="language-"],
+        pre[class*="language-"] {
+            color: #e8eaf6;
+        }
+
+        #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+            position: inherit;
+            margin-left: -1.3rem;
+            margin-right: 0.4rem;
+            margin-top: -1px;
+            vertical-align: middle;
+            left: unset;
+            visibility: visible;
+        }
+
+        #vcomments b,
+        strong {
+            font-weight: bold;
+        }
+
+        #vcomments dfn {
+            font-style: italic;
+        }
+
+        #vcomments small {
+            font-size: 85%;
+        }
+
+        #vcomments cite {
+            font-style: normal;
+        }
+
+        #vcomments mark {
+            background-color: #fcf8e3;
+            padding: .2em;
+        }
+
+        #vcomments table, th, td {
+            padding: 12px 13px;
+            border: 1px solid #dfe2e5;
+        }
+
+        table tr:nth-child(2n), thead {
+            background-color: #fafafa;
+        }
+
+        #vcomments table th {
+            background-color: #f2f2f2;
+            min-width: 80px;
+        }
+
+        #vcomments table td {
+            min-width: 80px;
+        }
+
+        #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+            position: inherit;
+            margin-left: -1.3rem;
+            margin-right: 0.4rem;
+            margin-top: -1px;
+            vertical-align: middle;
+            left: unset;
+            visibility: visible;
+        }
+    </style>
+</head>
+
+
+<body>
+<!--header-->
+<header th:replace="/web/fragments :: header"></header>
+<!--end header-->
+
+<!--bgcover-->
+<div th:replace="/web/fragments :: bgcover"></div>
+<!--end bgcover-->
+
+<main class="content">
+    <div class="container friends-container">
+        <div class="card">
+            <div class="card-content">
+                <div class="tag-title center-align">
+                    <i class="fas fa-address-book"></i>&nbsp;&nbsp;友情链接
+                </div>
+                <article id="friends-link">
+                    <div class="row tags-posts friend-all">
+
+                    </div>
+                </article>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card valine-card" data-aos="fade-up">
+                <div class="comment_headling"
+                     style="font-size: 20px; font-weight: 700; position: relative; left: 20px; top: 15px; padding-bottom: 5px;">
+                    <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+                    <span>留言墙</span>
+                </div>
+                <div id="vcomments" class="card-content" style="display: grid">
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</main>
+
+<!--footer-->
+<footer class="page-footer bg-color" th:fragment="footer">
+    <!--网站信息-->
+    <div class="container row center-align" style="margin-bottom: 15px !important;">
+        <!--copyright-->
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2020</span>
+            <a href="javascript:;" target="_blank">AlanLiang</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            <!--网站字数-->
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span class="white-color">97.2k</span>&nbsp;字
+            <br>
+            <!--网站运行时间-->
+            <span id="sitetime">载入运行时间...</span>
+            <script>
+                function siteTime() {
+                    var seconds = 1000;
+                    var minutes = seconds * 60;
+                    var hours = minutes * 60;
+                    var days = hours * 24;
+                    var years = days * 365;
+                    var today = new Date();
+                    var startYear = "2020";
+                    var startMonth = "2";
+                    var startDate = "16";
+                    var startHour = "0";
+                    var startMinute = "0";
+                    var startSecond = "0";
+                    var todayYear = today.getFullYear();
+                    var todayMonth = today.getMonth() + 1;
+                    var todayDate = today.getDate();
+                    var todayHour = today.getHours();
+                    var todayMinute = today.getMinutes();
+                    var todaySecond = today.getSeconds();
+                    var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                    var diff = t2 - t1;
+                    var diffYears = Math.floor(diff / years);
+                    var diffDays = Math.floor((diff / days) - diffYears * 365);
+                    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                        minutes);
+                    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                        diffMinutes * minutes) / seconds);
+                    if (startYear == todayYear) {
+                        document.getElementById("year").innerHTML = todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                            " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    } else {
+                        document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                            " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    }
+                }
+
+                setInterval(siteTime, 1000);
+            </script>
+            <br>
+        </div>
+        <!--联系方式-->
+        <div class="col s12 m4 l4 social-link social-statis">
+            <!--联系图标-->
+            <a class="tooltipped" data-delay="50" data-position="top" data-tooltip="访问我的GitHub"
+               href="https://github.com/AlanLiang1998"
+               target="_blank">
+                <i class="fab fa-github"></i>
+            </a>
+            <a class="tooltipped" data-delay="50" data-position="top" data-tooltip="邮件联系我"
+               href="mailto:1114173646@qq.com" target="_blank">
+                <i class="fas fa-envelope-open"></i>
+            </a>
+            <a class="tooltipped" data-delay="50" data-position="top" data-tooltip="QQ联系我: 1656927346"
+               href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1114173646" target="_blank">
+                <i class="fab fa-qq"></i>
+            </a>
+        </div>
+    </div>
+</footer>
+<!--end footer-->
+
+<!--commons-->
+<div th:fragment="commons">
+    <!--进度条-->
+    <div class="progress-bar"></div>
+    <!-- 搜索遮罩框 -->
+    <div class="modal" id="searchModal">
+        <div class="modal-content">
+            <div class="search-header">
+                <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+                <input class="search-input" id="searchInput" name="s" placeholder="请输入搜索的关键字" type="search">
+            </div>
+            <div id="searchResult"></div>
+        </div>
+    </div>
+    <!-- 回到顶部按钮 -->
+    <div class="top-scroll" id="backTop">
+        <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+            <i class="fas fa-arrow-up"></i>
+        </a>
+    </div>
+</div>
+<!--end commons-->
+
+<!--scripts--->
+<div th:fragment="scripts">
+    <!--网页离子背景-->
+    <script color="0,0,255" count="99" opacity='0.7' pointcolor="0,0,255" src="/static/web/js/canvas-nest.js"
+            type="text/javascript"
+            zindex="-1"></script>
+    <script color="122 103 238" count="200" opacity='0.7' src="/static/web/js/canvas-nest.min.js" type="text/javascript"
+            zindex="-2"></script>
+    <!--搜索-->
+    <script src="/static/web/js/search.js"></script>
+    <!-- <script type="text/javascript">
+         $(function () {
+             searchFunc("" + "", '', '');
+         });
+     </script>-->
+    <!--materialize框架-->
+    <script src="/static/web/js/materialize.min.js"></script>
+    <!--瀑布流-->
+    <script src="/static/web/js/masonry.pkgd.min.js"></script>
+    <!--页面滚动动画-->
+    <script src="/static/web/js/aos.js"></script>
+    <!--滚动进度条-->
+    <script src="/static/web/js/scrollProgress.min.js"></script>
+    <!--matery主题-->
+    <script src="/static/web/js/matery.js"></script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async="" src="/static/web/js/js.js"></script>
+    <!-- Baidu Analytics -->
+    <script>
+        var _hmt = _hmt || [];
+        (function () {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+    <!-- Baidu Push -->
+    <script>
+        (function () {
+            var bp = document.createElement('script');
+            var curProtocol = window.location.protocol.split(':')[0];
+            if (curProtocol === 'https') {
+                bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+            } else {
+                bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+            }
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(bp, s);
+        })();
+    </script>
+    <!--鼠标点击特效-->
+    <script async="async" src="/static/web/js/clicklove.js"></script>
+    <!--网页计数器-->
+    <script async="" src="/static/web/js/busuanzi.pure.mini.js"></script>
+    <!--未知-->
+    <script async="async" src="/static/web/js/ribbon-dynamic.js" type="text/javascript"></script>
+    <!--网页预加载-->
+    <script src="/static/web/js/instantpage.js" type="module"></script>
+    <!--网站标题切换-->
+    <script type="text/javascript">
+        var OriginTitile = document.title, st;
+        document.addEventListener("visibilitychange", function () {
+            document.hidden ? (document.title = "点这里，我这里有好康的！", clearTimeout(st)) : (document.title = "宁来啦！", st = setTimeout(function () {
+                document.title = OriginTitile
+            }, 3e3))
+        })
+    </script>
+    <!--多媒体播放-->
+    <script src="/static/web/js/lightgallery-all.min.js"></script>
+</div>
+<!--scripts-->
+<script src="/static/web/js/av-min.js"></script>
+<script src="/static/web/js/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: 'FtvcGzxkRnOmkryGU2VOXSe6-gzGzoHsz',
+        appKey: 'YVftCMoGoOKzQDD80KcLfCQa',
+        notify: 'false' === 'true',
+        verify: 'false' === 'true',
+        visitor: 'true' === 'true',
+        avatar: 'mm',
+        pageSize: '10',
+        lang: 'zh-cn',
+        placeholder: 'just go go'
+    });
+</script>
+<script>
+    $(function () {
+        $('#friends-link').masonry({
+            itemSelector: '.friend-div'
+        });
+    });
+</script>
+<!--打字机效果-->
+<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"></script>
+<script>
+    var typed = new Typed("#subtitle", {
+        strings: ['挑战无处不在，自己才是真正的敌人。', 'Challenges are everywhere, and you are the real enemy.'],
+        startDelay: 300,
+        typeSpeed: 100,
+        loop: true,
+        backSpeed: 50,
+        showCursor: true
+    });
+</script>
+</body>
+
+</html>
