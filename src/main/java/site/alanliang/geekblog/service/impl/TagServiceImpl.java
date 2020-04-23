@@ -78,6 +78,11 @@ public class TagServiceImpl implements TagService {
     }
 
     @Override
+    public long countAll() {
+        return tagMapper.selectCount(null);
+    }
+
+    @Override
     public List<Tag> findByArticleId(Long id) {
         return tagMapper.selectByArticleId(id);
     }

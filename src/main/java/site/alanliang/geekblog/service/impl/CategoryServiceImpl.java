@@ -45,6 +45,11 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
+    public long countAll() {
+        return categoryMapper.selectCount(null);
+    }
+
+    @Override
     public List<Category> listByArticleCount() {
         return categoryMapper.listByArticleCount();
     }

@@ -87,9 +87,10 @@ public interface ArticleMapper extends BaseMapper<Article> {
     /**
      * 根据日期统计文章数量
      *
+     * @param dateFilterType 日期统计类型
      * @return 文章日期统计
      */
-    List<ArticleDateVO> countArticleByDate();
+    List<ArticleDateVO> countArticleByDate(@Param("dft") Integer dateFilterType);
 
     /**
      * 根据日期分页查询所有文章预览

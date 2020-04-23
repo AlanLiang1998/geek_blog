@@ -26,10 +26,10 @@
         <div id="cd-timeline" class="container">
             <div class="cd-timeline-block" v-for="(article, index) in articles" :key="article.id">
                 <div class="cd-timeline-img year" data-aos="zoom-in-up" v-show="isShow(article.createTime,'y')">
-                    <a href="#">{{getSpecific(article.createTime,'y')}}</a>
+                    <span href="javascript:;">{{getSpecific(article.createTime,'y')}}</span>
                 </div>
                 <div class="cd-timeline-img month" data-aos="zoom-in-up" v-show="isShow(article.createTime,'m')">
-                    <a href="#">{{getSpecific(article.createTime,'m')}}</a>
+                    <span href="javascript:;">{{getSpecific(article.createTime,'m')}}</span>
                 </div>
                 <div class="cd-timeline-img day" data-aos="zoom-in-up">
                     <span>{{getSpecific(article.createTime,'d')}}</span>
@@ -130,34 +130,26 @@
             prevPage: function () {
                 if (this.current > 1) {
                     this.getArchives(this.current - 1);
-                    $(window).scrollTop(200);
-                    curYear = 0, curMonth = 0
                 }
             },
             nextPage: function () {
                 if (this.current < this.pages) {
                     this.getArchives(this.current + 1);
-                    $(window).scrollTop(200);
-                    curYear = 0, curMonth = 0
                 }
             },
             initCalendar: function (data) {
                 let myChart = echarts.init(document.getElementById('post-calendar'));
 
                 let dayTime = 3600 * 24 * 1000;
-                let startTime = +echarts.number.parseDate(data[0][0]) - 30 * dayTime;
-                let endTime = +echarts.number.parseDate(data[data.length - 1][0]) + 30 * dayTime;
-                let startDate = new Date(startTime);
-                let endDate = new Date(endTime);
+                let endTime = +echarts.number.parseDate(new Date());
+                let startTime = +(endTime - 365 * dayTime);
+                let startDate = new Date(startTime).format('yyyy-MM-dd');
+                let endDate = new Date(endTime).format('yyyy-MM-dd');
 
                 function getData() {
-                    if (data.length === 0) {
-                        return null;
-                    }
                     var date = data.map(item => item[0]);
                     var res = [];
-                    endTime += dayTime;
-                    for (var time = startTime; time < endTime; time += dayTime) {
+                    for (var time = startTime; time <= endTime; time += dayTime) {
                         let formatTime = echarts.format.formatTime('yyyy-MM-dd', time);
                         let count = 0;
                         let index = date.indexOf(formatTime);
@@ -178,7 +170,6 @@
                             color: '#3C4858'
                         }
                     },
-                    height: '250px',
                     tooltip: {
                         padding: 10,
                         backgroundColor: '#555',
@@ -207,7 +198,7 @@
                     calendar: [{
                         left: 'center',
                         range: [startDate, endDate],
-                        cellSize: [20, 20],
+                        cellSize: [14, 14],
                         splitLine: {
                             show: false
                         },
@@ -217,7 +208,7 @@
                             borderWidth: 2
                         },
                         yearLabel: {
-                            show: false
+                            show: true,
                         },
                         monthLabel: {
                             nameMap: 'cn',
@@ -233,20 +224,26 @@
                         type: 'heatmap',
                         coordinateSystem: 'calendar',
                         calendarIndex: 0,
-                        data: getData(this.calendarData)
-                    }],
+                        data: getData(),
+                    }]
+
                 };
 
                 myChart.setOption(option);
             },
             getArchives: function (current) {
                 axios({
-                    url: '/archives?current=' + current,
+                    url: '/archives',
+                    params: {
+                        current: current,
+                    },
                     method: 'GET'
                 }).then((result) => {
                     this.articles = result.data.records;
                     this.current = result.data.current;
                     this.pages = result.data.pages;
+                    curYear = 0, curMonth = 0;
+                    $(window).scrollTop(200);
                 })
             },
             getSpecific: function (date, type) {

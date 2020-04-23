@@ -64,4 +64,10 @@ public interface CategoryService {
      */
     List<Category> listByArticleCount();
 
+    /**
+     * 统计分类数量
+     *
+     * @return
+     */
+    long countAll();
 }

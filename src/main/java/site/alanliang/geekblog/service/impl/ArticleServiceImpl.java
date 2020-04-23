@@ -12,6 +12,7 @@ import site.alanliang.geekblog.domain.ArticleTag;
 import site.alanliang.geekblog.dto.ArticleDto;
 import site.alanliang.geekblog.mapper.ArticleMapper;
 import site.alanliang.geekblog.mapper.ArticleTagMapper;
+import site.alanliang.geekblog.query.ArticleQuery;
 import site.alanliang.geekblog.service.ArticleService;
 import site.alanliang.geekblog.vo.ArticleDateVO;
 import site.alanliang.geekblog.vo.ArticleVo;
@@ -46,14 +47,14 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public Page<Article> listPageArticlePreviewByDate(Integer current, Integer size) {
+    public Page<Article> listPageArticlePreviewByDate(Integer current, Integer size, ArticleQuery articleQuery) {
         Page<Article> articlePage = new Page<>(current, size);
         return articleMapper.listPageArticlePreviewByDate(articlePage);
     }
 
     @Override
-    public List<ArticleDateVO> countArticleByDate() {
-        return articleMapper.countArticleByDate();
+    public List<ArticleDateVO> countArticleByDate(Integer dateFilterType) {
+        return articleMapper.countArticleByDate(dateFilterType);
     }
 
     @Override

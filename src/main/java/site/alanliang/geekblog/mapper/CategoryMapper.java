@@ -26,4 +26,5 @@ public interface CategoryMapper extends BaseMapper<Category> {
      * @return 分类列表
      */
     List<Category> listByArticleCount();
+
 }

@@ -158,8 +158,29 @@
     </select>
 
     <select id="countArticleByDate" resultType="site.alanliang.geekblog.vo.ArticleDateVO">
-        select year(create_time) 'year', month(create_time) 'month', day(create_time) 'day', count(id) 'articleCount'
-        from t_article group by  year(create_time) ,month(create_time), day(create_time)
+        select year(create_time) 'year'
+        <choose>
+            <when test="dft == 2">
+                , month(create_time) 'month'
+            </when>
+            <when test="dft == 1">
+                , month(create_time) 'month', day(create_time) 'day'
+            </when>
+        </choose>
+        , count(id) 'articleCount'
+        from t_article
+        where create_time >= DATE_SUB(CURDATE(), INTERVAL 1 YEAR)
+        <choose>
+            <when test="dft == 3">
+                group by year(create_time)
+            </when>
+            <when test="dft == 2">
+                group by year(create_time) ,month(create_time)
+            </when>
+            <when test="dft == 1">
+                group by year(create_time) ,month(create_time), day(create_time)
+            </when>
+        </choose>
     </select>
 
     <select id="listPageArticlePreviewByDate" resultMap="previewResultMap"

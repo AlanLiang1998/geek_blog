@@ -1,0 +1,584 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta th:include="/web/fragments :: head(~{::title})">
+    <title>关于我 | GeekBlog</title>
+    <style type="text/css">
+        /* don't remove. */
+        .about-cover {
+            height: 75vh;
+        }
+    </style>
+    <style type="text/css">
+        #posts-chart,
+        #categories-chart,
+        #tags-chart {
+            width: 100%;
+            height: 300px;
+            margin: 0.5rem auto;
+            padding: 0.5rem;
+        }
+    </style>
+</head>
+
+<body>
+<!--header-->
+<header th:replace="/web/fragments :: header"></header>
+<!--end header-->
+
+<!--bgcover-->
+<div th:replace="/web/fragments :: bgcover"></div>
+<!--end bgcover-->
+
+<div id="app">
+    <main class="content">
+        <div id="aboutme" class="container about-container">
+            <div class="card">
+                <div class="card-content">
+                    <div class="row">
+                        <div class="post-statis col l4 hide-on-med-and-down" data-aos="zoom-in-right">
+                            <div class="statis">
+                                <span class="count"><a href="/">{{articleCount}}</a></span>
+                                <span class="name">文章</span>
+                            </div>
+                            <div class="statis">
+                                <span class="count"><a href="/api/categories">{{categoryCount}}</a></span>
+                                <span class="name">分类</span>
+                            </div>
+                            <div class="statis">
+                                <span class="count"><a href="/api/tags">{{tagCount}}</a></span>
+                                <span class="name">标签</span>
+                            </div>
+                        </div>
+                        <div class="col s12 m12 l4">
+                            <div class="profile center-align">
+                                <div class="avatar">
+                                    <img src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1701474507,2833806157&fm=26&gp=0.jpg"
+                                         class="circle responsive-img avatar-img">
+                                </div>
+                                <div class="author">
+                                    <div class="post-statis hide-on-large-only" data-aos="zoom-in-right">
+                                        <div class="statis">
+                                            <span class="count"><a href="/">{{articleCount}}</a></span>
+                                            <span class="name">文章</span>
+                                        </div>
+                                        <div class="statis">
+                                            <span class="count"><a href="/api/categories">{{categoryCount}}</a></span>
+                                            <span class="name">分类</span>
+                                        </div>
+                                        <div class="statis">
+                                            <span class="count"><a href="/api/tags">{{tagCount}}</a></span>
+                                            <span class="name">标签</span>
+                                        </div>
+                                    </div>
+                                    <div class="title">AlanLiang</div>
+                                    <div class="career">Java 学习者</div>
+                                    <div class="social-link hide-on-large-only" data-aos="zoom-in-left">
+                                        <a href="https://github.com/AlanLiang1998" class="tooltipped" target="_blank"
+                                           data-tooltip="访问我的GitHub"
+                                           data-position="top" data-delay="50">
+                                            <i class="fab fa-github"></i>
+                                        </a>
+                                        <a href="mailto:1114173646@qq.com" class="tooltipped" target="_blank"
+                                           data-tooltip="邮件联系我" data-position="top" data-delay="50">
+                                            <i class="fas fa-envelope-open"></i>
+                                        </a>
+                                        <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1114173646"
+                                           class="tooltipped" target="_blank"
+                                           data-tooltip="QQ联系我: 1114173646" data-position="top" data-delay="50">
+                                            <i class="fab fa-qq"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col l4 hide-on-med-and-down" data-aos="zoom-in-left">
+                            <div class="social-link">
+                                <a href="https://github.com/AlanLiang1998" class="tooltipped" target="_blank"
+                                   data-tooltip="访问我的GitHub"
+                                   data-position="top" data-delay="50">
+                                    <i class="fab fa-github"></i>
+                                </a>
+
+                                <a href="mailto:1114173646@qq.com" class="tooltipped" target="_blank"
+                                   data-tooltip="邮件联系我"
+                                   data-position="top" data-delay="50">
+                                    <i class="fas fa-envelope-open"></i>
+                                </a>
+                                <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1114173646"
+                                   class="tooltipped" target="_blank"
+                                   data-tooltip="QQ联系我: 1114173646"
+                                   data-position="top" data-delay="50">
+                                    <i class="fab fa-qq"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="introduction center-align" data-aos="fade-up">
+                        相信自己，相信未来。再苦再难，只要理想还在，总会找到希望的光明。向前一步，再向前一步，不管前面是苦涩是甜蜜，是困顿是豁然，但只有向前一步才是新的一步，才可以接近理想，才能让希望在春天里恣意绽放。
+                    </div>
+
+                    <div id="postCharts" class="post-charts">
+                        <div class="title center-align" data-aos="zoom-in-up">
+                            <i class="far fa-bar-chart"></i>&nbsp;&nbsp;文章统计图
+                        </div>
+                        <div class="row">
+                            <div class="chart col s12 m6 l4" data-aos="zoom-in-up">
+                                <div id="posts-chart"></div>
+                            </div>
+
+                            <div class="chart col s12 m6 l4" data-aos="zoom-in-up">
+                                <div id="categories-chart"></div>
+                            </div>
+
+                            <div class="chart col s12 m6 l4" data-aos="zoom-in-up">
+                                <div id="tags-chart"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="my-skills">
+                        <div class="title center-align" data-aos="zoom-in-up">
+                            <i class="fas fa-wrench"></i>&nbsp;&nbsp;我的技能
+                        </div>
+                        <div class="row">
+                            <div class="col s12 m6 l6" data-aos="fade-up">
+                                <div class="skillbar">
+                                    <div class="skillbar-title"
+                                         style="background: linear-gradient(to right, #FF0066 0%, #FF00CC 100%); width: 90%">
+                                        <span>Java</span>
+                                    </div>
+                                    <div class="skill-bar-percent">90%</div>
+                                </div>
+                            </div>
+                            <div class="col s12 m6 l6" data-aos="fade-up">
+                                <div class="skillbar">
+                                    <div class="skillbar-title"
+                                         style="background: linear-gradient(to right, #9900FF 0%, #CC66FF 100%); width: 60%">
+                                        <span>C/C++</span>
+                                    </div>
+                                    <div class="skill-bar-percent">60%</div>
+                                </div>
+                            </div>
+                            <div class="col s12 m6 l6" data-aos="fade-up">
+                                <div class="skillbar">
+                                    <div class="skillbar-title"
+                                         style="background: linear-gradient(to right, #2196F3 0%, #42A5F5 100%); width: 70%">
+                                        <span>Algorithm</span>
+                                    </div>
+                                    <div class="skill-bar-percent">70%</div>
+                                </div>
+                            </div>
+                            <div class="col s12 m6 l6" data-aos="fade-up">
+                                <div class="skillbar">
+                                    <div class="skillbar-title"
+                                         style="background: linear-gradient(to right, #00BCD4 0%, #80DEEA 100%); width: 85%">
+                                        <span>Spring</span>
+                                    </div>
+                                    <div class="skill-bar-percent">85%</div>
+                                </div>
+                            </div>
+                            <div class="col s12 m6 l6" data-aos="fade-up">
+                                <div class="skillbar">
+                                    <div class="skillbar-title"
+                                         style="background: linear-gradient(to right, #4CAF50 0%, #81C784 100%); width: 80%">
+                                        <span>MySQL</span>
+                                    </div>
+                                    <div class="skill-bar-percent">80%</div>
+                                </div>
+                            </div>
+                            <div class="col s12 m6 l6" data-aos="fade-up">
+                                <div class="skillbar">
+                                    <div class="skillbar-title"
+                                         style="background: linear-gradient(to right, #FFEB3B 0%, #FFF176 100%); width: 90%">
+                                        <span>MyBatis</span>
+                                    </div>
+                                    <div class="skill-bar-percent">90%</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="other-skills chip-container" data-aos="zoom-in-up">
+                            <div class="sub-title center-align"><i class="fa fa-book"></i>&nbsp;&nbsp;其他技能</div>
+                            <div class="tag-chips center-align">
+                                <a href="javascript:;" v-for="(tag, index) in tags">
+                                    <span class="chip center-align waves-effect waves-light chip-default">{{tag.name}}</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="myGallery" class="my-gallery">
+                        <div class="title center-align" data-aos="zoom-in-up">
+                            <i class="far fa-image"></i>&nbsp;&nbsp;相册
+                        </div>
+                        <div class="row">
+                            <div class="photo col s12 m6 l4" data-aos="fade-up">
+                                <div class="img-item" data-src="http://q8rsjstig.bkt.clouddn.com/note/oilpainting1.jpg">
+                                    <img src="http://q8rsjstig.bkt.clouddn.com/note/oilpainting1.jpg" class="responsive-img">
+                                </div>
+                            </div>
+                            <div class="photo col s12 m6 l4" data-aos="fade-up">
+                                <div class="img-item" data-src="http://q8rsjstig.bkt.clouddn.com/note/oilpainting2.jpg">
+                                    <img src="http://q8rsjstig.bkt.clouddn.com/note/oilpainting2.jpg" class="responsive-img">
+                                </div>
+                            </div>
+                            <div class="photo col s12 m6 l4" data-aos="fade-up">
+                                <div class="img-item" data-src="http://q8rsjstig.bkt.clouddn.com/note/oilpainting3.jpg">
+                                    <img src="http://q8rsjstig.bkt.clouddn.com/note/oilpainting3.jpg" class="responsive-img">
+                                </div>
+                            </div>
+                            <div class="photo col s12 m6 l4" data-aos="fade-up">
+                                <div class="img-item" data-src="http://q8rsjstig.bkt.clouddn.com/note/oilpainting4.jpg">
+                                    <img src="http://q8rsjstig.bkt.clouddn.com/note/oilpainting4.jpg" class="responsive-img">
+                                </div>
+                            </div>
+                            <div class="photo col s12 m6 l4" data-aos="fade-up">
+                                <div class="img-item" data-src="http://q8rsjstig.bkt.clouddn.com/note/oilpainting5.jpg">
+                                    <img src="http://q8rsjstig.bkt.clouddn.com/note/oilpainting5.jpg" class="responsive-img">
+                                </div>
+                            </div>
+                            <div class="photo col s12 m6 l4" data-aos="fade-up">
+                                <div class="img-item" data-src="http://q8rsjstig.bkt.clouddn.com/note/oilpainting6.jpg">
+                                    <img src="http://q8rsjstig.bkt.clouddn.com/note/oilpainting6.jpg" class="responsive-img">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+
+<!--vue-->
+<script type="text/javascript">
+    const app = new Vue({
+        el: '#app',
+        data: {
+            articleCount: 0,
+            categoryCount: 0,
+            tagCount: 0,
+            tags: [],
+        },
+        methods: {
+            getArticleCount: function () {
+                axios({
+                    url: '/article-count',
+                    method: 'GET'
+                }).then((result) => {
+                    this.articleCount = result.data;
+                })
+            },
+            getCategoryCount: function () {
+                axios({
+                    url: '/category-count',
+                    method: 'GET'
+                }).then((result) => {
+                    this.categoryCount = result.data;
+                })
+            },
+            getTagCount: function () {
+                axios({
+                    url: '/tag-count',
+                    method: 'GET'
+                }).then((result) => {
+                    this.tagCount = result.data;
+                })
+            },
+            getCalendarData: function () {
+                axios({
+                    url: '/archives/calendar-data',
+                    params: {
+                        type: 2
+                    },
+                    method: 'GET'
+                }).then((result) => {
+                    this.$nextTick(function () {
+                        this.initPostsChart(result.data);
+                    })
+                })
+            },
+            getCategories: function () {
+                axios({
+                    url: '/categories',
+                    method: 'GET'
+                }).then((result) => {
+                    this.$nextTick(function () {
+                        this.intiCategoriesChart(result.data);
+                    });
+                })
+            },
+            getTags: function () {
+                axios({
+                    url: '/tags',
+                    method: 'GET'
+                }).then((result) => {
+                    this.tags = result.data;
+                    this.$nextTick(function () {
+                        this.initTagsChart(this.tags);
+                    });
+                })
+            },
+            initPostsChart: function (data) {
+                Date.prototype.format = function (fmt) {
+                    var o = {
+                        "M+": this.getMonth() + 1, //月份
+                        "d+": this.getDate(), //日
+                        "h+": this.getHours(), //小时
+                        "m+": this.getMinutes(), //分
+                        "s+": this.getSeconds(), //秒
+                        "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+                        "S": this.getMilliseconds() //毫秒
+                    };
+                    if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+                    for (var k in o)
+                        if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+                    return fmt;
+                };
+
+                function getNextMonth(date) {
+                    var arr = date.split('-');
+                    var year = arr[0]; //获取当前日期的年份
+                    var month = arr[1]; //获取当前日期的月份
+                    var day = arr[2]; //获取当前日期的日
+                    var days = new Date(year, month, 0);
+                    days = days.getDate(); //获取当前日期中的月的天数
+                    var year2 = year;
+                    var month2 = parseInt(month) + 1;
+                    if (month2 == 13) {
+                        year2 = parseInt(year2) + 1;
+                        month2 = 1;
+                    }
+                    var day2 = day;
+                    var days2 = new Date(year2, month2, 0);
+                    days2 = days2.getDate();
+                    if (day2 > days2) {
+                        day2 = days2;
+                    }
+                    if (month2 < 10) {
+                        month2 = '0' + month2;
+                    }
+
+                    var t2 = year2 + '-' + month2 + '-' + day2;
+                    return t2;
+                };
+
+                let postsChart = echarts.init(document.getElementById('posts-chart'));
+
+                function getPostData(data) {
+                    let dayTime = 3600 * 24 * 1000;
+                    let endTime = +echarts.number.parseDate(new Date());
+                    let startTime = +(endTime - 365 * dayTime);
+                    let startDate = new Date(startTime).format('yyyy-MM-dd');
+                    let date = data.map(item => item.date);
+                    let totalDate = [];
+                    let totalCount = [];
+
+                    for (let cur = startDate, i = 1; i <= 13; cur = getNextMonth(cur), i++) {
+                        let formatDate = cur.substring(0, cur.lastIndexOf('-'));
+                        totalDate.push(formatDate);
+                        let count = 0;
+                        let index = date.indexOf(formatDate);
+                        if (index !== -1) {
+                            count = data[index].articleCount;
+                        }
+                        totalCount.push(count);
+                    }
+                    return [totalDate, totalCount];
+                };
+
+                let postData = getPostData(data);
+                let dateValue = postData[0], dataValue = postData[1];
+                let postsOption = {
+                    title: {
+                        text: '文章发布统计图',
+                        top: -5,
+                        x: 'center'
+                    },
+                    tooltip: {
+                        trigger: 'axis'
+                    },
+                    xAxis: {
+                        type: 'category',
+                        data: dateValue,
+                    },
+                    yAxis: {
+                        type: 'value',
+                    },
+                    series: [
+                        {
+                            name: '文章篇数',
+                            type: 'line',
+                            color: ['#6772e5'],
+                            data: dataValue,
+                            markPoint: {
+                                symbolSize: 45,
+                                color: ['#fa755a', '#3ecf8e', '#82d3f4'],
+                                data: [{
+                                    type: 'max',
+                                    itemStyle: {color: ['#3ecf8e']},
+                                    name: '最大值'
+                                }, {
+                                    type: 'min',
+                                    itemStyle: {color: ['#fa755a']},
+                                    name: '最小值'
+                                }]
+                            },
+                            markLine: {
+                                itemStyle: {color: ['#ab47bc']},
+                                data: [
+                                    {type: 'average', name: '平均值'}
+                                ]
+                            }
+                        }
+                    ]
+                };
+                postsChart.setOption(postsOption);
+            },
+            intiCategoriesChart: function (data) {
+                let categoriesChart = echarts.init(document.getElementById('categories-chart'));
+                data = data.map(item => {
+                    return {
+                        name: item.name,
+                        value: item.articleCount
+                    }
+                })
+                let categoriesOption = {
+                    title: {
+                        text: '文章分类统计图',
+                        top: -4,
+                        x: 'center'
+                    },
+                    tooltip: {
+                        trigger: 'item',
+                        formatter: "{a} <br/>{b} : {c} ({d}%)"
+                    },
+                    series: [
+                        {
+                            name: '分类',
+                            type: 'pie',
+                            radius: '50%',
+                            color: ['#6772e5', '#ff9e0f', '#fa755a', '#3ecf8e', '#82d3f4', '#ab47bc', '#525f7f', '#f51c47', '#26A69A'],
+                            data: data,
+                            itemStyle: {
+                                emphasis: {
+                                    shadowBlur: 10,
+                                    shadowOffsetX: 0,
+                                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                                }
+                            }
+                        }
+                    ]
+                };
+                categoriesChart.setOption(categoriesOption);
+            },
+            initTagsChart: function (data) {
+                let tagsChart = echarts.init(document.getElementById('tags-chart'));
+
+                let names = data.map(item => {
+                    return item.name;
+                });
+                let values = data.map(item => {
+                    return item.articleCount;
+                })
+
+                let tagsOption = {
+                    title: {
+                        text: 'TOP10 标签统计图',
+                        top: -5,
+                        x: 'center'
+                    },
+                    tooltip: {},
+                    xAxis: [
+                        {
+                            type: 'category',
+                            data: names,
+                        }
+                    ],
+                    yAxis: [
+                        {
+                            type: 'value'
+                        }
+                    ],
+                    series: [
+                        {
+                            type: 'bar',
+                            color: ['#82d3f4'],
+                            barWidth: 18,
+                            data: values,
+                            markPoint: {
+                                symbolSize: 45,
+                                data: [{
+                                    type: 'max',
+                                    itemStyle: {color: ['#3ecf8e']},
+                                    name: '最大值'
+                                }, {
+                                    type: 'min',
+                                    itemStyle: {color: ['#fa755a']},
+                                    name: '最小值'
+                                }],
+                            },
+                            markLine: {
+                                itemStyle: {color: ['#ab47bc']},
+                                data: [
+                                    {type: 'average', name: '平均值'}
+                                ]
+                            }
+                        }
+                    ]
+                };
+                tagsChart.setOption(tagsOption);
+            }
+        },
+        created(){
+            this.getArticleCount();
+            this.getCategoryCount();
+            this.getTagCount();
+            this.getCalendarData();
+            this.getCategories();
+            this.getTags();
+        },
+    });
+
+</script>
+
+<!--footer-->
+<footer th:replace="/web/fragments :: footer"></footer>
+<!--end footer-->
+
+<!--commons-->
+<div th:replace="/web/fragments :: commons"></div>
+<!--end commons-->
+
+<!--scripts-->
+<div th:replace="/web/fragments :: scripts"></div>
+<!--end scripts-->
+<!--打字机效果-->
+<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"></script>
+<script>
+    var typed = new Typed("#subtitle", {
+        strings: ['挑战无处不在，自己才是真正的敌人。', 'Challenges are everywhere, and you are the real enemy.'],
+        startDelay: 300,
+        typeSpeed: 100,
+        loop: true,
+        backSpeed: 50,
+        showCursor: true
+    });
+</script>
+<script>
+    $(function () {
+        let animateClass = 'animated pulse';
+        $('#myGallery .photo').hover(function () {
+            $(this).addClass(animateClass);
+        }, function () {
+            $(this).removeClass(animateClass);
+        });
+    });
+</script>
+<script type="text/javascript" src="/static/web/js/echarts.min.js"></script>
+</body>
+
+</html>

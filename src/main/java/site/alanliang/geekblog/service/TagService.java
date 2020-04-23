@@ -71,4 +71,11 @@ public interface TagService {
      * @return 标签列表
      */
     List<Tag> listByArticleCount();
+
+    /**
+     * 统计标签数量
+     *
+     * @return 标签数量
+     */
+    long countAll();
 }
