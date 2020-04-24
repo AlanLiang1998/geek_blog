@@ -14459,3 +14459,886 @@ org.thymeleaf.exceptions.TemplateProcessingException: Could not parse as express
 2020-04-24 19:03:34.914 DEBUG 1468 --- [http-nio-8889-exec-10] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
 2020-04-24 19:03:34.915 DEBUG 1468 --- [http-nio-8889-exec-10] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 7(Long)
 2020-04-24 19:03:34.916 DEBUG 1468 --- [http-nio-8889-exec-10] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 2
+2020-04-24 19:03:44.402  INFO 16612 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Starting GeekBlogApplication on DESKTOP-QNDK7AF with PID 16612 (D:\idea\geekblog\target\classes started by AlanLiang in D:\idea\geekblog)
+2020-04-24 19:03:44.408 DEBUG 16612 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Running with Spring Boot v2.2.6.RELEASE, Spring v5.2.5.RELEASE
+2020-04-24 19:03:44.409  INFO 16612 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : The following profiles are active: dev
+2020-04-24 19:03:44.500  INFO 16612 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2020-04-24 19:03:44.501  INFO 16612 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2020-04-24 19:03:47.458  INFO 16612 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8889 (http)
+2020-04-24 19:03:47.487  INFO 16612 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-04-24 19:03:47.487  INFO 16612 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.33]
+2020-04-24 19:03:47.660  INFO 16612 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-04-24 19:03:47.660  INFO 16612 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 3159 ms
+2020-04-24 19:03:48.084  INFO 16612 --- [restartedMain] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2020-04-24 19:03:48.453  INFO 16612 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2020-04-24 19:03:49.737  INFO 16612 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-04-24 19:03:50.154  INFO 16612 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2020-04-24 19:03:50.233  INFO 16612 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8889 (http) with context path ''
+2020-04-24 19:03:50.236  INFO 16612 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Started GeekBlogApplication in 7.004 seconds (JVM running for 9.557)
+2020-04-24 19:03:51.530  INFO 16612 --- [http-nio-8889-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-04-24 19:03:51.531  INFO 16612 --- [http-nio-8889-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-04-24 19:03:51.542  INFO 16612 --- [http-nio-8889-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 11 ms
+2020-04-24 19:03:51.691 DEBUG 16612 --- [http-nio-8889-exec-1] s.a.g.mapper.ArticleMapper.selectOne     : ==>  Preparing: SELECT views FROM t_article WHERE (id = ?) 
+2020-04-24 19:03:51.720 DEBUG 16612 --- [http-nio-8889-exec-1] s.a.g.mapper.ArticleMapper.selectOne     : ==> Parameters: 18(Long)
+2020-04-24 19:03:51.743 DEBUG 16612 --- [http-nio-8889-exec-1] s.a.g.mapper.ArticleMapper.selectOne     : <==      Total: 1
+2020-04-24 19:03:51.756 DEBUG 16612 --- [http-nio-8889-exec-1] s.a.g.mapper.ArticleMapper.updateById    : ==>  Preparing: UPDATE t_article SET views=? WHERE id=? 
+2020-04-24 19:03:51.757 DEBUG 16612 --- [http-nio-8889-exec-1] s.a.g.mapper.ArticleMapper.updateById    : ==> Parameters: 4385(Integer), 18(Long)
+2020-04-24 19:03:51.760 DEBUG 16612 --- [http-nio-8889-exec-1] s.a.g.mapper.ArticleMapper.updateById    : <==    Updates: 1
+2020-04-24 19:03:51.762 DEBUG 16612 --- [http-nio-8889-exec-1] s.a.g.m.ArticleMapper.selectArticleById  : ==>  Preparing: select ta.id, ta.title, ta.content, ta.cover, ta.create_time, ta.type, ta.likes, ta.views, ta.comments, ta.commentable, ta.appreciable, tc.id as cid, tc.name as cname, su.id, su.username from t_article ta left join t_category tc on ta.category_id = tc.id left join sys_user su on ta.author_id = su.id where ta.id = ? 
+2020-04-24 19:03:51.765 DEBUG 16612 --- [http-nio-8889-exec-1] s.a.g.m.ArticleMapper.selectArticleById  : ==> Parameters: 18(Long)
+2020-04-24 19:03:51.827 DEBUG 16612 --- [http-nio-8889-exec-1] s.a.g.m.ArticleMapper.selectArticleById  : <==      Total: 1
+2020-04-24 19:03:51.832 DEBUG 16612 --- [http-nio-8889-exec-1] s.a.g.m.A.selectPrevArticlePreview       : ==>  Preparing: select ta.id, ta.title, ta.summary, ta.create_time, ta.cover, tc.id as cid, tc.name as cname from t_article ta left join t_category tc on ta.category_id = tc.id where ta.id = (select max(id) from t_article where id < ?) 
+2020-04-24 19:03:51.833 DEBUG 16612 --- [http-nio-8889-exec-1] s.a.g.m.A.selectPrevArticlePreview       : ==> Parameters: 18(Long)
+2020-04-24 19:03:51.839 DEBUG 16612 --- [http-nio-8889-exec-1] s.a.g.m.A.selectPrevArticlePreview       : <==      Total: 1
+2020-04-24 19:03:51.841 DEBUG 16612 --- [http-nio-8889-exec-1] s.a.g.m.A.selectNextArticlePreview       : ==>  Preparing: select ta.id, ta.title, ta.summary, ta.create_time, ta.cover, tc.id as cid, tc.name as cname from t_article ta left join t_category tc on ta.category_id = tc.id where ta.id = (select min(id) from t_article where id > ?) 
+2020-04-24 19:03:51.841 DEBUG 16612 --- [http-nio-8889-exec-1] s.a.g.m.A.selectNextArticlePreview       : ==> Parameters: 18(Long)
+2020-04-24 19:03:51.845 DEBUG 16612 --- [http-nio-8889-exec-1] s.a.g.m.A.selectNextArticlePreview       : <==      Total: 1
+2020-04-24 19:03:52.141 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.mapper.ArticleMapper.selectOne     : ==>  Preparing: SELECT views FROM t_article WHERE (id = ?) 
+2020-04-24 19:03:52.142 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.mapper.ArticleMapper.selectOne     : ==> Parameters: 18(Long)
+2020-04-24 19:03:52.143 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.mapper.ArticleMapper.selectOne     : <==      Total: 1
+2020-04-24 19:03:52.146 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.mapper.ArticleMapper.updateById    : ==>  Preparing: UPDATE t_article SET views=? WHERE id=? 
+2020-04-24 19:03:52.147 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.mapper.ArticleMapper.updateById    : ==> Parameters: 4386(Integer), 18(Long)
+2020-04-24 19:03:52.150 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.mapper.ArticleMapper.updateById    : <==    Updates: 1
+2020-04-24 19:03:52.152 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.m.ArticleMapper.selectArticleById  : ==>  Preparing: select ta.id, ta.title, ta.content, ta.cover, ta.create_time, ta.type, ta.likes, ta.views, ta.comments, ta.commentable, ta.appreciable, tc.id as cid, tc.name as cname, su.id, su.username from t_article ta left join t_category tc on ta.category_id = tc.id left join sys_user su on ta.author_id = su.id where ta.id = ? 
+2020-04-24 19:03:52.152 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.m.ArticleMapper.selectArticleById  : ==> Parameters: 18(Long)
+2020-04-24 19:03:52.159 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.m.ArticleMapper.selectArticleById  : <==      Total: 1
+2020-04-24 19:03:52.160 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.m.A.selectPrevArticlePreview       : ==>  Preparing: select ta.id, ta.title, ta.summary, ta.create_time, ta.cover, tc.id as cid, tc.name as cname from t_article ta left join t_category tc on ta.category_id = tc.id where ta.id = (select max(id) from t_article where id < ?) 
+2020-04-24 19:03:52.160 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.m.A.selectPrevArticlePreview       : ==> Parameters: 18(Long)
+2020-04-24 19:03:52.165 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.m.A.selectPrevArticlePreview       : <==      Total: 1
+2020-04-24 19:03:52.168 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.m.A.selectNextArticlePreview       : ==>  Preparing: select ta.id, ta.title, ta.summary, ta.create_time, ta.cover, tc.id as cid, tc.name as cname from t_article ta left join t_category tc on ta.category_id = tc.id where ta.id = (select min(id) from t_article where id > ?) 
+2020-04-24 19:03:52.168 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.m.A.selectNextArticlePreview       : ==> Parameters: 18(Long)
+2020-04-24 19:03:52.172 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.m.A.selectNextArticlePreview       : <==      Total: 1
+2020-04-24 19:03:52.286 DEBUG 16612 --- [http-nio-8889-exec-1] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-24 19:03:52.287 DEBUG 16612 --- [http-nio-8889-exec-1] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 18(Long)
+2020-04-24 19:03:52.290 DEBUG 16612 --- [http-nio-8889-exec-1] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 1
+2020-04-24 19:03:52.291 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-24 19:03:52.292 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 18(Long)
+2020-04-24 19:03:52.294 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 1
+2020-04-24 19:03:52.341 DEBUG 16612 --- [http-nio-8889-exec-1] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-24 19:03:52.342 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-24 19:03:52.342 DEBUG 16612 --- [http-nio-8889-exec-1] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 11(Long)
+2020-04-24 19:03:52.343 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 11(Long)
+2020-04-24 19:03:52.345 DEBUG 16612 --- [http-nio-8889-exec-1] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 1
+2020-04-24 19:03:52.348 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 1
+2020-04-24 19:03:53.353 DEBUG 16612 --- [http-nio-8889-exec-3] s.a.g.mapper.ArticleMapper.selectOne     : ==>  Preparing: SELECT views FROM t_article WHERE (id = ?) 
+2020-04-24 19:03:53.355 DEBUG 16612 --- [http-nio-8889-exec-3] s.a.g.mapper.ArticleMapper.selectOne     : ==> Parameters: 7(Long)
+2020-04-24 19:03:53.357 DEBUG 16612 --- [http-nio-8889-exec-3] s.a.g.mapper.ArticleMapper.selectOne     : <==      Total: 1
+2020-04-24 19:03:53.360 DEBUG 16612 --- [http-nio-8889-exec-3] s.a.g.mapper.ArticleMapper.updateById    : ==>  Preparing: UPDATE t_article SET views=? WHERE id=? 
+2020-04-24 19:03:53.362 DEBUG 16612 --- [http-nio-8889-exec-3] s.a.g.mapper.ArticleMapper.updateById    : ==> Parameters: 1392(Integer), 7(Long)
+2020-04-24 19:03:53.366 DEBUG 16612 --- [http-nio-8889-exec-3] s.a.g.mapper.ArticleMapper.updateById    : <==    Updates: 1
+2020-04-24 19:03:53.368 DEBUG 16612 --- [http-nio-8889-exec-3] s.a.g.m.ArticleMapper.selectArticleById  : ==>  Preparing: select ta.id, ta.title, ta.content, ta.cover, ta.create_time, ta.type, ta.likes, ta.views, ta.comments, ta.commentable, ta.appreciable, tc.id as cid, tc.name as cname, su.id, su.username from t_article ta left join t_category tc on ta.category_id = tc.id left join sys_user su on ta.author_id = su.id where ta.id = ? 
+2020-04-24 19:03:53.370 DEBUG 16612 --- [http-nio-8889-exec-3] s.a.g.m.ArticleMapper.selectArticleById  : ==> Parameters: 7(Long)
+2020-04-24 19:03:53.373 DEBUG 16612 --- [http-nio-8889-exec-3] s.a.g.m.ArticleMapper.selectArticleById  : <==      Total: 1
+2020-04-24 19:03:53.375 DEBUG 16612 --- [http-nio-8889-exec-3] s.a.g.m.A.selectPrevArticlePreview       : ==>  Preparing: select ta.id, ta.title, ta.summary, ta.create_time, ta.cover, tc.id as cid, tc.name as cname from t_article ta left join t_category tc on ta.category_id = tc.id where ta.id = (select max(id) from t_article where id < ?) 
+2020-04-24 19:03:53.375 DEBUG 16612 --- [http-nio-8889-exec-3] s.a.g.m.A.selectPrevArticlePreview       : ==> Parameters: 7(Long)
+2020-04-24 19:03:53.377 DEBUG 16612 --- [http-nio-8889-exec-3] s.a.g.m.A.selectPrevArticlePreview       : <==      Total: 0
+2020-04-24 19:03:53.382 DEBUG 16612 --- [http-nio-8889-exec-3] s.a.g.m.A.selectNextArticlePreview       : ==>  Preparing: select ta.id, ta.title, ta.summary, ta.create_time, ta.cover, tc.id as cid, tc.name as cname from t_article ta left join t_category tc on ta.category_id = tc.id where ta.id = (select min(id) from t_article where id > ?) 
+2020-04-24 19:03:53.384 DEBUG 16612 --- [http-nio-8889-exec-3] s.a.g.m.A.selectNextArticlePreview       : ==> Parameters: 7(Long)
+2020-04-24 19:03:53.388 DEBUG 16612 --- [http-nio-8889-exec-3] s.a.g.m.A.selectNextArticlePreview       : <==      Total: 1
+2020-04-24 19:03:53.403 DEBUG 16612 --- [http-nio-8889-exec-3] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-24 19:03:53.404 DEBUG 16612 --- [http-nio-8889-exec-3] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 7(Long)
+2020-04-24 19:03:53.405 DEBUG 16612 --- [http-nio-8889-exec-3] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 2
+2020-04-24 19:03:54.404 DEBUG 16612 --- [http-nio-8889-exec-4] s.a.g.mapper.ArticleMapper.selectOne     : ==>  Preparing: SELECT views FROM t_article WHERE (id = ?) 
+2020-04-24 19:03:54.404 DEBUG 16612 --- [http-nio-8889-exec-4] s.a.g.mapper.ArticleMapper.selectOne     : ==> Parameters: 7(Long)
+2020-04-24 19:03:54.406 DEBUG 16612 --- [http-nio-8889-exec-4] s.a.g.mapper.ArticleMapper.selectOne     : <==      Total: 1
+2020-04-24 19:03:54.408 DEBUG 16612 --- [http-nio-8889-exec-4] s.a.g.mapper.ArticleMapper.updateById    : ==>  Preparing: UPDATE t_article SET views=? WHERE id=? 
+2020-04-24 19:03:54.409 DEBUG 16612 --- [http-nio-8889-exec-4] s.a.g.mapper.ArticleMapper.updateById    : ==> Parameters: 1393(Integer), 7(Long)
+2020-04-24 19:03:54.411 DEBUG 16612 --- [http-nio-8889-exec-4] s.a.g.mapper.ArticleMapper.updateById    : <==    Updates: 1
+2020-04-24 19:03:54.413 DEBUG 16612 --- [http-nio-8889-exec-4] s.a.g.m.ArticleMapper.selectArticleById  : ==>  Preparing: select ta.id, ta.title, ta.content, ta.cover, ta.create_time, ta.type, ta.likes, ta.views, ta.comments, ta.commentable, ta.appreciable, tc.id as cid, tc.name as cname, su.id, su.username from t_article ta left join t_category tc on ta.category_id = tc.id left join sys_user su on ta.author_id = su.id where ta.id = ? 
+2020-04-24 19:03:54.415 DEBUG 16612 --- [http-nio-8889-exec-4] s.a.g.m.ArticleMapper.selectArticleById  : ==> Parameters: 7(Long)
+2020-04-24 19:03:54.419 DEBUG 16612 --- [http-nio-8889-exec-4] s.a.g.m.ArticleMapper.selectArticleById  : <==      Total: 1
+2020-04-24 19:03:54.420 DEBUG 16612 --- [http-nio-8889-exec-4] s.a.g.m.A.selectPrevArticlePreview       : ==>  Preparing: select ta.id, ta.title, ta.summary, ta.create_time, ta.cover, tc.id as cid, tc.name as cname from t_article ta left join t_category tc on ta.category_id = tc.id where ta.id = (select max(id) from t_article where id < ?) 
+2020-04-24 19:03:54.421 DEBUG 16612 --- [http-nio-8889-exec-4] s.a.g.m.A.selectPrevArticlePreview       : ==> Parameters: 7(Long)
+2020-04-24 19:03:54.422 DEBUG 16612 --- [http-nio-8889-exec-4] s.a.g.m.A.selectPrevArticlePreview       : <==      Total: 0
+2020-04-24 19:03:54.424 DEBUG 16612 --- [http-nio-8889-exec-4] s.a.g.m.A.selectNextArticlePreview       : ==>  Preparing: select ta.id, ta.title, ta.summary, ta.create_time, ta.cover, tc.id as cid, tc.name as cname from t_article ta left join t_category tc on ta.category_id = tc.id where ta.id = (select min(id) from t_article where id > ?) 
+2020-04-24 19:03:54.424 DEBUG 16612 --- [http-nio-8889-exec-4] s.a.g.m.A.selectNextArticlePreview       : ==> Parameters: 7(Long)
+2020-04-24 19:03:54.427 DEBUG 16612 --- [http-nio-8889-exec-4] s.a.g.m.A.selectNextArticlePreview       : <==      Total: 1
+2020-04-24 19:03:54.441 DEBUG 16612 --- [http-nio-8889-exec-4] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-24 19:03:54.442 DEBUG 16612 --- [http-nio-8889-exec-4] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 7(Long)
+2020-04-24 19:03:54.444 DEBUG 16612 --- [http-nio-8889-exec-4] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 2
+2020-04-24 19:03:55.486 DEBUG 16612 --- [http-nio-8889-exec-5] s.a.g.mapper.ArticleMapper.selectOne     : ==>  Preparing: SELECT views FROM t_article WHERE (id = ?) 
+2020-04-24 19:03:55.486 DEBUG 16612 --- [http-nio-8889-exec-5] s.a.g.mapper.ArticleMapper.selectOne     : ==> Parameters: 7(Long)
+2020-04-24 19:03:55.487 DEBUG 16612 --- [http-nio-8889-exec-5] s.a.g.mapper.ArticleMapper.selectOne     : <==      Total: 1
+2020-04-24 19:03:55.489 DEBUG 16612 --- [http-nio-8889-exec-5] s.a.g.mapper.ArticleMapper.updateById    : ==>  Preparing: UPDATE t_article SET views=? WHERE id=? 
+2020-04-24 19:03:55.490 DEBUG 16612 --- [http-nio-8889-exec-5] s.a.g.mapper.ArticleMapper.updateById    : ==> Parameters: 1394(Integer), 7(Long)
+2020-04-24 19:03:55.493 DEBUG 16612 --- [http-nio-8889-exec-5] s.a.g.mapper.ArticleMapper.updateById    : <==    Updates: 1
+2020-04-24 19:03:55.494 DEBUG 16612 --- [http-nio-8889-exec-5] s.a.g.m.ArticleMapper.selectArticleById  : ==>  Preparing: select ta.id, ta.title, ta.content, ta.cover, ta.create_time, ta.type, ta.likes, ta.views, ta.comments, ta.commentable, ta.appreciable, tc.id as cid, tc.name as cname, su.id, su.username from t_article ta left join t_category tc on ta.category_id = tc.id left join sys_user su on ta.author_id = su.id where ta.id = ? 
+2020-04-24 19:03:55.496 DEBUG 16612 --- [http-nio-8889-exec-5] s.a.g.m.ArticleMapper.selectArticleById  : ==> Parameters: 7(Long)
+2020-04-24 19:03:55.500 DEBUG 16612 --- [http-nio-8889-exec-5] s.a.g.m.ArticleMapper.selectArticleById  : <==      Total: 1
+2020-04-24 19:03:55.503 DEBUG 16612 --- [http-nio-8889-exec-5] s.a.g.m.A.selectPrevArticlePreview       : ==>  Preparing: select ta.id, ta.title, ta.summary, ta.create_time, ta.cover, tc.id as cid, tc.name as cname from t_article ta left join t_category tc on ta.category_id = tc.id where ta.id = (select max(id) from t_article where id < ?) 
+2020-04-24 19:03:55.503 DEBUG 16612 --- [http-nio-8889-exec-5] s.a.g.m.A.selectPrevArticlePreview       : ==> Parameters: 7(Long)
+2020-04-24 19:03:55.504 DEBUG 16612 --- [http-nio-8889-exec-5] s.a.g.m.A.selectPrevArticlePreview       : <==      Total: 0
+2020-04-24 19:03:55.505 DEBUG 16612 --- [http-nio-8889-exec-5] s.a.g.m.A.selectNextArticlePreview       : ==>  Preparing: select ta.id, ta.title, ta.summary, ta.create_time, ta.cover, tc.id as cid, tc.name as cname from t_article ta left join t_category tc on ta.category_id = tc.id where ta.id = (select min(id) from t_article where id > ?) 
+2020-04-24 19:03:55.506 DEBUG 16612 --- [http-nio-8889-exec-5] s.a.g.m.A.selectNextArticlePreview       : ==> Parameters: 7(Long)
+2020-04-24 19:03:55.509 DEBUG 16612 --- [http-nio-8889-exec-5] s.a.g.m.A.selectNextArticlePreview       : <==      Total: 1
+2020-04-24 19:03:55.522 DEBUG 16612 --- [http-nio-8889-exec-5] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-24 19:03:55.523 DEBUG 16612 --- [http-nio-8889-exec-5] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 7(Long)
+2020-04-24 19:03:55.525 DEBUG 16612 --- [http-nio-8889-exec-5] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 2
+2020-04-24 19:03:56.925 DEBUG 16612 --- [http-nio-8889-exec-6] s.a.g.mapper.ArticleMapper.selectOne     : ==>  Preparing: SELECT views FROM t_article WHERE (id = ?) 
+2020-04-24 19:03:56.925 DEBUG 16612 --- [http-nio-8889-exec-6] s.a.g.mapper.ArticleMapper.selectOne     : ==> Parameters: 18(Long)
+2020-04-24 19:03:56.928 DEBUG 16612 --- [http-nio-8889-exec-6] s.a.g.mapper.ArticleMapper.selectOne     : <==      Total: 1
+2020-04-24 19:03:56.930 DEBUG 16612 --- [http-nio-8889-exec-6] s.a.g.mapper.ArticleMapper.updateById    : ==>  Preparing: UPDATE t_article SET views=? WHERE id=? 
+2020-04-24 19:03:56.930 DEBUG 16612 --- [http-nio-8889-exec-6] s.a.g.mapper.ArticleMapper.updateById    : ==> Parameters: 4387(Integer), 18(Long)
+2020-04-24 19:03:56.935 DEBUG 16612 --- [http-nio-8889-exec-6] s.a.g.mapper.ArticleMapper.updateById    : <==    Updates: 1
+2020-04-24 19:03:56.936 DEBUG 16612 --- [http-nio-8889-exec-6] s.a.g.m.ArticleMapper.selectArticleById  : ==>  Preparing: select ta.id, ta.title, ta.content, ta.cover, ta.create_time, ta.type, ta.likes, ta.views, ta.comments, ta.commentable, ta.appreciable, tc.id as cid, tc.name as cname, su.id, su.username from t_article ta left join t_category tc on ta.category_id = tc.id left join sys_user su on ta.author_id = su.id where ta.id = ? 
+2020-04-24 19:03:56.936 DEBUG 16612 --- [http-nio-8889-exec-6] s.a.g.m.ArticleMapper.selectArticleById  : ==> Parameters: 18(Long)
+2020-04-24 19:03:56.939 DEBUG 16612 --- [http-nio-8889-exec-6] s.a.g.m.ArticleMapper.selectArticleById  : <==      Total: 1
+2020-04-24 19:03:56.940 DEBUG 16612 --- [http-nio-8889-exec-6] s.a.g.m.A.selectPrevArticlePreview       : ==>  Preparing: select ta.id, ta.title, ta.summary, ta.create_time, ta.cover, tc.id as cid, tc.name as cname from t_article ta left join t_category tc on ta.category_id = tc.id where ta.id = (select max(id) from t_article where id < ?) 
+2020-04-24 19:03:56.941 DEBUG 16612 --- [http-nio-8889-exec-6] s.a.g.m.A.selectPrevArticlePreview       : ==> Parameters: 18(Long)
+2020-04-24 19:03:56.944 DEBUG 16612 --- [http-nio-8889-exec-6] s.a.g.m.A.selectPrevArticlePreview       : <==      Total: 1
+2020-04-24 19:03:56.947 DEBUG 16612 --- [http-nio-8889-exec-6] s.a.g.m.A.selectNextArticlePreview       : ==>  Preparing: select ta.id, ta.title, ta.summary, ta.create_time, ta.cover, tc.id as cid, tc.name as cname from t_article ta left join t_category tc on ta.category_id = tc.id where ta.id = (select min(id) from t_article where id > ?) 
+2020-04-24 19:03:56.948 DEBUG 16612 --- [http-nio-8889-exec-6] s.a.g.m.A.selectNextArticlePreview       : ==> Parameters: 18(Long)
+2020-04-24 19:03:56.950 DEBUG 16612 --- [http-nio-8889-exec-6] s.a.g.m.A.selectNextArticlePreview       : <==      Total: 1
+2020-04-24 19:03:56.962 DEBUG 16612 --- [http-nio-8889-exec-6] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-24 19:03:56.962 DEBUG 16612 --- [http-nio-8889-exec-6] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 18(Long)
+2020-04-24 19:03:56.965 DEBUG 16612 --- [http-nio-8889-exec-6] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 1
+2020-04-24 19:03:56.974 DEBUG 16612 --- [http-nio-8889-exec-6] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-24 19:03:56.974 DEBUG 16612 --- [http-nio-8889-exec-6] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 11(Long)
+2020-04-24 19:03:56.976 DEBUG 16612 --- [http-nio-8889-exec-6] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 1
+2020-04-24 19:03:58.453 DEBUG 16612 --- [http-nio-8889-exec-7] s.a.g.mapper.ArticleMapper.selectOne     : ==>  Preparing: SELECT views FROM t_article WHERE (id = ?) 
+2020-04-24 19:03:58.453 DEBUG 16612 --- [http-nio-8889-exec-7] s.a.g.mapper.ArticleMapper.selectOne     : ==> Parameters: 11(Long)
+2020-04-24 19:03:58.455 DEBUG 16612 --- [http-nio-8889-exec-7] s.a.g.mapper.ArticleMapper.selectOne     : <==      Total: 1
+2020-04-24 19:03:58.456 DEBUG 16612 --- [http-nio-8889-exec-7] s.a.g.mapper.ArticleMapper.updateById    : ==>  Preparing: UPDATE t_article SET views=? WHERE id=? 
+2020-04-24 19:03:58.456 DEBUG 16612 --- [http-nio-8889-exec-7] s.a.g.mapper.ArticleMapper.updateById    : ==> Parameters: 2180(Integer), 11(Long)
+2020-04-24 19:03:58.458 DEBUG 16612 --- [http-nio-8889-exec-7] s.a.g.mapper.ArticleMapper.updateById    : <==    Updates: 1
+2020-04-24 19:03:58.459 DEBUG 16612 --- [http-nio-8889-exec-7] s.a.g.m.ArticleMapper.selectArticleById  : ==>  Preparing: select ta.id, ta.title, ta.content, ta.cover, ta.create_time, ta.type, ta.likes, ta.views, ta.comments, ta.commentable, ta.appreciable, tc.id as cid, tc.name as cname, su.id, su.username from t_article ta left join t_category tc on ta.category_id = tc.id left join sys_user su on ta.author_id = su.id where ta.id = ? 
+2020-04-24 19:03:58.459 DEBUG 16612 --- [http-nio-8889-exec-7] s.a.g.m.ArticleMapper.selectArticleById  : ==> Parameters: 11(Long)
+2020-04-24 19:03:58.469 DEBUG 16612 --- [http-nio-8889-exec-7] s.a.g.m.ArticleMapper.selectArticleById  : <==      Total: 1
+2020-04-24 19:03:58.470 DEBUG 16612 --- [http-nio-8889-exec-7] s.a.g.m.A.selectPrevArticlePreview       : ==>  Preparing: select ta.id, ta.title, ta.summary, ta.create_time, ta.cover, tc.id as cid, tc.name as cname from t_article ta left join t_category tc on ta.category_id = tc.id where ta.id = (select max(id) from t_article where id < ?) 
+2020-04-24 19:03:58.470 DEBUG 16612 --- [http-nio-8889-exec-7] s.a.g.m.A.selectPrevArticlePreview       : ==> Parameters: 11(Long)
+2020-04-24 19:03:58.472 DEBUG 16612 --- [http-nio-8889-exec-7] s.a.g.m.A.selectPrevArticlePreview       : <==      Total: 1
+2020-04-24 19:03:58.473 DEBUG 16612 --- [http-nio-8889-exec-7] s.a.g.m.A.selectNextArticlePreview       : ==>  Preparing: select ta.id, ta.title, ta.summary, ta.create_time, ta.cover, tc.id as cid, tc.name as cname from t_article ta left join t_category tc on ta.category_id = tc.id where ta.id = (select min(id) from t_article where id > ?) 
+2020-04-24 19:03:58.473 DEBUG 16612 --- [http-nio-8889-exec-7] s.a.g.m.A.selectNextArticlePreview       : ==> Parameters: 11(Long)
+2020-04-24 19:03:58.477 DEBUG 16612 --- [http-nio-8889-exec-7] s.a.g.m.A.selectNextArticlePreview       : <==      Total: 1
+2020-04-24 19:03:58.488 DEBUG 16612 --- [http-nio-8889-exec-7] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-24 19:03:58.489 DEBUG 16612 --- [http-nio-8889-exec-7] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 11(Long)
+2020-04-24 19:03:58.490 DEBUG 16612 --- [http-nio-8889-exec-7] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 1
+2020-04-24 19:03:58.496 DEBUG 16612 --- [http-nio-8889-exec-7] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-24 19:03:58.496 DEBUG 16612 --- [http-nio-8889-exec-7] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 7(Long)
+2020-04-24 19:03:58.500 DEBUG 16612 --- [http-nio-8889-exec-7] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 2
+2020-04-24 19:03:58.704 DEBUG 16612 --- [http-nio-8889-exec-8] s.a.g.mapper.ArticleMapper.selectOne     : ==>  Preparing: SELECT views FROM t_article WHERE (id = ?) 
+2020-04-24 19:03:58.704 DEBUG 16612 --- [http-nio-8889-exec-8] s.a.g.mapper.ArticleMapper.selectOne     : ==> Parameters: 11(Long)
+2020-04-24 19:03:58.705 DEBUG 16612 --- [http-nio-8889-exec-8] s.a.g.mapper.ArticleMapper.selectOne     : <==      Total: 1
+2020-04-24 19:03:58.706 DEBUG 16612 --- [http-nio-8889-exec-8] s.a.g.mapper.ArticleMapper.updateById    : ==>  Preparing: UPDATE t_article SET views=? WHERE id=? 
+2020-04-24 19:03:58.707 DEBUG 16612 --- [http-nio-8889-exec-8] s.a.g.mapper.ArticleMapper.updateById    : ==> Parameters: 2181(Integer), 11(Long)
+2020-04-24 19:03:58.710 DEBUG 16612 --- [http-nio-8889-exec-8] s.a.g.mapper.ArticleMapper.updateById    : <==    Updates: 1
+2020-04-24 19:03:58.711 DEBUG 16612 --- [http-nio-8889-exec-8] s.a.g.m.ArticleMapper.selectArticleById  : ==>  Preparing: select ta.id, ta.title, ta.content, ta.cover, ta.create_time, ta.type, ta.likes, ta.views, ta.comments, ta.commentable, ta.appreciable, tc.id as cid, tc.name as cname, su.id, su.username from t_article ta left join t_category tc on ta.category_id = tc.id left join sys_user su on ta.author_id = su.id where ta.id = ? 
+2020-04-24 19:03:58.712 DEBUG 16612 --- [http-nio-8889-exec-8] s.a.g.m.ArticleMapper.selectArticleById  : ==> Parameters: 11(Long)
+2020-04-24 19:03:58.718 DEBUG 16612 --- [http-nio-8889-exec-8] s.a.g.m.ArticleMapper.selectArticleById  : <==      Total: 1
+2020-04-24 19:03:58.718 DEBUG 16612 --- [http-nio-8889-exec-8] s.a.g.m.A.selectPrevArticlePreview       : ==>  Preparing: select ta.id, ta.title, ta.summary, ta.create_time, ta.cover, tc.id as cid, tc.name as cname from t_article ta left join t_category tc on ta.category_id = tc.id where ta.id = (select max(id) from t_article where id < ?) 
+2020-04-24 19:03:58.718 DEBUG 16612 --- [http-nio-8889-exec-8] s.a.g.m.A.selectPrevArticlePreview       : ==> Parameters: 11(Long)
+2020-04-24 19:03:58.723 DEBUG 16612 --- [http-nio-8889-exec-8] s.a.g.m.A.selectPrevArticlePreview       : <==      Total: 1
+2020-04-24 19:03:58.725 DEBUG 16612 --- [http-nio-8889-exec-8] s.a.g.m.A.selectNextArticlePreview       : ==>  Preparing: select ta.id, ta.title, ta.summary, ta.create_time, ta.cover, tc.id as cid, tc.name as cname from t_article ta left join t_category tc on ta.category_id = tc.id where ta.id = (select min(id) from t_article where id > ?) 
+2020-04-24 19:03:58.725 DEBUG 16612 --- [http-nio-8889-exec-8] s.a.g.m.A.selectNextArticlePreview       : ==> Parameters: 11(Long)
+2020-04-24 19:03:58.730 DEBUG 16612 --- [http-nio-8889-exec-8] s.a.g.m.A.selectNextArticlePreview       : <==      Total: 1
+2020-04-24 19:03:58.744 DEBUG 16612 --- [http-nio-8889-exec-8] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-24 19:03:58.745 DEBUG 16612 --- [http-nio-8889-exec-8] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 11(Long)
+2020-04-24 19:03:58.752 DEBUG 16612 --- [http-nio-8889-exec-8] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 1
+2020-04-24 19:03:58.760 DEBUG 16612 --- [http-nio-8889-exec-8] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-24 19:03:58.761 DEBUG 16612 --- [http-nio-8889-exec-8] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 7(Long)
+2020-04-24 19:03:58.765 DEBUG 16612 --- [http-nio-8889-exec-8] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 2
+2020-04-24 19:03:59.569 DEBUG 16612 --- [http-nio-8889-exec-9] s.a.g.mapper.ArticleMapper.selectOne     : ==>  Preparing: SELECT views FROM t_article WHERE (id = ?) 
+2020-04-24 19:03:59.569 DEBUG 16612 --- [http-nio-8889-exec-9] s.a.g.mapper.ArticleMapper.selectOne     : ==> Parameters: 11(Long)
+2020-04-24 19:03:59.570 DEBUG 16612 --- [http-nio-8889-exec-9] s.a.g.mapper.ArticleMapper.selectOne     : <==      Total: 1
+2020-04-24 19:03:59.571 DEBUG 16612 --- [http-nio-8889-exec-9] s.a.g.mapper.ArticleMapper.updateById    : ==>  Preparing: UPDATE t_article SET views=? WHERE id=? 
+2020-04-24 19:03:59.571 DEBUG 16612 --- [http-nio-8889-exec-9] s.a.g.mapper.ArticleMapper.updateById    : ==> Parameters: 2182(Integer), 11(Long)
+2020-04-24 19:03:59.573 DEBUG 16612 --- [http-nio-8889-exec-9] s.a.g.mapper.ArticleMapper.updateById    : <==    Updates: 1
+2020-04-24 19:03:59.574 DEBUG 16612 --- [http-nio-8889-exec-9] s.a.g.m.ArticleMapper.selectArticleById  : ==>  Preparing: select ta.id, ta.title, ta.content, ta.cover, ta.create_time, ta.type, ta.likes, ta.views, ta.comments, ta.commentable, ta.appreciable, tc.id as cid, tc.name as cname, su.id, su.username from t_article ta left join t_category tc on ta.category_id = tc.id left join sys_user su on ta.author_id = su.id where ta.id = ? 
+2020-04-24 19:03:59.574 DEBUG 16612 --- [http-nio-8889-exec-9] s.a.g.m.ArticleMapper.selectArticleById  : ==> Parameters: 11(Long)
+2020-04-24 19:03:59.578 DEBUG 16612 --- [http-nio-8889-exec-9] s.a.g.m.ArticleMapper.selectArticleById  : <==      Total: 1
+2020-04-24 19:03:59.581 DEBUG 16612 --- [http-nio-8889-exec-9] s.a.g.m.A.selectPrevArticlePreview       : ==>  Preparing: select ta.id, ta.title, ta.summary, ta.create_time, ta.cover, tc.id as cid, tc.name as cname from t_article ta left join t_category tc on ta.category_id = tc.id where ta.id = (select max(id) from t_article where id < ?) 
+2020-04-24 19:03:59.582 DEBUG 16612 --- [http-nio-8889-exec-9] s.a.g.m.A.selectPrevArticlePreview       : ==> Parameters: 11(Long)
+2020-04-24 19:03:59.586 DEBUG 16612 --- [http-nio-8889-exec-9] s.a.g.m.A.selectPrevArticlePreview       : <==      Total: 1
+2020-04-24 19:03:59.586 DEBUG 16612 --- [http-nio-8889-exec-9] s.a.g.m.A.selectNextArticlePreview       : ==>  Preparing: select ta.id, ta.title, ta.summary, ta.create_time, ta.cover, tc.id as cid, tc.name as cname from t_article ta left join t_category tc on ta.category_id = tc.id where ta.id = (select min(id) from t_article where id > ?) 
+2020-04-24 19:03:59.587 DEBUG 16612 --- [http-nio-8889-exec-9] s.a.g.m.A.selectNextArticlePreview       : ==> Parameters: 11(Long)
+2020-04-24 19:03:59.590 DEBUG 16612 --- [http-nio-8889-exec-9] s.a.g.m.A.selectNextArticlePreview       : <==      Total: 1
+2020-04-24 19:03:59.602 DEBUG 16612 --- [http-nio-8889-exec-9] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-24 19:03:59.602 DEBUG 16612 --- [http-nio-8889-exec-9] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 11(Long)
+2020-04-24 19:03:59.604 DEBUG 16612 --- [http-nio-8889-exec-9] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 1
+2020-04-24 19:03:59.609 DEBUG 16612 --- [http-nio-8889-exec-9] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-24 19:03:59.609 DEBUG 16612 --- [http-nio-8889-exec-9] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 7(Long)
+2020-04-24 19:03:59.612 DEBUG 16612 --- [http-nio-8889-exec-9] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 2
+2020-04-24 19:04:01.114 DEBUG 16612 --- [http-nio-8889-exec-10] s.a.g.mapper.ArticleMapper.selectOne     : ==>  Preparing: SELECT views FROM t_article WHERE (id = ?) 
+2020-04-24 19:04:01.115 DEBUG 16612 --- [http-nio-8889-exec-10] s.a.g.mapper.ArticleMapper.selectOne     : ==> Parameters: 18(Long)
+2020-04-24 19:04:01.116 DEBUG 16612 --- [http-nio-8889-exec-10] s.a.g.mapper.ArticleMapper.selectOne     : <==      Total: 1
+2020-04-24 19:04:01.119 DEBUG 16612 --- [http-nio-8889-exec-10] s.a.g.mapper.ArticleMapper.updateById    : ==>  Preparing: UPDATE t_article SET views=? WHERE id=? 
+2020-04-24 19:04:01.119 DEBUG 16612 --- [http-nio-8889-exec-10] s.a.g.mapper.ArticleMapper.updateById    : ==> Parameters: 4388(Integer), 18(Long)
+2020-04-24 19:04:01.121 DEBUG 16612 --- [http-nio-8889-exec-10] s.a.g.mapper.ArticleMapper.updateById    : <==    Updates: 1
+2020-04-24 19:04:01.122 DEBUG 16612 --- [http-nio-8889-exec-10] s.a.g.m.ArticleMapper.selectArticleById  : ==>  Preparing: select ta.id, ta.title, ta.content, ta.cover, ta.create_time, ta.type, ta.likes, ta.views, ta.comments, ta.commentable, ta.appreciable, tc.id as cid, tc.name as cname, su.id, su.username from t_article ta left join t_category tc on ta.category_id = tc.id left join sys_user su on ta.author_id = su.id where ta.id = ? 
+2020-04-24 19:04:01.122 DEBUG 16612 --- [http-nio-8889-exec-10] s.a.g.m.ArticleMapper.selectArticleById  : ==> Parameters: 18(Long)
+2020-04-24 19:04:01.124 DEBUG 16612 --- [http-nio-8889-exec-10] s.a.g.m.ArticleMapper.selectArticleById  : <==      Total: 1
+2020-04-24 19:04:01.126 DEBUG 16612 --- [http-nio-8889-exec-10] s.a.g.m.A.selectPrevArticlePreview       : ==>  Preparing: select ta.id, ta.title, ta.summary, ta.create_time, ta.cover, tc.id as cid, tc.name as cname from t_article ta left join t_category tc on ta.category_id = tc.id where ta.id = (select max(id) from t_article where id < ?) 
+2020-04-24 19:04:01.127 DEBUG 16612 --- [http-nio-8889-exec-10] s.a.g.m.A.selectPrevArticlePreview       : ==> Parameters: 18(Long)
+2020-04-24 19:04:01.132 DEBUG 16612 --- [http-nio-8889-exec-10] s.a.g.m.A.selectPrevArticlePreview       : <==      Total: 1
+2020-04-24 19:04:01.133 DEBUG 16612 --- [http-nio-8889-exec-10] s.a.g.m.A.selectNextArticlePreview       : ==>  Preparing: select ta.id, ta.title, ta.summary, ta.create_time, ta.cover, tc.id as cid, tc.name as cname from t_article ta left join t_category tc on ta.category_id = tc.id where ta.id = (select min(id) from t_article where id > ?) 
+2020-04-24 19:04:01.134 DEBUG 16612 --- [http-nio-8889-exec-10] s.a.g.m.A.selectNextArticlePreview       : ==> Parameters: 18(Long)
+2020-04-24 19:04:01.140 DEBUG 16612 --- [http-nio-8889-exec-10] s.a.g.m.A.selectNextArticlePreview       : <==      Total: 1
+2020-04-24 19:04:01.152 DEBUG 16612 --- [http-nio-8889-exec-10] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-24 19:04:01.153 DEBUG 16612 --- [http-nio-8889-exec-10] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 18(Long)
+2020-04-24 19:04:01.154 DEBUG 16612 --- [http-nio-8889-exec-10] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 1
+2020-04-24 19:04:01.164 DEBUG 16612 --- [http-nio-8889-exec-10] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-24 19:04:01.165 DEBUG 16612 --- [http-nio-8889-exec-10] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 11(Long)
+2020-04-24 19:04:01.167 DEBUG 16612 --- [http-nio-8889-exec-10] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 1
+2020-04-24 19:04:04.551 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.mapper.ArticleMapper.selectOne     : ==>  Preparing: SELECT views FROM t_article WHERE (id = ?) 
+2020-04-24 19:04:04.552 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.mapper.ArticleMapper.selectOne     : ==> Parameters: 11(Long)
+2020-04-24 19:04:04.553 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.mapper.ArticleMapper.selectOne     : <==      Total: 1
+2020-04-24 19:04:04.555 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.mapper.ArticleMapper.updateById    : ==>  Preparing: UPDATE t_article SET views=? WHERE id=? 
+2020-04-24 19:04:04.556 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.mapper.ArticleMapper.updateById    : ==> Parameters: 2183(Integer), 11(Long)
+2020-04-24 19:04:04.559 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.mapper.ArticleMapper.updateById    : <==    Updates: 1
+2020-04-24 19:04:04.561 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.m.ArticleMapper.selectArticleById  : ==>  Preparing: select ta.id, ta.title, ta.content, ta.cover, ta.create_time, ta.type, ta.likes, ta.views, ta.comments, ta.commentable, ta.appreciable, tc.id as cid, tc.name as cname, su.id, su.username from t_article ta left join t_category tc on ta.category_id = tc.id left join sys_user su on ta.author_id = su.id where ta.id = ? 
+2020-04-24 19:04:04.562 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.m.ArticleMapper.selectArticleById  : ==> Parameters: 11(Long)
+2020-04-24 19:04:04.567 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.m.ArticleMapper.selectArticleById  : <==      Total: 1
+2020-04-24 19:04:04.568 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.m.A.selectPrevArticlePreview       : ==>  Preparing: select ta.id, ta.title, ta.summary, ta.create_time, ta.cover, tc.id as cid, tc.name as cname from t_article ta left join t_category tc on ta.category_id = tc.id where ta.id = (select max(id) from t_article where id < ?) 
+2020-04-24 19:04:04.568 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.m.A.selectPrevArticlePreview       : ==> Parameters: 11(Long)
+2020-04-24 19:04:04.569 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.m.A.selectPrevArticlePreview       : <==      Total: 1
+2020-04-24 19:04:04.570 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.m.A.selectNextArticlePreview       : ==>  Preparing: select ta.id, ta.title, ta.summary, ta.create_time, ta.cover, tc.id as cid, tc.name as cname from t_article ta left join t_category tc on ta.category_id = tc.id where ta.id = (select min(id) from t_article where id > ?) 
+2020-04-24 19:04:04.570 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.m.A.selectNextArticlePreview       : ==> Parameters: 11(Long)
+2020-04-24 19:04:04.572 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.m.A.selectNextArticlePreview       : <==      Total: 1
+2020-04-24 19:04:04.586 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-24 19:04:04.587 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 11(Long)
+2020-04-24 19:04:04.589 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 1
+2020-04-24 19:04:04.598 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-24 19:04:04.599 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 7(Long)
+2020-04-24 19:04:04.601 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 2
+2020-04-24 19:04:08.773 DEBUG 16612 --- [http-nio-8889-exec-1] s.a.g.mapper.ArticleMapper.selectOne     : ==>  Preparing: SELECT views FROM t_article WHERE (id = ?) 
+2020-04-24 19:04:08.773 DEBUG 16612 --- [http-nio-8889-exec-1] s.a.g.mapper.ArticleMapper.selectOne     : ==> Parameters: 11(Long)
+2020-04-24 19:04:08.776 DEBUG 16612 --- [http-nio-8889-exec-1] s.a.g.mapper.ArticleMapper.selectOne     : <==      Total: 1
+2020-04-24 19:04:08.778 DEBUG 16612 --- [http-nio-8889-exec-1] s.a.g.mapper.ArticleMapper.updateById    : ==>  Preparing: UPDATE t_article SET views=? WHERE id=? 
+2020-04-24 19:04:08.778 DEBUG 16612 --- [http-nio-8889-exec-1] s.a.g.mapper.ArticleMapper.updateById    : ==> Parameters: 2184(Integer), 11(Long)
+2020-04-24 19:04:08.782 DEBUG 16612 --- [http-nio-8889-exec-1] s.a.g.mapper.ArticleMapper.updateById    : <==    Updates: 1
+2020-04-24 19:04:08.782 DEBUG 16612 --- [http-nio-8889-exec-1] s.a.g.m.ArticleMapper.selectArticleById  : ==>  Preparing: select ta.id, ta.title, ta.content, ta.cover, ta.create_time, ta.type, ta.likes, ta.views, ta.comments, ta.commentable, ta.appreciable, tc.id as cid, tc.name as cname, su.id, su.username from t_article ta left join t_category tc on ta.category_id = tc.id left join sys_user su on ta.author_id = su.id where ta.id = ? 
+2020-04-24 19:04:08.783 DEBUG 16612 --- [http-nio-8889-exec-1] s.a.g.m.ArticleMapper.selectArticleById  : ==> Parameters: 11(Long)
+2020-04-24 19:04:08.786 DEBUG 16612 --- [http-nio-8889-exec-1] s.a.g.m.ArticleMapper.selectArticleById  : <==      Total: 1
+2020-04-24 19:04:08.787 DEBUG 16612 --- [http-nio-8889-exec-1] s.a.g.m.A.selectPrevArticlePreview       : ==>  Preparing: select ta.id, ta.title, ta.summary, ta.create_time, ta.cover, tc.id as cid, tc.name as cname from t_article ta left join t_category tc on ta.category_id = tc.id where ta.id = (select max(id) from t_article where id < ?) 
+2020-04-24 19:04:08.787 DEBUG 16612 --- [http-nio-8889-exec-1] s.a.g.m.A.selectPrevArticlePreview       : ==> Parameters: 11(Long)
+2020-04-24 19:04:08.790 DEBUG 16612 --- [http-nio-8889-exec-1] s.a.g.m.A.selectPrevArticlePreview       : <==      Total: 1
+2020-04-24 19:04:08.791 DEBUG 16612 --- [http-nio-8889-exec-1] s.a.g.m.A.selectNextArticlePreview       : ==>  Preparing: select ta.id, ta.title, ta.summary, ta.create_time, ta.cover, tc.id as cid, tc.name as cname from t_article ta left join t_category tc on ta.category_id = tc.id where ta.id = (select min(id) from t_article where id > ?) 
+2020-04-24 19:04:08.792 DEBUG 16612 --- [http-nio-8889-exec-1] s.a.g.m.A.selectNextArticlePreview       : ==> Parameters: 11(Long)
+2020-04-24 19:04:08.795 DEBUG 16612 --- [http-nio-8889-exec-1] s.a.g.m.A.selectNextArticlePreview       : <==      Total: 1
+2020-04-24 19:04:08.807 DEBUG 16612 --- [http-nio-8889-exec-1] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-24 19:04:08.809 DEBUG 16612 --- [http-nio-8889-exec-1] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 11(Long)
+2020-04-24 19:04:08.811 DEBUG 16612 --- [http-nio-8889-exec-1] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 1
+2020-04-24 19:04:08.817 DEBUG 16612 --- [http-nio-8889-exec-1] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-24 19:04:08.817 DEBUG 16612 --- [http-nio-8889-exec-1] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 7(Long)
+2020-04-24 19:04:08.819 DEBUG 16612 --- [http-nio-8889-exec-1] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 2
+2020-04-24 19:04:16.520 DEBUG 16612 --- [http-nio-8889-exec-6] s.a.g.mapper.ArticleMapper.selectOne     : ==>  Preparing: SELECT views FROM t_article WHERE (id = ?) 
+2020-04-24 19:04:16.520 DEBUG 16612 --- [http-nio-8889-exec-6] s.a.g.mapper.ArticleMapper.selectOne     : ==> Parameters: 11(Long)
+2020-04-24 19:04:16.521 DEBUG 16612 --- [http-nio-8889-exec-6] s.a.g.mapper.ArticleMapper.selectOne     : <==      Total: 1
+2020-04-24 19:04:16.524 DEBUG 16612 --- [http-nio-8889-exec-6] s.a.g.mapper.ArticleMapper.updateById    : ==>  Preparing: UPDATE t_article SET views=? WHERE id=? 
+2020-04-24 19:04:16.525 DEBUG 16612 --- [http-nio-8889-exec-6] s.a.g.mapper.ArticleMapper.updateById    : ==> Parameters: 2185(Integer), 11(Long)
+2020-04-24 19:04:16.527 DEBUG 16612 --- [http-nio-8889-exec-6] s.a.g.mapper.ArticleMapper.updateById    : <==    Updates: 1
+2020-04-24 19:04:16.528 DEBUG 16612 --- [http-nio-8889-exec-6] s.a.g.m.ArticleMapper.selectArticleById  : ==>  Preparing: select ta.id, ta.title, ta.content, ta.cover, ta.create_time, ta.type, ta.likes, ta.views, ta.comments, ta.commentable, ta.appreciable, tc.id as cid, tc.name as cname, su.id, su.username from t_article ta left join t_category tc on ta.category_id = tc.id left join sys_user su on ta.author_id = su.id where ta.id = ? 
+2020-04-24 19:04:16.529 DEBUG 16612 --- [http-nio-8889-exec-6] s.a.g.m.ArticleMapper.selectArticleById  : ==> Parameters: 11(Long)
+2020-04-24 19:04:16.532 DEBUG 16612 --- [http-nio-8889-exec-6] s.a.g.m.ArticleMapper.selectArticleById  : <==      Total: 1
+2020-04-24 19:04:16.533 DEBUG 16612 --- [http-nio-8889-exec-6] s.a.g.m.A.selectPrevArticlePreview       : ==>  Preparing: select ta.id, ta.title, ta.summary, ta.create_time, ta.cover, tc.id as cid, tc.name as cname from t_article ta left join t_category tc on ta.category_id = tc.id where ta.id = (select max(id) from t_article where id < ?) 
+2020-04-24 19:04:16.533 DEBUG 16612 --- [http-nio-8889-exec-6] s.a.g.m.A.selectPrevArticlePreview       : ==> Parameters: 11(Long)
+2020-04-24 19:04:16.536 DEBUG 16612 --- [http-nio-8889-exec-6] s.a.g.m.A.selectPrevArticlePreview       : <==      Total: 1
+2020-04-24 19:04:16.537 DEBUG 16612 --- [http-nio-8889-exec-6] s.a.g.m.A.selectNextArticlePreview       : ==>  Preparing: select ta.id, ta.title, ta.summary, ta.create_time, ta.cover, tc.id as cid, tc.name as cname from t_article ta left join t_category tc on ta.category_id = tc.id where ta.id = (select min(id) from t_article where id > ?) 
+2020-04-24 19:04:16.537 DEBUG 16612 --- [http-nio-8889-exec-6] s.a.g.m.A.selectNextArticlePreview       : ==> Parameters: 11(Long)
+2020-04-24 19:04:16.540 DEBUG 16612 --- [http-nio-8889-exec-6] s.a.g.m.A.selectNextArticlePreview       : <==      Total: 1
+2020-04-24 19:04:16.556 DEBUG 16612 --- [http-nio-8889-exec-6] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-24 19:04:16.556 DEBUG 16612 --- [http-nio-8889-exec-6] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 11(Long)
+2020-04-24 19:04:16.560 DEBUG 16612 --- [http-nio-8889-exec-6] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 1
+2020-04-24 19:04:16.567 DEBUG 16612 --- [http-nio-8889-exec-6] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-24 19:04:16.568 DEBUG 16612 --- [http-nio-8889-exec-6] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 7(Long)
+2020-04-24 19:04:16.569 DEBUG 16612 --- [http-nio-8889-exec-6] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 2
+2020-04-24 19:09:05.204 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.mapper.ArticleMapper.selectList    : ==>  Preparing: SELECT id,title,summary,cover FROM t_article WHERE (published = ? AND top = ?) limit 5 
+2020-04-24 19:09:05.204 DEBUG 16612 --- [http-nio-8889-exec-1] s.a.g.m.A.listRecommendArticles          : ==>  Preparing: select id, title, summary, cover, category_id from t_article where recommend = 1 and published = 1 
+2020-04-24 19:09:05.204 DEBUG 16612 --- [http-nio-8889-exec-1] s.a.g.m.A.listRecommendArticles          : ==> Parameters: 
+2020-04-24 19:09:05.205 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.mapper.ArticleMapper.selectList    : ==> Parameters: true(Boolean), true(Boolean)
+2020-04-24 19:09:05.208 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.mapper.ArticleMapper.selectList    : <==      Total: 5
+2020-04-24 19:09:05.213 DEBUG 16612 --- [http-nio-8889-exec-1] s.a.g.m.A.listRecommendArticles          : <==      Total: 4
+2020-04-24 19:09:05.241 DEBUG 16612 --- [http-nio-8889-exec-1] s.a.g.m.C.selectCategoryById             : ==>  Preparing: select id, name from t_category where id = ? 
+2020-04-24 19:09:05.242 DEBUG 16612 --- [http-nio-8889-exec-1] s.a.g.m.C.selectCategoryById             : ==> Parameters: 2(Long)
+2020-04-24 19:09:05.244 DEBUG 16612 --- [http-nio-8889-exec-1] s.a.g.m.C.selectCategoryById             : <==      Total: 1
+2020-04-24 19:09:05.246 DEBUG 16612 --- [http-nio-8889-exec-1] s.a.g.m.C.selectCategoryById             : ==>  Preparing: select id, name from t_category where id = ? 
+2020-04-24 19:09:05.246 DEBUG 16612 --- [http-nio-8889-exec-1] s.a.g.m.C.selectCategoryById             : ==> Parameters: 3(Long)
+2020-04-24 19:09:05.247 DEBUG 16612 --- [http-nio-8889-exec-3] s.a.g.m.A.listArticlesPreviewByPage      : ==>  Preparing: SELECT COUNT(1) FROM t_article ta WHERE ta.published = 1 
+2020-04-24 19:09:05.248 DEBUG 16612 --- [http-nio-8889-exec-1] s.a.g.m.C.selectCategoryById             : <==      Total: 1
+2020-04-24 19:09:05.249 DEBUG 16612 --- [http-nio-8889-exec-3] s.a.g.m.A.listArticlesPreviewByPage      : ==> Parameters: 
+2020-04-24 19:09:05.251 DEBUG 16612 --- [http-nio-8889-exec-1] s.a.g.m.C.selectCategoryById             : ==>  Preparing: select id, name from t_category where id = ? 
+2020-04-24 19:09:05.253 DEBUG 16612 --- [http-nio-8889-exec-1] s.a.g.m.C.selectCategoryById             : ==> Parameters: 1(Long)
+2020-04-24 19:09:05.255 DEBUG 16612 --- [http-nio-8889-exec-1] s.a.g.m.C.selectCategoryById             : <==      Total: 1
+2020-04-24 19:09:05.258 DEBUG 16612 --- [http-nio-8889-exec-1] s.a.g.m.C.selectCategoryById             : ==>  Preparing: select id, name from t_category where id = ? 
+2020-04-24 19:09:05.259 DEBUG 16612 --- [http-nio-8889-exec-1] s.a.g.m.C.selectCategoryById             : ==> Parameters: 1(Long)
+2020-04-24 19:09:05.260 DEBUG 16612 --- [http-nio-8889-exec-1] s.a.g.m.C.selectCategoryById             : <==      Total: 1
+2020-04-24 19:09:05.268 DEBUG 16612 --- [http-nio-8889-exec-3] s.a.g.m.A.listArticlesPreviewByPage      : ==>  Preparing: select ta.id, ta.title, ta.summary, ta.create_time, ta.cover, tc.id as cid, tc.name as cname from t_article ta left join t_category tc on ta.category_id = tc.id where ta.published = 1 order by ta.create_time desc LIMIT ?,? 
+2020-04-24 19:09:05.271 DEBUG 16612 --- [http-nio-8889-exec-3] s.a.g.m.A.listArticlesPreviewByPage      : ==> Parameters: 0(Long), 6(Long)
+2020-04-24 19:09:05.280 DEBUG 16612 --- [http-nio-8889-exec-3] s.a.g.m.A.listArticlesPreviewByPage      : <==      Total: 6
+2020-04-24 19:09:05.289 DEBUG 16612 --- [http-nio-8889-exec-3] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-24 19:09:05.290 DEBUG 16612 --- [http-nio-8889-exec-3] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 1041(Long)
+2020-04-24 19:09:05.291 DEBUG 16612 --- [http-nio-8889-exec-3] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 1
+2020-04-24 19:09:05.292 DEBUG 16612 --- [http-nio-8889-exec-3] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-24 19:09:05.292 DEBUG 16612 --- [http-nio-8889-exec-3] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 1040(Long)
+2020-04-24 19:09:05.294 DEBUG 16612 --- [http-nio-8889-exec-3] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 1
+2020-04-24 19:09:05.295 DEBUG 16612 --- [http-nio-8889-exec-3] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-24 19:09:05.295 DEBUG 16612 --- [http-nio-8889-exec-3] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 26(Long)
+2020-04-24 19:09:05.297 DEBUG 16612 --- [http-nio-8889-exec-3] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 1
+2020-04-24 19:09:05.298 DEBUG 16612 --- [http-nio-8889-exec-3] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-24 19:09:05.299 DEBUG 16612 --- [http-nio-8889-exec-3] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 25(Long)
+2020-04-24 19:09:05.300 DEBUG 16612 --- [http-nio-8889-exec-3] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 1
+2020-04-24 19:09:05.301 DEBUG 16612 --- [http-nio-8889-exec-3] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-24 19:09:05.301 DEBUG 16612 --- [http-nio-8889-exec-3] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 24(Long)
+2020-04-24 19:09:05.305 DEBUG 16612 --- [http-nio-8889-exec-3] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 4
+2020-04-24 19:09:05.307 DEBUG 16612 --- [http-nio-8889-exec-3] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-24 19:09:05.307 DEBUG 16612 --- [http-nio-8889-exec-3] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 23(Long)
+2020-04-24 19:09:05.308 DEBUG 16612 --- [http-nio-8889-exec-3] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 4
+2020-04-24 19:09:08.794 DEBUG 16612 --- [http-nio-8889-exec-4] s.a.g.mapper.ArticleMapper.selectOne     : ==>  Preparing: SELECT views FROM t_article WHERE (id = ?) 
+2020-04-24 19:09:08.794 DEBUG 16612 --- [http-nio-8889-exec-4] s.a.g.mapper.ArticleMapper.selectOne     : ==> Parameters: 11(Long)
+2020-04-24 19:09:08.795 DEBUG 16612 --- [http-nio-8889-exec-4] s.a.g.mapper.ArticleMapper.selectOne     : <==      Total: 1
+2020-04-24 19:09:08.797 DEBUG 16612 --- [http-nio-8889-exec-4] s.a.g.mapper.ArticleMapper.updateById    : ==>  Preparing: UPDATE t_article SET views=? WHERE id=? 
+2020-04-24 19:09:08.797 DEBUG 16612 --- [http-nio-8889-exec-4] s.a.g.mapper.ArticleMapper.updateById    : ==> Parameters: 2186(Integer), 11(Long)
+2020-04-24 19:09:08.800 DEBUG 16612 --- [http-nio-8889-exec-4] s.a.g.mapper.ArticleMapper.updateById    : <==    Updates: 1
+2020-04-24 19:09:08.801 DEBUG 16612 --- [http-nio-8889-exec-4] s.a.g.m.ArticleMapper.selectArticleById  : ==>  Preparing: select ta.id, ta.title, ta.content, ta.cover, ta.create_time, ta.type, ta.likes, ta.views, ta.comments, ta.commentable, ta.appreciable, tc.id as cid, tc.name as cname, su.id, su.username from t_article ta left join t_category tc on ta.category_id = tc.id left join sys_user su on ta.author_id = su.id where ta.id = ? 
+2020-04-24 19:09:08.801 DEBUG 16612 --- [http-nio-8889-exec-4] s.a.g.m.ArticleMapper.selectArticleById  : ==> Parameters: 11(Long)
+2020-04-24 19:09:08.805 DEBUG 16612 --- [http-nio-8889-exec-4] s.a.g.m.ArticleMapper.selectArticleById  : <==      Total: 1
+2020-04-24 19:09:08.808 DEBUG 16612 --- [http-nio-8889-exec-4] s.a.g.m.A.selectPrevArticlePreview       : ==>  Preparing: select ta.id, ta.title, ta.summary, ta.create_time, ta.cover, tc.id as cid, tc.name as cname from t_article ta left join t_category tc on ta.category_id = tc.id where ta.id = (select max(id) from t_article where id < ?) 
+2020-04-24 19:09:08.808 DEBUG 16612 --- [http-nio-8889-exec-4] s.a.g.m.A.selectPrevArticlePreview       : ==> Parameters: 11(Long)
+2020-04-24 19:09:08.828 DEBUG 16612 --- [http-nio-8889-exec-4] s.a.g.m.A.selectPrevArticlePreview       : <==      Total: 1
+2020-04-24 19:09:08.829 DEBUG 16612 --- [http-nio-8889-exec-4] s.a.g.m.A.selectNextArticlePreview       : ==>  Preparing: select ta.id, ta.title, ta.summary, ta.create_time, ta.cover, tc.id as cid, tc.name as cname from t_article ta left join t_category tc on ta.category_id = tc.id where ta.id = (select min(id) from t_article where id > ?) 
+2020-04-24 19:09:08.829 DEBUG 16612 --- [http-nio-8889-exec-4] s.a.g.m.A.selectNextArticlePreview       : ==> Parameters: 11(Long)
+2020-04-24 19:09:08.832 DEBUG 16612 --- [http-nio-8889-exec-4] s.a.g.m.A.selectNextArticlePreview       : <==      Total: 1
+2020-04-24 19:09:08.844 DEBUG 16612 --- [http-nio-8889-exec-4] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-24 19:09:08.844 DEBUG 16612 --- [http-nio-8889-exec-4] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 11(Long)
+2020-04-24 19:09:08.846 DEBUG 16612 --- [http-nio-8889-exec-4] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 1
+2020-04-24 19:09:08.850 DEBUG 16612 --- [http-nio-8889-exec-4] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-24 19:09:08.851 DEBUG 16612 --- [http-nio-8889-exec-4] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 7(Long)
+2020-04-24 19:09:08.853 DEBUG 16612 --- [http-nio-8889-exec-4] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 2
+2020-04-24 19:09:08.857 DEBUG 16612 --- [http-nio-8889-exec-4] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-24 19:09:08.858 DEBUG 16612 --- [http-nio-8889-exec-4] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 18(Long)
+2020-04-24 19:09:08.859 DEBUG 16612 --- [http-nio-8889-exec-4] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 1
+2020-04-24 19:09:11.593 DEBUG 16612 --- [http-nio-8889-exec-5] s.a.g.mapper.ArticleMapper.selectOne     : ==>  Preparing: SELECT views FROM t_article WHERE (id = ?) 
+2020-04-24 19:09:11.594 DEBUG 16612 --- [http-nio-8889-exec-5] s.a.g.mapper.ArticleMapper.selectOne     : ==> Parameters: 7(Long)
+2020-04-24 19:09:11.595 DEBUG 16612 --- [http-nio-8889-exec-5] s.a.g.mapper.ArticleMapper.selectOne     : <==      Total: 1
+2020-04-24 19:09:11.596 DEBUG 16612 --- [http-nio-8889-exec-5] s.a.g.mapper.ArticleMapper.updateById    : ==>  Preparing: UPDATE t_article SET views=? WHERE id=? 
+2020-04-24 19:09:11.597 DEBUG 16612 --- [http-nio-8889-exec-5] s.a.g.mapper.ArticleMapper.updateById    : ==> Parameters: 1395(Integer), 7(Long)
+2020-04-24 19:09:11.599 DEBUG 16612 --- [http-nio-8889-exec-5] s.a.g.mapper.ArticleMapper.updateById    : <==    Updates: 1
+2020-04-24 19:09:11.600 DEBUG 16612 --- [http-nio-8889-exec-5] s.a.g.m.ArticleMapper.selectArticleById  : ==>  Preparing: select ta.id, ta.title, ta.content, ta.cover, ta.create_time, ta.type, ta.likes, ta.views, ta.comments, ta.commentable, ta.appreciable, tc.id as cid, tc.name as cname, su.id, su.username from t_article ta left join t_category tc on ta.category_id = tc.id left join sys_user su on ta.author_id = su.id where ta.id = ? 
+2020-04-24 19:09:11.601 DEBUG 16612 --- [http-nio-8889-exec-5] s.a.g.m.ArticleMapper.selectArticleById  : ==> Parameters: 7(Long)
+2020-04-24 19:09:11.606 DEBUG 16612 --- [http-nio-8889-exec-5] s.a.g.m.ArticleMapper.selectArticleById  : <==      Total: 1
+2020-04-24 19:09:11.607 DEBUG 16612 --- [http-nio-8889-exec-5] s.a.g.m.A.selectPrevArticlePreview       : ==>  Preparing: select ta.id, ta.title, ta.summary, ta.create_time, ta.cover, tc.id as cid, tc.name as cname from t_article ta left join t_category tc on ta.category_id = tc.id where ta.id = (select max(id) from t_article where id < ?) 
+2020-04-24 19:09:11.607 DEBUG 16612 --- [http-nio-8889-exec-5] s.a.g.m.A.selectPrevArticlePreview       : ==> Parameters: 7(Long)
+2020-04-24 19:09:11.609 DEBUG 16612 --- [http-nio-8889-exec-5] s.a.g.m.A.selectPrevArticlePreview       : <==      Total: 0
+2020-04-24 19:09:11.611 DEBUG 16612 --- [http-nio-8889-exec-5] s.a.g.m.A.selectNextArticlePreview       : ==>  Preparing: select ta.id, ta.title, ta.summary, ta.create_time, ta.cover, tc.id as cid, tc.name as cname from t_article ta left join t_category tc on ta.category_id = tc.id where ta.id = (select min(id) from t_article where id > ?) 
+2020-04-24 19:09:11.611 DEBUG 16612 --- [http-nio-8889-exec-5] s.a.g.m.A.selectNextArticlePreview       : ==> Parameters: 7(Long)
+2020-04-24 19:09:11.614 DEBUG 16612 --- [http-nio-8889-exec-5] s.a.g.m.A.selectNextArticlePreview       : <==      Total: 1
+2020-04-24 19:09:11.627 DEBUG 16612 --- [http-nio-8889-exec-5] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-24 19:09:11.628 DEBUG 16612 --- [http-nio-8889-exec-5] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 7(Long)
+2020-04-24 19:09:11.630 DEBUG 16612 --- [http-nio-8889-exec-5] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 2
+2020-04-24 19:09:11.635 DEBUG 16612 --- [http-nio-8889-exec-5] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-24 19:09:11.636 DEBUG 16612 --- [http-nio-8889-exec-5] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 11(Long)
+2020-04-24 19:09:11.640 DEBUG 16612 --- [http-nio-8889-exec-5] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 1
+2020-04-24 19:09:16.969 DEBUG 16612 --- [http-nio-8889-exec-6] s.a.g.mapper.ArticleMapper.selectOne     : ==>  Preparing: SELECT views FROM t_article WHERE (id = ?) 
+2020-04-24 19:09:16.969 DEBUG 16612 --- [http-nio-8889-exec-6] s.a.g.mapper.ArticleMapper.selectOne     : ==> Parameters: 18(Long)
+2020-04-24 19:09:16.971 DEBUG 16612 --- [http-nio-8889-exec-6] s.a.g.mapper.ArticleMapper.selectOne     : <==      Total: 1
+2020-04-24 19:09:16.972 DEBUG 16612 --- [http-nio-8889-exec-6] s.a.g.mapper.ArticleMapper.updateById    : ==>  Preparing: UPDATE t_article SET views=? WHERE id=? 
+2020-04-24 19:09:16.974 DEBUG 16612 --- [http-nio-8889-exec-6] s.a.g.mapper.ArticleMapper.updateById    : ==> Parameters: 4389(Integer), 18(Long)
+2020-04-24 19:09:16.976 DEBUG 16612 --- [http-nio-8889-exec-6] s.a.g.mapper.ArticleMapper.updateById    : <==    Updates: 1
+2020-04-24 19:09:16.977 DEBUG 16612 --- [http-nio-8889-exec-6] s.a.g.m.ArticleMapper.selectArticleById  : ==>  Preparing: select ta.id, ta.title, ta.content, ta.cover, ta.create_time, ta.type, ta.likes, ta.views, ta.comments, ta.commentable, ta.appreciable, tc.id as cid, tc.name as cname, su.id, su.username from t_article ta left join t_category tc on ta.category_id = tc.id left join sys_user su on ta.author_id = su.id where ta.id = ? 
+2020-04-24 19:09:16.977 DEBUG 16612 --- [http-nio-8889-exec-6] s.a.g.m.ArticleMapper.selectArticleById  : ==> Parameters: 18(Long)
+2020-04-24 19:09:16.985 DEBUG 16612 --- [http-nio-8889-exec-6] s.a.g.m.ArticleMapper.selectArticleById  : <==      Total: 1
+2020-04-24 19:09:16.986 DEBUG 16612 --- [http-nio-8889-exec-6] s.a.g.m.A.selectPrevArticlePreview       : ==>  Preparing: select ta.id, ta.title, ta.summary, ta.create_time, ta.cover, tc.id as cid, tc.name as cname from t_article ta left join t_category tc on ta.category_id = tc.id where ta.id = (select max(id) from t_article where id < ?) 
+2020-04-24 19:09:16.987 DEBUG 16612 --- [http-nio-8889-exec-6] s.a.g.m.A.selectPrevArticlePreview       : ==> Parameters: 18(Long)
+2020-04-24 19:09:16.990 DEBUG 16612 --- [http-nio-8889-exec-6] s.a.g.m.A.selectPrevArticlePreview       : <==      Total: 1
+2020-04-24 19:09:16.992 DEBUG 16612 --- [http-nio-8889-exec-6] s.a.g.m.A.selectNextArticlePreview       : ==>  Preparing: select ta.id, ta.title, ta.summary, ta.create_time, ta.cover, tc.id as cid, tc.name as cname from t_article ta left join t_category tc on ta.category_id = tc.id where ta.id = (select min(id) from t_article where id > ?) 
+2020-04-24 19:09:16.993 DEBUG 16612 --- [http-nio-8889-exec-6] s.a.g.m.A.selectNextArticlePreview       : ==> Parameters: 18(Long)
+2020-04-24 19:09:16.995 DEBUG 16612 --- [http-nio-8889-exec-6] s.a.g.m.A.selectNextArticlePreview       : <==      Total: 1
+2020-04-24 19:09:17.008 DEBUG 16612 --- [http-nio-8889-exec-6] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-24 19:09:17.009 DEBUG 16612 --- [http-nio-8889-exec-6] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 18(Long)
+2020-04-24 19:09:17.011 DEBUG 16612 --- [http-nio-8889-exec-6] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 1
+2020-04-24 19:09:17.019 DEBUG 16612 --- [http-nio-8889-exec-6] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-24 19:09:17.019 DEBUG 16612 --- [http-nio-8889-exec-6] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 11(Long)
+2020-04-24 19:09:17.022 DEBUG 16612 --- [http-nio-8889-exec-6] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 1
+2020-04-24 19:09:17.024 DEBUG 16612 --- [http-nio-8889-exec-6] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-24 19:09:17.024 DEBUG 16612 --- [http-nio-8889-exec-6] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 22(Long)
+2020-04-24 19:09:17.025 DEBUG 16612 --- [http-nio-8889-exec-6] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 4
+2020-04-24 19:09:18.821 DEBUG 16612 --- [http-nio-8889-exec-7] s.a.g.mapper.ArticleMapper.selectOne     : ==>  Preparing: SELECT views FROM t_article WHERE (id = ?) 
+2020-04-24 19:09:18.821 DEBUG 16612 --- [http-nio-8889-exec-7] s.a.g.mapper.ArticleMapper.selectOne     : ==> Parameters: 11(Long)
+2020-04-24 19:09:18.823 DEBUG 16612 --- [http-nio-8889-exec-7] s.a.g.mapper.ArticleMapper.selectOne     : <==      Total: 1
+2020-04-24 19:09:18.824 DEBUG 16612 --- [http-nio-8889-exec-7] s.a.g.mapper.ArticleMapper.updateById    : ==>  Preparing: UPDATE t_article SET views=? WHERE id=? 
+2020-04-24 19:09:18.825 DEBUG 16612 --- [http-nio-8889-exec-7] s.a.g.mapper.ArticleMapper.updateById    : ==> Parameters: 2187(Integer), 11(Long)
+2020-04-24 19:09:18.827 DEBUG 16612 --- [http-nio-8889-exec-7] s.a.g.mapper.ArticleMapper.updateById    : <==    Updates: 1
+2020-04-24 19:09:18.828 DEBUG 16612 --- [http-nio-8889-exec-7] s.a.g.m.ArticleMapper.selectArticleById  : ==>  Preparing: select ta.id, ta.title, ta.content, ta.cover, ta.create_time, ta.type, ta.likes, ta.views, ta.comments, ta.commentable, ta.appreciable, tc.id as cid, tc.name as cname, su.id, su.username from t_article ta left join t_category tc on ta.category_id = tc.id left join sys_user su on ta.author_id = su.id where ta.id = ? 
+2020-04-24 19:09:18.828 DEBUG 16612 --- [http-nio-8889-exec-7] s.a.g.m.ArticleMapper.selectArticleById  : ==> Parameters: 11(Long)
+2020-04-24 19:09:18.831 DEBUG 16612 --- [http-nio-8889-exec-7] s.a.g.m.ArticleMapper.selectArticleById  : <==      Total: 1
+2020-04-24 19:09:18.832 DEBUG 16612 --- [http-nio-8889-exec-7] s.a.g.m.A.selectPrevArticlePreview       : ==>  Preparing: select ta.id, ta.title, ta.summary, ta.create_time, ta.cover, tc.id as cid, tc.name as cname from t_article ta left join t_category tc on ta.category_id = tc.id where ta.id = (select max(id) from t_article where id < ?) 
+2020-04-24 19:09:18.832 DEBUG 16612 --- [http-nio-8889-exec-7] s.a.g.m.A.selectPrevArticlePreview       : ==> Parameters: 11(Long)
+2020-04-24 19:09:18.836 DEBUG 16612 --- [http-nio-8889-exec-7] s.a.g.m.A.selectPrevArticlePreview       : <==      Total: 1
+2020-04-24 19:09:18.837 DEBUG 16612 --- [http-nio-8889-exec-7] s.a.g.m.A.selectNextArticlePreview       : ==>  Preparing: select ta.id, ta.title, ta.summary, ta.create_time, ta.cover, tc.id as cid, tc.name as cname from t_article ta left join t_category tc on ta.category_id = tc.id where ta.id = (select min(id) from t_article where id > ?) 
+2020-04-24 19:09:18.838 DEBUG 16612 --- [http-nio-8889-exec-7] s.a.g.m.A.selectNextArticlePreview       : ==> Parameters: 11(Long)
+2020-04-24 19:09:18.840 DEBUG 16612 --- [http-nio-8889-exec-7] s.a.g.m.A.selectNextArticlePreview       : <==      Total: 1
+2020-04-24 19:09:18.852 DEBUG 16612 --- [http-nio-8889-exec-7] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-24 19:09:18.852 DEBUG 16612 --- [http-nio-8889-exec-7] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 11(Long)
+2020-04-24 19:09:18.854 DEBUG 16612 --- [http-nio-8889-exec-7] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 1
+2020-04-24 19:09:18.859 DEBUG 16612 --- [http-nio-8889-exec-7] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-24 19:09:18.859 DEBUG 16612 --- [http-nio-8889-exec-7] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 7(Long)
+2020-04-24 19:09:18.860 DEBUG 16612 --- [http-nio-8889-exec-7] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 2
+2020-04-24 19:09:18.862 DEBUG 16612 --- [http-nio-8889-exec-7] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-24 19:09:18.863 DEBUG 16612 --- [http-nio-8889-exec-7] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 18(Long)
+2020-04-24 19:09:18.864 DEBUG 16612 --- [http-nio-8889-exec-7] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 1
+2020-04-24 19:11:00.297 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.mapper.ArticleMapper.selectOne     : ==>  Preparing: SELECT views FROM t_article WHERE (id = ?) 
+2020-04-24 19:11:00.297 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.mapper.ArticleMapper.selectOne     : ==> Parameters: 11(Long)
+2020-04-24 19:11:00.299 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.mapper.ArticleMapper.selectOne     : <==      Total: 1
+2020-04-24 19:11:00.301 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.mapper.ArticleMapper.updateById    : ==>  Preparing: UPDATE t_article SET views=? WHERE id=? 
+2020-04-24 19:11:00.301 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.mapper.ArticleMapper.updateById    : ==> Parameters: 2188(Integer), 11(Long)
+2020-04-24 19:11:00.307 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.mapper.ArticleMapper.updateById    : <==    Updates: 1
+2020-04-24 19:11:00.309 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.m.ArticleMapper.selectArticleById  : ==>  Preparing: select ta.id, ta.title, ta.content, ta.cover, ta.create_time, ta.type, ta.likes, ta.views, ta.comments, ta.commentable, ta.appreciable, tc.id as cid, tc.name as cname, su.id, su.username from t_article ta left join t_category tc on ta.category_id = tc.id left join sys_user su on ta.author_id = su.id where ta.id = ? 
+2020-04-24 19:11:00.309 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.m.ArticleMapper.selectArticleById  : ==> Parameters: 11(Long)
+2020-04-24 19:11:00.315 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.m.ArticleMapper.selectArticleById  : <==      Total: 1
+2020-04-24 19:11:00.316 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.m.A.selectPrevArticlePreview       : ==>  Preparing: select ta.id, ta.title, ta.summary, ta.create_time, ta.cover, tc.id as cid, tc.name as cname from t_article ta left join t_category tc on ta.category_id = tc.id where ta.id = (select max(id) from t_article where id < ?) 
+2020-04-24 19:11:00.316 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.m.A.selectPrevArticlePreview       : ==> Parameters: 11(Long)
+2020-04-24 19:11:00.320 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.m.A.selectPrevArticlePreview       : <==      Total: 1
+2020-04-24 19:11:00.322 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.m.A.selectNextArticlePreview       : ==>  Preparing: select ta.id, ta.title, ta.summary, ta.create_time, ta.cover, tc.id as cid, tc.name as cname from t_article ta left join t_category tc on ta.category_id = tc.id where ta.id = (select min(id) from t_article where id > ?) 
+2020-04-24 19:11:00.322 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.m.A.selectNextArticlePreview       : ==> Parameters: 11(Long)
+2020-04-24 19:11:00.327 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.m.A.selectNextArticlePreview       : <==      Total: 1
+2020-04-24 19:11:00.342 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-24 19:11:00.342 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 11(Long)
+2020-04-24 19:11:00.345 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 1
+2020-04-24 19:11:00.351 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-24 19:11:00.351 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 7(Long)
+2020-04-24 19:11:00.352 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 2
+2020-04-24 19:11:00.354 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-24 19:11:00.354 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 18(Long)
+2020-04-24 19:11:00.355 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 1
+2020-04-24 19:11:02.662 DEBUG 16612 --- [http-nio-8889-exec-1] s.a.g.mapper.ArticleMapper.selectOne     : ==>  Preparing: SELECT views FROM t_article WHERE (id = ?) 
+2020-04-24 19:11:02.662 DEBUG 16612 --- [http-nio-8889-exec-1] s.a.g.mapper.ArticleMapper.selectOne     : ==> Parameters: 11(Long)
+2020-04-24 19:11:02.663 DEBUG 16612 --- [http-nio-8889-exec-1] s.a.g.mapper.ArticleMapper.selectOne     : <==      Total: 1
+2020-04-24 19:11:02.665 DEBUG 16612 --- [http-nio-8889-exec-1] s.a.g.mapper.ArticleMapper.updateById    : ==>  Preparing: UPDATE t_article SET views=? WHERE id=? 
+2020-04-24 19:11:02.665 DEBUG 16612 --- [http-nio-8889-exec-1] s.a.g.mapper.ArticleMapper.updateById    : ==> Parameters: 2189(Integer), 11(Long)
+2020-04-24 19:11:02.666 DEBUG 16612 --- [http-nio-8889-exec-1] s.a.g.mapper.ArticleMapper.updateById    : <==    Updates: 1
+2020-04-24 19:11:02.668 DEBUG 16612 --- [http-nio-8889-exec-1] s.a.g.m.ArticleMapper.selectArticleById  : ==>  Preparing: select ta.id, ta.title, ta.content, ta.cover, ta.create_time, ta.type, ta.likes, ta.views, ta.comments, ta.commentable, ta.appreciable, tc.id as cid, tc.name as cname, su.id, su.username from t_article ta left join t_category tc on ta.category_id = tc.id left join sys_user su on ta.author_id = su.id where ta.id = ? 
+2020-04-24 19:11:02.668 DEBUG 16612 --- [http-nio-8889-exec-1] s.a.g.m.ArticleMapper.selectArticleById  : ==> Parameters: 11(Long)
+2020-04-24 19:11:02.670 DEBUG 16612 --- [http-nio-8889-exec-1] s.a.g.m.ArticleMapper.selectArticleById  : <==      Total: 1
+2020-04-24 19:11:02.671 DEBUG 16612 --- [http-nio-8889-exec-1] s.a.g.m.A.selectPrevArticlePreview       : ==>  Preparing: select ta.id, ta.title, ta.summary, ta.create_time, ta.cover, tc.id as cid, tc.name as cname from t_article ta left join t_category tc on ta.category_id = tc.id where ta.id = (select max(id) from t_article where id < ?) 
+2020-04-24 19:11:02.671 DEBUG 16612 --- [http-nio-8889-exec-1] s.a.g.m.A.selectPrevArticlePreview       : ==> Parameters: 11(Long)
+2020-04-24 19:11:02.673 DEBUG 16612 --- [http-nio-8889-exec-1] s.a.g.m.A.selectPrevArticlePreview       : <==      Total: 1
+2020-04-24 19:11:02.675 DEBUG 16612 --- [http-nio-8889-exec-1] s.a.g.m.A.selectNextArticlePreview       : ==>  Preparing: select ta.id, ta.title, ta.summary, ta.create_time, ta.cover, tc.id as cid, tc.name as cname from t_article ta left join t_category tc on ta.category_id = tc.id where ta.id = (select min(id) from t_article where id > ?) 
+2020-04-24 19:11:02.676 DEBUG 16612 --- [http-nio-8889-exec-1] s.a.g.m.A.selectNextArticlePreview       : ==> Parameters: 11(Long)
+2020-04-24 19:11:02.679 DEBUG 16612 --- [http-nio-8889-exec-1] s.a.g.m.A.selectNextArticlePreview       : <==      Total: 1
+2020-04-24 19:11:02.688 DEBUG 16612 --- [http-nio-8889-exec-1] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-24 19:11:02.688 DEBUG 16612 --- [http-nio-8889-exec-1] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 11(Long)
+2020-04-24 19:11:02.692 DEBUG 16612 --- [http-nio-8889-exec-1] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 1
+2020-04-24 19:11:02.697 DEBUG 16612 --- [http-nio-8889-exec-1] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-24 19:11:02.697 DEBUG 16612 --- [http-nio-8889-exec-1] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 7(Long)
+2020-04-24 19:11:02.699 DEBUG 16612 --- [http-nio-8889-exec-1] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 2
+2020-04-24 19:11:02.701 DEBUG 16612 --- [http-nio-8889-exec-1] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-24 19:11:02.701 DEBUG 16612 --- [http-nio-8889-exec-1] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 18(Long)
+2020-04-24 19:11:02.702 DEBUG 16612 --- [http-nio-8889-exec-1] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 1
+2020-04-24 19:11:03.141 DEBUG 16612 --- [http-nio-8889-exec-3] s.a.g.mapper.ArticleMapper.selectOne     : ==>  Preparing: SELECT views FROM t_article WHERE (id = ?) 
+2020-04-24 19:11:03.141 DEBUG 16612 --- [http-nio-8889-exec-3] s.a.g.mapper.ArticleMapper.selectOne     : ==> Parameters: 11(Long)
+2020-04-24 19:11:03.142 DEBUG 16612 --- [http-nio-8889-exec-3] s.a.g.mapper.ArticleMapper.selectOne     : <==      Total: 1
+2020-04-24 19:11:03.143 DEBUG 16612 --- [http-nio-8889-exec-3] s.a.g.mapper.ArticleMapper.updateById    : ==>  Preparing: UPDATE t_article SET views=? WHERE id=? 
+2020-04-24 19:11:03.144 DEBUG 16612 --- [http-nio-8889-exec-3] s.a.g.mapper.ArticleMapper.updateById    : ==> Parameters: 2190(Integer), 11(Long)
+2020-04-24 19:11:03.145 DEBUG 16612 --- [http-nio-8889-exec-3] s.a.g.mapper.ArticleMapper.updateById    : <==    Updates: 1
+2020-04-24 19:11:03.146 DEBUG 16612 --- [http-nio-8889-exec-3] s.a.g.m.ArticleMapper.selectArticleById  : ==>  Preparing: select ta.id, ta.title, ta.content, ta.cover, ta.create_time, ta.type, ta.likes, ta.views, ta.comments, ta.commentable, ta.appreciable, tc.id as cid, tc.name as cname, su.id, su.username from t_article ta left join t_category tc on ta.category_id = tc.id left join sys_user su on ta.author_id = su.id where ta.id = ? 
+2020-04-24 19:11:03.146 DEBUG 16612 --- [http-nio-8889-exec-3] s.a.g.m.ArticleMapper.selectArticleById  : ==> Parameters: 11(Long)
+2020-04-24 19:11:03.148 DEBUG 16612 --- [http-nio-8889-exec-3] s.a.g.m.ArticleMapper.selectArticleById  : <==      Total: 1
+2020-04-24 19:11:03.149 DEBUG 16612 --- [http-nio-8889-exec-3] s.a.g.m.A.selectPrevArticlePreview       : ==>  Preparing: select ta.id, ta.title, ta.summary, ta.create_time, ta.cover, tc.id as cid, tc.name as cname from t_article ta left join t_category tc on ta.category_id = tc.id where ta.id = (select max(id) from t_article where id < ?) 
+2020-04-24 19:11:03.149 DEBUG 16612 --- [http-nio-8889-exec-3] s.a.g.m.A.selectPrevArticlePreview       : ==> Parameters: 11(Long)
+2020-04-24 19:11:03.152 DEBUG 16612 --- [http-nio-8889-exec-3] s.a.g.m.A.selectPrevArticlePreview       : <==      Total: 1
+2020-04-24 19:11:03.152 DEBUG 16612 --- [http-nio-8889-exec-3] s.a.g.m.A.selectNextArticlePreview       : ==>  Preparing: select ta.id, ta.title, ta.summary, ta.create_time, ta.cover, tc.id as cid, tc.name as cname from t_article ta left join t_category tc on ta.category_id = tc.id where ta.id = (select min(id) from t_article where id > ?) 
+2020-04-24 19:11:03.152 DEBUG 16612 --- [http-nio-8889-exec-3] s.a.g.m.A.selectNextArticlePreview       : ==> Parameters: 11(Long)
+2020-04-24 19:11:03.154 DEBUG 16612 --- [http-nio-8889-exec-3] s.a.g.m.A.selectNextArticlePreview       : <==      Total: 1
+2020-04-24 19:11:03.164 DEBUG 16612 --- [http-nio-8889-exec-3] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-24 19:11:03.164 DEBUG 16612 --- [http-nio-8889-exec-3] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 11(Long)
+2020-04-24 19:11:03.165 DEBUG 16612 --- [http-nio-8889-exec-3] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 1
+2020-04-24 19:11:03.169 DEBUG 16612 --- [http-nio-8889-exec-3] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-24 19:11:03.169 DEBUG 16612 --- [http-nio-8889-exec-3] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 7(Long)
+2020-04-24 19:11:03.171 DEBUG 16612 --- [http-nio-8889-exec-3] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 2
+2020-04-24 19:11:03.172 DEBUG 16612 --- [http-nio-8889-exec-3] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-24 19:11:03.173 DEBUG 16612 --- [http-nio-8889-exec-3] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 18(Long)
+2020-04-24 19:11:03.176 DEBUG 16612 --- [http-nio-8889-exec-3] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 1
+2020-04-24 19:11:13.196 DEBUG 16612 --- [http-nio-8889-exec-5] s.a.g.mapper.ArticleMapper.selectOne     : ==>  Preparing: SELECT views FROM t_article WHERE (id = ?) 
+2020-04-24 19:11:13.197 DEBUG 16612 --- [http-nio-8889-exec-5] s.a.g.mapper.ArticleMapper.selectOne     : ==> Parameters: 11(Long)
+2020-04-24 19:11:13.199 DEBUG 16612 --- [http-nio-8889-exec-5] s.a.g.mapper.ArticleMapper.selectOne     : <==      Total: 1
+2020-04-24 19:11:13.200 DEBUG 16612 --- [http-nio-8889-exec-5] s.a.g.mapper.ArticleMapper.updateById    : ==>  Preparing: UPDATE t_article SET views=? WHERE id=? 
+2020-04-24 19:11:13.201 DEBUG 16612 --- [http-nio-8889-exec-5] s.a.g.mapper.ArticleMapper.updateById    : ==> Parameters: 2191(Integer), 11(Long)
+2020-04-24 19:11:13.202 DEBUG 16612 --- [http-nio-8889-exec-5] s.a.g.mapper.ArticleMapper.updateById    : <==    Updates: 1
+2020-04-24 19:11:13.204 DEBUG 16612 --- [http-nio-8889-exec-5] s.a.g.m.ArticleMapper.selectArticleById  : ==>  Preparing: select ta.id, ta.title, ta.content, ta.cover, ta.create_time, ta.type, ta.likes, ta.views, ta.comments, ta.commentable, ta.appreciable, tc.id as cid, tc.name as cname, su.id, su.username from t_article ta left join t_category tc on ta.category_id = tc.id left join sys_user su on ta.author_id = su.id where ta.id = ? 
+2020-04-24 19:11:13.204 DEBUG 16612 --- [http-nio-8889-exec-5] s.a.g.m.ArticleMapper.selectArticleById  : ==> Parameters: 11(Long)
+2020-04-24 19:11:13.210 DEBUG 16612 --- [http-nio-8889-exec-5] s.a.g.m.ArticleMapper.selectArticleById  : <==      Total: 1
+2020-04-24 19:11:13.211 DEBUG 16612 --- [http-nio-8889-exec-5] s.a.g.m.A.selectPrevArticlePreview       : ==>  Preparing: select ta.id, ta.title, ta.summary, ta.create_time, ta.cover, tc.id as cid, tc.name as cname from t_article ta left join t_category tc on ta.category_id = tc.id where ta.id = (select max(id) from t_article where id < ?) 
+2020-04-24 19:11:13.211 DEBUG 16612 --- [http-nio-8889-exec-5] s.a.g.m.A.selectPrevArticlePreview       : ==> Parameters: 11(Long)
+2020-04-24 19:11:13.215 DEBUG 16612 --- [http-nio-8889-exec-5] s.a.g.m.A.selectPrevArticlePreview       : <==      Total: 1
+2020-04-24 19:11:13.217 DEBUG 16612 --- [http-nio-8889-exec-5] s.a.g.m.A.selectNextArticlePreview       : ==>  Preparing: select ta.id, ta.title, ta.summary, ta.create_time, ta.cover, tc.id as cid, tc.name as cname from t_article ta left join t_category tc on ta.category_id = tc.id where ta.id = (select min(id) from t_article where id > ?) 
+2020-04-24 19:11:13.217 DEBUG 16612 --- [http-nio-8889-exec-5] s.a.g.m.A.selectNextArticlePreview       : ==> Parameters: 11(Long)
+2020-04-24 19:11:13.222 DEBUG 16612 --- [http-nio-8889-exec-5] s.a.g.m.A.selectNextArticlePreview       : <==      Total: 1
+2020-04-24 19:11:13.246 DEBUG 16612 --- [http-nio-8889-exec-5] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-24 19:11:13.248 DEBUG 16612 --- [http-nio-8889-exec-5] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 11(Long)
+2020-04-24 19:11:13.252 DEBUG 16612 --- [http-nio-8889-exec-5] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 1
+2020-04-24 19:11:13.260 DEBUG 16612 --- [http-nio-8889-exec-5] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-24 19:11:13.260 DEBUG 16612 --- [http-nio-8889-exec-5] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 7(Long)
+2020-04-24 19:11:13.263 DEBUG 16612 --- [http-nio-8889-exec-5] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 2
+2020-04-24 19:11:13.267 DEBUG 16612 --- [http-nio-8889-exec-5] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-24 19:11:13.268 DEBUG 16612 --- [http-nio-8889-exec-5] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 18(Long)
+2020-04-24 19:11:13.271 DEBUG 16612 --- [http-nio-8889-exec-5] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 1
+2020-04-24 19:11:28.641 DEBUG 16612 --- [http-nio-8889-exec-7] s.a.g.mapper.ArticleMapper.selectOne     : ==>  Preparing: SELECT views FROM t_article WHERE (id = ?) 
+2020-04-24 19:11:28.641 DEBUG 16612 --- [http-nio-8889-exec-7] s.a.g.mapper.ArticleMapper.selectOne     : ==> Parameters: 18(Long)
+2020-04-24 19:11:28.643 DEBUG 16612 --- [http-nio-8889-exec-7] s.a.g.mapper.ArticleMapper.selectOne     : <==      Total: 1
+2020-04-24 19:11:28.644 DEBUG 16612 --- [http-nio-8889-exec-7] s.a.g.mapper.ArticleMapper.updateById    : ==>  Preparing: UPDATE t_article SET views=? WHERE id=? 
+2020-04-24 19:11:28.644 DEBUG 16612 --- [http-nio-8889-exec-7] s.a.g.mapper.ArticleMapper.updateById    : ==> Parameters: 4390(Integer), 18(Long)
+2020-04-24 19:11:28.645 DEBUG 16612 --- [http-nio-8889-exec-7] s.a.g.mapper.ArticleMapper.updateById    : <==    Updates: 1
+2020-04-24 19:11:28.646 DEBUG 16612 --- [http-nio-8889-exec-7] s.a.g.m.ArticleMapper.selectArticleById  : ==>  Preparing: select ta.id, ta.title, ta.content, ta.cover, ta.create_time, ta.type, ta.likes, ta.views, ta.comments, ta.commentable, ta.appreciable, tc.id as cid, tc.name as cname, su.id, su.username from t_article ta left join t_category tc on ta.category_id = tc.id left join sys_user su on ta.author_id = su.id where ta.id = ? 
+2020-04-24 19:11:28.646 DEBUG 16612 --- [http-nio-8889-exec-7] s.a.g.m.ArticleMapper.selectArticleById  : ==> Parameters: 18(Long)
+2020-04-24 19:11:28.649 DEBUG 16612 --- [http-nio-8889-exec-7] s.a.g.m.ArticleMapper.selectArticleById  : <==      Total: 1
+2020-04-24 19:11:28.649 DEBUG 16612 --- [http-nio-8889-exec-7] s.a.g.m.A.selectPrevArticlePreview       : ==>  Preparing: select ta.id, ta.title, ta.summary, ta.create_time, ta.cover, tc.id as cid, tc.name as cname from t_article ta left join t_category tc on ta.category_id = tc.id where ta.id = (select max(id) from t_article where id < ?) 
+2020-04-24 19:11:28.650 DEBUG 16612 --- [http-nio-8889-exec-7] s.a.g.m.A.selectPrevArticlePreview       : ==> Parameters: 18(Long)
+2020-04-24 19:11:28.653 DEBUG 16612 --- [http-nio-8889-exec-7] s.a.g.m.A.selectPrevArticlePreview       : <==      Total: 1
+2020-04-24 19:11:28.653 DEBUG 16612 --- [http-nio-8889-exec-7] s.a.g.m.A.selectNextArticlePreview       : ==>  Preparing: select ta.id, ta.title, ta.summary, ta.create_time, ta.cover, tc.id as cid, tc.name as cname from t_article ta left join t_category tc on ta.category_id = tc.id where ta.id = (select min(id) from t_article where id > ?) 
+2020-04-24 19:11:28.653 DEBUG 16612 --- [http-nio-8889-exec-7] s.a.g.m.A.selectNextArticlePreview       : ==> Parameters: 18(Long)
+2020-04-24 19:11:28.657 DEBUG 16612 --- [http-nio-8889-exec-7] s.a.g.m.A.selectNextArticlePreview       : <==      Total: 1
+2020-04-24 19:11:28.666 DEBUG 16612 --- [http-nio-8889-exec-7] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-24 19:11:28.667 DEBUG 16612 --- [http-nio-8889-exec-7] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 18(Long)
+2020-04-24 19:11:28.669 DEBUG 16612 --- [http-nio-8889-exec-7] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 1
+2020-04-24 19:11:28.677 DEBUG 16612 --- [http-nio-8889-exec-7] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-24 19:11:28.677 DEBUG 16612 --- [http-nio-8889-exec-7] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 11(Long)
+2020-04-24 19:11:28.678 DEBUG 16612 --- [http-nio-8889-exec-7] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 1
+2020-04-24 19:11:28.679 DEBUG 16612 --- [http-nio-8889-exec-7] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-24 19:11:28.679 DEBUG 16612 --- [http-nio-8889-exec-7] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 22(Long)
+2020-04-24 19:11:28.680 DEBUG 16612 --- [http-nio-8889-exec-7] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 4
+2020-04-24 19:11:32.374 DEBUG 16612 --- [http-nio-8889-exec-9] s.a.g.mapper.ArticleMapper.selectOne     : ==>  Preparing: SELECT views FROM t_article WHERE (id = ?) 
+2020-04-24 19:11:32.374 DEBUG 16612 --- [http-nio-8889-exec-9] s.a.g.mapper.ArticleMapper.selectOne     : ==> Parameters: 18(Long)
+2020-04-24 19:11:32.375 DEBUG 16612 --- [http-nio-8889-exec-9] s.a.g.mapper.ArticleMapper.selectOne     : <==      Total: 1
+2020-04-24 19:11:32.376 DEBUG 16612 --- [http-nio-8889-exec-9] s.a.g.mapper.ArticleMapper.updateById    : ==>  Preparing: UPDATE t_article SET views=? WHERE id=? 
+2020-04-24 19:11:32.377 DEBUG 16612 --- [http-nio-8889-exec-9] s.a.g.mapper.ArticleMapper.updateById    : ==> Parameters: 4391(Integer), 18(Long)
+2020-04-24 19:11:32.379 DEBUG 16612 --- [http-nio-8889-exec-9] s.a.g.mapper.ArticleMapper.updateById    : <==    Updates: 1
+2020-04-24 19:11:32.380 DEBUG 16612 --- [http-nio-8889-exec-9] s.a.g.m.ArticleMapper.selectArticleById  : ==>  Preparing: select ta.id, ta.title, ta.content, ta.cover, ta.create_time, ta.type, ta.likes, ta.views, ta.comments, ta.commentable, ta.appreciable, tc.id as cid, tc.name as cname, su.id, su.username from t_article ta left join t_category tc on ta.category_id = tc.id left join sys_user su on ta.author_id = su.id where ta.id = ? 
+2020-04-24 19:11:32.380 DEBUG 16612 --- [http-nio-8889-exec-9] s.a.g.m.ArticleMapper.selectArticleById  : ==> Parameters: 18(Long)
+2020-04-24 19:11:32.383 DEBUG 16612 --- [http-nio-8889-exec-9] s.a.g.m.ArticleMapper.selectArticleById  : <==      Total: 1
+2020-04-24 19:11:32.384 DEBUG 16612 --- [http-nio-8889-exec-9] s.a.g.m.A.selectPrevArticlePreview       : ==>  Preparing: select ta.id, ta.title, ta.summary, ta.create_time, ta.cover, tc.id as cid, tc.name as cname from t_article ta left join t_category tc on ta.category_id = tc.id where ta.id = (select max(id) from t_article where id < ?) 
+2020-04-24 19:11:32.384 DEBUG 16612 --- [http-nio-8889-exec-9] s.a.g.m.A.selectPrevArticlePreview       : ==> Parameters: 18(Long)
+2020-04-24 19:11:32.388 DEBUG 16612 --- [http-nio-8889-exec-9] s.a.g.m.A.selectPrevArticlePreview       : <==      Total: 1
+2020-04-24 19:11:32.389 DEBUG 16612 --- [http-nio-8889-exec-9] s.a.g.m.A.selectNextArticlePreview       : ==>  Preparing: select ta.id, ta.title, ta.summary, ta.create_time, ta.cover, tc.id as cid, tc.name as cname from t_article ta left join t_category tc on ta.category_id = tc.id where ta.id = (select min(id) from t_article where id > ?) 
+2020-04-24 19:11:32.390 DEBUG 16612 --- [http-nio-8889-exec-9] s.a.g.m.A.selectNextArticlePreview       : ==> Parameters: 18(Long)
+2020-04-24 19:11:32.392 DEBUG 16612 --- [http-nio-8889-exec-9] s.a.g.m.A.selectNextArticlePreview       : <==      Total: 1
+2020-04-24 19:11:32.401 DEBUG 16612 --- [http-nio-8889-exec-9] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-24 19:11:32.401 DEBUG 16612 --- [http-nio-8889-exec-9] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 18(Long)
+2020-04-24 19:11:32.404 DEBUG 16612 --- [http-nio-8889-exec-9] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 1
+2020-04-24 19:11:32.411 DEBUG 16612 --- [http-nio-8889-exec-9] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-24 19:11:32.411 DEBUG 16612 --- [http-nio-8889-exec-9] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 11(Long)
+2020-04-24 19:11:32.413 DEBUG 16612 --- [http-nio-8889-exec-9] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 1
+2020-04-24 19:11:32.415 DEBUG 16612 --- [http-nio-8889-exec-9] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-24 19:11:32.416 DEBUG 16612 --- [http-nio-8889-exec-9] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 22(Long)
+2020-04-24 19:11:32.418 DEBUG 16612 --- [http-nio-8889-exec-9] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 4
+2020-04-24 19:11:43.721 DEBUG 16612 --- [http-nio-8889-exec-7] s.a.g.mapper.ArticleMapper.selectCount   : ==>  Preparing: SELECT COUNT( 1 ) FROM t_article 
+2020-04-24 19:11:43.721 DEBUG 16612 --- [http-nio-8889-exec-7] s.a.g.mapper.ArticleMapper.selectCount   : ==> Parameters: 
+2020-04-24 19:11:43.723 DEBUG 16612 --- [http-nio-8889-exec-7] s.a.g.mapper.ArticleMapper.selectCount   : <==      Total: 1
+2020-04-24 19:11:43.731 DEBUG 16612 --- [http-nio-8889-exec-10] s.a.g.m.A.countArticleByDate             : ==>  Preparing: select year(create_time) 'year' , month(create_time) 'month' , count(id) 'articleCount' from t_article where create_time >= DATE_SUB(CURDATE(), INTERVAL 1 YEAR) group by year(create_time) ,month(create_time) 
+2020-04-24 19:11:43.732 DEBUG 16612 --- [http-nio-8889-exec-10] s.a.g.m.A.countArticleByDate             : ==> Parameters: 
+2020-04-24 19:11:43.735 DEBUG 16612 --- [http-nio-8889-exec-9] s.a.g.mapper.CategoryMapper.selectCount  : ==>  Preparing: SELECT COUNT( 1 ) FROM t_category 
+2020-04-24 19:11:43.735 DEBUG 16612 --- [http-nio-8889-exec-9] s.a.g.mapper.CategoryMapper.selectCount  : ==> Parameters: 
+2020-04-24 19:11:43.734 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.m.C.listByArticleCount             : ==>  Preparing: select tc.id, tc.name, count(ta.id) articleCount from t_category tc left join t_article ta on tc.id = ta.category_id where tc.display = 1 group by tc.id having articleCount > 0 
+2020-04-24 19:11:43.737 DEBUG 16612 --- [http-nio-8889-exec-10] s.a.g.m.A.countArticleByDate             : <==      Total: 2
+2020-04-24 19:11:43.738 DEBUG 16612 --- [http-nio-8889-exec-9] s.a.g.mapper.CategoryMapper.selectCount  : <==      Total: 1
+2020-04-24 19:11:43.738 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.m.C.listByArticleCount             : ==> Parameters: 
+2020-04-24 19:11:43.740 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.m.C.listByArticleCount             : <==      Total: 3
+2020-04-24 19:11:43.740 DEBUG 16612 --- [http-nio-8889-exec-1] s.a.g.m.TagMapper.listByArticleCount     : ==>  Preparing: select tt.id, tt.name, count(ta.id) articleCount from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id left join t_article ta on ta.id = tat.article_id group by tt.id having articleCount > 0 
+2020-04-24 19:11:43.741 DEBUG 16612 --- [http-nio-8889-exec-1] s.a.g.m.TagMapper.listByArticleCount     : ==> Parameters: 
+2020-04-24 19:11:43.741 DEBUG 16612 --- [http-nio-8889-exec-8] s.a.g.mapper.TagMapper.selectCount       : ==>  Preparing: SELECT COUNT( 1 ) FROM t_tag 
+2020-04-24 19:11:43.741 DEBUG 16612 --- [http-nio-8889-exec-8] s.a.g.mapper.TagMapper.selectCount       : ==> Parameters: 
+2020-04-24 19:11:43.743 DEBUG 16612 --- [http-nio-8889-exec-8] s.a.g.mapper.TagMapper.selectCount       : <==      Total: 1
+2020-04-24 19:11:43.743 DEBUG 16612 --- [http-nio-8889-exec-1] s.a.g.m.TagMapper.listByArticleCount     : <==      Total: 4
+2020-04-24 19:11:49.683 DEBUG 16612 --- [http-nio-8889-exec-3] s.a.g.mapper.ArticleMapper.selectList    : ==>  Preparing: SELECT id,title,content FROM t_article 
+2020-04-24 19:11:49.684 DEBUG 16612 --- [http-nio-8889-exec-3] s.a.g.mapper.ArticleMapper.selectList    : ==> Parameters: 
+2020-04-24 19:11:49.691 DEBUG 16612 --- [http-nio-8889-exec-3] s.a.g.mapper.ArticleMapper.selectList    : <==      Total: 10
+2020-04-24 19:14:42.608 DEBUG 16612 --- [http-nio-8889-exec-8] s.a.g.mapper.ArticleMapper.selectCount   : ==>  Preparing: SELECT COUNT( 1 ) FROM t_article 
+2020-04-24 19:14:42.609 DEBUG 16612 --- [http-nio-8889-exec-8] s.a.g.mapper.ArticleMapper.selectCount   : ==> Parameters: 
+2020-04-24 19:14:42.610 DEBUG 16612 --- [http-nio-8889-exec-3] s.a.g.m.A.countArticleByDate             : ==>  Preparing: select year(create_time) 'year' , month(create_time) 'month' , count(id) 'articleCount' from t_article where create_time >= DATE_SUB(CURDATE(), INTERVAL 1 YEAR) group by year(create_time) ,month(create_time) 
+2020-04-24 19:14:42.611 DEBUG 16612 --- [http-nio-8889-exec-3] s.a.g.m.A.countArticleByDate             : ==> Parameters: 
+2020-04-24 19:14:42.611 DEBUG 16612 --- [http-nio-8889-exec-8] s.a.g.mapper.ArticleMapper.selectCount   : <==      Total: 1
+2020-04-24 19:14:42.612 DEBUG 16612 --- [http-nio-8889-exec-3] s.a.g.m.A.countArticleByDate             : <==      Total: 2
+2020-04-24 19:14:42.612 DEBUG 16612 --- [http-nio-8889-exec-1] s.a.g.mapper.CategoryMapper.selectCount  : ==>  Preparing: SELECT COUNT( 1 ) FROM t_category 
+2020-04-24 19:14:42.613 DEBUG 16612 --- [http-nio-8889-exec-1] s.a.g.mapper.CategoryMapper.selectCount  : ==> Parameters: 
+2020-04-24 19:14:42.614 DEBUG 16612 --- [http-nio-8889-exec-1] s.a.g.mapper.CategoryMapper.selectCount  : <==      Total: 1
+2020-04-24 19:14:42.618 DEBUG 16612 --- [http-nio-8889-exec-4] s.a.g.mapper.TagMapper.selectCount       : ==>  Preparing: SELECT COUNT( 1 ) FROM t_tag 
+2020-04-24 19:14:42.618 DEBUG 16612 --- [http-nio-8889-exec-4] s.a.g.mapper.TagMapper.selectCount       : ==> Parameters: 
+2020-04-24 19:14:42.618 DEBUG 16612 --- [http-nio-8889-exec-9] s.a.g.m.C.listByArticleCount             : ==>  Preparing: select tc.id, tc.name, count(ta.id) articleCount from t_category tc left join t_article ta on tc.id = ta.category_id where tc.display = 1 group by tc.id having articleCount > 0 
+2020-04-24 19:14:42.618 DEBUG 16612 --- [http-nio-8889-exec-9] s.a.g.m.C.listByArticleCount             : ==> Parameters: 
+2020-04-24 19:14:42.622 DEBUG 16612 --- [http-nio-8889-exec-1] s.a.g.m.TagMapper.listByArticleCount     : ==>  Preparing: select tt.id, tt.name, count(ta.id) articleCount from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id left join t_article ta on ta.id = tat.article_id group by tt.id having articleCount > 0 
+2020-04-24 19:14:42.622 DEBUG 16612 --- [http-nio-8889-exec-4] s.a.g.mapper.TagMapper.selectCount       : <==      Total: 1
+2020-04-24 19:14:42.623 DEBUG 16612 --- [http-nio-8889-exec-1] s.a.g.m.TagMapper.listByArticleCount     : ==> Parameters: 
+2020-04-24 19:14:42.632 DEBUG 16612 --- [http-nio-8889-exec-1] s.a.g.m.TagMapper.listByArticleCount     : <==      Total: 4
+2020-04-24 19:14:42.635 DEBUG 16612 --- [http-nio-8889-exec-9] s.a.g.m.C.listByArticleCount             : <==      Total: 3
+2020-04-24 19:14:47.069 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.mapper.CategoryMapper.selectCount  : ==>  Preparing: SELECT COUNT( 1 ) FROM t_category 
+2020-04-24 19:14:47.069 DEBUG 16612 --- [http-nio-8889-exec-10] s.a.g.mapper.ArticleMapper.selectCount   : ==>  Preparing: SELECT COUNT( 1 ) FROM t_article 
+2020-04-24 19:14:47.069 DEBUG 16612 --- [http-nio-8889-exec-3] s.a.g.mapper.TagMapper.selectCount       : ==>  Preparing: SELECT COUNT( 1 ) FROM t_tag 
+2020-04-24 19:14:47.069 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.mapper.CategoryMapper.selectCount  : ==> Parameters: 
+2020-04-24 19:14:47.070 DEBUG 16612 --- [http-nio-8889-exec-10] s.a.g.mapper.ArticleMapper.selectCount   : ==> Parameters: 
+2020-04-24 19:14:47.070 DEBUG 16612 --- [http-nio-8889-exec-3] s.a.g.mapper.TagMapper.selectCount       : ==> Parameters: 
+2020-04-24 19:14:47.074 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.mapper.CategoryMapper.selectCount  : <==      Total: 1
+2020-04-24 19:14:47.074 DEBUG 16612 --- [http-nio-8889-exec-3] s.a.g.mapper.TagMapper.selectCount       : <==      Total: 1
+2020-04-24 19:14:47.074 DEBUG 16612 --- [http-nio-8889-exec-10] s.a.g.mapper.ArticleMapper.selectCount   : <==      Total: 1
+2020-04-24 19:14:47.074 DEBUG 16612 --- [http-nio-8889-exec-8] s.a.g.m.A.countArticleByDate             : ==>  Preparing: select year(create_time) 'year' , month(create_time) 'month' , count(id) 'articleCount' from t_article where create_time >= DATE_SUB(CURDATE(), INTERVAL 1 YEAR) group by year(create_time) ,month(create_time) 
+2020-04-24 19:14:47.074 DEBUG 16612 --- [http-nio-8889-exec-8] s.a.g.m.A.countArticleByDate             : ==> Parameters: 
+2020-04-24 19:14:47.075 DEBUG 16612 --- [http-nio-8889-exec-4] s.a.g.m.TagMapper.listByArticleCount     : ==>  Preparing: select tt.id, tt.name, count(ta.id) articleCount from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id left join t_article ta on ta.id = tat.article_id group by tt.id having articleCount > 0 
+2020-04-24 19:14:47.075 DEBUG 16612 --- [http-nio-8889-exec-5] s.a.g.m.C.listByArticleCount             : ==>  Preparing: select tc.id, tc.name, count(ta.id) articleCount from t_category tc left join t_article ta on tc.id = ta.category_id where tc.display = 1 group by tc.id having articleCount > 0 
+2020-04-24 19:14:47.075 DEBUG 16612 --- [http-nio-8889-exec-4] s.a.g.m.TagMapper.listByArticleCount     : ==> Parameters: 
+2020-04-24 19:14:47.075 DEBUG 16612 --- [http-nio-8889-exec-5] s.a.g.m.C.listByArticleCount             : ==> Parameters: 
+2020-04-24 19:14:47.077 DEBUG 16612 --- [http-nio-8889-exec-8] s.a.g.m.A.countArticleByDate             : <==      Total: 2
+2020-04-24 19:14:47.077 DEBUG 16612 --- [http-nio-8889-exec-5] s.a.g.m.C.listByArticleCount             : <==      Total: 3
+2020-04-24 19:14:47.077 DEBUG 16612 --- [http-nio-8889-exec-4] s.a.g.m.TagMapper.listByArticleCount     : <==      Total: 4
+2020-04-24 19:14:50.061 DEBUG 16612 --- [http-nio-8889-exec-6] s.a.g.m.TagMapper.listByArticleCount     : ==>  Preparing: select tt.id, tt.name, count(ta.id) articleCount from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id left join t_article ta on ta.id = tat.article_id group by tt.id having articleCount > 0 
+2020-04-24 19:14:50.061 DEBUG 16612 --- [http-nio-8889-exec-6] s.a.g.m.TagMapper.listByArticleCount     : ==> Parameters: 
+2020-04-24 19:14:50.063 DEBUG 16612 --- [http-nio-8889-exec-6] s.a.g.m.TagMapper.listByArticleCount     : <==      Total: 4
+2020-04-24 19:14:55.078 DEBUG 16612 --- [http-nio-8889-exec-8] s.a.g.m.C.listByArticleCount             : ==>  Preparing: select tc.id, tc.name, count(ta.id) articleCount from t_category tc left join t_article ta on tc.id = ta.category_id where tc.display = 1 group by tc.id having articleCount > 0 
+2020-04-24 19:14:55.078 DEBUG 16612 --- [http-nio-8889-exec-8] s.a.g.m.C.listByArticleCount             : ==> Parameters: 
+2020-04-24 19:14:55.079 DEBUG 16612 --- [http-nio-8889-exec-8] s.a.g.m.C.listByArticleCount             : <==      Total: 3
+2020-04-24 19:14:58.550 DEBUG 16612 --- [http-nio-8889-exec-6] s.a.g.m.A.countArticleByDate             : ==>  Preparing: select year(create_time) 'year' , month(create_time) 'month', day(create_time) 'day' , count(id) 'articleCount' from t_article where create_time >= DATE_SUB(CURDATE(), INTERVAL 1 YEAR) group by year(create_time) ,month(create_time), day(create_time) 
+2020-04-24 19:14:58.550 DEBUG 16612 --- [http-nio-8889-exec-6] s.a.g.m.A.countArticleByDate             : ==> Parameters: 
+2020-04-24 19:14:58.555 DEBUG 16612 --- [http-nio-8889-exec-6] s.a.g.m.A.countArticleByDate             : <==      Total: 5
+2020-04-24 19:14:58.562 DEBUG 16612 --- [http-nio-8889-exec-10] s.a.g.m.A.listPageArticlePreviewByDate   : ==>  Preparing: SELECT COUNT(1) FROM t_article ta 
+2020-04-24 19:14:58.563 DEBUG 16612 --- [http-nio-8889-exec-10] s.a.g.m.A.listPageArticlePreviewByDate   : ==> Parameters: 
+2020-04-24 19:14:58.564 DEBUG 16612 --- [http-nio-8889-exec-10] s.a.g.m.A.listPageArticlePreviewByDate   : ==>  Preparing: select ta.id, ta.title, ta.summary, ta.create_time, ta.cover, tc.id as cid, tc.name as cname from t_article ta left join t_category tc on ta.category_id = tc.id order by ta.create_time desc LIMIT ?,? 
+2020-04-24 19:14:58.564 DEBUG 16612 --- [http-nio-8889-exec-10] s.a.g.m.A.listPageArticlePreviewByDate   : ==> Parameters: 0(Long), 6(Long)
+2020-04-24 19:14:58.572 DEBUG 16612 --- [http-nio-8889-exec-10] s.a.g.m.A.listPageArticlePreviewByDate   : <==      Total: 6
+2020-04-24 19:14:58.574 DEBUG 16612 --- [http-nio-8889-exec-10] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-24 19:14:58.574 DEBUG 16612 --- [http-nio-8889-exec-10] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 1041(Long)
+2020-04-24 19:14:58.575 DEBUG 16612 --- [http-nio-8889-exec-10] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 1
+2020-04-24 19:14:58.576 DEBUG 16612 --- [http-nio-8889-exec-10] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-24 19:14:58.576 DEBUG 16612 --- [http-nio-8889-exec-10] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 1040(Long)
+2020-04-24 19:14:58.577 DEBUG 16612 --- [http-nio-8889-exec-10] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 1
+2020-04-24 19:14:58.578 DEBUG 16612 --- [http-nio-8889-exec-10] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-24 19:14:58.578 DEBUG 16612 --- [http-nio-8889-exec-10] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 26(Long)
+2020-04-24 19:14:58.579 DEBUG 16612 --- [http-nio-8889-exec-10] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 1
+2020-04-24 19:14:58.580 DEBUG 16612 --- [http-nio-8889-exec-10] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-24 19:14:58.580 DEBUG 16612 --- [http-nio-8889-exec-10] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 25(Long)
+2020-04-24 19:14:58.581 DEBUG 16612 --- [http-nio-8889-exec-10] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 1
+2020-04-24 19:14:58.583 DEBUG 16612 --- [http-nio-8889-exec-10] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-24 19:14:58.583 DEBUG 16612 --- [http-nio-8889-exec-10] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 24(Long)
+2020-04-24 19:14:58.586 DEBUG 16612 --- [http-nio-8889-exec-10] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 4
+2020-04-24 19:14:58.590 DEBUG 16612 --- [http-nio-8889-exec-10] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-24 19:14:58.590 DEBUG 16612 --- [http-nio-8889-exec-10] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 23(Long)
+2020-04-24 19:14:58.591 DEBUG 16612 --- [http-nio-8889-exec-10] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 4
+2020-04-24 19:15:00.206 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.mapper.ArticleMapper.selectOne     : ==>  Preparing: SELECT views FROM t_article WHERE (id = ?) 
+2020-04-24 19:15:00.207 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.mapper.ArticleMapper.selectOne     : ==> Parameters: 1041(Long)
+2020-04-24 19:15:00.208 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.mapper.ArticleMapper.selectOne     : <==      Total: 1
+2020-04-24 19:15:00.209 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.mapper.ArticleMapper.updateById    : ==>  Preparing: UPDATE t_article SET views=? WHERE id=? 
+2020-04-24 19:15:00.209 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.mapper.ArticleMapper.updateById    : ==> Parameters: 151(Integer), 1041(Long)
+2020-04-24 19:15:00.212 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.mapper.ArticleMapper.updateById    : <==    Updates: 1
+2020-04-24 19:15:00.213 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.m.ArticleMapper.selectArticleById  : ==>  Preparing: select ta.id, ta.title, ta.content, ta.cover, ta.create_time, ta.type, ta.likes, ta.views, ta.comments, ta.commentable, ta.appreciable, tc.id as cid, tc.name as cname, su.id, su.username from t_article ta left join t_category tc on ta.category_id = tc.id left join sys_user su on ta.author_id = su.id where ta.id = ? 
+2020-04-24 19:15:00.213 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.m.ArticleMapper.selectArticleById  : ==> Parameters: 1041(Long)
+2020-04-24 19:15:00.216 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.m.ArticleMapper.selectArticleById  : <==      Total: 1
+2020-04-24 19:15:00.218 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.m.A.selectPrevArticlePreview       : ==>  Preparing: select ta.id, ta.title, ta.summary, ta.create_time, ta.cover, tc.id as cid, tc.name as cname from t_article ta left join t_category tc on ta.category_id = tc.id where ta.id = (select max(id) from t_article where id < ?) 
+2020-04-24 19:15:00.218 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.m.A.selectPrevArticlePreview       : ==> Parameters: 1041(Long)
+2020-04-24 19:15:00.221 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.m.A.selectPrevArticlePreview       : <==      Total: 1
+2020-04-24 19:15:00.222 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.m.A.selectNextArticlePreview       : ==>  Preparing: select ta.id, ta.title, ta.summary, ta.create_time, ta.cover, tc.id as cid, tc.name as cname from t_article ta left join t_category tc on ta.category_id = tc.id where ta.id = (select min(id) from t_article where id > ?) 
+2020-04-24 19:15:00.222 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.m.A.selectNextArticlePreview       : ==> Parameters: 1041(Long)
+2020-04-24 19:15:00.223 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.m.A.selectNextArticlePreview       : <==      Total: 0
+2020-04-24 19:15:00.229 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-24 19:15:00.229 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 1041(Long)
+2020-04-24 19:15:00.230 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 1
+2020-04-24 19:15:00.235 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-24 19:15:00.235 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 1040(Long)
+2020-04-24 19:15:00.236 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 1
+2020-04-24 19:15:03.265 DEBUG 16612 --- [http-nio-8889-exec-6] s.a.g.mapper.ArticleMapper.selectCount   : ==>  Preparing: SELECT COUNT( 1 ) FROM t_article 
+2020-04-24 19:15:03.266 DEBUG 16612 --- [http-nio-8889-exec-6] s.a.g.mapper.ArticleMapper.selectCount   : ==> Parameters: 
+2020-04-24 19:15:03.268 DEBUG 16612 --- [http-nio-8889-exec-10] s.a.g.mapper.CategoryMapper.selectCount  : ==>  Preparing: SELECT COUNT( 1 ) FROM t_category 
+2020-04-24 19:15:03.269 DEBUG 16612 --- [http-nio-8889-exec-10] s.a.g.mapper.CategoryMapper.selectCount  : ==> Parameters: 
+2020-04-24 19:15:03.269 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.mapper.TagMapper.selectCount       : ==>  Preparing: SELECT COUNT( 1 ) FROM t_tag 
+2020-04-24 19:15:03.269 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.mapper.TagMapper.selectCount       : ==> Parameters: 
+2020-04-24 19:15:03.270 DEBUG 16612 --- [http-nio-8889-exec-6] s.a.g.mapper.ArticleMapper.selectCount   : <==      Total: 1
+2020-04-24 19:15:03.272 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.mapper.TagMapper.selectCount       : <==      Total: 1
+2020-04-24 19:15:03.272 DEBUG 16612 --- [http-nio-8889-exec-10] s.a.g.mapper.CategoryMapper.selectCount  : <==      Total: 1
+2020-04-24 19:15:03.273 DEBUG 16612 --- [http-nio-8889-exec-4] s.a.g.m.C.listByArticleCount             : ==>  Preparing: select tc.id, tc.name, count(ta.id) articleCount from t_category tc left join t_article ta on tc.id = ta.category_id where tc.display = 1 group by tc.id having articleCount > 0 
+2020-04-24 19:15:03.273 DEBUG 16612 --- [http-nio-8889-exec-3] s.a.g.m.A.countArticleByDate             : ==>  Preparing: select year(create_time) 'year' , month(create_time) 'month' , count(id) 'articleCount' from t_article where create_time >= DATE_SUB(CURDATE(), INTERVAL 1 YEAR) group by year(create_time) ,month(create_time) 
+2020-04-24 19:15:03.273 DEBUG 16612 --- [http-nio-8889-exec-4] s.a.g.m.C.listByArticleCount             : ==> Parameters: 
+2020-04-24 19:15:03.273 DEBUG 16612 --- [http-nio-8889-exec-3] s.a.g.m.A.countArticleByDate             : ==> Parameters: 
+2020-04-24 19:15:03.275 DEBUG 16612 --- [http-nio-8889-exec-8] s.a.g.m.TagMapper.listByArticleCount     : ==>  Preparing: select tt.id, tt.name, count(ta.id) articleCount from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id left join t_article ta on ta.id = tat.article_id group by tt.id having articleCount > 0 
+2020-04-24 19:15:03.275 DEBUG 16612 --- [http-nio-8889-exec-8] s.a.g.m.TagMapper.listByArticleCount     : ==> Parameters: 
+2020-04-24 19:15:03.275 DEBUG 16612 --- [http-nio-8889-exec-3] s.a.g.m.A.countArticleByDate             : <==      Total: 2
+2020-04-24 19:15:03.275 DEBUG 16612 --- [http-nio-8889-exec-4] s.a.g.m.C.listByArticleCount             : <==      Total: 3
+2020-04-24 19:15:03.277 DEBUG 16612 --- [http-nio-8889-exec-8] s.a.g.m.TagMapper.listByArticleCount     : <==      Total: 4
+2020-04-24 19:15:43.894 DEBUG 16612 --- [http-nio-8889-exec-8] s.a.g.m.A.countArticleByDate             : ==>  Preparing: select year(create_time) 'year' , month(create_time) 'month', day(create_time) 'day' , count(id) 'articleCount' from t_article where create_time >= DATE_SUB(CURDATE(), INTERVAL 1 YEAR) group by year(create_time) ,month(create_time), day(create_time) 
+2020-04-24 19:15:43.894 DEBUG 16612 --- [http-nio-8889-exec-8] s.a.g.m.A.countArticleByDate             : ==> Parameters: 
+2020-04-24 19:15:43.896 DEBUG 16612 --- [http-nio-8889-exec-5] s.a.g.m.A.listPageArticlePreviewByDate   : ==>  Preparing: SELECT COUNT(1) FROM t_article ta 
+2020-04-24 19:15:43.896 DEBUG 16612 --- [http-nio-8889-exec-8] s.a.g.m.A.countArticleByDate             : <==      Total: 5
+2020-04-24 19:15:43.896 DEBUG 16612 --- [http-nio-8889-exec-5] s.a.g.m.A.listPageArticlePreviewByDate   : ==> Parameters: 
+2020-04-24 19:15:43.897 DEBUG 16612 --- [http-nio-8889-exec-5] s.a.g.m.A.listPageArticlePreviewByDate   : ==>  Preparing: select ta.id, ta.title, ta.summary, ta.create_time, ta.cover, tc.id as cid, tc.name as cname from t_article ta left join t_category tc on ta.category_id = tc.id order by ta.create_time desc LIMIT ?,? 
+2020-04-24 19:15:43.897 DEBUG 16612 --- [http-nio-8889-exec-5] s.a.g.m.A.listPageArticlePreviewByDate   : ==> Parameters: 0(Long), 6(Long)
+2020-04-24 19:15:43.908 DEBUG 16612 --- [http-nio-8889-exec-5] s.a.g.m.A.listPageArticlePreviewByDate   : <==      Total: 6
+2020-04-24 19:15:43.909 DEBUG 16612 --- [http-nio-8889-exec-5] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-24 19:15:43.910 DEBUG 16612 --- [http-nio-8889-exec-5] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 1041(Long)
+2020-04-24 19:15:43.913 DEBUG 16612 --- [http-nio-8889-exec-5] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 1
+2020-04-24 19:15:43.914 DEBUG 16612 --- [http-nio-8889-exec-5] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-24 19:15:43.914 DEBUG 16612 --- [http-nio-8889-exec-5] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 1040(Long)
+2020-04-24 19:15:43.915 DEBUG 16612 --- [http-nio-8889-exec-5] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 1
+2020-04-24 19:15:43.916 DEBUG 16612 --- [http-nio-8889-exec-5] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-24 19:15:43.917 DEBUG 16612 --- [http-nio-8889-exec-5] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 26(Long)
+2020-04-24 19:15:43.919 DEBUG 16612 --- [http-nio-8889-exec-5] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 1
+2020-04-24 19:15:43.920 DEBUG 16612 --- [http-nio-8889-exec-5] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-24 19:15:43.920 DEBUG 16612 --- [http-nio-8889-exec-5] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 25(Long)
+2020-04-24 19:15:43.922 DEBUG 16612 --- [http-nio-8889-exec-5] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 1
+2020-04-24 19:15:43.924 DEBUG 16612 --- [http-nio-8889-exec-5] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-24 19:15:43.926 DEBUG 16612 --- [http-nio-8889-exec-5] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 24(Long)
+2020-04-24 19:15:43.928 DEBUG 16612 --- [http-nio-8889-exec-5] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 4
+2020-04-24 19:15:43.929 DEBUG 16612 --- [http-nio-8889-exec-5] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-24 19:15:43.929 DEBUG 16612 --- [http-nio-8889-exec-5] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 23(Long)
+2020-04-24 19:15:43.930 DEBUG 16612 --- [http-nio-8889-exec-5] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 4
+2020-04-24 19:15:45.364 DEBUG 16612 --- [http-nio-8889-exec-7] s.a.g.mapper.ArticleMapper.selectCount   : ==>  Preparing: SELECT COUNT( 1 ) FROM t_article 
+2020-04-24 19:15:45.364 DEBUG 16612 --- [http-nio-8889-exec-7] s.a.g.mapper.ArticleMapper.selectCount   : ==> Parameters: 
+2020-04-24 19:15:45.365 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.mapper.TagMapper.selectCount       : ==>  Preparing: SELECT COUNT( 1 ) FROM t_tag 
+2020-04-24 19:15:45.365 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.mapper.TagMapper.selectCount       : ==> Parameters: 
+2020-04-24 19:15:45.365 DEBUG 16612 --- [http-nio-8889-exec-6] s.a.g.mapper.CategoryMapper.selectCount  : ==>  Preparing: SELECT COUNT( 1 ) FROM t_category 
+2020-04-24 19:15:45.365 DEBUG 16612 --- [http-nio-8889-exec-7] s.a.g.mapper.ArticleMapper.selectCount   : <==      Total: 1
+2020-04-24 19:15:45.366 DEBUG 16612 --- [http-nio-8889-exec-6] s.a.g.mapper.CategoryMapper.selectCount  : ==> Parameters: 
+2020-04-24 19:15:45.366 DEBUG 16612 --- [http-nio-8889-exec-2] s.a.g.mapper.TagMapper.selectCount       : <==      Total: 1
+2020-04-24 19:15:45.367 DEBUG 16612 --- [http-nio-8889-exec-6] s.a.g.mapper.CategoryMapper.selectCount  : <==      Total: 1
+2020-04-24 19:15:45.368 DEBUG 16612 --- [http-nio-8889-exec-10] s.a.g.m.A.countArticleByDate             : ==>  Preparing: select year(create_time) 'year' , month(create_time) 'month' , count(id) 'articleCount' from t_article where create_time >= DATE_SUB(CURDATE(), INTERVAL 1 YEAR) group by year(create_time) ,month(create_time) 
+2020-04-24 19:15:45.368 DEBUG 16612 --- [http-nio-8889-exec-10] s.a.g.m.A.countArticleByDate             : ==> Parameters: 
+2020-04-24 19:15:45.370 DEBUG 16612 --- [http-nio-8889-exec-3] s.a.g.m.TagMapper.listByArticleCount     : ==>  Preparing: select tt.id, tt.name, count(ta.id) articleCount from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id left join t_article ta on ta.id = tat.article_id group by tt.id having articleCount > 0 
+2020-04-24 19:15:45.372 DEBUG 16612 --- [http-nio-8889-exec-4] s.a.g.m.C.listByArticleCount             : ==>  Preparing: select tc.id, tc.name, count(ta.id) articleCount from t_category tc left join t_article ta on tc.id = ta.category_id where tc.display = 1 group by tc.id having articleCount > 0 
+2020-04-24 19:15:45.372 DEBUG 16612 --- [http-nio-8889-exec-3] s.a.g.m.TagMapper.listByArticleCount     : ==> Parameters: 
+2020-04-24 19:15:45.372 DEBUG 16612 --- [http-nio-8889-exec-4] s.a.g.m.C.listByArticleCount             : ==> Parameters: 
+2020-04-24 19:15:45.372 DEBUG 16612 --- [http-nio-8889-exec-10] s.a.g.m.A.countArticleByDate             : <==      Total: 2
+2020-04-24 19:15:45.375 DEBUG 16612 --- [http-nio-8889-exec-3] s.a.g.m.TagMapper.listByArticleCount     : <==      Total: 4
+2020-04-24 19:15:45.376 DEBUG 16612 --- [http-nio-8889-exec-4] s.a.g.m.C.listByArticleCount             : <==      Total: 3
+2020-04-24 19:17:15.472  INFO 13980 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Starting GeekBlogApplication on DESKTOP-QNDK7AF with PID 13980 (D:\idea\geekblog\target\classes started by AlanLiang in D:\idea\geekblog)
+2020-04-24 19:17:15.475 DEBUG 13980 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Running with Spring Boot v2.2.6.RELEASE, Spring v5.2.5.RELEASE
+2020-04-24 19:17:15.475  INFO 13980 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : The following profiles are active: dev
+2020-04-24 19:17:15.533  INFO 13980 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2020-04-24 19:17:15.533  INFO 13980 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2020-04-24 19:17:17.006  INFO 13980 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8889 (http)
+2020-04-24 19:17:17.013  INFO 13980 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-04-24 19:17:17.014  INFO 13980 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.33]
+2020-04-24 19:17:17.095  INFO 13980 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-04-24 19:17:17.096  INFO 13980 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1562 ms
+2020-04-24 19:17:17.304  INFO 13980 --- [restartedMain] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2020-04-24 19:17:17.541  INFO 13980 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2020-04-24 19:17:18.337  INFO 13980 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-04-24 19:17:18.561  INFO 13980 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2020-04-24 19:17:18.609  INFO 13980 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8889 (http) with context path ''
+2020-04-24 19:17:18.611  INFO 13980 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Started GeekBlogApplication in 3.964 seconds (JVM running for 5.11)
+2020-04-24 19:17:20.645  INFO 13980 --- [http-nio-8889-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-04-24 19:17:20.645  INFO 13980 --- [http-nio-8889-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-04-24 19:17:20.653  INFO 13980 --- [http-nio-8889-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 8 ms
+2020-04-24 19:17:25.577 DEBUG 13980 --- [http-nio-8889-exec-3] s.a.g.m.A.listRecommendArticles          : ==>  Preparing: select id, title, summary, cover, category_id from t_article where recommend = 1 and published = 1 
+2020-04-24 19:17:25.618 DEBUG 13980 --- [http-nio-8889-exec-9] s.a.g.mapper.ArticleMapper.selectList    : ==>  Preparing: SELECT id,title,summary,cover FROM t_article WHERE (published = ? AND top = ?) limit 5 
+2020-04-24 19:17:25.622 DEBUG 13980 --- [http-nio-8889-exec-3] s.a.g.m.A.listRecommendArticles          : ==> Parameters: 
+2020-04-24 19:17:25.623 DEBUG 13980 --- [http-nio-8889-exec-9] s.a.g.mapper.ArticleMapper.selectList    : ==> Parameters: true(Boolean), true(Boolean)
+2020-04-24 19:17:25.637 DEBUG 13980 --- [http-nio-8889-exec-7] s.a.g.m.A.listArticlesPreviewByPage      : ==>  Preparing: SELECT COUNT(1) FROM t_article ta WHERE ta.published = 1 
+2020-04-24 19:17:25.638 DEBUG 13980 --- [http-nio-8889-exec-7] s.a.g.m.A.listArticlesPreviewByPage      : ==> Parameters: 
+2020-04-24 19:17:25.652 DEBUG 13980 --- [http-nio-8889-exec-9] s.a.g.mapper.ArticleMapper.selectList    : <==      Total: 5
+2020-04-24 19:17:25.657 DEBUG 13980 --- [http-nio-8889-exec-7] s.a.g.m.A.listArticlesPreviewByPage      : ==>  Preparing: select ta.id, ta.title, ta.summary, ta.create_time, ta.cover, tc.id as cid, tc.name as cname from t_article ta left join t_category tc on ta.category_id = tc.id where ta.published = 1 order by ta.create_time desc LIMIT ?,? 
+2020-04-24 19:17:25.659 DEBUG 13980 --- [http-nio-8889-exec-7] s.a.g.m.A.listArticlesPreviewByPage      : ==> Parameters: 0(Long), 6(Long)
+2020-04-24 19:17:25.718 DEBUG 13980 --- [http-nio-8889-exec-3] s.a.g.m.A.listRecommendArticles          : <==      Total: 4
+2020-04-24 19:17:25.722 DEBUG 13980 --- [http-nio-8889-exec-7] s.a.g.m.A.listArticlesPreviewByPage      : <==      Total: 6
+2020-04-24 19:17:25.770 DEBUG 13980 --- [http-nio-8889-exec-3] s.a.g.m.C.selectCategoryById             : ==>  Preparing: select id, name from t_category where id = ? 
+2020-04-24 19:17:25.771 DEBUG 13980 --- [http-nio-8889-exec-3] s.a.g.m.C.selectCategoryById             : ==> Parameters: 2(Long)
+2020-04-24 19:17:25.775 DEBUG 13980 --- [http-nio-8889-exec-3] s.a.g.m.C.selectCategoryById             : <==      Total: 1
+2020-04-24 19:17:25.778 DEBUG 13980 --- [http-nio-8889-exec-7] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-24 19:17:25.779 DEBUG 13980 --- [http-nio-8889-exec-3] s.a.g.m.C.selectCategoryById             : ==>  Preparing: select id, name from t_category where id = ? 
+2020-04-24 19:17:25.780 DEBUG 13980 --- [http-nio-8889-exec-7] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 1041(Long)
+2020-04-24 19:17:25.780 DEBUG 13980 --- [http-nio-8889-exec-3] s.a.g.m.C.selectCategoryById             : ==> Parameters: 3(Long)
+2020-04-24 19:17:25.784 DEBUG 13980 --- [http-nio-8889-exec-3] s.a.g.m.C.selectCategoryById             : <==      Total: 1
+2020-04-24 19:17:25.787 DEBUG 13980 --- [http-nio-8889-exec-7] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 1
+2020-04-24 19:17:25.787 DEBUG 13980 --- [http-nio-8889-exec-3] s.a.g.m.C.selectCategoryById             : ==>  Preparing: select id, name from t_category where id = ? 
+2020-04-24 19:17:25.788 DEBUG 13980 --- [http-nio-8889-exec-3] s.a.g.m.C.selectCategoryById             : ==> Parameters: 1(Long)
+2020-04-24 19:17:25.790 DEBUG 13980 --- [http-nio-8889-exec-3] s.a.g.m.C.selectCategoryById             : <==      Total: 1
+2020-04-24 19:17:25.791 DEBUG 13980 --- [http-nio-8889-exec-7] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-24 19:17:25.792 DEBUG 13980 --- [http-nio-8889-exec-7] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 1040(Long)
+2020-04-24 19:17:25.792 DEBUG 13980 --- [http-nio-8889-exec-3] s.a.g.m.C.selectCategoryById             : ==>  Preparing: select id, name from t_category where id = ? 
+2020-04-24 19:17:25.793 DEBUG 13980 --- [http-nio-8889-exec-3] s.a.g.m.C.selectCategoryById             : ==> Parameters: 1(Long)
+2020-04-24 19:17:25.794 DEBUG 13980 --- [http-nio-8889-exec-3] s.a.g.m.C.selectCategoryById             : <==      Total: 1
+2020-04-24 19:17:25.794 DEBUG 13980 --- [http-nio-8889-exec-7] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 1
+2020-04-24 19:17:25.798 DEBUG 13980 --- [http-nio-8889-exec-7] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-24 19:17:25.799 DEBUG 13980 --- [http-nio-8889-exec-7] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 26(Long)
+2020-04-24 19:17:25.803 DEBUG 13980 --- [http-nio-8889-exec-7] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 1
+2020-04-24 19:17:25.805 DEBUG 13980 --- [http-nio-8889-exec-7] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-24 19:17:25.806 DEBUG 13980 --- [http-nio-8889-exec-7] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 25(Long)
+2020-04-24 19:17:25.807 DEBUG 13980 --- [http-nio-8889-exec-7] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 1
+2020-04-24 19:17:25.808 DEBUG 13980 --- [http-nio-8889-exec-7] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-24 19:17:25.808 DEBUG 13980 --- [http-nio-8889-exec-7] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 24(Long)
+2020-04-24 19:17:25.810 DEBUG 13980 --- [http-nio-8889-exec-7] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 4
+2020-04-24 19:17:25.812 DEBUG 13980 --- [http-nio-8889-exec-7] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-24 19:17:25.813 DEBUG 13980 --- [http-nio-8889-exec-7] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 23(Long)
+2020-04-24 19:17:25.817 DEBUG 13980 --- [http-nio-8889-exec-7] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 4
+2020-04-24 19:17:38.821 DEBUG 13980 --- [http-nio-8889-exec-6] s.a.g.mapper.ArticleMapper.selectOne     : ==>  Preparing: SELECT views FROM t_article WHERE (id = ?) 
+2020-04-24 19:17:38.822 DEBUG 13980 --- [http-nio-8889-exec-6] s.a.g.mapper.ArticleMapper.selectOne     : ==> Parameters: 11(Long)
+2020-04-24 19:17:38.824 DEBUG 13980 --- [http-nio-8889-exec-6] s.a.g.mapper.ArticleMapper.selectOne     : <==      Total: 1
+2020-04-24 19:17:38.833 DEBUG 13980 --- [http-nio-8889-exec-6] s.a.g.mapper.ArticleMapper.updateById    : ==>  Preparing: UPDATE t_article SET views=? WHERE id=? 
+2020-04-24 19:17:38.837 DEBUG 13980 --- [http-nio-8889-exec-6] s.a.g.mapper.ArticleMapper.updateById    : ==> Parameters: 2192(Integer), 11(Long)
+2020-04-24 19:17:38.839 DEBUG 13980 --- [http-nio-8889-exec-6] s.a.g.mapper.ArticleMapper.updateById    : <==    Updates: 1
+2020-04-24 19:17:38.841 DEBUG 13980 --- [http-nio-8889-exec-6] s.a.g.m.ArticleMapper.selectArticleById  : ==>  Preparing: select ta.id, ta.title, ta.content, ta.cover, ta.create_time, ta.type, ta.likes, ta.views, ta.comments, ta.commentable, ta.appreciable, tc.id as cid, tc.name as cname, su.id, su.username from t_article ta left join t_category tc on ta.category_id = tc.id left join sys_user su on ta.author_id = su.id where ta.id = ? 
+2020-04-24 19:17:38.842 DEBUG 13980 --- [http-nio-8889-exec-6] s.a.g.m.ArticleMapper.selectArticleById  : ==> Parameters: 11(Long)
+2020-04-24 19:17:38.853 DEBUG 13980 --- [http-nio-8889-exec-6] s.a.g.m.ArticleMapper.selectArticleById  : <==      Total: 1
+2020-04-24 19:17:38.855 DEBUG 13980 --- [http-nio-8889-exec-6] s.a.g.m.A.selectPrevArticlePreview       : ==>  Preparing: select ta.id, ta.title, ta.summary, ta.create_time, ta.cover, tc.id as cid, tc.name as cname from t_article ta left join t_category tc on ta.category_id = tc.id where ta.id = (select max(id) from t_article where id < ?) 
+2020-04-24 19:17:38.855 DEBUG 13980 --- [http-nio-8889-exec-6] s.a.g.m.A.selectPrevArticlePreview       : ==> Parameters: 11(Long)
+2020-04-24 19:17:38.858 DEBUG 13980 --- [http-nio-8889-exec-6] s.a.g.m.A.selectPrevArticlePreview       : <==      Total: 1
+2020-04-24 19:17:38.863 DEBUG 13980 --- [http-nio-8889-exec-6] s.a.g.m.A.selectNextArticlePreview       : ==>  Preparing: select ta.id, ta.title, ta.summary, ta.create_time, ta.cover, tc.id as cid, tc.name as cname from t_article ta left join t_category tc on ta.category_id = tc.id where ta.id = (select min(id) from t_article where id > ?) 
+2020-04-24 19:17:38.863 DEBUG 13980 --- [http-nio-8889-exec-6] s.a.g.m.A.selectNextArticlePreview       : ==> Parameters: 11(Long)
+2020-04-24 19:17:38.869 DEBUG 13980 --- [http-nio-8889-exec-6] s.a.g.m.A.selectNextArticlePreview       : <==      Total: 1
+2020-04-24 19:17:38.900 DEBUG 13980 --- [http-nio-8889-exec-6] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-24 19:17:38.901 DEBUG 13980 --- [http-nio-8889-exec-6] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 11(Long)
+2020-04-24 19:17:38.904 DEBUG 13980 --- [http-nio-8889-exec-6] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 1
+2020-04-24 19:17:38.950 DEBUG 13980 --- [http-nio-8889-exec-6] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-24 19:17:38.950 DEBUG 13980 --- [http-nio-8889-exec-6] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 7(Long)
+2020-04-24 19:17:38.954 DEBUG 13980 --- [http-nio-8889-exec-6] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 2
+2020-04-24 19:17:38.956 DEBUG 13980 --- [http-nio-8889-exec-6] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-24 19:17:38.957 DEBUG 13980 --- [http-nio-8889-exec-6] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 18(Long)
+2020-04-24 19:17:38.961 DEBUG 13980 --- [http-nio-8889-exec-6] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 1
+2020-04-24 19:17:41.344 DEBUG 13980 --- [http-nio-8889-exec-9] s.a.g.mapper.ArticleMapper.selectOne     : ==>  Preparing: SELECT views FROM t_article WHERE (id = ?) 
+2020-04-24 19:17:41.345 DEBUG 13980 --- [http-nio-8889-exec-9] s.a.g.mapper.ArticleMapper.selectOne     : ==> Parameters: 18(Long)
+2020-04-24 19:17:41.348 DEBUG 13980 --- [http-nio-8889-exec-9] s.a.g.mapper.ArticleMapper.selectOne     : <==      Total: 1
+2020-04-24 19:17:41.353 DEBUG 13980 --- [http-nio-8889-exec-9] s.a.g.mapper.ArticleMapper.updateById    : ==>  Preparing: UPDATE t_article SET views=? WHERE id=? 
+2020-04-24 19:17:41.353 DEBUG 13980 --- [http-nio-8889-exec-9] s.a.g.mapper.ArticleMapper.updateById    : ==> Parameters: 4392(Integer), 18(Long)
+2020-04-24 19:17:41.355 DEBUG 13980 --- [http-nio-8889-exec-9] s.a.g.mapper.ArticleMapper.updateById    : <==    Updates: 1
+2020-04-24 19:17:41.356 DEBUG 13980 --- [http-nio-8889-exec-9] s.a.g.m.ArticleMapper.selectArticleById  : ==>  Preparing: select ta.id, ta.title, ta.content, ta.cover, ta.create_time, ta.type, ta.likes, ta.views, ta.comments, ta.commentable, ta.appreciable, tc.id as cid, tc.name as cname, su.id, su.username from t_article ta left join t_category tc on ta.category_id = tc.id left join sys_user su on ta.author_id = su.id where ta.id = ? 
+2020-04-24 19:17:41.356 DEBUG 13980 --- [http-nio-8889-exec-9] s.a.g.m.ArticleMapper.selectArticleById  : ==> Parameters: 18(Long)
+2020-04-24 19:17:41.363 DEBUG 13980 --- [http-nio-8889-exec-9] s.a.g.m.ArticleMapper.selectArticleById  : <==      Total: 1
+2020-04-24 19:17:41.365 DEBUG 13980 --- [http-nio-8889-exec-9] s.a.g.m.A.selectPrevArticlePreview       : ==>  Preparing: select ta.id, ta.title, ta.summary, ta.create_time, ta.cover, tc.id as cid, tc.name as cname from t_article ta left join t_category tc on ta.category_id = tc.id where ta.id = (select max(id) from t_article where id < ?) 
+2020-04-24 19:17:41.365 DEBUG 13980 --- [http-nio-8889-exec-9] s.a.g.m.A.selectPrevArticlePreview       : ==> Parameters: 18(Long)
+2020-04-24 19:17:41.369 DEBUG 13980 --- [http-nio-8889-exec-9] s.a.g.m.A.selectPrevArticlePreview       : <==      Total: 1
+2020-04-24 19:17:41.370 DEBUG 13980 --- [http-nio-8889-exec-9] s.a.g.m.A.selectNextArticlePreview       : ==>  Preparing: select ta.id, ta.title, ta.summary, ta.create_time, ta.cover, tc.id as cid, tc.name as cname from t_article ta left join t_category tc on ta.category_id = tc.id where ta.id = (select min(id) from t_article where id > ?) 
+2020-04-24 19:17:41.371 DEBUG 13980 --- [http-nio-8889-exec-9] s.a.g.m.A.selectNextArticlePreview       : ==> Parameters: 18(Long)
+2020-04-24 19:17:41.378 DEBUG 13980 --- [http-nio-8889-exec-9] s.a.g.m.A.selectNextArticlePreview       : <==      Total: 1
+2020-04-24 19:17:41.394 DEBUG 13980 --- [http-nio-8889-exec-9] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-24 19:17:41.394 DEBUG 13980 --- [http-nio-8889-exec-9] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 18(Long)
+2020-04-24 19:17:41.399 DEBUG 13980 --- [http-nio-8889-exec-9] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 1
+2020-04-24 19:17:41.407 DEBUG 13980 --- [http-nio-8889-exec-9] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-24 19:17:41.407 DEBUG 13980 --- [http-nio-8889-exec-9] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 11(Long)
+2020-04-24 19:17:41.411 DEBUG 13980 --- [http-nio-8889-exec-9] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 1
+2020-04-24 19:17:41.416 DEBUG 13980 --- [http-nio-8889-exec-9] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-24 19:17:41.416 DEBUG 13980 --- [http-nio-8889-exec-9] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 22(Long)
+2020-04-24 19:17:41.418 DEBUG 13980 --- [http-nio-8889-exec-9] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 4
+2020-04-24 19:19:25.849 DEBUG 13980 --- [http-nio-8889-exec-10] s.a.g.mapper.ArticleMapper.selectOne     : ==>  Preparing: SELECT views FROM t_article WHERE (id = ?) 
+2020-04-24 19:19:25.850 DEBUG 13980 --- [http-nio-8889-exec-10] s.a.g.mapper.ArticleMapper.selectOne     : ==> Parameters: 11(Long)
+2020-04-24 19:19:25.853 DEBUG 13980 --- [http-nio-8889-exec-10] s.a.g.mapper.ArticleMapper.selectOne     : <==      Total: 1
+2020-04-24 19:19:25.857 DEBUG 13980 --- [http-nio-8889-exec-10] s.a.g.mapper.ArticleMapper.updateById    : ==>  Preparing: UPDATE t_article SET views=? WHERE id=? 
+2020-04-24 19:19:25.858 DEBUG 13980 --- [http-nio-8889-exec-10] s.a.g.mapper.ArticleMapper.updateById    : ==> Parameters: 2193(Integer), 11(Long)
+2020-04-24 19:19:25.860 DEBUG 13980 --- [http-nio-8889-exec-10] s.a.g.mapper.ArticleMapper.updateById    : <==    Updates: 1
+2020-04-24 19:19:25.861 DEBUG 13980 --- [http-nio-8889-exec-10] s.a.g.m.ArticleMapper.selectArticleById  : ==>  Preparing: select ta.id, ta.title, ta.content, ta.cover, ta.create_time, ta.type, ta.likes, ta.views, ta.comments, ta.commentable, ta.appreciable, tc.id as cid, tc.name as cname, su.id, su.username from t_article ta left join t_category tc on ta.category_id = tc.id left join sys_user su on ta.author_id = su.id where ta.id = ? 
+2020-04-24 19:19:25.862 DEBUG 13980 --- [http-nio-8889-exec-10] s.a.g.m.ArticleMapper.selectArticleById  : ==> Parameters: 11(Long)
+2020-04-24 19:19:25.868 DEBUG 13980 --- [http-nio-8889-exec-10] s.a.g.m.ArticleMapper.selectArticleById  : <==      Total: 1
+2020-04-24 19:19:25.870 DEBUG 13980 --- [http-nio-8889-exec-10] s.a.g.m.A.selectPrevArticlePreview       : ==>  Preparing: select ta.id, ta.title, ta.summary, ta.create_time, ta.cover, tc.id as cid, tc.name as cname from t_article ta left join t_category tc on ta.category_id = tc.id where ta.id = (select max(id) from t_article where id < ?) 
+2020-04-24 19:19:25.872 DEBUG 13980 --- [http-nio-8889-exec-10] s.a.g.m.A.selectPrevArticlePreview       : ==> Parameters: 11(Long)
+2020-04-24 19:19:25.876 DEBUG 13980 --- [http-nio-8889-exec-10] s.a.g.m.A.selectPrevArticlePreview       : <==      Total: 1
+2020-04-24 19:19:25.879 DEBUG 13980 --- [http-nio-8889-exec-10] s.a.g.m.A.selectNextArticlePreview       : ==>  Preparing: select ta.id, ta.title, ta.summary, ta.create_time, ta.cover, tc.id as cid, tc.name as cname from t_article ta left join t_category tc on ta.category_id = tc.id where ta.id = (select min(id) from t_article where id > ?) 
+2020-04-24 19:19:25.879 DEBUG 13980 --- [http-nio-8889-exec-10] s.a.g.m.A.selectNextArticlePreview       : ==> Parameters: 11(Long)
+2020-04-24 19:19:25.885 DEBUG 13980 --- [http-nio-8889-exec-10] s.a.g.m.A.selectNextArticlePreview       : <==      Total: 1
+2020-04-24 19:19:25.903 DEBUG 13980 --- [http-nio-8889-exec-10] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-24 19:19:25.904 DEBUG 13980 --- [http-nio-8889-exec-10] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 11(Long)
+2020-04-24 19:19:25.909 DEBUG 13980 --- [http-nio-8889-exec-10] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 1
+2020-04-24 19:19:25.920 DEBUG 13980 --- [http-nio-8889-exec-10] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-24 19:19:25.921 DEBUG 13980 --- [http-nio-8889-exec-10] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 7(Long)
+2020-04-24 19:19:25.925 DEBUG 13980 --- [http-nio-8889-exec-10] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 2
+2020-04-24 19:19:25.931 DEBUG 13980 --- [http-nio-8889-exec-10] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-24 19:19:25.931 DEBUG 13980 --- [http-nio-8889-exec-10] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 18(Long)
+2020-04-24 19:19:25.934 DEBUG 13980 --- [http-nio-8889-exec-10] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 1
+2020-04-24 19:20:58.779 DEBUG 13980 --- [http-nio-8889-exec-2] s.a.g.mapper.ArticleMapper.selectCount   : ==>  Preparing: SELECT COUNT( 1 ) FROM t_article 
+2020-04-24 19:20:58.780 DEBUG 13980 --- [http-nio-8889-exec-2] s.a.g.mapper.ArticleMapper.selectCount   : ==> Parameters: 
+2020-04-24 19:20:58.783 DEBUG 13980 --- [http-nio-8889-exec-2] s.a.g.mapper.ArticleMapper.selectCount   : <==      Total: 1
+2020-04-24 19:20:58.787 DEBUG 13980 --- [http-nio-8889-exec-6] s.a.g.mapper.CategoryMapper.selectCount  : ==>  Preparing: SELECT COUNT( 1 ) FROM t_category 
+2020-04-24 19:20:58.787 DEBUG 13980 --- [http-nio-8889-exec-6] s.a.g.mapper.CategoryMapper.selectCount  : ==> Parameters: 
+2020-04-24 19:20:58.788 DEBUG 13980 --- [http-nio-8889-exec-9] s.a.g.m.A.countArticleByDate             : ==>  Preparing: select year(create_time) 'year' , month(create_time) 'month' , count(id) 'articleCount' from t_article where create_time >= DATE_SUB(CURDATE(), INTERVAL 1 YEAR) group by year(create_time) ,month(create_time) 
+2020-04-24 19:20:58.789 DEBUG 13980 --- [http-nio-8889-exec-9] s.a.g.m.A.countArticleByDate             : ==> Parameters: 
+2020-04-24 19:20:58.792 DEBUG 13980 --- [http-nio-8889-exec-6] s.a.g.mapper.CategoryMapper.selectCount  : <==      Total: 1
+2020-04-24 19:20:58.793 DEBUG 13980 --- [http-nio-8889-exec-9] s.a.g.m.A.countArticleByDate             : <==      Total: 2
+2020-04-24 19:20:58.793 DEBUG 13980 --- [http-nio-8889-exec-4] s.a.g.m.TagMapper.listByArticleCount     : ==>  Preparing: select tt.id, tt.name, count(ta.id) articleCount from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id left join t_article ta on ta.id = tat.article_id group by tt.id having articleCount > 0 
+2020-04-24 19:20:58.793 DEBUG 13980 --- [http-nio-8889-exec-3] s.a.g.m.C.listByArticleCount             : ==>  Preparing: select tc.id, tc.name, count(ta.id) articleCount from t_category tc left join t_article ta on tc.id = ta.category_id where tc.display = 1 group by tc.id having articleCount > 0 
+2020-04-24 19:20:58.795 DEBUG 13980 --- [http-nio-8889-exec-4] s.a.g.m.TagMapper.listByArticleCount     : ==> Parameters: 
+2020-04-24 19:20:58.797 DEBUG 13980 --- [http-nio-8889-exec-3] s.a.g.m.C.listByArticleCount             : ==> Parameters: 
+2020-04-24 19:20:58.798 DEBUG 13980 --- [http-nio-8889-exec-8] s.a.g.mapper.TagMapper.selectCount       : ==>  Preparing: SELECT COUNT( 1 ) FROM t_tag 
+2020-04-24 19:20:58.799 DEBUG 13980 --- [http-nio-8889-exec-4] s.a.g.m.TagMapper.listByArticleCount     : <==      Total: 4
+2020-04-24 19:20:58.799 DEBUG 13980 --- [http-nio-8889-exec-8] s.a.g.mapper.TagMapper.selectCount       : ==> Parameters: 
+2020-04-24 19:20:58.800 DEBUG 13980 --- [http-nio-8889-exec-8] s.a.g.mapper.TagMapper.selectCount       : <==      Total: 1
+2020-04-24 19:20:58.801 DEBUG 13980 --- [http-nio-8889-exec-3] s.a.g.m.C.listByArticleCount             : <==      Total: 3

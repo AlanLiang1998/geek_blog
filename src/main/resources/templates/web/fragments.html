@@ -140,22 +140,27 @@
                 <!--侧边导航菜单-->
                 <ul class="menu-list mobile-menu-list">
                     <li class="m-nav-item">
-                        <a class="waves-effect waves-light" href=""><i class="fa-fw fas fa-home"></i>首页</a>
+                        <a class="waves-effect waves-light" th:href="@{/}"><i class="fa-fw fas fa-home"></i>首页</a>
                     </li>
                     <li class="m-nav-item">
-                        <a class="waves-effect waves-light" href="#"><i class="fa-fw fas fa-tags"></i>标签</a>
+                        <a class="waves-effect waves-light" th:href="@{/api/tags}"><i
+                                class="fa-fw fas fa-tags"></i>标签</a>
                     </li>
                     <li class="m-nav-item">
-                        <a class="waves-effect waves-light" href="#"><i class="fa-fw fas fa-bookmark"></i>分类</a>
+                        <a class="waves-effect waves-light" th:href="@{/api/categories}"><i
+                                class="fa-fw fas fa-bookmark"></i>分类</a>
                     </li>
                     <li class="m-nav-item">
-                        <a class="waves-effect waves-light" href="#"><i class="fa-fw fas fa-calendar"></i>归档</a>
+                        <a class="waves-effect waves-light" th:href="@{/api/archives}"><i
+                                class="fa-fw fas fa-calendar"></i>归档</a>
                     </li>
                     <li class="m-nav-item">
-                        <a class="waves-effect waves-light" href="#"><i class="fa-fw fas fa-paper-plane"></i>关于</a>
+                        <a class="waves-effect waves-light" th:href="@{/api/about}"><i
+                                class="fa-fw fas fa-paper-plane"></i>关于</a>
                     </li>
                     <li class="m-nav-item">
-                        <a class="waves-effect waves-light" href="#"><i class="fa-fw fas fa-comment"></i>友情链接</a>
+                        <a class="waves-effect waves-light" th:href="@{/api/friends}"><i
+                                class="fa-fw fas fa-comment"></i>友情链接</a>
                     </li>
                     <li>
                         <div class="divider"></div>
