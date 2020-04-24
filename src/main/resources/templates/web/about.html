@@ -202,7 +202,7 @@
                         <div class="other-skills chip-container" data-aos="zoom-in-up">
                             <div class="sub-title center-align"><i class="fa fa-book"></i>&nbsp;&nbsp;其他技能</div>
                             <div class="tag-chips center-align">
-                                <a href="javascript:;" v-for="(tag, index) in tags">
+                                <a :href="'/api/tags?id='+tag.id" v-for="(tag, index) in tags">
                                     <span class="chip center-align waves-effect waves-light chip-default">{{tag.name}}</span>
                                 </a>
                             </div>

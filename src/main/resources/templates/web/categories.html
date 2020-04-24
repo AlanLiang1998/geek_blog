@@ -76,16 +76,16 @@
                                     <span class="publish-date">
                                 <i class="far fa-clock fa-fw icon-date"></i>{{article.createTime | dateFormat}}
                                 </span>
-                                    <!--文章标签-->
+                                    <!--文章分类-->
                                     <span class="publish-author">
                                 <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                <a class="post-category" href="#">{{article.category.name}}</a>
+                                <a class="post-category" :href="'/api/categories?id='+article.category.id">{{article.category.name}}</a>
                             </span>
                                 </div>
                             </div>
                             <!--文章标签-->
                             <div class="card-action article-tags">
-                                <a href="#" v-for="(tag, index) in article.tagList">
+                                <a :href="'/api/tags?id='+tag.id" v-for="(tag, index) in article.tagList">
                                     <span class="chip bg-color">{{tag.name}}</span>
                                 </a>
                             </div>
@@ -216,17 +216,23 @@
             },
             prevPage: function () {
                 if (this.current > 1) {
-                    this.getArticlesByCategoryId(this.tagId, this.current - 1);
+                    this.getArticlesByCategoryId(this.categoryId, this.current - 1);
                 }
             },
             nextPage: function () {
                 if (this.current < this.pages) {
-                    this.getArticlesByCategoryId(this.tagId, this.current + 1);
+                    this.getArticlesByCategoryId(this.categoryId, this.current + 1);
                 }
             }
         },
-        created() {
+        created: function () {
             this.getCategories();
+            let cid = getQueryString('id');
+            console.log(cid);
+            if (cid !== null) {
+                this.categoryId = cid;
+                this.getArticlesByCategoryId(this.categoryId, 1);
+            }
         },
         filters: {
             dateFormat: function (value) {
@@ -267,5 +273,6 @@
         showCursor: true
     });
 </script>
+<script src="/static/web/js/queryString.js"></script>
 </body>
 </html>

@@ -50,12 +50,12 @@
                                         <i class="far fa-clock fa-fw icon-date"></i>{{article.createTime | dateFormat}}</span>
                                     <span class="publish-author">
                                         <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                        <a href="#" class="post-category">{{article.category.name}}</a>
+                                        <a :href="'/api/categories?id='+article.category.id" class="post-category">{{article.category.name}}</a>
                                      </span>
                                 </div>
                             </div>
                             <div class="card-action article-tags">
-                                <a href="#" v-for="(tag, index) in article.tagList"><span class="chip bg-color">{{tag.name}}</span></a>
+                                <a :href="'/api/tags?id='+tag.id" v-for="(tag, index) in article.tagList"><span class="chip bg-color">{{tag.name}}</span></a>
                             </div>
                         </div>
                     </div>

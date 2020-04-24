@@ -83,16 +83,16 @@
                                     <span class="publish-date">
                                 <i class="far fa-clock fa-fw icon-date"></i>{{article.createTime | dateFormat}}
                                 </span>
-                                    <!--文章标签-->
+                                    <!--文章分类-->
                                     <span class="publish-author">
                                 <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                <a class="post-category" href="#">{{article.category.name}}</a>
+                                <a class="post-category" :href="'/api/categories?id='+article.category.id">{{article.category.name}}</a>
                             </span>
                                 </div>
                             </div>
                             <!--文章标签-->
                             <div class="card-action article-tags">
-                                <a href="#" v-for="(tag, index) in article.tagList">
+                                <a :href="'/api/tags?id='+tag.id" v-for="(tag, index) in article.tagList">
                                     <span class="chip bg-color">{{tag.name}}</span>
                                 </a>
                             </div>
@@ -189,6 +189,11 @@
         },
         created() {
             this.getTags();
+            let tid = getQueryString('id');
+            if (tid !== null) {
+                this.tagId = tid;
+                this.getArticlesByTagId(tid, 1);
+            }
         },
         filters: {
             dateFormat: function (value) {
@@ -211,20 +216,8 @@
 <!--scripts-->
 <div th:replace="/web/fragments :: scripts"></div>
 <!--end scripts-->
-<!--打字机效果-->
-<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"></script>
-<script>
-    var typed = new Typed("#subtitle", {
-        strings: ['挑战无处不在，自己才是真正的敌人。', 'Challenges are everywhere, and you are the real enemy.'],
-        startDelay: 300,
-        typeSpeed: 100,
-        loop: true,
-        backSpeed: 50,
-        showCursor: true
-    });
-</script>
-<script type="text/javascript" src="/static/web/js/jqcloud-1.0.4.min.js"></script>
 
+<script type="text/javascript" src="/static/web/js/jqcloud-1.0.4.min.js"></script>
 </body>
 
 </html>

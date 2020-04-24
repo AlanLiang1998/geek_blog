@@ -37,10 +37,9 @@ public interface ArticleMapper extends BaseMapper<Article> {
      * 前台分页查询所有文章预览
      *
      * @param page         分页参数
-     * @param queryWrapper 条件
      * @return 文章预览列表
      */
-    Page<Article> listArticlesPreviewByPage(IPage<Article> page, @Param("ew") QueryWrapper<Article> queryWrapper);
+    Page<Article> listArticlesPreviewByPage(IPage<Article> page);
 
     /**
      * 前台根据ID查询文章

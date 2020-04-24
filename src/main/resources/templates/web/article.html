@@ -460,7 +460,8 @@
                                 <!--文章标签-->
                                 <div class="col s7">
                                     <div class="article-tag">
-                                        <a href="#" th:each="tag : ${article.tagList}">
+                                        <a th:href="'/api/tags?id='+${tag.id}" th:each="tag : ${article.tagList}"
+                                           target="_blank">
                                             <span class="chip bg-color" th:text="${tag.name}">标签名称</span>
                                         </a>
                                     </div>
@@ -469,7 +470,8 @@
                                 <div class="col s5 right-align">
                                     <div class="post-cate">
                                         <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                        <a href="#" class="post-category" th:text="${article.category.name}">分类名称</a>
+                                        <a th:href="'/api/categories?id='+${article.category.id}" class="post-category"
+                                           th:text="${article.category.name}" target="_blank">分类名称</a>
                                     </div>
                                 </div>
                             </div>
@@ -510,16 +512,17 @@
                                     <i class="fas fa-user">文章作者:</i>
                                 </span>
                                     <span class="reprint-info">
-                                    <a href="#" rel="external nofollow noreferrer" th:text="${article.author.username}">作者</a>
+                                    <a th:href="@{/api/about}" rel="external nofollow noreferrer"
+                                       th:text="${article.author.username}">作者</a>
                                 </span>
                                 </div>
                                 <!--文章链接-->
                                 <div class="reprint__type">
                                 <span class="reprint-meta" style="font-weight: bold;">
                                     <i class="fas fa-link">文章链接:</i>
+                                    <a th:text="${#httpServletRequest.requestURL}"></a>
                                 </span>
                                     <span class="reprint-info">
-
                                 </span>
                                 </div>
                                 <!--文章复制提醒-->
@@ -531,9 +534,9 @@
                                     </span>
                                     <span class="reprint-info">
                                         本博客所有文章除特別声明外，均采用
-                                        <a href="javascript:;" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                                        <a href="#" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
                                         许可协议。转载请注明来源
-                                        <a href="javascript:;" target="_blank"
+                                        <a th:href="@{/api/about}" target="_blank"
                                            th:text="${article.author.username}">作者</a>!
                                     </span>
                                 </div>
@@ -543,9 +546,8 @@
                                 <!--文章标签-->
                                 <div class="post-meta__tag-list" style="display: inline-block;">
                                     <div class="article-tag">
-                                        <a href="#" th:each="tag : ${article.tagList}">
-                                            <span class="chip bg-color" th:text="${tag.name}">文章标签</span>
-                                        </a>
+                                            <span class="chip bg-color"
+                                                  th:text="${article.type==1?'原创':(article.type==2?'转载':'翻译')}">文章类型</span>
                                     </div>
                                 </div>
                                 <!--文章分享-->
@@ -624,12 +626,13 @@
                                         </span>
                                             <span class="publish-author">
                                             <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                            <a href="#" class="post-category" th:text="${prevPreview.category.name}">分类名称</a>
+                                            <a th:href="'/api/categories?id='+${article.category.id}"
+                                               class="post-category" th:text="${prevPreview.category.name}">分类名称</a>
                                         </span>
                                         </div>
                                     </div>
                                     <div class="card-action article-tags">
-                                        <a href="#" th:each="tag : ${prevPreview.tagList}">
+                                        <a th:href="'/api/tags?id='+${tag.id}" th:each="tag : ${prevPreview.tagList}">
                                             <span class="chip bg-color" th:text="${tag.name}">标签名称</span>
                                         </a>
                                     </div>
@@ -657,12 +660,13 @@
                                         </span>
                                             <span class="publish-author">
                                             <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                            <a href="#" class="post-category" th:text="${nextPreview.category.name}">标签名称</a>
+                                            <a th:href="'/api/categories?id='+${article.category.id}"
+                                               class="post-category" th:text="${nextPreview.category.name}">标签名称</a>
                                         </span>
                                         </div>
                                     </div>
                                     <div class="card-action article-tags">
-                                        <a href="#" th:each="tag : ${nextPreview.tagList}">
+                                        <a th:href="'/api/tags?id='+${tag.id}" th:each="tag : ${nextPreview.tagList}">
                                             <span class="chip bg-color" th:text="${tag.name}">标签名称</span>
                                         </a>
                                     </div>
@@ -709,7 +713,7 @@
         el: '#vcomments',
         appId: 'SDxrhXkjLgCDr5ke5x7qg8gl-gzGzoHsz',
         appKey: 'S4XFSBkHr5ThpoAuYQvSKKbM',
-        avatar:('mp'),
+        avatar: ('mp'),
         pageSize: '10',
         lang: 'zh-cn',
         placeholder: '你想要对博主说什么呢...',

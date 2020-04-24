@@ -63,4 +63,13 @@ public class ArticleMapperTests {
             System.out.println(article.getCreateTime());
         }
     }
+
+    @Test
+    void listArticlesPreviewByPage() {
+        Page<Article> articlePage = new Page<>(1, 10);
+        Page<Article> page = articleMapper.listArticlesPreviewByPage(articlePage);
+        for (Article article : page.getRecords()) {
+            System.out.println(article);
+        }
+    }
 }

@@ -139,11 +139,8 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public Page<Article> listArticlesByPage(Integer current, Integer size) {
-        QueryWrapper<Article> wrapper = new QueryWrapper<>();
-        wrapper.eq("published", true)
-                .orderByDesc("create_time");
         Page<Article> articlePage = new Page<>(current, size);
-        return articleMapper.listArticlesPreviewByPage(articlePage, wrapper);
+        return articleMapper.listArticlesPreviewByPage(articlePage);
     }
 
     @Override

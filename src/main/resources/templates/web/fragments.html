@@ -320,6 +320,11 @@
             zindex="-2"></script>
     <!--搜索-->
     <script src="/static/web/js/search.js"></script>
+    <script type="text/javascript">
+        $('#searchBtn').click(function () {
+            searchFunc('/articles/search', 'searchInput', 'searchResult');
+        });
+    </script>
     <!--materialize框架-->
     <script src="/static/web/js/materialize.min.js"></script>
     <!--瀑布流-->
@@ -330,32 +335,6 @@
     <script src="/static/web/js/scrollProgress.min.js"></script>
     <!--matery主题-->
     <script src="/static/web/js/matery.js"></script>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async="" src="/static/web/js/js.js"></script>
-    <!-- Baidu Analytics -->
-    <script>
-        var _hmt = _hmt || [];
-        (function () {
-            var hm = document.createElement("script");
-            hm.src = "https://hm.baidu.com/hm.js?";
-            var s = document.getElementsByTagName("script")[0];
-            s.parentNode.insertBefore(hm, s);
-        })();
-    </script>
-    <!-- Baidu Push -->
-    <script>
-        (function () {
-            var bp = document.createElement('script');
-            var curProtocol = window.location.protocol.split(':')[0];
-            if (curProtocol === 'https') {
-                bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-            } else {
-                bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-            }
-            var s = document.getElementsByTagName("script")[0];
-            s.parentNode.insertBefore(bp, s);
-        })();
-    </script>
     <!--鼠标点击特效-->
     <script async="async" src="/static/web/js/clicklove.js"></script>
     <!--网页计数器-->
@@ -375,11 +354,20 @@
     </script>
     <!--多媒体播放-->
     <script src="/static/web/js/lightgallery-all.min.js"></script>
-    <script type="text/javascript">
-        $('#searchBtn').click(function () {
-            searchFunc('/articles/search', 'searchInput', 'searchResult');
+    <!--打字机效果-->
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"></script>
+    <script>
+        var typed = new Typed("#subtitle", {
+            strings: ['挑战无处不在，自己才是真正的敌人。', 'Challenges are everywhere, and you are the real enemy.'],
+            startDelay: 300,
+            typeSpeed: 100,
+            loop: true,
+            backSpeed: 50,
+            showCursor: true
         });
     </script>
+    <!--url参数获取-->
+    <script src="/static/web/js/queryString.js"></script>
 </div>
 <!--scripts-->
 </body>
