@@ -142,8 +142,8 @@ public interface ArticleService {
     /**
      * 根据日期统计文章数量
      *
-     * @return 文章日期统计
      * @param articleQuery
+     * @return 文章日期统计
      */
     List<ArticleDateVO> countArticleByDate(Integer articleQuery);
 
@@ -157,4 +157,10 @@ public interface ArticleService {
      */
     Page<Article> listPageArticlePreviewByDate(Integer current, Integer size, ArticleQuery articleQuery);
 
+    /**
+     * 根据关键词获取文章
+     *
+     * @return 文章列表
+     */
+    List<Article> listArticlesByKeyword();
 }

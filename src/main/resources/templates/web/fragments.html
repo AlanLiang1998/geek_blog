@@ -123,7 +123,7 @@
                     </a>
                 </li>
                 <li>
-                    <a class="modal-trigger waves-effect waves-light" href="#searchModal">
+                    <a class="modal-trigger waves-effect waves-light" href="#searchModal" id="searchBtn">
                         <i class="fas fa-search" id="searchIcon" style="zoom: 0.85;" title="搜索"></i>
                     </a>
                 </li>
@@ -320,11 +320,6 @@
             zindex="-2"></script>
     <!--搜索-->
     <script src="/static/web/js/search.js"></script>
-    <!-- <script type="text/javascript">
-         $(function () {
-             searchFunc("" + "", '', '');
-         });
-     </script>-->
     <!--materialize框架-->
     <script src="/static/web/js/materialize.min.js"></script>
     <!--瀑布流-->
@@ -380,6 +375,11 @@
     </script>
     <!--多媒体播放-->
     <script src="/static/web/js/lightgallery-all.min.js"></script>
+    <script type="text/javascript">
+        $('#searchBtn').click(function () {
+            searchFunc('/articles/search', 'searchInput', 'searchResult');
+        });
+    </script>
 </div>
 <!--scripts-->
 </body>

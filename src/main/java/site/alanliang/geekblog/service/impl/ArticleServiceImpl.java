@@ -2,6 +2,7 @@ package site.alanliang.geekblog.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import org.omg.PortableInterceptor.ObjectReferenceFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -50,6 +51,13 @@ public class ArticleServiceImpl implements ArticleService {
     public Page<Article> listPageArticlePreviewByDate(Integer current, Integer size, ArticleQuery articleQuery) {
         Page<Article> articlePage = new Page<>(current, size);
         return articleMapper.listPageArticlePreviewByDate(articlePage);
+    }
+
+    @Override
+    public List<Article> listArticlesByKeyword() {
+        QueryWrapper<Article> wrapper = new QueryWrapper<>();
+        wrapper.select("id", "title", "content");
+        return articleMapper.selectList(wrapper);
     }
 
     @Override

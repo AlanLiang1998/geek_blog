@@ -2,16 +2,17 @@ var searchFunc = function (path, search_id, content_id) {
     'use strict';
     $.ajax({
         url: path,
-        dataType: "xml",
-        success: function (xmlResponse) {
+        success: function (result) {
             // get the contents from search data
-            var datas = $("entry", xmlResponse).map(function () {
+
+            var datas = result;
+            datas = datas.map(item => {
                 return {
-                    title: $("title", this).text(),
-                    content: $("content", this).text(),
-                    url: $("url", this).text()
-                };
-            }).get();
+                    title: item.title,
+                    content: item.content,
+                    url: '/article/' + item.id
+                }
+            })
             var $input = document.getElementById(search_id);
             var $resultContent = document.getElementById(content_id);
             $input.addEventListener('input', function () {
@@ -22,7 +23,7 @@ var searchFunc = function (path, search_id, content_id) {
                     return;
                 }
                 // perform local searching
-                datas.forEach(function (data) {
+                datas.forEach(function (data, index) {
                     var isMatch = true;
                     var content_index = [];
                     var data_title = data.title.trim().toLowerCase();
