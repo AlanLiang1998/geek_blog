@@ -55,7 +55,8 @@
                                 </div>
                             </div>
                             <div class="card-action article-tags">
-                                <a :href="'/api/tags?id='+tag.id" v-for="(tag, index) in article.tagList"><span class="chip bg-color">{{tag.name}}</span></a>
+                                <a :href="'/api/tags?id='+tag.id" v-for="(tag, index) in article.tagList"><span
+                                        class="chip bg-color">{{tag.name}}</span></a>
                             </div>
                         </div>
                     </div>
@@ -68,19 +69,19 @@
     <div class="container paging">
         <div class="row">
             <!--左边按钮-->
-            <div class="col s6 m4 l4">
-                <a class="left btn-floating btn-large" @click="prevPage">
+            <div class="col s4 m4 l4">
+                <a class="left btn-floating btn-large waves-effect waves-light" @click="prevPage" href="#cd-timeline" :class="{disabled: current == 1}">
                     <i class="fas fa-angle-left"></i>
                 </a>
             </div>
             <!--分页信息-->
-            <div class="page-info col m4 l4 hide-on-small-only">
+            <div class="page-info col s4 m4 l4">
                 <div class="center-align b-text-gray">{{current}} / {{pages}}</div>
             </div>
             <!--右边按钮-->
-            <div class="col s6 m4 l4">
-                <a data-aos-anchor-placement class="right btn-floating btn-large waves-effect waves-light bg-color"
-                   @click="nextPage">
+            <div class="col s4 m4 l4">
+                <a class="right btn-floating btn-large waves-effect waves-light"
+                   @click="nextPage" href="#cd-timeline" :class="{disabled: current == pages}">
                     <i class="fas fa-angle-right"></i>
                 </a>
             </div>
@@ -88,6 +89,14 @@
     </div>
     <!--end pagination-->
 </div>
+
+<!--footer-->
+<footer th:replace="/web/fragments :: footer"></footer>
+<!--end footer-->
+
+<!--commons-->
+<div th:replace="/web/fragments :: commons"></div>
+<!--end commons-->
 
 <!--vue-->
 <script type="text/javascript">
@@ -243,7 +252,6 @@
                     this.current = result.data.current;
                     this.pages = result.data.pages;
                     curYear = 0, curMonth = 0;
-                    $(window).scrollTop(200);
                 })
             },
             getSpecific: function (date, type) {
@@ -291,29 +299,9 @@
 
 </script>
 
-<!--footer-->
-<footer th:replace="/web/fragments :: footer"></footer>
-<!--end footer-->
-
-<!--commons-->
-<div th:replace="/web/fragments :: commons"></div>
-<!--end commons-->
-
 <!--scripts-->
 <div th:replace="/web/fragments :: scripts"></div>
 <!--end scripts-->
-<!--打字机效果-->
-<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"></script>
-<script>
-    var typed = new Typed("#subtitle", {
-        strings: ['挑战无处不在，自己才是真正的敌人。', 'Challenges are everywhere, and you are the real enemy.'],
-        startDelay: 300,
-        typeSpeed: 100,
-        loop: true,
-        backSpeed: 50,
-        showCursor: true
-    });
-</script>
 <script type="text/javascript" src="/static/web/js/echarts.min.js"></script>
 </body>
 

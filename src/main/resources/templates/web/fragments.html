@@ -308,7 +308,7 @@
     </div>
     <!-- 回到顶部按钮 -->
     <div class="top-scroll" id="backTop">
-        <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <a class="btn-floating btn-large waves-effect waves-light" href="#">
             <i class="fas fa-arrow-up"></i>
         </a>
     </div>
@@ -373,6 +373,17 @@
     </script>
     <!--url参数获取-->
     <script src="/static/web/js/queryString.js"></script>
+    <!--平滑滚动-->
+    <script src="/static/web/js/smooth-scroll.min.js"></script>
+    <script src="/static/web/js/ba-bbq.js"></script>
+    <script type="text/javascript">
+        $('a').smoothScroll({
+            //缓动效果
+            easing: 'swing',
+            //滑动的速度
+            speed: 1000,
+        });
+    </script>
 </div>
 <!--scripts-->
 </body>

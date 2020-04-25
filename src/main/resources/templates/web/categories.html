@@ -52,7 +52,7 @@
             </div>
         </div>
         <!-- 所有文章卡片 -->
-        <article class="container articles">
+        <article class="container articles" id="articleCards">
             <div class="row article-row">
                 <div v-for="(article, index) in articles" :key="article.id">
                     <div class="article col s12 m6 l4" data-aos="zoom-in">
@@ -98,19 +98,19 @@
         <div class="container paging" v-if="articles.length!==0">
             <div class="row">
                 <!--左边按钮-->
-                <div class="col s6 m4 l4">
-                    <a class="left btn-floating btn-large" @click="prevPage">
+                <div class="col s4 m4 l4">
+                    <a class="left btn-floating btn-large waves-effect waves-light" @click="prevPage" href="#articleCards" :class="{disabled: current == 1}">
                         <i class="fas fa-angle-left"></i>
                     </a>
                 </div>
                 <!--分页信息-->
-                <div class="page-info col m4 l4 hide-on-small-only">
+                <div class="page-info col s4 m4 l4">
                     <div class="center-align b-text-gray">{{current}} / {{pages}}</div>
                 </div>
                 <!--右边按钮-->
-                <div class="col s6 m4 l4">
-                    <a class="right btn-floating btn-large waves-effect waves-light bg-color"
-                       @click="nextPage">
+                <div class="col s4 m4 l4">
+                    <a class="right btn-floating btn-large waves-effect waves-light"
+                       @click="nextPage" href="#articleCards" :class="{disabled: current == pages}">
                         <i class="fas fa-angle-right"></i>
                     </a>
                 </div>
@@ -228,7 +228,6 @@
         created: function () {
             this.getCategories();
             let cid = getQueryString('id');
-            console.log(cid);
             if (cid !== null) {
                 this.categoryId = cid;
                 this.getArticlesByCategoryId(this.categoryId, 1);
@@ -258,21 +257,5 @@
 
 <!--雷达图-->
 <script type="text/javascript" src="/static/web/js/echarts.min.js"></script>
-<script type="text/javascript">
-
-</script>
-<!--打字机效果-->
-<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"></script>
-<script>
-    var typed = new Typed("#subtitle", {
-        strings: ['挑战无处不在，自己才是真正的敌人。', 'Challenges are everywhere, and you are the real enemy.'],
-        startDelay: 300,
-        typeSpeed: 100,
-        loop: true,
-        backSpeed: 50,
-        showCursor: true
-    });
-</script>
-<script src="/static/web/js/queryString.js"></script>
 </body>
 </html>
