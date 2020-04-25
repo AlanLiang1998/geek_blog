@@ -28,9 +28,16 @@
                 </div>
             </div>
             <div class="layui-form-item">
+                <label class="layui-form-label">文章摘要</label>
+                <div class="layui-input-block">
+                    <input type="text" name="summary" lay-verify="verSummary" placeholder="请输入文章摘要..."
+                           autocomplete="off" class="layui-input"/>
+                </div>
+            </div>
+            <div class="layui-form-item">
                 <label class="layui-form-label">封面链接</label>
                 <div class="layui-input-block">
-                    <input type="text" name="cover"  placeholder="请输入封面链接..."
+                    <input type="text" name="cover" placeholder="请输入封面链接..."
                            autocomplete="off" class="layui-input"/>
                 </div>
             </div>
@@ -192,6 +199,11 @@
                 }
                 if (value.length > 100) {
                     return '文章标题长度不能超过100';
+                }
+            },
+            verSummary: function (value) {
+                if (value.length > 100) {
+                    return '文章摘要长度不能超过100';
                 }
             },
             verContent: function () {
