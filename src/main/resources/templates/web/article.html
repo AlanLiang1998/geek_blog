@@ -440,7 +440,7 @@
 <header th:replace="/web/fragments :: header"></header>
 <!--end navbar-->
 
-<div id="app">
+<div id="app" v-if="article != null">
     <!--bgcover-->
     <div class="bg-cover pd-header post-cover" :style="{backgroundImage: 'url(' + article.cover + ')' }">
         <div class="container" style="right: 0px;left: 0px;">
@@ -450,6 +450,7 @@
                     <div class="brand">
                         <h1 class="description center-align post-title">{{article.title}}</h1>
                     </div>
+                    <span id="subtitle" style="display: none"></span>
                 </div>
             </div>
         </div>
@@ -711,6 +712,8 @@
             prevPreview: null,
             nextPreview: null,
             liked: false,
+            cover: null,
+            title: null,
         },
         methods: {
             getArticleById: function (id) {
