@@ -1,8 +1,7 @@
 <!DOCTYPE HTML>
 <html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta th:include="/web/fragments :: head(~{::title})">
-    <meta>
+    <meta th:include="/web/fragments :: head(~{::title})"/>
     <title>GeekBlog - 个人博客</title>
     <style>
         .carousel-control {
@@ -44,7 +43,6 @@
             font-size: 2.4rem;
         }
     </style>
-
 </head>
 
 <body>
@@ -321,6 +319,7 @@
         },
     });
 </script>
+
 <!--轮播图配置-->
 <script>
     // TODO 此处的轮播尚需优化，PC/Mobile 在触摸切换时都感觉相当不灵活
@@ -381,7 +380,5 @@
 </script>
 
 <div th:replace="/web/fragments :: scripts"></div>
-
-
 </body>
 </html>

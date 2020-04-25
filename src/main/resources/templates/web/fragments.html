@@ -221,54 +221,16 @@
             |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
             |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
             <br>
-            <!--网站字数-->
-            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span class="white-color">97.2k</span>&nbsp;字
-            <br>
+            <span id="busuanzi_container_site_pv" style="display: inline;">&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span
+                    id="busuanzi_value_site_pv" class="white-color"></span>&nbsp;次
+            </span>
+            <span id="busuanzi_container_site_uv" style="display: inline;">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                                                                           class="white-color"></span>&nbsp;人
+            </span>
+            <br/>
             <!--网站运行时间-->
             <span id="sitetime">载入运行时间...</span>
-            <script>
-                function siteTime() {
-                    var seconds = 1000;
-                    var minutes = seconds * 60;
-                    var hours = minutes * 60;
-                    var days = hours * 24;
-                    var years = days * 365;
-                    var today = new Date();
-                    var startYear = "2020";
-                    var startMonth = "2";
-                    var startDate = "16";
-                    var startHour = "0";
-                    var startMinute = "0";
-                    var startSecond = "0";
-                    var todayYear = today.getFullYear();
-                    var todayMonth = today.getMonth() + 1;
-                    var todayDate = today.getDate();
-                    var todayHour = today.getHours();
-                    var todayMinute = today.getMinutes();
-                    var todaySecond = today.getSeconds();
-                    var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
-                    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
-                    var diff = t2 - t1;
-                    var diffYears = Math.floor(diff / years);
-                    var diffDays = Math.floor((diff / days) - diffYears * 365);
-                    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
-                    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
-                        minutes);
-                    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
-                        diffMinutes * minutes) / seconds);
-                    if (startYear == todayYear) {
-                        document.getElementById("year").innerHTML = todayYear;
-                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
-                            " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
-                    } else {
-                        document.getElementById("year").innerHTML = startYear + " - " + todayYear;
-                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
-                            " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
-                    }
-                }
-
-                setInterval(siteTime, 1000);
-            </script>
             <br>
         </div>
         <!--联系方式-->
@@ -346,8 +308,6 @@
     <script async="" src="/static/web/js/busuanzi.pure.mini.js"></script>
     <!--未知-->
     <script async="async" src="/static/web/js/ribbon-dynamic.js" type="text/javascript"></script>
-    <!--网页预加载-->
-    <script src="/static/web/js/instantpage.js" type="module"></script>
     <!--网站标题切换-->
     <script type="text/javascript">
         var OriginTitile = document.title, st;
@@ -383,6 +343,50 @@
             //滑动的速度
             speed: 1000,
         });
+    </script>
+    <!--网站计时-->
+    <script type="text/javascript">
+        function siteTime() {
+            var seconds = 1000;
+            var minutes = seconds * 60;
+            var hours = minutes * 60;
+            var days = hours * 24;
+            var years = days * 365;
+            var today = new Date();
+            var startYear = "2020";
+            var startMonth = "2";
+            var startDate = "16";
+            var startHour = "0";
+            var startMinute = "0";
+            var startSecond = "0";
+            var todayYear = today.getFullYear();
+            var todayMonth = today.getMonth() + 1;
+            var todayDate = today.getDate();
+            var todayHour = today.getHours();
+            var todayMinute = today.getMinutes();
+            var todaySecond = today.getSeconds();
+            var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+            var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+            var diff = t2 - t1;
+            var diffYears = Math.floor(diff / years);
+            var diffDays = Math.floor((diff / days) - diffYears * 365);
+            var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+            var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                minutes);
+            var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                diffMinutes * minutes) / seconds);
+            if (startYear == todayYear) {
+                document.getElementById("year").innerHTML = todayYear;
+                document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                    " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+            } else {
+                document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                    " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+            }
+        }
+
+        setInterval(siteTime, 1000);
     </script>
 </div>
 <!--scripts-->
