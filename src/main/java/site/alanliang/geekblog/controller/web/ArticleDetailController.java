@@ -11,6 +11,8 @@ import site.alanliang.geekblog.domain.Article;
 import site.alanliang.geekblog.service.ArticleService;
 
 import javax.validation.constraints.NotNull;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @Descriptin TODO
@@ -26,9 +28,7 @@ public class ArticleDetailController {
 
     @GetMapping("/article/{id}")
     public String articleDetail(@PathVariable("id") Long id, Model model) {
-        model.addAttribute("article", articleService.getArticleById(id));
-        model.addAttribute("prevPreview", articleService.getPrevArticlePreview(id));
-        model.addAttribute("nextPreview", articleService.getNextArticlePreview(id));
+        model.addAttribute("id", id);
         return "web/article";
     }
 
@@ -39,4 +39,21 @@ public class ArticleDetailController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @ResponseBody
+    @GetMapping("/article")
+    public ResponseEntity<Object> article(@RequestParam("id") Long id) {
+        Article article = articleService.getArticleById(id);
+        return new ResponseEntity<>(article, HttpStatus.OK);
+    }
+
+    @ResponseBody
+    @GetMapping("/article/prev-and-next")
+    ResponseEntity<Object> prevAndNextArticlePreview(@RequestParam("id") Long id) {
+        Article prevPreview = articleService.getPrevArticlePreview(id);
+        Article nextPreview = articleService.getNextArticlePreview(id);
+        Map<String, Object> map = new HashMap<>();
+        map.put("prevPreview", prevPreview);
+        map.put("nextPreview", nextPreview);
+        return new ResponseEntity<>(map, HttpStatus.OK);
+    }
 }

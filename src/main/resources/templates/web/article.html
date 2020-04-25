@@ -2,10 +2,11 @@
 <html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta th:include="/web/fragments :: head(~{::title})">
-    <title th:text="${article.title}+' | GeekBlog'">文章标题</title>
+    <title>文章详情 | GeekBlog</title>
     <!--代码高亮-->
     <link rel="stylesheet" href="/static/web/css/prism-tomorrow.css" type="text/css">
     <link rel="stylesheet" href="/static/web/css/prism-line-numbers.css" type="text/css">
+    <!--目录生成-->
     <link rel="stylesheet" href="/static/web/css/tocbot.css">
     <style>
         #articleContent h1::before,
@@ -426,6 +427,12 @@
             visibility: visible;
         }
     </style>
+    <!-- 代码块折行 -->
+    <style type="text/css">
+        code[class*="language-"], pre[class*="language-"] {
+            white-space: pre !important;
+        }
+    </style>
 </head>
 
 <body>
@@ -435,13 +442,13 @@
 
 <div id="app">
     <!--bgcover-->
-    <div class="bg-cover pd-header post-cover" th:style="'background:url(' + ${article.cover} + ');'">
+    <div class="bg-cover pd-header post-cover" :style="{backgroundImage: 'url(' + article.cover + ')' }">
         <div class="container" style="right: 0px;left: 0px;">
             <div class="row">
                 <div class="col s12 m12 l12">
                     <!--标题-->
                     <div class="brand">
-                        <h1 class="description center-align post-title" th:text="${article.title}">文章标题</h1>
+                        <h1 class="description center-align post-title">{{article.title}}</h1>
                     </div>
                 </div>
             </div>
@@ -461,9 +468,9 @@
                                 <!--文章标签-->
                                 <div class="col s7">
                                     <div class="article-tag">
-                                        <a th:href="'/api/tags?id='+${tag.id}" th:each="tag : ${article.tagList}"
-                                           target="_blank">
-                                            <span class="chip bg-color" th:text="${tag.name}">标签名称</span>
+                                        <a :href="'/api/tags?id='+tag.id" v-for="(tag, index) in article.tagList"
+                                           :key="tag.id" target="_blank">
+                                            <span class="chip bg-color">{{tag.name}}</span>
                                         </a>
                                     </div>
                                 </div>
@@ -471,31 +478,28 @@
                                 <div class="col s5 right-align">
                                     <div class="post-cate">
                                         <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                        <a th:href="'/api/categories?id='+${article.category.id}" class="post-category"
-                                           th:text="${article.category.name}" target="_blank">分类名称</a>
+                                        <a :href="'/api/categories?id='+article.category.id" class="post-category"
+                                           target="_blank">{{article.category.name}}</a>
                                     </div>
                                 </div>
                             </div>
                             <div class="post-info">
                                 <!--发布日期-->
                                 <div class="post-date info-break-policy">
-                                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;<span
-                                        th:text="${#dates.format(article.createTime,'yyyy-MM-dd')}">发布日期</span>
+                                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;<span>{{article.createTime | dateFormat}}</span>
                                 </div>
                                 <!--浏览次数-->
                                 <div id="busuanzi_container_page_pv" class="info-break-policy">
                                     <i class="fa fa-eye fa-fw"></i>浏览次数:&nbsp;&nbsp;
-                                    <span th:text="${article.views}">0</span>
+                                    <span>{{article.views}}</span>
                                 </div>
                                 <!--文章字数-->
                                 <div class="info-break-policy">
-                                    <i class="fa fa-heart fa-fw"></i>点赞量:&nbsp;&nbsp;<span
-                                        th:text="${article.likes}">0</span>
+                                    <i class="fa fa-heart fa-fw"></i>点赞量:&nbsp;&nbsp;<span>{{article.likes}}</span>
                                 </div>
                                 <!--阅读时长-->
                                 <div class="info-break-policy">
-                                    <i class="fa fa-comment fa-fw"></i>评论量:&nbsp;&nbsp;<span
-                                        th:text="${article.comments}">0</span>
+                                    <i class="fa fa-comment fa-fw"></i>评论量:&nbsp;&nbsp;<span>{{article.comments}}</span>
                                 </div>
 
                             </div>
@@ -503,7 +507,7 @@
                         <hr class="clearfix">
                         <div class="card-content article-card-content">
                             <!--文章内容-->
-                            <div id="articleContent" data-aos="fade-up" th:utext="${article.content}">文章内容</div>
+                            <div id="articleContent" data-aos="fade-up" v-html="article.content">文章内容</div>
                             <hr>
                             <!--复制-->
                             <div class="reprint" id="reprint-statement">
@@ -513,8 +517,8 @@
                                     <i class="fas fa-user">文章作者:</i>
                                 </span>
                                     <span class="reprint-info">
-                                    <a th:href="@{/api/about}" rel="external nofollow noreferrer"
-                                       th:text="${article.author.username}">作者</a>
+                                    <a href="/api/about"
+                                       rel="external nofollow noreferrer">{{article.author.username}}</a>
                                 </span>
                                 </div>
                                 <!--文章链接-->
@@ -537,8 +541,7 @@
                                         本博客所有文章除特別声明外，均采用
                                         <a href="#" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
                                         许可协议。转载请注明来源
-                                        <a th:href="@{/api/about}" target="_blank"
-                                           th:text="${article.author.username}">作者</a>!
+                                        <a href="/api/about" target="_blank">{{article.author.username}}}</a>!
                                     </span>
                                 </div>
                             </div>
@@ -547,8 +550,7 @@
                                 <!--文章标签-->
                                 <div class="post-meta__tag-list" style="display: inline-block;">
                                     <div class="article-tag">
-                                            <span class="chip bg-color"
-                                                  th:text="${article.type==1?'原创':(article.type==2?'转载':'翻译')}">文章类型</span>
+                                        <span class="chip bg-color">{{article.type==1?'原创':(article.type==2?'转载':'翻译')}}</span>
                                     </div>
                                 </div>
                                 <!--文章分享-->
@@ -559,7 +561,6 @@
                                         <div class="social-share"
                                              data-sites="qq,qzone,wechat,weibo"
                                              data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
-                                        <script src="/static/web/js/social-share.min.js"></script>
                                     </div>
                                 </div>
                             </div>
@@ -567,9 +568,9 @@
                             <div id="reward">
                                 <a href="#rewardModal"
                                    class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red"
-                                   th:if="${article.appreciable}">赏</a>
+                                   v-if="article.appreciable">赏</a>
                                 <a class="reward-link btn-floating btn-medium waves-effect waves-light teal"
-                                   id="likeBtn">赞</a>
+                                   @click="likeIt(article.id)" :class="{disabled: liked}">赞</a>
                                 <!-- Modal Structure -->
                                 <div id="rewardModal" class="modal">
                                     <div class="modal-content">
@@ -585,7 +586,6 @@
                                                     <img src="/static/web/picture/wepay.jpg" class="reward-img"
                                                          alt="微信打赏二维码">
                                                 </div>
-
                                             </div>
                                         </div>
                                     </div>
@@ -594,7 +594,7 @@
                         </div>
                     </div>
                     <!--评论区-->
-                    <div class="card valine-card" data-aos="fade-up">
+                    <div class="card valine-card" data-aos="fade-up" v-if="article.commentable">
                         <div class="comment_headling"
                              style="font-size: 20px; font-weight: 700; position: relative; left: 20px; top: 15px; padding-bottom: 5px;">
                             <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
@@ -607,68 +607,67 @@
                     <article id="prenext-posts" class="prev-next articles">
                         <div class="row article-row">
                             <!--上一篇-->
-                            <div class="article col s12 m6" data-aos="fade-up" th:if="${prevPreview != null}">
+                            <div class="article col s12 m6" data-aos="fade-up" v-if="prevPreview != null">
                                 <div class="article-badge left-badge text-color">
                                     <i class="fas fa-chevron-left"></i>&nbsp;上一篇
                                 </div>
                                 <div class="card">
-                                    <a th:href="@{/article/{id}(id=${prevPreview.id})}">
+                                    <a :href="'/article/'+prevPreview.id">
                                         <div class="card-image">
-                                            <img th:src="@{${prevPreview.cover}}" class="responsive-img">
-                                            <span class="card-title" th:text="${prevPreview.title}">文章标题</span>
+                                            <img :src="prevPreview.cover" class="responsive-img">
+                                            <span class="card-title">{{prevPreview.title}}</span>
                                         </div>
                                     </a>
                                     <div class="card-content article-content">
-                                        <div class="summary block-with-text" th:text="${prevPreview.summary}">文章摘要</div>
+                                        <div class="summary block-with-text">{{prevPreview.summary}}</div>
                                         <div class="publish-info">
                                         <span class="publish-date">
-                                            <i class="far fa-clock fa-fw icon-date"></i><span
-                                                th:text="${#dates.format(prevPreview.createTime,'yyyy-MM-dd')}">2020-03-11</span>
+                                            <i class="far fa-clock fa-fw icon-date"></i><span>{{prevPreview.createTime | dateFormat}}</span>
                                         </span>
                                             <span class="publish-author">
                                             <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                            <a th:href="'/api/categories?id='+${article.category.id}"
-                                               class="post-category" th:text="${prevPreview.category.name}">分类名称</a>
+                                            <a :href="'/api/categories?id='+article.category.id"
+                                               class="post-category">{{prevPreview.category.name}}</a>
                                         </span>
                                         </div>
                                     </div>
                                     <div class="card-action article-tags">
-                                        <a th:href="'/api/tags?id='+${tag.id}" th:each="tag : ${prevPreview.tagList}">
-                                            <span class="chip bg-color" th:text="${tag.name}">标签名称</span>
+                                        <a :href="'/api/tags?id='+tag.id" v-for="(tag,index) in prevPreview.tagList"
+                                           :key="tag.id">
+                                            <span class="chip bg-color">{{tag.name}}</span>
                                         </a>
                                     </div>
                                 </div>
                             </div>
                             <!--下一篇-->
-                            <div class="article col s12 m6" data-aos="fade-up" th:if="${nextPreview != null}">
+                            <div class="article col s12 m6" data-aos="fade-up" v-if="nextPreview != null">
                                 <div class="article-badge right-badge text-color">
                                     下一篇&nbsp;<i class="fas fa-chevron-right"></i>
                                 </div>
                                 <div class="card">
-                                    <a th:href="@{/article/{id}(id=${nextPreview.id})}">
+                                    <a :href="'/article/'+nextPreview.id">
                                         <div class="card-image">
                                             <img src="/static/web/picture/13.jpg" class="responsive-img"
                                                  alt="Java之ThreadLocal的使用及源码解析">
-                                            <span class="card-title" th:text="${nextPreview.title}">文章标题</span>
+                                            <span class="card-title">{{nextPreview.title}}</span>
                                         </div>
                                     </a>
                                     <div class="card-content article-content">
-                                        <div class="summary block-with-text" th:text="${nextPreview.summary}">文章摘要</div>
+                                        <div class="summary block-with-text">{{nextPreview.summary}}</div>
                                         <div class="publish-info">
                                         <span class="publish-date">
-                                            <i class="far fa-clock fa-fw icon-date"></i><span
-                                                th:text="${#dates.format(nextPreview.createTime,'yyyy-MM-dd')}">2020-03-11</span>
+                                            <i class="far fa-clock fa-fw icon-date"></i><span>{{nextPreview.createTime | dateFormat}}</span>
                                         </span>
                                             <span class="publish-author">
                                             <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                            <a th:href="'/api/categories?id='+${article.category.id}"
-                                               class="post-category" th:text="${nextPreview.category.name}">标签名称</a>
+                                            <a :href="'/api/categories?id='+article.category.id"
+                                               class="post-category">{{nextPreview.category.name}}</a>
                                         </span>
                                         </div>
                                     </div>
                                     <div class="card-action article-tags">
-                                        <a th:href="'/api/tags?id='+${tag.id}" th:each="tag : ${nextPreview.tagList}">
-                                            <span class="chip bg-color" th:text="${tag.name}">标签名称</span>
+                                        <a :href="'/api/tags?id='+tag.id" v-for="(tag, index) in nextPreview.tagList">
+                                            <span class="chip bg-color">{{tag.name}}</span>
                                         </a>
                                     </div>
                                 </div>
@@ -703,6 +702,135 @@
 <div th:replace="/web/fragments :: commons"></div>
 <!--end commons-->
 
+<!--vue-->
+<script type="text/javascript">
+    const vm = new Vue({
+        el: '#app',
+        data: {
+            article: null,
+            prevPreview: null,
+            nextPreview: null,
+            liked: false,
+        },
+        methods: {
+            getArticleById: function (id) {
+                axios({
+                    url: '/article?id=' + id,
+                    method: 'GET'
+                }).then((result) => {
+                    this.article = result.data;
+                    this.$nextTick(function () {
+                        Prism.highlightAllUnder(document.getElementById("articleContent"));
+                        this.initTocbot();
+                    });
+                })
+            },
+            getPrevAndNextById: function (id) {
+                axios({
+                    url: '/article/prev-and-next?id=' + id,
+                    method: 'GET'
+                }).then((result) => {
+                    this.prevPreview = result.data.prevPreview;
+                    this.nextPreview = result.data.nextPreview;
+                })
+            },
+            likeIt: function (id) {
+                axios({
+                    url: '/article/' + id + '/likes',
+                    method: 'PUT'
+                }).then((result) => {
+                    this.liked = true;
+                })
+                return false;
+            },
+            initTocbot: function () {
+                tocbot.init({
+                    tocSelector: '#toc-content',
+                    contentSelector: '#articleContent',
+                    headingsOffset: -($(window).height() * 0.4 - 45),
+                    collapseDepth: Number('0'),
+                    headingSelector: 'h2, h3, h4'
+                });
+
+                // modify the toc link href to support Chinese.
+                let i = 0;
+                let tocHeading = 'toc-heading-';
+                $('#toc-content a').each(function () {
+                    $(this).attr('href', '#' + tocHeading + (++i));
+                });
+
+                // modify the heading title id to support Chinese.
+                i = 0;
+                $('#articleContent').children('h2, h3, h4').each(function () {
+                    $(this).attr('id', tocHeading + (++i));
+                });
+
+                // Set scroll toc fixed.
+                let tocHeight = parseInt($(window).height() * 0.4 - 64);
+                let $tocWidget = $('.toc-widget');
+                $(window).scroll(function () {
+                    let scroll = $(window).scrollTop();
+                    /* add post toc fixed. */
+                    if (scroll > tocHeight) {
+                        $tocWidget.addClass('toc-fixed');
+                    } else {
+                        $tocWidget.removeClass('toc-fixed');
+                    }
+                });
+
+
+                /* 修复文章卡片 div 的宽度. */
+                let fixPostCardWidth = function (srcId, targetId) {
+                    let srcDiv = $('#' + srcId);
+                    if (srcDiv.length === 0) {
+                        return;
+                    }
+
+                    let w = srcDiv.width();
+                    if (w >= 450) {
+                        w = w + 21;
+                    } else if (w >= 350 && w < 450) {
+                        w = w + 18;
+                    } else if (w >= 300 && w < 350) {
+                        w = w + 16;
+                    } else {
+                        w = w + 14;
+                    }
+                    $('#' + targetId).width(w);
+                };
+
+                // 切换TOC目录展开收缩的相关操作.
+                const expandedClass = 'expanded';
+                let $tocAside = $('#toc-aside');
+                let $mainContent = $('#main-content');
+                $('#floating-toc-btn .btn-floating').click(function () {
+                    if ($tocAside.hasClass(expandedClass)) {
+                        $tocAside.removeClass(expandedClass).hide();
+                        $mainContent.removeClass('l9');
+                    } else {
+                        $tocAside.addClass(expandedClass).show();
+                        $mainContent.addClass('l9');
+                    }
+                    fixPostCardWidth('artDetail', 'prenext-posts');
+                });
+
+            },
+        },
+        mounted() {
+            let id = [[${id}]];
+            this.getArticleById(id);
+            this.getPrevAndNextById(id);
+        },
+        filters: {
+            dateFormat: function (value) {
+                if (!value) return ''
+                value = value.toString()
+                return value.split(' ')[0];
+            }
+        },
+    });
+</script>
+
 <!--scripts-->
 <div th:replace="/web/fragments :: scripts"></div>
 <!--end scripts-->
@@ -710,92 +838,20 @@
 <script src="/static/web/js/av-min.js"></script>
 <script src="/static/web/js/Valine.min.js"></script>
 <script>
-    new Valine({
-        el: '#vcomments',
-        appId: 'SDxrhXkjLgCDr5ke5x7qg8gl-gzGzoHsz',
-        appKey: 'S4XFSBkHr5ThpoAuYQvSKKbM',
-        avatar: ('mp'),
-        pageSize: '10',
-        lang: 'zh-cn',
-        placeholder: '你想要对博主说什么呢...',
-    });
+    $(function () {
+        new Valine({
+            el: '#vcomments',
+            appId: 'SDxrhXkjLgCDr5ke5x7qg8gl-gzGzoHsz',
+            appKey: 'S4XFSBkHr5ThpoAuYQvSKKbM',
+            avatar: ('mp'),
+            pageSize: '10',
+            lang: 'zh-cn',
+            placeholder: '你想要对博主说什么呢...',
+        });
+    })
 </script>
 <!--目录-->
 <script src="/static/web/js/tocbot.min.js"></script>
-<script>
-    $(function () {
-        tocbot.init({
-            tocSelector: '#toc-content',
-            contentSelector: '#articleContent',
-            headingsOffset: -($(window).height() * 0.4 - 45),
-            collapseDepth: Number('0'),
-            headingSelector: 'h2, h3, h4'
-        });
-
-        // modify the toc link href to support Chinese.
-        let i = 0;
-        let tocHeading = 'toc-heading-';
-        $('#toc-content a').each(function () {
-            $(this).attr('href', '#' + tocHeading + (++i));
-        });
-
-        // modify the heading title id to support Chinese.
-        i = 0;
-        $('#articleContent').children('h2, h3, h4').each(function () {
-            $(this).attr('id', tocHeading + (++i));
-        });
-
-        // Set scroll toc fixed.
-        let tocHeight = parseInt($(window).height() * 0.4 - 64);
-        let $tocWidget = $('.toc-widget');
-        $(window).scroll(function () {
-            let scroll = $(window).scrollTop();
-            /* add post toc fixed. */
-            if (scroll > tocHeight) {
-                $tocWidget.addClass('toc-fixed');
-            } else {
-                $tocWidget.removeClass('toc-fixed');
-            }
-        });
-
-
-        /* 修复文章卡片 div 的宽度. */
-        let fixPostCardWidth = function (srcId, targetId) {
-            let srcDiv = $('#' + srcId);
-            if (srcDiv.length === 0) {
-                return;
-            }
-
-            let w = srcDiv.width();
-            if (w >= 450) {
-                w = w + 21;
-            } else if (w >= 350 && w < 450) {
-                w = w + 18;
-            } else if (w >= 300 && w < 350) {
-                w = w + 16;
-            } else {
-                w = w + 14;
-            }
-            $('#' + targetId).width(w);
-        };
-
-        // 切换TOC目录展开收缩的相关操作.
-        const expandedClass = 'expanded';
-        let $tocAside = $('#toc-aside');
-        let $mainContent = $('#main-content');
-        $('#floating-toc-btn .btn-floating').click(function () {
-            if ($tocAside.hasClass(expandedClass)) {
-                $tocAside.removeClass(expandedClass).hide();
-                $mainContent.removeClass('l9');
-            } else {
-                $tocAside.addClass(expandedClass).show();
-                $mainContent.addClass('l9');
-            }
-            fixPostCardWidth('artDetail', 'prenext-posts');
-        });
-
-    });
-</script>
 <!--文章复制-->
 <script async="" defer="">
     document.addEventListener("copy", function (e) {
@@ -807,44 +863,6 @@
         $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
     }
 </script>
-<script>
-    $('#articleContent').on('copy', function (e) {
-        // IE8 or earlier browser is 'undefined'
-        if (typeof window.getSelection === 'undefined') return;
-
-        var selection = window.getSelection();
-        // if the selection is short let's not annoy our users.
-        if (('' + selection).length < Number.parseInt('120')) {
-            return;
-        }
-
-        // create a div outside of the visible area and fill it with the selected text.
-        var bodyElement = document.getElementsByTagName('body')[0];
-        var newdiv = document.createElement('div');
-        newdiv.style.position = 'absolute';
-        newdiv.style.left = '-99999px';
-        bodyElement.appendChild(newdiv);
-        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
-
-        // we need a <pre> tag workaround.
-        // otherwise the text inside "pre" loses all the line breaks!
-        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
-            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
-        }
-
-        var url = document.location.href;
-        newdiv.innerHTML += '<br />'
-            + '来源: GeeBlog<br />'
-            + '文章作者: AlanLiang<br />'
-            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
-            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
-
-        selection.selectAllChildren(newdiv);
-        window.setTimeout(function () {
-            bodyElement.removeChild(newdiv);
-        }, 200);
-    });
-</script>
 <!-- 代码块功能依赖 -->
 <script type="text/javascript" src="/static/web/js/codeBlockFuction.js"></script>
 <!-- 代码语言 -->
@@ -853,12 +871,7 @@
 <script type="text/javascript" src="/static/web/js/codeCopy.js"></script>
 <!-- 代码块收缩 -->
 <script type="text/javascript" src="/static/web/js/codeShrink.js"></script>
-<!-- 代码块折行 -->
-<style type="text/css">
-    code[class*="language-"], pre[class*="language-"] {
-        white-space: pre !important;
-    }
-</style>
+
 <!--代码高亮-->
 <script src="https://cdn.jsdelivr.net/npm/prismjs@1.17.1/prism.min.js"></script>
 <script src="https://cdn.bootcss.com/prism/1.17.1/components/prism-java.js"></script>
@@ -880,20 +893,6 @@
     gtag('js', new Date());
     gtag('config', '');
 </script>
-<script type="text/javascript">
-    Prism.highlightAllUnder(document.getElementById("articleContent"));
-</script>
-<script type="text/javascript">
-    $('#likeBtn').click(function () {
-        axios({
-            url: '/article/' + [[${article.id}]] + '/likes',
-            method: 'PUT'
-        }).then((result) => {
-            console.log(result);
-            $('#likeBtn').addClass('disabled');
-        })
-        return false;
-    });
-</script>
+<script src="/static/web/js/social-share.min.js"></script>
 </body>
 </html>
