@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.ModelAndView;
 import site.alanliang.geekblog.common.JsonResult;
 import site.alanliang.geekblog.common.ResultEnum;
+import site.alanliang.geekblog.exception.BadRequestException;
 import site.alanliang.geekblog.exception.NameNotUniqueException;
 import site.alanliang.geekblog.utils.AjaxUtil;
 
@@ -43,6 +44,13 @@ public class GlobalExceptionHandler {
         String defaultMessage = fieldError.getDefaultMessage();
         String message = String.format("%s : %s", field, defaultMessage);
         return JsonResult.build(HttpStatus.BAD_REQUEST.value(), message);
+    }
+
+    @ExceptionHandler(BadRequestException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public JsonResult handleBadRequestException(BadRequestException exception) {
+        log.error(exception.getMessage());
+        return JsonResult.build(HttpStatus.BAD_REQUEST.value(), exception.getMessage());
     }
 
     @ExceptionHandler(Exception.class)

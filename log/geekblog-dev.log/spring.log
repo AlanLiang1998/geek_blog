@@ -6570,3 +6570,1339 @@ org.attoparser.ParseException: (Line = 144, Column = 40) Malformed markup: Attri
 2020-04-26 17:49:56.124 DEBUG 22424 --- [http-nio-8889-exec-10] s.a.g.m.SysAccessLogMapper.selectPage    : ==>  Preparing: SELECT id,request_ip,address,description,browser,time,create_time FROM sys_access_log LIMIT ?,? 
 2020-04-26 17:49:56.124 DEBUG 22424 --- [http-nio-8889-exec-10] s.a.g.m.SysAccessLogMapper.selectPage    : ==> Parameters: 0(Long), 15(Long)
 2020-04-26 17:49:56.126 DEBUG 22424 --- [http-nio-8889-exec-10] s.a.g.m.SysAccessLogMapper.selectPage    : <==      Total: 5
+2020-04-26 17:54:52.642  INFO 21552 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Starting GeekBlogApplication on DESKTOP-QNDK7AF with PID 21552 (D:\idea\geekblog\target\classes started by AlanLiang in D:\idea\geekblog)
+2020-04-26 17:54:52.645 DEBUG 21552 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Running with Spring Boot v2.2.6.RELEASE, Spring v5.2.5.RELEASE
+2020-04-26 17:54:52.646  INFO 21552 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : The following profiles are active: dev
+2020-04-26 17:54:52.700  INFO 21552 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2020-04-26 17:54:52.701  INFO 21552 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2020-04-26 17:54:54.084  INFO 21552 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8889 (http)
+2020-04-26 17:54:54.096  INFO 21552 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-04-26 17:54:54.096  INFO 21552 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.33]
+2020-04-26 17:54:54.191  INFO 21552 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-04-26 17:54:54.191  INFO 21552 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1490 ms
+2020-04-26 17:54:54.237  INFO 21552 --- [restartedMain] o.s.boot.web.servlet.RegistrationBean    : Servlet statViewServlet was not registered (possibly already registered?)
+2020-04-26 17:54:54.241  INFO 21552 --- [restartedMain] o.s.boot.web.servlet.RegistrationBean    : Filter webStatFilter was not registered (possibly already registered?)
+2020-04-26 17:54:54.431  INFO 21552 --- [restartedMain] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2020-04-26 17:54:54.726  INFO 21552 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2020-04-26 17:54:56.104  INFO 21552 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-04-26 17:54:56.459  INFO 21552 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2020-04-26 17:54:56.537  INFO 21552 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8889 (http) with context path ''
+2020-04-26 17:54:56.541  INFO 21552 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Started GeekBlogApplication in 4.799 seconds (JVM running for 6.096)
+2020-04-26 17:55:00.880  INFO 21552 --- [http-nio-8889-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-04-26 17:55:00.880  INFO 21552 --- [http-nio-8889-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-04-26 17:55:00.895  INFO 21552 --- [http-nio-8889-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 14 ms
+2020-04-26 17:55:01.481 DEBUG 21552 --- [http-nio-8889-exec-1] s.a.g.mapper.SysMenuMapper.selectList    : ==>  Preparing: SELECT id,title,href,pid,icon,target,sort,status,remark,create_time,update_time FROM sys_menu WHERE (status = ?) 
+2020-04-26 17:55:01.574 DEBUG 21552 --- [http-nio-8889-exec-1] s.a.g.mapper.SysMenuMapper.selectList    : ==> Parameters: true(Boolean)
+2020-04-26 17:55:01.592 DEBUG 21552 --- [http-nio-8889-exec-1] s.a.g.mapper.SysMenuMapper.selectList    : <==      Total: 9
+2020-04-26 17:55:01.595  INFO 21552 --- [http-nio-8889-exec-1] s.alanliang.geekblog.aspect.LogAspect    : Request ------ RequestLog {url = http://localhost:8889/admin/init, ip = 0:0:0:0:0:0:0:1, classMethod = site.alanliang.geekblog.controller.admin.IndexController.init, args = [], time = 164ms, description = 初始化后台主页}
+2020-04-26 17:55:01.596  INFO 21552 --- [http-nio-8889-exec-1] s.alanliang.geekblog.aspect.LogAspect    : Return ------ <200 OK OK,InitInfoVo(menuInfo=[MenuVo(id=1, pid=0, title=常规管理, icon=fa fa-dashboard, href=, target=_self, child=[MenuVo(id=2, pid=1, title=用户管理, icon=fa fa-users, href=/admin/api/user/user-list, target=null, child=null), MenuVo(id=3, pid=1, title=文章发布, icon=fa fa-book, href=/admin/api/article/article-add, target=null, child=null), MenuVo(id=4, pid=1, title=其它管理, icon=fa fa-slideshare, href=null, target=null, child=null), MenuVo(id=5, pid=1, title=文章管理, icon=fa fa-book, href=/admin/api/article/article-list, target=null, child=null), MenuVo(id=6, pid=1, title=分类管理, icon=fa fa-bookmark, href=/admin/api/category/category-list, target=null, child=null), MenuVo(id=7, pid=1, title=标签管理, icon=fa fa-tags, href=/admin/api/tag/tag-list, target=null, child=null), MenuVo(id=8, pid=1, title=数据源监控, icon=fa fa-database, href=/druid, target=null, child=null), MenuVo(id=9, pid=1, title=访问日志, icon=fa fa-pencil-square, href=/admin/api/log/log-list, target=null, child=null)])], homeInfo=InitInfoVo.HomeInfo(title=首页, href=/admin/api/home/dashboard), logoInfo=InitInfoVo.LogoInfo(title=Geek Blog, image=/static/admin/layuimini/images/logo.png)),[]>
+2020-04-26 17:55:01.942 DEBUG 21552 --- [http-nio-8889-exec-2] s.a.g.m.SysAccessLogMapper.selectPage    : ==>  Preparing: SELECT COUNT(1) FROM sys_access_log 
+2020-04-26 17:55:01.944 DEBUG 21552 --- [http-nio-8889-exec-2] s.a.g.m.SysAccessLogMapper.selectPage    : ==> Parameters: 
+2020-04-26 17:55:01.952 DEBUG 21552 --- [http-nio-8889-exec-2] s.a.g.m.SysAccessLogMapper.selectPage    : ==>  Preparing: SELECT id,request_ip,address,description,browser,time,create_time FROM sys_access_log LIMIT ?,? 
+2020-04-26 17:55:01.954 DEBUG 21552 --- [http-nio-8889-exec-2] s.a.g.m.SysAccessLogMapper.selectPage    : ==> Parameters: 0(Long), 15(Long)
+2020-04-26 17:55:01.959 DEBUG 21552 --- [http-nio-8889-exec-2] s.a.g.m.SysAccessLogMapper.selectPage    : <==      Total: 5
+2020-04-26 17:55:08.642 DEBUG 21552 --- [http-nio-8889-exec-4] s.a.g.m.SysAccessLogMapper.deleteById    : ==>  Preparing: DELETE FROM sys_access_log WHERE id=? 
+2020-04-26 17:55:08.646 DEBUG 21552 --- [http-nio-8889-exec-4] s.a.g.m.SysAccessLogMapper.deleteById    : ==> Parameters: 54(Long)
+2020-04-26 17:55:08.649 DEBUG 21552 --- [http-nio-8889-exec-4] s.a.g.m.SysAccessLogMapper.deleteById    : <==    Updates: 1
+2020-04-26 17:55:11.152 DEBUG 21552 --- [http-nio-8889-exec-5] s.a.g.mapper.SysMenuMapper.selectList    : ==>  Preparing: SELECT id,title,href,pid,icon,target,sort,status,remark,create_time,update_time FROM sys_menu WHERE (status = ?) 
+2020-04-26 17:55:11.152 DEBUG 21552 --- [http-nio-8889-exec-5] s.a.g.mapper.SysMenuMapper.selectList    : ==> Parameters: true(Boolean)
+2020-04-26 17:55:11.158 DEBUG 21552 --- [http-nio-8889-exec-5] s.a.g.mapper.SysMenuMapper.selectList    : <==      Total: 9
+2020-04-26 17:55:11.158  INFO 21552 --- [http-nio-8889-exec-5] s.alanliang.geekblog.aspect.LogAspect    : Request ------ RequestLog {url = http://localhost:8889/admin/init, ip = 0:0:0:0:0:0:0:1, classMethod = site.alanliang.geekblog.controller.admin.IndexController.init, args = [], time = 8ms, description = 初始化后台主页}
+2020-04-26 17:55:11.158  INFO 21552 --- [http-nio-8889-exec-5] s.alanliang.geekblog.aspect.LogAspect    : Return ------ <200 OK OK,InitInfoVo(menuInfo=[MenuVo(id=1, pid=0, title=常规管理, icon=fa fa-dashboard, href=, target=_self, child=[MenuVo(id=2, pid=1, title=用户管理, icon=fa fa-users, href=/admin/api/user/user-list, target=null, child=null), MenuVo(id=3, pid=1, title=文章发布, icon=fa fa-book, href=/admin/api/article/article-add, target=null, child=null), MenuVo(id=4, pid=1, title=其它管理, icon=fa fa-slideshare, href=null, target=null, child=null), MenuVo(id=5, pid=1, title=文章管理, icon=fa fa-book, href=/admin/api/article/article-list, target=null, child=null), MenuVo(id=6, pid=1, title=分类管理, icon=fa fa-bookmark, href=/admin/api/category/category-list, target=null, child=null), MenuVo(id=7, pid=1, title=标签管理, icon=fa fa-tags, href=/admin/api/tag/tag-list, target=null, child=null), MenuVo(id=8, pid=1, title=数据源监控, icon=fa fa-database, href=/druid, target=null, child=null), MenuVo(id=9, pid=1, title=访问日志, icon=fa fa-pencil-square, href=/admin/api/log/log-list, target=null, child=null)])], homeInfo=InitInfoVo.HomeInfo(title=首页, href=/admin/api/home/dashboard), logoInfo=InitInfoVo.LogoInfo(title=Geek Blog, image=/static/admin/layuimini/images/logo.png)),[]>
+2020-04-26 17:55:11.403 DEBUG 21552 --- [http-nio-8889-exec-7] s.a.g.m.SysAccessLogMapper.selectPage    : ==>  Preparing: SELECT COUNT(1) FROM sys_access_log 
+2020-04-26 17:55:11.404 DEBUG 21552 --- [http-nio-8889-exec-7] s.a.g.m.SysAccessLogMapper.selectPage    : ==> Parameters: 
+2020-04-26 17:55:11.410 DEBUG 21552 --- [http-nio-8889-exec-7] s.a.g.m.SysAccessLogMapper.selectPage    : ==>  Preparing: SELECT id,request_ip,address,description,browser,time,create_time FROM sys_access_log LIMIT ?,? 
+2020-04-26 17:55:11.411 DEBUG 21552 --- [http-nio-8889-exec-7] s.a.g.m.SysAccessLogMapper.selectPage    : ==> Parameters: 0(Long), 15(Long)
+2020-04-26 17:55:11.414 DEBUG 21552 --- [http-nio-8889-exec-7] s.a.g.m.SysAccessLogMapper.selectPage    : <==      Total: 4
+2020-04-26 17:55:40.135 DEBUG 21552 --- [http-nio-8889-exec-8] s.a.g.m.S.deleteBatchIds                 : ==>  Preparing: DELETE FROM sys_access_log WHERE id IN ( ? , ? , ? , ? ) 
+2020-04-26 17:55:40.136 DEBUG 21552 --- [http-nio-8889-exec-8] s.a.g.m.S.deleteBatchIds                 : ==> Parameters: 55(Long), 56(Long), 57(Long), 58(Long)
+2020-04-26 17:55:40.142 DEBUG 21552 --- [http-nio-8889-exec-8] s.a.g.m.S.deleteBatchIds                 : <==    Updates: 4
+2020-04-26 17:55:40.156 DEBUG 21552 --- [http-nio-8889-exec-10] s.a.g.m.SysAccessLogMapper.selectPage    : ==>  Preparing: SELECT COUNT(1) FROM sys_access_log 
+2020-04-26 17:55:40.156 DEBUG 21552 --- [http-nio-8889-exec-10] s.a.g.m.SysAccessLogMapper.selectPage    : ==> Parameters: 
+2020-04-26 18:23:12.768 DEBUG 21552 --- [http-nio-8889-exec-1] s.a.g.mapper.SysMenuMapper.selectList    : ==>  Preparing: SELECT id,title,href,pid,icon,target,sort,status,remark,create_time,update_time FROM sys_menu WHERE (status = ?) 
+2020-04-26 18:23:12.769 DEBUG 21552 --- [http-nio-8889-exec-1] s.a.g.mapper.SysMenuMapper.selectList    : ==> Parameters: true(Boolean)
+2020-04-26 18:23:12.772 DEBUG 21552 --- [http-nio-8889-exec-1] s.a.g.mapper.SysMenuMapper.selectList    : <==      Total: 9
+2020-04-26 18:23:12.773  INFO 21552 --- [http-nio-8889-exec-1] s.alanliang.geekblog.aspect.LogAspect    : Request ------ RequestLog {url = http://localhost:8889/admin/init, ip = 0:0:0:0:0:0:0:1, classMethod = site.alanliang.geekblog.controller.admin.IndexController.init, args = [], time = 9ms, description = 初始化后台主页}
+2020-04-26 18:23:12.773  INFO 21552 --- [http-nio-8889-exec-1] s.alanliang.geekblog.aspect.LogAspect    : Return ------ <200 OK OK,InitInfoVo(menuInfo=[MenuVo(id=1, pid=0, title=常规管理, icon=fa fa-dashboard, href=, target=_self, child=[MenuVo(id=2, pid=1, title=用户管理, icon=fa fa-users, href=/admin/api/user/user-list, target=null, child=null), MenuVo(id=3, pid=1, title=文章发布, icon=fa fa-book, href=/admin/api/article/article-add, target=null, child=null), MenuVo(id=4, pid=1, title=其它管理, icon=fa fa-slideshare, href=null, target=null, child=null), MenuVo(id=5, pid=1, title=文章管理, icon=fa fa-book, href=/admin/api/article/article-list, target=null, child=null), MenuVo(id=6, pid=1, title=分类管理, icon=fa fa-bookmark, href=/admin/api/category/category-list, target=null, child=null), MenuVo(id=7, pid=1, title=标签管理, icon=fa fa-tags, href=/admin/api/tag/tag-list, target=null, child=null), MenuVo(id=8, pid=1, title=数据源监控, icon=fa fa-database, href=/druid, target=null, child=null), MenuVo(id=9, pid=1, title=访问日志, icon=fa fa-pencil-square, href=/admin/api/log/log-list, target=null, child=null)])], homeInfo=InitInfoVo.HomeInfo(title=首页, href=/admin/api/home/dashboard), logoInfo=InitInfoVo.LogoInfo(title=Geek Blog, image=/static/admin/layuimini/images/logo.png)),[]>
+2020-04-26 18:23:44.330 DEBUG 21552 --- [http-nio-8889-exec-2] s.a.g.mapper.SysMenuMapper.selectList    : ==>  Preparing: SELECT id,title,href,pid,icon,target,sort,status,remark,create_time,update_time FROM sys_menu WHERE (status = ?) 
+2020-04-26 18:23:44.331 DEBUG 21552 --- [http-nio-8889-exec-2] s.a.g.mapper.SysMenuMapper.selectList    : ==> Parameters: true(Boolean)
+2020-04-26 18:23:44.337 DEBUG 21552 --- [http-nio-8889-exec-2] s.a.g.mapper.SysMenuMapper.selectList    : <==      Total: 9
+2020-04-26 18:23:44.340  INFO 21552 --- [http-nio-8889-exec-2] s.alanliang.geekblog.aspect.LogAspect    : Request ------ RequestLog {url = http://localhost:8889/admin/init, ip = 0:0:0:0:0:0:0:1, classMethod = site.alanliang.geekblog.controller.admin.IndexController.init, args = [], time = 12ms, description = 初始化后台主页}
+2020-04-26 18:23:44.340  INFO 21552 --- [http-nio-8889-exec-2] s.alanliang.geekblog.aspect.LogAspect    : Return ------ <200 OK OK,InitInfoVo(menuInfo=[MenuVo(id=1, pid=0, title=常规管理, icon=fa fa-dashboard, href=, target=_self, child=[MenuVo(id=2, pid=1, title=用户管理, icon=fa fa-users, href=/admin/api/user/user-list, target=null, child=null), MenuVo(id=3, pid=1, title=文章发布, icon=fa fa-book, href=/admin/api/article/article-add, target=null, child=null), MenuVo(id=4, pid=1, title=其它管理, icon=fa fa-slideshare, href=null, target=null, child=null), MenuVo(id=5, pid=1, title=文章管理, icon=fa fa-book, href=/admin/api/article/article-list, target=null, child=null), MenuVo(id=6, pid=1, title=分类管理, icon=fa fa-bookmark, href=/admin/api/category/category-list, target=null, child=null), MenuVo(id=7, pid=1, title=标签管理, icon=fa fa-tags, href=/admin/api/tag/tag-list, target=null, child=null), MenuVo(id=8, pid=1, title=数据源监控, icon=fa fa-database, href=/druid, target=null, child=null), MenuVo(id=9, pid=1, title=访问日志, icon=fa fa-pencil-square, href=/admin/api/log/log-list, target=null, child=null)])], homeInfo=InitInfoVo.HomeInfo(title=首页, href=/admin/api/home/dashboard), logoInfo=InitInfoVo.LogoInfo(title=Geek Blog, image=/static/admin/layuimini/images/logo.png)),[]>
+2020-04-26 18:25:58.063  INFO 8268 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Starting GeekBlogApplication on DESKTOP-QNDK7AF with PID 8268 (D:\idea\geekblog\target\classes started by AlanLiang in D:\idea\geekblog)
+2020-04-26 18:25:58.067 DEBUG 8268 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Running with Spring Boot v2.2.6.RELEASE, Spring v5.2.5.RELEASE
+2020-04-26 18:25:58.068  INFO 8268 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : The following profiles are active: dev
+2020-04-26 18:25:58.120  INFO 8268 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2020-04-26 18:25:58.120  INFO 8268 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2020-04-26 18:25:59.638  INFO 8268 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8889 (http)
+2020-04-26 18:25:59.650  INFO 8268 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-04-26 18:25:59.650  INFO 8268 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.33]
+2020-04-26 18:25:59.763  INFO 8268 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-04-26 18:25:59.763  INFO 8268 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1643 ms
+2020-04-26 18:25:59.828  INFO 8268 --- [restartedMain] o.s.boot.web.servlet.RegistrationBean    : Servlet statViewServlet was not registered (possibly already registered?)
+2020-04-26 18:25:59.832  INFO 8268 --- [restartedMain] o.s.boot.web.servlet.RegistrationBean    : Filter webStatFilter was not registered (possibly already registered?)
+2020-04-26 18:26:00.020  INFO 8268 --- [restartedMain] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2020-04-26 18:26:00.368  INFO 8268 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2020-04-26 18:26:01.287  INFO 8268 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-04-26 18:26:01.563  INFO 8268 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2020-04-26 18:26:01.609  INFO 8268 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8889 (http) with context path ''
+2020-04-26 18:26:01.612  INFO 8268 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Started GeekBlogApplication in 4.34 seconds (JVM running for 5.587)
+2020-04-26 18:26:02.975  INFO 8268 --- [http-nio-8889-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-04-26 18:26:02.977  INFO 8268 --- [http-nio-8889-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-04-26 18:26:02.986  INFO 8268 --- [http-nio-8889-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 9 ms
+2020-04-26 18:26:03.088 ERROR 8268 --- [http-nio-8889-exec-1] org.thymeleaf.TemplateEngine             : [THYMELEAF][http-nio-8889-exec-1] Exception processing template "admin/home/login": Error resolving template [admin/home/login], template might not exist or might not be accessible by any of the configured Template Resolvers
+
+org.thymeleaf.exceptions.TemplateInputException: Error resolving template [admin/home/login], template might not exist or might not be accessible by any of the configured Template Resolvers
+	at org.thymeleaf.engine.TemplateManager.resolveTemplate(TemplateManager.java:869)
+	at org.thymeleaf.engine.TemplateManager.parseAndProcess(TemplateManager.java:607)
+	at org.thymeleaf.TemplateEngine.process(TemplateEngine.java:1098)
+	at org.thymeleaf.TemplateEngine.process(TemplateEngine.java:1072)
+	at org.thymeleaf.spring5.view.ThymeleafView.renderFragment(ThymeleafView.java:362)
+	at org.thymeleaf.spring5.view.ThymeleafView.render(ThymeleafView.java:189)
+	at org.springframework.web.servlet.DispatcherServlet.render(DispatcherServlet.java:1373)
+	at org.springframework.web.servlet.DispatcherServlet.processDispatchResult(DispatcherServlet.java:1118)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1057)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:943)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:898)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:634)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:741)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at com.alibaba.druid.support.http.WebStatFilter.doFilter(WebStatFilter.java:123)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:541)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:373)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:868)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1594)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+
+2020-04-26 18:26:03.093 ERROR 8268 --- [http-nio-8889-exec-1] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is org.thymeleaf.exceptions.TemplateInputException: Error resolving template [admin/home/login], template might not exist or might not be accessible by any of the configured Template Resolvers] with root cause
+
+org.thymeleaf.exceptions.TemplateInputException: Error resolving template [admin/home/login], template might not exist or might not be accessible by any of the configured Template Resolvers
+	at org.thymeleaf.engine.TemplateManager.resolveTemplate(TemplateManager.java:869)
+	at org.thymeleaf.engine.TemplateManager.parseAndProcess(TemplateManager.java:607)
+	at org.thymeleaf.TemplateEngine.process(TemplateEngine.java:1098)
+	at org.thymeleaf.TemplateEngine.process(TemplateEngine.java:1072)
+	at org.thymeleaf.spring5.view.ThymeleafView.renderFragment(ThymeleafView.java:362)
+	at org.thymeleaf.spring5.view.ThymeleafView.render(ThymeleafView.java:189)
+	at org.springframework.web.servlet.DispatcherServlet.render(DispatcherServlet.java:1373)
+	at org.springframework.web.servlet.DispatcherServlet.processDispatchResult(DispatcherServlet.java:1118)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1057)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:943)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:898)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:634)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:741)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at com.alibaba.druid.support.http.WebStatFilter.doFilter(WebStatFilter.java:123)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:541)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:373)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:868)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1594)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+
+2020-04-26 18:26:24.016  INFO 12092 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Starting GeekBlogApplication on DESKTOP-QNDK7AF with PID 12092 (D:\idea\geekblog\target\classes started by AlanLiang in D:\idea\geekblog)
+2020-04-26 18:26:24.019 DEBUG 12092 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Running with Spring Boot v2.2.6.RELEASE, Spring v5.2.5.RELEASE
+2020-04-26 18:26:24.020  INFO 12092 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : The following profiles are active: dev
+2020-04-26 18:26:24.075  INFO 12092 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2020-04-26 18:26:24.075  INFO 12092 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2020-04-26 18:26:25.324  INFO 12092 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8889 (http)
+2020-04-26 18:26:25.332  INFO 12092 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-04-26 18:26:25.332  INFO 12092 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.33]
+2020-04-26 18:26:25.431  INFO 12092 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-04-26 18:26:25.431  INFO 12092 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1355 ms
+2020-04-26 18:26:25.479  INFO 12092 --- [restartedMain] o.s.boot.web.servlet.RegistrationBean    : Servlet statViewServlet was not registered (possibly already registered?)
+2020-04-26 18:26:25.481  INFO 12092 --- [restartedMain] o.s.boot.web.servlet.RegistrationBean    : Filter webStatFilter was not registered (possibly already registered?)
+2020-04-26 18:26:25.623  INFO 12092 --- [restartedMain] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2020-04-26 18:26:25.905  INFO 12092 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2020-04-26 18:26:26.844  INFO 12092 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-04-26 18:26:27.177  INFO 12092 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2020-04-26 18:26:27.248  INFO 12092 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8889 (http) with context path ''
+2020-04-26 18:26:27.252  INFO 12092 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Started GeekBlogApplication in 4.055 seconds (JVM running for 5.698)
+2020-04-26 18:26:30.372  INFO 12092 --- [http-nio-8889-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-04-26 18:26:30.373  INFO 12092 --- [http-nio-8889-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-04-26 18:26:30.381  INFO 12092 --- [http-nio-8889-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 8 ms
+2020-04-26 18:26:30.490 ERROR 12092 --- [http-nio-8889-exec-1] org.thymeleaf.TemplateEngine             : [THYMELEAF][http-nio-8889-exec-1] Exception processing template "admin/home/login": Error resolving template [admin/home/login], template might not exist or might not be accessible by any of the configured Template Resolvers
+
+org.thymeleaf.exceptions.TemplateInputException: Error resolving template [admin/home/login], template might not exist or might not be accessible by any of the configured Template Resolvers
+	at org.thymeleaf.engine.TemplateManager.resolveTemplate(TemplateManager.java:869)
+	at org.thymeleaf.engine.TemplateManager.parseAndProcess(TemplateManager.java:607)
+	at org.thymeleaf.TemplateEngine.process(TemplateEngine.java:1098)
+	at org.thymeleaf.TemplateEngine.process(TemplateEngine.java:1072)
+	at org.thymeleaf.spring5.view.ThymeleafView.renderFragment(ThymeleafView.java:362)
+	at org.thymeleaf.spring5.view.ThymeleafView.render(ThymeleafView.java:189)
+	at org.springframework.web.servlet.DispatcherServlet.render(DispatcherServlet.java:1373)
+	at org.springframework.web.servlet.DispatcherServlet.processDispatchResult(DispatcherServlet.java:1118)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1057)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:943)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:898)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:634)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:741)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at com.alibaba.druid.support.http.WebStatFilter.doFilter(WebStatFilter.java:123)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:541)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:373)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:868)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1594)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+
+2020-04-26 18:26:30.495 ERROR 12092 --- [http-nio-8889-exec-1] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is org.thymeleaf.exceptions.TemplateInputException: Error resolving template [admin/home/login], template might not exist or might not be accessible by any of the configured Template Resolvers] with root cause
+
+org.thymeleaf.exceptions.TemplateInputException: Error resolving template [admin/home/login], template might not exist or might not be accessible by any of the configured Template Resolvers
+	at org.thymeleaf.engine.TemplateManager.resolveTemplate(TemplateManager.java:869)
+	at org.thymeleaf.engine.TemplateManager.parseAndProcess(TemplateManager.java:607)
+	at org.thymeleaf.TemplateEngine.process(TemplateEngine.java:1098)
+	at org.thymeleaf.TemplateEngine.process(TemplateEngine.java:1072)
+	at org.thymeleaf.spring5.view.ThymeleafView.renderFragment(ThymeleafView.java:362)
+	at org.thymeleaf.spring5.view.ThymeleafView.render(ThymeleafView.java:189)
+	at org.springframework.web.servlet.DispatcherServlet.render(DispatcherServlet.java:1373)
+	at org.springframework.web.servlet.DispatcherServlet.processDispatchResult(DispatcherServlet.java:1118)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1057)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:943)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:898)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:634)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:741)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at com.alibaba.druid.support.http.WebStatFilter.doFilter(WebStatFilter.java:123)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:541)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:373)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:868)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1594)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+
+2020-04-26 18:26:44.210  INFO 12092 --- [Thread-14] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2020-04-26 18:26:44.214  INFO 12092 --- [Thread-14] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed
+2020-04-26 18:26:44.743  INFO 12092 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Starting GeekBlogApplication on DESKTOP-QNDK7AF with PID 12092 (D:\idea\geekblog\target\classes started by AlanLiang in D:\idea\geekblog)
+2020-04-26 18:26:44.743 DEBUG 12092 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Running with Spring Boot v2.2.6.RELEASE, Spring v5.2.5.RELEASE
+2020-04-26 18:26:44.743  INFO 12092 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : The following profiles are active: dev
+2020-04-26 18:26:44.991  WARN 12092 --- [restartedMain] o.m.s.mapper.ClassPathMapperScanner      : No MyBatis mapper was found in '[site.alanliang.geekblog]' package. Please check your configuration.
+2020-04-26 18:26:45.135  INFO 12092 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8889 (http)
+2020-04-26 18:26:45.136  INFO 12092 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-04-26 18:26:45.136  INFO 12092 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.33]
+2020-04-26 18:26:45.195  INFO 12092 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-04-26 18:26:45.195  INFO 12092 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 448 ms
+2020-04-26 18:26:45.266  INFO 12092 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-04-26 18:26:45.327  INFO 12092 --- [restartedMain] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2020-04-26 18:26:45.357  INFO 12092 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-2} inited
+2020-04-26 18:26:45.397  WARN 12092 --- [restartedMain] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sqlSessionFactory' defined in class path resource [com/baomidou/mybatisplus/autoconfigure/MybatisPlusAutoConfiguration.class]: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.apache.ibatis.session.SqlSessionFactory]: Factory method 'sqlSessionFactory' threw exception; nested exception is org.springframework.core.NestedIOException: Failed to parse mapping resource: 'file [D:\idea\geekblog\target\classes\mapper\ArticleMapper.xml]'; nested exception is org.apache.ibatis.builder.BuilderException: Error parsing Mapper XML. The XML location is 'file [D:\idea\geekblog\target\classes\mapper\ArticleMapper.xml]'. Cause: org.apache.ibatis.builder.BuilderException: Error resolving class. Cause: org.apache.ibatis.type.TypeException: Could not resolve type alias 'site.alanliang.geekblog.domain.Article'.  Cause: java.lang.ClassNotFoundException: Cannot find class: site.alanliang.geekblog.domain.Article
+2020-04-26 18:26:45.398  INFO 12092 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-2} closed
+2020-04-26 18:26:45.399  INFO 12092 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2020-04-26 18:26:45.399  INFO 12092 --- [restartedMain] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2020-04-26 18:26:45.406  INFO 12092 --- [restartedMain] ConditionEvaluationReportLoggingListener : 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2020-04-26 18:26:45.416 ERROR 12092 --- [restartedMain] o.s.boot.SpringApplication               : Application run failed
+
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sqlSessionFactory' defined in class path resource [com/baomidou/mybatisplus/autoconfigure/MybatisPlusAutoConfiguration.class]: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.apache.ibatis.session.SqlSessionFactory]: Factory method 'sqlSessionFactory' threw exception; nested exception is org.springframework.core.NestedIOException: Failed to parse mapping resource: 'file [D:\idea\geekblog\target\classes\mapper\ArticleMapper.xml]'; nested exception is org.apache.ibatis.builder.BuilderException: Error parsing Mapper XML. The XML location is 'file [D:\idea\geekblog\target\classes\mapper\ArticleMapper.xml]'. Cause: org.apache.ibatis.builder.BuilderException: Error resolving class. Cause: org.apache.ibatis.type.TypeException: Could not resolve type alias 'site.alanliang.geekblog.domain.Article'.  Cause: java.lang.ClassNotFoundException: Cannot find class: site.alanliang.geekblog.domain.Article
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:656)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:636)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1338)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1177)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:557)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:517)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:323)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:321)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:882)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:878)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:550)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:141)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:747)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:397)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:315)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1226)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1215)
+	at site.alanliang.geekblog.GeekBlogApplication.main(GeekBlogApplication.java:14)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49)
+Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.apache.ibatis.session.SqlSessionFactory]: Factory method 'sqlSessionFactory' threw exception; nested exception is org.springframework.core.NestedIOException: Failed to parse mapping resource: 'file [D:\idea\geekblog\target\classes\mapper\ArticleMapper.xml]'; nested exception is org.apache.ibatis.builder.BuilderException: Error parsing Mapper XML. The XML location is 'file [D:\idea\geekblog\target\classes\mapper\ArticleMapper.xml]'. Cause: org.apache.ibatis.builder.BuilderException: Error resolving class. Cause: org.apache.ibatis.type.TypeException: Could not resolve type alias 'site.alanliang.geekblog.domain.Article'.  Cause: java.lang.ClassNotFoundException: Cannot find class: site.alanliang.geekblog.domain.Article
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:185)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:651)
+	... 24 common frames omitted
+Caused by: org.springframework.core.NestedIOException: Failed to parse mapping resource: 'file [D:\idea\geekblog\target\classes\mapper\ArticleMapper.xml]'; nested exception is org.apache.ibatis.builder.BuilderException: Error parsing Mapper XML. The XML location is 'file [D:\idea\geekblog\target\classes\mapper\ArticleMapper.xml]'. Cause: org.apache.ibatis.builder.BuilderException: Error resolving class. Cause: org.apache.ibatis.type.TypeException: Could not resolve type alias 'site.alanliang.geekblog.domain.Article'.  Cause: java.lang.ClassNotFoundException: Cannot find class: site.alanliang.geekblog.domain.Article
+	at com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean.buildSqlSessionFactory(MybatisSqlSessionFactoryBean.java:595)
+	at com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean.afterPropertiesSet(MybatisSqlSessionFactoryBean.java:430)
+	at com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean.getObject(MybatisSqlSessionFactoryBean.java:628)
+	at com.baomidou.mybatisplus.autoconfigure.MybatisPlusAutoConfiguration.sqlSessionFactory(MybatisPlusAutoConfiguration.java:214)
+	at com.baomidou.mybatisplus.autoconfigure.MybatisPlusAutoConfiguration$$EnhancerBySpringCGLIB$$80992cb2.CGLIB$sqlSessionFactory$2(<generated>)
+	at com.baomidou.mybatisplus.autoconfigure.MybatisPlusAutoConfiguration$$EnhancerBySpringCGLIB$$80992cb2$$FastClassBySpringCGLIB$$6246a99d.invoke(<generated>)
+	at org.springframework.cglib.proxy.MethodProxy.invokeSuper(MethodProxy.java:244)
+	at org.springframework.context.annotation.ConfigurationClassEnhancer$BeanMethodInterceptor.intercept(ConfigurationClassEnhancer.java:331)
+	at com.baomidou.mybatisplus.autoconfigure.MybatisPlusAutoConfiguration$$EnhancerBySpringCGLIB$$80992cb2.sqlSessionFactory(<generated>)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:154)
+	... 25 common frames omitted
+Caused by: org.apache.ibatis.builder.BuilderException: Error parsing Mapper XML. The XML location is 'file [D:\idea\geekblog\target\classes\mapper\ArticleMapper.xml]'. Cause: org.apache.ibatis.builder.BuilderException: Error resolving class. Cause: org.apache.ibatis.type.TypeException: Could not resolve type alias 'site.alanliang.geekblog.domain.Article'.  Cause: java.lang.ClassNotFoundException: Cannot find class: site.alanliang.geekblog.domain.Article
+	at org.apache.ibatis.builder.xml.XMLMapperBuilder.configurationElement(XMLMapperBuilder.java:122)
+	at org.apache.ibatis.builder.xml.XMLMapperBuilder.parse(XMLMapperBuilder.java:94)
+	at com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean.buildSqlSessionFactory(MybatisSqlSessionFactoryBean.java:593)
+	... 38 common frames omitted
+Caused by: org.apache.ibatis.builder.BuilderException: Error resolving class. Cause: org.apache.ibatis.type.TypeException: Could not resolve type alias 'site.alanliang.geekblog.domain.Article'.  Cause: java.lang.ClassNotFoundException: Cannot find class: site.alanliang.geekblog.domain.Article
+	at org.apache.ibatis.builder.BaseBuilder.resolveClass(BaseBuilder.java:118)
+	at org.apache.ibatis.builder.xml.XMLMapperBuilder.resultMapElement(XMLMapperBuilder.java:262)
+	at org.apache.ibatis.builder.xml.XMLMapperBuilder.resultMapElement(XMLMapperBuilder.java:253)
+	at org.apache.ibatis.builder.xml.XMLMapperBuilder.resultMapElements(XMLMapperBuilder.java:245)
+	at org.apache.ibatis.builder.xml.XMLMapperBuilder.configurationElement(XMLMapperBuilder.java:118)
+	... 40 common frames omitted
+Caused by: org.apache.ibatis.type.TypeException: Could not resolve type alias 'site.alanliang.geekblog.domain.Article'.  Cause: java.lang.ClassNotFoundException: Cannot find class: site.alanliang.geekblog.domain.Article
+	at org.apache.ibatis.type.TypeAliasRegistry.resolveAlias(TypeAliasRegistry.java:120)
+	at org.apache.ibatis.builder.BaseBuilder.resolveAlias(BaseBuilder.java:149)
+	at org.apache.ibatis.builder.BaseBuilder.resolveClass(BaseBuilder.java:116)
+	... 44 common frames omitted
+Caused by: java.lang.ClassNotFoundException: Cannot find class: site.alanliang.geekblog.domain.Article
+	at org.apache.ibatis.io.ClassLoaderWrapper.classForName(ClassLoaderWrapper.java:200)
+	at org.apache.ibatis.io.ClassLoaderWrapper.classForName(ClassLoaderWrapper.java:89)
+	at org.apache.ibatis.io.Resources.classForName(Resources.java:261)
+	at org.apache.ibatis.type.TypeAliasRegistry.resolveAlias(TypeAliasRegistry.java:116)
+	... 46 common frames omitted
+
+2020-04-26 18:26:50.430  INFO 12092 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Starting GeekBlogApplication on DESKTOP-QNDK7AF with PID 12092 (D:\idea\geekblog\target\classes started by AlanLiang in D:\idea\geekblog)
+2020-04-26 18:26:50.430 DEBUG 12092 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Running with Spring Boot v2.2.6.RELEASE, Spring v5.2.5.RELEASE
+2020-04-26 18:26:50.431  INFO 12092 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : The following profiles are active: dev
+2020-04-26 18:26:50.859  INFO 12092 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8889 (http)
+2020-04-26 18:26:50.860  INFO 12092 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-04-26 18:26:50.861  INFO 12092 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.33]
+2020-04-26 18:26:50.900  INFO 12092 --- [restartedMain] o.a.c.c.C.[Tomcat-1].[localhost].[/]     : Initializing Spring embedded WebApplicationContext
+2020-04-26 18:26:50.900  INFO 12092 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 467 ms
+2020-04-26 18:26:50.944  INFO 12092 --- [restartedMain] o.s.boot.web.servlet.RegistrationBean    : Servlet statViewServlet was not registered (possibly already registered?)
+2020-04-26 18:26:50.944  INFO 12092 --- [restartedMain] o.s.boot.web.servlet.RegistrationBean    : Filter webStatFilter was not registered (possibly already registered?)
+2020-04-26 18:26:50.989  INFO 12092 --- [restartedMain] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2020-04-26 18:26:51.145  INFO 12092 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-3} inited
+2020-04-26 18:26:51.886  INFO 12092 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-04-26 18:26:52.081  INFO 12092 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2020-04-26 18:26:52.107  INFO 12092 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8889 (http) with context path ''
+2020-04-26 18:26:52.107  INFO 12092 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Started GeekBlogApplication in 1.712 seconds (JVM running for 30.554)
+2020-04-26 18:26:52.109  INFO 12092 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2020-04-26 18:26:59.583  INFO 12092 --- [http-nio-8889-exec-1] o.a.c.c.C.[Tomcat-1].[localhost].[/]     : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-04-26 18:26:59.584  INFO 12092 --- [http-nio-8889-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-04-26 18:26:59.598  INFO 12092 --- [http-nio-8889-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 14 ms
+2020-04-26 18:59:41.560  INFO 12092 --- [Thread-21] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2020-04-26 18:59:41.568  INFO 12092 --- [Thread-21] com.alibaba.druid.pool.DruidDataSource   : {dataSource-3} closed
+2020-04-26 18:59:42.145  INFO 12092 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Starting GeekBlogApplication on DESKTOP-QNDK7AF with PID 12092 (D:\idea\geekblog\target\classes started by AlanLiang in D:\idea\geekblog)
+2020-04-26 18:59:42.145 DEBUG 12092 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Running with Spring Boot v2.2.6.RELEASE, Spring v5.2.5.RELEASE
+2020-04-26 18:59:42.145  INFO 12092 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : The following profiles are active: dev
+2020-04-26 18:59:42.589  INFO 12092 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8889 (http)
+2020-04-26 18:59:42.589  INFO 12092 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-04-26 18:59:42.589  INFO 12092 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.33]
+2020-04-26 18:59:42.615  INFO 12092 --- [restartedMain] o.a.c.c.C.[Tomcat-1].[localhost].[/]     : Initializing Spring embedded WebApplicationContext
+2020-04-26 18:59:42.616  INFO 12092 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 467 ms
+2020-04-26 18:59:42.646  INFO 12092 --- [restartedMain] o.s.boot.web.servlet.RegistrationBean    : Servlet statViewServlet was not registered (possibly already registered?)
+2020-04-26 18:59:42.646  INFO 12092 --- [restartedMain] o.s.boot.web.servlet.RegistrationBean    : Filter webStatFilter was not registered (possibly already registered?)
+2020-04-26 18:59:42.676  INFO 12092 --- [restartedMain] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2020-04-26 18:59:42.798  INFO 12092 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-4} inited
+2020-04-26 18:59:43.155  WARN 12092 --- [restartedMain] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'sysUserController': Unsatisfied dependency expressed through field 'sysUserService'; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type 'site.alanliang.geekblog.service.SysUserService' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+2020-04-26 18:59:43.156  INFO 12092 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-4} closed
+2020-04-26 18:59:43.157  INFO 12092 --- [restartedMain] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2020-04-26 18:59:43.163  INFO 12092 --- [restartedMain] ConditionEvaluationReportLoggingListener : 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2020-04-26 18:59:43.268 ERROR 12092 --- [restartedMain] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Field sysUserService in site.alanliang.geekblog.controller.admin.SysUserController required a bean of type 'site.alanliang.geekblog.service.SysUserService' that could not be found.
+
+The injection point has the following annotations:
+	- @org.springframework.beans.factory.annotation.Autowired(required=true)
+
+
+Action:
+
+Consider defining a bean of type 'site.alanliang.geekblog.service.SysUserService' in your configuration.
+
+2020-04-26 18:59:44.940  INFO 12092 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Starting GeekBlogApplication on DESKTOP-QNDK7AF with PID 12092 (D:\idea\geekblog\target\classes started by AlanLiang in D:\idea\geekblog)
+2020-04-26 18:59:44.940 DEBUG 12092 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Running with Spring Boot v2.2.6.RELEASE, Spring v5.2.5.RELEASE
+2020-04-26 18:59:44.940  INFO 12092 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : The following profiles are active: dev
+2020-04-26 18:59:45.249  INFO 12092 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8889 (http)
+2020-04-26 18:59:45.250  INFO 12092 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-04-26 18:59:45.250  INFO 12092 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.33]
+2020-04-26 18:59:45.280  INFO 12092 --- [restartedMain] o.a.c.c.C.[Tomcat-2].[localhost].[/]     : Initializing Spring embedded WebApplicationContext
+2020-04-26 18:59:45.280  INFO 12092 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 338 ms
+2020-04-26 18:59:45.303  INFO 12092 --- [restartedMain] o.s.boot.web.servlet.RegistrationBean    : Servlet statViewServlet was not registered (possibly already registered?)
+2020-04-26 18:59:45.304  INFO 12092 --- [restartedMain] o.s.boot.web.servlet.RegistrationBean    : Filter webStatFilter was not registered (possibly already registered?)
+2020-04-26 18:59:45.329  INFO 12092 --- [restartedMain] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2020-04-26 18:59:45.438  INFO 12092 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-5} inited
+2020-04-26 18:59:46.181  INFO 12092 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-04-26 18:59:46.640  INFO 12092 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2020-04-26 18:59:46.706  INFO 12092 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8889 (http) with context path ''
+2020-04-26 18:59:46.707  INFO 12092 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Started GeekBlogApplication in 1.794 seconds (JVM running for 2005.154)
+2020-04-26 18:59:46.710  INFO 12092 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2020-04-26 19:04:26.162  INFO 14552 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Starting GeekBlogApplication on DESKTOP-QNDK7AF with PID 14552 (D:\idea\geekblog\target\classes started by AlanLiang in D:\idea\geekblog)
+2020-04-26 19:04:26.165 DEBUG 14552 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Running with Spring Boot v2.2.6.RELEASE, Spring v5.2.5.RELEASE
+2020-04-26 19:04:26.166  INFO 14552 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : The following profiles are active: dev
+2020-04-26 19:04:26.215  INFO 14552 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2020-04-26 19:04:26.216  INFO 14552 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2020-04-26 19:04:27.196  INFO 14552 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8889 (http)
+2020-04-26 19:04:27.203  INFO 14552 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-04-26 19:04:27.203  INFO 14552 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.33]
+2020-04-26 19:04:27.284  INFO 14552 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-04-26 19:04:27.284  INFO 14552 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1068 ms
+2020-04-26 19:04:27.316  INFO 14552 --- [restartedMain] o.s.boot.web.servlet.RegistrationBean    : Servlet statViewServlet was not registered (possibly already registered?)
+2020-04-26 19:04:27.319  INFO 14552 --- [restartedMain] o.s.boot.web.servlet.RegistrationBean    : Filter webStatFilter was not registered (possibly already registered?)
+2020-04-26 19:04:27.464  INFO 14552 --- [restartedMain] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2020-04-26 19:04:27.721  INFO 14552 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2020-04-26 19:04:28.541  INFO 14552 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-04-26 19:04:28.828  INFO 14552 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2020-04-26 19:04:28.871  INFO 14552 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8889 (http) with context path ''
+2020-04-26 19:04:28.873  INFO 14552 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Started GeekBlogApplication in 3.373 seconds (JVM running for 4.193)
+2020-04-26 19:07:35.967  INFO 15348 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Starting GeekBlogApplication on DESKTOP-QNDK7AF with PID 15348 (D:\idea\geekblog\target\classes started by AlanLiang in D:\idea\geekblog)
+2020-04-26 19:07:35.970 DEBUG 15348 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Running with Spring Boot v2.2.6.RELEASE, Spring v5.2.5.RELEASE
+2020-04-26 19:07:35.970  INFO 15348 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : The following profiles are active: dev
+2020-04-26 19:07:36.017  INFO 15348 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2020-04-26 19:07:36.017  INFO 15348 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2020-04-26 19:07:37.264  INFO 15348 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8889 (http)
+2020-04-26 19:07:37.272  INFO 15348 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-04-26 19:07:37.272  INFO 15348 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.33]
+2020-04-26 19:07:37.355  INFO 15348 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-04-26 19:07:37.355  INFO 15348 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1337 ms
+2020-04-26 19:07:37.394  INFO 15348 --- [restartedMain] o.s.boot.web.servlet.RegistrationBean    : Servlet statViewServlet was not registered (possibly already registered?)
+2020-04-26 19:07:37.397  INFO 15348 --- [restartedMain] o.s.boot.web.servlet.RegistrationBean    : Filter webStatFilter was not registered (possibly already registered?)
+2020-04-26 19:07:37.556  INFO 15348 --- [restartedMain] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2020-04-26 19:07:37.879  INFO 15348 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2020-04-26 19:07:38.899  INFO 15348 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-04-26 19:07:39.320  INFO 15348 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2020-04-26 19:07:39.399  INFO 15348 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8889 (http) with context path ''
+2020-04-26 19:07:39.403  INFO 15348 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Started GeekBlogApplication in 4.045 seconds (JVM running for 5.004)
+2020-04-26 19:07:57.662  INFO 15348 --- [http-nio-8889-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-04-26 19:07:57.662  INFO 15348 --- [http-nio-8889-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-04-26 19:07:57.670  INFO 15348 --- [http-nio-8889-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 8 ms
+2020-04-26 19:08:07.027 DEBUG 15348 --- [http-nio-8889-exec-2] s.a.g.mapper.SysUserMapper.selectOne     : ==>  Preparing: SELECT id,username FROM sys_user WHERE (username = ? AND password = ?) 
+2020-04-26 19:08:07.149 DEBUG 15348 --- [http-nio-8889-exec-2] s.a.g.mapper.SysUserMapper.selectOne     : ==> Parameters: admin(String), 222fbe64009247406782ab797f991e13(String)
+2020-04-26 19:08:07.162 DEBUG 15348 --- [http-nio-8889-exec-2] s.a.g.mapper.SysUserMapper.selectOne     : <==      Total: 1
+2020-04-26 19:08:07.172 ERROR 15348 --- [http-nio-8889-exec-2] org.thymeleaf.TemplateEngine             : [THYMELEAF][http-nio-8889-exec-2] Exception processing template "admin/login": Error resolving template [admin/login], template might not exist or might not be accessible by any of the configured Template Resolvers
+
+org.thymeleaf.exceptions.TemplateInputException: Error resolving template [admin/login], template might not exist or might not be accessible by any of the configured Template Resolvers
+	at org.thymeleaf.engine.TemplateManager.resolveTemplate(TemplateManager.java:869)
+	at org.thymeleaf.engine.TemplateManager.parseAndProcess(TemplateManager.java:607)
+	at org.thymeleaf.TemplateEngine.process(TemplateEngine.java:1098)
+	at org.thymeleaf.TemplateEngine.process(TemplateEngine.java:1072)
+	at org.thymeleaf.spring5.view.ThymeleafView.renderFragment(ThymeleafView.java:362)
+	at org.thymeleaf.spring5.view.ThymeleafView.render(ThymeleafView.java:189)
+	at org.springframework.web.servlet.DispatcherServlet.render(DispatcherServlet.java:1373)
+	at org.springframework.web.servlet.DispatcherServlet.processDispatchResult(DispatcherServlet.java:1118)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1057)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:943)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:660)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:741)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at com.alibaba.druid.support.http.WebStatFilter.doFilter(WebStatFilter.java:123)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:541)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:373)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:868)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1594)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+
+2020-04-26 19:08:07.174 ERROR 15348 --- [http-nio-8889-exec-2] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is org.thymeleaf.exceptions.TemplateInputException: Error resolving template [admin/login], template might not exist or might not be accessible by any of the configured Template Resolvers] with root cause
+
+org.thymeleaf.exceptions.TemplateInputException: Error resolving template [admin/login], template might not exist or might not be accessible by any of the configured Template Resolvers
+	at org.thymeleaf.engine.TemplateManager.resolveTemplate(TemplateManager.java:869)
+	at org.thymeleaf.engine.TemplateManager.parseAndProcess(TemplateManager.java:607)
+	at org.thymeleaf.TemplateEngine.process(TemplateEngine.java:1098)
+	at org.thymeleaf.TemplateEngine.process(TemplateEngine.java:1072)
+	at org.thymeleaf.spring5.view.ThymeleafView.renderFragment(ThymeleafView.java:362)
+	at org.thymeleaf.spring5.view.ThymeleafView.render(ThymeleafView.java:189)
+	at org.springframework.web.servlet.DispatcherServlet.render(DispatcherServlet.java:1373)
+	at org.springframework.web.servlet.DispatcherServlet.processDispatchResult(DispatcherServlet.java:1118)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1057)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:943)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:660)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:741)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at com.alibaba.druid.support.http.WebStatFilter.doFilter(WebStatFilter.java:123)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:541)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:373)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:868)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1594)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+
+2020-04-26 19:08:42.662 DEBUG 15348 --- [http-nio-8889-exec-5] s.a.g.mapper.SysUserMapper.selectOne     : ==>  Preparing: SELECT id,username FROM sys_user WHERE (username = ? AND password = ?) 
+2020-04-26 19:08:42.663 DEBUG 15348 --- [http-nio-8889-exec-5] s.a.g.mapper.SysUserMapper.selectOne     : ==> Parameters: admin(String), 222fbe64009247406782ab797f991e13(String)
+2020-04-26 19:08:42.664 DEBUG 15348 --- [http-nio-8889-exec-5] s.a.g.mapper.SysUserMapper.selectOne     : <==      Total: 1
+2020-04-26 19:08:42.665 ERROR 15348 --- [http-nio-8889-exec-5] org.thymeleaf.TemplateEngine             : [THYMELEAF][http-nio-8889-exec-5] Exception processing template "admin/login": Error resolving template [admin/login], template might not exist or might not be accessible by any of the configured Template Resolvers
+
+org.thymeleaf.exceptions.TemplateInputException: Error resolving template [admin/login], template might not exist or might not be accessible by any of the configured Template Resolvers
+	at org.thymeleaf.engine.TemplateManager.resolveTemplate(TemplateManager.java:869)
+	at org.thymeleaf.engine.TemplateManager.parseAndProcess(TemplateManager.java:607)
+	at org.thymeleaf.TemplateEngine.process(TemplateEngine.java:1098)
+	at org.thymeleaf.TemplateEngine.process(TemplateEngine.java:1072)
+	at org.thymeleaf.spring5.view.ThymeleafView.renderFragment(ThymeleafView.java:362)
+	at org.thymeleaf.spring5.view.ThymeleafView.render(ThymeleafView.java:189)
+	at org.springframework.web.servlet.DispatcherServlet.render(DispatcherServlet.java:1373)
+	at org.springframework.web.servlet.DispatcherServlet.processDispatchResult(DispatcherServlet.java:1118)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1057)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:943)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:660)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:741)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at com.alibaba.druid.support.http.WebStatFilter.doFilter(WebStatFilter.java:123)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:541)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:373)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:868)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1594)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+
+2020-04-26 19:08:42.666 ERROR 15348 --- [http-nio-8889-exec-5] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is org.thymeleaf.exceptions.TemplateInputException: Error resolving template [admin/login], template might not exist or might not be accessible by any of the configured Template Resolvers] with root cause
+
+org.thymeleaf.exceptions.TemplateInputException: Error resolving template [admin/login], template might not exist or might not be accessible by any of the configured Template Resolvers
+	at org.thymeleaf.engine.TemplateManager.resolveTemplate(TemplateManager.java:869)
+	at org.thymeleaf.engine.TemplateManager.parseAndProcess(TemplateManager.java:607)
+	at org.thymeleaf.TemplateEngine.process(TemplateEngine.java:1098)
+	at org.thymeleaf.TemplateEngine.process(TemplateEngine.java:1072)
+	at org.thymeleaf.spring5.view.ThymeleafView.renderFragment(ThymeleafView.java:362)
+	at org.thymeleaf.spring5.view.ThymeleafView.render(ThymeleafView.java:189)
+	at org.springframework.web.servlet.DispatcherServlet.render(DispatcherServlet.java:1373)
+	at org.springframework.web.servlet.DispatcherServlet.processDispatchResult(DispatcherServlet.java:1118)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1057)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:943)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:660)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:741)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at com.alibaba.druid.support.http.WebStatFilter.doFilter(WebStatFilter.java:123)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:541)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:373)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:868)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1594)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+
+2020-04-26 19:08:57.204 DEBUG 15348 --- [http-nio-8889-exec-7] s.a.g.mapper.SysUserMapper.selectOne     : ==>  Preparing: SELECT id,username FROM sys_user WHERE (username = ? AND password = ?) 
+2020-04-26 19:08:57.205 DEBUG 15348 --- [http-nio-8889-exec-7] s.a.g.mapper.SysUserMapper.selectOne     : ==> Parameters: admin(String), 222fbe64009247406782ab797f991e13(String)
+2020-04-26 19:08:57.206 DEBUG 15348 --- [http-nio-8889-exec-7] s.a.g.mapper.SysUserMapper.selectOne     : <==      Total: 1
+2020-04-26 19:08:57.208 ERROR 15348 --- [http-nio-8889-exec-7] org.thymeleaf.TemplateEngine             : [THYMELEAF][http-nio-8889-exec-7] Exception processing template "admin/login": Error resolving template [admin/login], template might not exist or might not be accessible by any of the configured Template Resolvers
+
+org.thymeleaf.exceptions.TemplateInputException: Error resolving template [admin/login], template might not exist or might not be accessible by any of the configured Template Resolvers
+	at org.thymeleaf.engine.TemplateManager.resolveTemplate(TemplateManager.java:869)
+	at org.thymeleaf.engine.TemplateManager.parseAndProcess(TemplateManager.java:607)
+	at org.thymeleaf.TemplateEngine.process(TemplateEngine.java:1098)
+	at org.thymeleaf.TemplateEngine.process(TemplateEngine.java:1072)
+	at org.thymeleaf.spring5.view.ThymeleafView.renderFragment(ThymeleafView.java:362)
+	at org.thymeleaf.spring5.view.ThymeleafView.render(ThymeleafView.java:189)
+	at org.springframework.web.servlet.DispatcherServlet.render(DispatcherServlet.java:1373)
+	at org.springframework.web.servlet.DispatcherServlet.processDispatchResult(DispatcherServlet.java:1118)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1057)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:943)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:660)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:741)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at com.alibaba.druid.support.http.WebStatFilter.doFilter(WebStatFilter.java:123)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:541)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:373)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:868)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1594)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+
+2020-04-26 19:08:57.209 ERROR 15348 --- [http-nio-8889-exec-7] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is org.thymeleaf.exceptions.TemplateInputException: Error resolving template [admin/login], template might not exist or might not be accessible by any of the configured Template Resolvers] with root cause
+
+org.thymeleaf.exceptions.TemplateInputException: Error resolving template [admin/login], template might not exist or might not be accessible by any of the configured Template Resolvers
+	at org.thymeleaf.engine.TemplateManager.resolveTemplate(TemplateManager.java:869)
+	at org.thymeleaf.engine.TemplateManager.parseAndProcess(TemplateManager.java:607)
+	at org.thymeleaf.TemplateEngine.process(TemplateEngine.java:1098)
+	at org.thymeleaf.TemplateEngine.process(TemplateEngine.java:1072)
+	at org.thymeleaf.spring5.view.ThymeleafView.renderFragment(ThymeleafView.java:362)
+	at org.thymeleaf.spring5.view.ThymeleafView.render(ThymeleafView.java:189)
+	at org.springframework.web.servlet.DispatcherServlet.render(DispatcherServlet.java:1373)
+	at org.springframework.web.servlet.DispatcherServlet.processDispatchResult(DispatcherServlet.java:1118)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1057)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:943)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:660)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:741)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at com.alibaba.druid.support.http.WebStatFilter.doFilter(WebStatFilter.java:123)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:541)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:373)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:868)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1594)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+
+2020-04-26 19:09:51.258  INFO 16836 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Starting GeekBlogApplication on DESKTOP-QNDK7AF with PID 16836 (D:\idea\geekblog\target\classes started by AlanLiang in D:\idea\geekblog)
+2020-04-26 19:09:51.261 DEBUG 16836 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Running with Spring Boot v2.2.6.RELEASE, Spring v5.2.5.RELEASE
+2020-04-26 19:09:51.262  INFO 16836 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : The following profiles are active: dev
+2020-04-26 19:09:51.302  INFO 16836 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2020-04-26 19:09:51.302  INFO 16836 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2020-04-26 19:09:52.591  INFO 16836 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8889 (http)
+2020-04-26 19:09:52.598  INFO 16836 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-04-26 19:09:52.598  INFO 16836 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.33]
+2020-04-26 19:09:52.690  INFO 16836 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-04-26 19:09:52.691  INFO 16836 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1389 ms
+2020-04-26 19:09:52.740  INFO 16836 --- [restartedMain] o.s.boot.web.servlet.RegistrationBean    : Servlet statViewServlet was not registered (possibly already registered?)
+2020-04-26 19:09:52.745  INFO 16836 --- [restartedMain] o.s.boot.web.servlet.RegistrationBean    : Filter webStatFilter was not registered (possibly already registered?)
+2020-04-26 19:09:52.950  INFO 16836 --- [restartedMain] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2020-04-26 19:09:53.231  INFO 16836 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2020-04-26 19:09:54.123  INFO 16836 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-04-26 19:09:54.426  INFO 16836 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2020-04-26 19:09:54.471  INFO 16836 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8889 (http) with context path ''
+2020-04-26 19:09:54.474  INFO 16836 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Started GeekBlogApplication in 3.913 seconds (JVM running for 5.133)
+2020-04-26 19:09:58.666  INFO 16836 --- [http-nio-8889-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-04-26 19:09:58.666  INFO 16836 --- [http-nio-8889-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-04-26 19:09:58.681  INFO 16836 --- [http-nio-8889-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 15 ms
+2020-04-26 19:10:07.557 DEBUG 16836 --- [http-nio-8889-exec-4] s.a.g.mapper.SysUserMapper.selectOne     : ==>  Preparing: SELECT id,username FROM sys_user WHERE (username = ? AND password = ?) 
+2020-04-26 19:10:07.638 DEBUG 16836 --- [http-nio-8889-exec-4] s.a.g.mapper.SysUserMapper.selectOne     : ==> Parameters: admin(String), 222fbe64009247406782ab797f991e13(String)
+2020-04-26 19:10:07.654 DEBUG 16836 --- [http-nio-8889-exec-4] s.a.g.mapper.SysUserMapper.selectOne     : <==      Total: 1
+2020-04-26 19:10:11.288 DEBUG 16836 --- [http-nio-8889-exec-3] s.a.g.mapper.SysMenuMapper.selectList    : ==>  Preparing: SELECT id,title,href,pid,icon,target,sort,status,remark,create_time,update_time FROM sys_menu WHERE (status = ?) 
+2020-04-26 19:10:11.292 DEBUG 16836 --- [http-nio-8889-exec-3] s.a.g.mapper.SysMenuMapper.selectList    : ==> Parameters: true(Boolean)
+2020-04-26 19:10:11.307 DEBUG 16836 --- [http-nio-8889-exec-3] s.a.g.mapper.SysMenuMapper.selectList    : <==      Total: 9
+2020-04-26 19:10:16.276 DEBUG 16836 --- [http-nio-8889-exec-6] s.a.g.mapper.SysUserMapper.selectPage    : ==>  Preparing: SELECT COUNT(1) FROM sys_user 
+2020-04-26 19:10:16.277 DEBUG 16836 --- [http-nio-8889-exec-6] s.a.g.mapper.SysUserMapper.selectPage    : ==> Parameters: 
+2020-04-26 19:10:16.289 DEBUG 16836 --- [http-nio-8889-exec-6] s.a.g.mapper.SysUserMapper.selectPage    : ==>  Preparing: SELECT id,username,password,nickname,avatar,email,create_time,update_time FROM sys_user LIMIT ?,? 
+2020-04-26 19:10:16.291 DEBUG 16836 --- [http-nio-8889-exec-6] s.a.g.mapper.SysUserMapper.selectPage    : ==> Parameters: 0(Long), 15(Long)
+2020-04-26 19:10:16.296 DEBUG 16836 --- [http-nio-8889-exec-6] s.a.g.mapper.SysUserMapper.selectPage    : <==      Total: 15
+2020-04-26 19:10:16.298  INFO 16836 --- [http-nio-8889-exec-6] s.alanliang.geekblog.aspect.LogAspect    : Request ------ RequestLog {url = http://localhost:8889/admin/user, ip = 0:0:0:0:0:0:0:1, classMethod = site.alanliang.geekblog.controller.admin.SysUserController.list, args = [1, 15], time = 55ms, description = 分页查询用户}
+2020-04-26 19:10:16.300  INFO 16836 --- [http-nio-8889-exec-6] s.alanliang.geekblog.aspect.LogAspect    : Return ------ TableResult(count=100)
+2020-04-26 19:10:16.747 DEBUG 16836 --- [http-nio-8889-exec-3] s.a.g.mapper.TagMapper.selectList        : ==>  Preparing: SELECT id,name,create_time,update_time FROM t_tag 
+2020-04-26 19:10:16.748 DEBUG 16836 --- [http-nio-8889-exec-3] s.a.g.mapper.TagMapper.selectList        : ==> Parameters: 
+2020-04-26 19:10:16.756 DEBUG 16836 --- [http-nio-8889-exec-3] s.a.g.mapper.TagMapper.selectList        : <==      Total: 8
+2020-04-26 19:10:16.758 DEBUG 16836 --- [http-nio-8889-exec-4] s.a.g.mapper.CategoryMapper.selectList   : ==>  Preparing: SELECT id,name,display,introduction,create_time,update_time FROM t_category 
+2020-04-26 19:10:16.760 DEBUG 16836 --- [http-nio-8889-exec-4] s.a.g.mapper.CategoryMapper.selectList   : ==> Parameters: 
+2020-04-26 19:10:16.766 DEBUG 16836 --- [http-nio-8889-exec-4] s.a.g.mapper.CategoryMapper.selectList   : <==      Total: 5
+2020-04-26 19:10:18.176 DEBUG 16836 --- [http-nio-8889-exec-2] s.a.g.m.A.listArticlesTableByPage        : ==>  Preparing: SELECT COUNT(1) FROM t_article 
+2020-04-26 19:10:18.178 DEBUG 16836 --- [http-nio-8889-exec-2] s.a.g.m.A.listArticlesTableByPage        : ==> Parameters: 
+2020-04-26 19:10:18.184 DEBUG 16836 --- [http-nio-8889-exec-2] s.a.g.m.A.listArticlesTableByPage        : ==>  Preparing: select id, title, type, comments, views, likes, published, commentable, appreciable, top, recommend, create_time, update_time, category_id from t_article LIMIT ?,? 
+2020-04-26 19:10:18.185 DEBUG 16836 --- [http-nio-8889-exec-2] s.a.g.m.A.listArticlesTableByPage        : ==> Parameters: 0(Long), 15(Long)
+2020-04-26 19:10:18.240 DEBUG 16836 --- [http-nio-8889-exec-2] s.a.g.m.A.listArticlesTableByPage        : <==      Total: 3
+2020-04-26 19:10:18.248 DEBUG 16836 --- [http-nio-8889-exec-2] s.a.g.m.C.selectCategoryById             : ==>  Preparing: select id, name from t_category where id = ? 
+2020-04-26 19:10:18.251 DEBUG 16836 --- [http-nio-8889-exec-2] s.a.g.m.C.selectCategoryById             : ==> Parameters: 1(Long)
+2020-04-26 19:10:18.253 DEBUG 16836 --- [http-nio-8889-exec-2] s.a.g.m.C.selectCategoryById             : <==      Total: 1
+2020-04-26 19:10:18.255 DEBUG 16836 --- [http-nio-8889-exec-2] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-26 19:10:18.259 DEBUG 16836 --- [http-nio-8889-exec-2] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 1(Long)
+2020-04-26 19:10:18.262 DEBUG 16836 --- [http-nio-8889-exec-2] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 4
+2020-04-26 19:10:18.263 DEBUG 16836 --- [http-nio-8889-exec-2] s.a.g.m.C.selectCategoryById             : ==>  Preparing: select id, name from t_category where id = ? 
+2020-04-26 19:10:18.263 DEBUG 16836 --- [http-nio-8889-exec-2] s.a.g.m.C.selectCategoryById             : ==> Parameters: 1(Long)
+2020-04-26 19:10:18.264 DEBUG 16836 --- [http-nio-8889-exec-2] s.a.g.m.C.selectCategoryById             : <==      Total: 1
+2020-04-26 19:10:18.265 DEBUG 16836 --- [http-nio-8889-exec-2] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-26 19:10:18.266 DEBUG 16836 --- [http-nio-8889-exec-2] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 2(Long)
+2020-04-26 19:10:18.269 DEBUG 16836 --- [http-nio-8889-exec-2] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 3
+2020-04-26 19:10:18.270 DEBUG 16836 --- [http-nio-8889-exec-2] s.a.g.m.C.selectCategoryById             : ==>  Preparing: select id, name from t_category where id = ? 
+2020-04-26 19:10:18.271 DEBUG 16836 --- [http-nio-8889-exec-2] s.a.g.m.C.selectCategoryById             : ==> Parameters: 1(Long)
+2020-04-26 19:10:18.274 DEBUG 16836 --- [http-nio-8889-exec-2] s.a.g.m.C.selectCategoryById             : <==      Total: 1
+2020-04-26 19:10:18.275 DEBUG 16836 --- [http-nio-8889-exec-2] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-26 19:10:18.275 DEBUG 16836 --- [http-nio-8889-exec-2] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 3(Long)
+2020-04-26 19:10:18.277 DEBUG 16836 --- [http-nio-8889-exec-2] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 4
+2020-04-26 19:10:18.278 DEBUG 16836 --- [http-nio-8889-exec-2] s.a.g.mapper.ArticleMapper.selectCount   : ==>  Preparing: SELECT COUNT( 1 ) FROM t_article 
+2020-04-26 19:10:18.278 DEBUG 16836 --- [http-nio-8889-exec-2] s.a.g.mapper.ArticleMapper.selectCount   : ==> Parameters: 
+2020-04-26 19:10:18.279 DEBUG 16836 --- [http-nio-8889-exec-2] s.a.g.mapper.ArticleMapper.selectCount   : <==      Total: 1
+2020-04-26 19:10:44.651 DEBUG 16836 --- [http-nio-8889-exec-6] s.a.g.mapper.SysUserMapper.selectOne     : ==>  Preparing: SELECT id,username FROM sys_user WHERE (username = ? AND password = ?) 
+2020-04-26 19:10:44.651 DEBUG 16836 --- [http-nio-8889-exec-6] s.a.g.mapper.SysUserMapper.selectOne     : ==> Parameters: admin(String), e10adc3949ba59abbe56e057f20f883e(String)
+2020-04-26 19:10:44.653 DEBUG 16836 --- [http-nio-8889-exec-6] s.a.g.mapper.SysUserMapper.selectOne     : <==      Total: 0
+2020-04-26 19:10:44.655 ERROR 16836 --- [http-nio-8889-exec-6] s.a.g.e.handler.GlobalExceptionHandler   : Request URL : http://localhost:8889/admin/login, Exception : 用户名或密码错误
+2020-04-26 19:10:44.657  WARN 16836 --- [http-nio-8889-exec-6] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [site.alanliang.geekblog.exception.BadRequestException: 用户名或密码错误]
+2020-04-26 19:10:53.138 ERROR 16836 --- [http-nio-8889-exec-7] s.a.g.e.handler.GlobalExceptionHandler   : Request URL : http://localhost:8889/admin/login, Exception : Request method 'GET' not supported
+2020-04-26 19:10:53.138  WARN 16836 --- [http-nio-8889-exec-7] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' not supported]
+2020-04-26 19:20:42.429 DEBUG 16836 --- [http-nio-8889-exec-3] s.a.g.mapper.SysUserMapper.selectOne     : ==>  Preparing: SELECT id,username FROM sys_user WHERE (username = ? AND password = ?) 
+2020-04-26 19:20:42.429 DEBUG 16836 --- [http-nio-8889-exec-3] s.a.g.mapper.SysUserMapper.selectOne     : ==> Parameters: admin(String), e10adc3949ba59abbe56e057f20f883e(String)
+2020-04-26 19:20:42.430 DEBUG 16836 --- [http-nio-8889-exec-3] s.a.g.mapper.SysUserMapper.selectOne     : <==      Total: 0
+2020-04-26 19:20:42.432 ERROR 16836 --- [http-nio-8889-exec-3] s.a.g.e.handler.GlobalExceptionHandler   : Request URL : http://localhost:8889/admin/login, Exception : 用户名或密码错误
+2020-04-26 19:20:42.433  WARN 16836 --- [http-nio-8889-exec-3] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [site.alanliang.geekblog.exception.BadRequestException: 用户名或密码错误]
+2020-04-26 19:24:06.875  INFO 22200 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Starting GeekBlogApplication on DESKTOP-QNDK7AF with PID 22200 (D:\idea\geekblog\target\classes started by AlanLiang in D:\idea\geekblog)
+2020-04-26 19:24:06.877 DEBUG 22200 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Running with Spring Boot v2.2.6.RELEASE, Spring v5.2.5.RELEASE
+2020-04-26 19:24:06.877  INFO 22200 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : The following profiles are active: dev
+2020-04-26 19:24:06.912  INFO 22200 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2020-04-26 19:24:06.912  INFO 22200 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2020-04-26 19:24:08.246  INFO 22200 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8889 (http)
+2020-04-26 19:24:08.262  INFO 22200 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-04-26 19:24:08.263  INFO 22200 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.33]
+2020-04-26 19:24:08.378  INFO 22200 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-04-26 19:24:08.378  INFO 22200 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1466 ms
+2020-04-26 19:24:08.435  INFO 22200 --- [restartedMain] o.s.boot.web.servlet.RegistrationBean    : Servlet statViewServlet was not registered (possibly already registered?)
+2020-04-26 19:24:08.439  INFO 22200 --- [restartedMain] o.s.boot.web.servlet.RegistrationBean    : Filter webStatFilter was not registered (possibly already registered?)
+2020-04-26 19:24:08.638  INFO 22200 --- [restartedMain] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2020-04-26 19:24:08.921  INFO 22200 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2020-04-26 19:24:09.806  INFO 22200 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-04-26 19:24:10.090  INFO 22200 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2020-04-26 19:24:10.135  INFO 22200 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8889 (http) with context path ''
+2020-04-26 19:24:10.137  INFO 22200 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Started GeekBlogApplication in 3.968 seconds (JVM running for 5.282)
+2020-04-26 19:24:13.772  INFO 22200 --- [http-nio-8889-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-04-26 19:24:13.773  INFO 22200 --- [http-nio-8889-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-04-26 19:24:13.787  INFO 22200 --- [http-nio-8889-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 14 ms
+2020-04-26 19:24:18.074 DEBUG 22200 --- [http-nio-8889-exec-2] s.a.g.mapper.SysUserMapper.selectOne     : ==>  Preparing: SELECT id,username FROM sys_user WHERE (username = ? AND password = ?) 
+2020-04-26 19:24:18.192 DEBUG 22200 --- [http-nio-8889-exec-2] s.a.g.mapper.SysUserMapper.selectOne     : ==> Parameters: admin(String), 21232f297a57a5a743894a0e4a801fc3(String)
+2020-04-26 19:24:18.208 DEBUG 22200 --- [http-nio-8889-exec-2] s.a.g.mapper.SysUserMapper.selectOne     : <==      Total: 0
+2020-04-26 19:24:18.214 ERROR 22200 --- [http-nio-8889-exec-2] s.a.g.e.handler.GlobalExceptionHandler   : 错误请求
+
+site.alanliang.geekblog.exception.BadRequestException: 用户名或密码错误
+	at site.alanliang.geekblog.controller.admin.IndexController.login(IndexController.java:56)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:190)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:138)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:105)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:879)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:793)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1040)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:943)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:660)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:741)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at com.alibaba.druid.support.http.WebStatFilter.doFilter(WebStatFilter.java:123)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:541)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:373)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:868)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1594)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+
+2020-04-26 19:24:18.266  WARN 22200 --- [http-nio-8889-exec-2] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [site.alanliang.geekblog.exception.BadRequestException: 用户名或密码错误]
+2020-04-26 19:27:25.811  INFO 10044 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Starting GeekBlogApplication on DESKTOP-QNDK7AF with PID 10044 (D:\idea\geekblog\target\classes started by AlanLiang in D:\idea\geekblog)
+2020-04-26 19:27:25.815 DEBUG 10044 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Running with Spring Boot v2.2.6.RELEASE, Spring v5.2.5.RELEASE
+2020-04-26 19:27:25.816  INFO 10044 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : The following profiles are active: dev
+2020-04-26 19:27:25.877  INFO 10044 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2020-04-26 19:27:25.877  INFO 10044 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2020-04-26 19:27:27.796  INFO 10044 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8889 (http)
+2020-04-26 19:27:27.810  INFO 10044 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-04-26 19:27:27.811  INFO 10044 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.33]
+2020-04-26 19:27:27.956  INFO 10044 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-04-26 19:27:27.957  INFO 10044 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 2079 ms
+2020-04-26 19:27:28.021  INFO 10044 --- [restartedMain] o.s.boot.web.servlet.RegistrationBean    : Servlet statViewServlet was not registered (possibly already registered?)
+2020-04-26 19:27:28.024  INFO 10044 --- [restartedMain] o.s.boot.web.servlet.RegistrationBean    : Filter webStatFilter was not registered (possibly already registered?)
+2020-04-26 19:27:28.276  INFO 10044 --- [restartedMain] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2020-04-26 19:27:28.634  INFO 10044 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2020-04-26 19:27:29.873  INFO 10044 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-04-26 19:27:30.233  INFO 10044 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2020-04-26 19:27:30.289  INFO 10044 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8889 (http) with context path ''
+2020-04-26 19:27:30.293  INFO 10044 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Started GeekBlogApplication in 5.52 seconds (JVM running for 7.184)
+2020-04-26 19:27:33.128  INFO 10044 --- [http-nio-8889-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-04-26 19:27:33.130  INFO 10044 --- [http-nio-8889-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-04-26 19:27:33.151  INFO 10044 --- [http-nio-8889-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 20 ms
+2020-04-26 19:27:33.346 DEBUG 10044 --- [http-nio-8889-exec-1] s.a.g.mapper.SysUserMapper.selectOne     : ==>  Preparing: SELECT id,username FROM sys_user WHERE (username = ? AND password = ?) 
+2020-04-26 19:27:33.522 DEBUG 10044 --- [http-nio-8889-exec-1] s.a.g.mapper.SysUserMapper.selectOne     : ==> Parameters: admin(String), 21232f297a57a5a743894a0e4a801fc3(String)
+2020-04-26 19:27:33.543 DEBUG 10044 --- [http-nio-8889-exec-1] s.a.g.mapper.SysUserMapper.selectOne     : <==      Total: 0
+2020-04-26 19:27:33.549 ERROR 10044 --- [http-nio-8889-exec-1] s.a.g.e.handler.GlobalExceptionHandler   : 用户名或密码错误
+2020-04-26 19:27:33.620  WARN 10044 --- [http-nio-8889-exec-1] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [site.alanliang.geekblog.exception.BadRequestException: 用户名或密码错误]
+2020-04-26 19:27:36.035 DEBUG 10044 --- [http-nio-8889-exec-3] s.a.g.mapper.SysUserMapper.selectOne     : ==>  Preparing: SELECT id,username FROM sys_user WHERE (username = ? AND password = ?) 
+2020-04-26 19:27:36.035 DEBUG 10044 --- [http-nio-8889-exec-3] s.a.g.mapper.SysUserMapper.selectOne     : ==> Parameters: admin(String), 21232f297a57a5a743894a0e4a801fc3(String)
+2020-04-26 19:27:36.036 DEBUG 10044 --- [http-nio-8889-exec-3] s.a.g.mapper.SysUserMapper.selectOne     : <==      Total: 0
+2020-04-26 19:27:36.037 ERROR 10044 --- [http-nio-8889-exec-3] s.a.g.e.handler.GlobalExceptionHandler   : 用户名或密码错误
+2020-04-26 19:27:36.038  WARN 10044 --- [http-nio-8889-exec-3] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [site.alanliang.geekblog.exception.BadRequestException: 用户名或密码错误]
+2020-04-26 19:27:55.237 DEBUG 10044 --- [http-nio-8889-exec-6] s.a.g.mapper.SysUserMapper.selectOne     : ==>  Preparing: SELECT id,username FROM sys_user WHERE (username = ? AND password = ?) 
+2020-04-26 19:27:55.238 DEBUG 10044 --- [http-nio-8889-exec-6] s.a.g.mapper.SysUserMapper.selectOne     : ==> Parameters: admin(String), 21232f297a57a5a743894a0e4a801fc3(String)
+2020-04-26 19:27:55.240 DEBUG 10044 --- [http-nio-8889-exec-6] s.a.g.mapper.SysUserMapper.selectOne     : <==      Total: 0
+2020-04-26 19:27:55.241 ERROR 10044 --- [http-nio-8889-exec-6] s.a.g.e.handler.GlobalExceptionHandler   : 用户名或密码错误
+2020-04-26 19:27:55.243  WARN 10044 --- [http-nio-8889-exec-6] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [site.alanliang.geekblog.exception.BadRequestException: 用户名或密码错误]
+2020-04-26 19:28:55.922 DEBUG 10044 --- [http-nio-8889-exec-7] s.a.g.mapper.SysMenuMapper.selectList    : ==>  Preparing: SELECT id,title,href,pid,icon,target,sort,status,remark,create_time,update_time FROM sys_menu WHERE (status = ?) 
+2020-04-26 19:28:55.924 DEBUG 10044 --- [http-nio-8889-exec-7] s.a.g.mapper.SysMenuMapper.selectList    : ==> Parameters: true(Boolean)
+2020-04-26 19:28:55.935 DEBUG 10044 --- [http-nio-8889-exec-7] s.a.g.mapper.SysMenuMapper.selectList    : <==      Total: 9
+2020-04-26 19:30:44.332  INFO 3212 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Starting GeekBlogApplication on DESKTOP-QNDK7AF with PID 3212 (D:\idea\geekblog\target\classes started by AlanLiang in D:\idea\geekblog)
+2020-04-26 19:30:44.337 DEBUG 3212 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Running with Spring Boot v2.2.6.RELEASE, Spring v5.2.5.RELEASE
+2020-04-26 19:30:44.337  INFO 3212 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : The following profiles are active: dev
+2020-04-26 19:30:44.391  INFO 3212 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2020-04-26 19:30:44.391  INFO 3212 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2020-04-26 19:30:46.180  INFO 3212 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8889 (http)
+2020-04-26 19:30:46.191  INFO 3212 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-04-26 19:30:46.191  INFO 3212 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.33]
+2020-04-26 19:30:46.302  INFO 3212 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-04-26 19:30:46.302  INFO 3212 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1910 ms
+2020-04-26 19:30:46.362  INFO 3212 --- [restartedMain] o.s.boot.web.servlet.RegistrationBean    : Servlet statViewServlet was not registered (possibly already registered?)
+2020-04-26 19:30:46.366  INFO 3212 --- [restartedMain] o.s.boot.web.servlet.RegistrationBean    : Filter webStatFilter was not registered (possibly already registered?)
+2020-04-26 19:30:46.597  INFO 3212 --- [restartedMain] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2020-04-26 19:30:47.207  INFO 3212 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2020-04-26 19:30:48.495  INFO 3212 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-04-26 19:30:48.901  INFO 3212 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2020-04-26 19:30:48.963  INFO 3212 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8889 (http) with context path ''
+2020-04-26 19:30:48.965  INFO 3212 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Started GeekBlogApplication in 5.271 seconds (JVM running for 7.802)
+2020-04-26 19:30:57.209  INFO 3212 --- [http-nio-8889-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-04-26 19:30:57.210  INFO 3212 --- [http-nio-8889-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-04-26 19:30:57.221  INFO 3212 --- [http-nio-8889-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 11 ms
+2020-04-26 19:35:49.236  INFO 14780 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Starting GeekBlogApplication on DESKTOP-QNDK7AF with PID 14780 (D:\idea\geekblog\target\classes started by AlanLiang in D:\idea\geekblog)
+2020-04-26 19:35:49.241 DEBUG 14780 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Running with Spring Boot v2.2.6.RELEASE, Spring v5.2.5.RELEASE
+2020-04-26 19:35:49.242  INFO 14780 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : The following profiles are active: dev
+2020-04-26 19:35:49.351  INFO 14780 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2020-04-26 19:35:49.351  INFO 14780 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2020-04-26 19:35:51.130  INFO 14780 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8889 (http)
+2020-04-26 19:35:51.138  INFO 14780 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-04-26 19:35:51.139  INFO 14780 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.33]
+2020-04-26 19:35:51.247  INFO 14780 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-04-26 19:35:51.248  INFO 14780 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1897 ms
+2020-04-26 19:35:51.295  INFO 14780 --- [restartedMain] o.s.boot.web.servlet.RegistrationBean    : Servlet statViewServlet was not registered (possibly already registered?)
+2020-04-26 19:35:51.298  INFO 14780 --- [restartedMain] o.s.boot.web.servlet.RegistrationBean    : Filter webStatFilter was not registered (possibly already registered?)
+2020-04-26 19:35:51.497  INFO 14780 --- [restartedMain] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2020-04-26 19:35:51.839  INFO 14780 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2020-04-26 19:35:52.978  INFO 14780 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-04-26 19:35:53.394  INFO 14780 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2020-04-26 19:35:53.474  INFO 14780 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8889 (http) with context path ''
+2020-04-26 19:35:53.478  INFO 14780 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Started GeekBlogApplication in 5.135 seconds (JVM running for 6.703)
+2020-04-26 19:36:01.339  INFO 14780 --- [http-nio-8889-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-04-26 19:36:01.340  INFO 14780 --- [http-nio-8889-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-04-26 19:36:01.351  INFO 14780 --- [http-nio-8889-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 11 ms
+2020-04-26 19:37:28.913  INFO 16924 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Starting GeekBlogApplication on DESKTOP-QNDK7AF with PID 16924 (D:\idea\geekblog\target\classes started by AlanLiang in D:\idea\geekblog)
+2020-04-26 19:37:28.915 DEBUG 16924 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Running with Spring Boot v2.2.6.RELEASE, Spring v5.2.5.RELEASE
+2020-04-26 19:37:28.915  INFO 16924 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : The following profiles are active: dev
+2020-04-26 19:37:28.947  INFO 16924 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2020-04-26 19:37:28.947  INFO 16924 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2020-04-26 19:37:30.130  INFO 16924 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8889 (http)
+2020-04-26 19:37:30.138  INFO 16924 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-04-26 19:37:30.139  INFO 16924 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.33]
+2020-04-26 19:37:30.240  INFO 16924 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-04-26 19:37:30.241  INFO 16924 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1294 ms
+2020-04-26 19:37:30.284  INFO 16924 --- [restartedMain] o.s.boot.web.servlet.RegistrationBean    : Servlet statViewServlet was not registered (possibly already registered?)
+2020-04-26 19:37:30.287  INFO 16924 --- [restartedMain] o.s.boot.web.servlet.RegistrationBean    : Filter webStatFilter was not registered (possibly already registered?)
+2020-04-26 19:37:30.486  INFO 16924 --- [restartedMain] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2020-04-26 19:37:30.805  INFO 16924 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2020-04-26 19:37:31.603  INFO 16924 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-04-26 19:37:31.889  INFO 16924 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2020-04-26 19:37:31.929  INFO 16924 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8889 (http) with context path ''
+2020-04-26 19:37:31.932  INFO 16924 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Started GeekBlogApplication in 3.511 seconds (JVM running for 4.538)
+2020-04-26 19:37:44.040  INFO 16924 --- [http-nio-8889-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-04-26 19:37:44.040  INFO 16924 --- [http-nio-8889-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-04-26 19:37:44.046  INFO 16924 --- [http-nio-8889-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 6 ms
+2020-04-26 19:37:45.905 DEBUG 16924 --- [http-nio-8889-exec-2] s.a.g.mapper.SysUserMapper.selectOne     : ==>  Preparing: SELECT id,username FROM sys_user WHERE (username = ? AND password = ?) 
+2020-04-26 19:37:46.006 DEBUG 16924 --- [http-nio-8889-exec-2] s.a.g.mapper.SysUserMapper.selectOne     : ==> Parameters: admin(String), 21232f297a57a5a743894a0e4a801fc3(String)
+2020-04-26 19:37:46.022 DEBUG 16924 --- [http-nio-8889-exec-2] s.a.g.mapper.SysUserMapper.selectOne     : <==      Total: 0
+2020-04-26 19:37:46.026 ERROR 16924 --- [http-nio-8889-exec-2] s.a.g.e.handler.GlobalExceptionHandler   : 用户名或密码错误
+2020-04-26 19:37:46.081  WARN 16924 --- [http-nio-8889-exec-2] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [site.alanliang.geekblog.exception.BadRequestException: 用户名或密码错误]
+2020-04-26 19:39:33.530 DEBUG 16924 --- [http-nio-8889-exec-3] s.a.g.mapper.SysUserMapper.selectOne     : ==>  Preparing: SELECT id,username FROM sys_user WHERE (username = ? AND password = ?) 
+2020-04-26 19:39:33.530 DEBUG 16924 --- [http-nio-8889-exec-3] s.a.g.mapper.SysUserMapper.selectOne     : ==> Parameters: admin(String), 222fbe64009247406782ab797f991e13(String)
+2020-04-26 19:39:33.533 DEBUG 16924 --- [http-nio-8889-exec-3] s.a.g.mapper.SysUserMapper.selectOne     : <==      Total: 1
+2020-04-26 19:39:36.988 DEBUG 16924 --- [http-nio-8889-exec-6] s.a.g.mapper.SysMenuMapper.selectList    : ==>  Preparing: SELECT id,title,href,pid,icon,target,sort,status,remark,create_time,update_time FROM sys_menu WHERE (status = ?) 
+2020-04-26 19:39:36.991 DEBUG 16924 --- [http-nio-8889-exec-6] s.a.g.mapper.SysMenuMapper.selectList    : ==> Parameters: true(Boolean)
+2020-04-26 19:39:36.998 DEBUG 16924 --- [http-nio-8889-exec-6] s.a.g.mapper.SysMenuMapper.selectList    : <==      Total: 9
+2020-04-26 19:42:48.513  INFO 22560 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Starting GeekBlogApplication on DESKTOP-QNDK7AF with PID 22560 (D:\idea\geekblog\target\classes started by AlanLiang in D:\idea\geekblog)
+2020-04-26 19:42:48.515 DEBUG 22560 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Running with Spring Boot v2.2.6.RELEASE, Spring v5.2.5.RELEASE
+2020-04-26 19:42:48.516  INFO 22560 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : The following profiles are active: dev
+2020-04-26 19:42:48.571  INFO 22560 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2020-04-26 19:42:48.571  INFO 22560 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2020-04-26 19:42:49.852  INFO 22560 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8889 (http)
+2020-04-26 19:42:49.862  INFO 22560 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-04-26 19:42:49.862  INFO 22560 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.33]
+2020-04-26 19:42:49.957  INFO 22560 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-04-26 19:42:49.957  INFO 22560 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1385 ms
+2020-04-26 19:42:50.002  INFO 22560 --- [restartedMain] o.s.boot.web.servlet.RegistrationBean    : Servlet statViewServlet was not registered (possibly already registered?)
+2020-04-26 19:42:50.004  INFO 22560 --- [restartedMain] o.s.boot.web.servlet.RegistrationBean    : Filter webStatFilter was not registered (possibly already registered?)
+2020-04-26 19:42:50.175  INFO 22560 --- [restartedMain] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2020-04-26 19:42:50.444  INFO 22560 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2020-04-26 19:42:51.410  INFO 22560 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-04-26 19:42:51.700  INFO 22560 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2020-04-26 19:42:51.742  INFO 22560 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8889 (http) with context path ''
+2020-04-26 19:42:51.745  INFO 22560 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Started GeekBlogApplication in 4.095 seconds (JVM running for 5.124)
+2020-04-26 19:43:18.157  INFO 3296 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Starting GeekBlogApplication on DESKTOP-QNDK7AF with PID 3296 (D:\idea\geekblog\target\classes started by AlanLiang in D:\idea\geekblog)
+2020-04-26 19:43:18.159 DEBUG 3296 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Running with Spring Boot v2.2.6.RELEASE, Spring v5.2.5.RELEASE
+2020-04-26 19:43:18.159  INFO 3296 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : The following profiles are active: dev
+2020-04-26 19:43:18.192  INFO 3296 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2020-04-26 19:43:18.192  INFO 3296 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2020-04-26 19:43:19.334  INFO 3296 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8889 (http)
+2020-04-26 19:43:19.341  INFO 3296 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-04-26 19:43:19.341  INFO 3296 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.33]
+2020-04-26 19:43:19.430  INFO 3296 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-04-26 19:43:19.430  INFO 3296 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1238 ms
+2020-04-26 19:43:19.473  INFO 3296 --- [restartedMain] o.s.boot.web.servlet.RegistrationBean    : Servlet statViewServlet was not registered (possibly already registered?)
+2020-04-26 19:43:19.475  INFO 3296 --- [restartedMain] o.s.boot.web.servlet.RegistrationBean    : Filter webStatFilter was not registered (possibly already registered?)
+2020-04-26 19:43:19.635  INFO 3296 --- [restartedMain] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2020-04-26 19:43:19.898  INFO 3296 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2020-04-26 19:43:20.715  INFO 3296 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-04-26 19:43:21.004  INFO 3296 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2020-04-26 19:43:21.044  INFO 3296 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8889 (http) with context path ''
+2020-04-26 19:43:21.046  INFO 3296 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Started GeekBlogApplication in 3.382 seconds (JVM running for 4.318)
+2020-04-26 19:43:26.325  INFO 3296 --- [http-nio-8889-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-04-26 19:43:26.325  INFO 3296 --- [http-nio-8889-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-04-26 19:43:26.332  INFO 3296 --- [http-nio-8889-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 7 ms
+2020-04-26 19:43:35.443 DEBUG 3296 --- [http-nio-8889-exec-5] s.a.g.mapper.ArticleMapper.selectList    : ==>  Preparing: SELECT id,title,summary,cover FROM t_article WHERE (published = ? AND top = ?) limit 5 
+2020-04-26 19:43:35.567 DEBUG 3296 --- [http-nio-8889-exec-5] s.a.g.mapper.ArticleMapper.selectList    : ==> Parameters: true(Boolean), true(Boolean)
+2020-04-26 19:43:35.582 DEBUG 3296 --- [http-nio-8889-exec-5] s.a.g.mapper.ArticleMapper.selectList    : <==      Total: 3
+2020-04-26 19:43:35.585 DEBUG 3296 --- [http-nio-8889-exec-5] s.a.g.m.A.listRecommendArticles          : ==>  Preparing: select id, title, summary, cover, category_id from t_article where recommend = 1 and published = 1 
+2020-04-26 19:43:35.587 DEBUG 3296 --- [http-nio-8889-exec-5] s.a.g.m.A.listRecommendArticles          : ==> Parameters: 
+2020-04-26 19:43:35.658 DEBUG 3296 --- [http-nio-8889-exec-5] s.a.g.m.A.listRecommendArticles          : <==      Total: 3
+2020-04-26 19:43:35.714 DEBUG 3296 --- [http-nio-8889-exec-5] s.a.g.m.A.listArticlesPreviewByPage      : ==>  Preparing: SELECT COUNT(1) FROM t_article ta WHERE ta.published = 1 
+2020-04-26 19:43:35.719 DEBUG 3296 --- [http-nio-8889-exec-5] s.a.g.m.A.listArticlesPreviewByPage      : ==> Parameters: 
+2020-04-26 19:43:35.738 DEBUG 3296 --- [http-nio-8889-exec-5] s.a.g.m.A.listArticlesPreviewByPage      : ==>  Preparing: select ta.id, ta.title, ta.summary, ta.create_time, ta.cover, tc.id as cid, tc.name as cname from t_article ta left join t_category tc on ta.category_id = tc.id where ta.published = 1 order by ta.create_time desc LIMIT ?,? 
+2020-04-26 19:43:35.749 DEBUG 3296 --- [http-nio-8889-exec-5] s.a.g.m.A.listArticlesPreviewByPage      : ==> Parameters: 0(Long), 2(Long)
+2020-04-26 19:43:35.760 DEBUG 3296 --- [http-nio-8889-exec-5] s.a.g.m.A.listArticlesPreviewByPage      : <==      Total: 2
+2020-04-26 19:43:35.884 DEBUG 3296 --- [http-nio-8889-exec-5] s.a.g.mapper.SysAccessLogMapper.insert   : ==>  Preparing: INSERT INTO sys_access_log ( create_time, description, log_type, method, params, request_ip, time, username, browser, address ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ) 
+2020-04-26 19:43:35.897 DEBUG 3296 --- [http-nio-8889-exec-5] s.a.g.mapper.SysAccessLogMapper.insert   : ==> Parameters: 2020-04-26 19:43:35.875(Timestamp), 访问首页(String), INFO(String), site.alanliang.geekblog.controller.web.HomeController.home()(String), { }(String), 0:0:0:0:0:0:0:1(String), 417(Long), (String), Chrome 8(String), 内网IP(String)
+2020-04-26 19:43:35.905 DEBUG 3296 --- [http-nio-8889-exec-5] s.a.g.mapper.SysAccessLogMapper.insert   : <==    Updates: 1
+2020-04-26 19:43:36.000 DEBUG 3296 --- [http-nio-8889-exec-5] s.a.g.m.C.selectCategoryById             : ==>  Preparing: select id, name from t_category where id = ? 
+2020-04-26 19:43:36.001 DEBUG 3296 --- [http-nio-8889-exec-5] s.a.g.m.C.selectCategoryById             : ==> Parameters: 1(Long)
+2020-04-26 19:43:36.003 DEBUG 3296 --- [http-nio-8889-exec-5] s.a.g.m.C.selectCategoryById             : <==      Total: 1
+2020-04-26 19:43:36.007 DEBUG 3296 --- [http-nio-8889-exec-5] s.a.g.m.C.selectCategoryById             : ==>  Preparing: select id, name from t_category where id = ? 
+2020-04-26 19:43:36.008 DEBUG 3296 --- [http-nio-8889-exec-5] s.a.g.m.C.selectCategoryById             : ==> Parameters: 1(Long)
+2020-04-26 19:43:36.009 DEBUG 3296 --- [http-nio-8889-exec-5] s.a.g.m.C.selectCategoryById             : <==      Total: 1
+2020-04-26 19:43:36.012 DEBUG 3296 --- [http-nio-8889-exec-5] s.a.g.m.C.selectCategoryById             : ==>  Preparing: select id, name from t_category where id = ? 
+2020-04-26 19:43:36.012 DEBUG 3296 --- [http-nio-8889-exec-5] s.a.g.m.C.selectCategoryById             : ==> Parameters: 1(Long)
+2020-04-26 19:43:36.014 DEBUG 3296 --- [http-nio-8889-exec-5] s.a.g.m.C.selectCategoryById             : <==      Total: 1
+2020-04-26 19:43:36.022 DEBUG 3296 --- [http-nio-8889-exec-5] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-26 19:43:36.023 DEBUG 3296 --- [http-nio-8889-exec-5] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 3(Long)
+2020-04-26 19:43:36.025 DEBUG 3296 --- [http-nio-8889-exec-5] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 4
+2020-04-26 19:43:36.028 DEBUG 3296 --- [http-nio-8889-exec-5] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-26 19:43:36.029 DEBUG 3296 --- [http-nio-8889-exec-5] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 2(Long)
+2020-04-26 19:43:36.032 DEBUG 3296 --- [http-nio-8889-exec-5] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 3
+2020-04-26 19:43:43.873 DEBUG 3296 --- [http-nio-8889-exec-10] s.a.g.mapper.SysUserMapper.selectOne     : ==>  Preparing: SELECT id,username FROM sys_user WHERE (username = ? AND password = ?) 
+2020-04-26 19:43:43.874 DEBUG 3296 --- [http-nio-8889-exec-10] s.a.g.mapper.SysUserMapper.selectOne     : ==> Parameters: admin(String), 222fbe64009247406782ab797f991e13(String)
+2020-04-26 19:43:43.877 DEBUG 3296 --- [http-nio-8889-exec-10] s.a.g.mapper.SysUserMapper.selectOne     : <==      Total: 1
+2020-04-26 19:43:47.305 DEBUG 3296 --- [http-nio-8889-exec-10] s.a.g.mapper.SysMenuMapper.selectList    : ==>  Preparing: SELECT id,title,href,pid,icon,target,sort,status,remark,create_time,update_time FROM sys_menu WHERE (status = ?) 
+2020-04-26 19:43:47.307 DEBUG 3296 --- [http-nio-8889-exec-10] s.a.g.mapper.SysMenuMapper.selectList    : ==> Parameters: true(Boolean)
+2020-04-26 19:43:47.317 DEBUG 3296 --- [http-nio-8889-exec-10] s.a.g.mapper.SysMenuMapper.selectList    : <==      Total: 9
+2020-04-26 19:44:12.833 DEBUG 3296 --- [http-nio-8889-exec-3] s.a.g.mapper.ArticleMapper.selectList    : ==>  Preparing: SELECT id,title,summary,cover FROM t_article WHERE (published = ? AND top = ?) limit 5 
+2020-04-26 19:44:12.834 DEBUG 3296 --- [http-nio-8889-exec-3] s.a.g.mapper.ArticleMapper.selectList    : ==> Parameters: true(Boolean), true(Boolean)
+2020-04-26 19:44:12.840 DEBUG 3296 --- [http-nio-8889-exec-3] s.a.g.mapper.ArticleMapper.selectList    : <==      Total: 3
+2020-04-26 19:44:12.841 DEBUG 3296 --- [http-nio-8889-exec-3] s.a.g.m.A.listRecommendArticles          : ==>  Preparing: select id, title, summary, cover, category_id from t_article where recommend = 1 and published = 1 
+2020-04-26 19:44:12.841 DEBUG 3296 --- [http-nio-8889-exec-3] s.a.g.m.A.listRecommendArticles          : ==> Parameters: 
+2020-04-26 19:44:12.845 DEBUG 3296 --- [http-nio-8889-exec-3] s.a.g.m.A.listRecommendArticles          : <==      Total: 3
+2020-04-26 19:44:12.847 DEBUG 3296 --- [http-nio-8889-exec-3] s.a.g.m.A.listArticlesPreviewByPage      : ==>  Preparing: SELECT COUNT(1) FROM t_article ta WHERE ta.published = 1 
+2020-04-26 19:44:12.847 DEBUG 3296 --- [http-nio-8889-exec-3] s.a.g.m.A.listArticlesPreviewByPage      : ==> Parameters: 
+2020-04-26 19:44:12.849 DEBUG 3296 --- [http-nio-8889-exec-3] s.a.g.m.A.listArticlesPreviewByPage      : ==>  Preparing: select ta.id, ta.title, ta.summary, ta.create_time, ta.cover, tc.id as cid, tc.name as cname from t_article ta left join t_category tc on ta.category_id = tc.id where ta.published = 1 order by ta.create_time desc LIMIT ?,? 
+2020-04-26 19:44:12.849 DEBUG 3296 --- [http-nio-8889-exec-3] s.a.g.m.A.listArticlesPreviewByPage      : ==> Parameters: 0(Long), 2(Long)
+2020-04-26 19:44:12.856 DEBUG 3296 --- [http-nio-8889-exec-3] s.a.g.m.A.listArticlesPreviewByPage      : <==      Total: 2
+2020-04-26 19:44:12.860 DEBUG 3296 --- [http-nio-8889-exec-3] s.a.g.mapper.SysAccessLogMapper.insert   : ==>  Preparing: INSERT INTO sys_access_log ( create_time, description, log_type, method, params, request_ip, time, username, browser, address ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ) 
+2020-04-26 19:44:12.861 DEBUG 3296 --- [http-nio-8889-exec-3] s.a.g.mapper.SysAccessLogMapper.insert   : ==> Parameters: 2020-04-26 19:44:12.859(Timestamp), 访问首页(String), INFO(String), site.alanliang.geekblog.controller.web.HomeController.home()(String), { }(String), 0:0:0:0:0:0:0:1(String), 26(Long), (String), Chrome 8(String), 内网IP(String)
+2020-04-26 19:44:12.865 DEBUG 3296 --- [http-nio-8889-exec-3] s.a.g.mapper.SysAccessLogMapper.insert   : <==    Updates: 1
+2020-04-26 19:44:12.870 DEBUG 3296 --- [http-nio-8889-exec-3] s.a.g.m.C.selectCategoryById             : ==>  Preparing: select id, name from t_category where id = ? 
+2020-04-26 19:44:12.871 DEBUG 3296 --- [http-nio-8889-exec-3] s.a.g.m.C.selectCategoryById             : ==> Parameters: 1(Long)
+2020-04-26 19:44:12.872 DEBUG 3296 --- [http-nio-8889-exec-3] s.a.g.m.C.selectCategoryById             : <==      Total: 1
+2020-04-26 19:44:12.874 DEBUG 3296 --- [http-nio-8889-exec-3] s.a.g.m.C.selectCategoryById             : ==>  Preparing: select id, name from t_category where id = ? 
+2020-04-26 19:44:12.874 DEBUG 3296 --- [http-nio-8889-exec-3] s.a.g.m.C.selectCategoryById             : ==> Parameters: 1(Long)
+2020-04-26 19:44:12.875 DEBUG 3296 --- [http-nio-8889-exec-3] s.a.g.m.C.selectCategoryById             : <==      Total: 1
+2020-04-26 19:44:12.876 DEBUG 3296 --- [http-nio-8889-exec-3] s.a.g.m.C.selectCategoryById             : ==>  Preparing: select id, name from t_category where id = ? 
+2020-04-26 19:44:12.876 DEBUG 3296 --- [http-nio-8889-exec-3] s.a.g.m.C.selectCategoryById             : ==> Parameters: 1(Long)
+2020-04-26 19:44:12.877 DEBUG 3296 --- [http-nio-8889-exec-3] s.a.g.m.C.selectCategoryById             : <==      Total: 1
+2020-04-26 19:44:12.879 DEBUG 3296 --- [http-nio-8889-exec-3] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-26 19:44:12.880 DEBUG 3296 --- [http-nio-8889-exec-3] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 3(Long)
+2020-04-26 19:44:12.883 DEBUG 3296 --- [http-nio-8889-exec-3] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 4
+2020-04-26 19:44:12.885 DEBUG 3296 --- [http-nio-8889-exec-3] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-26 19:44:12.888 DEBUG 3296 --- [http-nio-8889-exec-3] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 2(Long)
+2020-04-26 19:44:12.890 DEBUG 3296 --- [http-nio-8889-exec-3] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 3
+2020-04-26 19:44:18.072 DEBUG 3296 --- [http-nio-8889-exec-3] s.a.g.mapper.SysMenuMapper.selectList    : ==>  Preparing: SELECT id,title,href,pid,icon,target,sort,status,remark,create_time,update_time FROM sys_menu WHERE (status = ?) 
+2020-04-26 19:44:18.073 DEBUG 3296 --- [http-nio-8889-exec-3] s.a.g.mapper.SysMenuMapper.selectList    : ==> Parameters: true(Boolean)
+2020-04-26 19:44:18.079 DEBUG 3296 --- [http-nio-8889-exec-3] s.a.g.mapper.SysMenuMapper.selectList    : <==      Total: 9
+2020-04-26 19:44:38.775  INFO 10952 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Starting GeekBlogApplication on DESKTOP-QNDK7AF with PID 10952 (D:\idea\geekblog\target\classes started by AlanLiang in D:\idea\geekblog)
+2020-04-26 19:44:38.779 DEBUG 10952 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Running with Spring Boot v2.2.6.RELEASE, Spring v5.2.5.RELEASE
+2020-04-26 19:44:38.780  INFO 10952 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : The following profiles are active: dev
+2020-04-26 19:44:38.835  INFO 10952 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2020-04-26 19:44:38.835  INFO 10952 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2020-04-26 19:44:40.399  INFO 10952 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8889 (http)
+2020-04-26 19:44:40.407  INFO 10952 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-04-26 19:44:40.408  INFO 10952 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.33]
+2020-04-26 19:44:40.496  INFO 10952 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-04-26 19:44:40.496  INFO 10952 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1661 ms
+2020-04-26 19:44:40.549  INFO 10952 --- [restartedMain] o.s.boot.web.servlet.RegistrationBean    : Servlet statViewServlet was not registered (possibly already registered?)
+2020-04-26 19:44:40.552  INFO 10952 --- [restartedMain] o.s.boot.web.servlet.RegistrationBean    : Filter webStatFilter was not registered (possibly already registered?)
+2020-04-26 19:44:40.739  INFO 10952 --- [restartedMain] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2020-04-26 19:44:41.022  INFO 10952 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2020-04-26 19:44:42.202  INFO 10952 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-04-26 19:44:42.599  INFO 10952 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2020-04-26 19:44:42.652  INFO 10952 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8889 (http) with context path ''
+2020-04-26 19:44:42.654  INFO 10952 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Started GeekBlogApplication in 4.7 seconds (JVM running for 6.225)
+2020-04-26 19:44:51.990  INFO 10952 --- [http-nio-8889-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-04-26 19:44:51.991  INFO 10952 --- [http-nio-8889-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-04-26 19:44:52.001  INFO 10952 --- [http-nio-8889-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 10 ms
+2020-04-26 19:44:54.054 DEBUG 10952 --- [http-nio-8889-exec-2] s.a.g.mapper.SysUserMapper.selectOne     : ==>  Preparing: SELECT id,username FROM sys_user WHERE (username = ? AND password = ?) 
+2020-04-26 19:44:54.175 DEBUG 10952 --- [http-nio-8889-exec-2] s.a.g.mapper.SysUserMapper.selectOne     : ==> Parameters: admin(String), 3ef5b7e03854c03be727bcdf9bb774ff(String)
+2020-04-26 19:44:54.192 DEBUG 10952 --- [http-nio-8889-exec-2] s.a.g.mapper.SysUserMapper.selectOne     : <==      Total: 0
+2020-04-26 19:44:54.198 ERROR 10952 --- [http-nio-8889-exec-2] s.a.g.e.handler.GlobalExceptionHandler   : 用户名或密码错误
+2020-04-26 19:44:54.252  WARN 10952 --- [http-nio-8889-exec-2] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [site.alanliang.geekblog.exception.BadRequestException: 用户名或密码错误]
+2020-04-26 19:44:54.509 DEBUG 10952 --- [http-nio-8889-exec-3] s.a.g.mapper.SysUserMapper.selectOne     : ==>  Preparing: SELECT id,username FROM sys_user WHERE (username = ? AND password = ?) 
+2020-04-26 19:44:54.510 DEBUG 10952 --- [http-nio-8889-exec-3] s.a.g.mapper.SysUserMapper.selectOne     : ==> Parameters: admin(String), 3ef5b7e03854c03be727bcdf9bb774ff(String)
+2020-04-26 19:44:54.512 DEBUG 10952 --- [http-nio-8889-exec-3] s.a.g.mapper.SysUserMapper.selectOne     : <==      Total: 0
+2020-04-26 19:44:54.513 ERROR 10952 --- [http-nio-8889-exec-3] s.a.g.e.handler.GlobalExceptionHandler   : 用户名或密码错误
+2020-04-26 19:44:54.514  WARN 10952 --- [http-nio-8889-exec-3] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [site.alanliang.geekblog.exception.BadRequestException: 用户名或密码错误]
+2020-04-26 19:45:44.142 DEBUG 10952 --- [http-nio-8889-exec-4] s.a.g.mapper.SysUserMapper.selectOne     : ==>  Preparing: SELECT id,username FROM sys_user WHERE (username = ? AND password = ?) 
+2020-04-26 19:45:44.142 DEBUG 10952 --- [http-nio-8889-exec-4] s.a.g.mapper.SysUserMapper.selectOne     : ==> Parameters: admin(String), 3ef5b7e03854c03be727bcdf9bb774ff(String)
+2020-04-26 19:45:44.143 DEBUG 10952 --- [http-nio-8889-exec-4] s.a.g.mapper.SysUserMapper.selectOne     : <==      Total: 0
+2020-04-26 19:45:44.144 ERROR 10952 --- [http-nio-8889-exec-4] s.a.g.e.handler.GlobalExceptionHandler   : 用户名或密码错误
+2020-04-26 19:45:44.146  WARN 10952 --- [http-nio-8889-exec-4] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [site.alanliang.geekblog.exception.BadRequestException: 用户名或密码错误]
+2020-04-26 19:45:49.649 DEBUG 10952 --- [http-nio-8889-exec-5] s.a.g.mapper.SysUserMapper.selectOne     : ==>  Preparing: SELECT id,username FROM sys_user WHERE (username = ? AND password = ?) 
+2020-04-26 19:45:49.650 DEBUG 10952 --- [http-nio-8889-exec-5] s.a.g.mapper.SysUserMapper.selectOne     : ==> Parameters: admin(String), 222fbe64009247406782ab797f991e13(String)
+2020-04-26 19:45:49.652 DEBUG 10952 --- [http-nio-8889-exec-5] s.a.g.mapper.SysUserMapper.selectOne     : <==      Total: 1
+2020-04-26 19:45:53.086 DEBUG 10952 --- [http-nio-8889-exec-5] s.a.g.mapper.SysMenuMapper.selectList    : ==>  Preparing: SELECT id,title,href,pid,icon,target,sort,status,remark,create_time,update_time FROM sys_menu WHERE (status = ?) 
+2020-04-26 19:45:53.088 DEBUG 10952 --- [http-nio-8889-exec-5] s.a.g.mapper.SysMenuMapper.selectList    : ==> Parameters: true(Boolean)
+2020-04-26 19:45:53.093 DEBUG 10952 --- [http-nio-8889-exec-5] s.a.g.mapper.SysMenuMapper.selectList    : <==      Total: 9
+2020-04-26 19:45:56.423 DEBUG 10952 --- [http-nio-8889-exec-7] s.a.g.m.SysAccessLogMapper.selectPage    : ==>  Preparing: SELECT COUNT(1) FROM sys_access_log 
+2020-04-26 19:45:56.425 DEBUG 10952 --- [http-nio-8889-exec-7] s.a.g.m.SysAccessLogMapper.selectPage    : ==> Parameters: 
+2020-04-26 19:45:56.435 DEBUG 10952 --- [http-nio-8889-exec-7] s.a.g.m.SysAccessLogMapper.selectPage    : ==>  Preparing: SELECT id,request_ip,address,description,browser,time,create_time FROM sys_access_log LIMIT ?,? 
+2020-04-26 19:45:56.437 DEBUG 10952 --- [http-nio-8889-exec-7] s.a.g.m.SysAccessLogMapper.selectPage    : ==> Parameters: 0(Long), 15(Long)
+2020-04-26 19:45:56.439 DEBUG 10952 --- [http-nio-8889-exec-7] s.a.g.m.SysAccessLogMapper.selectPage    : <==      Total: 2
+2020-04-26 19:46:30.865 DEBUG 10952 --- [http-nio-8889-exec-8] s.a.g.mapper.SysMenuMapper.selectList    : ==>  Preparing: SELECT id,title,href,pid,icon,target,sort,status,remark,create_time,update_time FROM sys_menu WHERE (status = ?) 
+2020-04-26 19:46:30.865 DEBUG 10952 --- [http-nio-8889-exec-8] s.a.g.mapper.SysMenuMapper.selectList    : ==> Parameters: true(Boolean)
+2020-04-26 19:46:30.872 DEBUG 10952 --- [http-nio-8889-exec-8] s.a.g.mapper.SysMenuMapper.selectList    : <==      Total: 9
+2020-04-26 20:00:42.190  INFO 13524 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Starting GeekBlogApplication on DESKTOP-QNDK7AF with PID 13524 (D:\idea\geekblog\target\classes started by AlanLiang in D:\idea\geekblog)
+2020-04-26 20:00:42.192 DEBUG 13524 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Running with Spring Boot v2.2.6.RELEASE, Spring v5.2.5.RELEASE
+2020-04-26 20:00:42.193  INFO 13524 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : The following profiles are active: dev
+2020-04-26 20:00:42.235  INFO 13524 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2020-04-26 20:00:42.236  INFO 13524 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2020-04-26 20:00:43.649  INFO 13524 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8889 (http)
+2020-04-26 20:00:43.657  INFO 13524 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-04-26 20:00:43.657  INFO 13524 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.33]
+2020-04-26 20:00:43.771  INFO 13524 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-04-26 20:00:43.771  INFO 13524 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1535 ms
+2020-04-26 20:00:43.825  INFO 13524 --- [restartedMain] o.s.boot.web.servlet.RegistrationBean    : Servlet statViewServlet was not registered (possibly already registered?)
+2020-04-26 20:00:43.828  INFO 13524 --- [restartedMain] o.s.boot.web.servlet.RegistrationBean    : Filter webStatFilter was not registered (possibly already registered?)
+2020-04-26 20:00:44.033  INFO 13524 --- [restartedMain] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2020-04-26 20:00:44.418  INFO 13524 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2020-04-26 20:00:45.332  INFO 13524 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-04-26 20:00:45.607  INFO 13524 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2020-04-26 20:00:45.651  INFO 13524 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8889 (http) with context path ''
+2020-04-26 20:00:45.664  INFO 13524 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Started GeekBlogApplication in 4.08 seconds (JVM running for 5.595)
+2020-04-26 20:01:33.872  INFO 10504 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Starting GeekBlogApplication on DESKTOP-QNDK7AF with PID 10504 (D:\idea\geekblog\target\classes started by AlanLiang in D:\idea\geekblog)
+2020-04-26 20:01:33.875 DEBUG 10504 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Running with Spring Boot v2.2.6.RELEASE, Spring v5.2.5.RELEASE
+2020-04-26 20:01:33.875  INFO 10504 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : The following profiles are active: dev
+2020-04-26 20:01:33.913  INFO 10504 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2020-04-26 20:01:33.914  INFO 10504 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2020-04-26 20:01:35.035  INFO 10504 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8889 (http)
+2020-04-26 20:01:35.044  INFO 10504 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-04-26 20:01:35.044  INFO 10504 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.33]
+2020-04-26 20:01:35.133  INFO 10504 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-04-26 20:01:35.133  INFO 10504 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1219 ms
+2020-04-26 20:01:35.178  INFO 10504 --- [restartedMain] o.s.boot.web.servlet.RegistrationBean    : Servlet statViewServlet was not registered (possibly already registered?)
+2020-04-26 20:01:35.180  INFO 10504 --- [restartedMain] o.s.boot.web.servlet.RegistrationBean    : Filter webStatFilter was not registered (possibly already registered?)
+2020-04-26 20:01:35.359  INFO 10504 --- [restartedMain] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2020-04-26 20:01:35.655  INFO 10504 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2020-04-26 20:01:36.656  INFO 10504 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-04-26 20:01:36.998  INFO 10504 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2020-04-26 20:01:37.055  INFO 10504 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8889 (http) with context path ''
+2020-04-26 20:01:37.059  INFO 10504 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Started GeekBlogApplication in 3.984 seconds (JVM running for 4.936)
+2020-04-26 20:01:45.809  INFO 10504 --- [http-nio-8889-exec-5] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-04-26 20:01:45.810  INFO 10504 --- [http-nio-8889-exec-5] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-04-26 20:01:45.821  INFO 10504 --- [http-nio-8889-exec-5] o.s.web.servlet.DispatcherServlet        : Completed initialization in 11 ms

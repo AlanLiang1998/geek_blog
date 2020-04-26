@@ -65,4 +65,11 @@ public class JsonResult implements Serializable {
         result.setData(data);
         return result;
     }
+
+    public static JsonResult fail(String msg) {
+        JsonResult result = new JsonResult();
+        result.setCode(500);
+        result.setMsg(msg);
+        return result;
+    }
 }

@@ -15,4 +15,13 @@ public interface SysUserService {
      * @return 用户列表
      */
     Page<SysUser> listByPage(int current, int size);
+
+    /**
+     * 检验用户
+     *
+     * @param username 用户名
+     * @param password 密码
+     * @return 用户
+     */
+    SysUser checkUser(String username, String password);
 }
