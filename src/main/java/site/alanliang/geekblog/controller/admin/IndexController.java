@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import site.alanliang.geekblog.anntation.AccessLog;
 import site.alanliang.geekblog.anntation.Log;
 import site.alanliang.geekblog.common.JsonResult;
 import site.alanliang.geekblog.domain.SysUser;
@@ -31,6 +32,7 @@ public class IndexController {
     @Autowired
     private SysUserService sysUserService;
 
+    @AccessLog("访问后台登录页")
     @GetMapping
     public String toLogin(HttpSession session) {
         if (session.getAttribute("user") != null) {

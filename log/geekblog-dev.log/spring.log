@@ -7906,3 +7906,86 @@ site.alanliang.geekblog.exception.BadRequestException: 用户名或密码错误
 2020-04-26 20:01:45.809  INFO 10504 --- [http-nio-8889-exec-5] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
 2020-04-26 20:01:45.810  INFO 10504 --- [http-nio-8889-exec-5] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
 2020-04-26 20:01:45.821  INFO 10504 --- [http-nio-8889-exec-5] o.s.web.servlet.DispatcherServlet        : Completed initialization in 11 ms
+2020-04-26 20:05:11.398  INFO 10676 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Starting GeekBlogApplication on DESKTOP-QNDK7AF with PID 10676 (D:\idea\geekblog\target\classes started by AlanLiang in D:\idea\geekblog)
+2020-04-26 20:05:11.400 DEBUG 10676 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Running with Spring Boot v2.2.6.RELEASE, Spring v5.2.5.RELEASE
+2020-04-26 20:05:11.400  INFO 10676 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : The following profiles are active: dev
+2020-04-26 20:05:11.431  INFO 10676 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2020-04-26 20:05:11.431  INFO 10676 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2020-04-26 20:05:12.771  INFO 10676 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8889 (http)
+2020-04-26 20:05:12.781  INFO 10676 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-04-26 20:05:12.781  INFO 10676 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.33]
+2020-04-26 20:05:12.907  INFO 10676 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-04-26 20:05:12.908  INFO 10676 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1476 ms
+2020-04-26 20:05:12.953  INFO 10676 --- [restartedMain] o.s.boot.web.servlet.RegistrationBean    : Servlet statViewServlet was not registered (possibly already registered?)
+2020-04-26 20:05:12.955  INFO 10676 --- [restartedMain] o.s.boot.web.servlet.RegistrationBean    : Filter webStatFilter was not registered (possibly already registered?)
+2020-04-26 20:05:13.155  INFO 10676 --- [restartedMain] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2020-04-26 20:05:13.501  INFO 10676 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2020-04-26 20:05:14.355  INFO 10676 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-04-26 20:05:14.613  INFO 10676 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2020-04-26 20:05:14.654  INFO 10676 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8889 (http) with context path ''
+2020-04-26 20:05:14.656  INFO 10676 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Started GeekBlogApplication in 3.894 seconds (JVM running for 4.857)
+2020-04-26 20:05:33.662  INFO 10676 --- [http-nio-8889-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-04-26 20:05:33.663  INFO 10676 --- [http-nio-8889-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-04-26 20:05:33.684  INFO 10676 --- [http-nio-8889-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 21 ms
+2020-04-26 20:05:33.702  INFO 10676 --- [http-nio-8889-exec-1] s.a.g.interceptor.LoginPageInterceptor   : 0:0:0:0:0:0:0:1---请求登录页
+2020-04-26 20:06:58.206  INFO 10676 --- [http-nio-8889-exec-4] s.a.g.interceptor.LoginPageInterceptor   : 0:0:0:0:0:0:0:1---请求登录页
+2020-04-26 20:07:05.355 DEBUG 10676 --- [http-nio-8889-exec-5] s.a.g.mapper.SysUserMapper.selectOne     : ==>  Preparing: SELECT id,username FROM sys_user WHERE (username = ? AND password = ?) 
+2020-04-26 20:07:05.472 DEBUG 10676 --- [http-nio-8889-exec-5] s.a.g.mapper.SysUserMapper.selectOne     : ==> Parameters: admin(String), 222fbe64009247406782ab797f991e13(String)
+2020-04-26 20:07:05.489 DEBUG 10676 --- [http-nio-8889-exec-5] s.a.g.mapper.SysUserMapper.selectOne     : <==      Total: 1
+2020-04-26 20:07:09.059 DEBUG 10676 --- [http-nio-8889-exec-7] s.a.g.mapper.SysMenuMapper.selectList    : ==>  Preparing: SELECT id,title,href,pid,icon,target,sort,status,remark,create_time,update_time FROM sys_menu WHERE (status = ?) 
+2020-04-26 20:07:09.061 DEBUG 10676 --- [http-nio-8889-exec-7] s.a.g.mapper.SysMenuMapper.selectList    : ==> Parameters: true(Boolean)
+2020-04-26 20:07:09.074 DEBUG 10676 --- [http-nio-8889-exec-7] s.a.g.mapper.SysMenuMapper.selectList    : <==      Total: 9
+2020-04-26 20:07:13.941 DEBUG 10676 --- [http-nio-8889-exec-8] s.a.g.mapper.SysUserMapper.selectPage    : ==>  Preparing: SELECT COUNT(1) FROM sys_user 
+2020-04-26 20:07:13.943 DEBUG 10676 --- [http-nio-8889-exec-8] s.a.g.mapper.SysUserMapper.selectPage    : ==> Parameters: 
+2020-04-26 20:07:13.952 DEBUG 10676 --- [http-nio-8889-exec-8] s.a.g.mapper.SysUserMapper.selectPage    : ==>  Preparing: SELECT id,username,password,nickname,avatar,email,create_time,update_time FROM sys_user LIMIT ?,? 
+2020-04-26 20:07:13.954 DEBUG 10676 --- [http-nio-8889-exec-8] s.a.g.mapper.SysUserMapper.selectPage    : ==> Parameters: 0(Long), 15(Long)
+2020-04-26 20:07:13.955 DEBUG 10676 --- [http-nio-8889-exec-8] s.a.g.mapper.SysUserMapper.selectPage    : <==      Total: 1
+2020-04-26 20:07:13.956  INFO 10676 --- [http-nio-8889-exec-8] s.alanliang.geekblog.aspect.LogAspect    : Request ------ RequestLog {url = http://localhost:8889/admin/user, ip = 0:0:0:0:0:0:0:1, classMethod = site.alanliang.geekblog.controller.admin.SysUserController.list, args = [1, 15], time = 37ms, description = 分页查询用户}
+2020-04-26 20:07:13.957  INFO 10676 --- [http-nio-8889-exec-8] s.alanliang.geekblog.aspect.LogAspect    : Return ------ TableResult(count=1)
+2020-04-26 20:07:20.985 DEBUG 10676 --- [http-nio-8889-exec-6] s.a.g.mapper.TagMapper.selectList        : ==>  Preparing: SELECT id,name,create_time,update_time FROM t_tag 
+2020-04-26 20:07:20.986 DEBUG 10676 --- [http-nio-8889-exec-6] s.a.g.mapper.TagMapper.selectList        : ==> Parameters: 
+2020-04-26 20:07:20.992 DEBUG 10676 --- [http-nio-8889-exec-7] s.a.g.mapper.CategoryMapper.selectList   : ==>  Preparing: SELECT id,name,display,introduction,create_time,update_time FROM t_category 
+2020-04-26 20:07:20.992 DEBUG 10676 --- [http-nio-8889-exec-6] s.a.g.mapper.TagMapper.selectList        : <==      Total: 8
+2020-04-26 20:07:20.994 DEBUG 10676 --- [http-nio-8889-exec-7] s.a.g.mapper.CategoryMapper.selectList   : ==> Parameters: 
+2020-04-26 20:07:21.000 DEBUG 10676 --- [http-nio-8889-exec-7] s.a.g.mapper.CategoryMapper.selectList   : <==      Total: 5
+2020-04-26 20:07:22.767 DEBUG 10676 --- [http-nio-8889-exec-9] s.a.g.m.A.listArticlesTableByPage        : ==>  Preparing: SELECT COUNT(1) FROM t_article 
+2020-04-26 20:07:22.768 DEBUG 10676 --- [http-nio-8889-exec-9] s.a.g.m.A.listArticlesTableByPage        : ==> Parameters: 
+2020-04-26 20:07:22.771 DEBUG 10676 --- [http-nio-8889-exec-9] s.a.g.m.A.listArticlesTableByPage        : ==>  Preparing: select id, title, type, comments, views, likes, published, commentable, appreciable, top, recommend, create_time, update_time, category_id from t_article LIMIT ?,? 
+2020-04-26 20:07:22.772 DEBUG 10676 --- [http-nio-8889-exec-9] s.a.g.m.A.listArticlesTableByPage        : ==> Parameters: 0(Long), 15(Long)
+2020-04-26 20:07:22.828 DEBUG 10676 --- [http-nio-8889-exec-9] s.a.g.m.A.listArticlesTableByPage        : <==      Total: 3
+2020-04-26 20:07:22.849 DEBUG 10676 --- [http-nio-8889-exec-9] s.a.g.m.C.selectCategoryById             : ==>  Preparing: select id, name from t_category where id = ? 
+2020-04-26 20:07:22.852 DEBUG 10676 --- [http-nio-8889-exec-9] s.a.g.m.C.selectCategoryById             : ==> Parameters: 1(Long)
+2020-04-26 20:07:22.854 DEBUG 10676 --- [http-nio-8889-exec-9] s.a.g.m.C.selectCategoryById             : <==      Total: 1
+2020-04-26 20:07:22.855 DEBUG 10676 --- [http-nio-8889-exec-9] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-26 20:07:22.858 DEBUG 10676 --- [http-nio-8889-exec-9] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 1(Long)
+2020-04-26 20:07:22.861 DEBUG 10676 --- [http-nio-8889-exec-9] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 4
+2020-04-26 20:07:22.864 DEBUG 10676 --- [http-nio-8889-exec-9] s.a.g.m.C.selectCategoryById             : ==>  Preparing: select id, name from t_category where id = ? 
+2020-04-26 20:07:22.864 DEBUG 10676 --- [http-nio-8889-exec-9] s.a.g.m.C.selectCategoryById             : ==> Parameters: 1(Long)
+2020-04-26 20:07:22.866 DEBUG 10676 --- [http-nio-8889-exec-9] s.a.g.m.C.selectCategoryById             : <==      Total: 1
+2020-04-26 20:07:22.869 DEBUG 10676 --- [http-nio-8889-exec-9] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-26 20:07:22.870 DEBUG 10676 --- [http-nio-8889-exec-9] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 2(Long)
+2020-04-26 20:07:22.872 DEBUG 10676 --- [http-nio-8889-exec-9] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 3
+2020-04-26 20:07:22.873 DEBUG 10676 --- [http-nio-8889-exec-9] s.a.g.m.C.selectCategoryById             : ==>  Preparing: select id, name from t_category where id = ? 
+2020-04-26 20:07:22.873 DEBUG 10676 --- [http-nio-8889-exec-9] s.a.g.m.C.selectCategoryById             : ==> Parameters: 1(Long)
+2020-04-26 20:07:22.874 DEBUG 10676 --- [http-nio-8889-exec-9] s.a.g.m.C.selectCategoryById             : <==      Total: 1
+2020-04-26 20:07:22.875 DEBUG 10676 --- [http-nio-8889-exec-9] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-26 20:07:22.875 DEBUG 10676 --- [http-nio-8889-exec-9] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 3(Long)
+2020-04-26 20:07:22.880 DEBUG 10676 --- [http-nio-8889-exec-9] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 4
+2020-04-26 20:07:22.882 DEBUG 10676 --- [http-nio-8889-exec-9] s.a.g.mapper.ArticleMapper.selectCount   : ==>  Preparing: SELECT COUNT( 1 ) FROM t_article 
+2020-04-26 20:07:22.883 DEBUG 10676 --- [http-nio-8889-exec-9] s.a.g.mapper.ArticleMapper.selectCount   : ==> Parameters: 
+2020-04-26 20:07:22.886 DEBUG 10676 --- [http-nio-8889-exec-9] s.a.g.mapper.ArticleMapper.selectCount   : <==      Total: 1
+2020-04-26 20:07:23.435 DEBUG 10676 --- [http-nio-8889-exec-8] s.a.g.mapper.CategoryMapper.selectPage   : ==>  Preparing: SELECT COUNT(1) FROM t_category 
+2020-04-26 20:07:23.436 DEBUG 10676 --- [http-nio-8889-exec-8] s.a.g.mapper.CategoryMapper.selectPage   : ==> Parameters: 
+2020-04-26 20:07:23.440 DEBUG 10676 --- [http-nio-8889-exec-8] s.a.g.mapper.CategoryMapper.selectPage   : ==>  Preparing: SELECT id,name,display,introduction,create_time,update_time FROM t_category LIMIT ?,? 
+2020-04-26 20:07:23.441 DEBUG 10676 --- [http-nio-8889-exec-8] s.a.g.mapper.CategoryMapper.selectPage   : ==> Parameters: 0(Long), 15(Long)
+2020-04-26 20:07:23.443 DEBUG 10676 --- [http-nio-8889-exec-8] s.a.g.mapper.CategoryMapper.selectPage   : <==      Total: 5
+2020-04-26 20:07:23.967 DEBUG 10676 --- [http-nio-8889-exec-10] s.a.g.mapper.TagMapper.selectPage        : ==>  Preparing: SELECT COUNT(1) FROM t_tag 
+2020-04-26 20:07:23.968 DEBUG 10676 --- [http-nio-8889-exec-10] s.a.g.mapper.TagMapper.selectPage        : ==> Parameters: 
+2020-04-26 20:07:23.971 DEBUG 10676 --- [http-nio-8889-exec-10] s.a.g.mapper.TagMapper.selectPage        : ==>  Preparing: SELECT id,name,create_time,update_time FROM t_tag LIMIT ?,? 
+2020-04-26 20:07:23.972 DEBUG 10676 --- [http-nio-8889-exec-10] s.a.g.mapper.TagMapper.selectPage        : ==> Parameters: 0(Long), 15(Long)
+2020-04-26 20:07:23.976 DEBUG 10676 --- [http-nio-8889-exec-10] s.a.g.mapper.TagMapper.selectPage        : <==      Total: 8
+2020-04-26 20:07:24.705 DEBUG 10676 --- [http-nio-8889-exec-5] s.a.g.m.SysAccessLogMapper.selectPage    : ==>  Preparing: SELECT COUNT(1) FROM sys_access_log 
+2020-04-26 20:07:24.706 DEBUG 10676 --- [http-nio-8889-exec-5] s.a.g.m.SysAccessLogMapper.selectPage    : ==> Parameters: 
+2020-04-26 20:07:24.709 DEBUG 10676 --- [http-nio-8889-exec-5] s.a.g.m.SysAccessLogMapper.selectPage    : ==>  Preparing: SELECT id,request_ip,address,description,browser,time,create_time FROM sys_access_log LIMIT ?,? 
+2020-04-26 20:07:24.713 DEBUG 10676 --- [http-nio-8889-exec-5] s.a.g.m.SysAccessLogMapper.selectPage    : ==> Parameters: 0(Long), 15(Long)
+2020-04-26 20:07:24.714 DEBUG 10676 --- [http-nio-8889-exec-5] s.a.g.m.SysAccessLogMapper.selectPage    : <==      Total: 2

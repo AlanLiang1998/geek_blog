@@ -1,3 +1,6 @@
+#服务器端口
+server:
+  port: 80
 #配置数据源
 spring:
   datasource:
@@ -24,16 +27,30 @@ spring:
       test-on-borrow: false
       test-on-return: false
       max-pool-prepared-statement-per-connection-size: 20
-  #禁用thymeleaf模板缓存
-  thymeleaf:
-    cache: false
-
+      # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+      filters: stat,wall,slf4j
+      # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
+      connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+  jackson:
+    #设置JSON数据的时区和格式
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+    #不序列化为null的属性
+    default-property-inclusion: non_null
+#日志配置
 logging:
   level:
     root: info
     site.alanliang.geekblog: info
   file:
     path: log/geekblog-pro.log
-
+mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: site.alanliang.geekblog.domain
+  configuration:
+    #开启驼峰映射
+    map-underscore-to-camel-case: true
+    lazy-loading-enabled: true
+    aggressive-lazy-loading: false
 
 
