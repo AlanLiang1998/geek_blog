@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import site.alanliang.geekblog.anntation.AccessLog;
 import site.alanliang.geekblog.common.Constant;
 import site.alanliang.geekblog.domain.Article;
 import site.alanliang.geekblog.service.ArticleService;
@@ -27,18 +28,21 @@ public class HomeController {
     @Autowired
     private ArticleService articleService;
 
+    @AccessLog("获取置顶文章")
     @GetMapping("/top-articles")
     public ResponseEntity<Object> listTopArticles() {
         List<Article> articles = articleService.listTopArticles();
         return new ResponseEntity<>(articles, HttpStatus.OK);
     }
 
+    @AccessLog("获取推荐文章")
     @GetMapping("/recommend-articles")
     public ResponseEntity<Object> listRecommendArticles() {
         List<Article> articles = articleService.listRecommendArticles();
         return new ResponseEntity<>(articles, HttpStatus.OK);
     }
 
+    @AccessLog("获取文章")
     @GetMapping("/articles/{current}")
     public ResponseEntity<Object> listArticlesByPage(@PathVariable(value = "current") Integer current,
                                                      @RequestParam(value = "size", defaultValue = Constant.PAGE_SIZE) Integer size) {

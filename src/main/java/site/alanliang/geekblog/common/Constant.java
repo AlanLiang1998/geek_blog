@@ -21,4 +21,9 @@ public interface Constant {
     Integer FILTER_BY_DAY = 1;
     Integer FILTER_BY_MONTH = 2;
     Integer FILTER_BY_YEAR = 3;
+
+    /**
+     * 用于IP定位转换
+     */
+    static final String REGION = "内网IP|内网IP";
 }
