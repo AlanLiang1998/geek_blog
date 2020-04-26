@@ -1,6 +1,8 @@
 package site.alanliang.geekblog.service.impl;
 
 import cn.hutool.json.JSONObject;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,7 @@ import site.alanliang.geekblog.utils.StringUtils;
 
 import java.lang.reflect.Method;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @Descriptin TODO
@@ -71,5 +74,25 @@ public class SysAccessLogServiceImpl implements SysAccessLogService {
         log.setBrowser(browser);
         log.setCreateTime(new Date());
         sysAccessLogMapper.insert(log);
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void removeByIds(List<Long> idList) {
+        sysAccessLogMapper.deleteBatchIds(idList);
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void remove(Long id) {
+        sysAccessLogMapper.deleteById(id);
+    }
+
+    @Override
+    public Page<SysAccessLog> listByPage(Integer current, Integer size) {
+        Page<SysAccessLog> page = new Page<>(current, size);
+        QueryWrapper<SysAccessLog> wrapper = new QueryWrapper<>();
+        wrapper.select("id", "request_ip", "address", "description", "browser", "time", "create_time");
+        return sysAccessLogMapper.selectPage(page, wrapper);
     }
 }

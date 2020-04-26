@@ -6345,3 +6345,228 @@ org.attoparser.ParseException: (Line = 144, Column = 40) Malformed markup: Attri
 2020-04-26 17:09:09.280 DEBUG 17532 --- [http-nio-8889-exec-4] s.a.g.m.A.countArticleByDate             : ==>  Preparing: select year(create_time) 'year' , month(create_time) 'month' , count(id) 'articleCount' from t_article where create_time >= DATE_SUB(CURDATE(), INTERVAL 1 YEAR) group by year(create_time) ,month(create_time) 
 2020-04-26 17:09:09.281 DEBUG 17532 --- [http-nio-8889-exec-4] s.a.g.m.A.countArticleByDate             : ==> Parameters: 
 2020-04-26 17:09:09.283 DEBUG 17532 --- [http-nio-8889-exec-4] s.a.g.m.A.countArticleByDate             : <==      Total: 1
+2020-04-26 17:11:32.459  INFO 21848 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Starting GeekBlogApplication on DESKTOP-QNDK7AF with PID 21848 (D:\idea\geekblog\target\classes started by AlanLiang in D:\idea\geekblog)
+2020-04-26 17:11:32.467 DEBUG 21848 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Running with Spring Boot v2.2.6.RELEASE, Spring v5.2.5.RELEASE
+2020-04-26 17:11:32.468  INFO 21848 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : The following profiles are active: dev
+2020-04-26 17:11:32.557  INFO 21848 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2020-04-26 17:11:32.558  INFO 21848 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2020-04-26 17:11:34.508  INFO 21848 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8889 (http)
+2020-04-26 17:11:34.519  INFO 21848 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-04-26 17:11:34.520  INFO 21848 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.33]
+2020-04-26 17:11:34.639  INFO 21848 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-04-26 17:11:34.640  INFO 21848 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 2082 ms
+2020-04-26 17:11:34.702  INFO 21848 --- [restartedMain] o.s.boot.web.servlet.RegistrationBean    : Servlet statViewServlet was not registered (possibly already registered?)
+2020-04-26 17:11:34.705  INFO 21848 --- [restartedMain] o.s.boot.web.servlet.RegistrationBean    : Filter webStatFilter was not registered (possibly already registered?)
+2020-04-26 17:11:34.974  INFO 21848 --- [restartedMain] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2020-04-26 17:11:35.461  INFO 21848 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2020-04-26 17:11:36.950  INFO 21848 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-04-26 17:11:37.280  INFO 21848 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2020-04-26 17:11:37.346  INFO 21848 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8889 (http) with context path ''
+2020-04-26 17:11:37.350  INFO 21848 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Started GeekBlogApplication in 6.021 seconds (JVM running for 7.969)
+2020-04-26 17:11:37.392  INFO 21848 --- [http-nio-8889-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-04-26 17:11:37.392  INFO 21848 --- [http-nio-8889-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-04-26 17:11:37.402  INFO 21848 --- [http-nio-8889-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 10 ms
+2020-04-26 17:11:38.553 DEBUG 21848 --- [http-nio-8889-exec-2] s.a.g.mapper.ArticleMapper.selectList    : ==>  Preparing: SELECT id,title,summary,cover FROM t_article WHERE (published = ? AND top = ?) limit 5 
+2020-04-26 17:11:38.769 DEBUG 21848 --- [http-nio-8889-exec-2] s.a.g.mapper.ArticleMapper.selectList    : ==> Parameters: true(Boolean), true(Boolean)
+2020-04-26 17:11:38.808 DEBUG 21848 --- [http-nio-8889-exec-2] s.a.g.mapper.ArticleMapper.selectList    : <==      Total: 3
+2020-04-26 17:11:38.819 DEBUG 21848 --- [http-nio-8889-exec-2] s.a.g.m.A.listRecommendArticles          : ==>  Preparing: select id, title, summary, cover, category_id from t_article where recommend = 1 and published = 1 
+2020-04-26 17:11:38.825 DEBUG 21848 --- [http-nio-8889-exec-2] s.a.g.m.A.listRecommendArticles          : ==> Parameters: 
+2020-04-26 17:11:38.942 DEBUG 21848 --- [http-nio-8889-exec-2] s.a.g.m.A.listRecommendArticles          : <==      Total: 3
+2020-04-26 17:11:38.991 DEBUG 21848 --- [http-nio-8889-exec-2] s.a.g.m.A.listArticlesPreviewByPage      : ==>  Preparing: SELECT COUNT(1) FROM t_article ta WHERE ta.published = 1 
+2020-04-26 17:11:38.997 DEBUG 21848 --- [http-nio-8889-exec-2] s.a.g.m.A.listArticlesPreviewByPage      : ==> Parameters: 
+2020-04-26 17:11:39.018 DEBUG 21848 --- [http-nio-8889-exec-2] s.a.g.m.A.listArticlesPreviewByPage      : ==>  Preparing: select ta.id, ta.title, ta.summary, ta.create_time, ta.cover, tc.id as cid, tc.name as cname from t_article ta left join t_category tc on ta.category_id = tc.id where ta.published = 1 order by ta.create_time desc LIMIT ?,? 
+2020-04-26 17:11:39.031 DEBUG 21848 --- [http-nio-8889-exec-2] s.a.g.m.A.listArticlesPreviewByPage      : ==> Parameters: 0(Long), 2(Long)
+2020-04-26 17:11:39.041 DEBUG 21848 --- [http-nio-8889-exec-2] s.a.g.m.A.listArticlesPreviewByPage      : <==      Total: 2
+2020-04-26 17:11:39.144 DEBUG 21848 --- [http-nio-8889-exec-2] s.a.g.mapper.SysAccessLogMapper.insert   : ==>  Preparing: INSERT INTO sys_access_log ( create_time, description, log_type, method, params, request_ip, time, username, browser, address ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ) 
+2020-04-26 17:11:39.157 DEBUG 21848 --- [http-nio-8889-exec-2] s.a.g.mapper.SysAccessLogMapper.insert   : ==> Parameters: 2020-04-26 17:11:39.135(Timestamp), 访问首页(String), INFO(String), site.alanliang.geekblog.controller.web.HomeController.home()(String), { }(String), 192.168.150.1(String), 666(Long), (String), Chrome 8(String), 内网IP(String)
+2020-04-26 17:11:39.160 DEBUG 21848 --- [http-nio-8889-exec-2] s.a.g.mapper.SysAccessLogMapper.insert   : <==    Updates: 1
+2020-04-26 17:11:39.215 DEBUG 21848 --- [http-nio-8889-exec-2] s.a.g.m.C.selectCategoryById             : ==>  Preparing: select id, name from t_category where id = ? 
+2020-04-26 17:11:39.217 DEBUG 21848 --- [http-nio-8889-exec-2] s.a.g.m.C.selectCategoryById             : ==> Parameters: 1(Long)
+2020-04-26 17:11:39.220 DEBUG 21848 --- [http-nio-8889-exec-2] s.a.g.m.C.selectCategoryById             : <==      Total: 1
+2020-04-26 17:11:39.224 DEBUG 21848 --- [http-nio-8889-exec-2] s.a.g.m.C.selectCategoryById             : ==>  Preparing: select id, name from t_category where id = ? 
+2020-04-26 17:11:39.224 DEBUG 21848 --- [http-nio-8889-exec-2] s.a.g.m.C.selectCategoryById             : ==> Parameters: 1(Long)
+2020-04-26 17:11:39.229 DEBUG 21848 --- [http-nio-8889-exec-2] s.a.g.m.C.selectCategoryById             : <==      Total: 1
+2020-04-26 17:11:39.232 DEBUG 21848 --- [http-nio-8889-exec-2] s.a.g.m.C.selectCategoryById             : ==>  Preparing: select id, name from t_category where id = ? 
+2020-04-26 17:11:39.233 DEBUG 21848 --- [http-nio-8889-exec-2] s.a.g.m.C.selectCategoryById             : ==> Parameters: 1(Long)
+2020-04-26 17:11:39.235 DEBUG 21848 --- [http-nio-8889-exec-2] s.a.g.m.C.selectCategoryById             : <==      Total: 1
+2020-04-26 17:11:39.242 DEBUG 21848 --- [http-nio-8889-exec-2] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-26 17:11:39.245 DEBUG 21848 --- [http-nio-8889-exec-2] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 3(Long)
+2020-04-26 17:11:39.249 DEBUG 21848 --- [http-nio-8889-exec-2] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 4
+2020-04-26 17:11:39.254 DEBUG 21848 --- [http-nio-8889-exec-2] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-26 17:11:39.255 DEBUG 21848 --- [http-nio-8889-exec-2] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 2(Long)
+2020-04-26 17:11:39.258 DEBUG 21848 --- [http-nio-8889-exec-2] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 3
+2020-04-26 17:11:43.348 DEBUG 21848 --- [http-nio-8889-exec-6] s.a.g.m.TagMapper.listByArticleCount     : ==>  Preparing: select tt.id, tt.name, count(ta.id) articleCount from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id left join t_article ta on ta.id = tat.article_id group by tt.id having articleCount > 0 
+2020-04-26 17:11:43.350 DEBUG 21848 --- [http-nio-8889-exec-6] s.a.g.m.TagMapper.listByArticleCount     : ==> Parameters: 
+2020-04-26 17:11:43.353 DEBUG 21848 --- [http-nio-8889-exec-6] s.a.g.m.TagMapper.listByArticleCount     : <==      Total: 8
+2020-04-26 17:11:43.356 DEBUG 21848 --- [http-nio-8889-exec-6] s.a.g.mapper.SysAccessLogMapper.insert   : ==>  Preparing: INSERT INTO sys_access_log ( create_time, description, log_type, method, params, request_ip, time, username, browser, address ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ) 
+2020-04-26 17:11:43.359 DEBUG 21848 --- [http-nio-8889-exec-6] s.a.g.mapper.SysAccessLogMapper.insert   : ==> Parameters: 2020-04-26 17:11:43.355(Timestamp), 访问标签页(String), INFO(String), site.alanliang.geekblog.controller.web.TagsController.tags()(String), { }(String), 192.168.150.1(String), 13(Long), (String), Chrome 8(String), 内网IP(String)
+2020-04-26 17:11:43.363 DEBUG 21848 --- [http-nio-8889-exec-6] s.a.g.mapper.SysAccessLogMapper.insert   : <==    Updates: 1
+2020-04-26 17:11:47.845 DEBUG 21848 --- [http-nio-8889-exec-9] s.a.g.m.C.listByArticleCount             : ==>  Preparing: select tc.id, tc.name, count(ta.id) articleCount from t_category tc left join t_article ta on tc.id = ta.category_id where tc.display = 1 group by tc.id having articleCount > 0 
+2020-04-26 17:11:47.847 DEBUG 21848 --- [http-nio-8889-exec-9] s.a.g.m.C.listByArticleCount             : ==> Parameters: 
+2020-04-26 17:11:47.849 DEBUG 21848 --- [http-nio-8889-exec-9] s.a.g.m.C.listByArticleCount             : <==      Total: 1
+2020-04-26 17:11:47.852 DEBUG 21848 --- [http-nio-8889-exec-9] s.a.g.mapper.SysAccessLogMapper.insert   : ==>  Preparing: INSERT INTO sys_access_log ( create_time, description, log_type, method, params, request_ip, time, username, browser, address ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ) 
+2020-04-26 17:11:47.853 DEBUG 21848 --- [http-nio-8889-exec-9] s.a.g.mapper.SysAccessLogMapper.insert   : ==> Parameters: 2020-04-26 17:11:47.851(Timestamp), 访问分类页(String), INFO(String), site.alanliang.geekblog.controller.web.CategoriesController.categories()(String), { }(String), 192.168.150.1(String), 13(Long), (String), Chrome 8(String), 内网IP(String)
+2020-04-26 17:11:47.854 DEBUG 21848 --- [http-nio-8889-exec-9] s.a.g.mapper.SysAccessLogMapper.insert   : <==    Updates: 1
+2020-04-26 17:11:50.063 DEBUG 21848 --- [http-nio-8889-exec-3] s.a.g.m.A.countArticleByDate             : ==>  Preparing: select year(create_time) 'year' , month(create_time) 'month', day(create_time) 'day' , count(id) 'articleCount' from t_article where create_time >= DATE_SUB(CURDATE(), INTERVAL 1 YEAR) group by year(create_time) ,month(create_time), day(create_time) 
+2020-04-26 17:11:50.066 DEBUG 21848 --- [http-nio-8889-exec-3] s.a.g.m.A.countArticleByDate             : ==> Parameters: 
+2020-04-26 17:11:50.069 DEBUG 21848 --- [http-nio-8889-exec-3] s.a.g.m.A.countArticleByDate             : <==      Total: 1
+2020-04-26 17:11:50.071 DEBUG 21848 --- [http-nio-8889-exec-3] s.a.g.m.A.listPageArticlePreviewByDate   : ==>  Preparing: SELECT COUNT(1) FROM t_article ta 
+2020-04-26 17:11:50.072 DEBUG 21848 --- [http-nio-8889-exec-3] s.a.g.m.A.listPageArticlePreviewByDate   : ==> Parameters: 
+2020-04-26 17:11:50.078 DEBUG 21848 --- [http-nio-8889-exec-3] s.a.g.m.A.listPageArticlePreviewByDate   : ==>  Preparing: select ta.id, ta.title, ta.summary, ta.create_time, ta.cover, tc.id as cid, tc.name as cname from t_article ta left join t_category tc on ta.category_id = tc.id order by ta.create_time desc LIMIT ?,? 
+2020-04-26 17:11:50.079 DEBUG 21848 --- [http-nio-8889-exec-3] s.a.g.m.A.listPageArticlePreviewByDate   : ==> Parameters: 0(Long), 2(Long)
+2020-04-26 17:11:50.084 DEBUG 21848 --- [http-nio-8889-exec-3] s.a.g.m.A.listPageArticlePreviewByDate   : <==      Total: 2
+2020-04-26 17:11:50.088 DEBUG 21848 --- [http-nio-8889-exec-3] s.a.g.mapper.SysAccessLogMapper.insert   : ==>  Preparing: INSERT INTO sys_access_log ( create_time, description, log_type, method, params, request_ip, time, username, browser, address ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ) 
+2020-04-26 17:11:50.089 DEBUG 21848 --- [http-nio-8889-exec-3] s.a.g.mapper.SysAccessLogMapper.insert   : ==> Parameters: 2020-04-26 17:11:50.087(Timestamp), 访问归档页(String), INFO(String), site.alanliang.geekblog.controller.web.ArchivesController.archives()(String), { dateFilterType: null }(String), 192.168.150.1(String), 29(Long), (String), Chrome 8(String), 内网IP(String)
+2020-04-26 17:11:50.093 DEBUG 21848 --- [http-nio-8889-exec-3] s.a.g.mapper.SysAccessLogMapper.insert   : <==    Updates: 1
+2020-04-26 17:11:50.098 DEBUG 21848 --- [http-nio-8889-exec-3] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-26 17:11:50.098 DEBUG 21848 --- [http-nio-8889-exec-3] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 3(Long)
+2020-04-26 17:11:50.101 DEBUG 21848 --- [http-nio-8889-exec-3] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 4
+2020-04-26 17:11:50.103 DEBUG 21848 --- [http-nio-8889-exec-3] s.a.g.m.TagMapper.selectByArticleId      : ==>  Preparing: select tt.id, tt.name from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-04-26 17:11:50.103 DEBUG 21848 --- [http-nio-8889-exec-3] s.a.g.m.TagMapper.selectByArticleId      : ==> Parameters: 2(Long)
+2020-04-26 17:11:50.104 DEBUG 21848 --- [http-nio-8889-exec-3] s.a.g.m.TagMapper.selectByArticleId      : <==      Total: 3
+2020-04-26 17:11:54.537 DEBUG 21848 --- [http-nio-8889-exec-6] s.a.g.mapper.ArticleMapper.selectCount   : ==>  Preparing: SELECT COUNT( 1 ) FROM t_article 
+2020-04-26 17:11:54.538 DEBUG 21848 --- [http-nio-8889-exec-6] s.a.g.mapper.ArticleMapper.selectCount   : ==> Parameters: 
+2020-04-26 17:11:54.541 DEBUG 21848 --- [http-nio-8889-exec-6] s.a.g.mapper.ArticleMapper.selectCount   : <==      Total: 1
+2020-04-26 17:11:54.544 DEBUG 21848 --- [http-nio-8889-exec-6] s.a.g.mapper.CategoryMapper.selectCount  : ==>  Preparing: SELECT COUNT( 1 ) FROM t_category 
+2020-04-26 17:11:54.545 DEBUG 21848 --- [http-nio-8889-exec-6] s.a.g.mapper.CategoryMapper.selectCount  : ==> Parameters: 
+2020-04-26 17:11:54.547 DEBUG 21848 --- [http-nio-8889-exec-6] s.a.g.mapper.CategoryMapper.selectCount  : <==      Total: 1
+2020-04-26 17:11:54.547 DEBUG 21848 --- [http-nio-8889-exec-6] s.a.g.mapper.TagMapper.selectCount       : ==>  Preparing: SELECT COUNT( 1 ) FROM t_tag 
+2020-04-26 17:11:54.548 DEBUG 21848 --- [http-nio-8889-exec-6] s.a.g.mapper.TagMapper.selectCount       : ==> Parameters: 
+2020-04-26 17:11:54.549 DEBUG 21848 --- [http-nio-8889-exec-6] s.a.g.mapper.TagMapper.selectCount       : <==      Total: 1
+2020-04-26 17:11:54.550 DEBUG 21848 --- [http-nio-8889-exec-6] s.a.g.m.C.listByArticleCount             : ==>  Preparing: select tc.id, tc.name, count(ta.id) articleCount from t_category tc left join t_article ta on tc.id = ta.category_id where tc.display = 1 group by tc.id having articleCount > 0 
+2020-04-26 17:11:54.550 DEBUG 21848 --- [http-nio-8889-exec-6] s.a.g.m.C.listByArticleCount             : ==> Parameters: 
+2020-04-26 17:11:54.552 DEBUG 21848 --- [http-nio-8889-exec-6] s.a.g.m.C.listByArticleCount             : <==      Total: 1
+2020-04-26 17:11:54.553 DEBUG 21848 --- [http-nio-8889-exec-6] s.a.g.m.TagMapper.listByArticleCount     : ==>  Preparing: select tt.id, tt.name, count(ta.id) articleCount from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id left join t_article ta on ta.id = tat.article_id group by tt.id having articleCount > 0 
+2020-04-26 17:11:54.553 DEBUG 21848 --- [http-nio-8889-exec-6] s.a.g.m.TagMapper.listByArticleCount     : ==> Parameters: 
+2020-04-26 17:11:54.558 DEBUG 21848 --- [http-nio-8889-exec-6] s.a.g.m.TagMapper.listByArticleCount     : <==      Total: 8
+2020-04-26 17:11:54.560 DEBUG 21848 --- [http-nio-8889-exec-6] s.a.g.m.A.countArticleByDate             : ==>  Preparing: select year(create_time) 'year' , month(create_time) 'month' , count(id) 'articleCount' from t_article where create_time >= DATE_SUB(CURDATE(), INTERVAL 1 YEAR) group by year(create_time) ,month(create_time) 
+2020-04-26 17:11:54.561 DEBUG 21848 --- [http-nio-8889-exec-6] s.a.g.m.A.countArticleByDate             : ==> Parameters: 
+2020-04-26 17:11:54.563 DEBUG 21848 --- [http-nio-8889-exec-6] s.a.g.m.A.countArticleByDate             : <==      Total: 1
+2020-04-26 17:11:54.566 DEBUG 21848 --- [http-nio-8889-exec-6] s.a.g.mapper.SysAccessLogMapper.insert   : ==>  Preparing: INSERT INTO sys_access_log ( create_time, description, log_type, method, params, request_ip, time, username, browser, address ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ) 
+2020-04-26 17:11:54.567 DEBUG 21848 --- [http-nio-8889-exec-6] s.a.g.mapper.SysAccessLogMapper.insert   : ==> Parameters: 2020-04-26 17:11:54.565(Timestamp), 访问关于我页(String), INFO(String), site.alanliang.geekblog.controller.web.AboutController.about()(String), { dateFilterType: 2 }(String), 192.168.150.1(String), 29(Long), (String), Chrome 8(String), 内网IP(String)
+2020-04-26 17:11:54.568 DEBUG 21848 --- [http-nio-8889-exec-6] s.a.g.mapper.SysAccessLogMapper.insert   : <==    Updates: 1
+2020-04-26 17:27:04.134  INFO 10584 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Starting GeekBlogApplication on DESKTOP-QNDK7AF with PID 10584 (D:\idea\geekblog\target\classes started by AlanLiang in D:\idea\geekblog)
+2020-04-26 17:27:04.138 DEBUG 10584 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Running with Spring Boot v2.2.6.RELEASE, Spring v5.2.5.RELEASE
+2020-04-26 17:27:04.138  INFO 10584 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : The following profiles are active: dev
+2020-04-26 17:27:04.214  INFO 10584 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2020-04-26 17:27:04.214  INFO 10584 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2020-04-26 17:27:05.902  INFO 10584 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8889 (http)
+2020-04-26 17:27:05.911  INFO 10584 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-04-26 17:27:05.911  INFO 10584 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.33]
+2020-04-26 17:27:06.030  INFO 10584 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-04-26 17:27:06.030  INFO 10584 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1816 ms
+2020-04-26 17:27:06.099  INFO 10584 --- [restartedMain] o.s.boot.web.servlet.RegistrationBean    : Servlet statViewServlet was not registered (possibly already registered?)
+2020-04-26 17:27:06.104  INFO 10584 --- [restartedMain] o.s.boot.web.servlet.RegistrationBean    : Filter webStatFilter was not registered (possibly already registered?)
+2020-04-26 17:27:06.334  INFO 10584 --- [restartedMain] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2020-04-26 17:27:06.727  INFO 10584 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2020-04-26 17:27:08.017  INFO 10584 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-04-26 17:27:08.456  INFO 10584 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2020-04-26 17:27:08.529  INFO 10584 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8889 (http) with context path ''
+2020-04-26 17:27:08.533  INFO 10584 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Started GeekBlogApplication in 5.305 seconds (JVM running for 6.913)
+2020-04-26 17:27:47.692  INFO 10420 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Starting GeekBlogApplication on DESKTOP-QNDK7AF with PID 10420 (D:\idea\geekblog\target\classes started by AlanLiang in D:\idea\geekblog)
+2020-04-26 17:27:47.696 DEBUG 10420 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Running with Spring Boot v2.2.6.RELEASE, Spring v5.2.5.RELEASE
+2020-04-26 17:27:47.696  INFO 10420 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : The following profiles are active: dev
+2020-04-26 17:27:47.770  INFO 10420 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2020-04-26 17:27:47.771  INFO 10420 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2020-04-26 17:27:49.977  INFO 10420 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8889 (http)
+2020-04-26 17:27:49.992  INFO 10420 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-04-26 17:27:49.992  INFO 10420 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.33]
+2020-04-26 17:27:50.135  INFO 10420 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-04-26 17:27:50.136  INFO 10420 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 2365 ms
+2020-04-26 17:27:50.221  INFO 10420 --- [restartedMain] o.s.boot.web.servlet.RegistrationBean    : Servlet statViewServlet was not registered (possibly already registered?)
+2020-04-26 17:27:50.226  INFO 10420 --- [restartedMain] o.s.boot.web.servlet.RegistrationBean    : Filter webStatFilter was not registered (possibly already registered?)
+2020-04-26 17:27:50.486  INFO 10420 --- [restartedMain] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2020-04-26 17:27:50.916  INFO 10420 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2020-04-26 17:27:52.126  INFO 10420 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-04-26 17:27:52.546  INFO 10420 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2020-04-26 17:27:52.609  INFO 10420 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8889 (http) with context path ''
+2020-04-26 17:27:52.612  INFO 10420 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Started GeekBlogApplication in 5.94 seconds (JVM running for 7.705)
+2020-04-26 17:28:01.106  INFO 10420 --- [http-nio-8889-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-04-26 17:28:01.106  INFO 10420 --- [http-nio-8889-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-04-26 17:28:01.130  INFO 10420 --- [http-nio-8889-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 23 ms
+2020-04-26 17:28:01.257 DEBUG 10420 --- [http-nio-8889-exec-2] s.a.g.m.SysAccessLogMapper.selectPage    : ==>  Preparing: SELECT COUNT(1) FROM sys_access_log 
+2020-04-26 17:28:01.384 DEBUG 10420 --- [http-nio-8889-exec-2] s.a.g.m.SysAccessLogMapper.selectPage    : ==> Parameters: 
+2020-04-26 17:28:01.415 DEBUG 10420 --- [http-nio-8889-exec-2] s.a.g.m.SysAccessLogMapper.selectPage    : ==>  Preparing: SELECT id,create_time,description,exception_detail,log_type,method,params,request_ip,time,username,browser,address FROM sys_access_log LIMIT ?,? 
+2020-04-26 17:28:01.423 DEBUG 10420 --- [http-nio-8889-exec-2] s.a.g.m.SysAccessLogMapper.selectPage    : ==> Parameters: 0(Long), 10(Long)
+2020-04-26 17:28:01.432 DEBUG 10420 --- [http-nio-8889-exec-2] s.a.g.m.SysAccessLogMapper.selectPage    : <==      Total: 5
+2020-04-26 17:30:51.569  INFO 22424 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Starting GeekBlogApplication on DESKTOP-QNDK7AF with PID 22424 (D:\idea\geekblog\target\classes started by AlanLiang in D:\idea\geekblog)
+2020-04-26 17:30:51.571 DEBUG 22424 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Running with Spring Boot v2.2.6.RELEASE, Spring v5.2.5.RELEASE
+2020-04-26 17:30:51.571  INFO 22424 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : The following profiles are active: dev
+2020-04-26 17:30:51.603  INFO 22424 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2020-04-26 17:30:51.603  INFO 22424 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2020-04-26 17:30:52.807  INFO 22424 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8889 (http)
+2020-04-26 17:30:52.814  INFO 22424 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-04-26 17:30:52.815  INFO 22424 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.33]
+2020-04-26 17:30:52.898  INFO 22424 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-04-26 17:30:52.898  INFO 22424 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1295 ms
+2020-04-26 17:30:52.935  INFO 22424 --- [restartedMain] o.s.boot.web.servlet.RegistrationBean    : Servlet statViewServlet was not registered (possibly already registered?)
+2020-04-26 17:30:52.938  INFO 22424 --- [restartedMain] o.s.boot.web.servlet.RegistrationBean    : Filter webStatFilter was not registered (possibly already registered?)
+2020-04-26 17:30:53.104  INFO 22424 --- [restartedMain] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2020-04-26 17:30:53.413  INFO 22424 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2020-04-26 17:30:54.265  INFO 22424 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-04-26 17:30:54.551  INFO 22424 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2020-04-26 17:30:54.606  INFO 22424 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8889 (http) with context path ''
+2020-04-26 17:30:54.610  INFO 22424 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Started GeekBlogApplication in 3.686 seconds (JVM running for 4.665)
+2020-04-26 17:30:59.755  INFO 22424 --- [http-nio-8889-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-04-26 17:30:59.755  INFO 22424 --- [http-nio-8889-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-04-26 17:30:59.769  INFO 22424 --- [http-nio-8889-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 14 ms
+2020-04-26 17:30:59.868 DEBUG 22424 --- [http-nio-8889-exec-2] s.a.g.m.SysAccessLogMapper.selectPage    : ==>  Preparing: SELECT COUNT(1) FROM sys_access_log 
+2020-04-26 17:30:59.938 DEBUG 22424 --- [http-nio-8889-exec-2] s.a.g.m.SysAccessLogMapper.selectPage    : ==> Parameters: 
+2020-04-26 17:30:59.952 DEBUG 22424 --- [http-nio-8889-exec-2] s.a.g.m.SysAccessLogMapper.selectPage    : ==>  Preparing: SELECT id,request_ip,address,description,browser,time,create_time FROM sys_access_log LIMIT ?,? 
+2020-04-26 17:30:59.955 DEBUG 22424 --- [http-nio-8889-exec-2] s.a.g.m.SysAccessLogMapper.selectPage    : ==> Parameters: 0(Long), 10(Long)
+2020-04-26 17:30:59.962 DEBUG 22424 --- [http-nio-8889-exec-2] s.a.g.m.SysAccessLogMapper.selectPage    : <==      Total: 5
+2020-04-26 17:32:42.857 DEBUG 22424 --- [http-nio-8889-exec-5] s.a.g.m.SysAccessLogMapper.selectPage    : ==>  Preparing: SELECT COUNT(1) FROM sys_access_log 
+2020-04-26 17:32:42.858 DEBUG 22424 --- [http-nio-8889-exec-5] s.a.g.m.SysAccessLogMapper.selectPage    : ==> Parameters: 
+2020-04-26 17:32:42.861 DEBUG 22424 --- [http-nio-8889-exec-5] s.a.g.m.SysAccessLogMapper.selectPage    : ==>  Preparing: SELECT id,request_ip,address,description,browser,time,create_time FROM sys_access_log LIMIT ?,? 
+2020-04-26 17:32:42.862 DEBUG 22424 --- [http-nio-8889-exec-5] s.a.g.m.SysAccessLogMapper.selectPage    : ==> Parameters: 0(Long), 10(Long)
+2020-04-26 17:32:42.868 DEBUG 22424 --- [http-nio-8889-exec-5] s.a.g.m.SysAccessLogMapper.selectPage    : <==      Total: 5
+2020-04-26 17:48:07.050 DEBUG 22424 --- [http-nio-8889-exec-6] s.a.g.mapper.SysMenuMapper.selectList    : ==>  Preparing: SELECT id,title,href,pid,icon,target,sort,status,remark,create_time,update_time FROM sys_menu WHERE (status = ?) 
+2020-04-26 17:48:07.068 DEBUG 22424 --- [http-nio-8889-exec-6] s.a.g.mapper.SysMenuMapper.selectList    : ==> Parameters: true(Boolean)
+2020-04-26 17:48:07.072 DEBUG 22424 --- [http-nio-8889-exec-6] s.a.g.mapper.SysMenuMapper.selectList    : <==      Total: 9
+2020-04-26 17:48:07.080  INFO 22424 --- [http-nio-8889-exec-6] s.alanliang.geekblog.aspect.LogAspect    : Request ------ RequestLog {url = http://localhost:8889/admin/init, ip = 0:0:0:0:0:0:0:1, classMethod = site.alanliang.geekblog.controller.admin.IndexController.init, args = [], time = 35ms, description = 初始化后台主页}
+2020-04-26 17:48:07.082  INFO 22424 --- [http-nio-8889-exec-6] s.alanliang.geekblog.aspect.LogAspect    : Return ------ <200 OK OK,InitInfoVo(menuInfo=[MenuVo(id=1, pid=0, title=常规管理, icon=fa fa-dashboard, href=, target=_self, child=[MenuVo(id=2, pid=1, title=用户管理, icon=fa fa-users, href=/admin/api/user/user-list, target=null, child=null), MenuVo(id=3, pid=1, title=文章发布, icon=fa fa-book, href=/admin/api/article/article-add, target=null, child=null), MenuVo(id=4, pid=1, title=其它管理, icon=fa fa-slideshare, href=null, target=null, child=null), MenuVo(id=5, pid=1, title=文章管理, icon=fa fa-book, href=/admin/api/article/article-list, target=null, child=null), MenuVo(id=6, pid=1, title=分类管理, icon=fa fa-bookmark, href=/admin/api/category/category-list, target=null, child=null), MenuVo(id=7, pid=1, title=标签管理, icon=fa fa-tags, href=/admin/api/tag/tag-list, target=null, child=null), MenuVo(id=8, pid=1, title=数据源监控, icon=fa fa-database, href=/druid, target=null, child=null), MenuVo(id=9, pid=1, title=访问日志, icon=fa fa-pencil-square, href=/admin/api/log/log-list, target=null, child=null)])], homeInfo=InitInfoVo.HomeInfo(title=首页, href=/admin/api/home/dashboard), logoInfo=InitInfoVo.LogoInfo(title=Geek Blog, image=/static/admin/layuimini/images/logo.png)),[]>
+2020-04-26 17:48:10.178 DEBUG 22424 --- [http-nio-8889-exec-8] s.a.g.m.SysAccessLogMapper.selectPage    : ==>  Preparing: SELECT COUNT(1) FROM sys_access_log 
+2020-04-26 17:48:10.178 DEBUG 22424 --- [http-nio-8889-exec-8] s.a.g.m.SysAccessLogMapper.selectPage    : ==> Parameters: 
+2020-04-26 17:48:10.181 DEBUG 22424 --- [http-nio-8889-exec-8] s.a.g.m.SysAccessLogMapper.selectPage    : ==>  Preparing: SELECT id,request_ip,address,description,browser,time,create_time FROM sys_access_log LIMIT ?,? 
+2020-04-26 17:48:10.182 DEBUG 22424 --- [http-nio-8889-exec-8] s.a.g.m.SysAccessLogMapper.selectPage    : ==> Parameters: 0(Long), 15(Long)
+2020-04-26 17:48:10.183 DEBUG 22424 --- [http-nio-8889-exec-8] s.a.g.m.SysAccessLogMapper.selectPage    : <==      Total: 5
+2020-04-26 17:48:47.326 DEBUG 22424 --- [http-nio-8889-exec-9] s.a.g.mapper.SysMenuMapper.selectList    : ==>  Preparing: SELECT id,title,href,pid,icon,target,sort,status,remark,create_time,update_time FROM sys_menu WHERE (status = ?) 
+2020-04-26 17:48:47.327 DEBUG 22424 --- [http-nio-8889-exec-9] s.a.g.mapper.SysMenuMapper.selectList    : ==> Parameters: true(Boolean)
+2020-04-26 17:48:47.359 DEBUG 22424 --- [http-nio-8889-exec-9] s.a.g.mapper.SysMenuMapper.selectList    : <==      Total: 9
+2020-04-26 17:48:47.360  INFO 22424 --- [http-nio-8889-exec-9] s.alanliang.geekblog.aspect.LogAspect    : Request ------ RequestLog {url = http://localhost:8889/admin/init, ip = 0:0:0:0:0:0:0:1, classMethod = site.alanliang.geekblog.controller.admin.IndexController.init, args = [], time = 36ms, description = 初始化后台主页}
+2020-04-26 17:48:47.360  INFO 22424 --- [http-nio-8889-exec-9] s.alanliang.geekblog.aspect.LogAspect    : Return ------ <200 OK OK,InitInfoVo(menuInfo=[MenuVo(id=1, pid=0, title=常规管理, icon=fa fa-dashboard, href=, target=_self, child=[MenuVo(id=2, pid=1, title=用户管理, icon=fa fa-users, href=/admin/api/user/user-list, target=null, child=null), MenuVo(id=3, pid=1, title=文章发布, icon=fa fa-book, href=/admin/api/article/article-add, target=null, child=null), MenuVo(id=4, pid=1, title=其它管理, icon=fa fa-slideshare, href=null, target=null, child=null), MenuVo(id=5, pid=1, title=文章管理, icon=fa fa-book, href=/admin/api/article/article-list, target=null, child=null), MenuVo(id=6, pid=1, title=分类管理, icon=fa fa-bookmark, href=/admin/api/category/category-list, target=null, child=null), MenuVo(id=7, pid=1, title=标签管理, icon=fa fa-tags, href=/admin/api/tag/tag-list, target=null, child=null), MenuVo(id=8, pid=1, title=数据源监控, icon=fa fa-database, href=/druid, target=null, child=null), MenuVo(id=9, pid=1, title=访问日志, icon=fa fa-pencil-square, href=/admin/api/log/log-list, target=null, child=null)])], homeInfo=InitInfoVo.HomeInfo(title=首页, href=/admin/api/home/dashboard), logoInfo=InitInfoVo.LogoInfo(title=Geek Blog, image=/static/admin/layuimini/images/logo.png)),[]>
+2020-04-26 17:48:47.703 DEBUG 22424 --- [http-nio-8889-exec-1] s.a.g.m.SysAccessLogMapper.selectPage    : ==>  Preparing: SELECT COUNT(1) FROM sys_access_log 
+2020-04-26 17:48:47.704 DEBUG 22424 --- [http-nio-8889-exec-1] s.a.g.m.SysAccessLogMapper.selectPage    : ==> Parameters: 
+2020-04-26 17:48:47.706 DEBUG 22424 --- [http-nio-8889-exec-1] s.a.g.m.SysAccessLogMapper.selectPage    : ==>  Preparing: SELECT id,request_ip,address,description,browser,time,create_time FROM sys_access_log LIMIT ?,? 
+2020-04-26 17:48:47.707 DEBUG 22424 --- [http-nio-8889-exec-1] s.a.g.m.SysAccessLogMapper.selectPage    : ==> Parameters: 0(Long), 15(Long)
+2020-04-26 17:48:47.711 DEBUG 22424 --- [http-nio-8889-exec-1] s.a.g.m.SysAccessLogMapper.selectPage    : <==      Total: 5
+2020-04-26 17:49:10.602 DEBUG 22424 --- [http-nio-8889-exec-2] s.a.g.mapper.SysMenuMapper.selectList    : ==>  Preparing: SELECT id,title,href,pid,icon,target,sort,status,remark,create_time,update_time FROM sys_menu WHERE (status = ?) 
+2020-04-26 17:49:10.603 DEBUG 22424 --- [http-nio-8889-exec-2] s.a.g.mapper.SysMenuMapper.selectList    : ==> Parameters: true(Boolean)
+2020-04-26 17:49:10.612 DEBUG 22424 --- [http-nio-8889-exec-2] s.a.g.mapper.SysMenuMapper.selectList    : <==      Total: 9
+2020-04-26 17:49:10.613  INFO 22424 --- [http-nio-8889-exec-2] s.alanliang.geekblog.aspect.LogAspect    : Request ------ RequestLog {url = http://localhost:8889/admin/init, ip = 0:0:0:0:0:0:0:1, classMethod = site.alanliang.geekblog.controller.admin.IndexController.init, args = [], time = 13ms, description = 初始化后台主页}
+2020-04-26 17:49:10.613  INFO 22424 --- [http-nio-8889-exec-2] s.alanliang.geekblog.aspect.LogAspect    : Return ------ <200 OK OK,InitInfoVo(menuInfo=[MenuVo(id=1, pid=0, title=常规管理, icon=fa fa-dashboard, href=, target=_self, child=[MenuVo(id=2, pid=1, title=用户管理, icon=fa fa-users, href=/admin/api/user/user-list, target=null, child=null), MenuVo(id=3, pid=1, title=文章发布, icon=fa fa-book, href=/admin/api/article/article-add, target=null, child=null), MenuVo(id=4, pid=1, title=其它管理, icon=fa fa-slideshare, href=null, target=null, child=null), MenuVo(id=5, pid=1, title=文章管理, icon=fa fa-book, href=/admin/api/article/article-list, target=null, child=null), MenuVo(id=6, pid=1, title=分类管理, icon=fa fa-bookmark, href=/admin/api/category/category-list, target=null, child=null), MenuVo(id=7, pid=1, title=标签管理, icon=fa fa-tags, href=/admin/api/tag/tag-list, target=null, child=null), MenuVo(id=8, pid=1, title=数据源监控, icon=fa fa-database, href=/druid, target=null, child=null), MenuVo(id=9, pid=1, title=访问日志, icon=fa fa-pencil-square, href=/admin/api/log/log-list, target=null, child=null)])], homeInfo=InitInfoVo.HomeInfo(title=首页, href=/admin/api/home/dashboard), logoInfo=InitInfoVo.LogoInfo(title=Geek Blog, image=/static/admin/layuimini/images/logo.png)),[]>
+2020-04-26 17:49:10.936 DEBUG 22424 --- [http-nio-8889-exec-4] s.a.g.m.SysAccessLogMapper.selectPage    : ==>  Preparing: SELECT COUNT(1) FROM sys_access_log 
+2020-04-26 17:49:10.936 DEBUG 22424 --- [http-nio-8889-exec-4] s.a.g.m.SysAccessLogMapper.selectPage    : ==> Parameters: 
+2020-04-26 17:49:10.938 DEBUG 22424 --- [http-nio-8889-exec-4] s.a.g.m.SysAccessLogMapper.selectPage    : ==>  Preparing: SELECT id,request_ip,address,description,browser,time,create_time FROM sys_access_log LIMIT ?,? 
+2020-04-26 17:49:10.938 DEBUG 22424 --- [http-nio-8889-exec-4] s.a.g.m.SysAccessLogMapper.selectPage    : ==> Parameters: 0(Long), 15(Long)
+2020-04-26 17:49:10.941 DEBUG 22424 --- [http-nio-8889-exec-4] s.a.g.m.SysAccessLogMapper.selectPage    : <==      Total: 5
+2020-04-26 17:49:41.210 DEBUG 22424 --- [http-nio-8889-exec-5] s.a.g.mapper.SysMenuMapper.selectList    : ==>  Preparing: SELECT id,title,href,pid,icon,target,sort,status,remark,create_time,update_time FROM sys_menu WHERE (status = ?) 
+2020-04-26 17:49:41.211 DEBUG 22424 --- [http-nio-8889-exec-5] s.a.g.mapper.SysMenuMapper.selectList    : ==> Parameters: true(Boolean)
+2020-04-26 17:49:41.215 DEBUG 22424 --- [http-nio-8889-exec-5] s.a.g.mapper.SysMenuMapper.selectList    : <==      Total: 9
+2020-04-26 17:49:41.216  INFO 22424 --- [http-nio-8889-exec-5] s.alanliang.geekblog.aspect.LogAspect    : Request ------ RequestLog {url = http://localhost:8889/admin/init, ip = 0:0:0:0:0:0:0:1, classMethod = site.alanliang.geekblog.controller.admin.IndexController.init, args = [], time = 8ms, description = 初始化后台主页}
+2020-04-26 17:49:41.217  INFO 22424 --- [http-nio-8889-exec-5] s.alanliang.geekblog.aspect.LogAspect    : Return ------ <200 OK OK,InitInfoVo(menuInfo=[MenuVo(id=1, pid=0, title=常规管理, icon=fa fa-dashboard, href=, target=_self, child=[MenuVo(id=2, pid=1, title=用户管理, icon=fa fa-users, href=/admin/api/user/user-list, target=null, child=null), MenuVo(id=3, pid=1, title=文章发布, icon=fa fa-book, href=/admin/api/article/article-add, target=null, child=null), MenuVo(id=4, pid=1, title=其它管理, icon=fa fa-slideshare, href=null, target=null, child=null), MenuVo(id=5, pid=1, title=文章管理, icon=fa fa-book, href=/admin/api/article/article-list, target=null, child=null), MenuVo(id=6, pid=1, title=分类管理, icon=fa fa-bookmark, href=/admin/api/category/category-list, target=null, child=null), MenuVo(id=7, pid=1, title=标签管理, icon=fa fa-tags, href=/admin/api/tag/tag-list, target=null, child=null), MenuVo(id=8, pid=1, title=数据源监控, icon=fa fa-database, href=/druid, target=null, child=null), MenuVo(id=9, pid=1, title=访问日志, icon=fa fa-pencil-square, href=/admin/api/log/log-list, target=null, child=null)])], homeInfo=InitInfoVo.HomeInfo(title=首页, href=/admin/api/home/dashboard), logoInfo=InitInfoVo.LogoInfo(title=Geek Blog, image=/static/admin/layuimini/images/logo.png)),[]>
+2020-04-26 17:49:41.579 DEBUG 22424 --- [http-nio-8889-exec-7] s.a.g.m.SysAccessLogMapper.selectPage    : ==>  Preparing: SELECT COUNT(1) FROM sys_access_log 
+2020-04-26 17:49:41.580 DEBUG 22424 --- [http-nio-8889-exec-7] s.a.g.m.SysAccessLogMapper.selectPage    : ==> Parameters: 
+2020-04-26 17:49:41.582 DEBUG 22424 --- [http-nio-8889-exec-7] s.a.g.m.SysAccessLogMapper.selectPage    : ==>  Preparing: SELECT id,request_ip,address,description,browser,time,create_time FROM sys_access_log LIMIT ?,? 
+2020-04-26 17:49:41.585 DEBUG 22424 --- [http-nio-8889-exec-7] s.a.g.m.SysAccessLogMapper.selectPage    : ==> Parameters: 0(Long), 15(Long)
+2020-04-26 17:49:41.589 DEBUG 22424 --- [http-nio-8889-exec-7] s.a.g.m.SysAccessLogMapper.selectPage    : <==      Total: 5
+2020-04-26 17:49:55.777 DEBUG 22424 --- [http-nio-8889-exec-9] s.a.g.mapper.SysMenuMapper.selectList    : ==>  Preparing: SELECT id,title,href,pid,icon,target,sort,status,remark,create_time,update_time FROM sys_menu WHERE (status = ?) 
+2020-04-26 17:49:55.777 DEBUG 22424 --- [http-nio-8889-exec-9] s.a.g.mapper.SysMenuMapper.selectList    : ==> Parameters: true(Boolean)
+2020-04-26 17:49:55.785 DEBUG 22424 --- [http-nio-8889-exec-9] s.a.g.mapper.SysMenuMapper.selectList    : <==      Total: 9
+2020-04-26 17:49:55.786  INFO 22424 --- [http-nio-8889-exec-9] s.alanliang.geekblog.aspect.LogAspect    : Request ------ RequestLog {url = http://localhost:8889/admin/init, ip = 0:0:0:0:0:0:0:1, classMethod = site.alanliang.geekblog.controller.admin.IndexController.init, args = [], time = 12ms, description = 初始化后台主页}
+2020-04-26 17:49:55.786  INFO 22424 --- [http-nio-8889-exec-9] s.alanliang.geekblog.aspect.LogAspect    : Return ------ <200 OK OK,InitInfoVo(menuInfo=[MenuVo(id=1, pid=0, title=常规管理, icon=fa fa-dashboard, href=, target=_self, child=[MenuVo(id=2, pid=1, title=用户管理, icon=fa fa-users, href=/admin/api/user/user-list, target=null, child=null), MenuVo(id=3, pid=1, title=文章发布, icon=fa fa-book, href=/admin/api/article/article-add, target=null, child=null), MenuVo(id=4, pid=1, title=其它管理, icon=fa fa-slideshare, href=null, target=null, child=null), MenuVo(id=5, pid=1, title=文章管理, icon=fa fa-book, href=/admin/api/article/article-list, target=null, child=null), MenuVo(id=6, pid=1, title=分类管理, icon=fa fa-bookmark, href=/admin/api/category/category-list, target=null, child=null), MenuVo(id=7, pid=1, title=标签管理, icon=fa fa-tags, href=/admin/api/tag/tag-list, target=null, child=null), MenuVo(id=8, pid=1, title=数据源监控, icon=fa fa-database, href=/druid, target=null, child=null), MenuVo(id=9, pid=1, title=访问日志, icon=fa fa-pencil-square, href=/admin/api/log/log-list, target=null, child=null)])], homeInfo=InitInfoVo.HomeInfo(title=首页, href=/admin/api/home/dashboard), logoInfo=InitInfoVo.LogoInfo(title=Geek Blog, image=/static/admin/layuimini/images/logo.png)),[]>
+2020-04-26 17:49:56.122 DEBUG 22424 --- [http-nio-8889-exec-10] s.a.g.m.SysAccessLogMapper.selectPage    : ==>  Preparing: SELECT COUNT(1) FROM sys_access_log 
+2020-04-26 17:49:56.122 DEBUG 22424 --- [http-nio-8889-exec-10] s.a.g.m.SysAccessLogMapper.selectPage    : ==> Parameters: 
+2020-04-26 17:49:56.124 DEBUG 22424 --- [http-nio-8889-exec-10] s.a.g.m.SysAccessLogMapper.selectPage    : ==>  Preparing: SELECT id,request_ip,address,description,browser,time,create_time FROM sys_access_log LIMIT ?,? 
+2020-04-26 17:49:56.124 DEBUG 22424 --- [http-nio-8889-exec-10] s.a.g.m.SysAccessLogMapper.selectPage    : ==> Parameters: 0(Long), 15(Long)
+2020-04-26 17:49:56.126 DEBUG 22424 --- [http-nio-8889-exec-10] s.a.g.m.SysAccessLogMapper.selectPage    : <==      Total: 5
