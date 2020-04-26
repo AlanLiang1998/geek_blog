@@ -156,7 +156,7 @@
         where tat.tag_id = #{tagId}
     </select>
 
-    <select id="countArticleByDate" resultType="site.alanliang.geekblog.vo.ArticleDateVO">
+    <select id="countArticleByDate" resultType="site.alanliang.geekblog.vo.ArticleDateVo">
         select year(create_time) 'year'
         <choose>
             <when test="dft == 2">

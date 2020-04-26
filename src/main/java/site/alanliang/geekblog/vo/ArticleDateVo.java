@@ -11,7 +11,7 @@ import java.util.Date;
  * Version 1.0
  **/
 @Data
-public class ArticleDateVO {
+public class ArticleDateVo {
     private Integer year;
 
     private Integer month;

@@ -2,14 +2,17 @@ package site.alanliang.geekblog.controller.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import site.alanliang.geekblog.domain.Article;
+import site.alanliang.geekblog.anntation.AccessLog;
+import site.alanliang.geekblog.dto.AboutVo;
 import site.alanliang.geekblog.service.ArticleService;
 import site.alanliang.geekblog.service.CategoryService;
 import site.alanliang.geekblog.service.TagService;
+import site.alanliang.geekblog.utils.DateUtil;
+import site.alanliang.geekblog.vo.ArticleDateVo;
 
 import java.util.List;
 
@@ -31,22 +34,24 @@ public class AboutController {
     @Autowired
     private TagService tagService;
 
-    @GetMapping("/article-count")
-    public ResponseEntity<Object> articleCount() {
-        long count = articleService.countAll(null);
-        return new ResponseEntity<>(count, HttpStatus.OK);
-    }
+    @AccessLog("访问关于我页")
+    @GetMapping("/about")
+    public ResponseEntity<Object> about(@RequestParam(value = "dateType", required = false) Integer dateFilterType) {
+        AboutVo aboutVo = new AboutVo();
+        aboutVo.setArticleCount(articleService.countAll(null));
+        aboutVo.setCategoryCount(categoryService.countAll());
+        aboutVo.setTagCount(tagService.countAll());
+        aboutVo.setCategories(categoryService.listByArticleCount());
+        aboutVo.setTags(tagService.listByArticleCount());
 
-    @GetMapping("/category-count")
-    public ResponseEntity<Object> categoryCount() {
-        long count = categoryService.countAll();
-        return new ResponseEntity<>(count, HttpStatus.OK);
+        List<ArticleDateVo> articleDates = articleService.countArticleByDate(dateFilterType);
+        for (ArticleDateVo articleDate : articleDates) {
+            articleDate.setDate(DateUtil.formatDate(articleDate.getYear(), articleDate.getMonth(), articleDate.getDay()));
+            articleDate.setYear(null);
+            articleDate.setMonth(null);
+            articleDate.setDay(null);
+        }
+        aboutVo.setArticleDates(articleDates);
+        return new ResponseEntity<>(aboutVo, HttpStatus.OK);
     }
-
-    @GetMapping("/tag-count")
-    public ResponseEntity<Object> tagCount() {
-        long count = tagService.countAll();
-        return new ResponseEntity<>(count, HttpStatus.OK);
-    }
-
 }

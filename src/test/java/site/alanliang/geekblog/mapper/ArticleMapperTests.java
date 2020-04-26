@@ -6,8 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import site.alanliang.geekblog.common.Constant;
 import site.alanliang.geekblog.domain.Article;
-import site.alanliang.geekblog.query.ArticleQuery;
-import site.alanliang.geekblog.vo.ArticleDateVO;
+import site.alanliang.geekblog.vo.ArticleDateVo;
 
 import java.util.List;
 
@@ -51,7 +50,7 @@ public class ArticleMapperTests {
     @Test
     void countArticleByDate() {
         Integer type = Constant.FILTER_BY_MONTH;
-        List<ArticleDateVO> articleDates = articleMapper.countArticleByDate(type);
+        List<ArticleDateVo> articleDates = articleMapper.countArticleByDate(type);
         System.out.println(articleDates);
     }
 

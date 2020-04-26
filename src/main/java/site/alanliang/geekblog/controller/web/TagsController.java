@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import site.alanliang.geekblog.anntation.AccessLog;
 import site.alanliang.geekblog.common.Constant;
 import site.alanliang.geekblog.domain.Article;
 import site.alanliang.geekblog.domain.Category;
@@ -33,6 +34,7 @@ public class TagsController {
     @Autowired
     private ArticleService articleService;
 
+    @AccessLog("访问标签页")
     @GetMapping("/tags")
     public ResponseEntity<Object> tags() {
         List<Tag> tags = tagService.listByArticleCount();

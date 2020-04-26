@@ -105,7 +105,8 @@
             <div class="row">
                 <!--左边按钮-->
                 <div class="col s4 m4 l4">
-                    <a class="left btn-floating btn-large waves-effect waves-light" @click="prevPage" href="#articleCards"
+                    <a class="left btn-floating btn-large waves-effect waves-light" @click="toPage(current-1)"
+                       href="#articleCards"
                        :class="{disabled: current == 1}">
                         <i class="fas fa-angle-left"></i>
                     </a>
@@ -117,7 +118,7 @@
                 <!--右边按钮-->
                 <div class="col s4 m4 l4">
                     <a class="right btn-floating btn-large waves-effect waves-light"
-                       @click="nextPage" href="#articleCards" :class="{disabled: current == pages}">
+                       @click="toPage(current+1)" href="#articleCards" :class="{disabled: current == pages}">
                         <i class="fas fa-angle-right"></i>
                     </a>
                 </div>
@@ -137,7 +138,7 @@
 <!--end commons-->
 
 <!--Vue-->
-<script type="module">
+<script type="text/javascript">
     let app = new Vue({
         el: '#app',
         data: {
@@ -173,14 +174,10 @@
                     this.tagId = tagId;
                 })
             },
-            prevPage: function () {
-                if (this.current > 1) {
-                    this.getArticlesByTagId(this.tagId, this.current - 1);
-                }
-            },
-            nextPage: function () {
-                if (this.current < this.pages) {
-                    this.getArticlesByTagId(this.tagId, this.current + 1);
+            toPage: function (page) {
+                if (page >= 1 && page <= this.pages) {
+                    this.current = page;
+                    this.getArticlesByTagId(this.tagId, page);
                 }
             },
             getWordArray: function () {
@@ -189,15 +186,21 @@
                     let word = {};
                     word.text = tag.name;
                     word.weight = tag.articleCount;
-                    word.link = '/tag/' + tag.id + '/articles';
+                    word.link = 'javascript:;';
                     wordArray.push(word);
                 });
                 $("#tag-wordcloud").jQCloud(wordArray, {autoResize: true});
+            },
+            getQueryString: function (name) {
+                var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+                var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+                if (r != null) return decodeURI(r[2]);
+                return null;
             }
         },
         created: function () {
             this.getTags();
-            let tid = getQueryString('id');
+            let tid = this.getQueryString('id');
             if (tid !== null) {
                 this.tagId = tid;
                 this.getArticlesByTagId(this.tagId, 1);

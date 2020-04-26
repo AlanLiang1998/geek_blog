@@ -2,16 +2,14 @@ package site.alanliang.geekblog.controller.admin;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import site.alanliang.geekblog.common.JsonResult;
 import site.alanliang.geekblog.common.TableResult;
 import site.alanliang.geekblog.domain.Article;
-import site.alanliang.geekblog.dto.ArticleDto;
+import site.alanliang.geekblog.dto.ArticleVo;
 import site.alanliang.geekblog.service.ArticleService;
-import site.alanliang.geekblog.vo.ArticleVo;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -40,34 +38,34 @@ public class ArticleController {
             wrapper = new QueryWrapper<>();
             wrapper.like("title", keyword);
         }
-        List<ArticleVo> articleVos = articleService.listByPageForAdmin(page, limit, wrapper);
+        List<site.alanliang.geekblog.vo.ArticleVo> articleVos = articleService.listByPageForAdmin(page, limit, wrapper);
         long count = articleService.countAll(wrapper);
         return TableResult.tableOk(articleVos, count);
     }
 
     @PostMapping
-    public JsonResult save(@Validated @RequestBody ArticleDto articleDto) {
-        articleDto.setViews(0);
-        articleDto.setLikes(0);
-        articleDto.setComments(0);
-        articleDto.setAppreciable(articleDto.getAppreciable() != null);
-        articleDto.setCommentable(articleDto.getCommentable() != null);
-        articleDto.setTop(articleDto.getTop() != null);
-        articleDto.setRecommend(articleDto.getRecommend() != null);
-        articleDto.setCreateTime(new Date());
-        articleDto.setUpdateTime(articleDto.getCreateTime());
-        articleService.saveOrUpdate(articleDto);
+    public JsonResult save(@Validated @RequestBody ArticleVo articleVo) {
+        articleVo.setViews(0);
+        articleVo.setLikes(0);
+        articleVo.setComments(0);
+        articleVo.setAppreciable(articleVo.getAppreciable() != null);
+        articleVo.setCommentable(articleVo.getCommentable() != null);
+        articleVo.setTop(articleVo.getTop() != null);
+        articleVo.setRecommend(articleVo.getRecommend() != null);
+        articleVo.setCreateTime(new Date());
+        articleVo.setUpdateTime(articleVo.getCreateTime());
+        articleService.saveOrUpdate(articleVo);
         return JsonResult.ok();
     }
 
     @PutMapping
-    public JsonResult update(@Validated @RequestBody ArticleDto articleDto) {
-        articleDto.setAppreciable(articleDto.getAppreciable() != null);
-        articleDto.setCommentable(articleDto.getCommentable() != null);
-        articleDto.setTop(articleDto.getTop() != null);
-        articleDto.setRecommend(articleDto.getRecommend() != null);
-        articleDto.setUpdateTime(new Date());
-        articleService.saveOrUpdate(articleDto);
+    public JsonResult update(@Validated @RequestBody ArticleVo articleVo) {
+        articleVo.setAppreciable(articleVo.getAppreciable() != null);
+        articleVo.setCommentable(articleVo.getCommentable() != null);
+        articleVo.setTop(articleVo.getTop() != null);
+        articleVo.setRecommend(articleVo.getRecommend() != null);
+        articleVo.setUpdateTime(new Date());
+        articleService.saveOrUpdate(articleVo);
         return JsonResult.ok();
     }
 

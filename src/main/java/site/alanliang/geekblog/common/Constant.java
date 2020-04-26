@@ -16,7 +16,7 @@ public interface Constant {
 
     Integer MAX_RECOMMEND_ARTICLES = 4;
 
-    String PAGE_SIZE = "6";
+    String PAGE_SIZE = "2";
 
     Integer FILTER_BY_DAY = 1;
     Integer FILTER_BY_MONTH = 2;

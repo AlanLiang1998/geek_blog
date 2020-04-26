@@ -723,20 +723,14 @@
                     url: '/article?id=' + id,
                     method: 'GET'
                 }).then((result) => {
-                    this.article = result.data;
+                    let articleData = result.data;
+                    this.article = articleData.article;
+                    this.prevPreview = articleData.prevPreview;
+                    this.nextPreview = articleData.nextPreview;
                     this.$nextTick(function () {
                         Prism.highlightAllUnder(document.getElementById("articleContent"));
                         this.initTocbot();
                     });
-                })
-            },
-            getPrevAndNextById: function (id) {
-                axios({
-                    url: '/article/prev-and-next?id=' + id,
-                    method: 'GET'
-                }).then((result) => {
-                    this.prevPreview = result.data.prevPreview;
-                    this.nextPreview = result.data.nextPreview;
                 })
             },
             likeIt: function (id) {
@@ -824,7 +818,6 @@
         mounted() {
             let id = [[${id}]];
             this.getArticleById(id);
-            this.getPrevAndNextById(id);
         },
         filters: {
             dateFormat: function (value) {

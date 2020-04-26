@@ -1,18 +1,17 @@
 package site.alanliang.geekblog.controller.web;
 
-import com.sun.media.sound.SoftTuning;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import site.alanliang.geekblog.anntation.AccessLog;
 import site.alanliang.geekblog.domain.Article;
+import site.alanliang.geekblog.dto.ArticleDetailVo;
 import site.alanliang.geekblog.service.ArticleService;
 
 import javax.validation.constraints.NotNull;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @Descriptin TODO
@@ -39,21 +38,18 @@ public class ArticleDetailController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @AccessLog("阅读文章")
     @ResponseBody
     @GetMapping("/article")
     public ResponseEntity<Object> article(@RequestParam("id") Long id) {
         Article article = articleService.getArticleById(id);
-        return new ResponseEntity<>(article, HttpStatus.OK);
-    }
-
-    @ResponseBody
-    @GetMapping("/article/prev-and-next")
-    ResponseEntity<Object> prevAndNextArticlePreview(@RequestParam("id") Long id) {
         Article prevPreview = articleService.getPrevArticlePreview(id);
         Article nextPreview = articleService.getNextArticlePreview(id);
-        Map<String, Object> map = new HashMap<>();
-        map.put("prevPreview", prevPreview);
-        map.put("nextPreview", nextPreview);
-        return new ResponseEntity<>(map, HttpStatus.OK);
+        ArticleDetailVo articleDetailVo = new ArticleDetailVo();
+        articleDetailVo.setArticle(article);
+        articleDetailVo.setPrevPreview(prevPreview);
+        articleDetailVo.setNextPreview(nextPreview);
+        return new ResponseEntity<>(articleDetailVo, HttpStatus.OK);
     }
+
 }

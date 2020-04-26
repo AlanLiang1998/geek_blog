@@ -3,10 +3,9 @@ package site.alanliang.geekblog.service;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import site.alanliang.geekblog.domain.Article;
-import site.alanliang.geekblog.dto.ArticleDto;
+import site.alanliang.geekblog.dto.ArticleVo;
 import site.alanliang.geekblog.query.ArticleQuery;
-import site.alanliang.geekblog.vo.ArticleDateVO;
-import site.alanliang.geekblog.vo.ArticleVo;
+import site.alanliang.geekblog.vo.ArticleDateVo;
 
 import java.util.List;
 
@@ -18,9 +17,9 @@ public interface ArticleService {
     /**
      * 保存或编辑文章
      *
-     * @param articleDto 文章DTO
+     * @param articleVo 文章DTO
      */
-    void saveOrUpdate(ArticleDto articleDto);
+    void saveOrUpdate(ArticleVo articleVo);
 
     /**
      * 后台分页查询所有文章
@@ -30,7 +29,7 @@ public interface ArticleService {
      * @param wrapper 条件
      * @return 文章列表
      */
-    List<ArticleVo> listByPageForAdmin(Integer current, Integer size, QueryWrapper<Article> wrapper);
+    List<site.alanliang.geekblog.vo.ArticleVo> listByPageForAdmin(Integer current, Integer size, QueryWrapper<Article> wrapper);
 
     /**
      * 查询记录总数
@@ -145,7 +144,7 @@ public interface ArticleService {
      * @param articleQuery
      * @return 文章日期统计
      */
-    List<ArticleDateVO> countArticleByDate(Integer articleQuery);
+    List<ArticleDateVo> countArticleByDate(Integer articleQuery);
 
     /**
      * 根据日期分页获取所有文章预览
@@ -163,4 +162,5 @@ public interface ArticleService {
      * @return 文章列表
      */
     List<Article> listArticlesByKeyword();
+
 }

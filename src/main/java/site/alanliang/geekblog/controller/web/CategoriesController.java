@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import site.alanliang.geekblog.anntation.AccessLog;
 import site.alanliang.geekblog.common.Constant;
 import site.alanliang.geekblog.domain.Article;
 import site.alanliang.geekblog.domain.Category;
@@ -28,6 +29,7 @@ public class CategoriesController {
     @Autowired
     private ArticleService articleService;
 
+    @AccessLog("访问分类页")
     @GetMapping("/categories")
     public ResponseEntity<Object> categories() {
         List<Category> categories = categoryService.listByArticleCount();

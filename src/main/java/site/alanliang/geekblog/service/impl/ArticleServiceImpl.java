@@ -2,7 +2,6 @@ package site.alanliang.geekblog.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import org.omg.PortableInterceptor.ObjectReferenceFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,13 +9,12 @@ import org.springframework.transaction.annotation.Transactional;
 import site.alanliang.geekblog.common.Constant;
 import site.alanliang.geekblog.domain.Article;
 import site.alanliang.geekblog.domain.ArticleTag;
-import site.alanliang.geekblog.dto.ArticleDto;
+import site.alanliang.geekblog.dto.ArticleVo;
 import site.alanliang.geekblog.mapper.ArticleMapper;
 import site.alanliang.geekblog.mapper.ArticleTagMapper;
 import site.alanliang.geekblog.query.ArticleQuery;
 import site.alanliang.geekblog.service.ArticleService;
-import site.alanliang.geekblog.vo.ArticleDateVO;
-import site.alanliang.geekblog.vo.ArticleVo;
+import site.alanliang.geekblog.vo.ArticleDateVo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,7 +59,10 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public List<ArticleDateVO> countArticleByDate(Integer dateFilterType) {
+    public List<ArticleDateVo> countArticleByDate(Integer dateFilterType) {
+        if (dateFilterType == null) {
+            dateFilterType = Constant.FILTER_BY_DAY;
+        }
         return articleMapper.countArticleByDate(dateFilterType);
     }
 
@@ -149,12 +150,12 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public List<ArticleVo> listByPageForAdmin(Integer current, Integer size, QueryWrapper<Article> wrapper) {
+    public List<site.alanliang.geekblog.vo.ArticleVo> listByPageForAdmin(Integer current, Integer size, QueryWrapper<Article> wrapper) {
         Page<Article> page = new Page<>(current, size);
         List<Article> articles = articleMapper.listArticlesTableByPage(page, wrapper);
-        List<ArticleVo> articleVos = new ArrayList<>();
+        List<site.alanliang.geekblog.vo.ArticleVo> articleVos = new ArrayList<>();
         for (Article article : articles) {
-            ArticleVo articleVo = new ArticleVo();
+            site.alanliang.geekblog.vo.ArticleVo articleVo = new site.alanliang.geekblog.vo.ArticleVo();
             BeanUtils.copyProperties(article, articleVo);
             articleVos.add(articleVo);
         }
@@ -163,18 +164,19 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void saveOrUpdate(ArticleDto articleDto) {
-        if (articleDto.getId() == null) {
+    public void saveOrUpdate(ArticleVo articleVo) {
+        if (articleVo.getId() == null) {
             //新增
-            articleMapper.insert(articleDto);
-            articleTagMapper.batchInsert(articleDto.getId(), articleDto.getTagIdList());
+            articleMapper.insert(articleVo);
+            articleTagMapper.batchInsert(articleVo.getId(), articleVo.getTagIdList());
         } else {
             //编辑
-            articleMapper.updateById(articleDto);
+            articleMapper.updateById(articleVo);
             QueryWrapper<ArticleTag> wrapper = new QueryWrapper<>();
-            wrapper.eq("article_id", articleDto.getId());
+            wrapper.eq("article_id", articleVo.getId());
             articleTagMapper.delete(wrapper);
-            articleTagMapper.batchInsert(articleDto.getId(), articleDto.getTagIdList());
+            articleTagMapper.batchInsert(articleVo.getId(), articleVo.getTagIdList());
         }
     }
+
 }

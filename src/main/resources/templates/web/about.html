@@ -216,32 +216,38 @@
                         <div class="row">
                             <div class="photo col s12 m6 l4" data-aos="fade-up">
                                 <div class="img-item" data-src="http://q8rsjstig.bkt.clouddn.com/note/oilpainting1.jpg">
-                                    <img src="http://q8rsjstig.bkt.clouddn.com/note/oilpainting1.jpg" class="responsive-img">
+                                    <img src="http://q8rsjstig.bkt.clouddn.com/note/oilpainting1.jpg"
+                                         class="responsive-img">
                                 </div>
                             </div>
                             <div class="photo col s12 m6 l4" data-aos="fade-up">
                                 <div class="img-item" data-src="http://q8rsjstig.bkt.clouddn.com/note/oilpainting2.jpg">
-                                    <img src="http://q8rsjstig.bkt.clouddn.com/note/oilpainting2.jpg" class="responsive-img">
+                                    <img src="http://q8rsjstig.bkt.clouddn.com/note/oilpainting2.jpg"
+                                         class="responsive-img">
                                 </div>
                             </div>
                             <div class="photo col s12 m6 l4" data-aos="fade-up">
                                 <div class="img-item" data-src="http://q8rsjstig.bkt.clouddn.com/note/oilpainting3.jpg">
-                                    <img src="http://q8rsjstig.bkt.clouddn.com/note/oilpainting3.jpg" class="responsive-img">
+                                    <img src="http://q8rsjstig.bkt.clouddn.com/note/oilpainting3.jpg"
+                                         class="responsive-img">
                                 </div>
                             </div>
                             <div class="photo col s12 m6 l4" data-aos="fade-up">
                                 <div class="img-item" data-src="http://q8rsjstig.bkt.clouddn.com/note/oilpainting4.jpg">
-                                    <img src="http://q8rsjstig.bkt.clouddn.com/note/oilpainting4.jpg" class="responsive-img">
+                                    <img src="http://q8rsjstig.bkt.clouddn.com/note/oilpainting4.jpg"
+                                         class="responsive-img">
                                 </div>
                             </div>
                             <div class="photo col s12 m6 l4" data-aos="fade-up">
                                 <div class="img-item" data-src="http://q8rsjstig.bkt.clouddn.com/note/oilpainting5.jpg">
-                                    <img src="http://q8rsjstig.bkt.clouddn.com/note/oilpainting5.jpg" class="responsive-img">
+                                    <img src="http://q8rsjstig.bkt.clouddn.com/note/oilpainting5.jpg"
+                                         class="responsive-img">
                                 </div>
                             </div>
                             <div class="photo col s12 m6 l4" data-aos="fade-up">
                                 <div class="img-item" data-src="http://q8rsjstig.bkt.clouddn.com/note/oilpainting6.jpg">
-                                    <img src="http://q8rsjstig.bkt.clouddn.com/note/oilpainting6.jpg" class="responsive-img">
+                                    <img src="http://q8rsjstig.bkt.clouddn.com/note/oilpainting6.jpg"
+                                         class="responsive-img">
                                 </div>
                             </div>
                         </div>
@@ -260,66 +266,36 @@
             articleCount: 0,
             categoryCount: 0,
             tagCount: 0,
+            categories: [],
             tags: [],
+            articleDates: [],
         },
         methods: {
-            getArticleCount: function () {
+            getAboutData: function () {
                 axios({
-                    url: '/article-count',
-                    method: 'GET'
-                }).then((result) => {
-                    this.articleCount = result.data;
-                })
-            },
-            getCategoryCount: function () {
-                axios({
-                    url: '/category-count',
-                    method: 'GET'
-                }).then((result) => {
-                    this.categoryCount = result.data;
-                })
-            },
-            getTagCount: function () {
-                axios({
-                    url: '/tag-count',
-                    method: 'GET'
-                }).then((result) => {
-                    this.tagCount = result.data;
-                })
-            },
-            getCalendarData: function () {
-                axios({
-                    url: '/archives/calendar-data',
+                    url: '/about',
                     params: {
-                        type: 2
+                        dateType: 2,
                     },
                     method: 'GET'
                 }).then((result) => {
+                    let aboutData = result.data;
+                    this.articleCount = aboutData.articleCount;
+                    this.categoryCount = aboutData.categoryCount;
+                    this.aboutData = aboutData.aboutData;
+                    this.categories = aboutData.categories;
+                    this.tags = aboutData.tags;
+                    this.articleDates = aboutData.articleDates;
+
                     this.$nextTick(function () {
-                        this.initPostsChart(result.data);
+                        this.initCharts();
                     })
                 })
             },
-            getCategories: function () {
-                axios({
-                    url: '/categories',
-                    method: 'GET'
-                }).then((result) => {
-                    this.$nextTick(function () {
-                        this.intiCategoriesChart(result.data);
-                    });
-                })
-            },
-            getTags: function () {
-                axios({
-                    url: '/tags',
-                    method: 'GET'
-                }).then((result) => {
-                    this.tags = result.data;
-                    this.$nextTick(function () {
-                        this.initTagsChart(this.tags);
-                    });
-                })
+            initCharts: function () {
+                this.initPostsChart(this.articleDates);
+                this.initCategoriesChart(this.categories);
+                this.initTagsChart(this.tags);
             },
             initPostsChart: function (data) {
                 Date.prototype.format = function (fmt) {
@@ -437,7 +413,7 @@
                 };
                 postsChart.setOption(postsOption);
             },
-            intiCategoriesChart: function (data) {
+            initCategoriesChart: function (data) {
                 let categoriesChart = echarts.init(document.getElementById('categories-chart'));
                 data = data.map(item => {
                     return {
@@ -532,13 +508,8 @@
                 tagsChart.setOption(tagsOption);
             }
         },
-        created(){
-            this.getArticleCount();
-            this.getCategoryCount();
-            this.getTagCount();
-            this.getCalendarData();
-            this.getCategories();
-            this.getTags();
+        created() {
+            this.getAboutData();
         },
     });
 

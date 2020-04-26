@@ -7,7 +7,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 import site.alanliang.geekblog.domain.Article;
-import site.alanliang.geekblog.vo.ArticleDateVO;
+import site.alanliang.geekblog.vo.ArticleDateVo;
 
 import java.util.List;
 
@@ -89,7 +89,7 @@ public interface ArticleMapper extends BaseMapper<Article> {
      * @param dateFilterType 日期统计类型
      * @return 文章日期统计
      */
-    List<ArticleDateVO> countArticleByDate(@Param("dft") Integer dateFilterType);
+    List<ArticleDateVo> countArticleByDate(@Param("dft") Integer dateFilterType);
 
     /**
      * 根据日期分页查询所有文章预览

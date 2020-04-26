@@ -16,7 +16,7 @@ import java.util.List;
  **/
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class ArticleDto extends Article {
+public class ArticleVo extends Article {
     @Size(min = 1,message = "请选择至少一个标签")
     private List<Long> tagIdList;
 }
