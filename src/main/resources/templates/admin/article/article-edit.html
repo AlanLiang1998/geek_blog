@@ -38,7 +38,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">封面链接</label>
                 <div class="layui-input-block">
-                    <input type="text" name="cover" lay-verify="verTitle" placeholder="请输入封面链接..."
+                    <input type="text" name="cover"  placeholder="请输入封面链接..."
                            autocomplete="off" class="layui-input"/>
                 </div>
             </div>
@@ -243,12 +243,7 @@
         //保存文章
         function saveArticle(data, isPublish) {
             //获取标签列表
-            var tagIdList = [];
-            var tagIdListStr = data.field.select.split(',');
-            $.each(tagIdListStr, function () {
-                tagIdList.push(Number($(this)[0]));
-            })
-            data.field.tagIdList = tagIdList;
+            data.field.tagIdList = tagSelect.getValue('value');
             //获取文章内容
             data.field.content = editor.getHTML();
             //获取文章markdown

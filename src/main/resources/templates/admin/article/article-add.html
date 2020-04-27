@@ -192,50 +192,44 @@
             }
         });
         //表单验证
-        form.verify({
-            verTitle: function (value) {
-                if (value.length <= 0) {
-                    return '文章标题不能为空';
-                }
-                if (value.length > 100) {
-                    return '文章标题长度不能超过100';
-                }
-            },
-            verSummary: function (value) {
-                if (value.length > 100) {
-                    return '文章摘要长度不能超过100';
-                }
-            },
-            verContent: function () {
-                var content = editor.getMarkdown()
-                if (content.length <= 0) {
-                    return '文章内容不能为空';
-                }
-            },
-            verCategory: function (value) {
-                if (value == 0) {
-                    return '请选择一个分类';
-                }
-            },
-            verTag: function () {
-                if (tagSelect.getValue('value').length <= 0) {
-                    return '请选择至少一个标签';
-                }
-            }
-        });
+         form.verify({
+             verTitle: function (value) {
+                 if (value.length <= 0) {
+                     return '文章标题不能为空';
+                 }
+                 if (value.length > 100) {
+                     return '文章标题长度不能超过100';
+                 }
+             },
+             verSummary: function (value) {
+                 if (value.length > 100) {
+                     return '文章摘要长度不能超过100';
+                 }
+             },
+             verContent: function () {
+                 var content = editor.getMarkdown()
+                 if (content.length <= 0) {
+                     return '文章内容不能为空';
+                 }
+             },
+             verCategory: function (value) {
+                 if (value == 0) {
+                     return '请选择一个分类';
+                 }
+             },
+             verTag: function () {
+                 if (tagSelect.getValue('value').length <= 0) {
+                     return '请选择至少一个标签';
+                 }
+             }
+         });
 
         //保存文章
         function saveArticle(data, isPublish) {
             //获取标签列表
-            var tagIdList = [];
-            var tagIdListStr = data.field.select.split(',');
-            $.each(tagIdListStr, function () {
-                tagIdList.push(Number($(this)[0]));
-            })
-            data.field.tagIdList = tagIdList;
+            data.field.tagIdList = tagSelect.getValue('value');
             //获取文章内容
             data.field.content = editor.getHTML();
-            console.log(editor.getHTML());
             //获取文章markdown
             data.field.textContent = editor.getMarkdown();
             //获取是否发布
@@ -243,22 +237,22 @@
 
             var saveResult = false;
 
-            $.ajax({
-                url: '/admin/article',
-                type: 'POST',
-                contentType: 'application/json',
-                data: JSON.stringify(data.field),
-                async: false,
-                success: function (result) {
-                    if (result.code == 200) {
-                        saveResult = true;
-                    }
-                },
-                error: function (XMLHttpRequest) {
-                    var result = JSON.parse(XMLHttpRequest.responseText);
-                    layer.alert(result.msg, {icon: 5});
-                }
-            });
+             $.ajax({
+                 url: '/admin/article',
+                 type: 'POST',
+                 contentType: 'application/json',
+                 data: JSON.stringify(data.field),
+                 async: false,
+                 success: function (result) {
+                     if (result.code == 200) {
+                         saveResult = true;
+                     }
+                 },
+                 error: function (XMLHttpRequest) {
+                     var result = JSON.parse(XMLHttpRequest.responseText);
+                     layer.alert(result.msg, {icon: 5});
+                 }
+             });
             return saveResult;
         };
         //监听保存草稿按钮

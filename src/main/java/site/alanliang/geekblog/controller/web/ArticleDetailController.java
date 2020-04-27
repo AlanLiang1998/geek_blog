@@ -27,7 +27,9 @@ public class ArticleDetailController {
 
     @GetMapping("/article/{id}")
     public String articleDetail(@PathVariable("id") Long id, Model model) {
-        model.addAttribute("id", id);
+        model.addAttribute("article", articleService.getArticleById(id));
+        model.addAttribute("prevPreview", articleService.getPrevArticlePreview(id));
+        model.addAttribute("nextPreview", articleService.getNextArticlePreview(id));
         return "web/article";
     }
 
