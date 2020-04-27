@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta th:include="/web/fragments :: head(~{::title})">
+    <meta th:include="web/fragments :: head(~{::title})">
     <title>关于我 | GeekBlog</title>
     <style type="text/css">
         /* don't remove. */
@@ -23,11 +23,11 @@
 
 <body>
 <!--header-->
-<header th:replace="/web/fragments :: header"></header>
+<header th:replace="web/fragments :: header"></header>
 <!--end header-->
 
 <!--bgcover-->
-<div th:replace="/web/fragments :: bgcover"></div>
+<div th:replace="web/fragments :: bgcover"></div>
 <!--end bgcover-->
 
 <div id="app">
@@ -516,15 +516,15 @@
 </script>
 
 <!--footer-->
-<footer th:replace="/web/fragments :: footer"></footer>
+<footer th:replace="web/fragments :: footer"></footer>
 <!--end footer-->
 
 <!--commons-->
-<div th:replace="/web/fragments :: commons"></div>
+<div th:replace="web/fragments :: commons"></div>
 <!--end commons-->
 
 <!--scripts-->
-<div th:replace="/web/fragments :: scripts"></div>
+<div th:replace="web/fragments :: scripts"></div>
 <!--end scripts-->
 <script>
     $(function () {

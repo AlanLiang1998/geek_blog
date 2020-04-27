@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta th:include="/web/fragments :: head(~{::title})">
+    <meta th:include="web/fragments :: head(~{::title})">
     <title>文章详情 | GeekBlog</title>
     <!--代码高亮-->
     <link rel="stylesheet" href="/static/web/css/prism-tomorrow.css" type="text/css">
@@ -437,7 +437,7 @@
 
 <body>
 <!--navbar-->
-<header th:replace="/web/fragments :: header"></header>
+<header th:replace="web/fragments :: header"></header>
 <!--end navbar-->
 
 <div id="app" v-if="article != null">
@@ -698,11 +698,11 @@
 </div>
 
 <!--footer-->
-<footer th:replace="/web/fragments :: footer"></footer>
+<footer th:replace="web/fragments :: footer"></footer>
 <!--end footer-->
 
 <!--commons-->
-<div th:replace="/web/fragments :: commons"></div>
+<div th:replace="web/fragments :: commons"></div>
 <!--end commons-->
 
 <!--vue-->
@@ -830,7 +830,7 @@
 </script>
 
 <!--scripts-->
-<div th:replace="/web/fragments :: scripts"></div>
+<div th:replace="web/fragments :: scripts"></div>
 <!--end scripts-->
 <!--评论区-->
 <script src="/static/web/js/av-min.js"></script>

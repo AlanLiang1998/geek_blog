@@ -1,24 +1,31 @@
 <!DOCTYPE HTML>
 <html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta th:include="/web/fragments :: head(~{::title})">
+    <meta th:include="web/fragments :: head(~{::title})">
     <title>分类 | GeekBlog</title>
     <style type="text/css">
         #category-radar {
             width: 100%;
             height: 360px;
         }
+
+        [v-cloak] {
+            display: none;
+        }
+
     </style>
+    <!--雷达图-->
+    <script type="text/javascript" src="/static/web/js/echarts.min.js"></script>
 </head>
 
 
 <body>
 <!--header-->
-<header th:replace="/web/fragments :: header"></header>
+<header th:replace="web/fragments :: header"></header>
 <!--end header-->
 
 <!--bgcover-->
-<div th:replace="/web/fragments :: bgcover"></div>
+<div th:replace="web/fragments :: bgcover"></div>
 <!--end bgcover-->
 
 <div id="app">
@@ -34,7 +41,7 @@
                     <!--分类列表-->
                     <div class="tag-chips">
                         <a href="javascript:;" v-for="(cate,index) in categories" :key="cate.id"
-                           @click="getArticlesByCategoryId(cate.id, 1)">
+                           @click="getArticlesByCategoryId(cate.id, 1)" v-cloak>
                     <span class="chip center-align waves-effect waves-light
                              chip-default" :style="{backgroundColor : getRandomColor()}"
                           :class="{'chip-active' : cate.id == categoryId}">{{cate.name}}
@@ -99,7 +106,7 @@
             <div class="row">
                 <!--左边按钮-->
                 <div class="col s4 m4 l4">
-                    <a class="left btn-floating btn-large waves-effect waves-light" @click="prevPage"
+                    <a class="left btn-floating btn-large waves-effect waves-light" @click="toPage(current-1)"
                        href="#articleCards" :class="{disabled: current == 1}">
                         <i class="fas fa-angle-left"></i>
                     </a>
@@ -111,7 +118,7 @@
                 <!--右边按钮-->
                 <div class="col s4 m4 l4">
                     <a class="right btn-floating btn-large waves-effect waves-light"
-                       @click="nextPage" href="#articleCards" :class="{disabled: current == pages}">
+                       @click="toPage(current+1)" href="#articleCards" :class="{disabled: current == pages}">
                         <i class="fas fa-angle-right"></i>
                     </a>
                 </div>
@@ -123,7 +130,7 @@
 </div>
 
 <!--Vue-->
-<script type="module">
+<script type="text/javascript">
     let app = new Vue({
         el: '#app',
         data: {
@@ -141,21 +148,23 @@
                     method: 'GET'
                 }).then((result) => {
                     this.categories = result.data;
-                    this.initEcharts();
+                    this.$nextTick(function () {
+                        this.initRandomChart(this.categories);
+                    })
                 })
             },
             getRandomColor: function () {
                 let num = Math.floor(Math.random() * (this.colors.length));
                 return this.colors[num];
             },
-            initEcharts: function () {
+            initRandomChart: function (data) {
                 let radarChart = echarts.init(document.getElementById('category-radar'));
                 let indicator = [];
                 let value = [];
-                let maxValue = this.categories.sort((a, b) => {
+                let maxValue = data.sort((a, b) => {
                     return b.articleCount - a.articleCount;
                 })[0].articleCount;
-                $.each(this.categories, function (index, cate) {
+                $.each(data, function (index, cate) {
                     if (cate.articleCount > maxValue) {
                         maxValue = cate.articleCount;
                     }
@@ -200,7 +209,6 @@
                         ]
                     }]
                 };
-
                 radarChart.setOption(option);
             },
             getArticlesByCategoryId: function (categoryId, current) {
@@ -214,22 +222,22 @@
                     this.categoryId = categoryId;
                 })
             },
-
-            prevPage: function () {
-                if (this.current > 1) {
-                    this.getArticlesByCategoryId(this.categoryId, this.current - 1);
+            toPage: function (page) {
+                if (page >= 1 && page <= this.pages) {
+                    this.current = page;
+                    this.getArticlesByCategoryId(this.categoryId, page);
                 }
             },
-            nextPage: function () {
-                if (this.current < this.pages) {
-                    this.getArticlesByCategoryId(this.categoryId, this.current + 1);
-                }
+            getQueryString: function (name) {
+                var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+                var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+                if (r != null) return decodeURI(r[2]);
+                return null;
             },
-
         },
         created: function () {
             this.getCategories();
-            let cid = getQueryString('id');
+            let cid = this.getQueryString('id');
             if (cid !== null) {
                 this.categoryId = cid;
                 this.getArticlesByCategoryId(this.categoryId, 1);
@@ -238,7 +246,7 @@
         filters: {
             dateFormat: function (value) {
                 if (!value) return ''
-                value = value.toString()
+                value = value.toString();
                 return value.split(' ')[0];
             }
         },
@@ -246,18 +254,15 @@
 </script>
 
 <!--footer-->
-<footer th:replace="/web/fragments :: footer"></footer>
+<footer th:replace="web/fragments :: footer"></footer>
 <!--end footer-->
 
 <!--commons-->
-<div th:replace="/web/fragments :: commons"></div>
+<div th:replace="web/fragments :: commons"></div>
 <!--end commons-->
 
 <!--scripts-->
-<div th:replace="/web/fragments :: scripts"></div>
+<div th:replace="web/fragments :: scripts"></div>
 <!--end scripts-->
-
-<!--雷达图-->
-<script type="text/javascript" src="/static/web/js/echarts.min.js"></script>
 </body>
 </html>
