@@ -433,6 +433,9 @@
             white-space: pre !important;
         }
     </style>
+    <!--评论区-->
+    <script src="/static/web/js/av-min.js"></script>
+    <script src="/static/web/js/Valine.min.js"></script>
 </head>
 
 <body>
@@ -469,7 +472,7 @@
                         <div class="card-content article-info">
                             <div class="row tag-cate">
                                 <!--文章标签-->
-                                <div class="col s7">
+                                <div class="col s8">
                                     <div class="article-tag">
                                         <a :href="'/api/tags?id='+tag.id" v-for="(tag, index) in article.tagList"
                                            :key="tag.id" target="_blank">
@@ -478,7 +481,7 @@
                                     </div>
                                 </div>
                                 <!--文章分类-->
-                                <div class="col s5 right-align">
+                                <div class="col s4 right-align">
                                     <div class="post-cate">
                                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                                         <a :href="'/api/categories?id='+article.category.id" class="post-category"
@@ -814,10 +817,26 @@
                 });
 
             },
+            initValine: function () {
+                $(function () {
+                    new Valine({
+                        el: '#vcomments',
+                        appId: 'SDxrhXkjLgCDr5ke5x7qg8gl-gzGzoHsz',
+                        appKey: 'S4XFSBkHr5ThpoAuYQvSKKbM',
+                        avatar: ('mp'),
+                        pageSize: '10',
+                        lang: 'zh-cn',
+                        placeholder: '你想要对博主说什么呢...',
+                    });
+                })
+            },
         },
-        mounted() {
+        created() {
             let id = [[${id}]];
             this.getArticleById(id);
+        },
+        mounted() {
+            this.initValine();
         },
         filters: {
             dateFormat: function (value) {
@@ -832,21 +851,9 @@
 <!--scripts-->
 <div th:replace="web/fragments :: scripts"></div>
 <!--end scripts-->
-<!--评论区-->
-<script src="/static/web/js/av-min.js"></script>
-<script src="/static/web/js/Valine.min.js"></script>
+
 <script>
-    $(function () {
-        new Valine({
-            el: '#vcomments',
-            appId: 'SDxrhXkjLgCDr5ke5x7qg8gl-gzGzoHsz',
-            appKey: 'S4XFSBkHr5ThpoAuYQvSKKbM',
-            avatar: ('mp'),
-            pageSize: '10',
-            lang: 'zh-cn',
-            placeholder: '你想要对博主说什么呢...',
-        });
-    })
+
 </script>
 <!--目录-->
 <script src="/static/web/js/tocbot.min.js"></script>
