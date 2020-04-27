@@ -427,6 +427,20 @@
             visibility: visible;
         }
     </style>
+    <!--打字机效果-->
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"></script>
+    <script>
+        $(function () {
+            var typed = new Typed("#subtitle", {
+                strings: ['挑战无处不在，自己才是真正的敌人。', 'Challenges are everywhere, and you are the real enemy.'],
+                startDelay: 300,
+                typeSpeed: 100,
+                loop: true,
+                backSpeed: 50,
+                showCursor: true
+            });
+        });
+    </script>
 </head>
 
 
@@ -481,7 +495,7 @@
 <!--scripts-->
 <div th:replace="web/fragments :: scripts"></div>
 <!--end scripts-->
-
+</body>
 <script src="/static/web/js/av-min.js"></script>
 <script src="/static/web/js/Valine.min.js"></script>
 <script>
@@ -502,6 +516,4 @@
         });
     });
 </script>
-</body>
-
 </html>

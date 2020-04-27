@@ -10,7 +10,7 @@
     </sql>
 
     <insert id="batchInsert">
-        insert into t_article_tag(<include refid="baseColumnSql"/>) values
+        insert ignore into t_article_tag(<include refid="baseColumnSql"/>) values
         <foreach collection="tagIdList" item="tagId" separator=",">
             (#{articleId},#{tagId})
         </foreach>

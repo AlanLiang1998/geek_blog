@@ -433,9 +433,12 @@
             white-space: pre !important;
         }
     </style>
-    <!--评论区-->
-    <script src="/static/web/js/av-min.js"></script>
-    <script src="/static/web/js/Valine.min.js"></script>
+    <!--代码高亮-->
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.17.1/prism.min.js"></script>
+    <script src="https://cdn.bootcss.com/prism/1.17.1/components/prism-java.js"></script>
+    <script src="/static/web/js/prism-line-numbers.js"></script>
+    <!--目录-->
+    <script src="/static/web/js/tocbot.min.js"></script>
 </head>
 
 <body>
@@ -453,9 +456,6 @@
                     <div class="brand">
                         <h1 class="description center-align post-title">{{article.title}}</h1>
                     </div>
-                    <div class="description center-align">
-                        <span id="subtitle"></span>
-                    </div>
                 </div>
             </div>
         </div>
@@ -469,7 +469,7 @@
             <div id="main-content" class="col s12 m12 l9">
                 <div id="artDetail">
                     <div class="card">
-                        <div class="card-content article-info">
+                        <div class="card-content article-info" data-aos="fade-up">
                             <div class="row tag-cate">
                                 <!--文章标签-->
                                 <div class="col s8">
@@ -511,9 +511,9 @@
                             </div>
                         </div>
                         <hr class="clearfix">
-                        <div class="card-content article-card-content">
+                        <div class="card-content article-card-content" data-aos="fade-up">
                             <!--文章内容-->
-                            <div id="articleContent" data-aos="fade-up" v-html="article.content">文章内容</div>
+                            <div id="articleContent"  v-html="article.content">文章内容</div>
                             <hr>
                             <!--复制-->
                             <div class="reprint" id="reprint-statement">
@@ -600,7 +600,7 @@
                         </div>
                     </div>
                     <!--评论区-->
-                    <div class="card valine-card" data-aos="fade-up" v-if="article.commentable">
+                    <div class="card valine-card" v-if="article.commentable">
                         <div class="comment_headling"
                              style="font-size: 20px; font-weight: 700; position: relative; left: 20px; top: 15px; padding-bottom: 5px;">
                             <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
@@ -613,7 +613,7 @@
                     <article id="prenext-posts" class="prev-next articles">
                         <div class="row article-row">
                             <!--上一篇-->
-                            <div class="article col s12 m6" data-aos="fade-up" v-if="prevPreview != null">
+                            <div class="article col s12 m6"  v-if="prevPreview != null">
                                 <div class="article-badge left-badge text-color">
                                     <i class="fas fa-chevron-left"></i>&nbsp;上一篇
                                 </div>
@@ -646,7 +646,7 @@
                                 </div>
                             </div>
                             <!--下一篇-->
-                            <div class="article col s12 m6" data-aos="fade-up" v-if="nextPreview != null">
+                            <div class="article col s12 m6"  v-if="nextPreview != null">
                                 <div class="article-badge right-badge text-color">
                                     下一篇&nbsp;<i class="fas fa-chevron-right"></i>
                                 </div>
@@ -834,9 +834,10 @@
         created() {
             let id = [[${id}]];
             this.getArticleById(id);
+            this.initValine();
         },
         mounted() {
-            this.initValine();
+
         },
         filters: {
             dateFormat: function (value) {
@@ -852,11 +853,6 @@
 <div th:replace="web/fragments :: scripts"></div>
 <!--end scripts-->
 
-<script>
-
-</script>
-<!--目录-->
-<script src="/static/web/js/tocbot.min.js"></script>
 <!--文章复制-->
 <script async="" defer="">
     document.addEventListener("copy", function (e) {
@@ -876,11 +872,10 @@
 <script type="text/javascript" src="/static/web/js/codeCopy.js"></script>
 <!-- 代码块收缩 -->
 <script type="text/javascript" src="/static/web/js/codeShrink.js"></script>
+<!--评论区-->
+<script src="/static/web/js/av-min.js"></script>
+<script src="/static/web/js/Valine.min.js"></script>
 
-<!--代码高亮-->
-<script src="https://cdn.jsdelivr.net/npm/prismjs@1.17.1/prism.min.js"></script>
-<script src="https://cdn.bootcss.com/prism/1.17.1/components/prism-java.js"></script>
-<script src="/static/web/js/prism-line-numbers.js"></script>
 <!--打赏tab-->
 <script>
     $(function () {
@@ -898,6 +893,7 @@
     gtag('js', new Date());
     gtag('config', '');
 </script>
+<!--社交分享-->
 <script src="/static/web/js/social-share.min.js"></script>
 </body>
 </html>

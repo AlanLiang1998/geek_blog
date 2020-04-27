@@ -3,6 +3,21 @@
 <head>
     <meta th:include="web/fragments :: head(~{::title})">
     <title>归档 | GeekBlog</title>
+    <!--打字机效果-->
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"></script>
+    <script>
+        $(function () {
+            var typed = new Typed("#subtitle", {
+                strings: ['挑战无处不在，自己才是真正的敌人。', 'Challenges are everywhere, and you are the real enemy.'],
+                startDelay: 300,
+                typeSpeed: 100,
+                loop: true,
+                backSpeed: 50,
+                showCursor: true
+            });
+        });
+    </script>
+    <script type="text/javascript" src="/static/web/js/echarts.min.js"></script>
 </head>
 
 <body>
@@ -307,7 +322,6 @@
 <!--scripts-->
 <div th:replace="web/fragments :: scripts"></div>
 <!--end scripts-->
-<script type="text/javascript" src="/static/web/js/echarts.min.js"></script>
 </body>
 
 </html>
