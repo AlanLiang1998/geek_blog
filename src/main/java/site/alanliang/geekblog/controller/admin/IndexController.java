@@ -6,14 +6,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import site.alanliang.geekblog.anntation.AccessLog;
-import site.alanliang.geekblog.anntation.Log;
 import site.alanliang.geekblog.common.JsonResult;
-import site.alanliang.geekblog.domain.SysUser;
+import site.alanliang.geekblog.entity.SysUser;
 import site.alanliang.geekblog.exception.BadRequestException;
 import site.alanliang.geekblog.service.SysMenuService;
 import site.alanliang.geekblog.service.SysUserService;
 import site.alanliang.geekblog.utils.MD5Util;
-import site.alanliang.geekblog.vo.init.InitInfoVo;
+import site.alanliang.geekblog.vo.InitInfoVO;
 
 import javax.servlet.http.HttpSession;
 
@@ -44,7 +43,7 @@ public class IndexController {
     @ResponseBody
     @GetMapping("/init")
     public ResponseEntity<Object> init() {
-        InitInfoVo initInfoVO = sysMenuService.menu();
+        InitInfoVO initInfoVO = sysMenuService.menu();
         return new ResponseEntity<>(initInfoVO, HttpStatus.OK);
     }
 

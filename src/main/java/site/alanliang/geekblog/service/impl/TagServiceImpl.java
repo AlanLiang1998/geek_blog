@@ -6,9 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
-import site.alanliang.geekblog.domain.Tag;
+import site.alanliang.geekblog.entity.Tag;
 import site.alanliang.geekblog.exception.NameNotUniqueException;
-import site.alanliang.geekblog.mapper.TagMapper;
+import site.alanliang.geekblog.dao.TagMapper;
 import site.alanliang.geekblog.service.TagService;
 
 import java.util.List;
@@ -57,18 +57,18 @@ public class TagServiceImpl implements TagService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void remove(Long id) {
+    public void removeById(Long id) {
         tagMapper.deleteById(id);
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void batchRemove(List<Long> idList) {
+    public void removeByIds(List<Long> idList) {
         tagMapper.deleteBatchIds(idList);
     }
 
     @Override
-    public Tag findById(Long id) {
+    public Tag getById(Long id) {
         return tagMapper.selectById(id);
     }
 
@@ -83,7 +83,7 @@ public class TagServiceImpl implements TagService {
     }
 
     @Override
-    public List<Tag> findByArticleId(Long id) {
+    public List<Tag> listByArticleId(Long id) {
         return tagMapper.selectByArticleId(id);
     }
 

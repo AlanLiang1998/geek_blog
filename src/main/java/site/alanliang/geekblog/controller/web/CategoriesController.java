@@ -7,8 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import site.alanliang.geekblog.anntation.AccessLog;
 import site.alanliang.geekblog.common.Constant;
-import site.alanliang.geekblog.domain.Article;
-import site.alanliang.geekblog.domain.Category;
+import site.alanliang.geekblog.entity.Article;
+import site.alanliang.geekblog.entity.Category;
 import site.alanliang.geekblog.service.ArticleService;
 import site.alanliang.geekblog.service.CategoryService;
 
@@ -40,7 +40,7 @@ public class CategoriesController {
     public ResponseEntity<Object> categoryArticles(@PathVariable("id") Long id,
                                                    @RequestParam(value = "current", defaultValue = "1") Integer current,
                                                    @RequestParam(value = "size", defaultValue = Constant.PAGE_SIZE) Integer size) {
-        Page<Article> pageInfo = articleService.listPageArticlePreviewByCategoryId(current, size, id);
+        Page<Article> pageInfo = articleService.listPreviewPageByCategoryId(current, size, id);
         return new ResponseEntity<>(pageInfo, HttpStatus.OK);
     }
 }

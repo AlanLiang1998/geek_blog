@@ -4,8 +4,8 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import site.alanliang.geekblog.domain.SysUser;
-import site.alanliang.geekblog.mapper.SysUserMapper;
+import site.alanliang.geekblog.entity.SysUser;
+import site.alanliang.geekblog.dao.SysUserMapper;
 import site.alanliang.geekblog.service.SysUserService;
 
 /**

@@ -2,7 +2,7 @@ package site.alanliang.geekblog.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import site.alanliang.geekblog.domain.Tag;
+import site.alanliang.geekblog.entity.Tag;
 
 import java.util.List;
 
@@ -24,7 +24,7 @@ public interface TagService {
      * @param id 文章ID
      * @return 标签列表
      */
-    List<Tag> findByArticleId(Long id);
+    List<Tag> listByArticleId(Long id);
 
     /**
      * 分页查询所有标签
@@ -48,14 +48,14 @@ public interface TagService {
      *
      * @param id 标签ID
      */
-    void remove(Long id);
+    void removeById(Long id);
 
     /**
      * 根据ID列表批量删除标签
      *
      * @param idList 标签ID列表
      */
-    void batchRemove(List<Long> idList);
+    void removeByIds(List<Long> idList);
 
     /**
      * 根据ID查询标签
@@ -63,7 +63,7 @@ public interface TagService {
      * @param id 标签ID
      * @return 标签
      */
-    Tag findById(Long id);
+    Tag getById(Long id);
 
     /**
      * 查询所有标签（统计文章数目）

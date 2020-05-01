@@ -3,10 +3,10 @@ package site.alanliang.geekblog.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import site.alanliang.geekblog.domain.SysMenu;
-import site.alanliang.geekblog.mapper.SysMenuMapper;
+import site.alanliang.geekblog.entity.SysMenu;
+import site.alanliang.geekblog.dao.SysMenuMapper;
 import site.alanliang.geekblog.service.SysMenuService;
-import site.alanliang.geekblog.vo.init.InitInfoVo;
+import site.alanliang.geekblog.vo.InitInfoVO;
 
 
 import java.util.List;
@@ -24,11 +24,11 @@ public class SysMenuServiceImpl implements SysMenuService {
     private SysMenuMapper sysMenuMapper;
 
     @Override
-    public InitInfoVo menu() {
+    public InitInfoVO menu() {
         QueryWrapper<SysMenu> wrapper = new QueryWrapper<>();
         wrapper.eq("status", true);
         List<SysMenu> menuList = sysMenuMapper.selectList(wrapper);
-        return InitInfoVo.init(menuList);
+        return InitInfoVO.init(menuList);
 
     }
 }

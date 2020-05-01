@@ -10,11 +10,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import site.alanliang.geekblog.anntation.AccessLog;
 import site.alanliang.geekblog.common.Constant;
-import site.alanliang.geekblog.domain.Article;
-import site.alanliang.geekblog.domain.Category;
-import site.alanliang.geekblog.domain.Tag;
+import site.alanliang.geekblog.entity.Article;
+import site.alanliang.geekblog.entity.Tag;
 import site.alanliang.geekblog.service.ArticleService;
-import site.alanliang.geekblog.service.CategoryService;
 import site.alanliang.geekblog.service.TagService;
 
 import java.util.List;
@@ -45,7 +43,7 @@ public class TagsController {
     public ResponseEntity<Object> tagArticles(@PathVariable("id") Long id,
                                               @RequestParam(value = "current", defaultValue = "1") Integer current,
                                               @RequestParam(value = "size", defaultValue = Constant.PAGE_SIZE) Integer size) {
-        Page<Article> pageInfo = articleService.listPageArticlePreviewByTagId(current, size, id);
+        Page<Article> pageInfo = articleService.listPreviewPageByTagId(current, size, id);
         return new ResponseEntity<>(pageInfo, HttpStatus.OK);
     }
 }

@@ -1732,7 +1732,7 @@ org.thymeleaf.exceptions.TemplateInputException: Error resolving template [admin
 2020-04-06 18:42:39.566  INFO 3640 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Starting GeekBlogApplication on DESKTOP-QNDK7AF with PID 3640 (D:\idea\geekblog\target\classes started by AlanLiang in D:\idea\geekblog)
 2020-04-06 18:42:39.566 DEBUG 3640 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Running with Spring Boot v2.2.6.RELEASE, Spring v5.2.5.RELEASE
 2020-04-06 18:42:39.566  INFO 3640 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : The following profiles are active: dev
-2020-04-06 18:42:39.751  WARN 3640 --- [restartedMain] o.m.s.mapper.ClassPathMapperScanner      : No MyBatis mapper was found in '[site.alanliang.geekblog.mapper]' package. Please check your configuration.
+2020-04-06 18:42:39.751  WARN 3640 --- [restartedMain] o.m.s.mapper.ClassPathMapperScanner      : No MyBatis mapper was found in '[site.alanliang.geekblog.dao]' package. Please check your configuration.
 2020-04-06 18:42:39.832  INFO 3640 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
 2020-04-06 18:42:39.833  INFO 3640 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
 2020-04-06 18:42:39.833  INFO 3640 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.33]
@@ -2320,13 +2320,13 @@ org.thymeleaf.exceptions.TemplateInputException: Error resolving template [admin
 2020-04-06 18:49:24.350 ERROR 8308 --- [http-nio-8080-exec-9] s.a.g.e.handler.GlobalExceptionHandler   : Request URL : http://localhost:8080/admin/init, Exception : nested exception is org.apache.ibatis.exceptions.PersistenceException: 
 ### Error querying database.  Cause: org.springframework.jdbc.CannotGetJdbcConnectionException: Failed to obtain JDBC Connection; nested exception is com.alibaba.druid.pool.DataSourceClosedException: dataSource already closed at Mon Apr 06 18:49:24 CST 2020
 ### The error may exist in site/alanliang/geekblog/mapper/SysMenuMapper.java (best guess)
-### The error may involve site.alanliang.geekblog.mapper.SysMenuMapper.selectList
+### The error may involve site.alanliang.geekblog.dao.SysMenuMapper.selectList
 ### The error occurred while executing a query
 ### Cause: org.springframework.jdbc.CannotGetJdbcConnectionException: Failed to obtain JDBC Connection; nested exception is com.alibaba.druid.pool.DataSourceClosedException: dataSource already closed at Mon Apr 06 18:49:24 CST 2020
 2020-04-06 18:49:24.351  WARN 8308 --- [http-nio-8080-exec-9] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.mybatis.spring.MyBatisSystemException: nested exception is org.apache.ibatis.exceptions.PersistenceException: 
 ### Error querying database.  Cause: org.springframework.jdbc.CannotGetJdbcConnectionException: Failed to obtain JDBC Connection; nested exception is com.alibaba.druid.pool.DataSourceClosedException: dataSource already closed at Mon Apr 06 18:49:24 CST 2020
 ### The error may exist in site/alanliang/geekblog/mapper/SysMenuMapper.java (best guess)
-### The error may involve site.alanliang.geekblog.mapper.SysMenuMapper.selectList
+### The error may involve site.alanliang.geekblog.dao.SysMenuMapper.selectList
 ### The error occurred while executing a query
 ### Cause: org.springframework.jdbc.CannotGetJdbcConnectionException: Failed to obtain JDBC Connection; nested exception is com.alibaba.druid.pool.DataSourceClosedException: dataSource already closed at Mon Apr 06 18:49:24 CST 2020]
 2020-04-06 18:53:36.725  INFO 25468 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Starting GeekBlogApplication on DESKTOP-QNDK7AF with PID 25468 (D:\idea\geekblog\target\classes started by AlanLiang in D:\idea\geekblog)
@@ -2981,7 +2981,7 @@ org.thymeleaf.exceptions.TemplateInputException: Error resolving template [dashb
 2020-04-06 20:03:32.392  INFO 24188 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Starting GeekBlogApplication on DESKTOP-QNDK7AF with PID 24188 (D:\idea\geekblog\target\classes started by AlanLiang in D:\idea\geekblog)
 2020-04-06 20:03:32.393 DEBUG 24188 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Running with Spring Boot v2.2.6.RELEASE, Spring v5.2.5.RELEASE
 2020-04-06 20:03:32.393  INFO 24188 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : The following profiles are active: dev
-2020-04-06 20:03:32.593  WARN 24188 --- [restartedMain] o.m.s.mapper.ClassPathMapperScanner      : No MyBatis mapper was found in '[site.alanliang.geekblog.mapper]' package. Please check your configuration.
+2020-04-06 20:03:32.593  WARN 24188 --- [restartedMain] o.m.s.mapper.ClassPathMapperScanner      : No MyBatis mapper was found in '[site.alanliang.geekblog.dao]' package. Please check your configuration.
 2020-04-06 20:03:32.655  INFO 24188 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
 2020-04-06 20:03:32.657  INFO 24188 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
 2020-04-06 20:03:32.657  INFO 24188 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.33]
@@ -3053,7 +3053,7 @@ org.thymeleaf.exceptions.TemplateInputException: Error resolving template [dashb
 2020-04-06 20:11:34.518  INFO 25224 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Starting GeekBlogApplication on DESKTOP-QNDK7AF with PID 25224 (D:\idea\geekblog\target\classes started by AlanLiang in D:\idea\geekblog)
 2020-04-06 20:11:34.519 DEBUG 25224 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Running with Spring Boot v2.2.6.RELEASE, Spring v5.2.5.RELEASE
 2020-04-06 20:11:34.519  INFO 25224 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : The following profiles are active: dev
-2020-04-06 20:11:34.742  WARN 25224 --- [restartedMain] o.m.s.mapper.ClassPathMapperScanner      : No MyBatis mapper was found in '[site.alanliang.geekblog.mapper]' package. Please check your configuration.
+2020-04-06 20:11:34.742  WARN 25224 --- [restartedMain] o.m.s.mapper.ClassPathMapperScanner      : No MyBatis mapper was found in '[site.alanliang.geekblog.dao]' package. Please check your configuration.
 2020-04-06 20:11:34.812  INFO 25224 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
 2020-04-06 20:11:34.812  INFO 25224 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
 2020-04-06 20:11:34.813  INFO 25224 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.33]

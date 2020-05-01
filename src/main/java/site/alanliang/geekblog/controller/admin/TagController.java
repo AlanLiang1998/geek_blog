@@ -8,7 +8,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import site.alanliang.geekblog.common.JsonResult;
 import site.alanliang.geekblog.common.TableResult;
-import site.alanliang.geekblog.domain.Tag;
+import site.alanliang.geekblog.entity.Tag;
 import site.alanliang.geekblog.service.TagService;
 
 import javax.validation.constraints.NotEmpty;
@@ -30,7 +30,7 @@ public class TagController {
     private TagService tagService;
 
     @GetMapping
-    public JsonResult list() {
+    public JsonResult listAll() {
         return JsonResult.ok(tagService.list());
     }
 
@@ -64,13 +64,13 @@ public class TagController {
 
     @DeleteMapping("/{id}")
     public JsonResult remove(@NotNull @PathVariable("id") Long id) {
-        tagService.remove(id);
+        tagService.removeById(id);
         return JsonResult.ok();
     }
 
     @DeleteMapping
     public JsonResult remove(@NotEmpty @RequestBody List<Long> idList) {
-        tagService.batchRemove(idList);
+        tagService.removeByIds(idList);
         return JsonResult.ok();
     }
 }

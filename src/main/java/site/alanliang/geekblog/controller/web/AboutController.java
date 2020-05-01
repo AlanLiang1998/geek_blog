@@ -7,12 +7,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import site.alanliang.geekblog.anntation.AccessLog;
-import site.alanliang.geekblog.dto.AboutVo;
+import site.alanliang.geekblog.vo.AboutVO;
 import site.alanliang.geekblog.service.ArticleService;
 import site.alanliang.geekblog.service.CategoryService;
 import site.alanliang.geekblog.service.TagService;
 import site.alanliang.geekblog.utils.DateUtil;
-import site.alanliang.geekblog.vo.ArticleDateVo;
+import site.alanliang.geekblog.vo.ArticleDateVO;
 
 import java.util.List;
 
@@ -37,15 +37,15 @@ public class AboutController {
     @AccessLog("访问关于我页")
     @GetMapping("/about")
     public ResponseEntity<Object> about(@RequestParam(value = "dateType", required = false) Integer dateFilterType) {
-        AboutVo aboutVo = new AboutVo();
+        AboutVO aboutVo = new AboutVO();
         aboutVo.setArticleCount(articleService.countAll(null));
         aboutVo.setCategoryCount(categoryService.countAll());
         aboutVo.setTagCount(tagService.countAll());
         aboutVo.setCategories(categoryService.listByArticleCount());
         aboutVo.setTags(tagService.listByArticleCount());
 
-        List<ArticleDateVo> articleDates = articleService.countArticleByDate(dateFilterType);
-        for (ArticleDateVo articleDate : articleDates) {
+        List<ArticleDateVO> articleDates = articleService.countByDate(dateFilterType);
+        for (ArticleDateVO articleDate : articleDates) {
             articleDate.setDate(DateUtil.formatDate(articleDate.getYear(), articleDate.getMonth(), articleDate.getDay()));
             articleDate.setYear(null);
             articleDate.setMonth(null);

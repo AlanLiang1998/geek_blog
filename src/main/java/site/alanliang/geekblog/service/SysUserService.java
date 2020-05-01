@@ -1,7 +1,7 @@
 package site.alanliang.geekblog.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import site.alanliang.geekblog.domain.SysUser;
+import site.alanliang.geekblog.entity.SysUser;
 
 /**
  * @author AlanLiang

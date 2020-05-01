@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="site.alanliang.geekblog.mapper.ArticleTagMapper">
-    <resultMap id="baseColumnResultMap" type="site.alanliang.geekblog.domain.ArticleTag">
+<mapper namespace="site.alanliang.geekblog.dao.ArticleTagMapper">
+    <resultMap id="baseColumnResultMap" type="site.alanliang.geekblog.entity.ArticleTag">
         <id column="article_id" property="articleId"/>
         <id column="tag_id" property="tagId"/>
     </resultMap>
@@ -9,7 +9,7 @@
         article_id, tag_id
     </sql>
 
-    <insert id="batchInsert">
+    <insert id="insertBatch">
         insert into t_article_tag(<include refid="baseColumnSql"/>) values
         <foreach collection="tagIdList" item="tagId" separator=",">
             (#{articleId},#{tagId})

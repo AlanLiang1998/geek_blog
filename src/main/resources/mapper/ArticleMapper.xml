@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="site.alanliang.geekblog.mapper.ArticleMapper">
-    <resultMap id="baseResultMap" type="site.alanliang.geekblog.domain.Article">
+<mapper namespace="site.alanliang.geekblog.dao.ArticleMapper">
+    <resultMap id="tableResultMap" type="site.alanliang.geekblog.entity.Article">
         <id property="id" column="id"/>
         <result property="title" column="title"/>
         <result property="type" column="type"/>
@@ -15,36 +15,38 @@
         <result property="recommend" column="recommend"/>
         <result property="createTime" column="create_time"/>
         <result property="updateTime" column="update_time"/>
+        <association property="category" javaType="site.alanliang.geekblog.entity.Category">
+            <id property="id" column="cid"/>
+            <id property="name" column="cname"/>
+        </association>
+        <collection property="tagList" column="id" select="site.alanliang.geekblog.dao.TagMapper.selectByArticleId"/>
     </resultMap>
 
-    <resultMap id="adminListResultMap" extends="baseResultMap" type="site.alanliang.geekblog.domain.Article">
-        <association property="category" column="category_id"
-                     select="site.alanliang.geekblog.mapper.CategoryMapper.selectCategoryById"/>
-        <collection property="tagList" column="id" select="site.alanliang.geekblog.mapper.TagMapper.selectByArticleId"/>
-    </resultMap>
-
-    <resultMap id="recommendResultMap" type="site.alanliang.geekblog.domain.Article">
+    <resultMap id="recommendResultMap" type="site.alanliang.geekblog.entity.Article">
         <id property="id" column="id"/>
         <result property="title" column="title"/>
         <result property="summary" column="summary"/>
-        <association property="category" column="category_id"
-                     select="site.alanliang.geekblog.mapper.CategoryMapper.selectCategoryById"/>
+        <result property="cover" column="cover"/>
+        <association property="category" javaType="site.alanliang.geekblog.entity.Category">
+            <id property="id" column="cid"/>
+            <id property="name" column="cname"/>
+        </association>
     </resultMap>
 
-    <resultMap id="previewResultMap" type="site.alanliang.geekblog.domain.Article">
+    <resultMap id="previewResultMap" type="site.alanliang.geekblog.entity.Article">
         <id property="id" column="id"/>
         <result property="title" column="title"/>
         <result property="summary" column="summary"/>
         <result property="cover" column="cover"/>
         <result property="createTime" column="create_time"/>
-        <association property="category" javaType="site.alanliang.geekblog.domain.Category">
+        <association property="category" javaType="site.alanliang.geekblog.entity.Category">
             <id property="id" column="cid"/>
             <result property="name" column="cname"/>
         </association>
-        <collection property="tagList" column="id" select="site.alanliang.geekblog.mapper.TagMapper.selectByArticleId"/>
+        <collection property="tagList" column="id" select="site.alanliang.geekblog.dao.TagMapper.selectByArticleId"/>
     </resultMap>
 
-    <resultMap id="detailResultMap" type="site.alanliang.geekblog.domain.Article">
+    <resultMap id="detailResultMap" type="site.alanliang.geekblog.entity.Article">
         <id property="id" column="id"/>
         <result property="title" column="title"/>
         <result property="cover" column="cover"/>
@@ -56,49 +58,46 @@
         <result property="commentable" column="commentable"/>
         <result property="appreciable" column="appreciable"/>
         <result property="createTime" column="create_time"/>
-        <association property="author" javaType="site.alanliang.geekblog.domain.SysUser">
-            <id property="id" column="id"/>
+        <association property="author" javaType="site.alanliang.geekblog.entity.SysUser">
+            <id property="id" column="uid"/>
             <result property="username" column="username"/>
         </association>
-        <association property="category" javaType="site.alanliang.geekblog.domain.Category">
+        <association property="category" javaType="site.alanliang.geekblog.entity.Category">
             <id property="id" column="cid"/>
             <result property="name" column="cname"/>
         </association>
-        <collection property="tagList" column="id" select="site.alanliang.geekblog.mapper.TagMapper.selectByArticleId"/>
+        <collection property="tagList" column="id" select="site.alanliang.geekblog.dao.TagMapper.selectByArticleId"/>
     </resultMap>
-
-    <sql id="adminListColumn">
-        id, title, type, comments, views, likes, published, commentable, appreciable, top, recommend, create_time, update_time,
-        category_id
-    </sql>
-
-    <sql id="recommendColumn">
-        id, title, summary, cover, category_id
-    </sql>
 
     <sql id="previewColumn">
         ta.id, ta.title, ta.summary, ta.create_time, ta.cover, tc.id as cid, tc.name as cname
     </sql>
 
-    <select id="listArticlesTableByPage" resultMap="adminListResultMap"
+    <select id="listTableByPage" resultMap="tableResultMap"
             parameterType="com.baomidou.mybatisplus.extension.plugins.pagination.Page">
-        select
-        <include refid="adminListColumn"/>
-        from t_article
+        select ta.id, ta.title, ta.type, ta.comments, ta.views, ta.likes, ta.published, ta.commentable, ta.appreciable,
+        ta.top, ta.recommend,
+        ta.create_time, ta.update_time, tc.id as cid, tc.name as cname
+        from t_article ta
+        left join t_category tc
+        on ta.category_id = tc.id
         <if test="ew != null and ew.emptyOfWhere == false">
             ${ew.customSqlSegment}
         </if>
     </select>
 
-    <select id="listRecommendArticles" resultMap="recommendResultMap">
-        select
-        <include refid="recommendColumn"/>
-        from t_article
+    <select id="listRecommend" resultMap="recommendResultMap">
+        select  ta.id, ta.title, ta.summary, ta.cover, tc.id as cid, tc.name as cname
+        from t_article ta
+        left join t_category tc
+        on ta.category_id = tc.id
         where recommend = 1
         and published = 1
+        limit #{limit}
     </select>
 
-    <select id="listArticlesPreviewByPage" resultMap="previewResultMap">
+    <select id="listPreviewByPage" resultMap="previewResultMap"
+            parameterType="com.baomidou.mybatisplus.extension.plugins.pagination.Page">
         select
         <include refid="previewColumn"/>
         from t_article ta
@@ -108,8 +107,8 @@
         order by ta.create_time desc
     </select>
 
-    <select id="selectArticleById" resultMap="detailResultMap">
-        select ta.id, ta.title, ta.content, ta.cover, ta.create_time, ta.type, ta.likes, ta.views, ta.comments, ta.commentable, ta.appreciable, tc.id as cid, tc.name as cname, su.id, su.username from t_article ta
+    <select id="selectDetailById" resultMap="detailResultMap">
+        select ta.id, ta.title, ta.content, ta.cover, ta.create_time, ta.type, ta.likes, ta.views, ta.comments, ta.commentable, ta.appreciable, tc.id as cid, tc.name as cname, su.id as uid, su.username from t_article ta
         left join t_category tc
         on ta.category_id = tc.id
         left join sys_user su
@@ -117,7 +116,7 @@
         where ta.id = #{id}
     </select>
 
-    <select id="selectPrevArticlePreview" resultMap="previewResultMap">
+    <select id="selectPrevPreviewById" resultMap="previewResultMap">
         select
         <include refid="previewColumn"/>
         from t_article ta
@@ -126,7 +125,7 @@
         where ta.id = (select max(id) from t_article where id &lt; #{id})
     </select>
 
-    <select id="selectNextArticlePreview" resultMap="previewResultMap">
+    <select id="selectNextPreviewById" resultMap="previewResultMap">
         select
         <include refid="previewColumn"/>
         from t_article ta
@@ -134,7 +133,8 @@
         on ta.category_id = tc.id
         where ta.id = (select min(id) from t_article where id &gt; #{id})
     </select>
-    <select id="listPageArticlePreviewByCategoryId" resultMap="previewResultMap"
+
+    <select id="listPreviewPageByCategoryId" resultMap="previewResultMap"
             parameterType="com.baomidou.mybatisplus.extension.plugins.pagination.Page">
         select
         <include refid="previewColumn"/>
@@ -144,7 +144,7 @@
         where tc.id = #{categoryId}
     </select>
 
-    <select id="listPageArticlePreviewByTagId" resultMap="previewResultMap"
+    <select id="listPreviewPageByTagId" resultMap="previewResultMap"
             parameterType="com.baomidou.mybatisplus.extension.plugins.pagination.Page">
         select
         <include refid="previewColumn"/>
@@ -156,7 +156,7 @@
         where tat.tag_id = #{tagId}
     </select>
 
-    <select id="countArticleByDate" resultType="site.alanliang.geekblog.vo.ArticleDateVo">
+    <select id="countByDate" resultType="site.alanliang.geekblog.vo.ArticleDateVO">
         select year(create_time) 'year'
         <choose>
             <when test="dft == 2">
@@ -182,7 +182,7 @@
         </choose>
     </select>
 
-    <select id="listPageArticlePreviewByDate" resultMap="previewResultMap"
+    <select id="listPreviewPageByDate" resultMap="previewResultMap"
             parameterType="com.baomidou.mybatisplus.extension.plugins.pagination.Page">
         select
         <include refid="previewColumn"/>

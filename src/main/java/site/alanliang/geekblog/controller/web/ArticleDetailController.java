@@ -7,8 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import site.alanliang.geekblog.anntation.AccessLog;
-import site.alanliang.geekblog.domain.Article;
-import site.alanliang.geekblog.dto.ArticleDetailVo;
+import site.alanliang.geekblog.entity.Article;
+import site.alanliang.geekblog.vo.ArticleDetailVO;
 import site.alanliang.geekblog.service.ArticleService;
 
 import javax.validation.constraints.NotNull;
@@ -27,9 +27,9 @@ public class ArticleDetailController {
 
     @GetMapping("/article/{id}")
     public String articleDetail(@PathVariable("id") Long id, Model model) {
-        model.addAttribute("article", articleService.getArticleById(id));
-        model.addAttribute("prevPreview", articleService.getPrevArticlePreview(id));
-        model.addAttribute("nextPreview", articleService.getNextArticlePreview(id));
+        model.addAttribute("article", articleService.getDetailById(id));
+        model.addAttribute("prevPreview", articleService.getPrevPreviewById(id));
+        model.addAttribute("nextPreview", articleService.getNextPreviewById(id));
         return "web/article";
     }
 
@@ -44,10 +44,10 @@ public class ArticleDetailController {
     @ResponseBody
     @GetMapping("/article")
     public ResponseEntity<Object> article(@RequestParam("id") Long id) {
-        Article article = articleService.getArticleById(id);
-        Article prevPreview = articleService.getPrevArticlePreview(id);
-        Article nextPreview = articleService.getNextArticlePreview(id);
-        ArticleDetailVo articleDetailVo = new ArticleDetailVo();
+        Article article = articleService.getDetailById(id);
+        Article prevPreview = articleService.getPrevPreviewById(id);
+        Article nextPreview = articleService.getNextPreviewById(id);
+        ArticleDetailVO articleDetailVo = new ArticleDetailVO();
         articleDetailVo.setArticle(article);
         articleDetailVo.setPrevPreview(prevPreview);
         articleDetailVo.setNextPreview(nextPreview);

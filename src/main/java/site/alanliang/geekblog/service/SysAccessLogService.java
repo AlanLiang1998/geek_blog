@@ -3,7 +3,7 @@ package site.alanliang.geekblog.service;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.springframework.scheduling.annotation.Async;
-import site.alanliang.geekblog.domain.SysAccessLog;
+import site.alanliang.geekblog.entity.SysAccessLog;
 
 import java.util.List;
 

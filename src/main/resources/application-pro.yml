@@ -46,7 +46,7 @@ logging:
     path: log/geekblog-pro.log
 mybatis-plus:
   mapper-locations: classpath:mapper/*.xml
-  type-aliases-package: site.alanliang.geekblog.domain
+  type-aliases-package: site.alanliang.geekblog.entity
   configuration:
     #开启驼峰映射
     map-underscore-to-camel-case: true

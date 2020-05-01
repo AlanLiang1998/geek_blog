@@ -6,9 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
-import site.alanliang.geekblog.domain.Category;
+import site.alanliang.geekblog.entity.Category;
 import site.alanliang.geekblog.exception.NameNotUniqueException;
-import site.alanliang.geekblog.mapper.CategoryMapper;
+import site.alanliang.geekblog.dao.CategoryMapper;
 import site.alanliang.geekblog.service.CategoryService;
 
 import java.util.List;
@@ -34,13 +34,13 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void remove(Long id) {
+    public void removeById(Long id) {
         categoryMapper.deleteById(id);
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void batchRemove(List<Long> idList) {
+    public void removeByIds(List<Long> idList) {
         categoryMapper.deleteBatchIds(idList);
     }
 
@@ -78,12 +78,12 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public Category findById(Long id) {
+    public Category getById(Long id) {
         return categoryMapper.selectById(id);
     }
 
     @Override
-    public List<Category> list() {
+    public List<Category> listAll() {
         return categoryMapper.selectList(null);
     }
 }

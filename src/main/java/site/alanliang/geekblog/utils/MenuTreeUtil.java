@@ -1,6 +1,6 @@
 package site.alanliang.geekblog.utils;
 
-import site.alanliang.geekblog.vo.init.MenuVo;
+import site.alanliang.geekblog.vo.MenuVO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,17 +12,17 @@ import java.util.List;
  * Version 1.0
  **/
 public class MenuTreeUtil {
-    public static List<MenuVo> toTree(List<MenuVo> treeList, Long pid) {
-        List<MenuVo> retList = new ArrayList<MenuVo>();
-        for (MenuVo parent : treeList) {
+    public static List<MenuVO> toTree(List<MenuVO> treeList, Long pid) {
+        List<MenuVO> retList = new ArrayList<MenuVO>();
+        for (MenuVO parent : treeList) {
             if (pid.equals(parent.getPid())) {
                 retList.add(findChildren(parent, treeList));
             }
         }
         return retList;
     }
-    private static MenuVo findChildren(MenuVo parent, List<MenuVo> treeList) {
-        for (MenuVo child : treeList) {
+    private static MenuVO findChildren(MenuVO parent, List<MenuVO> treeList) {
+        for (MenuVO child : treeList) {
             if (parent.getId().equals(child.getPid())) {
                 if (parent.getChild() == null) {
                     parent.setChild(new ArrayList<>());

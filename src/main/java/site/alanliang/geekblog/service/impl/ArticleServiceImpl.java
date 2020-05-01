@@ -2,21 +2,19 @@ package site.alanliang.geekblog.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import site.alanliang.geekblog.common.Constant;
-import site.alanliang.geekblog.domain.Article;
-import site.alanliang.geekblog.domain.ArticleTag;
-import site.alanliang.geekblog.dto.ArticleVo;
-import site.alanliang.geekblog.mapper.ArticleMapper;
-import site.alanliang.geekblog.mapper.ArticleTagMapper;
+import site.alanliang.geekblog.entity.Article;
+import site.alanliang.geekblog.entity.ArticleTag;
+import site.alanliang.geekblog.vo.ArticleVO;
+import site.alanliang.geekblog.dao.ArticleMapper;
+import site.alanliang.geekblog.dao.ArticleTagMapper;
 import site.alanliang.geekblog.query.ArticleQuery;
 import site.alanliang.geekblog.service.ArticleService;
-import site.alanliang.geekblog.vo.ArticleDateVo;
+import site.alanliang.geekblog.vo.ArticleDateVO;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -46,53 +44,53 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public Page<Article> listPageArticlePreviewByDate(Integer current, Integer size, ArticleQuery articleQuery) {
+    public Page<Article> listPreviewPageByDate(Integer current, Integer size, ArticleQuery articleQuery) {
         Page<Article> articlePage = new Page<>(current, size);
-        return articleMapper.listPageArticlePreviewByDate(articlePage);
+        return articleMapper.listPreviewPageByDate(articlePage);
     }
 
     @Override
-    public List<Article> listArticlesByKeyword() {
+    public List<Article> listByKeyword() {
         QueryWrapper<Article> wrapper = new QueryWrapper<>();
         wrapper.select("id", "title", "content");
         return articleMapper.selectList(wrapper);
     }
 
     @Override
-    public List<ArticleDateVo> countArticleByDate(Integer dateFilterType) {
+    public List<ArticleDateVO> countByDate(Integer dateFilterType) {
         if (dateFilterType == null) {
             dateFilterType = Constant.FILTER_BY_DAY;
         }
-        return articleMapper.countArticleByDate(dateFilterType);
+        return articleMapper.countByDate(dateFilterType);
     }
 
     @Override
-    public Page<Article> listPageArticlePreviewByTagId(Integer current, Integer size, Long tagId) {
+    public Page<Article> listPreviewPageByTagId(Integer current, Integer size, Long tagId) {
         Page<Article> articlePage = new Page<>(current, size);
-        return articleMapper.listPageArticlePreviewByTagId(articlePage, tagId);
+        return articleMapper.listPreviewPageByTagId(articlePage, tagId);
     }
 
     @Override
-    public Page<Article> listPageArticlePreviewByCategoryId(Integer current, Integer size, Long categoryId) {
+    public Page<Article> listPreviewPageByCategoryId(Integer current, Integer size, Long categoryId) {
         Page<Article> articlePage = new Page<>(current, size);
-        return articleMapper.listPageArticlePreviewByCategoryId(articlePage, categoryId);
+        return articleMapper.listPreviewPageByCategoryId(articlePage, categoryId);
     }
 
     @Override
-    public Article getNextArticlePreview(Long id) {
-        return articleMapper.selectNextArticlePreview(id);
+    public Article getNextPreviewById(Long id) {
+        return articleMapper.selectNextPreviewById(id);
     }
 
     @Override
-    public Article getPrevArticlePreview(Long id) {
-        return articleMapper.selectPrevArticlePreview(id);
+    public Article getPrevPreviewById(Long id) {
+        return articleMapper.selectPrevPreviewById(id);
     }
 
     @Override
-    public Article getArticleById(Long id) {
+    public Article getDetailById(Long id) {
         //浏览次数加1
         increaseViews(id);
-        return articleMapper.selectArticleById(id);
+        return articleMapper.selectDetailById(id);
     }
 
     @Override
@@ -107,7 +105,7 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public Article findById(Long id) {
+    public Article getById(Long id) {
         return articleMapper.selectById(id);
     }
 
@@ -117,7 +115,7 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public List<Article> listTopArticles() {
+    public List<Article> listTop() {
         QueryWrapper<Article> wrapper = new QueryWrapper<>();
         wrapper.select("id", "title", "summary", "cover")
                 .eq("published", true)
@@ -134,48 +132,41 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void remove(Long id) {
+    public void removeById(Long id) {
         articleMapper.deleteById(id);
     }
 
     @Override
-    public Page<Article> listArticlesByPage(Integer current, Integer size) {
+    public Page<Article> listPreviewByPage(Integer current, Integer size) {
         Page<Article> articlePage = new Page<>(current, size);
-        return articleMapper.listArticlesPreviewByPage(articlePage);
+        return articleMapper.listPreviewByPage(articlePage);
     }
 
     @Override
-    public List<Article> listRecommendArticles() {
-        return articleMapper.listRecommendArticles(Constant.MAX_RECOMMEND_ARTICLES);
+    public List<Article> listRecommend() {
+        return articleMapper.listRecommend(Constant.MAX_RECOMMEND_ARTICLES);
     }
 
     @Override
-    public List<site.alanliang.geekblog.vo.ArticleVo> listByPageForAdmin(Integer current, Integer size, QueryWrapper<Article> wrapper) {
+    public Page<Article> listTableByPage(Integer current, Integer size, QueryWrapper<Article> wrapper) {
         Page<Article> page = new Page<>(current, size);
-        List<Article> articles = articleMapper.listArticlesTableByPage(page, wrapper);
-        List<site.alanliang.geekblog.vo.ArticleVo> articleVos = new ArrayList<>();
-        for (Article article : articles) {
-            site.alanliang.geekblog.vo.ArticleVo articleVo = new site.alanliang.geekblog.vo.ArticleVo();
-            BeanUtils.copyProperties(article, articleVo);
-            articleVos.add(articleVo);
-        }
-        return articleVos;
+        return articleMapper.listTableByPage(page, wrapper);
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void saveOrUpdate(ArticleVo articleVo) {
+    public void saveOrUpdate(ArticleVO articleVo) {
         if (articleVo.getId() == null) {
             //新增
             articleMapper.insert(articleVo);
-            articleTagMapper.batchInsert(articleVo.getId(), articleVo.getTagIdList());
+            articleTagMapper.insertBatch(articleVo.getId(), articleVo.getTagIdList());
         } else {
             //编辑
             articleMapper.updateById(articleVo);
             QueryWrapper<ArticleTag> wrapper = new QueryWrapper<>();
             wrapper.eq("article_id", articleVo.getId());
             articleTagMapper.delete(wrapper);
-            articleTagMapper.batchInsert(articleVo.getId(), articleVo.getTagIdList());
+            articleTagMapper.insertBatch(articleVo.getId(), articleVo.getTagIdList());
         }
     }
 

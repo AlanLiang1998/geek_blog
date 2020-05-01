@@ -8,7 +8,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import site.alanliang.geekblog.common.JsonResult;
 import site.alanliang.geekblog.common.TableResult;
-import site.alanliang.geekblog.domain.Category;
+import site.alanliang.geekblog.entity.Category;
 import site.alanliang.geekblog.service.CategoryService;
 
 import javax.validation.constraints.NotEmpty;
@@ -30,8 +30,8 @@ public class CategoryController {
     private CategoryService categoryService;
 
     @GetMapping
-    public JsonResult list() {
-        return JsonResult.ok(categoryService.list());
+    public JsonResult listAll() {
+        return JsonResult.ok(categoryService.listAll());
     }
 
     @GetMapping("/list")
@@ -64,13 +64,13 @@ public class CategoryController {
 
     @DeleteMapping("/{id}")
     public JsonResult remove(@NotNull @PathVariable("id") Long id) {
-        categoryService.remove(id);
+        categoryService.removeById(id);
         return JsonResult.ok();
     }
 
     @DeleteMapping
     public JsonResult remove(@NotEmpty @RequestBody List<Long> idList) {
-        categoryService.batchRemove(idList);
+        categoryService.removeByIds(idList);
         return JsonResult.ok();
     }
 }

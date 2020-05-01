@@ -2,10 +2,10 @@ package site.alanliang.geekblog.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import site.alanliang.geekblog.domain.Article;
-import site.alanliang.geekblog.dto.ArticleVo;
+import site.alanliang.geekblog.entity.Article;
+import site.alanliang.geekblog.vo.ArticleVO;
 import site.alanliang.geekblog.query.ArticleQuery;
-import site.alanliang.geekblog.vo.ArticleDateVo;
+import site.alanliang.geekblog.vo.ArticleDateVO;
 
 import java.util.List;
 
@@ -15,21 +15,21 @@ import java.util.List;
 public interface ArticleService {
 
     /**
-     * 保存或编辑文章
+     * 保存或更新文章
      *
-     * @param articleVo 文章DTO
+     * @param articleVo 文章
      */
-    void saveOrUpdate(ArticleVo articleVo);
+    void saveOrUpdate(ArticleVO articleVo);
 
     /**
-     * 后台分页查询所有文章
+     * 分页查询文章
      *
      * @param current 当前页码
      * @param size    页面大小
      * @param wrapper 条件
      * @return 文章列表
      */
-    List<site.alanliang.geekblog.vo.ArticleVo> listByPageForAdmin(Integer current, Integer size, QueryWrapper<Article> wrapper);
+    Page<Article> listTableByPage(Integer current, Integer size, QueryWrapper<Article> wrapper);
 
     /**
      * 查询记录总数
@@ -45,14 +45,14 @@ public interface ArticleService {
      * @param id 文章ID
      * @return 文章
      */
-    Article findById(Long id);
+    Article getById(Long id);
 
     /**
      * 根据ID删除文章
      *
      * @param id 文章ID
      */
-    void remove(Long id);
+    void removeById(Long id);
 
     /**
      * 根据ID列表批量删除文章
@@ -62,35 +62,35 @@ public interface ArticleService {
     void removeByIds(List<Long> idList);
 
     /**
-     * 根据条件查询所有文章
+     * 查询置顶文章
      *
      * @return 文章列表
      */
-    List<Article> listTopArticles();
+    List<Article> listTop();
 
     /**
-     * 查询所有推荐文章信息
+     * 查询推荐文章
      *
      * @return 推荐文章列表
      */
-    List<Article> listRecommendArticles();
+    List<Article> listRecommend();
 
     /**
-     * 前台分页查询所有文章
+     * 分页查询所有文章
      *
      * @param current 当前页码
      * @param size    页码大小
      * @return 文章列表
      */
-    Page<Article> listArticlesByPage(Integer current, Integer size);
+    Page<Article> listPreviewByPage(Integer current, Integer size);
 
     /**
-     * 前台根据ID查询文章
+     * 根据ID查询文章
      *
      * @param id 文章ID
      * @return 文章
      */
-    Article getArticleById(Long id);
+    Article getDetailById(Long id);
 
     /**
      * 增加文章点赞量
@@ -112,7 +112,7 @@ public interface ArticleService {
      * @param id 当前文章ID
      * @return 上一篇文章预览
      */
-    Article getPrevArticlePreview(Long id);
+    Article getPrevPreviewById(Long id);
 
     /**
      * 获取当前文章的下一篇文章预览
@@ -120,7 +120,7 @@ public interface ArticleService {
      * @param id 当前文章ID
      * @return 下一篇文章预览
      */
-    Article getNextArticlePreview(Long id);
+    Article getNextPreviewById(Long id);
 
     /**
      * 根据分类ID分页获取分类的所有文章
@@ -128,7 +128,7 @@ public interface ArticleService {
      * @param categoryId 分类ID
      * @return 文章列表
      */
-    Page<Article> listPageArticlePreviewByCategoryId(Integer current, Integer size, Long categoryId);
+    Page<Article> listPreviewPageByCategoryId(Integer current, Integer size, Long categoryId);
 
     /**
      * 根据标签ID分页获取标签的所有文章
@@ -136,7 +136,7 @@ public interface ArticleService {
      * @param tagId 标签ID
      * @return 文章列表
      */
-    Page<Article> listPageArticlePreviewByTagId(Integer current, Integer size, Long tagId);
+    Page<Article> listPreviewPageByTagId(Integer current, Integer size, Long tagId);
 
     /**
      * 根据日期统计文章数量
@@ -144,7 +144,7 @@ public interface ArticleService {
      * @param articleQuery
      * @return 文章日期统计
      */
-    List<ArticleDateVo> countArticleByDate(Integer articleQuery);
+    List<ArticleDateVO> countByDate(Integer articleQuery);
 
     /**
      * 根据日期分页获取所有文章预览
@@ -154,13 +154,13 @@ public interface ArticleService {
      * @param articleQuery 条件
      * @return 文章预览列表
      */
-    Page<Article> listPageArticlePreviewByDate(Integer current, Integer size, ArticleQuery articleQuery);
+    Page<Article> listPreviewPageByDate(Integer current, Integer size, ArticleQuery articleQuery);
 
     /**
      * 根据关键词获取文章
      *
      * @return 文章列表
      */
-    List<Article> listArticlesByKeyword();
+    List<Article> listByKeyword();
 
 }

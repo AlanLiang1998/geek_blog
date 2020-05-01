@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  **/
 @EnableTransactionManagement
 @Configuration
-@MapperScan("site.alanliang.geekblog.mapper")
+@MapperScan("site.alanliang.geekblog.dao")
 public class MyBatisPlusConfig {
     /**
      * 开启分页

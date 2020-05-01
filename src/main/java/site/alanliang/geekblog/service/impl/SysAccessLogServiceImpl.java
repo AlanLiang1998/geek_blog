@@ -9,8 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import site.alanliang.geekblog.anntation.AccessLog;
-import site.alanliang.geekblog.domain.SysAccessLog;
-import site.alanliang.geekblog.mapper.SysAccessLogMapper;
+import site.alanliang.geekblog.entity.SysAccessLog;
+import site.alanliang.geekblog.dao.SysAccessLogMapper;
 import site.alanliang.geekblog.service.SysAccessLogService;
 import site.alanliang.geekblog.utils.StringUtils;
 
