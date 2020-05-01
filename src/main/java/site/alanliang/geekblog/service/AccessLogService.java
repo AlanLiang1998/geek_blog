@@ -7,7 +7,7 @@ import site.alanliang.geekblog.entity.SysAccessLog;
 
 import java.util.List;
 
-public interface SysAccessLogService {
+public interface AccessLogService {
     /**
      * 保存日志数据
      *

@@ -8,7 +8,7 @@ import site.alanliang.geekblog.vo.InitInfoVO;
  * Date 2020/4/5 22:15
  * Version 1.0
  **/
-public interface SysMenuService {
+public interface MenuService {
     /**
      * 获取菜单树
      * @return

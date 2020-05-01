@@ -5,8 +5,8 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import site.alanliang.geekblog.entity.SysUser;
-import site.alanliang.geekblog.dao.SysUserMapper;
-import site.alanliang.geekblog.service.SysUserService;
+import site.alanliang.geekblog.dao.UserMapper;
+import site.alanliang.geekblog.service.UserService;
 
 /**
  * @Descriptin TODO
@@ -15,16 +15,16 @@ import site.alanliang.geekblog.service.SysUserService;
  * Version 1.0
  **/
 @Service
-public class SysUserServiceImpl implements SysUserService {
+public class UserServiceImpl implements UserService {
 
     @Autowired
-    private SysUserMapper sysUserMapper;
+    private UserMapper userMapper;
 
 
     @Override
     public Page<SysUser> listByPage(int current, int size) {
         Page<SysUser> page = new Page<>(current, size);
-        return sysUserMapper.selectPage(page, null);
+        return userMapper.selectPage(page, null);
     }
 
     @Override
@@ -33,6 +33,6 @@ public class SysUserServiceImpl implements SysUserService {
         wrapper.select("id", "username")
                 .eq("username", username)
                 .eq("password", password);
-        return sysUserMapper.selectOne(wrapper);
+        return userMapper.selectOne(wrapper);
     }
 }

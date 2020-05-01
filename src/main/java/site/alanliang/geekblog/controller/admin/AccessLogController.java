@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import site.alanliang.geekblog.common.JsonResult;
 import site.alanliang.geekblog.common.TableResult;
 import site.alanliang.geekblog.entity.SysAccessLog;
-import site.alanliang.geekblog.service.SysAccessLogService;
+import site.alanliang.geekblog.service.AccessLogService;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -23,24 +23,24 @@ import java.util.List;
 public class AccessLogController {
 
     @Autowired
-    private SysAccessLogService sysAccessLogService;
+    private AccessLogService accessLogService;
 
     @GetMapping
     public TableResult listByPage(@RequestParam(value = "page", defaultValue = "1") Integer page,
                                   @RequestParam(value = "limit", defaultValue = "10") Integer limit) {
-        Page<SysAccessLog> pageInfo = sysAccessLogService.listByPage(page, limit);
+        Page<SysAccessLog> pageInfo = accessLogService.listByPage(page, limit);
         return TableResult.tableOk(pageInfo.getRecords(), pageInfo.getTotal());
     }
 
     @DeleteMapping("/{id}")
     public JsonResult removeById(@NotNull @PathVariable("id") Long id) {
-        sysAccessLogService.remove(id);
+        accessLogService.remove(id);
         return JsonResult.ok();
     }
 
     @DeleteMapping
     public JsonResult removeBatch(@NotEmpty @RequestBody List<Long> idList) {
-        sysAccessLogService.removeByIds(idList);
+        accessLogService.removeByIds(idList);
         return JsonResult.ok();
     }
 }

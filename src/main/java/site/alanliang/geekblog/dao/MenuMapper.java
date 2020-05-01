@@ -11,6 +11,6 @@ import site.alanliang.geekblog.entity.SysMenu;
  * Version 1.0
  **/
 @Repository
-public interface SysMenuMapper extends BaseMapper<SysMenu> {
+public interface MenuMapper extends BaseMapper<SysMenu> {
 
 }

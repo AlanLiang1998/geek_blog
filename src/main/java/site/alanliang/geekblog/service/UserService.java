@@ -6,7 +6,7 @@ import site.alanliang.geekblog.entity.SysUser;
 /**
  * @author AlanLiang
  */
-public interface SysUserService {
+public interface UserService {
     /**
      * 分页查询所有用户
      *

@@ -10,8 +10,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import site.alanliang.geekblog.anntation.AccessLog;
 import site.alanliang.geekblog.entity.SysAccessLog;
-import site.alanliang.geekblog.dao.SysAccessLogMapper;
-import site.alanliang.geekblog.service.SysAccessLogService;
+import site.alanliang.geekblog.dao.AccessLogMapper;
+import site.alanliang.geekblog.service.AccessLogService;
 import site.alanliang.geekblog.utils.StringUtils;
 
 import java.lang.reflect.Method;
@@ -25,10 +25,10 @@ import java.util.List;
  * Version 1.0
  **/
 @Service
-public class SysAccessLogServiceImpl implements SysAccessLogService {
+public class AccessLogServiceImpl implements AccessLogService {
 
     @Autowired
-    private SysAccessLogMapper sysAccessLogMapper;
+    private AccessLogMapper accessLogMapper;
 
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -73,19 +73,19 @@ public class SysAccessLogServiceImpl implements SysAccessLogService {
         log.setParams(params.toString() + " }");
         log.setBrowser(browser);
         log.setCreateTime(new Date());
-        sysAccessLogMapper.insert(log);
+        accessLogMapper.insert(log);
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void removeByIds(List<Long> idList) {
-        sysAccessLogMapper.deleteBatchIds(idList);
+        accessLogMapper.deleteBatchIds(idList);
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void remove(Long id) {
-        sysAccessLogMapper.deleteById(id);
+        accessLogMapper.deleteById(id);
     }
 
     @Override
@@ -93,6 +93,6 @@ public class SysAccessLogServiceImpl implements SysAccessLogService {
         Page<SysAccessLog> page = new Page<>(current, size);
         QueryWrapper<SysAccessLog> wrapper = new QueryWrapper<>();
         wrapper.select("id", "request_ip", "address", "description", "browser", "time", "create_time");
-        return sysAccessLogMapper.selectPage(page, wrapper);
+        return accessLogMapper.selectPage(page, wrapper);
     }
 }

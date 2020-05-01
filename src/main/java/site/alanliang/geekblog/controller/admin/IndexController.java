@@ -9,8 +9,8 @@ import site.alanliang.geekblog.anntation.AccessLog;
 import site.alanliang.geekblog.common.JsonResult;
 import site.alanliang.geekblog.entity.SysUser;
 import site.alanliang.geekblog.exception.BadRequestException;
-import site.alanliang.geekblog.service.SysMenuService;
-import site.alanliang.geekblog.service.SysUserService;
+import site.alanliang.geekblog.service.MenuService;
+import site.alanliang.geekblog.service.UserService;
 import site.alanliang.geekblog.utils.MD5Util;
 import site.alanliang.geekblog.vo.InitInfoVO;
 
@@ -27,9 +27,9 @@ import javax.servlet.http.HttpSession;
 public class IndexController {
 
     @Autowired
-    private SysMenuService sysMenuService;
+    private MenuService menuService;
     @Autowired
-    private SysUserService sysUserService;
+    private UserService userService;
 
     @AccessLog("访问后台登录页")
     @GetMapping
@@ -43,7 +43,7 @@ public class IndexController {
     @ResponseBody
     @GetMapping("/init")
     public ResponseEntity<Object> init() {
-        InitInfoVO initInfoVO = sysMenuService.menu();
+        InitInfoVO initInfoVO = menuService.menu();
         return new ResponseEntity<>(initInfoVO, HttpStatus.OK);
     }
 
@@ -52,7 +52,7 @@ public class IndexController {
     public JsonResult toLogin(@RequestParam("username") String username,
                               @RequestParam("password") String password,
                               HttpSession session) {
-        SysUser user = sysUserService.checkUser(username, MD5Util.code(password));
+        SysUser user = userService.checkUser(username, MD5Util.code(password));
         if (user != null) {
             session.setAttribute("user", user);
             return JsonResult.ok();

@@ -7,7 +7,7 @@ import org.aspectj.lang.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import site.alanliang.geekblog.entity.SysAccessLog;
-import site.alanliang.geekblog.service.SysAccessLogService;
+import site.alanliang.geekblog.service.AccessLogService;
 import site.alanliang.geekblog.utils.RequestHolder;
 import site.alanliang.geekblog.utils.StringUtils;
 import site.alanliang.geekblog.utils.ThrowableUtil;
@@ -26,7 +26,7 @@ import javax.servlet.http.HttpServletRequest;
 public class AccessLogAspect {
 
     @Autowired
-    private SysAccessLogService sysAccessLogService;
+    private AccessLogService accessLogService;
 
     ThreadLocal<Long> currentTime = new ThreadLocal<>();
 
@@ -52,7 +52,7 @@ public class AccessLogAspect {
         SysAccessLog log = new SysAccessLog("INFO", System.currentTimeMillis() - currentTime.get());
         currentTime.remove();
         HttpServletRequest request = RequestHolder.getHttpServletRequest();
-        sysAccessLogService.save(getUsername(), StringUtils.getBrowser(request), StringUtils.getIp(request), joinPoint, log);
+        accessLogService.save(getUsername(), StringUtils.getBrowser(request), StringUtils.getIp(request), joinPoint, log);
         return result;
     }
 
@@ -68,7 +68,7 @@ public class AccessLogAspect {
         currentTime.remove();
         log.setExceptionDetail(ThrowableUtil.getStackTrace(e).getBytes());
         HttpServletRequest request = RequestHolder.getHttpServletRequest();
-        sysAccessLogService.save(getUsername(), StringUtils.getBrowser(request), StringUtils.getIp(request), (ProceedingJoinPoint) joinPoint, log);
+        accessLogService.save(getUsername(), StringUtils.getBrowser(request), StringUtils.getIp(request), (ProceedingJoinPoint) joinPoint, log);
     }
 
     public String getUsername() {
