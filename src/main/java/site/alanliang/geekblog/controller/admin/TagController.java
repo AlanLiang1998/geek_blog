@@ -1,10 +1,8 @@
 package site.alanliang.geekblog.controller.admin;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
-import org.springframework.util.StringUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
@@ -54,7 +52,7 @@ public class TagController {
     public TableResult listByPage(@RequestParam(value = "page", defaultValue = "1") Integer page,
                                   @RequestParam(value = "limit", defaultValue = "10") Integer limit,
                                   TagQuery tagQuery) {
-        Page<Tag> tagPage = tagService.listByPage(page, limit, tagQuery);
+        Page<Tag> tagPage = tagService.listTableByPage(page, limit, tagQuery);
         return TableResult.tableOk(tagPage.getRecords(), tagPage.getTotal());
     }
 

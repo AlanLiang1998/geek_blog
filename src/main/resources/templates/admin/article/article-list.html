@@ -148,7 +148,7 @@
                         }
                     },
                     {
-                        field: 'type', width: 80, title: '类型', sort: true, templet: function (data) {
+                        field: 'type', width: 80, title: '类型', sort: true, align: 'center', templet: function (data) {
                             let type = data.type === 1 ? '原创' : (data.type === 2 ? '转载' : '翻译');
                             let color = data.type === 1 ? 'green' : (data.type === 2 ? 'orange' : 'red');
                             let bgColor = 'layui-bg-' + color;
@@ -156,7 +156,12 @@
                         }
                     },
                     {
-                        field: 'category', width: 150, title: '分类', sort: true, templet: function (data) {
+                        field: 'category',
+                        width: 150,
+                        title: '分类',
+                        align: 'center',
+                        sort: true,
+                        templet: function (data) {
                             let cateName = data.category.name;
                             let color = data.category.color;
                             return '<span class="layui-badge" style="background-color: ' + color +
@@ -177,7 +182,12 @@
                         }
                     },
                     {
-                        field: 'published', width: 80, title: '状态', sort: true, templet: function (data) {
+                        field: 'published',
+                        width: 80,
+                        title: '状态',
+                        align: 'center',
+                        sort: true,
+                        templet: function (data) {
                             let str = (data.published ? '发布' : '草稿');
                             let color = (data.published ? 'green' : 'orange');
                             let bgColor = 'layui-bg-' + color;
@@ -185,7 +195,12 @@
                         }
                     },
                     {
-                        field: 'views', width: 100, title: '浏览量', sort: true, templet: function (data) {
+                        field: 'views',
+                        width: 100,
+                        title: '浏览量',
+                        align: 'center',
+                        sort: true,
+                        templet: function (data) {
                             let views = data.views;
                             let color = views >= 500 ? 'red' : (views >= 100 ? 'orange' : 'green');
                             let bgColor = 'layui-bg-' + color;
@@ -193,7 +208,12 @@
                         }
                     },
                     {
-                        field: 'likes', width: 100, title: '点赞数', sort: true, templet: function (data) {
+                        field: 'likes',
+                        width: 100,
+                        title: '点赞数',
+                        align: 'center',
+                        sort: true,
+                        templet: function (data) {
                             let likes = data.likes;
                             let color = likes >= 100 ? 'red' : (likes >= 50 ? 'orange' : 'green');
                             let bgColor = 'layui-bg-' + color;
@@ -201,7 +221,12 @@
                         }
                     },
                     {
-                        field: 'comments', width: 100, title: '评论数', sort: true, templet: function (data) {
+                        field: 'comments',
+                        width: 100,
+                        title: '评论数',
+                        align: 'center',
+                        sort: true,
+                        templet: function (data) {
                             let comments = data.comments;
                             let color = comments >= 30 ? 'red' : (comments >= 10 ? 'orange' : 'green');
                             let bgColor = 'layui-bg-' + color;

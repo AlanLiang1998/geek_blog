@@ -9,4 +9,16 @@
         where tc.display = 1
         group by tc.id
     </select>
+    <select id="listTableByPage" resultType="site.alanliang.geekblog.entity.Category"
+            parameterType="com.baomidou.mybatisplus.extension.plugins.pagination.Page">
+        select tc.id, tc.name, tc.display, tc.introduction, tc.color, tc.create_time, tc.update_time, count(ta.id)
+        articleCount
+        from t_category tc
+        left join t_article ta
+        on tc.id = ta.category_id
+        <if test="ew != null and ew.emptyOfWhere == false">
+            ${ew.customSqlSegment}
+        </if>
+        group by tc.id
+    </select>
 </mapper>

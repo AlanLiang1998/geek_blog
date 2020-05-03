@@ -29,7 +29,7 @@ public class TagServiceImpl implements TagService {
     private TagMapper tagMapper;
 
     @Override
-    public Page<Tag> listByPage(Integer current, Integer size, TagQuery tagQuery) {
+    public Page<Tag> listTableByPage(Integer current, Integer size, TagQuery tagQuery) {
         Page<Tag> tagPage = new Page<>(current, size);
         QueryWrapper<Tag> wrapper = new QueryWrapper<>();
         if (!StringUtils.isEmpty(tagQuery.getName())) {
@@ -38,7 +38,7 @@ public class TagServiceImpl implements TagService {
         if (tagQuery.getStartDate() != null && tagQuery.getEndDate() != null) {
             wrapper.between("create_time", tagQuery.getStartDate(), tagQuery.getEndDate());
         }
-        return tagMapper.selectPage(tagPage, wrapper);
+        return tagMapper.listTableByPage(tagPage, wrapper);
     }
 
     @Override

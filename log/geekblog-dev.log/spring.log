@@ -5286,3 +5286,555 @@ Field error in object 'categoryQuery' on field 'startDate': rejected value []; c
 2020-05-03 17:53:40.693 DEBUG 9980 --- [http-nio-8889-exec-4] s.a.g.dao.TagMapper.selectByArticleId    : ==>  Preparing: select tt.id, tt.name, tt.color from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
 2020-05-03 17:53:40.693 DEBUG 9980 --- [http-nio-8889-exec-4] s.a.g.dao.TagMapper.selectByArticleId    : ==> Parameters: 1(Long)
 2020-05-03 17:53:40.695 DEBUG 9980 --- [http-nio-8889-exec-4] s.a.g.dao.TagMapper.selectByArticleId    : <==      Total: 4
+2020-05-03 17:55:31.320 DEBUG 9980 --- [http-nio-8889-exec-8] s.a.g.dao.CategoryMapper.selectPage      : ==>  Preparing: SELECT COUNT(1) FROM t_category 
+2020-05-03 17:55:31.320 DEBUG 9980 --- [http-nio-8889-exec-8] s.a.g.dao.CategoryMapper.selectPage      : ==> Parameters: 
+2020-05-03 17:55:31.326 DEBUG 9980 --- [http-nio-8889-exec-8] s.a.g.dao.CategoryMapper.selectPage      : ==>  Preparing: SELECT id,name,display,introduction,color,create_time,update_time FROM t_category LIMIT ?,? 
+2020-05-03 17:55:31.327 DEBUG 9980 --- [http-nio-8889-exec-8] s.a.g.dao.CategoryMapper.selectPage      : ==> Parameters: 0(Long), 15(Long)
+2020-05-03 17:55:31.330 DEBUG 9980 --- [http-nio-8889-exec-8] s.a.g.dao.CategoryMapper.selectPage      : <==      Total: 6
+2020-05-03 17:55:38.417 DEBUG 9980 --- [http-nio-8889-exec-9] s.a.geekblog.dao.TagMapper.selectPage    : ==>  Preparing: SELECT COUNT(1) FROM t_tag 
+2020-05-03 17:55:38.418 DEBUG 9980 --- [http-nio-8889-exec-9] s.a.geekblog.dao.TagMapper.selectPage    : ==> Parameters: 
+2020-05-03 17:55:38.421 DEBUG 9980 --- [http-nio-8889-exec-9] s.a.geekblog.dao.TagMapper.selectPage    : ==>  Preparing: SELECT id,name,create_time,update_time,color FROM t_tag LIMIT ?,? 
+2020-05-03 17:55:38.423 DEBUG 9980 --- [http-nio-8889-exec-9] s.a.geekblog.dao.TagMapper.selectPage    : ==> Parameters: 0(Long), 15(Long)
+2020-05-03 17:55:38.430 DEBUG 9980 --- [http-nio-8889-exec-9] s.a.geekblog.dao.TagMapper.selectPage    : <==      Total: 14
+2020-05-03 17:56:43.029 DEBUG 9980 --- [http-nio-8889-exec-4] s.a.g.dao.CategoryMapper.selectPage      : ==>  Preparing: SELECT COUNT(1) FROM t_category 
+2020-05-03 17:56:43.029 DEBUG 9980 --- [http-nio-8889-exec-4] s.a.g.dao.CategoryMapper.selectPage      : ==> Parameters: 
+2020-05-03 17:56:43.031 DEBUG 9980 --- [http-nio-8889-exec-4] s.a.g.dao.CategoryMapper.selectPage      : ==>  Preparing: SELECT id,name,display,introduction,color,create_time,update_time FROM t_category LIMIT ?,? 
+2020-05-03 17:56:43.031 DEBUG 9980 --- [http-nio-8889-exec-4] s.a.g.dao.CategoryMapper.selectPage      : ==> Parameters: 0(Long), 15(Long)
+2020-05-03 17:56:43.032 DEBUG 9980 --- [http-nio-8889-exec-4] s.a.g.dao.CategoryMapper.selectPage      : <==      Total: 6
+2020-05-03 17:56:44.265 DEBUG 9980 --- [http-nio-8889-exec-7] s.a.g.dao.CategoryMapper.selectList      : ==>  Preparing: SELECT id,name FROM t_category 
+2020-05-03 17:56:44.265 DEBUG 9980 --- [http-nio-8889-exec-7] s.a.g.dao.CategoryMapper.selectList      : ==> Parameters: 
+2020-05-03 17:56:44.266 DEBUG 9980 --- [http-nio-8889-exec-7] s.a.g.dao.CategoryMapper.selectList      : <==      Total: 6
+2020-05-03 17:56:44.277 DEBUG 9980 --- [http-nio-8889-exec-6] s.a.g.dao.ArticleMapper.listTableByPage  : ==>  Preparing: SELECT COUNT(1) FROM t_article ta 
+2020-05-03 17:56:44.278 DEBUG 9980 --- [http-nio-8889-exec-6] s.a.g.dao.ArticleMapper.listTableByPage  : ==> Parameters: 
+2020-05-03 17:56:44.280 DEBUG 9980 --- [http-nio-8889-exec-6] s.a.g.dao.ArticleMapper.listTableByPage  : ==>  Preparing: select ta.id, ta.title, ta.type, ta.comments, ta.views, ta.likes, ta.published, ta.commentable, ta.appreciable, ta.top, ta.recommend, ta.create_time, ta.update_time, tc.id as cid, tc.name as cname, tc.color from t_article ta left join t_category tc on ta.category_id = tc.id LIMIT ?,? 
+2020-05-03 17:56:44.282 DEBUG 9980 --- [http-nio-8889-exec-6] s.a.g.dao.ArticleMapper.listTableByPage  : ==> Parameters: 0(Long), 15(Long)
+2020-05-03 17:56:44.296 DEBUG 9980 --- [http-nio-8889-exec-6] s.a.g.dao.ArticleMapper.listTableByPage  : <==      Total: 8
+2020-05-03 17:56:44.298 DEBUG 9980 --- [http-nio-8889-exec-6] s.a.g.dao.TagMapper.selectByArticleId    : ==>  Preparing: select tt.id, tt.name, tt.color from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-05-03 17:56:44.298 DEBUG 9980 --- [http-nio-8889-exec-6] s.a.g.dao.TagMapper.selectByArticleId    : ==> Parameters: 1(Long)
+2020-05-03 17:56:44.299 DEBUG 9980 --- [http-nio-8889-exec-6] s.a.g.dao.TagMapper.selectByArticleId    : <==      Total: 4
+2020-05-03 17:56:44.300 DEBUG 9980 --- [http-nio-8889-exec-6] s.a.g.dao.TagMapper.selectByArticleId    : ==>  Preparing: select tt.id, tt.name, tt.color from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-05-03 17:56:44.300 DEBUG 9980 --- [http-nio-8889-exec-6] s.a.g.dao.TagMapper.selectByArticleId    : ==> Parameters: 2(Long)
+2020-05-03 17:56:44.301 DEBUG 9980 --- [http-nio-8889-exec-6] s.a.g.dao.TagMapper.selectByArticleId    : <==      Total: 3
+2020-05-03 17:56:44.301 DEBUG 9980 --- [http-nio-8889-exec-6] s.a.g.dao.TagMapper.selectByArticleId    : ==>  Preparing: select tt.id, tt.name, tt.color from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-05-03 17:56:44.301 DEBUG 9980 --- [http-nio-8889-exec-6] s.a.g.dao.TagMapper.selectByArticleId    : ==> Parameters: 3(Long)
+2020-05-03 17:56:44.302 DEBUG 9980 --- [http-nio-8889-exec-6] s.a.g.dao.TagMapper.selectByArticleId    : <==      Total: 4
+2020-05-03 17:56:44.303 DEBUG 9980 --- [http-nio-8889-exec-6] s.a.g.dao.TagMapper.selectByArticleId    : ==>  Preparing: select tt.id, tt.name, tt.color from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-05-03 17:56:44.303 DEBUG 9980 --- [http-nio-8889-exec-6] s.a.g.dao.TagMapper.selectByArticleId    : ==> Parameters: 4(Long)
+2020-05-03 17:56:44.306 DEBUG 9980 --- [http-nio-8889-exec-6] s.a.g.dao.TagMapper.selectByArticleId    : <==      Total: 4
+2020-05-03 17:56:44.307 DEBUG 9980 --- [http-nio-8889-exec-6] s.a.g.dao.TagMapper.selectByArticleId    : ==>  Preparing: select tt.id, tt.name, tt.color from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-05-03 17:56:44.309 DEBUG 9980 --- [http-nio-8889-exec-6] s.a.g.dao.TagMapper.selectByArticleId    : ==> Parameters: 5(Long)
+2020-05-03 17:56:44.311 DEBUG 9980 --- [http-nio-8889-exec-6] s.a.g.dao.TagMapper.selectByArticleId    : <==      Total: 3
+2020-05-03 17:56:44.312 DEBUG 9980 --- [http-nio-8889-exec-6] s.a.g.dao.TagMapper.selectByArticleId    : ==>  Preparing: select tt.id, tt.name, tt.color from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-05-03 17:56:44.312 DEBUG 9980 --- [http-nio-8889-exec-6] s.a.g.dao.TagMapper.selectByArticleId    : ==> Parameters: 6(Long)
+2020-05-03 17:56:44.313 DEBUG 9980 --- [http-nio-8889-exec-6] s.a.g.dao.TagMapper.selectByArticleId    : <==      Total: 4
+2020-05-03 17:56:44.313 DEBUG 9980 --- [http-nio-8889-exec-6] s.a.g.dao.TagMapper.selectByArticleId    : ==>  Preparing: select tt.id, tt.name, tt.color from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-05-03 17:56:44.314 DEBUG 9980 --- [http-nio-8889-exec-6] s.a.g.dao.TagMapper.selectByArticleId    : ==> Parameters: 7(Long)
+2020-05-03 17:56:44.315 DEBUG 9980 --- [http-nio-8889-exec-6] s.a.g.dao.TagMapper.selectByArticleId    : <==      Total: 5
+2020-05-03 17:56:44.315 DEBUG 9980 --- [http-nio-8889-exec-6] s.a.g.dao.TagMapper.selectByArticleId    : ==>  Preparing: select tt.id, tt.name, tt.color from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-05-03 17:56:44.315 DEBUG 9980 --- [http-nio-8889-exec-6] s.a.g.dao.TagMapper.selectByArticleId    : ==> Parameters: 9(Long)
+2020-05-03 17:56:44.316 DEBUG 9980 --- [http-nio-8889-exec-6] s.a.g.dao.TagMapper.selectByArticleId    : <==      Total: 3
+2020-05-03 17:56:45.300 DEBUG 9980 --- [http-nio-8889-exec-10] s.a.geekblog.dao.TagMapper.selectPage    : ==>  Preparing: SELECT COUNT(1) FROM t_tag 
+2020-05-03 17:56:45.300 DEBUG 9980 --- [http-nio-8889-exec-10] s.a.geekblog.dao.TagMapper.selectPage    : ==> Parameters: 
+2020-05-03 17:56:45.301 DEBUG 9980 --- [http-nio-8889-exec-10] s.a.geekblog.dao.TagMapper.selectPage    : ==>  Preparing: SELECT id,name,create_time,update_time,color FROM t_tag LIMIT ?,? 
+2020-05-03 17:56:45.302 DEBUG 9980 --- [http-nio-8889-exec-10] s.a.geekblog.dao.TagMapper.selectPage    : ==> Parameters: 0(Long), 15(Long)
+2020-05-03 17:56:45.304 DEBUG 9980 --- [http-nio-8889-exec-10] s.a.geekblog.dao.TagMapper.selectPage    : <==      Total: 14
+2020-05-03 18:02:26.709  INFO 9980 --- [Thread-19] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2020-05-03 18:02:26.710  INFO 9980 --- [Thread-19] com.alibaba.druid.pool.DruidDataSource   : {dataSource-2} closed
+2020-05-03 18:02:27.098  INFO 9980 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Starting GeekBlogApplication on DESKTOP-QNDK7AF with PID 9980 (D:\idea\geekblog\target\classes started by AlanLiang in D:\idea\geekblog)
+2020-05-03 18:02:27.098 DEBUG 9980 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Running with Spring Boot v2.2.6.RELEASE, Spring v5.2.5.RELEASE
+2020-05-03 18:02:27.098  INFO 9980 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : The following profiles are active: dev
+2020-05-03 18:02:27.323  INFO 9980 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8889 (http)
+2020-05-03 18:02:27.323  INFO 9980 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-05-03 18:02:27.323  INFO 9980 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.33]
+2020-05-03 18:02:27.342  INFO 9980 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-05-03 18:02:27.342  INFO 9980 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 242 ms
+2020-05-03 18:02:27.357  INFO 9980 --- [restartedMain] o.s.boot.web.servlet.RegistrationBean    : Servlet statViewServlet was not registered (possibly already registered?)
+2020-05-03 18:02:27.357  INFO 9980 --- [restartedMain] o.s.boot.web.servlet.RegistrationBean    : Filter webStatFilter was not registered (possibly already registered?)
+2020-05-03 18:02:27.377  INFO 9980 --- [restartedMain] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2020-05-03 18:02:27.445  INFO 9980 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-3} inited
+2020-05-03 18:02:27.909  INFO 9980 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-05-03 18:02:28.056  INFO 9980 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2020-05-03 18:02:28.074  INFO 9980 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8889 (http) with context path ''
+2020-05-03 18:02:28.075  INFO 9980 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Started GeekBlogApplication in 1.003 seconds (JVM running for 775.811)
+2020-05-03 18:02:28.076  INFO 9980 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2020-05-03 18:02:54.165  INFO 9980 --- [Thread-24] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2020-05-03 18:02:54.168  INFO 9980 --- [Thread-24] com.alibaba.druid.pool.DruidDataSource   : {dataSource-3} closed
+2020-05-03 18:02:54.599  INFO 9980 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Starting GeekBlogApplication on DESKTOP-QNDK7AF with PID 9980 (D:\idea\geekblog\target\classes started by AlanLiang in D:\idea\geekblog)
+2020-05-03 18:02:54.599 DEBUG 9980 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Running with Spring Boot v2.2.6.RELEASE, Spring v5.2.5.RELEASE
+2020-05-03 18:02:54.599  INFO 9980 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : The following profiles are active: dev
+2020-05-03 18:02:54.850  INFO 9980 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8889 (http)
+2020-05-03 18:02:54.851  INFO 9980 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-05-03 18:02:54.851  INFO 9980 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.33]
+2020-05-03 18:02:54.870  INFO 9980 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-05-03 18:02:54.870  INFO 9980 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 267 ms
+2020-05-03 18:02:54.887  INFO 9980 --- [restartedMain] o.s.boot.web.servlet.RegistrationBean    : Servlet statViewServlet was not registered (possibly already registered?)
+2020-05-03 18:02:54.887  INFO 9980 --- [restartedMain] o.s.boot.web.servlet.RegistrationBean    : Filter webStatFilter was not registered (possibly already registered?)
+2020-05-03 18:02:54.910  INFO 9980 --- [restartedMain] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2020-05-03 18:02:54.972  INFO 9980 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-4} inited
+2020-05-03 18:02:55.389  INFO 9980 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-05-03 18:02:55.542  INFO 9980 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2020-05-03 18:02:55.562  INFO 9980 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8889 (http) with context path ''
+2020-05-03 18:02:55.562  INFO 9980 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Started GeekBlogApplication in 0.992 seconds (JVM running for 803.299)
+2020-05-03 18:02:55.564  INFO 9980 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2020-05-03 18:03:09.936  INFO 9980 --- [Thread-29] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2020-05-03 18:03:09.938  INFO 9980 --- [Thread-29] com.alibaba.druid.pool.DruidDataSource   : {dataSource-4} closed
+2020-05-03 18:03:10.370  INFO 9980 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Starting GeekBlogApplication on DESKTOP-QNDK7AF with PID 9980 (D:\idea\geekblog\target\classes started by AlanLiang in D:\idea\geekblog)
+2020-05-03 18:03:10.371 DEBUG 9980 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Running with Spring Boot v2.2.6.RELEASE, Spring v5.2.5.RELEASE
+2020-05-03 18:03:10.371  INFO 9980 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : The following profiles are active: dev
+2020-05-03 18:03:10.576  INFO 9980 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8889 (http)
+2020-05-03 18:03:10.576  INFO 9980 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-05-03 18:03:10.576  INFO 9980 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.33]
+2020-05-03 18:03:10.594  INFO 9980 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-05-03 18:03:10.594  INFO 9980 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 222 ms
+2020-05-03 18:03:10.609  INFO 9980 --- [restartedMain] o.s.boot.web.servlet.RegistrationBean    : Servlet statViewServlet was not registered (possibly already registered?)
+2020-05-03 18:03:10.609  INFO 9980 --- [restartedMain] o.s.boot.web.servlet.RegistrationBean    : Filter webStatFilter was not registered (possibly already registered?)
+2020-05-03 18:03:10.627  INFO 9980 --- [restartedMain] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2020-05-03 18:03:10.683  INFO 9980 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-5} inited
+2020-05-03 18:03:11.063  INFO 9980 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-05-03 18:03:11.203  INFO 9980 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2020-05-03 18:03:11.221  INFO 9980 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8889 (http) with context path ''
+2020-05-03 18:03:11.222  INFO 9980 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Started GeekBlogApplication in 0.875 seconds (JVM running for 818.958)
+2020-05-03 18:03:11.222  INFO 9980 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2020-05-03 18:03:20.254  INFO 9980 --- [Thread-34] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2020-05-03 18:03:20.257  INFO 9980 --- [Thread-34] com.alibaba.druid.pool.DruidDataSource   : {dataSource-5} closed
+2020-05-03 18:03:20.572  INFO 9980 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Starting GeekBlogApplication on DESKTOP-QNDK7AF with PID 9980 (D:\idea\geekblog\target\classes started by AlanLiang in D:\idea\geekblog)
+2020-05-03 18:03:20.572 DEBUG 9980 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Running with Spring Boot v2.2.6.RELEASE, Spring v5.2.5.RELEASE
+2020-05-03 18:03:20.572  INFO 9980 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : The following profiles are active: dev
+2020-05-03 18:03:20.813  INFO 9980 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8889 (http)
+2020-05-03 18:03:20.814  INFO 9980 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-05-03 18:03:20.814  INFO 9980 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.33]
+2020-05-03 18:03:20.846  INFO 9980 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-05-03 18:03:20.846  INFO 9980 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 272 ms
+2020-05-03 18:03:20.867  INFO 9980 --- [restartedMain] o.s.boot.web.servlet.RegistrationBean    : Servlet statViewServlet was not registered (possibly already registered?)
+2020-05-03 18:03:20.868  INFO 9980 --- [restartedMain] o.s.boot.web.servlet.RegistrationBean    : Filter webStatFilter was not registered (possibly already registered?)
+2020-05-03 18:03:20.890  INFO 9980 --- [restartedMain] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2020-05-03 18:03:20.950  INFO 9980 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-6} inited
+2020-05-03 18:03:21.418  INFO 9980 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-05-03 18:03:21.579  INFO 9980 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2020-05-03 18:03:21.598  INFO 9980 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8889 (http) with context path ''
+2020-05-03 18:03:21.598  INFO 9980 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Started GeekBlogApplication in 1.051 seconds (JVM running for 829.335)
+2020-05-03 18:03:21.599  INFO 9980 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2020-05-03 18:03:25.293  INFO 9980 --- [Thread-39] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2020-05-03 18:03:25.298  INFO 9980 --- [Thread-39] com.alibaba.druid.pool.DruidDataSource   : {dataSource-6} closed
+2020-05-03 18:03:25.646  INFO 9980 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Starting GeekBlogApplication on DESKTOP-QNDK7AF with PID 9980 (D:\idea\geekblog\target\classes started by AlanLiang in D:\idea\geekblog)
+2020-05-03 18:03:25.646 DEBUG 9980 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Running with Spring Boot v2.2.6.RELEASE, Spring v5.2.5.RELEASE
+2020-05-03 18:03:25.646  INFO 9980 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : The following profiles are active: dev
+2020-05-03 18:03:25.847  INFO 9980 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8889 (http)
+2020-05-03 18:03:25.848  INFO 9980 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-05-03 18:03:25.848  INFO 9980 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.33]
+2020-05-03 18:03:25.865  INFO 9980 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-05-03 18:03:25.865  INFO 9980 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 218 ms
+2020-05-03 18:03:25.880  INFO 9980 --- [restartedMain] o.s.boot.web.servlet.RegistrationBean    : Servlet statViewServlet was not registered (possibly already registered?)
+2020-05-03 18:03:25.880  INFO 9980 --- [restartedMain] o.s.boot.web.servlet.RegistrationBean    : Filter webStatFilter was not registered (possibly already registered?)
+2020-05-03 18:03:25.897  INFO 9980 --- [restartedMain] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2020-05-03 18:03:25.953  INFO 9980 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-7} inited
+2020-05-03 18:03:26.325  INFO 9980 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-05-03 18:03:26.468  INFO 9980 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2020-05-03 18:03:26.486  INFO 9980 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8889 (http) with context path ''
+2020-05-03 18:03:26.486  INFO 9980 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Started GeekBlogApplication in 0.861 seconds (JVM running for 834.223)
+2020-05-03 18:03:26.487  INFO 9980 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2020-05-03 18:03:34.491  INFO 9980 --- [Thread-44] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2020-05-03 18:03:34.506  INFO 9980 --- [Thread-44] com.alibaba.druid.pool.DruidDataSource   : {dataSource-7} closed
+2020-05-03 18:03:35.181  INFO 9980 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Starting GeekBlogApplication on DESKTOP-QNDK7AF with PID 9980 (D:\idea\geekblog\target\classes started by AlanLiang in D:\idea\geekblog)
+2020-05-03 18:03:35.181 DEBUG 9980 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Running with Spring Boot v2.2.6.RELEASE, Spring v5.2.5.RELEASE
+2020-05-03 18:03:35.181  INFO 9980 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : The following profiles are active: dev
+2020-05-03 18:03:35.573  INFO 9980 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8889 (http)
+2020-05-03 18:03:35.574  INFO 9980 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-05-03 18:03:35.574  INFO 9980 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.33]
+2020-05-03 18:03:35.593  INFO 9980 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-05-03 18:03:35.593  INFO 9980 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 409 ms
+2020-05-03 18:03:35.609  INFO 9980 --- [restartedMain] o.s.boot.web.servlet.RegistrationBean    : Servlet statViewServlet was not registered (possibly already registered?)
+2020-05-03 18:03:35.609  INFO 9980 --- [restartedMain] o.s.boot.web.servlet.RegistrationBean    : Filter webStatFilter was not registered (possibly already registered?)
+2020-05-03 18:03:35.627  INFO 9980 --- [restartedMain] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2020-05-03 18:03:35.695  INFO 9980 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-8} inited
+2020-05-03 18:03:36.116  INFO 9980 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-05-03 18:03:36.325  INFO 9980 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2020-05-03 18:03:36.344  INFO 9980 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8889 (http) with context path ''
+2020-05-03 18:03:36.345  INFO 9980 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Started GeekBlogApplication in 1.223 seconds (JVM running for 844.082)
+2020-05-03 18:03:36.346  INFO 9980 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2020-05-03 18:04:15.043  INFO 9980 --- [Thread-49] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2020-05-03 18:04:15.046  INFO 9980 --- [Thread-49] com.alibaba.druid.pool.DruidDataSource   : {dataSource-8} closed
+2020-05-03 18:04:15.490  INFO 9980 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Starting GeekBlogApplication on DESKTOP-QNDK7AF with PID 9980 (D:\idea\geekblog\target\classes started by AlanLiang in D:\idea\geekblog)
+2020-05-03 18:04:15.491 DEBUG 9980 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Running with Spring Boot v2.2.6.RELEASE, Spring v5.2.5.RELEASE
+2020-05-03 18:04:15.491  INFO 9980 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : The following profiles are active: dev
+2020-05-03 18:04:15.735  INFO 9980 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8889 (http)
+2020-05-03 18:04:15.736  INFO 9980 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-05-03 18:04:15.736  INFO 9980 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.33]
+2020-05-03 18:04:15.754  INFO 9980 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-05-03 18:04:15.754  INFO 9980 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 262 ms
+2020-05-03 18:04:15.768  INFO 9980 --- [restartedMain] o.s.boot.web.servlet.RegistrationBean    : Servlet statViewServlet was not registered (possibly already registered?)
+2020-05-03 18:04:15.768  INFO 9980 --- [restartedMain] o.s.boot.web.servlet.RegistrationBean    : Filter webStatFilter was not registered (possibly already registered?)
+2020-05-03 18:04:15.786  INFO 9980 --- [restartedMain] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2020-05-03 18:04:15.844  INFO 9980 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-9} inited
+2020-05-03 18:04:16.209  INFO 9980 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-05-03 18:04:16.365  INFO 9980 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2020-05-03 18:04:16.383  INFO 9980 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8889 (http) with context path ''
+2020-05-03 18:04:16.383  INFO 9980 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Started GeekBlogApplication in 0.924 seconds (JVM running for 884.12)
+2020-05-03 18:04:16.384  INFO 9980 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2020-05-03 18:07:08.770  INFO 8672 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Starting GeekBlogApplication on DESKTOP-QNDK7AF with PID 8672 (D:\idea\geekblog\target\classes started by AlanLiang in D:\idea\geekblog)
+2020-05-03 18:07:08.773 DEBUG 8672 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Running with Spring Boot v2.2.6.RELEASE, Spring v5.2.5.RELEASE
+2020-05-03 18:07:08.774  INFO 8672 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : The following profiles are active: dev
+2020-05-03 18:07:08.823  INFO 8672 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2020-05-03 18:07:08.824  INFO 8672 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2020-05-03 18:07:09.833  INFO 8672 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8889 (http)
+2020-05-03 18:07:09.840  INFO 8672 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-05-03 18:07:09.841  INFO 8672 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.33]
+2020-05-03 18:07:09.919  INFO 8672 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-05-03 18:07:09.919  INFO 8672 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1095 ms
+2020-05-03 18:07:09.955  INFO 8672 --- [restartedMain] o.s.boot.web.servlet.RegistrationBean    : Servlet statViewServlet was not registered (possibly already registered?)
+2020-05-03 18:07:09.957  INFO 8672 --- [restartedMain] o.s.boot.web.servlet.RegistrationBean    : Filter webStatFilter was not registered (possibly already registered?)
+2020-05-03 18:07:10.103  INFO 8672 --- [restartedMain] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2020-05-03 18:07:10.354  INFO 8672 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2020-05-03 18:07:11.185  INFO 8672 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-05-03 18:07:11.495  INFO 8672 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2020-05-03 18:07:11.541  INFO 8672 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8889 (http) with context path ''
+2020-05-03 18:07:11.543  INFO 8672 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Started GeekBlogApplication in 3.468 seconds (JVM running for 4.375)
+2020-05-03 18:07:16.792  INFO 8672 --- [http-nio-8889-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-05-03 18:07:16.792  INFO 8672 --- [http-nio-8889-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-05-03 18:07:16.798  INFO 8672 --- [http-nio-8889-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 6 ms
+2020-05-03 18:07:17.403 DEBUG 8672 --- [http-nio-8889-exec-7] s.a.geekblog.dao.MenuMapper.selectList   : ==>  Preparing: SELECT id,title,href,pid,icon,target,sort,status,remark,create_time,update_time FROM sys_menu WHERE (status = ?) 
+2020-05-03 18:07:17.523 DEBUG 8672 --- [http-nio-8889-exec-7] s.a.geekblog.dao.MenuMapper.selectList   : ==> Parameters: true(Boolean)
+2020-05-03 18:07:17.541 DEBUG 8672 --- [http-nio-8889-exec-7] s.a.geekblog.dao.MenuMapper.selectList   : <==      Total: 10
+2020-05-03 18:07:17.992 DEBUG 8672 --- [http-nio-8889-exec-6] s.a.g.d.CategoryMapper.listTableByPage   : ==>  Preparing: SELECT COUNT(1) FROM ( SELECT tc.id, tc.name, tc.display, tc.introduction, tc.color, tc.create_time, tc.update_time, count(ta.id) articleCount FROM t_category tc LEFT JOIN t_article ta ON tc.id = ta.category_id GROUP BY tc.id ) TOTAL 
+2020-05-03 18:07:17.996 DEBUG 8672 --- [http-nio-8889-exec-6] s.a.g.d.CategoryMapper.listTableByPage   : ==> Parameters: 
+2020-05-03 18:07:18.009 DEBUG 8672 --- [http-nio-8889-exec-6] s.a.g.d.CategoryMapper.listTableByPage   : ==>  Preparing: select tc.id, tc.name, tc.display, tc.introduction, tc.color, tc.create_time, tc.update_time, count(ta.id) articleCount from t_category tc left join t_article ta on tc.id = ta.category_id group by tc.id LIMIT ?,? 
+2020-05-03 18:07:18.013 DEBUG 8672 --- [http-nio-8889-exec-6] s.a.g.d.CategoryMapper.listTableByPage   : ==> Parameters: 0(Long), 15(Long)
+2020-05-03 18:07:18.021 DEBUG 8672 --- [http-nio-8889-exec-6] s.a.g.d.CategoryMapper.listTableByPage   : <==      Total: 6
+2020-05-03 18:08:25.343 DEBUG 8672 --- [http-nio-8889-exec-10] s.a.geekblog.dao.MenuMapper.selectList   : ==>  Preparing: SELECT id,title,href,pid,icon,target,sort,status,remark,create_time,update_time FROM sys_menu WHERE (status = ?) 
+2020-05-03 18:08:25.344 DEBUG 8672 --- [http-nio-8889-exec-10] s.a.geekblog.dao.MenuMapper.selectList   : ==> Parameters: true(Boolean)
+2020-05-03 18:08:25.355 DEBUG 8672 --- [http-nio-8889-exec-10] s.a.geekblog.dao.MenuMapper.selectList   : <==      Total: 10
+2020-05-03 18:08:25.654 DEBUG 8672 --- [http-nio-8889-exec-1] s.a.g.d.CategoryMapper.listTableByPage   : ==>  Preparing: SELECT COUNT(1) FROM ( SELECT tc.id, tc.name, tc.display, tc.introduction, tc.color, tc.create_time, tc.update_time, count(ta.id) articleCount FROM t_category tc LEFT JOIN t_article ta ON tc.id = ta.category_id GROUP BY tc.id ) TOTAL 
+2020-05-03 18:08:25.655 DEBUG 8672 --- [http-nio-8889-exec-1] s.a.g.d.CategoryMapper.listTableByPage   : ==> Parameters: 
+2020-05-03 18:08:25.657 DEBUG 8672 --- [http-nio-8889-exec-1] s.a.g.d.CategoryMapper.listTableByPage   : ==>  Preparing: select tc.id, tc.name, tc.display, tc.introduction, tc.color, tc.create_time, tc.update_time, count(ta.id) articleCount from t_category tc left join t_article ta on tc.id = ta.category_id group by tc.id LIMIT ?,? 
+2020-05-03 18:08:25.658 DEBUG 8672 --- [http-nio-8889-exec-1] s.a.g.d.CategoryMapper.listTableByPage   : ==> Parameters: 0(Long), 15(Long)
+2020-05-03 18:08:25.662 DEBUG 8672 --- [http-nio-8889-exec-1] s.a.g.d.CategoryMapper.listTableByPage   : <==      Total: 6
+2020-05-03 18:08:34.670 DEBUG 8672 --- [http-nio-8889-exec-7] s.a.geekblog.dao.MenuMapper.selectList   : ==>  Preparing: SELECT id,title,href,pid,icon,target,sort,status,remark,create_time,update_time FROM sys_menu WHERE (status = ?) 
+2020-05-03 18:08:34.671 DEBUG 8672 --- [http-nio-8889-exec-7] s.a.geekblog.dao.MenuMapper.selectList   : ==> Parameters: true(Boolean)
+2020-05-03 18:08:34.685 DEBUG 8672 --- [http-nio-8889-exec-7] s.a.geekblog.dao.MenuMapper.selectList   : <==      Total: 10
+2020-05-03 18:08:35.238 DEBUG 8672 --- [http-nio-8889-exec-6] s.a.g.d.CategoryMapper.listTableByPage   : ==>  Preparing: SELECT COUNT(1) FROM ( SELECT tc.id, tc.name, tc.display, tc.introduction, tc.color, tc.create_time, tc.update_time, count(ta.id) articleCount FROM t_category tc LEFT JOIN t_article ta ON tc.id = ta.category_id GROUP BY tc.id ) TOTAL 
+2020-05-03 18:08:35.238 DEBUG 8672 --- [http-nio-8889-exec-6] s.a.g.d.CategoryMapper.listTableByPage   : ==> Parameters: 
+2020-05-03 18:08:35.242 DEBUG 8672 --- [http-nio-8889-exec-6] s.a.g.d.CategoryMapper.listTableByPage   : ==>  Preparing: select tc.id, tc.name, tc.display, tc.introduction, tc.color, tc.create_time, tc.update_time, count(ta.id) articleCount from t_category tc left join t_article ta on tc.id = ta.category_id group by tc.id LIMIT ?,? 
+2020-05-03 18:08:35.243 DEBUG 8672 --- [http-nio-8889-exec-6] s.a.g.d.CategoryMapper.listTableByPage   : ==> Parameters: 0(Long), 15(Long)
+2020-05-03 18:08:35.254 DEBUG 8672 --- [http-nio-8889-exec-6] s.a.g.d.CategoryMapper.listTableByPage   : <==      Total: 6
+2020-05-03 18:09:05.500 DEBUG 8672 --- [http-nio-8889-exec-5] s.a.geekblog.dao.MenuMapper.selectList   : ==>  Preparing: SELECT id,title,href,pid,icon,target,sort,status,remark,create_time,update_time FROM sys_menu WHERE (status = ?) 
+2020-05-03 18:09:05.501 DEBUG 8672 --- [http-nio-8889-exec-5] s.a.geekblog.dao.MenuMapper.selectList   : ==> Parameters: true(Boolean)
+2020-05-03 18:09:05.505 DEBUG 8672 --- [http-nio-8889-exec-5] s.a.geekblog.dao.MenuMapper.selectList   : <==      Total: 10
+2020-05-03 18:09:05.831 DEBUG 8672 --- [http-nio-8889-exec-9] s.a.g.d.CategoryMapper.listTableByPage   : ==>  Preparing: SELECT COUNT(1) FROM ( SELECT tc.id, tc.name, tc.display, tc.introduction, tc.color, tc.create_time, tc.update_time, count(ta.id) articleCount FROM t_category tc LEFT JOIN t_article ta ON tc.id = ta.category_id GROUP BY tc.id ) TOTAL 
+2020-05-03 18:09:05.831 DEBUG 8672 --- [http-nio-8889-exec-9] s.a.g.d.CategoryMapper.listTableByPage   : ==> Parameters: 
+2020-05-03 18:09:05.833 DEBUG 8672 --- [http-nio-8889-exec-9] s.a.g.d.CategoryMapper.listTableByPage   : ==>  Preparing: select tc.id, tc.name, tc.display, tc.introduction, tc.color, tc.create_time, tc.update_time, count(ta.id) articleCount from t_category tc left join t_article ta on tc.id = ta.category_id group by tc.id LIMIT ?,? 
+2020-05-03 18:09:05.834 DEBUG 8672 --- [http-nio-8889-exec-9] s.a.g.d.CategoryMapper.listTableByPage   : ==> Parameters: 0(Long), 15(Long)
+2020-05-03 18:09:05.837 DEBUG 8672 --- [http-nio-8889-exec-9] s.a.g.d.CategoryMapper.listTableByPage   : <==      Total: 6
+2020-05-03 18:09:18.144 DEBUG 8672 --- [http-nio-8889-exec-9] s.a.geekblog.dao.MenuMapper.selectList   : ==>  Preparing: SELECT id,title,href,pid,icon,target,sort,status,remark,create_time,update_time FROM sys_menu WHERE (status = ?) 
+2020-05-03 18:09:18.145 DEBUG 8672 --- [http-nio-8889-exec-9] s.a.geekblog.dao.MenuMapper.selectList   : ==> Parameters: true(Boolean)
+2020-05-03 18:09:18.150 DEBUG 8672 --- [http-nio-8889-exec-9] s.a.geekblog.dao.MenuMapper.selectList   : <==      Total: 10
+2020-05-03 18:09:18.508 DEBUG 8672 --- [http-nio-8889-exec-3] s.a.g.d.CategoryMapper.listTableByPage   : ==>  Preparing: SELECT COUNT(1) FROM ( SELECT tc.id, tc.name, tc.display, tc.introduction, tc.color, tc.create_time, tc.update_time, count(ta.id) articleCount FROM t_category tc LEFT JOIN t_article ta ON tc.id = ta.category_id GROUP BY tc.id ) TOTAL 
+2020-05-03 18:09:18.508 DEBUG 8672 --- [http-nio-8889-exec-3] s.a.g.d.CategoryMapper.listTableByPage   : ==> Parameters: 
+2020-05-03 18:09:18.511 DEBUG 8672 --- [http-nio-8889-exec-3] s.a.g.d.CategoryMapper.listTableByPage   : ==>  Preparing: select tc.id, tc.name, tc.display, tc.introduction, tc.color, tc.create_time, tc.update_time, count(ta.id) articleCount from t_category tc left join t_article ta on tc.id = ta.category_id group by tc.id LIMIT ?,? 
+2020-05-03 18:09:18.511 DEBUG 8672 --- [http-nio-8889-exec-3] s.a.g.d.CategoryMapper.listTableByPage   : ==> Parameters: 0(Long), 15(Long)
+2020-05-03 18:09:18.514 DEBUG 8672 --- [http-nio-8889-exec-3] s.a.g.d.CategoryMapper.listTableByPage   : <==      Total: 6
+2020-05-03 18:10:32.609 DEBUG 8672 --- [http-nio-8889-exec-5] s.a.geekblog.dao.MenuMapper.selectList   : ==>  Preparing: SELECT id,title,href,pid,icon,target,sort,status,remark,create_time,update_time FROM sys_menu WHERE (status = ?) 
+2020-05-03 18:10:32.610 DEBUG 8672 --- [http-nio-8889-exec-5] s.a.geekblog.dao.MenuMapper.selectList   : ==> Parameters: true(Boolean)
+2020-05-03 18:10:32.613 DEBUG 8672 --- [http-nio-8889-exec-5] s.a.geekblog.dao.MenuMapper.selectList   : <==      Total: 10
+2020-05-03 18:10:32.881 DEBUG 8672 --- [http-nio-8889-exec-8] s.a.g.d.CategoryMapper.listTableByPage   : ==>  Preparing: SELECT COUNT(1) FROM ( SELECT tc.id, tc.name, tc.display, tc.introduction, tc.color, tc.create_time, tc.update_time, count(ta.id) articleCount FROM t_category tc LEFT JOIN t_article ta ON tc.id = ta.category_id GROUP BY tc.id ) TOTAL 
+2020-05-03 18:10:32.881 DEBUG 8672 --- [http-nio-8889-exec-8] s.a.g.d.CategoryMapper.listTableByPage   : ==> Parameters: 
+2020-05-03 18:10:32.886 DEBUG 8672 --- [http-nio-8889-exec-8] s.a.g.d.CategoryMapper.listTableByPage   : ==>  Preparing: select tc.id, tc.name, tc.display, tc.introduction, tc.color, tc.create_time, tc.update_time, count(ta.id) articleCount from t_category tc left join t_article ta on tc.id = ta.category_id group by tc.id LIMIT ?,? 
+2020-05-03 18:10:32.887 DEBUG 8672 --- [http-nio-8889-exec-8] s.a.g.d.CategoryMapper.listTableByPage   : ==> Parameters: 0(Long), 15(Long)
+2020-05-03 18:10:32.892 DEBUG 8672 --- [http-nio-8889-exec-8] s.a.g.d.CategoryMapper.listTableByPage   : <==      Total: 6
+2020-05-03 18:10:41.054 DEBUG 8672 --- [http-nio-8889-exec-1] s.a.g.dao.CategoryMapper.selectList      : ==>  Preparing: SELECT id,name FROM t_category 
+2020-05-03 18:10:41.055 DEBUG 8672 --- [http-nio-8889-exec-1] s.a.g.dao.CategoryMapper.selectList      : ==> Parameters: 
+2020-05-03 18:10:41.056 DEBUG 8672 --- [http-nio-8889-exec-1] s.a.g.dao.CategoryMapper.selectList      : <==      Total: 6
+2020-05-03 18:10:41.075 DEBUG 8672 --- [http-nio-8889-exec-7] s.a.g.dao.ArticleMapper.listTableByPage  : ==>  Preparing: SELECT COUNT(1) FROM t_article ta 
+2020-05-03 18:10:41.076 DEBUG 8672 --- [http-nio-8889-exec-7] s.a.g.dao.ArticleMapper.listTableByPage  : ==> Parameters: 
+2020-05-03 18:10:41.078 DEBUG 8672 --- [http-nio-8889-exec-7] s.a.g.dao.ArticleMapper.listTableByPage  : ==>  Preparing: select ta.id, ta.title, ta.type, ta.comments, ta.views, ta.likes, ta.published, ta.commentable, ta.appreciable, ta.top, ta.recommend, ta.create_time, ta.update_time, tc.id as cid, tc.name as cname, tc.color from t_article ta left join t_category tc on ta.category_id = tc.id LIMIT ?,? 
+2020-05-03 18:10:41.079 DEBUG 8672 --- [http-nio-8889-exec-7] s.a.g.dao.ArticleMapper.listTableByPage  : ==> Parameters: 0(Long), 15(Long)
+2020-05-03 18:10:41.137 DEBUG 8672 --- [http-nio-8889-exec-7] s.a.g.dao.ArticleMapper.listTableByPage  : <==      Total: 8
+2020-05-03 18:10:41.145 DEBUG 8672 --- [http-nio-8889-exec-7] s.a.g.dao.TagMapper.selectByArticleId    : ==>  Preparing: select tt.id, tt.name, tt.color from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-05-03 18:10:41.146 DEBUG 8672 --- [http-nio-8889-exec-7] s.a.g.dao.TagMapper.selectByArticleId    : ==> Parameters: 1(Long)
+2020-05-03 18:10:41.150 DEBUG 8672 --- [http-nio-8889-exec-7] s.a.g.dao.TagMapper.selectByArticleId    : <==      Total: 4
+2020-05-03 18:10:41.156 DEBUG 8672 --- [http-nio-8889-exec-7] s.a.g.dao.TagMapper.selectByArticleId    : ==>  Preparing: select tt.id, tt.name, tt.color from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-05-03 18:10:41.156 DEBUG 8672 --- [http-nio-8889-exec-7] s.a.g.dao.TagMapper.selectByArticleId    : ==> Parameters: 2(Long)
+2020-05-03 18:10:41.159 DEBUG 8672 --- [http-nio-8889-exec-7] s.a.g.dao.TagMapper.selectByArticleId    : <==      Total: 3
+2020-05-03 18:10:41.160 DEBUG 8672 --- [http-nio-8889-exec-7] s.a.g.dao.TagMapper.selectByArticleId    : ==>  Preparing: select tt.id, tt.name, tt.color from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-05-03 18:10:41.160 DEBUG 8672 --- [http-nio-8889-exec-7] s.a.g.dao.TagMapper.selectByArticleId    : ==> Parameters: 3(Long)
+2020-05-03 18:10:41.162 DEBUG 8672 --- [http-nio-8889-exec-7] s.a.g.dao.TagMapper.selectByArticleId    : <==      Total: 4
+2020-05-03 18:10:41.163 DEBUG 8672 --- [http-nio-8889-exec-7] s.a.g.dao.TagMapper.selectByArticleId    : ==>  Preparing: select tt.id, tt.name, tt.color from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-05-03 18:10:41.163 DEBUG 8672 --- [http-nio-8889-exec-7] s.a.g.dao.TagMapper.selectByArticleId    : ==> Parameters: 4(Long)
+2020-05-03 18:10:41.164 DEBUG 8672 --- [http-nio-8889-exec-7] s.a.g.dao.TagMapper.selectByArticleId    : <==      Total: 4
+2020-05-03 18:10:41.164 DEBUG 8672 --- [http-nio-8889-exec-7] s.a.g.dao.TagMapper.selectByArticleId    : ==>  Preparing: select tt.id, tt.name, tt.color from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-05-03 18:10:41.165 DEBUG 8672 --- [http-nio-8889-exec-7] s.a.g.dao.TagMapper.selectByArticleId    : ==> Parameters: 5(Long)
+2020-05-03 18:10:41.171 DEBUG 8672 --- [http-nio-8889-exec-7] s.a.g.dao.TagMapper.selectByArticleId    : <==      Total: 3
+2020-05-03 18:10:41.173 DEBUG 8672 --- [http-nio-8889-exec-7] s.a.g.dao.TagMapper.selectByArticleId    : ==>  Preparing: select tt.id, tt.name, tt.color from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-05-03 18:10:41.174 DEBUG 8672 --- [http-nio-8889-exec-7] s.a.g.dao.TagMapper.selectByArticleId    : ==> Parameters: 6(Long)
+2020-05-03 18:10:41.175 DEBUG 8672 --- [http-nio-8889-exec-7] s.a.g.dao.TagMapper.selectByArticleId    : <==      Total: 4
+2020-05-03 18:10:41.176 DEBUG 8672 --- [http-nio-8889-exec-7] s.a.g.dao.TagMapper.selectByArticleId    : ==>  Preparing: select tt.id, tt.name, tt.color from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-05-03 18:10:41.176 DEBUG 8672 --- [http-nio-8889-exec-7] s.a.g.dao.TagMapper.selectByArticleId    : ==> Parameters: 7(Long)
+2020-05-03 18:10:41.177 DEBUG 8672 --- [http-nio-8889-exec-7] s.a.g.dao.TagMapper.selectByArticleId    : <==      Total: 5
+2020-05-03 18:10:41.177 DEBUG 8672 --- [http-nio-8889-exec-7] s.a.g.dao.TagMapper.selectByArticleId    : ==>  Preparing: select tt.id, tt.name, tt.color from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-05-03 18:10:41.177 DEBUG 8672 --- [http-nio-8889-exec-7] s.a.g.dao.TagMapper.selectByArticleId    : ==> Parameters: 9(Long)
+2020-05-03 18:10:41.178 DEBUG 8672 --- [http-nio-8889-exec-7] s.a.g.dao.TagMapper.selectByArticleId    : <==      Total: 3
+2020-05-03 18:12:44.278 DEBUG 8672 --- [http-nio-8889-exec-2] s.a.geekblog.dao.MenuMapper.selectList   : ==>  Preparing: SELECT id,title,href,pid,icon,target,sort,status,remark,create_time,update_time FROM sys_menu WHERE (status = ?) 
+2020-05-03 18:12:44.278 DEBUG 8672 --- [http-nio-8889-exec-2] s.a.geekblog.dao.MenuMapper.selectList   : ==> Parameters: true(Boolean)
+2020-05-03 18:12:44.281 DEBUG 8672 --- [http-nio-8889-exec-2] s.a.geekblog.dao.MenuMapper.selectList   : <==      Total: 10
+2020-05-03 18:12:44.575 DEBUG 8672 --- [http-nio-8889-exec-10] s.a.g.d.CategoryMapper.listTableByPage   : ==>  Preparing: SELECT COUNT(1) FROM ( SELECT tc.id, tc.name, tc.display, tc.introduction, tc.color, tc.create_time, tc.update_time, count(ta.id) articleCount FROM t_category tc LEFT JOIN t_article ta ON tc.id = ta.category_id GROUP BY tc.id ) TOTAL 
+2020-05-03 18:12:44.575 DEBUG 8672 --- [http-nio-8889-exec-10] s.a.g.d.CategoryMapper.listTableByPage   : ==> Parameters: 
+2020-05-03 18:12:44.578 DEBUG 8672 --- [http-nio-8889-exec-10] s.a.g.d.CategoryMapper.listTableByPage   : ==>  Preparing: select tc.id, tc.name, tc.display, tc.introduction, tc.color, tc.create_time, tc.update_time, count(ta.id) articleCount from t_category tc left join t_article ta on tc.id = ta.category_id group by tc.id LIMIT ?,? 
+2020-05-03 18:12:44.578 DEBUG 8672 --- [http-nio-8889-exec-10] s.a.g.d.CategoryMapper.listTableByPage   : ==> Parameters: 0(Long), 15(Long)
+2020-05-03 18:12:44.580 DEBUG 8672 --- [http-nio-8889-exec-10] s.a.g.d.CategoryMapper.listTableByPage   : <==      Total: 6
+2020-05-03 18:13:48.072 DEBUG 8672 --- [http-nio-8889-exec-1] s.a.geekblog.dao.MenuMapper.selectList   : ==>  Preparing: SELECT id,title,href,pid,icon,target,sort,status,remark,create_time,update_time FROM sys_menu WHERE (status = ?) 
+2020-05-03 18:13:48.073 DEBUG 8672 --- [http-nio-8889-exec-1] s.a.geekblog.dao.MenuMapper.selectList   : ==> Parameters: true(Boolean)
+2020-05-03 18:13:48.077 DEBUG 8672 --- [http-nio-8889-exec-1] s.a.geekblog.dao.MenuMapper.selectList   : <==      Total: 10
+2020-05-03 18:13:48.383 DEBUG 8672 --- [http-nio-8889-exec-6] s.a.g.d.CategoryMapper.listTableByPage   : ==>  Preparing: SELECT COUNT(1) FROM ( SELECT tc.id, tc.name, tc.display, tc.introduction, tc.color, tc.create_time, tc.update_time, count(ta.id) articleCount FROM t_category tc LEFT JOIN t_article ta ON tc.id = ta.category_id GROUP BY tc.id ) TOTAL 
+2020-05-03 18:13:48.383 DEBUG 8672 --- [http-nio-8889-exec-6] s.a.g.d.CategoryMapper.listTableByPage   : ==> Parameters: 
+2020-05-03 18:13:48.386 DEBUG 8672 --- [http-nio-8889-exec-6] s.a.g.d.CategoryMapper.listTableByPage   : ==>  Preparing: select tc.id, tc.name, tc.display, tc.introduction, tc.color, tc.create_time, tc.update_time, count(ta.id) articleCount from t_category tc left join t_article ta on tc.id = ta.category_id group by tc.id LIMIT ?,? 
+2020-05-03 18:13:48.387 DEBUG 8672 --- [http-nio-8889-exec-6] s.a.g.d.CategoryMapper.listTableByPage   : ==> Parameters: 0(Long), 15(Long)
+2020-05-03 18:13:48.392 DEBUG 8672 --- [http-nio-8889-exec-6] s.a.g.d.CategoryMapper.listTableByPage   : <==      Total: 6
+2020-05-03 18:13:57.054 DEBUG 8672 --- [http-nio-8889-exec-2] s.a.geekblog.dao.MenuMapper.selectList   : ==>  Preparing: SELECT id,title,href,pid,icon,target,sort,status,remark,create_time,update_time FROM sys_menu WHERE (status = ?) 
+2020-05-03 18:13:57.055 DEBUG 8672 --- [http-nio-8889-exec-2] s.a.geekblog.dao.MenuMapper.selectList   : ==> Parameters: true(Boolean)
+2020-05-03 18:13:57.057 DEBUG 8672 --- [http-nio-8889-exec-2] s.a.geekblog.dao.MenuMapper.selectList   : <==      Total: 10
+2020-05-03 18:13:57.346 DEBUG 8672 --- [http-nio-8889-exec-10] s.a.g.d.CategoryMapper.listTableByPage   : ==>  Preparing: SELECT COUNT(1) FROM ( SELECT tc.id, tc.name, tc.display, tc.introduction, tc.color, tc.create_time, tc.update_time, count(ta.id) articleCount FROM t_category tc LEFT JOIN t_article ta ON tc.id = ta.category_id GROUP BY tc.id ) TOTAL 
+2020-05-03 18:13:57.346 DEBUG 8672 --- [http-nio-8889-exec-10] s.a.g.d.CategoryMapper.listTableByPage   : ==> Parameters: 
+2020-05-03 18:13:57.348 DEBUG 8672 --- [http-nio-8889-exec-10] s.a.g.d.CategoryMapper.listTableByPage   : ==>  Preparing: select tc.id, tc.name, tc.display, tc.introduction, tc.color, tc.create_time, tc.update_time, count(ta.id) articleCount from t_category tc left join t_article ta on tc.id = ta.category_id group by tc.id LIMIT ?,? 
+2020-05-03 18:13:57.348 DEBUG 8672 --- [http-nio-8889-exec-10] s.a.g.d.CategoryMapper.listTableByPage   : ==> Parameters: 0(Long), 15(Long)
+2020-05-03 18:13:57.352 DEBUG 8672 --- [http-nio-8889-exec-10] s.a.g.d.CategoryMapper.listTableByPage   : <==      Total: 6
+2020-05-03 18:18:32.049 DEBUG 8672 --- [http-nio-8889-exec-8] s.a.geekblog.dao.MenuMapper.selectList   : ==>  Preparing: SELECT id,title,href,pid,icon,target,sort,status,remark,create_time,update_time FROM sys_menu WHERE (status = ?) 
+2020-05-03 18:18:32.051 DEBUG 8672 --- [http-nio-8889-exec-8] s.a.geekblog.dao.MenuMapper.selectList   : ==> Parameters: true(Boolean)
+2020-05-03 18:18:32.057 DEBUG 8672 --- [http-nio-8889-exec-8] s.a.geekblog.dao.MenuMapper.selectList   : <==      Total: 10
+2020-05-03 18:18:52.605 DEBUG 8672 --- [http-nio-8889-exec-2] s.a.geekblog.dao.MenuMapper.selectList   : ==>  Preparing: SELECT id,title,href,pid,icon,target,sort,status,remark,create_time,update_time FROM sys_menu WHERE (status = ?) 
+2020-05-03 18:18:52.606 DEBUG 8672 --- [http-nio-8889-exec-2] s.a.geekblog.dao.MenuMapper.selectList   : ==> Parameters: true(Boolean)
+2020-05-03 18:18:52.610 DEBUG 8672 --- [http-nio-8889-exec-2] s.a.geekblog.dao.MenuMapper.selectList   : <==      Total: 10
+2020-05-03 18:18:53.043 DEBUG 8672 --- [http-nio-8889-exec-4] s.a.g.d.CategoryMapper.listTableByPage   : ==>  Preparing: SELECT COUNT(1) FROM ( SELECT tc.id, tc.name, tc.display, tc.introduction, tc.color, tc.create_time, tc.update_time, count(ta.id) articleCount FROM t_category tc LEFT JOIN t_article ta ON tc.id = ta.category_id GROUP BY tc.id ) TOTAL 
+2020-05-03 18:18:53.044 DEBUG 8672 --- [http-nio-8889-exec-4] s.a.g.d.CategoryMapper.listTableByPage   : ==> Parameters: 
+2020-05-03 18:18:53.049 DEBUG 8672 --- [http-nio-8889-exec-4] s.a.g.d.CategoryMapper.listTableByPage   : ==>  Preparing: select tc.id, tc.name, tc.display, tc.introduction, tc.color, tc.create_time, tc.update_time, count(ta.id) articleCount from t_category tc left join t_article ta on tc.id = ta.category_id group by tc.id LIMIT ?,? 
+2020-05-03 18:18:53.050 DEBUG 8672 --- [http-nio-8889-exec-4] s.a.g.d.CategoryMapper.listTableByPage   : ==> Parameters: 0(Long), 15(Long)
+2020-05-03 18:18:53.052 DEBUG 8672 --- [http-nio-8889-exec-4] s.a.g.d.CategoryMapper.listTableByPage   : <==      Total: 6
+2020-05-03 18:19:28.966 DEBUG 8672 --- [http-nio-8889-exec-10] s.a.geekblog.dao.MenuMapper.selectList   : ==>  Preparing: SELECT id,title,href,pid,icon,target,sort,status,remark,create_time,update_time FROM sys_menu WHERE (status = ?) 
+2020-05-03 18:19:28.966 DEBUG 8672 --- [http-nio-8889-exec-10] s.a.geekblog.dao.MenuMapper.selectList   : ==> Parameters: true(Boolean)
+2020-05-03 18:19:28.971 DEBUG 8672 --- [http-nio-8889-exec-10] s.a.geekblog.dao.MenuMapper.selectList   : <==      Total: 10
+2020-05-03 18:19:29.307 DEBUG 8672 --- [http-nio-8889-exec-8] s.a.g.d.CategoryMapper.listTableByPage   : ==>  Preparing: SELECT COUNT(1) FROM ( SELECT tc.id, tc.name, tc.display, tc.introduction, tc.color, tc.create_time, tc.update_time, count(ta.id) articleCount FROM t_category tc LEFT JOIN t_article ta ON tc.id = ta.category_id GROUP BY tc.id ) TOTAL 
+2020-05-03 18:19:29.308 DEBUG 8672 --- [http-nio-8889-exec-8] s.a.g.d.CategoryMapper.listTableByPage   : ==> Parameters: 
+2020-05-03 18:19:29.310 DEBUG 8672 --- [http-nio-8889-exec-8] s.a.g.d.CategoryMapper.listTableByPage   : ==>  Preparing: select tc.id, tc.name, tc.display, tc.introduction, tc.color, tc.create_time, tc.update_time, count(ta.id) articleCount from t_category tc left join t_article ta on tc.id = ta.category_id group by tc.id LIMIT ?,? 
+2020-05-03 18:19:29.311 DEBUG 8672 --- [http-nio-8889-exec-8] s.a.g.d.CategoryMapper.listTableByPage   : ==> Parameters: 0(Long), 15(Long)
+2020-05-03 18:19:29.313 DEBUG 8672 --- [http-nio-8889-exec-8] s.a.g.d.CategoryMapper.listTableByPage   : <==      Total: 6
+2020-05-03 18:19:39.004 DEBUG 8672 --- [http-nio-8889-exec-3] s.a.g.dao.CategoryMapper.selectList      : ==>  Preparing: SELECT id,name FROM t_category 
+2020-05-03 18:19:39.005 DEBUG 8672 --- [http-nio-8889-exec-3] s.a.g.dao.CategoryMapper.selectList      : ==> Parameters: 
+2020-05-03 18:19:39.005 DEBUG 8672 --- [http-nio-8889-exec-3] s.a.g.dao.CategoryMapper.selectList      : <==      Total: 6
+2020-05-03 18:19:39.013 DEBUG 8672 --- [http-nio-8889-exec-2] s.a.g.dao.ArticleMapper.listTableByPage  : ==>  Preparing: SELECT COUNT(1) FROM t_article ta 
+2020-05-03 18:19:39.014 DEBUG 8672 --- [http-nio-8889-exec-2] s.a.g.dao.ArticleMapper.listTableByPage  : ==> Parameters: 
+2020-05-03 18:19:39.015 DEBUG 8672 --- [http-nio-8889-exec-2] s.a.g.dao.ArticleMapper.listTableByPage  : ==>  Preparing: select ta.id, ta.title, ta.type, ta.comments, ta.views, ta.likes, ta.published, ta.commentable, ta.appreciable, ta.top, ta.recommend, ta.create_time, ta.update_time, tc.id as cid, tc.name as cname, tc.color from t_article ta left join t_category tc on ta.category_id = tc.id LIMIT ?,? 
+2020-05-03 18:19:39.015 DEBUG 8672 --- [http-nio-8889-exec-2] s.a.g.dao.ArticleMapper.listTableByPage  : ==> Parameters: 0(Long), 15(Long)
+2020-05-03 18:19:39.031 DEBUG 8672 --- [http-nio-8889-exec-2] s.a.g.dao.ArticleMapper.listTableByPage  : <==      Total: 8
+2020-05-03 18:19:39.032 DEBUG 8672 --- [http-nio-8889-exec-2] s.a.g.dao.TagMapper.selectByArticleId    : ==>  Preparing: select tt.id, tt.name, tt.color from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-05-03 18:19:39.033 DEBUG 8672 --- [http-nio-8889-exec-2] s.a.g.dao.TagMapper.selectByArticleId    : ==> Parameters: 1(Long)
+2020-05-03 18:19:39.036 DEBUG 8672 --- [http-nio-8889-exec-2] s.a.g.dao.TagMapper.selectByArticleId    : <==      Total: 4
+2020-05-03 18:19:39.039 DEBUG 8672 --- [http-nio-8889-exec-2] s.a.g.dao.TagMapper.selectByArticleId    : ==>  Preparing: select tt.id, tt.name, tt.color from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-05-03 18:19:39.039 DEBUG 8672 --- [http-nio-8889-exec-2] s.a.g.dao.TagMapper.selectByArticleId    : ==> Parameters: 2(Long)
+2020-05-03 18:19:39.040 DEBUG 8672 --- [http-nio-8889-exec-2] s.a.g.dao.TagMapper.selectByArticleId    : <==      Total: 3
+2020-05-03 18:19:39.041 DEBUG 8672 --- [http-nio-8889-exec-2] s.a.g.dao.TagMapper.selectByArticleId    : ==>  Preparing: select tt.id, tt.name, tt.color from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-05-03 18:19:39.041 DEBUG 8672 --- [http-nio-8889-exec-2] s.a.g.dao.TagMapper.selectByArticleId    : ==> Parameters: 3(Long)
+2020-05-03 18:19:39.042 DEBUG 8672 --- [http-nio-8889-exec-2] s.a.g.dao.TagMapper.selectByArticleId    : <==      Total: 4
+2020-05-03 18:19:39.043 DEBUG 8672 --- [http-nio-8889-exec-2] s.a.g.dao.TagMapper.selectByArticleId    : ==>  Preparing: select tt.id, tt.name, tt.color from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-05-03 18:19:39.044 DEBUG 8672 --- [http-nio-8889-exec-2] s.a.g.dao.TagMapper.selectByArticleId    : ==> Parameters: 4(Long)
+2020-05-03 18:19:39.045 DEBUG 8672 --- [http-nio-8889-exec-2] s.a.g.dao.TagMapper.selectByArticleId    : <==      Total: 4
+2020-05-03 18:19:39.045 DEBUG 8672 --- [http-nio-8889-exec-2] s.a.g.dao.TagMapper.selectByArticleId    : ==>  Preparing: select tt.id, tt.name, tt.color from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-05-03 18:19:39.046 DEBUG 8672 --- [http-nio-8889-exec-2] s.a.g.dao.TagMapper.selectByArticleId    : ==> Parameters: 5(Long)
+2020-05-03 18:19:39.047 DEBUG 8672 --- [http-nio-8889-exec-2] s.a.g.dao.TagMapper.selectByArticleId    : <==      Total: 3
+2020-05-03 18:19:39.047 DEBUG 8672 --- [http-nio-8889-exec-2] s.a.g.dao.TagMapper.selectByArticleId    : ==>  Preparing: select tt.id, tt.name, tt.color from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-05-03 18:19:39.047 DEBUG 8672 --- [http-nio-8889-exec-2] s.a.g.dao.TagMapper.selectByArticleId    : ==> Parameters: 6(Long)
+2020-05-03 18:19:39.048 DEBUG 8672 --- [http-nio-8889-exec-2] s.a.g.dao.TagMapper.selectByArticleId    : <==      Total: 4
+2020-05-03 18:19:39.049 DEBUG 8672 --- [http-nio-8889-exec-2] s.a.g.dao.TagMapper.selectByArticleId    : ==>  Preparing: select tt.id, tt.name, tt.color from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-05-03 18:19:39.049 DEBUG 8672 --- [http-nio-8889-exec-2] s.a.g.dao.TagMapper.selectByArticleId    : ==> Parameters: 7(Long)
+2020-05-03 18:19:39.050 DEBUG 8672 --- [http-nio-8889-exec-2] s.a.g.dao.TagMapper.selectByArticleId    : <==      Total: 5
+2020-05-03 18:19:39.058 DEBUG 8672 --- [http-nio-8889-exec-2] s.a.g.dao.TagMapper.selectByArticleId    : ==>  Preparing: select tt.id, tt.name, tt.color from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-05-03 18:19:39.058 DEBUG 8672 --- [http-nio-8889-exec-2] s.a.g.dao.TagMapper.selectByArticleId    : ==> Parameters: 9(Long)
+2020-05-03 18:19:39.059 DEBUG 8672 --- [http-nio-8889-exec-2] s.a.g.dao.TagMapper.selectByArticleId    : <==      Total: 3
+2020-05-03 18:20:55.068 DEBUG 8672 --- [http-nio-8889-exec-4] s.a.geekblog.dao.MenuMapper.selectList   : ==>  Preparing: SELECT id,title,href,pid,icon,target,sort,status,remark,create_time,update_time FROM sys_menu WHERE (status = ?) 
+2020-05-03 18:20:55.068 DEBUG 8672 --- [http-nio-8889-exec-4] s.a.geekblog.dao.MenuMapper.selectList   : ==> Parameters: true(Boolean)
+2020-05-03 18:20:55.072 DEBUG 8672 --- [http-nio-8889-exec-4] s.a.geekblog.dao.MenuMapper.selectList   : <==      Total: 10
+2020-05-03 18:20:55.388 DEBUG 8672 --- [http-nio-8889-exec-8] s.a.g.dao.CategoryMapper.selectList      : ==>  Preparing: SELECT id,name FROM t_category 
+2020-05-03 18:20:55.388 DEBUG 8672 --- [http-nio-8889-exec-8] s.a.g.dao.CategoryMapper.selectList      : ==> Parameters: 
+2020-05-03 18:20:55.389 DEBUG 8672 --- [http-nio-8889-exec-8] s.a.g.dao.CategoryMapper.selectList      : <==      Total: 6
+2020-05-03 18:20:55.407 DEBUG 8672 --- [http-nio-8889-exec-1] s.a.g.dao.ArticleMapper.listTableByPage  : ==>  Preparing: SELECT COUNT(1) FROM t_article ta 
+2020-05-03 18:20:55.410 DEBUG 8672 --- [http-nio-8889-exec-1] s.a.g.dao.ArticleMapper.listTableByPage  : ==> Parameters: 
+2020-05-03 18:20:55.412 DEBUG 8672 --- [http-nio-8889-exec-1] s.a.g.dao.ArticleMapper.listTableByPage  : ==>  Preparing: select ta.id, ta.title, ta.type, ta.comments, ta.views, ta.likes, ta.published, ta.commentable, ta.appreciable, ta.top, ta.recommend, ta.create_time, ta.update_time, tc.id as cid, tc.name as cname, tc.color from t_article ta left join t_category tc on ta.category_id = tc.id LIMIT ?,? 
+2020-05-03 18:20:55.412 DEBUG 8672 --- [http-nio-8889-exec-1] s.a.g.dao.ArticleMapper.listTableByPage  : ==> Parameters: 0(Long), 15(Long)
+2020-05-03 18:20:55.427 DEBUG 8672 --- [http-nio-8889-exec-1] s.a.g.dao.ArticleMapper.listTableByPage  : <==      Total: 8
+2020-05-03 18:20:55.428 DEBUG 8672 --- [http-nio-8889-exec-1] s.a.g.dao.TagMapper.selectByArticleId    : ==>  Preparing: select tt.id, tt.name, tt.color from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-05-03 18:20:55.429 DEBUG 8672 --- [http-nio-8889-exec-1] s.a.g.dao.TagMapper.selectByArticleId    : ==> Parameters: 1(Long)
+2020-05-03 18:20:55.432 DEBUG 8672 --- [http-nio-8889-exec-1] s.a.g.dao.TagMapper.selectByArticleId    : <==      Total: 4
+2020-05-03 18:20:55.436 DEBUG 8672 --- [http-nio-8889-exec-1] s.a.g.dao.TagMapper.selectByArticleId    : ==>  Preparing: select tt.id, tt.name, tt.color from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-05-03 18:20:55.437 DEBUG 8672 --- [http-nio-8889-exec-1] s.a.g.dao.TagMapper.selectByArticleId    : ==> Parameters: 2(Long)
+2020-05-03 18:20:55.439 DEBUG 8672 --- [http-nio-8889-exec-1] s.a.g.dao.TagMapper.selectByArticleId    : <==      Total: 3
+2020-05-03 18:20:55.440 DEBUG 8672 --- [http-nio-8889-exec-1] s.a.g.dao.TagMapper.selectByArticleId    : ==>  Preparing: select tt.id, tt.name, tt.color from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-05-03 18:20:55.440 DEBUG 8672 --- [http-nio-8889-exec-1] s.a.g.dao.TagMapper.selectByArticleId    : ==> Parameters: 3(Long)
+2020-05-03 18:20:55.442 DEBUG 8672 --- [http-nio-8889-exec-1] s.a.g.dao.TagMapper.selectByArticleId    : <==      Total: 4
+2020-05-03 18:20:55.444 DEBUG 8672 --- [http-nio-8889-exec-1] s.a.g.dao.TagMapper.selectByArticleId    : ==>  Preparing: select tt.id, tt.name, tt.color from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-05-03 18:20:55.444 DEBUG 8672 --- [http-nio-8889-exec-1] s.a.g.dao.TagMapper.selectByArticleId    : ==> Parameters: 4(Long)
+2020-05-03 18:20:55.446 DEBUG 8672 --- [http-nio-8889-exec-1] s.a.g.dao.TagMapper.selectByArticleId    : <==      Total: 4
+2020-05-03 18:20:55.447 DEBUG 8672 --- [http-nio-8889-exec-1] s.a.g.dao.TagMapper.selectByArticleId    : ==>  Preparing: select tt.id, tt.name, tt.color from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-05-03 18:20:55.448 DEBUG 8672 --- [http-nio-8889-exec-1] s.a.g.dao.TagMapper.selectByArticleId    : ==> Parameters: 5(Long)
+2020-05-03 18:20:55.452 DEBUG 8672 --- [http-nio-8889-exec-1] s.a.g.dao.TagMapper.selectByArticleId    : <==      Total: 3
+2020-05-03 18:20:55.454 DEBUG 8672 --- [http-nio-8889-exec-1] s.a.g.dao.TagMapper.selectByArticleId    : ==>  Preparing: select tt.id, tt.name, tt.color from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-05-03 18:20:55.454 DEBUG 8672 --- [http-nio-8889-exec-1] s.a.g.dao.TagMapper.selectByArticleId    : ==> Parameters: 6(Long)
+2020-05-03 18:20:55.457 DEBUG 8672 --- [http-nio-8889-exec-1] s.a.g.dao.TagMapper.selectByArticleId    : <==      Total: 4
+2020-05-03 18:20:55.459 DEBUG 8672 --- [http-nio-8889-exec-1] s.a.g.dao.TagMapper.selectByArticleId    : ==>  Preparing: select tt.id, tt.name, tt.color from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-05-03 18:20:55.459 DEBUG 8672 --- [http-nio-8889-exec-1] s.a.g.dao.TagMapper.selectByArticleId    : ==> Parameters: 7(Long)
+2020-05-03 18:20:55.461 DEBUG 8672 --- [http-nio-8889-exec-1] s.a.g.dao.TagMapper.selectByArticleId    : <==      Total: 5
+2020-05-03 18:20:55.467 DEBUG 8672 --- [http-nio-8889-exec-1] s.a.g.dao.TagMapper.selectByArticleId    : ==>  Preparing: select tt.id, tt.name, tt.color from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-05-03 18:20:55.469 DEBUG 8672 --- [http-nio-8889-exec-1] s.a.g.dao.TagMapper.selectByArticleId    : ==> Parameters: 9(Long)
+2020-05-03 18:20:55.472 DEBUG 8672 --- [http-nio-8889-exec-1] s.a.g.dao.TagMapper.selectByArticleId    : <==      Total: 3
+2020-05-03 18:21:17.517 DEBUG 8672 --- [http-nio-8889-exec-3] s.a.g.d.CategoryMapper.listTableByPage   : ==>  Preparing: SELECT COUNT(1) FROM ( SELECT tc.id, tc.name, tc.display, tc.introduction, tc.color, tc.create_time, tc.update_time, count(ta.id) articleCount FROM t_category tc LEFT JOIN t_article ta ON tc.id = ta.category_id GROUP BY tc.id ) TOTAL 
+2020-05-03 18:21:17.517 DEBUG 8672 --- [http-nio-8889-exec-3] s.a.g.d.CategoryMapper.listTableByPage   : ==> Parameters: 
+2020-05-03 18:21:17.519 DEBUG 8672 --- [http-nio-8889-exec-3] s.a.g.d.CategoryMapper.listTableByPage   : ==>  Preparing: select tc.id, tc.name, tc.display, tc.introduction, tc.color, tc.create_time, tc.update_time, count(ta.id) articleCount from t_category tc left join t_article ta on tc.id = ta.category_id group by tc.id LIMIT ?,? 
+2020-05-03 18:21:17.519 DEBUG 8672 --- [http-nio-8889-exec-3] s.a.g.d.CategoryMapper.listTableByPage   : ==> Parameters: 0(Long), 15(Long)
+2020-05-03 18:21:17.520 DEBUG 8672 --- [http-nio-8889-exec-3] s.a.g.d.CategoryMapper.listTableByPage   : <==      Total: 6
+2020-05-03 18:22:05.583 DEBUG 8672 --- [http-nio-8889-exec-2] s.a.geekblog.dao.MenuMapper.selectList   : ==>  Preparing: SELECT id,title,href,pid,icon,target,sort,status,remark,create_time,update_time FROM sys_menu WHERE (status = ?) 
+2020-05-03 18:22:05.584 DEBUG 8672 --- [http-nio-8889-exec-2] s.a.geekblog.dao.MenuMapper.selectList   : ==> Parameters: true(Boolean)
+2020-05-03 18:22:05.587 DEBUG 8672 --- [http-nio-8889-exec-2] s.a.geekblog.dao.MenuMapper.selectList   : <==      Total: 10
+2020-05-03 18:22:05.825 DEBUG 8672 --- [http-nio-8889-exec-4] s.a.g.d.CategoryMapper.listTableByPage   : ==>  Preparing: SELECT COUNT(1) FROM ( SELECT tc.id, tc.name, tc.display, tc.introduction, tc.color, tc.create_time, tc.update_time, count(ta.id) articleCount FROM t_category tc LEFT JOIN t_article ta ON tc.id = ta.category_id GROUP BY tc.id ) TOTAL 
+2020-05-03 18:22:05.825 DEBUG 8672 --- [http-nio-8889-exec-4] s.a.g.d.CategoryMapper.listTableByPage   : ==> Parameters: 
+2020-05-03 18:22:05.828 DEBUG 8672 --- [http-nio-8889-exec-4] s.a.g.d.CategoryMapper.listTableByPage   : ==>  Preparing: select tc.id, tc.name, tc.display, tc.introduction, tc.color, tc.create_time, tc.update_time, count(ta.id) articleCount from t_category tc left join t_article ta on tc.id = ta.category_id group by tc.id LIMIT ?,? 
+2020-05-03 18:22:05.828 DEBUG 8672 --- [http-nio-8889-exec-4] s.a.g.d.CategoryMapper.listTableByPage   : ==> Parameters: 0(Long), 15(Long)
+2020-05-03 18:22:05.830 DEBUG 8672 --- [http-nio-8889-exec-4] s.a.g.d.CategoryMapper.listTableByPage   : <==      Total: 6
+2020-05-03 18:22:22.919 DEBUG 8672 --- [http-nio-8889-exec-8] s.a.g.dao.CategoryMapper.selectList      : ==>  Preparing: SELECT id,name FROM t_category 
+2020-05-03 18:22:22.919 DEBUG 8672 --- [http-nio-8889-exec-8] s.a.g.dao.CategoryMapper.selectList      : ==> Parameters: 
+2020-05-03 18:22:22.920 DEBUG 8672 --- [http-nio-8889-exec-8] s.a.g.dao.CategoryMapper.selectList      : <==      Total: 6
+2020-05-03 18:22:22.933 DEBUG 8672 --- [http-nio-8889-exec-9] s.a.g.dao.ArticleMapper.listTableByPage  : ==>  Preparing: SELECT COUNT(1) FROM t_article ta 
+2020-05-03 18:22:22.933 DEBUG 8672 --- [http-nio-8889-exec-9] s.a.g.dao.ArticleMapper.listTableByPage  : ==> Parameters: 
+2020-05-03 18:22:22.935 DEBUG 8672 --- [http-nio-8889-exec-9] s.a.g.dao.ArticleMapper.listTableByPage  : ==>  Preparing: select ta.id, ta.title, ta.type, ta.comments, ta.views, ta.likes, ta.published, ta.commentable, ta.appreciable, ta.top, ta.recommend, ta.create_time, ta.update_time, tc.id as cid, tc.name as cname, tc.color from t_article ta left join t_category tc on ta.category_id = tc.id LIMIT ?,? 
+2020-05-03 18:22:22.935 DEBUG 8672 --- [http-nio-8889-exec-9] s.a.g.dao.ArticleMapper.listTableByPage  : ==> Parameters: 0(Long), 15(Long)
+2020-05-03 18:22:22.943 DEBUG 8672 --- [http-nio-8889-exec-9] s.a.g.dao.ArticleMapper.listTableByPage  : <==      Total: 8
+2020-05-03 18:22:22.945 DEBUG 8672 --- [http-nio-8889-exec-9] s.a.g.dao.TagMapper.selectByArticleId    : ==>  Preparing: select tt.id, tt.name, tt.color from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-05-03 18:22:22.946 DEBUG 8672 --- [http-nio-8889-exec-9] s.a.g.dao.TagMapper.selectByArticleId    : ==> Parameters: 1(Long)
+2020-05-03 18:22:22.949 DEBUG 8672 --- [http-nio-8889-exec-9] s.a.g.dao.TagMapper.selectByArticleId    : <==      Total: 4
+2020-05-03 18:22:22.950 DEBUG 8672 --- [http-nio-8889-exec-9] s.a.g.dao.TagMapper.selectByArticleId    : ==>  Preparing: select tt.id, tt.name, tt.color from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-05-03 18:22:22.950 DEBUG 8672 --- [http-nio-8889-exec-9] s.a.g.dao.TagMapper.selectByArticleId    : ==> Parameters: 2(Long)
+2020-05-03 18:22:22.952 DEBUG 8672 --- [http-nio-8889-exec-9] s.a.g.dao.TagMapper.selectByArticleId    : <==      Total: 3
+2020-05-03 18:22:22.953 DEBUG 8672 --- [http-nio-8889-exec-9] s.a.g.dao.TagMapper.selectByArticleId    : ==>  Preparing: select tt.id, tt.name, tt.color from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-05-03 18:22:22.953 DEBUG 8672 --- [http-nio-8889-exec-9] s.a.g.dao.TagMapper.selectByArticleId    : ==> Parameters: 3(Long)
+2020-05-03 18:22:22.955 DEBUG 8672 --- [http-nio-8889-exec-9] s.a.g.dao.TagMapper.selectByArticleId    : <==      Total: 4
+2020-05-03 18:22:22.956 DEBUG 8672 --- [http-nio-8889-exec-9] s.a.g.dao.TagMapper.selectByArticleId    : ==>  Preparing: select tt.id, tt.name, tt.color from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-05-03 18:22:22.956 DEBUG 8672 --- [http-nio-8889-exec-9] s.a.g.dao.TagMapper.selectByArticleId    : ==> Parameters: 4(Long)
+2020-05-03 18:22:22.958 DEBUG 8672 --- [http-nio-8889-exec-9] s.a.g.dao.TagMapper.selectByArticleId    : <==      Total: 4
+2020-05-03 18:22:22.959 DEBUG 8672 --- [http-nio-8889-exec-9] s.a.g.dao.TagMapper.selectByArticleId    : ==>  Preparing: select tt.id, tt.name, tt.color from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-05-03 18:22:22.959 DEBUG 8672 --- [http-nio-8889-exec-9] s.a.g.dao.TagMapper.selectByArticleId    : ==> Parameters: 5(Long)
+2020-05-03 18:22:22.963 DEBUG 8672 --- [http-nio-8889-exec-9] s.a.g.dao.TagMapper.selectByArticleId    : <==      Total: 3
+2020-05-03 18:22:22.966 DEBUG 8672 --- [http-nio-8889-exec-9] s.a.g.dao.TagMapper.selectByArticleId    : ==>  Preparing: select tt.id, tt.name, tt.color from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-05-03 18:22:22.966 DEBUG 8672 --- [http-nio-8889-exec-9] s.a.g.dao.TagMapper.selectByArticleId    : ==> Parameters: 6(Long)
+2020-05-03 18:22:22.973 DEBUG 8672 --- [http-nio-8889-exec-9] s.a.g.dao.TagMapper.selectByArticleId    : <==      Total: 4
+2020-05-03 18:22:22.974 DEBUG 8672 --- [http-nio-8889-exec-9] s.a.g.dao.TagMapper.selectByArticleId    : ==>  Preparing: select tt.id, tt.name, tt.color from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-05-03 18:22:22.974 DEBUG 8672 --- [http-nio-8889-exec-9] s.a.g.dao.TagMapper.selectByArticleId    : ==> Parameters: 7(Long)
+2020-05-03 18:22:22.975 DEBUG 8672 --- [http-nio-8889-exec-9] s.a.g.dao.TagMapper.selectByArticleId    : <==      Total: 5
+2020-05-03 18:22:22.976 DEBUG 8672 --- [http-nio-8889-exec-9] s.a.g.dao.TagMapper.selectByArticleId    : ==>  Preparing: select tt.id, tt.name, tt.color from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-05-03 18:22:22.976 DEBUG 8672 --- [http-nio-8889-exec-9] s.a.g.dao.TagMapper.selectByArticleId    : ==> Parameters: 9(Long)
+2020-05-03 18:22:22.979 DEBUG 8672 --- [http-nio-8889-exec-9] s.a.g.dao.TagMapper.selectByArticleId    : <==      Total: 3
+2020-05-03 18:22:29.690 DEBUG 8672 --- [http-nio-8889-exec-1] s.a.geekblog.dao.TagMapper.selectPage    : ==>  Preparing: SELECT COUNT(1) FROM t_tag 
+2020-05-03 18:22:29.691 DEBUG 8672 --- [http-nio-8889-exec-1] s.a.geekblog.dao.TagMapper.selectPage    : ==> Parameters: 
+2020-05-03 18:22:29.694 DEBUG 8672 --- [http-nio-8889-exec-1] s.a.geekblog.dao.TagMapper.selectPage    : ==>  Preparing: SELECT id,name,create_time,update_time,color FROM t_tag LIMIT ?,? 
+2020-05-03 18:22:29.695 DEBUG 8672 --- [http-nio-8889-exec-1] s.a.geekblog.dao.TagMapper.selectPage    : ==> Parameters: 0(Long), 15(Long)
+2020-05-03 18:22:29.696 DEBUG 8672 --- [http-nio-8889-exec-1] s.a.geekblog.dao.TagMapper.selectPage    : <==      Total: 14
+2020-05-03 18:22:43.498 DEBUG 8672 --- [http-nio-8889-exec-3] s.a.geekblog.dao.MenuMapper.selectList   : ==>  Preparing: SELECT id,title,href,pid,icon,target,sort,status,remark,create_time,update_time FROM sys_menu WHERE (status = ?) 
+2020-05-03 18:22:43.498 DEBUG 8672 --- [http-nio-8889-exec-3] s.a.geekblog.dao.MenuMapper.selectList   : ==> Parameters: true(Boolean)
+2020-05-03 18:22:43.500 DEBUG 8672 --- [http-nio-8889-exec-3] s.a.geekblog.dao.MenuMapper.selectList   : <==      Total: 10
+2020-05-03 18:22:43.894 DEBUG 8672 --- [http-nio-8889-exec-5] s.a.geekblog.dao.TagMapper.selectPage    : ==>  Preparing: SELECT COUNT(1) FROM t_tag 
+2020-05-03 18:22:43.894 DEBUG 8672 --- [http-nio-8889-exec-5] s.a.geekblog.dao.TagMapper.selectPage    : ==> Parameters: 
+2020-05-03 18:22:43.896 DEBUG 8672 --- [http-nio-8889-exec-5] s.a.geekblog.dao.TagMapper.selectPage    : ==>  Preparing: SELECT id,name,create_time,update_time,color FROM t_tag LIMIT ?,? 
+2020-05-03 18:22:43.896 DEBUG 8672 --- [http-nio-8889-exec-5] s.a.geekblog.dao.TagMapper.selectPage    : ==> Parameters: 0(Long), 15(Long)
+2020-05-03 18:22:43.899 DEBUG 8672 --- [http-nio-8889-exec-5] s.a.geekblog.dao.TagMapper.selectPage    : <==      Total: 14
+2020-05-03 18:22:56.468 DEBUG 8672 --- [http-nio-8889-exec-10] s.a.g.d.CategoryMapper.listTableByPage   : ==>  Preparing: SELECT COUNT(1) FROM ( SELECT tc.id, tc.name, tc.display, tc.introduction, tc.color, tc.create_time, tc.update_time, count(ta.id) articleCount FROM t_category tc LEFT JOIN t_article ta ON tc.id = ta.category_id GROUP BY tc.id ) TOTAL 
+2020-05-03 18:22:56.468 DEBUG 8672 --- [http-nio-8889-exec-10] s.a.g.d.CategoryMapper.listTableByPage   : ==> Parameters: 
+2020-05-03 18:22:56.471 DEBUG 8672 --- [http-nio-8889-exec-10] s.a.g.d.CategoryMapper.listTableByPage   : ==>  Preparing: select tc.id, tc.name, tc.display, tc.introduction, tc.color, tc.create_time, tc.update_time, count(ta.id) articleCount from t_category tc left join t_article ta on tc.id = ta.category_id group by tc.id LIMIT ?,? 
+2020-05-03 18:22:56.472 DEBUG 8672 --- [http-nio-8889-exec-10] s.a.g.d.CategoryMapper.listTableByPage   : ==> Parameters: 0(Long), 15(Long)
+2020-05-03 18:22:56.473 DEBUG 8672 --- [http-nio-8889-exec-10] s.a.g.d.CategoryMapper.listTableByPage   : <==      Total: 6
+2020-05-03 18:22:58.070 DEBUG 8672 --- [http-nio-8889-exec-9] s.a.g.dao.CategoryMapper.selectList      : ==>  Preparing: SELECT id,name FROM t_category 
+2020-05-03 18:22:58.071 DEBUG 8672 --- [http-nio-8889-exec-9] s.a.g.dao.CategoryMapper.selectList      : ==> Parameters: 
+2020-05-03 18:22:58.072 DEBUG 8672 --- [http-nio-8889-exec-9] s.a.g.dao.CategoryMapper.selectList      : <==      Total: 6
+2020-05-03 18:22:58.078 DEBUG 8672 --- [http-nio-8889-exec-7] s.a.g.dao.ArticleMapper.listTableByPage  : ==>  Preparing: SELECT COUNT(1) FROM t_article ta 
+2020-05-03 18:22:58.078 DEBUG 8672 --- [http-nio-8889-exec-7] s.a.g.dao.ArticleMapper.listTableByPage  : ==> Parameters: 
+2020-05-03 18:22:58.080 DEBUG 8672 --- [http-nio-8889-exec-7] s.a.g.dao.ArticleMapper.listTableByPage  : ==>  Preparing: select ta.id, ta.title, ta.type, ta.comments, ta.views, ta.likes, ta.published, ta.commentable, ta.appreciable, ta.top, ta.recommend, ta.create_time, ta.update_time, tc.id as cid, tc.name as cname, tc.color from t_article ta left join t_category tc on ta.category_id = tc.id LIMIT ?,? 
+2020-05-03 18:22:58.080 DEBUG 8672 --- [http-nio-8889-exec-7] s.a.g.dao.ArticleMapper.listTableByPage  : ==> Parameters: 0(Long), 15(Long)
+2020-05-03 18:22:58.091 DEBUG 8672 --- [http-nio-8889-exec-7] s.a.g.dao.ArticleMapper.listTableByPage  : <==      Total: 8
+2020-05-03 18:22:58.093 DEBUG 8672 --- [http-nio-8889-exec-7] s.a.g.dao.TagMapper.selectByArticleId    : ==>  Preparing: select tt.id, tt.name, tt.color from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-05-03 18:22:58.093 DEBUG 8672 --- [http-nio-8889-exec-7] s.a.g.dao.TagMapper.selectByArticleId    : ==> Parameters: 1(Long)
+2020-05-03 18:22:58.095 DEBUG 8672 --- [http-nio-8889-exec-7] s.a.g.dao.TagMapper.selectByArticleId    : <==      Total: 4
+2020-05-03 18:22:58.096 DEBUG 8672 --- [http-nio-8889-exec-7] s.a.g.dao.TagMapper.selectByArticleId    : ==>  Preparing: select tt.id, tt.name, tt.color from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-05-03 18:22:58.096 DEBUG 8672 --- [http-nio-8889-exec-7] s.a.g.dao.TagMapper.selectByArticleId    : ==> Parameters: 2(Long)
+2020-05-03 18:22:58.097 DEBUG 8672 --- [http-nio-8889-exec-7] s.a.g.dao.TagMapper.selectByArticleId    : <==      Total: 3
+2020-05-03 18:22:58.097 DEBUG 8672 --- [http-nio-8889-exec-7] s.a.g.dao.TagMapper.selectByArticleId    : ==>  Preparing: select tt.id, tt.name, tt.color from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-05-03 18:22:58.097 DEBUG 8672 --- [http-nio-8889-exec-7] s.a.g.dao.TagMapper.selectByArticleId    : ==> Parameters: 3(Long)
+2020-05-03 18:22:58.098 DEBUG 8672 --- [http-nio-8889-exec-7] s.a.g.dao.TagMapper.selectByArticleId    : <==      Total: 4
+2020-05-03 18:22:58.099 DEBUG 8672 --- [http-nio-8889-exec-7] s.a.g.dao.TagMapper.selectByArticleId    : ==>  Preparing: select tt.id, tt.name, tt.color from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-05-03 18:22:58.099 DEBUG 8672 --- [http-nio-8889-exec-7] s.a.g.dao.TagMapper.selectByArticleId    : ==> Parameters: 4(Long)
+2020-05-03 18:22:58.100 DEBUG 8672 --- [http-nio-8889-exec-7] s.a.g.dao.TagMapper.selectByArticleId    : <==      Total: 4
+2020-05-03 18:22:58.100 DEBUG 8672 --- [http-nio-8889-exec-7] s.a.g.dao.TagMapper.selectByArticleId    : ==>  Preparing: select tt.id, tt.name, tt.color from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-05-03 18:22:58.100 DEBUG 8672 --- [http-nio-8889-exec-7] s.a.g.dao.TagMapper.selectByArticleId    : ==> Parameters: 5(Long)
+2020-05-03 18:22:58.101 DEBUG 8672 --- [http-nio-8889-exec-7] s.a.g.dao.TagMapper.selectByArticleId    : <==      Total: 3
+2020-05-03 18:22:58.104 DEBUG 8672 --- [http-nio-8889-exec-7] s.a.g.dao.TagMapper.selectByArticleId    : ==>  Preparing: select tt.id, tt.name, tt.color from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-05-03 18:22:58.104 DEBUG 8672 --- [http-nio-8889-exec-7] s.a.g.dao.TagMapper.selectByArticleId    : ==> Parameters: 6(Long)
+2020-05-03 18:22:58.106 DEBUG 8672 --- [http-nio-8889-exec-7] s.a.g.dao.TagMapper.selectByArticleId    : <==      Total: 4
+2020-05-03 18:22:58.107 DEBUG 8672 --- [http-nio-8889-exec-7] s.a.g.dao.TagMapper.selectByArticleId    : ==>  Preparing: select tt.id, tt.name, tt.color from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-05-03 18:22:58.107 DEBUG 8672 --- [http-nio-8889-exec-7] s.a.g.dao.TagMapper.selectByArticleId    : ==> Parameters: 7(Long)
+2020-05-03 18:22:58.108 DEBUG 8672 --- [http-nio-8889-exec-7] s.a.g.dao.TagMapper.selectByArticleId    : <==      Total: 5
+2020-05-03 18:22:58.109 DEBUG 8672 --- [http-nio-8889-exec-7] s.a.g.dao.TagMapper.selectByArticleId    : ==>  Preparing: select tt.id, tt.name, tt.color from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id where tat.article_id = ? 
+2020-05-03 18:22:58.109 DEBUG 8672 --- [http-nio-8889-exec-7] s.a.g.dao.TagMapper.selectByArticleId    : ==> Parameters: 9(Long)
+2020-05-03 18:22:58.111 DEBUG 8672 --- [http-nio-8889-exec-7] s.a.g.dao.TagMapper.selectByArticleId    : <==      Total: 3
+2020-05-03 18:27:22.705  INFO 8672 --- [Thread-12] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2020-05-03 18:27:22.707  INFO 8672 --- [Thread-12] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed
+2020-05-03 18:27:23.040  INFO 8672 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Starting GeekBlogApplication on DESKTOP-QNDK7AF with PID 8672 (D:\idea\geekblog\target\classes started by AlanLiang in D:\idea\geekblog)
+2020-05-03 18:27:23.041 DEBUG 8672 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Running with Spring Boot v2.2.6.RELEASE, Spring v5.2.5.RELEASE
+2020-05-03 18:27:23.041  INFO 8672 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : The following profiles are active: dev
+2020-05-03 18:27:23.275  INFO 8672 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8889 (http)
+2020-05-03 18:27:23.276  INFO 8672 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-05-03 18:27:23.276  INFO 8672 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.33]
+2020-05-03 18:27:23.297  INFO 8672 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-05-03 18:27:23.297  INFO 8672 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 255 ms
+2020-05-03 18:27:23.313  INFO 8672 --- [restartedMain] o.s.boot.web.servlet.RegistrationBean    : Servlet statViewServlet was not registered (possibly already registered?)
+2020-05-03 18:27:23.313  INFO 8672 --- [restartedMain] o.s.boot.web.servlet.RegistrationBean    : Filter webStatFilter was not registered (possibly already registered?)
+2020-05-03 18:27:23.331  INFO 8672 --- [restartedMain] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2020-05-03 18:27:23.391  INFO 8672 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-2} inited
+2020-05-03 18:27:23.805  INFO 8672 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-05-03 18:27:23.945  INFO 8672 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2020-05-03 18:27:23.963  INFO 8672 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8889 (http) with context path ''
+2020-05-03 18:27:23.964  INFO 8672 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Started GeekBlogApplication in 0.952 seconds (JVM running for 1216.796)
+2020-05-03 18:27:23.965  INFO 8672 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2020-05-03 18:28:41.421  INFO 16660 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Starting GeekBlogApplication on DESKTOP-QNDK7AF with PID 16660 (D:\idea\geekblog\target\classes started by AlanLiang in D:\idea\geekblog)
+2020-05-03 18:28:41.425 DEBUG 16660 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Running with Spring Boot v2.2.6.RELEASE, Spring v5.2.5.RELEASE
+2020-05-03 18:28:41.426  INFO 16660 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : The following profiles are active: dev
+2020-05-03 18:28:41.487  INFO 16660 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2020-05-03 18:28:41.487  INFO 16660 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2020-05-03 18:28:42.561  INFO 16660 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8889 (http)
+2020-05-03 18:28:42.567  INFO 16660 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-05-03 18:28:42.568  INFO 16660 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.33]
+2020-05-03 18:28:42.641  INFO 16660 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-05-03 18:28:42.641  INFO 16660 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1154 ms
+2020-05-03 18:28:42.676  INFO 16660 --- [restartedMain] o.s.boot.web.servlet.RegistrationBean    : Servlet statViewServlet was not registered (possibly already registered?)
+2020-05-03 18:28:42.678  INFO 16660 --- [restartedMain] o.s.boot.web.servlet.RegistrationBean    : Filter webStatFilter was not registered (possibly already registered?)
+2020-05-03 18:28:42.831  INFO 16660 --- [restartedMain] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2020-05-03 18:28:43.099  INFO 16660 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2020-05-03 18:28:43.929  INFO 16660 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-05-03 18:28:44.186  INFO 16660 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2020-05-03 18:28:44.238  INFO 16660 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8889 (http) with context path ''
+2020-05-03 18:28:44.240  INFO 16660 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Started GeekBlogApplication in 3.482 seconds (JVM running for 4.341)
+2020-05-03 18:28:50.309  INFO 16660 --- [http-nio-8889-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-05-03 18:28:50.309  INFO 16660 --- [http-nio-8889-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-05-03 18:28:50.315  INFO 16660 --- [http-nio-8889-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 6 ms
+2020-05-03 18:28:50.767 DEBUG 16660 --- [http-nio-8889-exec-1] s.a.geekblog.dao.MenuMapper.selectList   : ==>  Preparing: SELECT id,title,href,pid,icon,target,sort,status,remark,create_time,update_time FROM sys_menu WHERE (status = ?) 
+2020-05-03 18:28:50.853 DEBUG 16660 --- [http-nio-8889-exec-1] s.a.geekblog.dao.MenuMapper.selectList   : ==> Parameters: true(Boolean)
+2020-05-03 18:28:50.868 DEBUG 16660 --- [http-nio-8889-exec-1] s.a.geekblog.dao.MenuMapper.selectList   : <==      Total: 10
+2020-05-03 18:28:51.207 DEBUG 16660 --- [http-nio-8889-exec-4] s.a.g.d.CategoryMapper.listTableByPage   : ==>  Preparing: SELECT COUNT(1) FROM ( SELECT tc.id, tc.name, tc.display, tc.introduction, tc.color, tc.create_time, tc.update_time, count(ta.id) articleCount FROM t_category tc LEFT JOIN t_article ta ON tc.id = ta.category_id GROUP BY tc.id ) TOTAL 
+2020-05-03 18:28:51.211 DEBUG 16660 --- [http-nio-8889-exec-4] s.a.g.d.CategoryMapper.listTableByPage   : ==> Parameters: 
+2020-05-03 18:28:51.222 DEBUG 16660 --- [http-nio-8889-exec-4] s.a.g.d.CategoryMapper.listTableByPage   : ==>  Preparing: select tc.id, tc.name, tc.display, tc.introduction, tc.color, tc.create_time, tc.update_time, count(ta.id) articleCount from t_category tc left join t_article ta on tc.id = ta.category_id group by tc.id LIMIT ?,? 
+2020-05-03 18:28:51.224 DEBUG 16660 --- [http-nio-8889-exec-4] s.a.g.d.CategoryMapper.listTableByPage   : ==> Parameters: 0(Long), 15(Long)
+2020-05-03 18:28:51.227 DEBUG 16660 --- [http-nio-8889-exec-4] s.a.g.d.CategoryMapper.listTableByPage   : <==      Total: 6
+2020-05-03 18:28:53.272 DEBUG 16660 --- [http-nio-8889-exec-6] s.a.g.dao.TagMapper.listTableByPage      : ==>  Preparing: SELECT COUNT(1) FROM ( SELECT tt.id, tt.name, tt.color, tt.create_time, tt.update_time, count(ta.id) FROM t_tag tt LEFT JOIN t_article_tag tat ON tt.id = tat.tag_id LEFT JOIN t_article ta ON ta.id = tat.article_id GROUP BY tt.id ) TOTAL 
+2020-05-03 18:28:53.273 DEBUG 16660 --- [http-nio-8889-exec-6] s.a.g.dao.TagMapper.listTableByPage      : ==> Parameters: 
+2020-05-03 18:28:53.275 DEBUG 16660 --- [http-nio-8889-exec-6] s.a.g.dao.TagMapper.listTableByPage      : ==>  Preparing: select tt.id, tt.name, tt.color, tt.create_time, tt.update_time, count(ta.id) from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id left join t_article ta on ta.id = tat.article_id group by tt.id LIMIT ?,? 
+2020-05-03 18:28:53.277 DEBUG 16660 --- [http-nio-8889-exec-6] s.a.g.dao.TagMapper.listTableByPage      : ==> Parameters: 0(Long), 15(Long)
+2020-05-03 18:28:53.280 DEBUG 16660 --- [http-nio-8889-exec-6] s.a.g.dao.TagMapper.listTableByPage      : <==      Total: 14
+2020-05-03 18:28:58.704 DEBUG 16660 --- [http-nio-8889-exec-6] s.a.geekblog.dao.MenuMapper.selectList   : ==>  Preparing: SELECT id,title,href,pid,icon,target,sort,status,remark,create_time,update_time FROM sys_menu WHERE (status = ?) 
+2020-05-03 18:28:58.705 DEBUG 16660 --- [http-nio-8889-exec-6] s.a.geekblog.dao.MenuMapper.selectList   : ==> Parameters: true(Boolean)
+2020-05-03 18:28:58.714 DEBUG 16660 --- [http-nio-8889-exec-6] s.a.geekblog.dao.MenuMapper.selectList   : <==      Total: 10
+2020-05-03 18:28:59.095 DEBUG 16660 --- [http-nio-8889-exec-9] s.a.g.dao.TagMapper.listTableByPage      : ==>  Preparing: SELECT COUNT(1) FROM ( SELECT tt.id, tt.name, tt.color, tt.create_time, tt.update_time, count(ta.id) FROM t_tag tt LEFT JOIN t_article_tag tat ON tt.id = tat.tag_id LEFT JOIN t_article ta ON ta.id = tat.article_id GROUP BY tt.id ) TOTAL 
+2020-05-03 18:28:59.095 DEBUG 16660 --- [http-nio-8889-exec-9] s.a.g.dao.TagMapper.listTableByPage      : ==> Parameters: 
+2020-05-03 18:28:59.103 DEBUG 16660 --- [http-nio-8889-exec-9] s.a.g.dao.TagMapper.listTableByPage      : ==>  Preparing: select tt.id, tt.name, tt.color, tt.create_time, tt.update_time, count(ta.id) from t_tag tt left join t_article_tag tat on tt.id = tat.tag_id left join t_article ta on ta.id = tat.article_id group by tt.id LIMIT ?,? 
+2020-05-03 18:28:59.103 DEBUG 16660 --- [http-nio-8889-exec-9] s.a.g.dao.TagMapper.listTableByPage      : ==> Parameters: 0(Long), 15(Long)
+2020-05-03 18:28:59.111 DEBUG 16660 --- [http-nio-8889-exec-9] s.a.g.dao.TagMapper.listTableByPage      : <==      Total: 14

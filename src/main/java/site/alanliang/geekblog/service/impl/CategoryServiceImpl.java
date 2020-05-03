@@ -41,7 +41,7 @@ public class CategoryServiceImpl implements CategoryService {
         if (categoryQuery.getStartDate() != null && categoryQuery.getEndDate() != null) {
             wrapper.between("create_time", categoryQuery.getStartDate(), categoryQuery.getEndDate());
         }
-        return categoryMapper.selectPage(page, wrapper);
+        return categoryMapper.listTableByPage(page, wrapper);
     }
 
     @Override

@@ -34,7 +34,7 @@ public interface TagService {
      * @param tagQuery 条件
      * @return 标签列表
      */
-    Page<Tag> listByPage(Integer current, Integer size, TagQuery tagQuery);
+    Page<Tag> listTableByPage(Integer current, Integer size, TagQuery tagQuery);
 
     /**
      * 新增或者更新标签

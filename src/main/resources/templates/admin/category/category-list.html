@@ -104,18 +104,33 @@
                 [
                     {type: "checkbox", width: 50, fixed: "left"},
                     {field: 'id', width: 80, title: 'ID', sort: true},
-                    {field: 'name', width: 150, title: '名称'},
+                    {field: 'name', width: 150, title: '名称', sort: true},
                     {
-                        field: 'display', width: 120, title: '是否前台显示', templet: function (data) {
+                        field: 'display',
+                        width: 150,
+                        title: '是否前台显示',
+                        sort: true,
+                        align: 'center',
+                        templet: function (data) {
                             return data.display == true ? '是' : '否';
                         }
                     },
                     {field: 'introduction', width: 250, title: '简介'},
                     {
-                        field: 'color', width: 100, title: '颜色', templet: function (data) {
+                        field: 'color', width: 100, title: '颜色', align: 'center', templet: function (data) {
                             let color = data.color;
                             return '<span class="layui-badge" style="background-color: ' + color +
                                 ';color: #666666">' + color + '</span>';
+                        }
+                    },
+                    {
+                        field: 'articleCount',
+                        width: 150,
+                        title: '关联文章数量',
+                        sort: true,
+                        align: 'center',
+                        templet: function (data) {
+                            return '<span class="layui-badge layui-bg-green">' + data.articleCount + '</span>';
                         }
                     },
                     {field: 'createTime', width: 200, title: '创建时间', sort: true},
