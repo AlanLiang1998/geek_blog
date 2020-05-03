@@ -7,17 +7,22 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import site.alanliang.geekblog.common.Constant;
+import site.alanliang.geekblog.dao.TagMapper;
 import site.alanliang.geekblog.entity.Article;
 import site.alanliang.geekblog.entity.ArticleTag;
+import site.alanliang.geekblog.entity.Tag;
+import site.alanliang.geekblog.exception.NameNotUniqueException;
 import site.alanliang.geekblog.query.ArticleQuery;
-import site.alanliang.geekblog.vo.ArticleVO;
 import site.alanliang.geekblog.dao.ArticleMapper;
 import site.alanliang.geekblog.dao.ArticleTagMapper;
 import site.alanliang.geekblog.query.ArchivesQuery;
 import site.alanliang.geekblog.service.ArticleService;
 import site.alanliang.geekblog.vo.ArticleDateVO;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @Descriptin TODO
@@ -33,6 +38,9 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Autowired
     private ArticleTagMapper articleTagMapper;
+
+    @Autowired
+    private TagMapper tagMapper;
 
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -173,19 +181,31 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void saveOrUpdate(ArticleVO articleVo) {
-        if (articleVo.getId() == null) {
+    public void saveOrUpdate(Article article) {
+        QueryWrapper<Tag> tagWrapper = new QueryWrapper<>();
+        tagWrapper.select("id", "name");
+        List<Tag> tagList = tagMapper.selectList(tagWrapper);
+        //存在新标签则添加新标签
+        List<Tag> newTagList = article.getTagList().stream().filter(t -> (t.getId() == null)).collect(Collectors.toList());
+        for (Tag newTag : newTagList) {
+            //添加标签
+            newTag.setColor(Constant.DEFAULT_COLOR);
+            newTag.setCreateTime(new Date());
+            newTag.setUpdateTime(newTag.getCreateTime());
+            tagMapper.insert(newTag);
+        }
+        if (article.getId() == null) {
             //新增
-            articleMapper.insert(articleVo);
-            articleTagMapper.insertBatch(articleVo.getId(), articleVo.getTagIdList());
+            articleMapper.insert(article);
         } else {
             //编辑
-            articleMapper.updateById(articleVo);
+            articleMapper.updateById(article);
             QueryWrapper<ArticleTag> wrapper = new QueryWrapper<>();
-            wrapper.eq("article_id", articleVo.getId());
+            wrapper.eq("article_id", article.getId());
             articleTagMapper.delete(wrapper);
-            articleTagMapper.insertBatch(articleVo.getId(), articleVo.getTagIdList());
         }
+        List<Long> tagIdList = article.getTagList().stream().map(Tag::getId).collect(Collectors.toList());
+        articleTagMapper.insertBatch(article.getId(), tagIdList);
     }
 
 }

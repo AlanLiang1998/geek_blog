@@ -152,14 +152,15 @@
                 maxColor: 'orange',
             },
             create: function (val, arr) {
-                //返回一个创建成功的对象, val是搜索的数据, arr是搜索后的当前页面数据
-                return {
-                    name: '创建-' + val,
-                    value: val
+                if (arr.length === 0) {
+                    return {
+                        name: val,
+                        value: null
+                    }
                 }
             },
-            maxMethod(seles, item) {
-                alert(`${item.name}不能选了, 已经超了`)
+            maxMethod() {
+                layer.msg('标签数量不能超过5个');
             },
             data: []
         });
@@ -168,7 +169,7 @@
             url: '/admin/category',
             type: 'GET',
             success: function (result) {
-                if (result.code == 200) {
+                if (result.code === 200) {
                     $.each(result.data, function () {
                         var categoryId = $(this)[0].id;
                         var categoryName = $(this)[0].name;
@@ -234,7 +235,12 @@
         //保存文章
         function saveArticle(data, isPublish) {
             //获取标签列表
-            data.field.tagIdList = tagSelect.getValue('value');
+            data.field.tagList = tagSelect.getValue().map(item => {
+                return {
+                    id: item.value,
+                    name: item.name,
+                }
+            });
             //获取文章内容
             data.field.content = editor.getHTML();
             //获取文章markdown

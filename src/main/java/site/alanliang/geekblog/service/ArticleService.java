@@ -4,7 +4,6 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import site.alanliang.geekblog.entity.Article;
 import site.alanliang.geekblog.query.ArticleQuery;
-import site.alanliang.geekblog.vo.ArticleVO;
 import site.alanliang.geekblog.query.ArchivesQuery;
 import site.alanliang.geekblog.vo.ArticleDateVO;
 
@@ -18,9 +17,9 @@ public interface ArticleService {
     /**
      * 保存或更新文章
      *
-     * @param articleVo 文章
+     * @param article 文章
      */
-    void saveOrUpdate(ArticleVO articleVo);
+    void saveOrUpdate(Article article);
 
     /**
      * 分页查询文章

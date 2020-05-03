@@ -31,4 +31,9 @@ public interface Constant {
      * 表别名前缀
      */
     String TABLE_ALIAS_ARTICLE = "ta.";
+
+    /**
+     * 默认颜色
+     */
+    String DEFAULT_COLOR = "#D5F5E3";
 }

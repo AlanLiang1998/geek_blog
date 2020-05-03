@@ -65,9 +65,9 @@
             clickClose: true,
             model: {
                 label: {
-                    block: {
+                    type: 'text',
+                    text: {
                         template: function (item, sels) {
-                            $('.label-content').css('backgroundColor', item.value);
                             return '<span>' + item.name + '</span>';
                         },
                     },

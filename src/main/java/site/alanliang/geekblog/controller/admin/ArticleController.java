@@ -53,17 +53,17 @@ public class ArticleController {
     }
 
     @PostMapping
-    public JsonResult save(@Validated @RequestBody ArticleVO articleVo) {
-        articleVo.setViews(0);
-        articleVo.setLikes(0);
-        articleVo.setComments(0);
-        articleVo.setAppreciable(articleVo.getAppreciable() != null);
-        articleVo.setCommentable(articleVo.getCommentable() != null);
-        articleVo.setTop(articleVo.getTop() != null);
-        articleVo.setRecommend(articleVo.getRecommend() != null);
-        articleVo.setCreateTime(new Date());
-        articleVo.setUpdateTime(articleVo.getCreateTime());
-        articleService.saveOrUpdate(articleVo);
+    public JsonResult save(@Validated @RequestBody Article article) {
+        article.setViews(0);
+        article.setLikes(0);
+        article.setComments(0);
+        article.setAppreciable(article.getAppreciable() != null);
+        article.setCommentable(article.getCommentable() != null);
+        article.setTop(article.getTop() != null);
+        article.setRecommend(article.getRecommend() != null);
+        article.setCreateTime(new Date());
+        article.setUpdateTime(article.getCreateTime());
+        articleService.saveOrUpdate(article);
         return JsonResult.ok();
     }
 

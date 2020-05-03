@@ -64,7 +64,8 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public List<String> listColor() {
         QueryWrapper<Category> wrapper = new QueryWrapper<>();
-        wrapper.select("color");
+        wrapper.select("color")
+                .groupBy("color");
         List<Category> categories = categoryMapper.selectList(wrapper);
         return categories.stream().map(Category::getColor).collect(Collectors.toList());
     }

@@ -94,7 +94,8 @@ public class TagServiceImpl implements TagService {
     @Override
     public List<String> listColor() {
         QueryWrapper<Tag> wrapper = new QueryWrapper<>();
-        wrapper.select("color");
+        wrapper.select("color")
+                .groupBy("color");
         List<Tag> tags = tagMapper.selectList(wrapper);
         return tags.stream().map(Tag::getColor).collect(Collectors.toList());
     }

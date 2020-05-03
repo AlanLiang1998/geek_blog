@@ -38,7 +38,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">封面链接</label>
                 <div class="layui-input-block">
-                    <input type="text" name="cover"  placeholder="请输入封面链接..."
+                    <input type="text" name="cover" placeholder="请输入封面链接..."
                            autocomplete="off" class="layui-input"/>
                 </div>
             </div>
@@ -150,8 +150,16 @@
             theme: {
                 maxColor: 'orange',
             },
-            maxMethod(seles, item) {
-                alert(`${item.name}不能选了, 已经超了`)
+            create: function (val, arr) {
+                if (arr.length === 0) {
+                    return {
+                        name: val,
+                        value: null
+                    }
+                }
+            },
+            maxMethod() {
+                layer.msg('标签数量不能超过5个');
             },
             data: []
         });
@@ -243,7 +251,12 @@
         //保存文章
         function saveArticle(data, isPublish) {
             //获取标签列表
-            data.field.tagIdList = tagSelect.getValue('value');
+            data.field.tagList = tagSelect.getValue().map(item => {
+                return {
+                    id: item.value,
+                    name: item.name,
+                }
+            });
             //获取文章内容
             data.field.content = editor.getHTML();
             //获取文章markdown
