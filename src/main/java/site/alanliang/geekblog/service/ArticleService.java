@@ -24,8 +24,8 @@ public interface ArticleService {
     /**
      * 分页查询文章
      *
-     * @param current 当前页码
-     * @param size    页面大小
+     * @param current      当前页码
+     * @param size         页面大小
      * @param articleQuery 条件
      * @return 文章列表
      */
@@ -149,8 +149,8 @@ public interface ArticleService {
     /**
      * 根据日期分页获取所有文章预览
      *
-     * @param current      当前页
-     * @param size         页面大小
+     * @param current       当前页
+     * @param size          页面大小
      * @param archivesQuery 条件
      * @return 文章预览列表
      */
@@ -163,4 +163,17 @@ public interface ArticleService {
      */
     List<Article> listByKeyword();
 
+    /**
+     * 判断置顶文章是否达到上限
+     *
+     * @return 布尔值
+     */
+    Boolean reachedMaxTop();
+
+    /**
+     * 判断推荐文章是否达到上限
+     *
+     * @return 布尔值
+     */
+    Boolean reachedMaxRecommend();
 }

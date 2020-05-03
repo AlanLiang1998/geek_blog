@@ -78,7 +78,7 @@
                     <div class="layui-form-item">
                         <label class="layui-form-label">开启赞赏</label>
                         <div class="layui-input-inline pane">
-                            <input type="checkbox" name="appreciable" lay-skin="switch" lay-text="是|否" checked
+                            <input type="checkbox" name="appreciable" lay-skin="switch" lay-text="是|否"
                                    value="true">
                         </div>
                     </div>
@@ -98,15 +98,15 @@
                 <div class="layui-inline">
                     <label class="layui-form-label">是否置顶</label>
                     <div class="layui-input-inline pane">
-                        <input type="checkbox" name="top" lay-skin="switch" lay-text="是|否" checked
-                               value="true">
+                        <input type="checkbox" name="top" lay-skin="switch" lay-text="是|否"
+                               value="true" lay-filter="top-filter">
                     </div>
                 </div>
                 <div class="layui-inline">
                     <label class="layui-form-label">是否推荐</label>
                     <div class="layui-input-inline pane">
-                        <input type="checkbox" name="recommend" lay-skin="switch" lay-text="是|否" checked
-                               value="true">
+                        <input type="checkbox" name="recommend" lay-skin="switch" lay-text="是|否"
+                               value="true" lay-filter="recommend-filter">
                     </div>
                 </div>
             </div>
@@ -268,6 +268,38 @@
             });
             return saveResult;
         };
+        //监听置顶
+        form.on('switch(top-filter)', function (data) {
+            if (data.elem.checked) {
+                $.ajax({
+                    url: '/admin/article/reachedMaxTop',
+                    type: 'GET',
+                    success: function (result) {
+                        if (result.data.reached) {
+                            layer.msg('置顶文章已达到最大限制数量：' + result.data.maxTop);
+                            data.elem.checked = false;
+                            form.render();
+                        }
+                    }
+                });
+            }
+        });
+        //监听推荐
+        form.on('switch(recommend-filter)', function (data) {
+            if (data.elem.checked) {
+                $.ajax({
+                    url: '/admin/article/reachedMaxRecommend',
+                    type: 'GET',
+                    success: function (result) {
+                        if (result.data.reached) {
+                            layer.msg('推荐文章已达到最大限制数量：' + result.data.maxRecommend);
+                            data.elem.checked = false;
+                            form.render();
+                        }
+                    }
+                });
+            }
+        });
         //监听保存草稿按钮
         form.on('submit(draft)', function (data) {
             var result = saveArticle(data, false);

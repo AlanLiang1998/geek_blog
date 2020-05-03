@@ -84,4 +84,9 @@ public class CategoryController {
         categoryService.removeByIds(idList);
         return JsonResult.ok();
     }
+
+    @GetMapping("/colors")
+    public JsonResult getColors() {
+        return JsonResult.ok(categoryService.listColor());
+    }
 }

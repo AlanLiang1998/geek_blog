@@ -180,6 +180,22 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
+    public Boolean reachedMaxRecommend() {
+        QueryWrapper<Article> wrapper = new QueryWrapper<>();
+        wrapper.eq("recommend", true);
+        Integer count = articleMapper.selectCount(wrapper);
+        return count >= Constant.MAX_RECOMMEND_ARTICLES;
+    }
+
+    @Override
+    public Boolean reachedMaxTop() {
+        QueryWrapper<Article> wrapper = new QueryWrapper<>();
+        wrapper.eq("top", true);
+        Integer count = articleMapper.selectCount(wrapper);
+        return count >= Constant.MAX_TOP_ARTICLES;
+    }
+
+    @Override
     @Transactional(rollbackFor = Exception.class)
     public void saveOrUpdate(Article article) {
         QueryWrapper<Tag> tagWrapper = new QueryWrapper<>();

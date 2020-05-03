@@ -82,4 +82,9 @@ public class TagController {
         tagService.removeByIds(idList);
         return JsonResult.ok();
     }
+
+    @GetMapping("/colors")
+    public JsonResult getColors() {
+        return JsonResult.ok(tagService.listColor());
+    }
 }

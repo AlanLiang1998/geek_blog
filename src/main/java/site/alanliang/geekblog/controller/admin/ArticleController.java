@@ -6,6 +6,7 @@ import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import site.alanliang.geekblog.common.Constant;
 import site.alanliang.geekblog.common.JsonResult;
 import site.alanliang.geekblog.common.TableResult;
 import site.alanliang.geekblog.entity.Article;
@@ -17,6 +18,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -88,5 +90,21 @@ public class ArticleController {
     public JsonResult batchRemove(@NotEmpty @RequestBody List<Long> idList) {
         articleService.removeByIds(idList);
         return JsonResult.ok();
+    }
+
+    @GetMapping("/reachedMaxTop")
+    public JsonResult reachedMaxTop() {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("reached", articleService.reachedMaxTop());
+        map.put("maxTop", Constant.MAX_TOP_ARTICLES);
+        return JsonResult.ok(map);
+    }
+
+    @GetMapping("/reachedMaxRecommend")
+    public JsonResult reachedMaxRecommend() {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("reached", articleService.reachedMaxRecommend());
+        map.put("maxRecommend", Constant.MAX_RECOMMEND_ARTICLES);
+        return JsonResult.ok(map);
     }
 }
