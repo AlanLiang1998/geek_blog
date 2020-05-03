@@ -6,23 +6,61 @@
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link rel="stylesheet" href="../../../static/admin/layuimini/lib/layui-v2.5.5/css/layui.css" media="all"
+    <link rel="stylesheet" href="/static/admin/layuimini/lib/layui-v2.5.5/css/layui.css" media="all"
           th:href="@{/static/admin/layuimini/lib/layui-v2.5.5/css/layui.css}">
-    <link rel="stylesheet" href="../../../static/admin/layuimini/css/public.css" media="all" th:href="@{/static/admin/layuimini/css/public.css}">
+    <link rel="stylesheet" href="/static/admin/layuimini/css/public.css" media="all"
+          th:href="@{/static/admin/layuimini/css/public.css}">
+    <link rel="stylesheet" href="/static/admin/layuimini/lib/font-awesome-4.7.0/css/font-awesome.min.css">
 </head>
 <body>
 <div class="layuimini-container">
     <div class="layuimini-main">
-
         <fieldset class="table-search-fieldset">
             <legend>搜索信息</legend>
             <div style="margin: 10px 10px 10px 10px">
-                <form class="layui-form layui-form-pane" action="">
+                <form class="layui-form layui-form-pane" lay-filter="search-filter">
                     <div class="layui-form-item">
                         <div class="layui-inline">
                             <label class="layui-form-label">文章标题</label>
                             <div class="layui-input-inline">
-                                <input type="text" name="keyword" autocomplete="off" class="layui-input">
+                                <input type="text" name="title" autocomplete="off" class="layui-input"
+                                       placeholder="不输入则忽略标题筛选">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">文章类型</label>
+                            <div class="layui-input-inline">
+                                <select name="type">
+                                    <option value="" selected>所有</option>
+                                    <option value="1">原创</option>
+                                    <option value="2">转载</option>
+                                    <option value="3">翻译</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">文章分类</label>
+                            <div class="layui-input-inline">
+                                <select name="categoryId" lay-search id="category-select">
+                                    <option value="" selected>所有</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">状态</label>
+                            <div class="layui-input-inline">
+                                <select name="published">
+                                    <option value="" selected>所有</option>
+                                    <option value="true">发布</option>
+                                    <option value="false">草稿</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">日期范围</label>
+                            <div class="layui-input-inline">
+                                <input type="text" class="layui-input" id="date-range" placeholder="不输入则忽略日期范围筛选"
+                                       name="dateRange">
                             </div>
                         </div>
                         <div class="layui-inline">
@@ -51,18 +89,44 @@
 
     </div>
 </div>
-<script src="../../../static/admin/layuimini/lib/layui-v2.5.5/layui.js" charset="utf-8"
+<script src="/static/admin/layuimini/lib/layui-v2.5.5/layui.js" charset="utf-8"
         th:src="@{/static/admin/layuimini/lib/layui-v2.5.5/layui.js}"></script>
-<script src="../../../static/admin/layuimini/js/lay-config.js?v=1.0.4" charset="utf-8"
+<script src="/static/admin/layuimini/js/lay-config.js?v=1.0.4" charset="utf-8"
         th:src="@{/static/admin/layuimini/js/lay-config.js(v=1.0.4)}"></script>
-<script src="../../../static/admin/layuimini/js/lay-module/layuimini/miniTab.js"
+<script src="/static/admin/layuimini/js/lay-module/layuimini/miniTab.js"
         th:src="@{/static/admin/layuimini/js/lay-module/layuimini/miniTab.js}"></script>
 <script>
-    layui.use(['layer', 'form', 'table', 'miniTab'], function () {
+    layui.use(['layer', 'form', 'table', 'miniTab', 'laydate'], function () {
         var $ = layui.jquery,
             form = layui.form,
             table = layui.table,
-            miniTab = layui.miniTab;
+            miniTab = layui.miniTab,
+            laydate = layui.laydate;
+
+        //日期范围
+        laydate.render({
+            elem: '#date-range',
+            range: '~',
+            theme: 'molv'
+        });
+
+        //获取分类列表
+        $.ajax({
+            url: '/admin/category',
+            type: 'GET',
+            success: function (result) {
+                if (result.code === 200) {
+                    $.each(result.data, function () {
+                        var categoryId = $(this)[0].id;
+                        var categoryName = $(this)[0].name;
+                        var categoryOption = $('<option></option>').val(categoryId).text(categoryName);
+                        $('#category-select').append(categoryOption);
+                    });
+                    form.render('select', 'search-filter');
+                }
+            }
+        });
+
         table.render({
             elem: '#currentTableId',
             url: '/admin/article',
@@ -75,41 +139,77 @@
             cols: [
                 [
                     {type: "checkbox", width: 50, fixed: "left"},
-                    {field: 'id', width: 50, title: 'ID', sort: true},
-                    {field: 'title', width: 220, title: '标题'},
+                    {field: 'id', width: 60, title: 'ID', sort: true},
+                    {
+                        field: 'title', width: 250, title: '标题', sort: true, templet: function (data) {
+                            let href = '/article/' + data.id;
+                            //return '<a href=' + href + ' style="color: #01AAED;">' + data.title + '</a>';
+                            return '<a href=' + href + ' style="color: #01AAED;" target="_blank">' + data.title + '</a>'
+                        }
+                    },
                     {
                         field: 'type', width: 80, title: '类型', sort: true, templet: function (data) {
-                            return data.type == 1 ? '原创' : (data.type == 2 ? '转载' : '翻译')
+                            let type = data.type === 1 ? '原创' : (data.type === 2 ? '转载' : '翻译');
+                            let color = data.type === 1 ? 'green' : (data.type === 2 ? 'orange' : 'red');
+                            let bgColor = 'layui-bg-' + color;
+                            return '<span class="layui-badge ' + bgColor + '">' + type + '</span>';
                         }
                     },
                     {
-                        field: 'category', width: 100, title: '分类', sort: true, templet: function (data) {
-                            return data.category.name;
+                        field: 'category', width: 150, title: '分类', sort: true, templet: function (data) {
+                            let cateName = data.category.name;
+                            let color = data.category.color;
+                            return '<span class="layui-badge" style="background-color: ' + color +
+                                ';color: #666666">' + cateName + '</span>';
                         }
                     },
                     {
-                        field: 'tagList', width: 220, title: '标签', templet: function (data) {
-                            var tagNameList = [];
+                        field: 'tagList', width: 380, title: '标签', templet: function (data) {
+                            let tagListStr = "";
                             $.each(data.tagList, function () {
-                                tagNameList.push($(this)[0].name);
+                                let tagName = $(this)[0].name;
+                                let color = $(this)[0].color;
+                                let str = '<span class="layui-badge" style="background-color: ' + color +
+                                    ';color: #666666;margin-right: 3px">' + tagName + '</span>';
+                                tagListStr += str;
                             })
-                            if (tagNameList.length > 0) {
-                                return tagNameList.toString();
-                            } else {
-                                return '无';
-                            }
+                            return tagListStr;
                         }
                     },
-                    {field: 'views', width: 80, title: '浏览量', sort: true},
-                    {field: 'likes', width: 80, title: '点赞数', sort: true},
-                    {field: 'comments', width: 80, title: '评论数', sort: true,},
                     {
                         field: 'published', width: 80, title: '状态', sort: true, templet: function (data) {
-                            return data.published ? '发布' : '草稿';
+                            let str = (data.published ? '发布' : '草稿');
+                            let color = (data.published ? 'green' : 'orange');
+                            let bgColor = 'layui-bg-' + color;
+                            return '<span class="layui-badge ' + bgColor + '">' + str + '</span>';
                         }
                     },
-                    {field: 'createTime', width: 150, title: '创建时间', sort: true},
-                    {field: 'updateTime', width: 150, title: '更新时间', sort: true},
+                    {
+                        field: 'views', width: 100, title: '浏览量', sort: true, templet: function (data) {
+                            let views = data.views;
+                            let color = views >= 500 ? 'red' : (views >= 100 ? 'orange' : 'green');
+                            let bgColor = 'layui-bg-' + color;
+                            return '<span class="layui-badge ' + bgColor + '">' + views + '</span>';
+                        }
+                    },
+                    {
+                        field: 'likes', width: 100, title: '点赞数', sort: true, templet: function (data) {
+                            let likes = data.likes;
+                            let color = likes >= 100 ? 'red' : (likes >= 50 ? 'orange' : 'green');
+                            let bgColor = 'layui-bg-' + color;
+                            return '<span class="layui-badge ' + bgColor + '">' + likes + '</span>';
+                        }
+                    },
+                    {
+                        field: 'comments', width: 100, title: '评论数', sort: true, templet: function (data) {
+                            let comments = data.comments;
+                            let color = comments >= 30 ? 'red' : (comments >= 10 ? 'orange' : 'green');
+                            let bgColor = 'layui-bg-' + color;
+                            return '<span class="layui-badge ' + bgColor + '">' + comments + '</span>';
+                        }
+                    },
+                    {field: 'createTime', width: 200, title: '创建时间', sort: true},
+                    {field: 'updateTime', width: 200, title: '更新时间', sort: true},
                     {title: '操作', minWidth: 120, toolbar: '#currentTableBar', fixed: "right", align: "center"}
                 ]
             ],
@@ -120,14 +220,26 @@
 
         // 监听搜索操作
         form.on('submit(data-search-btn)', function (data) {
-            var keyword = data.field.keyword;
+            let title = data.field.title;
+            let type = data.field.type;
+            let categoryId = data.field.categoryId;
+            let published = data.field.published;
+            let dateRange = data.field.dateRange;
+            let dates = dateRange.split(' ~ ')
+            let startDate = dates[0];
+            let endDate = dates[1];
             //执行搜索重载
             table.reload('currentTableId', {
                 page: {
                     curr: 1
                 }
                 , where: {
-                    keyword: keyword
+                    title: title,
+                    type: type,
+                    categoryId: categoryId,
+                    published: published,
+                    startDate: startDate,
+                    endDate: endDate,
                 }
             }, 'data');
 

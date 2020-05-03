@@ -26,6 +26,8 @@ public class Tag {
 
     private Date updateTime;
 
+    private String color;
+
     @TableField(exist = false)
     private Integer articleCount;
 }

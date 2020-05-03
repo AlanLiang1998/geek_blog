@@ -6,9 +6,10 @@
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link rel="stylesheet" href="../../../static/admin/layuimini/lib/layui-v2.5.5/css/layui.css" media="all"
+    <link rel="stylesheet" href="/static/admin/layuimini/lib/layui-v2.5.5/css/layui.css" media="all"
           th:href="@{/static/admin/layuimini/lib/layui-v2.5.5/css/layui.css}">
-    <link rel="stylesheet" href="../../../static/admin/layuimini/css/public.css" media="all" th:href="@{/static/admin/layuimini/css/public.css}">
+    <link rel="stylesheet" href="/static/admin/layuimini/css/public.css" media="all"
+          th:href="@{/static/admin/layuimini/css/public.css}">
 </head>
 <body>
 <div class="layuimini-container">
@@ -17,12 +18,30 @@
         <fieldset class="table-search-fieldset">
             <legend>搜索信息</legend>
             <div style="margin: 10px 10px 10px 10px">
-                <form class="layui-form layui-form-pane" action="">
+                <form class="layui-form layui-form-pane">
                     <div class="layui-form-item">
                         <div class="layui-inline">
                             <label class="layui-form-label">分类名称</label>
                             <div class="layui-input-inline">
-                                <input type="text" name="keyword" autocomplete="off" class="layui-input">
+                                <input type="text" name="name" autocomplete="off" class="layui-input"
+                                       placeholder="不输入则忽略名称筛选">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">前台显示</label>
+                            <div class="layui-input-inline">
+                                <select name="display">
+                                    <option value="" selected>所有</option>
+                                    <option value="true">是</option>
+                                    <option value="false">否</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">日期范围</label>
+                            <div class="layui-input-inline">
+                                <input type="text" class="layui-input" id="date-range" placeholder="不输入则忽略日期范围筛选"
+                                       name="dateRange">
                             </div>
                         </div>
                         <div class="layui-inline">
@@ -52,18 +71,26 @@
 
     </div>
 </div>
-<script src="../../../static/admin/layuimini/lib/layui-v2.5.5/layui.js" charset="utf-8"
+<script src="/static/admin/layuimini/lib/layui-v2.5.5/layui.js" charset="utf-8"
         th:src="@{/static/admin/layuimini/lib/layui-v2.5.5/layui.js}"></script>
-<script src="../../../static/admin/layuimini/js/lay-config.js?v=1.0.4" charset="utf-8"
+<script src="/static/admin/layuimini/js/lay-config.js?v=1.0.4" charset="utf-8"
         th:src="@{/static/admin/layuimini/js/lay-config.js(v=1.0.4)}"></script>
-<script src="../../../static/admin/layuimini/js/lay-module/layuimini/miniTab.js"
+<script src="/static/admin/layuimini/js/lay-module/layuimini/miniTab.js"
         th:src="@{/static/admin/layuimini/js/lay-module/layuimini/miniTab.js}"></script>
 <script>
-    layui.use(['layer', 'form', 'table', 'miniTab'], function () {
+    layui.use(['layer', 'form', 'table', 'miniTab', 'laydate'], function () {
         var $ = layui.jquery,
             form = layui.form,
             table = layui.table,
-            miniTab = layui.miniTab;
+            miniTab = layui.miniTab,
+            laydate = layui.laydate;
+        //日期范围
+        laydate.render({
+            elem: '#date-range',
+            range: '~',
+            theme: 'molv'
+        });
+
         table.render({
             elem: '#currentTableId',
             url: '/admin/category/list',
@@ -76,14 +103,21 @@
             cols: [
                 [
                     {type: "checkbox", width: 50, fixed: "left"},
-                    {field: 'id', width: 50, title: 'ID', sort: true},
-                    {field: 'name', width: 100, title: '名称'},
+                    {field: 'id', width: 80, title: 'ID', sort: true},
+                    {field: 'name', width: 150, title: '名称'},
                     {
-                        field: 'display', width: 150, title: '是否前台显示', templet: function (data) {
+                        field: 'display', width: 120, title: '是否前台显示', templet: function (data) {
                             return data.display == true ? '是' : '否';
                         }
                     },
                     {field: 'introduction', width: 250, title: '简介'},
+                    {
+                        field: 'color', width: 100, title: '颜色', templet: function (data) {
+                            let color = data.color;
+                            return '<span class="layui-badge" style="background-color: ' + color +
+                                ';color: #666666">' + color + '</span>';
+                        }
+                    },
                     {field: 'createTime', width: 200, title: '创建时间', sort: true},
                     {field: 'updateTime', width: 200, title: '更新时间', sort: true},
                     {title: '操作', minWidth: 120, toolbar: '#currentTableBar', fixed: "right", align: "center"}
@@ -96,17 +130,24 @@
 
         // 监听搜索操作
         form.on('submit(data-search-btn)', function (data) {
-            var keyword = data.field.keyword;
+            let name = data.field.name;
+            let display = data.field.display;
+            let dateRange = data.field.dateRange;
+            let dates = dateRange.split(' ~ ')
+            let startDate = dates[0];
+            let endDate = dates[1];
             //执行搜索重载
             table.reload('currentTableId', {
                 page: {
                     curr: 1
                 }
                 , where: {
-                    keyword: keyword
+                    name: name,
+                    display: display,
+                    startDate: startDate,
+                    endDate: endDate
                 }
             }, 'data');
-
             return false;
         });
 
@@ -146,7 +187,7 @@
                     shade: 0.2,
                     maxmin: true,
                     shadeClose: true,
-                    area: ['40%', '60%'],
+                    area: ['50%', '80%'],
                     content: '/admin/api/category/category-add',
                 });
                 $(window).on("resize", function () {
@@ -164,7 +205,7 @@
                     shade: 0.2,
                     maxmin: true,
                     shadeClose: true,
-                    area: ['40%', '60%'],
+                    area: ['50%', '80%'],
                     content: '/admin/category/' + data.id,
                 });
                 $(window).on("resize", function () {

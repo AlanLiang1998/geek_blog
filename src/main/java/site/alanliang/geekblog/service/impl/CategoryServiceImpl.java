@@ -6,9 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 import site.alanliang.geekblog.entity.Category;
 import site.alanliang.geekblog.exception.NameNotUniqueException;
 import site.alanliang.geekblog.dao.CategoryMapper;
+import site.alanliang.geekblog.query.CategoryQuery;
 import site.alanliang.geekblog.service.CategoryService;
 
 import java.util.List;
@@ -27,9 +29,19 @@ public class CategoryServiceImpl implements CategoryService {
     private CategoryMapper categoryMapper;
 
     @Override
-    public Page<Category> listByPage(Integer current, Integer size, QueryWrapper<Category> wrapper) {
-        Page<Category> categoryPage = new Page<>(current, size);
-        return categoryMapper.selectPage(categoryPage, wrapper);
+    public Page<Category> listByPage(Integer current, Integer size, CategoryQuery categoryQuery) {
+        Page<Category> page = new Page<>(current, size);
+        QueryWrapper<Category> wrapper = new QueryWrapper<>();
+        if (!StringUtils.isEmpty(categoryQuery.getName())) {
+            wrapper.like("name", categoryQuery.getName());
+        }
+        if (categoryQuery.getDisplay() != null) {
+            wrapper.eq("display", categoryQuery.getDisplay());
+        }
+        if (categoryQuery.getStartDate() != null && categoryQuery.getEndDate() != null) {
+            wrapper.between("create_time", categoryQuery.getStartDate(), categoryQuery.getEndDate());
+        }
+        return categoryMapper.selectPage(page, wrapper);
     }
 
     @Override
@@ -47,6 +59,14 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public long countAll() {
         return categoryMapper.selectCount(null);
+    }
+
+    @Override
+    public List<String> listColor() {
+        QueryWrapper<Category> wrapper = new QueryWrapper<>();
+        wrapper.select("color");
+        List<Category> categories = categoryMapper.selectList(wrapper);
+        return categories.stream().map(Category::getColor).collect(Collectors.toList());
     }
 
     @Override
@@ -84,6 +104,8 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public List<Category> listAll() {
-        return categoryMapper.selectList(null);
+        QueryWrapper<Category> wrapper = new QueryWrapper<>();
+        wrapper.select("id", "name");
+        return categoryMapper.selectList(wrapper);
     }
 }

@@ -6,8 +6,8 @@
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link rel="stylesheet" href="../../../static/admin/layuimini/lib/layui-v2.5.5/css/layui.css" media="all">
-    <link rel="stylesheet" href="../../../static/admin/layuimini/css/public.css" media="all">
+    <link rel="stylesheet" href="/static/admin/layuimini/lib/layui-v2.5.5/css/layui.css" media="all">
+    <link rel="stylesheet" href="/static/admin/layuimini/css/public.css" media="all">
     <style>
         body {
             background-color: #ffffff;
@@ -23,7 +23,14 @@
                    class="layui-input">
         </div>
     </div>
-
+    <div class="layui-form-item">
+        <label class="layui-form-label required">颜色</label>
+        <div class="layui-input-block">
+            <div>
+                <div id="color-select" lay-verify="colorVer"></div>
+            </div>
+        </div>
+    </div>
     <div class="layui-form-item">
         <div class="layui-input-block">
             <button class="layui-btn" lay-submit lay-filter="saveBtn">确认保存</button>
@@ -31,13 +38,80 @@
         </div>
     </div>
 </form>
-<script src="../../../static/admin/layuimini/lib/layui-v2.5.5/layui.js" charset="utf-8"></script>
+<script src="/static/admin/layuimini/lib/layui-v2.5.5/layui.js" charset="utf-8"></script>
+<script src="/static/admin/xm-select/xm-select.js"></script>
 <script>
     layui.use(['form'], function () {
         var form = layui.form,
             layer = layui.layer,
             $ = layui.$;
-
+        //渲染多选下拉框
+        var colorSelect = xmSelect.render({
+            el: '#color-select',
+            language: 'zn',
+            //开启搜索
+            filterable: true,
+            radio: true,
+            clickClose: true,
+            model: {
+                label: {
+                    block: {
+                        template: function (item, sels) {
+                            $('.label-content').css('backgroundColor', item.value);
+                            return '<span>' + item.name + '</span>';
+                        },
+                    },
+                }
+            },
+            template({name, value}) {
+                return name + '<span style="position: absolute; right: 10px; background-color: ' + value + '">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>'
+            },
+            data: [
+                {name: '#D5F5E3', value: '#D5F5E3'},
+                {name: '#E8F8F5', value: '#E8F8F5'},
+                {name: '#82E0AA', value: '#82E0AA'},
+            ],
+            create: function (val, arr) {
+                //返回一个创建成功的对象, val是搜索的数据, arr是搜索后的当前页面数据
+                return {
+                    name: '创建-' + val,
+                    value: val
+                }
+            },
+        });
+        //获取所有颜色
+        $.ajax({
+            url: '/common/tags/colors',
+            method: 'GET',
+            success: function (result) {
+                let data = result.data.map(item => {
+                    return {
+                        name: item,
+                        value: item
+                    }
+                });
+                colorSelect.update({
+                    data: data,
+                    autoRow: true,
+                })
+            }
+        });
+        //表单验证
+        form.verify({
+            colorVer: function () {
+                if (colorSelect.getValue('value').length <= 0) {
+                    return '请选择颜色';
+                }
+                let value = colorSelect.getValue('value')[0];
+                if (value[0] !== '#') {
+                    return '颜色由#开头';
+                }
+                let pattern = /^#([0-9a-fA-F]{6})$/;
+                if (!pattern.test(value)) {
+                    return '颜色由#开头的6位16进制字符组成';
+                }
+            }
+        });
         //监听提交
         form.on('submit(saveBtn)', function (data) {
             $.ajax({

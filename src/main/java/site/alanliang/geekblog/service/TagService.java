@@ -1,8 +1,8 @@
 package site.alanliang.geekblog.service;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import site.alanliang.geekblog.entity.Tag;
+import site.alanliang.geekblog.query.TagQuery;
 
 import java.util.List;
 
@@ -31,10 +31,10 @@ public interface TagService {
      *
      * @param current 当前页
      * @param size    页面大小
-     * @param wrapper 条件
+     * @param tagQuery 条件
      * @return 标签列表
      */
-    Page<Tag> listByPage(Integer current, Integer size, QueryWrapper<Tag> wrapper);
+    Page<Tag> listByPage(Integer current, Integer size, TagQuery tagQuery);
 
     /**
      * 新增或者更新标签
@@ -78,4 +78,11 @@ public interface TagService {
      * @return 标签数量
      */
     long countAll();
+
+    /**
+     * 查询标签的所有颜色
+     *
+     * @return 颜色列表
+     */
+    List<String> listColor();
 }

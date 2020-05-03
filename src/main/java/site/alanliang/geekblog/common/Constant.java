@@ -25,5 +25,10 @@ public interface Constant {
     /**
      * 用于IP定位转换
      */
-    static final String REGION = "内网IP|内网IP";
+    String REGION = "内网IP|内网IP";
+
+    /**
+     * 表别名前缀
+     */
+    String TABLE_ALIAS_ARTICLE = "ta.";
 }

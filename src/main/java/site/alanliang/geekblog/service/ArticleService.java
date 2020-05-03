@@ -3,8 +3,9 @@ package site.alanliang.geekblog.service;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import site.alanliang.geekblog.entity.Article;
-import site.alanliang.geekblog.vo.ArticleVO;
 import site.alanliang.geekblog.query.ArticleQuery;
+import site.alanliang.geekblog.vo.ArticleVO;
+import site.alanliang.geekblog.query.ArchivesQuery;
 import site.alanliang.geekblog.vo.ArticleDateVO;
 
 import java.util.List;
@@ -26,10 +27,10 @@ public interface ArticleService {
      *
      * @param current 当前页码
      * @param size    页面大小
-     * @param wrapper 条件
+     * @param articleQuery 条件
      * @return 文章列表
      */
-    Page<Article> listTableByPage(Integer current, Integer size, QueryWrapper<Article> wrapper);
+    Page<Article> listTableByPage(Integer current, Integer size, ArticleQuery articleQuery);
 
     /**
      * 查询记录总数
@@ -151,10 +152,10 @@ public interface ArticleService {
      *
      * @param current      当前页
      * @param size         页面大小
-     * @param articleQuery 条件
+     * @param archivesQuery 条件
      * @return 文章预览列表
      */
-    Page<Article> listPreviewPageByDate(Integer current, Integer size, ArticleQuery articleQuery);
+    Page<Article> listPreviewPageByDate(Integer current, Integer size, ArchivesQuery archivesQuery);
 
     /**
      * 根据关键词获取文章

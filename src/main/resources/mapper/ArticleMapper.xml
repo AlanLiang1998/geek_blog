@@ -18,6 +18,7 @@
         <association property="category" javaType="site.alanliang.geekblog.entity.Category">
             <id property="id" column="cid"/>
             <id property="name" column="cname"/>
+            <id property="color" column="color"/>
         </association>
         <collection property="tagList" column="id" select="site.alanliang.geekblog.dao.TagMapper.selectByArticleId"/>
     </resultMap>
@@ -77,7 +78,7 @@
             parameterType="com.baomidou.mybatisplus.extension.plugins.pagination.Page">
         select ta.id, ta.title, ta.type, ta.comments, ta.views, ta.likes, ta.published, ta.commentable, ta.appreciable,
         ta.top, ta.recommend,
-        ta.create_time, ta.update_time, tc.id as cid, tc.name as cname
+        ta.create_time, ta.update_time, tc.id as cid, tc.name as cname, tc.color
         from t_article ta
         left join t_category tc
         on ta.category_id = tc.id

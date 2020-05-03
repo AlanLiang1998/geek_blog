@@ -11,7 +11,7 @@ import site.alanliang.geekblog.anntation.AccessLog;
 import site.alanliang.geekblog.common.Constant;
 import site.alanliang.geekblog.entity.Article;
 import site.alanliang.geekblog.vo.ArchivesVO;
-import site.alanliang.geekblog.query.ArticleQuery;
+import site.alanliang.geekblog.query.ArchivesQuery;
 import site.alanliang.geekblog.service.ArticleService;
 import site.alanliang.geekblog.utils.DateUtil;
 import site.alanliang.geekblog.vo.ArticleDateVO;
@@ -53,9 +53,9 @@ public class ArchivesController {
     @GetMapping("/archives-articles")
     public ResponseEntity<Object> archivesArticles(@RequestParam(value = "current", defaultValue = "1") Integer current,
                                                    @RequestParam(value = "size", defaultValue = Constant.PAGE_SIZE) Integer size,
-                                                   ArticleQuery articleQuery) {
+                                                   ArchivesQuery archivesQuery) {
 
-        Page<Article> pageInfo = articleService.listPreviewPageByDate(current, size, articleQuery);
+        Page<Article> pageInfo = articleService.listPreviewPageByDate(current, size, archivesQuery);
         return new ResponseEntity<>(pageInfo, HttpStatus.OK);
     }
 

@@ -1,8 +1,8 @@
 package site.alanliang.geekblog.service;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import site.alanliang.geekblog.entity.Category;
+import site.alanliang.geekblog.query.CategoryQuery;
 
 import java.util.List;
 
@@ -22,10 +22,10 @@ public interface CategoryService {
      *
      * @param current 当前页码
      * @param size    页面大小
-     * @param wrapper 条件
+     * @param categoryQuery 条件
      * @return 分类列表
      */
-    Page<Category> listByPage(Integer current, Integer size, QueryWrapper<Category> wrapper);
+    Page<Category> listByPage(Integer current, Integer size, CategoryQuery categoryQuery);
 
     /**
      * 新增或者更新分类
@@ -69,4 +69,11 @@ public interface CategoryService {
      * @return
      */
     long countAll();
+
+    /**
+     * 查询分类的所有颜色
+     *
+     * @return 颜色列表
+     */
+    List<String> listColor();
 }

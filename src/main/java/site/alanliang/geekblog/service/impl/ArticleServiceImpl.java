@@ -5,13 +5,15 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 import site.alanliang.geekblog.common.Constant;
 import site.alanliang.geekblog.entity.Article;
 import site.alanliang.geekblog.entity.ArticleTag;
+import site.alanliang.geekblog.query.ArticleQuery;
 import site.alanliang.geekblog.vo.ArticleVO;
 import site.alanliang.geekblog.dao.ArticleMapper;
 import site.alanliang.geekblog.dao.ArticleTagMapper;
-import site.alanliang.geekblog.query.ArticleQuery;
+import site.alanliang.geekblog.query.ArchivesQuery;
 import site.alanliang.geekblog.service.ArticleService;
 import site.alanliang.geekblog.vo.ArticleDateVO;
 
@@ -44,7 +46,7 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public Page<Article> listPreviewPageByDate(Integer current, Integer size, ArticleQuery articleQuery) {
+    public Page<Article> listPreviewPageByDate(Integer current, Integer size, ArchivesQuery archivesQuery) {
         Page<Article> articlePage = new Page<>(current, size);
         return articleMapper.listPreviewPageByDate(articlePage);
     }
@@ -148,8 +150,24 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public Page<Article> listTableByPage(Integer current, Integer size, QueryWrapper<Article> wrapper) {
+    public Page<Article> listTableByPage(Integer current, Integer size, ArticleQuery articleQuery) {
         Page<Article> page = new Page<>(current, size);
+        QueryWrapper<Article> wrapper = new QueryWrapper<>();
+        if (!StringUtils.isEmpty(articleQuery.getTitle())) {
+            wrapper.like("title", articleQuery.getTitle());
+        }
+        if (articleQuery.getType() != null) {
+            wrapper.eq("type", articleQuery.getType());
+        }
+        if (articleQuery.getCategoryId() != null) {
+            wrapper.eq("category_id", articleQuery.getCategoryId());
+        }
+        if (articleQuery.getPublished() != null) {
+            wrapper.eq("published", articleQuery.getPublished());
+        }
+        if (articleQuery.getStartDate() != null && articleQuery.getEndDate() != null) {
+            wrapper.between(Constant.TABLE_ALIAS_ARTICLE + "create_time", articleQuery.getStartDate(), articleQuery.getEndDate());
+        }
         return articleMapper.listTableByPage(page, wrapper);
     }
 

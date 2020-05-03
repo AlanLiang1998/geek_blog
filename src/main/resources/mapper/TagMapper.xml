@@ -8,7 +8,7 @@
     </resultMap>
 
     <select id="selectByArticleId" resultType="site.alanliang.geekblog.entity.Tag">
-        select tt.id, tt.name
+        select tt.id, tt.name, tt.color
         from t_tag tt
         left join t_article_tag tat
         on tt.id = tat.tag_id
@@ -16,7 +16,7 @@
     </select>
 
     <select id="listByArticleCount" resultType="site.alanliang.geekblog.entity.Tag">
-        select tt.id, tt.name, count(ta.id) articleCount
+        select tt.id, tt.name, tt.color, count(ta.id) articleCount
         from t_tag tt
         left join t_article_tag tat
         on tt.id = tat.tag_id

@@ -57,7 +57,7 @@
                         <a href="javascript:;" v-for="(cate,index) in categories" :key="cate.id"
                            @click="getArticlesByCategoryId(cate.id, 1)" v-cloak>
                     <span class="chip center-align waves-effect waves-light
-                             chip-default" :style="{backgroundColor : getRandomColor()}"
+                             chip-default" :style="{backgroundColor : cate.color}"
                           :class="{'chip-active' : cate.id == categoryId}">{{cate.name}}
                         <span class="tag-length">{{cate.articleCount}}</span>
                     </span>
@@ -166,10 +166,6 @@
                         this.initRandomChart(this.categories);
                     })
                 })
-            },
-            getRandomColor: function () {
-                let num = Math.floor(Math.random() * (this.colors.length));
-                return this.colors[num];
             },
             initRandomChart: function (data) {
                 let radarChart = echarts.init(document.getElementById('category-radar'));

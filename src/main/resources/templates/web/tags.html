@@ -51,7 +51,7 @@
                         <a href="javascript:;" v-for="(tag,index) in tags" :key="tag.id"
                            @click="getArticlesByTagId(tag.id, 1)">
                     <span class="chip center-align waves-effect waves-light
-                             chip-default" :style="{backgroundColor : getRandomColor()}"
+                             chip-default" :style="{backgroundColor : tag.color}"
                           :class="{'chip-active' : tag.id == tagId}">{{tag.name}}
                         <span class="tag-length">{{tag.articleCount}}</span>
                     </span>
@@ -173,10 +173,6 @@
                     this.tags = result.data;
                     this.getWordArray();
                 })
-            },
-            getRandomColor: function () {
-                let num = Math.floor(Math.random() * (this.colors.length));
-                return this.colors[num];
             },
             getArticlesByTagId: function (tagId, current) {
                 axios({

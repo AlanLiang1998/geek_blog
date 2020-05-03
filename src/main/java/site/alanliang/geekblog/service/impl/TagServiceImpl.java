@@ -6,9 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 import site.alanliang.geekblog.entity.Tag;
 import site.alanliang.geekblog.exception.NameNotUniqueException;
 import site.alanliang.geekblog.dao.TagMapper;
+import site.alanliang.geekblog.query.TagQuery;
 import site.alanliang.geekblog.service.TagService;
 
 import java.util.List;
@@ -27,8 +29,15 @@ public class TagServiceImpl implements TagService {
     private TagMapper tagMapper;
 
     @Override
-    public Page<Tag> listByPage(Integer current, Integer size, QueryWrapper<Tag> wrapper) {
+    public Page<Tag> listByPage(Integer current, Integer size, TagQuery tagQuery) {
         Page<Tag> tagPage = new Page<>(current, size);
+        QueryWrapper<Tag> wrapper = new QueryWrapper<>();
+        if (!StringUtils.isEmpty(tagQuery.getName())) {
+            wrapper.like("name", tagQuery.getName());
+        }
+        if (tagQuery.getStartDate() != null && tagQuery.getEndDate() != null) {
+            wrapper.between("create_time", tagQuery.getStartDate(), tagQuery.getEndDate());
+        }
         return tagMapper.selectPage(tagPage, wrapper);
     }
 
@@ -80,6 +89,14 @@ public class TagServiceImpl implements TagService {
     @Override
     public long countAll() {
         return tagMapper.selectCount(null);
+    }
+
+    @Override
+    public List<String> listColor() {
+        QueryWrapper<Tag> wrapper = new QueryWrapper<>();
+        wrapper.select("color");
+        List<Tag> tags = tagMapper.selectList(wrapper);
+        return tags.stream().map(Tag::getColor).collect(Collectors.toList());
     }
 
     @Override

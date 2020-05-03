@@ -1,19 +1,21 @@
 package site.alanliang.geekblog.controller.admin;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.StringUtils;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import site.alanliang.geekblog.common.JsonResult;
 import site.alanliang.geekblog.common.TableResult;
 import site.alanliang.geekblog.entity.Article;
-import site.alanliang.geekblog.vo.ArticleVO;
+import site.alanliang.geekblog.query.ArticleQuery;
 import site.alanliang.geekblog.service.ArticleService;
+import site.alanliang.geekblog.vo.ArticleVO;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -30,16 +32,23 @@ public class ArticleController {
     @Autowired
     private ArticleService articleService;
 
+    /**
+     * 将日期格式的String类型转为Date类型
+     *
+     * @param binder 数据绑定
+     */
+    @InitBinder
+    public void dateBinder(WebDataBinder binder) {
+        String pattern = "yyyy-MM-dd";
+        CustomDateEditor editor = new CustomDateEditor(new SimpleDateFormat(pattern), true);
+        binder.registerCustomEditor(Date.class, editor);
+    }
+
     @GetMapping
     public TableResult listTableByPage(@RequestParam(value = "page", defaultValue = "1") Integer page,
                                        @RequestParam(value = "limit", defaultValue = "10") Integer limit,
-                                       @RequestParam(value = "keyword", required = false) String keyword) {
-        QueryWrapper<Article> wrapper = null;
-        if (!StringUtils.isEmpty(keyword)) {
-            wrapper = new QueryWrapper<>();
-            wrapper.like("title", keyword);
-        }
-        Page<Article> pageInfo = articleService.listTableByPage(page, limit, wrapper);
+                                       ArticleQuery articleQuery) {
+        Page<Article> pageInfo = articleService.listTableByPage(page, limit, articleQuery);
         return TableResult.tableOk(pageInfo.getRecords(), pageInfo.getTotal());
     }
 

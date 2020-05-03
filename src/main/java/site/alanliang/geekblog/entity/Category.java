@@ -27,6 +27,8 @@ public class Category {
     @NotBlank(message = "分类简介不能为空")
     private String introduction;
 
+    private String color;
+
     private Date createTime;
 
     private Date updateTime;
