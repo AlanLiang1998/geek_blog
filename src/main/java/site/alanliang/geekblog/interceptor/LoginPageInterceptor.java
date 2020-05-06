@@ -2,13 +2,10 @@ package site.alanliang.geekblog.interceptor;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
-import site.alanliang.geekblog.anntation.Log;
-import site.alanliang.geekblog.utils.RequestHolder;
 import site.alanliang.geekblog.utils.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  * @Descriptin TODO

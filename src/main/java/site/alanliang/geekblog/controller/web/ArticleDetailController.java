@@ -25,6 +25,7 @@ public class ArticleDetailController {
     @Autowired
     private ArticleService articleService;
 
+    @AccessLog("阅读文章")
     @GetMapping("/article/{id}")
     public String articleDetail(@PathVariable("id") Long id, Model model) {
         model.addAttribute("article", articleService.getDetailById(id));

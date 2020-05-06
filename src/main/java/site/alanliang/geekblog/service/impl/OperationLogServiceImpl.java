@@ -8,10 +8,10 @@ import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import site.alanliang.geekblog.anntation.AccessLog;
-import site.alanliang.geekblog.entity.SysAccessLog;
-import site.alanliang.geekblog.dao.AccessLogMapper;
-import site.alanliang.geekblog.service.AccessLogService;
+import site.alanliang.geekblog.anntation.OperationLog;
+import site.alanliang.geekblog.dao.OperationLogMapper;
+import site.alanliang.geekblog.entity.SysOperationLog;
+import site.alanliang.geekblog.service.OperationLogService;
 import site.alanliang.geekblog.utils.StringUtils;
 
 import java.lang.reflect.Method;
@@ -25,18 +25,18 @@ import java.util.List;
  * Version 1.0
  **/
 @Service
-public class AccessLogServiceImpl implements AccessLogService {
+public class OperationLogServiceImpl implements OperationLogService {
 
     @Autowired
-    private AccessLogMapper accessLogMapper;
+    private OperationLogMapper operationLogMapper;
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void save(String username, String browser, String ip, ProceedingJoinPoint joinPoint, SysAccessLog log) {
+    public void save(String username, String browser, String ip, ProceedingJoinPoint joinPoint, SysOperationLog log) {
 
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         Method method = signature.getMethod();
-        AccessLog aopLog = method.getAnnotation(AccessLog.class);
+        OperationLog aopLog = method.getAnnotation(OperationLog.class);
 
         // 方法路径
         String methodName = joinPoint.getTarget().getClass().getName() + "." + signature.getName() + "()";
@@ -73,27 +73,27 @@ public class AccessLogServiceImpl implements AccessLogService {
         log.setParams(params.toString() + " }");
         log.setBrowser(browser);
         log.setCreateTime(new Date());
-        accessLogMapper.insert(log);
+        operationLogMapper.insert(log);
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void removeByIds(List<Long> idList) {
-        accessLogMapper.deleteBatchIds(idList);
+        operationLogMapper.deleteBatchIds(idList);
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void remove(Long id) {
-        accessLogMapper.deleteById(id);
+        operationLogMapper.deleteById(id);
     }
 
     @Override
-    public Page<SysAccessLog> listByPage(Integer current, Integer size) {
-        Page<SysAccessLog> page = new Page<>(current, size);
-        QueryWrapper<SysAccessLog> wrapper = new QueryWrapper<>();
+    public Page<SysOperationLog> listByPage(Integer current, Integer size) {
+        Page<SysOperationLog> page = new Page<>(current, size);
+        QueryWrapper<SysOperationLog> wrapper = new QueryWrapper<>();
         wrapper.select("id", "request_ip", "address", "description", "browser", "time", "create_time")
-        .orderByDesc("create_time");
-        return accessLogMapper.selectPage(page, wrapper);
+                .orderByDesc("create_time");
+        return operationLogMapper.selectPage(page, wrapper);
     }
 }

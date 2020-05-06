@@ -8,6 +8,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import site.alanliang.geekblog.anntation.OperationLog;
 import site.alanliang.geekblog.common.JsonResult;
 import site.alanliang.geekblog.common.TableResult;
 import site.alanliang.geekblog.entity.Category;
@@ -50,6 +51,7 @@ public class CategoryController {
         binder.registerCustomEditor(Date.class, editor);
     }
 
+    @OperationLog("查询分类")
     @GetMapping("/list")
     public TableResult listByPage(@RequestParam(value = "page", defaultValue = "1") Integer page,
                                   @RequestParam(value = "limit", defaultValue = "10") Integer limit,
@@ -58,6 +60,7 @@ public class CategoryController {
         return TableResult.tableOk(categoryPage.getRecords(), categoryPage.getTotal());
     }
 
+    @OperationLog("新增分类")
     @PostMapping
     public JsonResult save(@Validated @RequestBody Category category) {
         category.setCreateTime(new Date());
@@ -66,6 +69,7 @@ public class CategoryController {
         return JsonResult.ok();
     }
 
+    @OperationLog("更新分类")
     @PutMapping
     public JsonResult update(@Validated @RequestBody Category category) {
         category.setUpdateTime(new Date());
@@ -73,12 +77,14 @@ public class CategoryController {
         return JsonResult.ok();
     }
 
+    @OperationLog("删除分类")
     @DeleteMapping("/{id}")
     public JsonResult remove(@NotNull @PathVariable("id") Long id) {
         categoryService.removeById(id);
         return JsonResult.ok();
     }
 
+    @OperationLog("批量删除分类")
     @DeleteMapping
     public JsonResult remove(@NotEmpty @RequestBody List<Long> idList) {
         categoryService.removeByIds(idList);

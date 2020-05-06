@@ -6,6 +6,7 @@ import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import site.alanliang.geekblog.anntation.OperationLog;
 import site.alanliang.geekblog.common.JsonResult;
 import site.alanliang.geekblog.common.TableResult;
 import site.alanliang.geekblog.entity.Tag;
@@ -48,6 +49,7 @@ public class TagController {
         binder.registerCustomEditor(Date.class, editor);
     }
 
+    @OperationLog("查询标签")
     @GetMapping("/list")
     public TableResult listByPage(@RequestParam(value = "page", defaultValue = "1") Integer page,
                                   @RequestParam(value = "limit", defaultValue = "10") Integer limit,
@@ -56,6 +58,7 @@ public class TagController {
         return TableResult.tableOk(tagPage.getRecords(), tagPage.getTotal());
     }
 
+    @OperationLog("新增标签")
     @PostMapping
     public JsonResult save(@Validated @RequestBody Tag tag) {
         tag.setCreateTime(new Date());
@@ -64,6 +67,7 @@ public class TagController {
         return JsonResult.ok();
     }
 
+    @OperationLog("更新标签")
     @PutMapping
     public JsonResult update(@Validated @RequestBody Tag tag) {
         tag.setUpdateTime(new Date());
@@ -71,12 +75,14 @@ public class TagController {
         return JsonResult.ok();
     }
 
+    @OperationLog("删除标签")
     @DeleteMapping("/{id}")
     public JsonResult remove(@NotNull @PathVariable("id") Long id) {
         tagService.removeById(id);
         return JsonResult.ok();
     }
 
+    @OperationLog("批量删除标签")
     @DeleteMapping
     public JsonResult remove(@NotEmpty @RequestBody List<Long> idList) {
         tagService.removeByIds(idList);

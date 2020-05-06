@@ -6,6 +6,7 @@ import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import site.alanliang.geekblog.anntation.OperationLog;
 import site.alanliang.geekblog.common.Constant;
 import site.alanliang.geekblog.common.JsonResult;
 import site.alanliang.geekblog.common.TableResult;
@@ -46,6 +47,7 @@ public class ArticleController {
         binder.registerCustomEditor(Date.class, editor);
     }
 
+    @OperationLog("查询文章")
     @GetMapping
     public TableResult listTableByPage(@RequestParam(value = "page", defaultValue = "1") Integer page,
                                        @RequestParam(value = "limit", defaultValue = "10") Integer limit,
@@ -54,6 +56,7 @@ public class ArticleController {
         return TableResult.tableOk(pageInfo.getRecords(), pageInfo.getTotal());
     }
 
+    @OperationLog("新增文章")
     @PostMapping
     public JsonResult save(@Validated @RequestBody Article article) {
         article.setViews(0);
@@ -69,6 +72,7 @@ public class ArticleController {
         return JsonResult.ok();
     }
 
+    @OperationLog("更新文章")
     @PutMapping
     public JsonResult update(@Validated @RequestBody ArticleVO articleVo) {
         articleVo.setAppreciable(articleVo.getAppreciable() != null);
@@ -80,12 +84,14 @@ public class ArticleController {
         return JsonResult.ok();
     }
 
+    @OperationLog("删除文章")
     @DeleteMapping("/{id}")
     public JsonResult remove(@NotNull @PathVariable("id") Long id) {
         articleService.removeById(id);
         return JsonResult.ok();
     }
 
+    @OperationLog("批量删除文章")
     @DeleteMapping
     public JsonResult batchRemove(@NotEmpty @RequestBody List<Long> idList) {
         articleService.removeByIds(idList);

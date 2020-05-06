@@ -5,8 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import site.alanliang.geekblog.common.JsonResult;
 import site.alanliang.geekblog.common.TableResult;
-import site.alanliang.geekblog.entity.SysAccessLog;
-import site.alanliang.geekblog.service.AccessLogService;
+import site.alanliang.geekblog.entity.SysOperationLog;
+import site.alanliang.geekblog.service.OperationLogService;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -19,28 +19,28 @@ import java.util.List;
  * Version 1.0
  **/
 @RestController
-@RequestMapping("/admin/access-log")
-public class AccessLogController {
+@RequestMapping("/admin/operation-log")
+public class OperationLogController {
 
     @Autowired
-    private AccessLogService accessLogService;
+    private OperationLogService operationLogService;
 
     @GetMapping
     public TableResult listByPage(@RequestParam(value = "page", defaultValue = "1") Integer page,
                                   @RequestParam(value = "limit", defaultValue = "10") Integer limit) {
-        Page<SysAccessLog> pageInfo = accessLogService.listByPage(page, limit);
+        Page<SysOperationLog> pageInfo = operationLogService.listByPage(page, limit);
         return TableResult.tableOk(pageInfo.getRecords(), pageInfo.getTotal());
     }
 
     @DeleteMapping("/{id}")
     public JsonResult removeById(@NotNull @PathVariable("id") Long id) {
-        accessLogService.remove(id);
+        operationLogService.remove(id);
         return JsonResult.ok();
     }
 
     @DeleteMapping
     public JsonResult removeBatch(@NotEmpty @RequestBody List<Long> idList) {
-        accessLogService.removeByIds(idList);
+        operationLogService.removeByIds(idList);
         return JsonResult.ok();
     }
 }
