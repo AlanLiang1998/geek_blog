@@ -98,15 +98,15 @@
                 <div class="layui-inline">
                     <label class="layui-form-label">是否置顶</label>
                     <div class="layui-input-inline pane">
-                        <input type="checkbox" name="top" lay-skin="switch" lay-text="是|否"
-                               value="true" lay-filter="top-filter">
+                        <input type="checkbox" name="top" lay-skin="switch" lay-text="是|否" value="true"
+                               lay-filter="top">
                     </div>
                 </div>
                 <div class="layui-inline">
                     <label class="layui-form-label">是否推荐</label>
                     <div class="layui-input-inline pane">
-                        <input type="checkbox" name="recommend" lay-skin="switch" lay-text="是|否"
-                               value="true" lay-filter="recommend-filter">
+                        <input type="checkbox" name="recommend" lay-skin="switch" lay-text="是|否" value="true"
+                               lay-filter="recommend">
                     </div>
                 </div>
             </div>
@@ -269,7 +269,7 @@
             return saveResult;
         };
         //监听置顶
-        form.on('switch(top-filter)', function (data) {
+        form.on('switch(top)', function (data) {
             if (data.elem.checked) {
                 $.ajax({
                     url: '/admin/article/reachedMaxTop',
@@ -285,7 +285,7 @@
             }
         });
         //监听推荐
-        form.on('switch(recommend-filter)', function (data) {
+        form.on('switch(recommend)', function (data) {
             if (data.elem.checked) {
                 $.ajax({
                     url: '/admin/article/reachedMaxRecommend',

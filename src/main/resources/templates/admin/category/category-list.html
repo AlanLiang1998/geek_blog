@@ -104,7 +104,12 @@
                 [
                     {type: "checkbox", width: 50, fixed: "left"},
                     {field: 'id', width: 80, title: 'ID', sort: true},
-                    {field: 'name', width: 150, title: '名称', sort: true},
+                    {
+                        field: 'name', width: 150, title: '名称', sort: true, templet: function (data) {
+                            let href = '/api/categories?id=' + data.id;
+                            return '<a href=' + href + ' style="color: #01AAED;" target="_blank">' + data.name + '</a>';
+                        }
+                    },
                     {
                         field: 'display',
                         width: 150,
@@ -112,7 +117,10 @@
                         sort: true,
                         align: 'center',
                         templet: function (data) {
-                            return data.display == true ? '是' : '否';
+                            let text = data.display ? '是' : '否';
+                            let color = data.display ? 'green' : 'orange';
+                            let bgColor = 'layui-bg-' + color;
+                            return '<span class="layui-badge ' + bgColor + '">' + text + '</span>';
                         }
                     },
                     {field: 'introduction', width: 250, title: '简介'},

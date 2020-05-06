@@ -93,7 +93,12 @@
                 [
                     {type: "checkbox", width: 50, fixed: "left"},
                     {field: 'id', width: 80, title: 'ID', sort: true},
-                    {field: 'name', width: 150, title: '名称'},
+                    {
+                        field: 'name', width: 150, title: '名称', templet: function (data) {
+                            let href = '/api/tags?id=' + data.id;
+                            return '<a href=' + href + ' style="color: #01AAED;" target="_blank">' + data.name + '</a>';
+                        }
+                    },
                     {
                         field: 'color', width: 100, title: '颜色', align: 'center', templet: function (data) {
                             let color = data.color;

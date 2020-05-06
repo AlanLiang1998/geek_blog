@@ -22,6 +22,7 @@
                            on tt.id = tat.tag_id
                  left join t_article ta
                            on ta.id = tat.article_id
+        group by tt.id
     </select>
 
     <select id="listTableByPage" resultType="site.alanliang.geekblog.entity.Tag"
