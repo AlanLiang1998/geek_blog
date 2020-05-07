@@ -36,4 +36,17 @@ public interface Constant {
      * 默认颜色
      */
     String DEFAULT_COLOR = "#D5F5E3";
+
+    /**
+     * 请求耗时等级
+     */
+    Integer LOW_REQUEST_TIME_RANK = 1;
+
+    Integer MID_REQUEST_TIME_RANK = 2;
+
+    Integer HIGH_REQUEST_TIME_RANK = 3;
+
+    Integer LOW_REQUEST_TIME = 10;
+
+    Integer HIGH_REQUEST_TIME = 1000;
 }

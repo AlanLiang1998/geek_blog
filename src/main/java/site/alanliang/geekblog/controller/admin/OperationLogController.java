@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import site.alanliang.geekblog.common.JsonResult;
 import site.alanliang.geekblog.common.TableResult;
 import site.alanliang.geekblog.entity.SysOperationLog;
+import site.alanliang.geekblog.query.LogQuery;
 import site.alanliang.geekblog.service.OperationLogService;
 
 import javax.validation.constraints.NotEmpty;
@@ -27,8 +28,9 @@ public class OperationLogController {
 
     @GetMapping
     public TableResult listByPage(@RequestParam(value = "page", defaultValue = "1") Integer page,
-                                  @RequestParam(value = "limit", defaultValue = "10") Integer limit) {
-        Page<SysOperationLog> pageInfo = operationLogService.listByPage(page, limit);
+                                  @RequestParam(value = "limit", defaultValue = "10") Integer limit,
+                                  LogQuery logQuery) {
+        Page<SysOperationLog> pageInfo = operationLogService.listByPage(page, limit, logQuery);
         return TableResult.tableOk(pageInfo.getRecords(), pageInfo.getTotal());
     }
 

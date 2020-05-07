@@ -9,14 +9,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import site.alanliang.geekblog.anntation.AccessLog;
-import site.alanliang.geekblog.entity.SysAccessLog;
+import site.alanliang.geekblog.common.Constant;
 import site.alanliang.geekblog.dao.AccessLogMapper;
+import site.alanliang.geekblog.entity.SysAccessLog;
+import site.alanliang.geekblog.query.LogQuery;
 import site.alanliang.geekblog.service.AccessLogService;
 import site.alanliang.geekblog.utils.StringUtils;
 
 import java.lang.reflect.Method;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @Descriptin TODO
@@ -89,11 +92,37 @@ public class AccessLogServiceImpl implements AccessLogService {
     }
 
     @Override
-    public Page<SysAccessLog> listByPage(Integer current, Integer size) {
+    public Page<SysAccessLog> listByPage(Integer current, Integer size, LogQuery logQuery) {
         Page<SysAccessLog> page = new Page<>(current, size);
         QueryWrapper<SysAccessLog> wrapper = new QueryWrapper<>();
         wrapper.select("id", "request_ip", "address", "description", "browser", "time", "create_time")
-        .orderByDesc("create_time");
+                .orderByDesc("create_time");
+        if (!StringUtils.isEmpty(logQuery.getRequestIp())) {
+            wrapper.eq("request_ip", logQuery.getRequestIp());
+        }
+        if (!StringUtils.isEmpty(logQuery.getDescription())) {
+            wrapper.like("description", logQuery.getDescription());
+        }
+        if (!StringUtils.isEmpty(logQuery.getBrowser())) {
+            wrapper.like("browser", logQuery.getBrowser());
+        }
+        if (!StringUtils.isEmpty(logQuery.getAddress())) {
+            wrapper.like("address", logQuery.getAddress());
+        }
+        if (logQuery.getStartDate() != null && logQuery.getEndDate() != null) {
+            wrapper.between("create_time", logQuery.getStartDate(), logQuery.getEndDate());
+        }
+        if (logQuery.getTimeRank() != null) {
+            if (Objects.equals(logQuery.getTimeRank(), Constant.LOW_REQUEST_TIME_RANK)) {
+                wrapper.lt("time", Constant.LOW_REQUEST_TIME);
+            }
+            if (Objects.equals(logQuery.getTimeRank(), Constant.MID_REQUEST_TIME_RANK)) {
+                wrapper.between("time", Constant.LOW_REQUEST_TIME, Constant.HIGH_REQUEST_TIME);
+            }
+            if (Objects.equals(logQuery.getTimeRank(), Constant.HIGH_REQUEST_TIME_RANK)) {
+                wrapper.gt("time", Constant.HIGH_REQUEST_TIME);
+            }
+        }
         return accessLogMapper.selectPage(page, wrapper);
     }
 }

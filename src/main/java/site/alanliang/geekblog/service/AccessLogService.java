@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.springframework.scheduling.annotation.Async;
 import site.alanliang.geekblog.entity.SysAccessLog;
+import site.alanliang.geekblog.query.LogQuery;
 
 import java.util.List;
 
@@ -25,9 +26,10 @@ public interface AccessLogService {
      *
      * @param current 当前页码
      * @param size    页码大小
+     * @param logQuery
      * @return 日志列表
      */
-    Page<SysAccessLog> listByPage(Integer current, Integer size);
+    Page<SysAccessLog> listByPage(Integer current, Integer size, LogQuery logQuery);
 
     /**
      * 根据ID删除日志
