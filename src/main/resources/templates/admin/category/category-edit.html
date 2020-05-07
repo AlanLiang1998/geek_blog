@@ -97,10 +97,11 @@
                 {name: '#82E0AA', value: '#82E0AA'},
             ],
             create: function (val, arr) {
-                //返回一个创建成功的对象, val是搜索的数据, arr是搜索后的当前页面数据
-                return {
-                    name: '创建-' + val,
-                    value: val
+                if (arr.length === 0) {
+                    return {
+                        name: '创建' + val,
+                        value: val,
+                    }
                 }
             },
         });
@@ -141,6 +142,7 @@
         });
         //监听提交
         form.on('submit(saveBtn)', function (data) {
+            data.field.color = colorSelect.getValue('value')[0];
             $.ajax({
                 url: '/admin/category',
                 type: 'PUT',

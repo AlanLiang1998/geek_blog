@@ -782,3 +782,238 @@ com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Unknown column 'reque
 2020-05-07 09:58:59.043 DEBUG 22492 --- [http-nio-8889-exec-1] s.a.g.dao.OperationLogMapper.selectPage  : ==>  Preparing: SELECT id,request_ip,address,description,browser,time,create_time FROM sys_operation_log ORDER BY create_time DESC LIMIT ?,? 
 2020-05-07 09:58:59.044 DEBUG 22492 --- [http-nio-8889-exec-1] s.a.g.dao.OperationLogMapper.selectPage  : ==> Parameters: 0(Long), 15(Long)
 2020-05-07 09:58:59.045 DEBUG 22492 --- [http-nio-8889-exec-1] s.a.g.dao.OperationLogMapper.selectPage  : <==      Total: 4
+2020-05-07 10:00:44.255  INFO 10016 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Starting GeekBlogApplication on DESKTOP-QNDK7AF with PID 10016 (D:\idea\geekblog\target\classes started by AlanLiang in D:\idea\geekblog)
+2020-05-07 10:00:44.258 DEBUG 10016 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Running with Spring Boot v2.2.6.RELEASE, Spring v5.2.5.RELEASE
+2020-05-07 10:00:44.259  INFO 10016 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : The following profiles are active: dev
+2020-05-07 10:00:44.309  INFO 10016 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2020-05-07 10:00:44.309  INFO 10016 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2020-05-07 10:00:45.462  INFO 10016 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8889 (http)
+2020-05-07 10:00:45.468  INFO 10016 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-05-07 10:00:45.469  INFO 10016 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.33]
+2020-05-07 10:00:45.541  INFO 10016 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-05-07 10:00:45.541  INFO 10016 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1232 ms
+2020-05-07 10:00:45.576  INFO 10016 --- [restartedMain] o.s.boot.web.servlet.RegistrationBean    : Servlet statViewServlet was not registered (possibly already registered?)
+2020-05-07 10:00:45.578  INFO 10016 --- [restartedMain] o.s.boot.web.servlet.RegistrationBean    : Filter webStatFilter was not registered (possibly already registered?)
+2020-05-07 10:00:45.726  INFO 10016 --- [restartedMain] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2020-05-07 10:00:45.982  INFO 10016 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2020-05-07 10:00:46.826  INFO 10016 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-05-07 10:00:47.110  INFO 10016 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2020-05-07 10:00:47.153  INFO 10016 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8889 (http) with context path ''
+2020-05-07 10:00:47.155  INFO 10016 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Started GeekBlogApplication in 3.485 seconds (JVM running for 4.355)
+2020-05-07 10:03:55.144  INFO 10016 --- [Thread-12] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2020-05-07 10:03:55.148  INFO 10016 --- [Thread-12] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed
+2020-05-07 10:04:05.061  INFO 10016 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Starting GeekBlogApplication on DESKTOP-QNDK7AF with PID 10016 (D:\idea\geekblog\target\classes started by AlanLiang in D:\idea\geekblog)
+2020-05-07 10:04:05.061 DEBUG 10016 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Running with Spring Boot v2.2.6.RELEASE, Spring v5.2.5.RELEASE
+2020-05-07 10:04:05.061  INFO 10016 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : The following profiles are active: dev
+2020-05-07 10:04:05.203  WARN 10016 --- [restartedMain] o.m.s.mapper.ClassPathMapperScanner      : No MyBatis mapper was found in '[site.alanliang.geekblog]' package. Please check your configuration.
+2020-05-07 10:04:05.262  INFO 10016 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8889 (http)
+2020-05-07 10:04:05.263  INFO 10016 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-05-07 10:04:05.263  INFO 10016 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.33]
+2020-05-07 10:04:05.284  INFO 10016 --- [restartedMain] o.a.c.c.C.[Tomcat-1].[localhost].[/]     : Initializing Spring embedded WebApplicationContext
+2020-05-07 10:04:05.284  INFO 10016 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 220 ms
+2020-05-07 10:04:05.347  INFO 10016 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-05-07 10:04:05.388  INFO 10016 --- [restartedMain] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2020-05-07 10:04:05.414  INFO 10016 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-2} inited
+2020-05-07 10:04:05.448  WARN 10016 --- [restartedMain] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sqlSessionFactory' defined in class path resource [com/baomidou/mybatisplus/autoconfigure/MybatisPlusAutoConfiguration.class]: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.apache.ibatis.session.SqlSessionFactory]: Factory method 'sqlSessionFactory' threw exception; nested exception is org.springframework.core.NestedIOException: Failed to parse mapping resource: 'file [D:\idea\geekblog\target\classes\mapper\ArticleMapper.xml]'; nested exception is org.apache.ibatis.builder.BuilderException: Error parsing Mapper XML. The XML location is 'file [D:\idea\geekblog\target\classes\mapper\ArticleMapper.xml]'. Cause: org.apache.ibatis.builder.BuilderException: Error resolving class. Cause: org.apache.ibatis.type.TypeException: Could not resolve type alias 'site.alanliang.geekblog.entity.Article'.  Cause: java.lang.ClassNotFoundException: Cannot find class: site.alanliang.geekblog.entity.Article
+2020-05-07 10:04:05.449  INFO 10016 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-2} closed
+2020-05-07 10:04:05.450  INFO 10016 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2020-05-07 10:04:05.450  INFO 10016 --- [restartedMain] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2020-05-07 10:04:05.456  INFO 10016 --- [restartedMain] ConditionEvaluationReportLoggingListener : 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2020-05-07 10:04:05.463 ERROR 10016 --- [restartedMain] o.s.boot.SpringApplication               : Application run failed
+
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sqlSessionFactory' defined in class path resource [com/baomidou/mybatisplus/autoconfigure/MybatisPlusAutoConfiguration.class]: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.apache.ibatis.session.SqlSessionFactory]: Factory method 'sqlSessionFactory' threw exception; nested exception is org.springframework.core.NestedIOException: Failed to parse mapping resource: 'file [D:\idea\geekblog\target\classes\mapper\ArticleMapper.xml]'; nested exception is org.apache.ibatis.builder.BuilderException: Error parsing Mapper XML. The XML location is 'file [D:\idea\geekblog\target\classes\mapper\ArticleMapper.xml]'. Cause: org.apache.ibatis.builder.BuilderException: Error resolving class. Cause: org.apache.ibatis.type.TypeException: Could not resolve type alias 'site.alanliang.geekblog.entity.Article'.  Cause: java.lang.ClassNotFoundException: Cannot find class: site.alanliang.geekblog.entity.Article
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:656)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:636)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1338)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1177)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:557)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:517)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:323)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:321)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:882)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:878)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:550)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:141)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:747)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:397)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:315)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1226)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1215)
+	at site.alanliang.geekblog.GeekBlogApplication.main(GeekBlogApplication.java:14)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49)
+Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.apache.ibatis.session.SqlSessionFactory]: Factory method 'sqlSessionFactory' threw exception; nested exception is org.springframework.core.NestedIOException: Failed to parse mapping resource: 'file [D:\idea\geekblog\target\classes\mapper\ArticleMapper.xml]'; nested exception is org.apache.ibatis.builder.BuilderException: Error parsing Mapper XML. The XML location is 'file [D:\idea\geekblog\target\classes\mapper\ArticleMapper.xml]'. Cause: org.apache.ibatis.builder.BuilderException: Error resolving class. Cause: org.apache.ibatis.type.TypeException: Could not resolve type alias 'site.alanliang.geekblog.entity.Article'.  Cause: java.lang.ClassNotFoundException: Cannot find class: site.alanliang.geekblog.entity.Article
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:185)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:651)
+	... 24 common frames omitted
+Caused by: org.springframework.core.NestedIOException: Failed to parse mapping resource: 'file [D:\idea\geekblog\target\classes\mapper\ArticleMapper.xml]'; nested exception is org.apache.ibatis.builder.BuilderException: Error parsing Mapper XML. The XML location is 'file [D:\idea\geekblog\target\classes\mapper\ArticleMapper.xml]'. Cause: org.apache.ibatis.builder.BuilderException: Error resolving class. Cause: org.apache.ibatis.type.TypeException: Could not resolve type alias 'site.alanliang.geekblog.entity.Article'.  Cause: java.lang.ClassNotFoundException: Cannot find class: site.alanliang.geekblog.entity.Article
+	at com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean.buildSqlSessionFactory(MybatisSqlSessionFactoryBean.java:595)
+	at com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean.afterPropertiesSet(MybatisSqlSessionFactoryBean.java:430)
+	at com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean.getObject(MybatisSqlSessionFactoryBean.java:628)
+	at com.baomidou.mybatisplus.autoconfigure.MybatisPlusAutoConfiguration.sqlSessionFactory(MybatisPlusAutoConfiguration.java:214)
+	at com.baomidou.mybatisplus.autoconfigure.MybatisPlusAutoConfiguration$$EnhancerBySpringCGLIB$$236d4d2.CGLIB$sqlSessionFactory$2(<generated>)
+	at com.baomidou.mybatisplus.autoconfigure.MybatisPlusAutoConfiguration$$EnhancerBySpringCGLIB$$236d4d2$$FastClassBySpringCGLIB$$807b706f.invoke(<generated>)
+	at org.springframework.cglib.proxy.MethodProxy.invokeSuper(MethodProxy.java:244)
+	at org.springframework.context.annotation.ConfigurationClassEnhancer$BeanMethodInterceptor.intercept(ConfigurationClassEnhancer.java:331)
+	at com.baomidou.mybatisplus.autoconfigure.MybatisPlusAutoConfiguration$$EnhancerBySpringCGLIB$$236d4d2.sqlSessionFactory(<generated>)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:154)
+	... 25 common frames omitted
+Caused by: org.apache.ibatis.builder.BuilderException: Error parsing Mapper XML. The XML location is 'file [D:\idea\geekblog\target\classes\mapper\ArticleMapper.xml]'. Cause: org.apache.ibatis.builder.BuilderException: Error resolving class. Cause: org.apache.ibatis.type.TypeException: Could not resolve type alias 'site.alanliang.geekblog.entity.Article'.  Cause: java.lang.ClassNotFoundException: Cannot find class: site.alanliang.geekblog.entity.Article
+	at org.apache.ibatis.builder.xml.XMLMapperBuilder.configurationElement(XMLMapperBuilder.java:122)
+	at org.apache.ibatis.builder.xml.XMLMapperBuilder.parse(XMLMapperBuilder.java:94)
+	at com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean.buildSqlSessionFactory(MybatisSqlSessionFactoryBean.java:593)
+	... 38 common frames omitted
+Caused by: org.apache.ibatis.builder.BuilderException: Error resolving class. Cause: org.apache.ibatis.type.TypeException: Could not resolve type alias 'site.alanliang.geekblog.entity.Article'.  Cause: java.lang.ClassNotFoundException: Cannot find class: site.alanliang.geekblog.entity.Article
+	at org.apache.ibatis.builder.BaseBuilder.resolveClass(BaseBuilder.java:118)
+	at org.apache.ibatis.builder.xml.XMLMapperBuilder.resultMapElement(XMLMapperBuilder.java:262)
+	at org.apache.ibatis.builder.xml.XMLMapperBuilder.resultMapElement(XMLMapperBuilder.java:253)
+	at org.apache.ibatis.builder.xml.XMLMapperBuilder.resultMapElements(XMLMapperBuilder.java:245)
+	at org.apache.ibatis.builder.xml.XMLMapperBuilder.configurationElement(XMLMapperBuilder.java:118)
+	... 40 common frames omitted
+Caused by: org.apache.ibatis.type.TypeException: Could not resolve type alias 'site.alanliang.geekblog.entity.Article'.  Cause: java.lang.ClassNotFoundException: Cannot find class: site.alanliang.geekblog.entity.Article
+	at org.apache.ibatis.type.TypeAliasRegistry.resolveAlias(TypeAliasRegistry.java:120)
+	at org.apache.ibatis.builder.BaseBuilder.resolveAlias(BaseBuilder.java:149)
+	at org.apache.ibatis.builder.BaseBuilder.resolveClass(BaseBuilder.java:116)
+	... 44 common frames omitted
+Caused by: java.lang.ClassNotFoundException: Cannot find class: site.alanliang.geekblog.entity.Article
+	at org.apache.ibatis.io.ClassLoaderWrapper.classForName(ClassLoaderWrapper.java:200)
+	at org.apache.ibatis.io.ClassLoaderWrapper.classForName(ClassLoaderWrapper.java:89)
+	at org.apache.ibatis.io.Resources.classForName(Resources.java:261)
+	at org.apache.ibatis.type.TypeAliasRegistry.resolveAlias(TypeAliasRegistry.java:116)
+	... 46 common frames omitted
+
+2020-05-07 10:04:11.492  INFO 10016 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Starting GeekBlogApplication on DESKTOP-QNDK7AF with PID 10016 (D:\idea\geekblog\target\classes started by AlanLiang in D:\idea\geekblog)
+2020-05-07 10:04:11.493 DEBUG 10016 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Running with Spring Boot v2.2.6.RELEASE, Spring v5.2.5.RELEASE
+2020-05-07 10:04:11.493  INFO 10016 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : The following profiles are active: dev
+2020-05-07 10:04:11.805  INFO 10016 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8889 (http)
+2020-05-07 10:04:11.806  INFO 10016 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-05-07 10:04:11.806  INFO 10016 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.33]
+2020-05-07 10:04:11.833  INFO 10016 --- [restartedMain] o.a.c.c.C.[Tomcat-2].[localhost].[/]     : Initializing Spring embedded WebApplicationContext
+2020-05-07 10:04:11.833  INFO 10016 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 338 ms
+2020-05-07 10:04:11.862  INFO 10016 --- [restartedMain] o.s.boot.web.servlet.RegistrationBean    : Servlet statViewServlet was not registered (possibly already registered?)
+2020-05-07 10:04:11.862  INFO 10016 --- [restartedMain] o.s.boot.web.servlet.RegistrationBean    : Filter webStatFilter was not registered (possibly already registered?)
+2020-05-07 10:04:11.887  INFO 10016 --- [restartedMain] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2020-05-07 10:04:11.959  INFO 10016 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-3} inited
+2020-05-07 10:04:12.530  INFO 10016 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-05-07 10:04:12.744  INFO 10016 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2020-05-07 10:04:12.767  INFO 10016 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8889 (http) with context path ''
+2020-05-07 10:04:12.767  INFO 10016 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Started GeekBlogApplication in 1.302 seconds (JVM running for 209.967)
+2020-05-07 10:04:12.769  INFO 10016 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2020-05-07 10:32:58.333  INFO 22008 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Starting GeekBlogApplication on DESKTOP-QNDK7AF with PID 22008 (D:\idea\geekblog\target\classes started by AlanLiang in D:\idea\geekblog)
+2020-05-07 10:32:58.341 DEBUG 22008 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Running with Spring Boot v2.2.6.RELEASE, Spring v5.2.5.RELEASE
+2020-05-07 10:32:58.341  INFO 22008 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : The following profiles are active: dev
+2020-05-07 10:32:58.412  INFO 22008 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2020-05-07 10:32:58.412  INFO 22008 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2020-05-07 10:32:59.514  INFO 22008 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8889 (http)
+2020-05-07 10:32:59.524  INFO 22008 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-05-07 10:32:59.525  INFO 22008 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.33]
+2020-05-07 10:32:59.606  INFO 22008 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-05-07 10:32:59.606  INFO 22008 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1194 ms
+2020-05-07 10:32:59.644  INFO 22008 --- [restartedMain] o.s.boot.web.servlet.RegistrationBean    : Servlet statViewServlet was not registered (possibly already registered?)
+2020-05-07 10:32:59.646  INFO 22008 --- [restartedMain] o.s.boot.web.servlet.RegistrationBean    : Filter webStatFilter was not registered (possibly already registered?)
+2020-05-07 10:32:59.818  INFO 22008 --- [restartedMain] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2020-05-07 10:33:00.109  INFO 22008 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2020-05-07 10:33:01.186  INFO 22008 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-05-07 10:33:01.506  INFO 22008 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2020-05-07 10:33:01.556  INFO 22008 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8889 (http) with context path ''
+2020-05-07 10:33:01.559  INFO 22008 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Started GeekBlogApplication in 3.913 seconds (JVM running for 4.853)
+2020-05-07 10:33:01.605  INFO 22008 --- [http-nio-8889-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-05-07 10:33:01.605  INFO 22008 --- [http-nio-8889-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-05-07 10:33:01.612  INFO 22008 --- [http-nio-8889-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 7 ms
+2020-05-07 10:33:02.214 DEBUG 22008 --- [http-nio-8889-exec-3] s.a.geekblog.dao.MenuMapper.selectList   : ==>  Preparing: SELECT id,title,href,pid,icon,target,sort,status,remark,create_time,update_time FROM sys_menu WHERE (status = ?) 
+2020-05-07 10:33:02.315 DEBUG 22008 --- [http-nio-8889-exec-3] s.a.geekblog.dao.MenuMapper.selectList   : ==> Parameters: true(Boolean)
+2020-05-07 10:33:02.332 DEBUG 22008 --- [http-nio-8889-exec-3] s.a.geekblog.dao.MenuMapper.selectList   : <==      Total: 11
+2020-05-07 10:33:02.633 DEBUG 22008 --- [http-nio-8889-exec-6] s.a.g.d.CategoryMapper.listTableByPage   : ==>  Preparing: SELECT COUNT(1) FROM ( SELECT tc.id, tc.name, tc.display, tc.introduction, tc.color, tc.create_time, tc.update_time, count(ta.id) articleCount FROM t_category tc LEFT JOIN t_article ta ON tc.id = ta.category_id GROUP BY tc.id ) TOTAL 
+2020-05-07 10:33:02.638 DEBUG 22008 --- [http-nio-8889-exec-6] s.a.g.d.CategoryMapper.listTableByPage   : ==> Parameters: 
+2020-05-07 10:33:02.645 DEBUG 22008 --- [http-nio-8889-exec-6] s.a.g.d.CategoryMapper.listTableByPage   : ==>  Preparing: select tc.id, tc.name, tc.display, tc.introduction, tc.color, tc.create_time, tc.update_time, count(ta.id) articleCount from t_category tc left join t_article ta on tc.id = ta.category_id group by tc.id LIMIT ?,? 
+2020-05-07 10:33:02.647 DEBUG 22008 --- [http-nio-8889-exec-6] s.a.g.d.CategoryMapper.listTableByPage   : ==> Parameters: 0(Long), 15(Long)
+2020-05-07 10:33:02.652 DEBUG 22008 --- [http-nio-8889-exec-6] s.a.g.d.CategoryMapper.listTableByPage   : <==      Total: 6
+2020-05-07 10:33:02.696 DEBUG 22008 --- [http-nio-8889-exec-6] s.a.g.dao.OperationLogMapper.insert      : ==>  Preparing: INSERT INTO sys_operation_log ( create_time, description, log_type, method, params, request_ip, time, username, browser, address ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ) 
+2020-05-07 10:33:02.703 DEBUG 22008 --- [http-nio-8889-exec-6] s.a.g.dao.OperationLogMapper.insert      : ==> Parameters: 2020-05-07 10:33:02.693(Timestamp), 查询分类(String), INFO(String), site.alanliang.geekblog.controller.admin.CategoryController.listByPage()(String), { page: 1 limit: 15 categoryQuery: CategoryQuery(name=null, display=null, startDate=null, endDate=null) }(String), 192.168.150.1(String), 46(Long), (String), Chrome 8(String), 内网IP(String)
+2020-05-07 10:33:02.705 DEBUG 22008 --- [http-nio-8889-exec-6] s.a.g.dao.OperationLogMapper.insert      : <==    Updates: 1
+2020-05-07 10:33:06.792 DEBUG 22008 --- [http-nio-8889-exec-10] s.a.g.dao.CategoryMapper.selectList      : ==>  Preparing: SELECT color FROM t_category GROUP BY color 
+2020-05-07 10:33:06.794 DEBUG 22008 --- [http-nio-8889-exec-10] s.a.g.dao.CategoryMapper.selectList      : ==> Parameters: 
+2020-05-07 10:33:06.796 DEBUG 22008 --- [http-nio-8889-exec-10] s.a.g.dao.CategoryMapper.selectList      : <==      Total: 5
+2020-05-07 10:33:24.142 DEBUG 22008 --- [http-nio-8889-exec-4] s.a.g.dao.CategoryMapper.selectOne       : ==>  Preparing: SELECT id,name,display,introduction,color,create_time,update_time FROM t_category WHERE (name = ?) 
+2020-05-07 10:33:24.144 DEBUG 22008 --- [http-nio-8889-exec-4] s.a.g.dao.CategoryMapper.selectOne       : ==> Parameters: 测试分类2(String)
+2020-05-07 10:33:24.145 DEBUG 22008 --- [http-nio-8889-exec-4] s.a.g.dao.CategoryMapper.selectOne       : <==      Total: 0
+2020-05-07 10:33:24.148 DEBUG 22008 --- [http-nio-8889-exec-4] s.a.geekblog.dao.CategoryMapper.insert   : ==>  Preparing: INSERT INTO t_category ( name, display, introduction, color, create_time, update_time ) VALUES ( ?, ?, ?, ?, ?, ? ) 
+2020-05-07 10:33:24.149 DEBUG 22008 --- [http-nio-8889-exec-4] s.a.geekblog.dao.CategoryMapper.insert   : ==> Parameters: 测试分类2(String), true(Boolean), 测试分类2的简介(String), #123456(String), 2020-05-07 10:33:24.139(Timestamp), 2020-05-07 10:33:24.139(Timestamp)
+2020-05-07 10:33:24.150 DEBUG 22008 --- [http-nio-8889-exec-4] s.a.geekblog.dao.CategoryMapper.insert   : <==    Updates: 1
+2020-05-07 10:33:24.153 DEBUG 22008 --- [http-nio-8889-exec-4] s.a.g.dao.OperationLogMapper.insert      : ==>  Preparing: INSERT INTO sys_operation_log ( create_time, description, log_type, method, params, request_ip, time, username, browser, address ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ) 
+2020-05-07 10:33:24.154 DEBUG 22008 --- [http-nio-8889-exec-4] s.a.g.dao.OperationLogMapper.insert      : ==> Parameters: 2020-05-07 10:33:24.153(Timestamp), 新增分类(String), INFO(String), site.alanliang.geekblog.controller.admin.CategoryController.save()(String), { category: Category(id=13, name=测试分类2, display=true, introduction=测试分类2的简介, color=#123456, createTime=Thu May 07 10:33:24 CST 2020, updateTime=Thu May 07 10:33:24 CST 2020, articleCount=null) }(String), 0:0:0:0:0:0:0:1(String), 12(Long), (String), Chrome 8(String), 内网IP(String)
+2020-05-07 10:33:24.156 DEBUG 22008 --- [http-nio-8889-exec-4] s.a.g.dao.OperationLogMapper.insert      : <==    Updates: 1
+2020-05-07 10:33:25.513 DEBUG 22008 --- [http-nio-8889-exec-3] s.a.g.d.CategoryMapper.listTableByPage   : ==>  Preparing: SELECT COUNT(1) FROM ( SELECT tc.id, tc.name, tc.display, tc.introduction, tc.color, tc.create_time, tc.update_time, count(ta.id) articleCount FROM t_category tc LEFT JOIN t_article ta ON tc.id = ta.category_id GROUP BY tc.id ) TOTAL 
+2020-05-07 10:33:25.513 DEBUG 22008 --- [http-nio-8889-exec-3] s.a.g.d.CategoryMapper.listTableByPage   : ==> Parameters: 
+2020-05-07 10:33:25.515 DEBUG 22008 --- [http-nio-8889-exec-3] s.a.g.d.CategoryMapper.listTableByPage   : ==>  Preparing: select tc.id, tc.name, tc.display, tc.introduction, tc.color, tc.create_time, tc.update_time, count(ta.id) articleCount from t_category tc left join t_article ta on tc.id = ta.category_id group by tc.id LIMIT ?,? 
+2020-05-07 10:33:25.515 DEBUG 22008 --- [http-nio-8889-exec-3] s.a.g.d.CategoryMapper.listTableByPage   : ==> Parameters: 0(Long), 15(Long)
+2020-05-07 10:33:25.520 DEBUG 22008 --- [http-nio-8889-exec-3] s.a.g.d.CategoryMapper.listTableByPage   : <==      Total: 7
+2020-05-07 10:33:25.524 DEBUG 22008 --- [http-nio-8889-exec-3] s.a.g.dao.OperationLogMapper.insert      : ==>  Preparing: INSERT INTO sys_operation_log ( create_time, description, log_type, method, params, request_ip, time, username, browser, address ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ) 
+2020-05-07 10:33:25.524 DEBUG 22008 --- [http-nio-8889-exec-3] s.a.g.dao.OperationLogMapper.insert      : ==> Parameters: 2020-05-07 10:33:25.523(Timestamp), 查询分类(String), INFO(String), site.alanliang.geekblog.controller.admin.CategoryController.listByPage()(String), { page: 1 limit: 15 categoryQuery: CategoryQuery(name=null, display=null, startDate=null, endDate=null) }(String), 192.168.150.1(String), 8(Long), (String), Chrome 8(String), 内网IP(String)
+2020-05-07 10:33:25.526 DEBUG 22008 --- [http-nio-8889-exec-3] s.a.g.dao.OperationLogMapper.insert      : <==    Updates: 1
+2020-05-07 10:33:27.372 DEBUG 22008 --- [http-nio-8889-exec-2] s.a.g.dao.CategoryMapper.selectById      : ==>  Preparing: SELECT id,name,display,introduction,color,create_time,update_time FROM t_category WHERE id=? 
+2020-05-07 10:33:27.374 DEBUG 22008 --- [http-nio-8889-exec-2] s.a.g.dao.CategoryMapper.selectById      : ==> Parameters: 13(Long)
+2020-05-07 10:33:27.376 DEBUG 22008 --- [http-nio-8889-exec-2] s.a.g.dao.CategoryMapper.selectById      : <==      Total: 1
+2020-05-07 10:33:27.458 DEBUG 22008 --- [http-nio-8889-exec-5] s.a.g.dao.CategoryMapper.selectList      : ==>  Preparing: SELECT color FROM t_category GROUP BY color 
+2020-05-07 10:33:27.458 DEBUG 22008 --- [http-nio-8889-exec-5] s.a.g.dao.CategoryMapper.selectList      : ==> Parameters: 
+2020-05-07 10:33:27.459 DEBUG 22008 --- [http-nio-8889-exec-5] s.a.g.dao.CategoryMapper.selectList      : <==      Total: 6
+2020-05-07 10:33:35.797 DEBUG 22008 --- [http-nio-8889-exec-6] s.a.g.dao.CategoryMapper.selectList      : ==>  Preparing: SELECT id,name,display,introduction,color,create_time,update_time FROM t_category WHERE (name = ?) 
+2020-05-07 10:33:35.797 DEBUG 22008 --- [http-nio-8889-exec-6] s.a.g.dao.CategoryMapper.selectList      : ==> Parameters: 测试分类2(String)
+2020-05-07 10:33:35.798 DEBUG 22008 --- [http-nio-8889-exec-6] s.a.g.dao.CategoryMapper.selectList      : <==      Total: 1
+2020-05-07 10:33:35.801 DEBUG 22008 --- [http-nio-8889-exec-6] s.a.g.dao.CategoryMapper.updateById      : ==>  Preparing: UPDATE t_category SET name=?, display=?, introduction=?, update_time=? WHERE id=? 
+2020-05-07 10:33:35.803 DEBUG 22008 --- [http-nio-8889-exec-6] s.a.g.dao.CategoryMapper.updateById      : ==> Parameters: 测试分类2(String), true(Boolean), 测试分类2的简介(String), 2020-05-07 10:33:35.795(Timestamp), 13(Long)
+2020-05-07 10:33:35.804 DEBUG 22008 --- [http-nio-8889-exec-6] s.a.g.dao.CategoryMapper.updateById      : <==    Updates: 1
+2020-05-07 10:33:35.809 DEBUG 22008 --- [http-nio-8889-exec-6] s.a.g.dao.OperationLogMapper.insert      : ==>  Preparing: INSERT INTO sys_operation_log ( create_time, description, log_type, method, params, request_ip, time, username, browser, address ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ) 
+2020-05-07 10:33:35.810 DEBUG 22008 --- [http-nio-8889-exec-6] s.a.g.dao.OperationLogMapper.insert      : ==> Parameters: 2020-05-07 10:33:35.808(Timestamp), 更新分类(String), INFO(String), site.alanliang.geekblog.controller.admin.CategoryController.update()(String), { category: Category(id=13, name=测试分类2, display=true, introduction=测试分类2的简介, color=null, createTime=null, updateTime=Thu May 07 10:33:35 CST 2020, articleCount=null) }(String), 192.168.150.1(String), 11(Long), (String), Chrome 8(String), 内网IP(String)
+2020-05-07 10:33:35.811 DEBUG 22008 --- [http-nio-8889-exec-6] s.a.g.dao.OperationLogMapper.insert      : <==    Updates: 1
+2020-05-07 10:33:37.177 DEBUG 22008 --- [http-nio-8889-exec-8] s.a.g.d.CategoryMapper.listTableByPage   : ==>  Preparing: SELECT COUNT(1) FROM ( SELECT tc.id, tc.name, tc.display, tc.introduction, tc.color, tc.create_time, tc.update_time, count(ta.id) articleCount FROM t_category tc LEFT JOIN t_article ta ON tc.id = ta.category_id GROUP BY tc.id ) TOTAL 
+2020-05-07 10:33:37.178 DEBUG 22008 --- [http-nio-8889-exec-8] s.a.g.d.CategoryMapper.listTableByPage   : ==> Parameters: 
+2020-05-07 10:33:37.180 DEBUG 22008 --- [http-nio-8889-exec-8] s.a.g.d.CategoryMapper.listTableByPage   : ==>  Preparing: select tc.id, tc.name, tc.display, tc.introduction, tc.color, tc.create_time, tc.update_time, count(ta.id) articleCount from t_category tc left join t_article ta on tc.id = ta.category_id group by tc.id LIMIT ?,? 
+2020-05-07 10:33:37.180 DEBUG 22008 --- [http-nio-8889-exec-8] s.a.g.d.CategoryMapper.listTableByPage   : ==> Parameters: 0(Long), 15(Long)
+2020-05-07 10:33:37.183 DEBUG 22008 --- [http-nio-8889-exec-8] s.a.g.d.CategoryMapper.listTableByPage   : <==      Total: 7
+2020-05-07 10:33:37.190 DEBUG 22008 --- [http-nio-8889-exec-8] s.a.g.dao.OperationLogMapper.insert      : ==>  Preparing: INSERT INTO sys_operation_log ( create_time, description, log_type, method, params, request_ip, time, username, browser, address ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ) 
+2020-05-07 10:33:37.191 DEBUG 22008 --- [http-nio-8889-exec-8] s.a.g.dao.OperationLogMapper.insert      : ==> Parameters: 2020-05-07 10:33:37.187(Timestamp), 查询分类(String), INFO(String), site.alanliang.geekblog.controller.admin.CategoryController.listByPage()(String), { page: 1 limit: 15 categoryQuery: CategoryQuery(name=null, display=null, startDate=null, endDate=null) }(String), 0:0:0:0:0:0:0:1(String), 8(Long), (String), Chrome 8(String), 内网IP(String)
+2020-05-07 10:33:37.195 DEBUG 22008 --- [http-nio-8889-exec-8] s.a.g.dao.OperationLogMapper.insert      : <==    Updates: 1
+2020-05-07 10:33:44.091 DEBUG 22008 --- [http-nio-8889-exec-9] s.a.g.dao.CategoryMapper.selectById      : ==>  Preparing: SELECT id,name,display,introduction,color,create_time,update_time FROM t_category WHERE id=? 
+2020-05-07 10:33:44.091 DEBUG 22008 --- [http-nio-8889-exec-9] s.a.g.dao.CategoryMapper.selectById      : ==> Parameters: 13(Long)
+2020-05-07 10:33:44.093 DEBUG 22008 --- [http-nio-8889-exec-9] s.a.g.dao.CategoryMapper.selectById      : <==      Total: 1
+2020-05-07 10:33:44.199 DEBUG 22008 --- [http-nio-8889-exec-10] s.a.g.dao.CategoryMapper.selectList      : ==>  Preparing: SELECT color FROM t_category GROUP BY color 
+2020-05-07 10:33:44.199 DEBUG 22008 --- [http-nio-8889-exec-10] s.a.g.dao.CategoryMapper.selectList      : ==> Parameters: 
+2020-05-07 10:33:44.201 DEBUG 22008 --- [http-nio-8889-exec-10] s.a.g.dao.CategoryMapper.selectList      : <==      Total: 6
+2020-05-07 10:33:53.332 DEBUG 22008 --- [http-nio-8889-exec-4] s.a.g.dao.CategoryMapper.selectList      : ==>  Preparing: SELECT id,name,display,introduction,color,create_time,update_time FROM t_category WHERE (name = ?) 
+2020-05-07 10:33:53.333 DEBUG 22008 --- [http-nio-8889-exec-4] s.a.g.dao.CategoryMapper.selectList      : ==> Parameters: 测试分类2(String)
+2020-05-07 10:33:53.334 DEBUG 22008 --- [http-nio-8889-exec-4] s.a.g.dao.CategoryMapper.selectList      : <==      Total: 1
+2020-05-07 10:33:53.335 DEBUG 22008 --- [http-nio-8889-exec-4] s.a.g.dao.CategoryMapper.updateById      : ==>  Preparing: UPDATE t_category SET name=?, display=?, introduction=?, update_time=? WHERE id=? 
+2020-05-07 10:33:53.335 DEBUG 22008 --- [http-nio-8889-exec-4] s.a.g.dao.CategoryMapper.updateById      : ==> Parameters: 测试分类2(String), true(Boolean), 测试分类2的简介(String), 2020-05-07 10:33:53.331(Timestamp), 13(Long)
+2020-05-07 10:33:53.337 DEBUG 22008 --- [http-nio-8889-exec-4] s.a.g.dao.CategoryMapper.updateById      : <==    Updates: 1
+2020-05-07 10:33:53.344 DEBUG 22008 --- [http-nio-8889-exec-4] s.a.g.dao.OperationLogMapper.insert      : ==>  Preparing: INSERT INTO sys_operation_log ( create_time, description, log_type, method, params, request_ip, time, username, browser, address ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ) 
+2020-05-07 10:33:53.346 DEBUG 22008 --- [http-nio-8889-exec-4] s.a.g.dao.OperationLogMapper.insert      : ==> Parameters: 2020-05-07 10:33:53.341(Timestamp), 更新分类(String), INFO(String), site.alanliang.geekblog.controller.admin.CategoryController.update()(String), { category: Category(id=13, name=测试分类2, display=true, introduction=测试分类2的简介, color=null, createTime=null, updateTime=Thu May 07 10:33:53 CST 2020, articleCount=null) }(String), 0:0:0:0:0:0:0:1(String), 8(Long), (String), Chrome 8(String), 内网IP(String)
+2020-05-07 10:33:53.348 DEBUG 22008 --- [http-nio-8889-exec-4] s.a.g.dao.OperationLogMapper.insert      : <==    Updates: 1
+2020-05-07 10:33:54.771 DEBUG 22008 --- [http-nio-8889-exec-3] s.a.g.d.CategoryMapper.listTableByPage   : ==>  Preparing: SELECT COUNT(1) FROM ( SELECT tc.id, tc.name, tc.display, tc.introduction, tc.color, tc.create_time, tc.update_time, count(ta.id) articleCount FROM t_category tc LEFT JOIN t_article ta ON tc.id = ta.category_id GROUP BY tc.id ) TOTAL 
+2020-05-07 10:33:54.771 DEBUG 22008 --- [http-nio-8889-exec-3] s.a.g.d.CategoryMapper.listTableByPage   : ==> Parameters: 
+2020-05-07 10:33:54.774 DEBUG 22008 --- [http-nio-8889-exec-3] s.a.g.d.CategoryMapper.listTableByPage   : ==>  Preparing: select tc.id, tc.name, tc.display, tc.introduction, tc.color, tc.create_time, tc.update_time, count(ta.id) articleCount from t_category tc left join t_article ta on tc.id = ta.category_id group by tc.id LIMIT ?,? 
+2020-05-07 10:33:54.775 DEBUG 22008 --- [http-nio-8889-exec-3] s.a.g.d.CategoryMapper.listTableByPage   : ==> Parameters: 0(Long), 15(Long)
+2020-05-07 10:33:54.778 DEBUG 22008 --- [http-nio-8889-exec-3] s.a.g.d.CategoryMapper.listTableByPage   : <==      Total: 7
+2020-05-07 10:33:54.783 DEBUG 22008 --- [http-nio-8889-exec-3] s.a.g.dao.OperationLogMapper.insert      : ==>  Preparing: INSERT INTO sys_operation_log ( create_time, description, log_type, method, params, request_ip, time, username, browser, address ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ) 
+2020-05-07 10:33:54.783 DEBUG 22008 --- [http-nio-8889-exec-3] s.a.g.dao.OperationLogMapper.insert      : ==> Parameters: 2020-05-07 10:33:54.781(Timestamp), 查询分类(String), INFO(String), site.alanliang.geekblog.controller.admin.CategoryController.listByPage()(String), { page: 1 limit: 15 categoryQuery: CategoryQuery(name=null, display=null, startDate=null, endDate=null) }(String), 192.168.150.1(String), 12(Long), (String), Chrome 8(String), 内网IP(String)
+2020-05-07 10:33:54.785 DEBUG 22008 --- [http-nio-8889-exec-3] s.a.g.dao.OperationLogMapper.insert      : <==    Updates: 1
+2020-05-07 10:35:35.926 DEBUG 22008 --- [http-nio-8889-exec-7] s.a.g.dao.CategoryMapper.selectById      : ==>  Preparing: SELECT id,name,display,introduction,color,create_time,update_time FROM t_category WHERE id=? 
+2020-05-07 10:35:35.927 DEBUG 22008 --- [http-nio-8889-exec-7] s.a.g.dao.CategoryMapper.selectById      : ==> Parameters: 13(Long)
+2020-05-07 10:35:35.929 DEBUG 22008 --- [http-nio-8889-exec-7] s.a.g.dao.CategoryMapper.selectById      : <==      Total: 1
+2020-05-07 10:35:35.998 DEBUG 22008 --- [http-nio-8889-exec-8] s.a.g.dao.CategoryMapper.selectList      : ==>  Preparing: SELECT color FROM t_category GROUP BY color 
+2020-05-07 10:35:35.998 DEBUG 22008 --- [http-nio-8889-exec-8] s.a.g.dao.CategoryMapper.selectList      : ==> Parameters: 
+2020-05-07 10:35:36.000 DEBUG 22008 --- [http-nio-8889-exec-8] s.a.g.dao.CategoryMapper.selectList      : <==      Total: 6
+2020-05-07 10:35:39.163 DEBUG 22008 --- [http-nio-8889-exec-10] s.a.g.dao.CategoryMapper.selectList      : ==>  Preparing: SELECT color FROM t_category GROUP BY color 
+2020-05-07 10:35:39.164 DEBUG 22008 --- [http-nio-8889-exec-10] s.a.g.dao.CategoryMapper.selectList      : ==> Parameters: 
+2020-05-07 10:35:39.166 DEBUG 22008 --- [http-nio-8889-exec-10] s.a.g.dao.CategoryMapper.selectList      : <==      Total: 6
