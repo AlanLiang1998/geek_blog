@@ -8,10 +8,9 @@ import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import site.alanliang.geekblog.anntation.OperationLog;
 import site.alanliang.geekblog.common.Constant;
 import site.alanliang.geekblog.dao.OperationLogMapper;
-import site.alanliang.geekblog.entity.SysOperationLog;
+import site.alanliang.geekblog.model.OperationLog;
 import site.alanliang.geekblog.query.LogQuery;
 import site.alanliang.geekblog.service.OperationLogService;
 import site.alanliang.geekblog.utils.StringUtils;
@@ -35,11 +34,11 @@ public class OperationLogServiceImpl implements OperationLogService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void save(String username, String browser, String ip, ProceedingJoinPoint joinPoint, SysOperationLog log) {
+    public void save(String username, String browser, String ip, ProceedingJoinPoint joinPoint, OperationLog log) {
 
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         Method method = signature.getMethod();
-        OperationLog aopLog = method.getAnnotation(OperationLog.class);
+        site.alanliang.geekblog.anntation.OperationLog aopLog = method.getAnnotation(site.alanliang.geekblog.anntation.OperationLog.class);
 
         // 方法路径
         String methodName = joinPoint.getTarget().getClass().getName() + "." + signature.getName() + "()";
@@ -81,7 +80,7 @@ public class OperationLogServiceImpl implements OperationLogService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void removeByIds(List<Long> idList) {
+    public void removeByIdList(List<Long> idList) {
         operationLogMapper.deleteBatchIds(idList);
     }
 
@@ -92,9 +91,9 @@ public class OperationLogServiceImpl implements OperationLogService {
     }
 
     @Override
-    public Page<SysOperationLog> listByPage(Integer current, Integer size, LogQuery logQuery) {
-        Page<SysOperationLog> page = new Page<>(current, size);
-        QueryWrapper<SysOperationLog> wrapper = new QueryWrapper<>();
+    public Page<OperationLog> listByPage(Integer current, Integer size, LogQuery logQuery) {
+        Page<OperationLog> page = new Page<>(current, size);
+        QueryWrapper<OperationLog> wrapper = new QueryWrapper<>();
         wrapper.select("id", "request_ip", "address", "description", "browser", "time", "create_time")
                 .orderByDesc("create_time");
         if (!StringUtils.isEmpty(logQuery.getRequestIp())) {

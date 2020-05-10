@@ -10,7 +10,7 @@ import site.alanliang.geekblog.anntation.OperationLog;
 import site.alanliang.geekblog.common.Constant;
 import site.alanliang.geekblog.common.JsonResult;
 import site.alanliang.geekblog.common.TableResult;
-import site.alanliang.geekblog.entity.Article;
+import site.alanliang.geekblog.model.Article;
 import site.alanliang.geekblog.query.ArticleQuery;
 import site.alanliang.geekblog.service.ArticleService;
 import site.alanliang.geekblog.vo.ArticleVO;
@@ -94,7 +94,7 @@ public class ArticleController {
     @OperationLog("批量删除文章")
     @DeleteMapping
     public JsonResult batchRemove(@NotEmpty @RequestBody List<Long> idList) {
-        articleService.removeByIds(idList);
+        articleService.removeByIdList(idList);
         return JsonResult.ok();
     }
 

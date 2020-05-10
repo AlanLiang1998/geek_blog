@@ -7,8 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
-import site.alanliang.geekblog.entity.Category;
-import site.alanliang.geekblog.exception.NameNotUniqueException;
+import site.alanliang.geekblog.model.Category;
+import site.alanliang.geekblog.exception.EntityExistException;
 import site.alanliang.geekblog.dao.CategoryMapper;
 import site.alanliang.geekblog.query.CategoryQuery;
 import site.alanliang.geekblog.service.CategoryService;
@@ -52,7 +52,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void removeByIds(List<Long> idList) {
+    public void removeByIdList(List<Long> idList) {
         categoryMapper.deleteBatchIds(idList);
     }
 
@@ -84,7 +84,7 @@ public class CategoryServiceImpl implements CategoryService {
             //新增
             //检查分类名称是否唯一
             if (categoryMapper.selectOne(wrapper) != null) {
-                throw new NameNotUniqueException("分类名称已存在");
+                throw new EntityExistException("分类名称已存在");
             }
             categoryMapper.insert(category);
         } else {
@@ -92,7 +92,7 @@ public class CategoryServiceImpl implements CategoryService {
             List<Category> categories = categoryMapper.selectList(wrapper);
             categories = categories.stream().filter(c -> !c.getId().equals(category.getId())).collect(Collectors.toList());
             if (!CollectionUtils.isEmpty(categories)) {
-                throw new NameNotUniqueException("分类名称已存在");
+                throw new EntityExistException("分类名称已存在");
             }
             categoryMapper.updateById(category);
         }

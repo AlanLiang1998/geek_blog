@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="site.alanliang.geekblog.dao.TagMapper">
-    <resultMap id="baseResultMap" type="site.alanliang.geekblog.entity.Tag">
+    <resultMap id="baseResultMap" type="site.alanliang.geekblog.model.Tag">
         <id property="id" column="id"/>
         <result property="name" column="name"/>
         <result property="createTime" column="create_time"/>
     </resultMap>
 
-    <select id="selectByArticleId" resultType="site.alanliang.geekblog.entity.Tag">
+    <select id="selectByArticleId" resultType="site.alanliang.geekblog.model.Tag">
         select tt.id, tt.name, tt.color
         from t_tag tt
                  left join t_article_tag tat
@@ -15,7 +15,7 @@
         where tat.article_id = #{articleId}
     </select>
 
-    <select id="listByArticleCount" resultType="site.alanliang.geekblog.entity.Tag">
+    <select id="listByArticleCount" resultType="site.alanliang.geekblog.model.Tag">
         select tt.id, tt.name, tt.color, count(ta.id) articleCount
         from t_tag tt
                  left join t_article_tag tat
@@ -25,7 +25,7 @@
         group by tt.id
     </select>
 
-    <select id="listTableByPage" resultType="site.alanliang.geekblog.entity.Tag"
+    <select id="listTableByPage" resultType="site.alanliang.geekblog.model.Tag"
             parameterType="com.baomidou.mybatisplus.extension.plugins.pagination.Page">
         select tt.id, tt.name, tt.color, tt.create_time, tt.update_time, count(ta.id) articleCount
         from t_tag tt

@@ -1,7 +1,7 @@
 package site.alanliang.geekblog.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import site.alanliang.geekblog.entity.Tag;
+import site.alanliang.geekblog.model.Tag;
 import site.alanliang.geekblog.query.TagQuery;
 
 import java.util.List;
@@ -16,7 +16,7 @@ public interface TagService {
      *
      * @return 标签列表
      */
-    List<Tag> list();
+    List<Tag> listAll();
 
     /**
      * 根据文章ID查询标签
@@ -55,7 +55,7 @@ public interface TagService {
      *
      * @param idList 标签ID列表
      */
-    void removeByIds(List<Long> idList);
+    void removeByIdList(List<Long> idList);
 
     /**
      * 根据ID查询标签

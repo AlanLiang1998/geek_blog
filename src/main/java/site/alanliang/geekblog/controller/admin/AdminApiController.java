@@ -10,6 +10,8 @@ import org.springframework.web.servlet.ModelAndView;
 import site.alanliang.geekblog.service.ArticleService;
 import site.alanliang.geekblog.service.CategoryService;
 import site.alanliang.geekblog.service.TagService;
+import site.alanliang.geekblog.service.UserService;
+import site.alanliang.geekblog.service.impl.UserServiceImpl;
 
 /**
  * @Descriptin TODO
@@ -27,7 +29,8 @@ public class AdminApiController {
     private TagService tagService;
     @Autowired
     private CategoryService categoryService;
-
+    @Autowired
+    private UserService userService;
 
     @GetMapping("/api/{moduleName}/{pageName}")
     public ModelAndView getPage(@PathVariable("moduleName") String moduleName, @PathVariable("pageName") String pageName) {
@@ -53,5 +56,11 @@ public class AdminApiController {
     public String editTag(@PathVariable("id") Long id, Model model) {
         model.addAttribute("tag", tagService.getById(id));
         return "admin/tag/tag-edit";
+    }
+
+    @GetMapping("/user/{id}")
+    public String editUser(@PathVariable("id") Long id, Model model) {
+        model.addAttribute("user", userService.getById(id));
+        return "admin/user/user-edit";
     }
 }

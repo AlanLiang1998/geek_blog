@@ -2,7 +2,7 @@ package site.alanliang.geekblog.vo;
 
 import lombok.Data;
 import site.alanliang.geekblog.common.Constant;
-import site.alanliang.geekblog.entity.SysMenu;
+import site.alanliang.geekblog.model.Menu;
 import site.alanliang.geekblog.utils.MenuTreeUtil;
 
 import java.util.ArrayList;
@@ -23,9 +23,9 @@ public class InitInfoVO {
     private LogoInfo logoInfo;
 
 
-    public static InitInfoVO init(List<SysMenu> menuList) {
+    public static InitInfoVO init(List<Menu> menuList) {
         List<MenuVO> menuInfo = new ArrayList<>();
-        for (SysMenu e : menuList) {
+        for (Menu e : menuList) {
             MenuVO menuVO = new MenuVO();
             menuVO.setId(e.getId());
             menuVO.setPid(e.getPid());

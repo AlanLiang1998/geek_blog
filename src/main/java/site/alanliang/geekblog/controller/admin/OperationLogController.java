@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import site.alanliang.geekblog.common.JsonResult;
 import site.alanliang.geekblog.common.TableResult;
-import site.alanliang.geekblog.entity.SysOperationLog;
+import site.alanliang.geekblog.model.OperationLog;
 import site.alanliang.geekblog.query.LogQuery;
 import site.alanliang.geekblog.service.OperationLogService;
 
@@ -30,7 +30,7 @@ public class OperationLogController {
     public TableResult listByPage(@RequestParam(value = "page", defaultValue = "1") Integer page,
                                   @RequestParam(value = "limit", defaultValue = "10") Integer limit,
                                   LogQuery logQuery) {
-        Page<SysOperationLog> pageInfo = operationLogService.listByPage(page, limit, logQuery);
+        Page<OperationLog> pageInfo = operationLogService.listByPage(page, limit, logQuery);
         return TableResult.tableOk(pageInfo.getRecords(), pageInfo.getTotal());
     }
 
@@ -42,7 +42,7 @@ public class OperationLogController {
 
     @DeleteMapping
     public JsonResult removeBatch(@NotEmpty @RequestBody List<Long> idList) {
-        operationLogService.removeByIds(idList);
+        operationLogService.removeByIdList(idList);
         return JsonResult.ok();
     }
 }

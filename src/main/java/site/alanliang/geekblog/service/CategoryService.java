@@ -1,7 +1,7 @@
 package site.alanliang.geekblog.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import site.alanliang.geekblog.entity.Category;
+import site.alanliang.geekblog.model.Category;
 import site.alanliang.geekblog.query.CategoryQuery;
 
 import java.util.List;
@@ -54,7 +54,7 @@ public interface CategoryService {
      *
      * @param idList 分类ID列表
      */
-    void removeByIds(List<Long> idList);
+    void removeByIdList(List<Long> idList);
 
     /**
      * 查询所有分类（统计文章数目）

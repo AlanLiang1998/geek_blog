@@ -1,17 +1,15 @@
 package site.alanliang.geekblog.controller.admin;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
-import org.springframework.util.StringUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import site.alanliang.geekblog.anntation.OperationLog;
 import site.alanliang.geekblog.common.JsonResult;
 import site.alanliang.geekblog.common.TableResult;
-import site.alanliang.geekblog.entity.Category;
+import site.alanliang.geekblog.model.Category;
 import site.alanliang.geekblog.query.CategoryQuery;
 import site.alanliang.geekblog.service.CategoryService;
 
@@ -79,15 +77,15 @@ public class CategoryController {
 
     @OperationLog("删除分类")
     @DeleteMapping("/{id}")
-    public JsonResult remove(@NotNull @PathVariable("id") Long id) {
+    public JsonResult batchRemove(@NotNull @PathVariable("id") Long id) {
         categoryService.removeById(id);
         return JsonResult.ok();
     }
 
     @OperationLog("批量删除分类")
     @DeleteMapping
-    public JsonResult remove(@NotEmpty @RequestBody List<Long> idList) {
-        categoryService.removeByIds(idList);
+    public JsonResult batchRemove(@NotEmpty @RequestBody List<Long> idList) {
+        categoryService.removeByIdList(idList);
         return JsonResult.ok();
     }
 

@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
-import site.alanliang.geekblog.entity.Article;
+import site.alanliang.geekblog.model.Article;
 import site.alanliang.geekblog.vo.ArticleDateVO;
 
 import java.util.List;

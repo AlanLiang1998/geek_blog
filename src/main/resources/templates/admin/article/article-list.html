@@ -143,8 +143,13 @@
                     {
                         field: 'title', width: 250, title: '标题', sort: true, templet: function (data) {
                             let href = '/article/' + data.id;
-                            //return '<a href=' + href + ' style="color: #01AAED;">' + data.title + '</a>';
                             return '<a href=' + href + ' style="color: #01AAED;" target="_blank">' + data.title + '</a>'
+                        }
+                    },
+                    {
+                        field: 'cover', width: 150, title: '封面', templet: function (data) {
+                            let cover = data.cover;
+                            return '<img src='+cover+'></img>'
                         }
                     },
                     {

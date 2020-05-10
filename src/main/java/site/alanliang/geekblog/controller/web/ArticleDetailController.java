@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import site.alanliang.geekblog.anntation.AccessLog;
-import site.alanliang.geekblog.entity.Article;
+import site.alanliang.geekblog.model.Article;
 import site.alanliang.geekblog.vo.ArticleDetailVO;
 import site.alanliang.geekblog.service.ArticleService;
 
@@ -25,7 +25,6 @@ public class ArticleDetailController {
     @Autowired
     private ArticleService articleService;
 
-    @AccessLog("阅读文章")
     @GetMapping("/article/{id}")
     public String articleDetail(@PathVariable("id") Long id, Model model) {
         model.addAttribute("article", articleService.getDetailById(id));

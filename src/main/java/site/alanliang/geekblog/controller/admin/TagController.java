@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import site.alanliang.geekblog.anntation.OperationLog;
 import site.alanliang.geekblog.common.JsonResult;
 import site.alanliang.geekblog.common.TableResult;
-import site.alanliang.geekblog.entity.Tag;
+import site.alanliang.geekblog.model.Tag;
 import site.alanliang.geekblog.query.TagQuery;
 import site.alanliang.geekblog.service.TagService;
 
@@ -34,7 +34,7 @@ public class TagController {
 
     @GetMapping
     public JsonResult listAll() {
-        return JsonResult.ok(tagService.list());
+        return JsonResult.ok(tagService.listAll());
     }
 
     /**
@@ -77,15 +77,15 @@ public class TagController {
 
     @OperationLog("删除标签")
     @DeleteMapping("/{id}")
-    public JsonResult remove(@NotNull @PathVariable("id") Long id) {
+    public JsonResult batchRemove(@NotNull @PathVariable("id") Long id) {
         tagService.removeById(id);
         return JsonResult.ok();
     }
 
     @OperationLog("批量删除标签")
     @DeleteMapping
-    public JsonResult remove(@NotEmpty @RequestBody List<Long> idList) {
-        tagService.removeByIds(idList);
+    public JsonResult batchRemove(@NotEmpty @RequestBody List<Long> idList) {
+        tagService.removeByIdList(idList);
         return JsonResult.ok();
     }
 

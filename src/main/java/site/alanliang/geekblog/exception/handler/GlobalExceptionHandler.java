@@ -12,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import site.alanliang.geekblog.common.JsonResult;
 import site.alanliang.geekblog.common.ResultEnum;
 import site.alanliang.geekblog.exception.BadRequestException;
-import site.alanliang.geekblog.exception.NameNotUniqueException;
+import site.alanliang.geekblog.exception.EntityExistException;
 import site.alanliang.geekblog.utils.AjaxUtil;
 
 import javax.servlet.http.HttpServletRequest;
@@ -27,9 +27,9 @@ import javax.servlet.http.HttpServletRequest;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(NameNotUniqueException.class)
+    @ExceptionHandler(EntityExistException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public JsonResult handleNameNotUniqueException(NameNotUniqueException exception) {
+    public JsonResult handleNameNotUniqueException(EntityExistException exception) {
         log.error("参数验证失败", exception);
         return JsonResult.build(HttpStatus.BAD_REQUEST.value(), exception.getMessage());
     }

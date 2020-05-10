@@ -2,7 +2,7 @@ package site.alanliang.geekblog.vo;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.Data;
-import site.alanliang.geekblog.entity.Article;
+import site.alanliang.geekblog.model.Article;
 
 import java.util.List;
 

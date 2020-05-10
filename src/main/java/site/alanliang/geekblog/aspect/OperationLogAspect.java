@@ -9,7 +9,7 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import site.alanliang.geekblog.entity.SysOperationLog;
+import site.alanliang.geekblog.model.OperationLog;
 import site.alanliang.geekblog.service.OperationLogService;
 import site.alanliang.geekblog.utils.RequestHolder;
 import site.alanliang.geekblog.utils.StringUtils;
@@ -52,7 +52,7 @@ public class OperationLogAspect {
         Object result;
         currentTime.set(System.currentTimeMillis());
         result = joinPoint.proceed();
-        SysOperationLog log = new SysOperationLog("INFO", System.currentTimeMillis() - currentTime.get());
+        OperationLog log = new OperationLog("INFO", System.currentTimeMillis() - currentTime.get());
         currentTime.remove();
         HttpServletRequest request = RequestHolder.getHttpServletRequest();
         operationLogService.save(getUsername(), StringUtils.getBrowser(request), StringUtils.getIp(request), joinPoint, log);
@@ -67,7 +67,7 @@ public class OperationLogAspect {
      */
     @AfterThrowing(pointcut = "logPointcut()", throwing = "e")
     public void logAfterThrowing(JoinPoint joinPoint, Throwable e) {
-        SysOperationLog log = new SysOperationLog("ERROR", System.currentTimeMillis() - currentTime.get());
+        OperationLog log = new OperationLog("ERROR", System.currentTimeMillis() - currentTime.get());
         currentTime.remove();
         log.setExceptionDetail(ThrowableUtil.getStackTrace(e).getBytes());
         HttpServletRequest request = RequestHolder.getHttpServletRequest();

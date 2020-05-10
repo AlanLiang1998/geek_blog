@@ -8,10 +8,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import site.alanliang.geekblog.common.Constant;
 import site.alanliang.geekblog.dao.TagMapper;
-import site.alanliang.geekblog.entity.Article;
-import site.alanliang.geekblog.entity.ArticleTag;
-import site.alanliang.geekblog.entity.Tag;
-import site.alanliang.geekblog.exception.NameNotUniqueException;
+import site.alanliang.geekblog.model.Article;
+import site.alanliang.geekblog.model.ArticleTag;
+import site.alanliang.geekblog.model.Tag;
 import site.alanliang.geekblog.query.ArticleQuery;
 import site.alanliang.geekblog.dao.ArticleMapper;
 import site.alanliang.geekblog.dao.ArticleTagMapper;
@@ -19,7 +18,6 @@ import site.alanliang.geekblog.query.ArchivesQuery;
 import site.alanliang.geekblog.service.ArticleService;
 import site.alanliang.geekblog.vo.ArticleDateVO;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -136,7 +134,7 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void removeByIds(List<Long> idList) {
+    public void removeByIdList(List<Long> idList) {
         articleMapper.deleteBatchIds(idList);
     }
 

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="site.alanliang.geekblog.dao.ArticleMapper">
-    <resultMap id="tableResultMap" type="site.alanliang.geekblog.entity.Article">
+    <resultMap id="tableResultMap" type="site.alanliang.geekblog.model.Article">
         <id property="id" column="id"/>
         <result property="title" column="title"/>
+        <result property="cover" column="cover"/>
         <result property="type" column="type"/>
         <result property="comments" column="comments"/>
         <result property="views" column="views"/>
@@ -15,7 +16,7 @@
         <result property="recommend" column="recommend"/>
         <result property="createTime" column="create_time"/>
         <result property="updateTime" column="update_time"/>
-        <association property="category" javaType="site.alanliang.geekblog.entity.Category">
+        <association property="category" javaType="site.alanliang.geekblog.model.Category">
             <id property="id" column="cid"/>
             <id property="name" column="cname"/>
             <id property="color" column="color"/>
@@ -23,31 +24,31 @@
         <collection property="tagList" column="id" select="site.alanliang.geekblog.dao.TagMapper.selectByArticleId"/>
     </resultMap>
 
-    <resultMap id="recommendResultMap" type="site.alanliang.geekblog.entity.Article">
+    <resultMap id="recommendResultMap" type="site.alanliang.geekblog.model.Article">
         <id property="id" column="id"/>
         <result property="title" column="title"/>
         <result property="summary" column="summary"/>
         <result property="cover" column="cover"/>
-        <association property="category" javaType="site.alanliang.geekblog.entity.Category">
+        <association property="category" javaType="site.alanliang.geekblog.model.Category">
             <id property="id" column="cid"/>
             <id property="name" column="cname"/>
         </association>
     </resultMap>
 
-    <resultMap id="previewResultMap" type="site.alanliang.geekblog.entity.Article">
+    <resultMap id="previewResultMap" type="site.alanliang.geekblog.model.Article">
         <id property="id" column="id"/>
         <result property="title" column="title"/>
         <result property="summary" column="summary"/>
         <result property="cover" column="cover"/>
         <result property="createTime" column="create_time"/>
-        <association property="category" javaType="site.alanliang.geekblog.entity.Category">
+        <association property="category" javaType="site.alanliang.geekblog.model.Category">
             <id property="id" column="cid"/>
             <result property="name" column="cname"/>
         </association>
         <collection property="tagList" column="id" select="site.alanliang.geekblog.dao.TagMapper.selectByArticleId"/>
     </resultMap>
 
-    <resultMap id="detailResultMap" type="site.alanliang.geekblog.entity.Article">
+    <resultMap id="detailResultMap" type="site.alanliang.geekblog.model.Article">
         <id property="id" column="id"/>
         <result property="title" column="title"/>
         <result property="cover" column="cover"/>
@@ -59,11 +60,11 @@
         <result property="commentable" column="commentable"/>
         <result property="appreciable" column="appreciable"/>
         <result property="createTime" column="create_time"/>
-        <association property="author" javaType="site.alanliang.geekblog.entity.SysUser">
+        <association property="author" javaType="site.alanliang.geekblog.model.User">
             <id property="id" column="uid"/>
             <result property="username" column="username"/>
         </association>
-        <association property="category" javaType="site.alanliang.geekblog.entity.Category">
+        <association property="category" javaType="site.alanliang.geekblog.model.Category">
             <id property="id" column="cid"/>
             <result property="name" column="cname"/>
         </association>
@@ -76,7 +77,8 @@
 
     <select id="listTableByPage" resultMap="tableResultMap"
             parameterType="com.baomidou.mybatisplus.extension.plugins.pagination.Page">
-        select ta.id, ta.title, ta.type, ta.comments, ta.views, ta.likes, ta.published, ta.commentable, ta.appreciable,
+        select ta.id, ta.title, ta.type, ta.cover, ta.comments, ta.views, ta.likes, ta.published, ta.commentable,
+        ta.appreciable,
         ta.top, ta.recommend,
         ta.create_time, ta.update_time, tc.id as cid, tc.name as cname, tc.color
         from t_article ta

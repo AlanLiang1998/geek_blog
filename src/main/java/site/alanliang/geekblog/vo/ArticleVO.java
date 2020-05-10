@@ -2,7 +2,7 @@ package site.alanliang.geekblog.vo;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import site.alanliang.geekblog.entity.Article;
+import site.alanliang.geekblog.model.Article;
 
 import javax.validation.constraints.Size;
 import java.util.List;

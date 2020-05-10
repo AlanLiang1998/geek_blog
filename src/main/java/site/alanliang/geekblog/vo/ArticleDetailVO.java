@@ -1,7 +1,7 @@
 package site.alanliang.geekblog.vo;
 
 import lombok.Data;
-import site.alanliang.geekblog.entity.Article;
+import site.alanliang.geekblog.model.Article;
 
 /**
  * @Descriptin TODO

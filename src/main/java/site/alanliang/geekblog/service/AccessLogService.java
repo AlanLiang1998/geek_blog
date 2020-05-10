@@ -3,7 +3,7 @@ package site.alanliang.geekblog.service;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.springframework.scheduling.annotation.Async;
-import site.alanliang.geekblog.entity.SysAccessLog;
+import site.alanliang.geekblog.model.AccessLog;
 import site.alanliang.geekblog.query.LogQuery;
 
 import java.util.List;
@@ -19,7 +19,7 @@ public interface AccessLogService {
      * @param log       日志实体
      */
     @Async
-    void save(String username, String browser, String ip, ProceedingJoinPoint joinPoint, SysAccessLog log);
+    void save(String username, String browser, String ip, ProceedingJoinPoint joinPoint, AccessLog log);
 
     /**
      * 分页获取所有日志
@@ -29,7 +29,7 @@ public interface AccessLogService {
      * @param logQuery
      * @return 日志列表
      */
-    Page<SysAccessLog> listByPage(Integer current, Integer size, LogQuery logQuery);
+    Page<AccessLog> listByPage(Integer current, Integer size, LogQuery logQuery);
 
     /**
      * 根据ID删除日志
@@ -43,5 +43,5 @@ public interface AccessLogService {
      *
      * @param idList 日志ID列表
      */
-    void removeByIds(List<Long> idList);
+    void removeByIdList(List<Long> idList);
 }

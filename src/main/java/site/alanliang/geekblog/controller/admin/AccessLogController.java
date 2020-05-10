@@ -7,7 +7,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import site.alanliang.geekblog.common.JsonResult;
 import site.alanliang.geekblog.common.TableResult;
-import site.alanliang.geekblog.entity.SysAccessLog;
+import site.alanliang.geekblog.model.AccessLog;
 import site.alanliang.geekblog.query.LogQuery;
 import site.alanliang.geekblog.service.AccessLogService;
 
@@ -46,7 +46,7 @@ public class AccessLogController {
     public TableResult listByPage(@RequestParam(value = "page", defaultValue = "1") Integer page,
                                   @RequestParam(value = "limit", defaultValue = "10") Integer limit,
                                   LogQuery logQuery) {
-        Page<SysAccessLog> pageInfo = accessLogService.listByPage(page, limit, logQuery);
+        Page<AccessLog> pageInfo = accessLogService.listByPage(page, limit, logQuery);
         return TableResult.tableOk(pageInfo.getRecords(), pageInfo.getTotal());
     }
 
@@ -58,7 +58,7 @@ public class AccessLogController {
 
     @DeleteMapping
     public JsonResult removeBatch(@NotEmpty @RequestBody List<Long> idList) {
-        accessLogService.removeByIds(idList);
+        accessLogService.removeByIdList(idList);
         return JsonResult.ok();
     }
 }

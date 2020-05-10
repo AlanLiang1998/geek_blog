@@ -716,7 +716,16 @@
         lang: 'zh-cn',
         placeholder: '你想要对博主说什么呢...',
     });
+    $(document).ready(function () {
+        $('.vemoji-btn').text('😀');
+        $("#vcomments").on('click', 'span.vat', function () {
+            $(this).parent('div.vmeta').next("div.vcontent").after($("div.vwrap"));
+            $('textarea#veditor').focus();
+        })
+    })
+
 </script>
+
 <!--目录-->
 <script src="/static/web/js/tocbot.min.js"></script>
 <script>

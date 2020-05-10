@@ -8,10 +8,9 @@ import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import site.alanliang.geekblog.anntation.AccessLog;
 import site.alanliang.geekblog.common.Constant;
 import site.alanliang.geekblog.dao.AccessLogMapper;
-import site.alanliang.geekblog.entity.SysAccessLog;
+import site.alanliang.geekblog.model.AccessLog;
 import site.alanliang.geekblog.query.LogQuery;
 import site.alanliang.geekblog.service.AccessLogService;
 import site.alanliang.geekblog.utils.StringUtils;
@@ -35,11 +34,11 @@ public class AccessLogServiceImpl implements AccessLogService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void save(String username, String browser, String ip, ProceedingJoinPoint joinPoint, SysAccessLog log) {
+    public void save(String username, String browser, String ip, ProceedingJoinPoint joinPoint, AccessLog log) {
 
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         Method method = signature.getMethod();
-        AccessLog aopLog = method.getAnnotation(AccessLog.class);
+        site.alanliang.geekblog.anntation.AccessLog aopLog = method.getAnnotation(site.alanliang.geekblog.anntation.AccessLog.class);
 
         // 方法路径
         String methodName = joinPoint.getTarget().getClass().getName() + "." + signature.getName() + "()";
@@ -81,7 +80,7 @@ public class AccessLogServiceImpl implements AccessLogService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void removeByIds(List<Long> idList) {
+    public void removeByIdList(List<Long> idList) {
         accessLogMapper.deleteBatchIds(idList);
     }
 
@@ -92,9 +91,9 @@ public class AccessLogServiceImpl implements AccessLogService {
     }
 
     @Override
-    public Page<SysAccessLog> listByPage(Integer current, Integer size, LogQuery logQuery) {
-        Page<SysAccessLog> page = new Page<>(current, size);
-        QueryWrapper<SysAccessLog> wrapper = new QueryWrapper<>();
+    public Page<AccessLog> listByPage(Integer current, Integer size, LogQuery logQuery) {
+        Page<AccessLog> page = new Page<>(current, size);
+        QueryWrapper<AccessLog> wrapper = new QueryWrapper<>();
         wrapper.select("id", "request_ip", "address", "description", "browser", "time", "create_time")
                 .orderByDesc("create_time");
         if (!StringUtils.isEmpty(logQuery.getRequestIp())) {

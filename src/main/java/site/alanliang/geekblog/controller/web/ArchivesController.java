@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import site.alanliang.geekblog.anntation.AccessLog;
 import site.alanliang.geekblog.common.Constant;
-import site.alanliang.geekblog.entity.Article;
+import site.alanliang.geekblog.model.Article;
 import site.alanliang.geekblog.vo.ArchivesVO;
 import site.alanliang.geekblog.query.ArchivesQuery;
 import site.alanliang.geekblog.service.ArticleService;

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="site.alanliang.geekblog.dao.CategoryMapper">
-    <select id="listByArticleCount" resultType="site.alanliang.geekblog.entity.Category">
+    <select id="listByArticleCount" resultType="site.alanliang.geekblog.model.Category">
         select tc.id, tc.name, tc.color, count(ta.id) articleCount
         from t_category tc
         left join t_article ta
@@ -9,7 +9,7 @@
         where tc.display = 1
         group by tc.id
     </select>
-    <select id="listTableByPage" resultType="site.alanliang.geekblog.entity.Category"
+    <select id="listTableByPage" resultType="site.alanliang.geekblog.model.Category"
             parameterType="com.baomidou.mybatisplus.extension.plugins.pagination.Page">
         select tc.id, tc.name, tc.display, tc.introduction, tc.color, tc.create_time, tc.update_time, count(ta.id)
         articleCount

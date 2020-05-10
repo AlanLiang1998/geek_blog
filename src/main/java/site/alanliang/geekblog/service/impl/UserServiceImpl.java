@@ -4,9 +4,19 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import site.alanliang.geekblog.entity.SysUser;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
+import site.alanliang.geekblog.dao.RoleUserMapper;
+import site.alanliang.geekblog.model.RoleUser;
+import site.alanliang.geekblog.model.User;
 import site.alanliang.geekblog.dao.UserMapper;
+import site.alanliang.geekblog.exception.EntityExistException;
+import site.alanliang.geekblog.query.UserQuery;
 import site.alanliang.geekblog.service.UserService;
+import site.alanliang.geekblog.utils.StringUtils;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @Descriptin TODO
@@ -19,17 +29,135 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserMapper userMapper;
-
+    @Autowired
+    private RoleUserMapper roleUserMapper;
 
     @Override
-    public Page<SysUser> listByPage(int current, int size) {
-        Page<SysUser> page = new Page<>(current, size);
-        return userMapper.selectPage(page, null);
+    public User getById(Long id) {
+        QueryWrapper<User> userWrapper = new QueryWrapper<>();
+        userWrapper.select("id", "username", "nickname", "sex", "phone", "email", "status")
+                .eq("id", id);
+        User user = userMapper.selectOne(userWrapper);
+        QueryWrapper<RoleUser> roleUserWrapper = new QueryWrapper<>();
+        roleUserWrapper.select("role_id")
+                .eq("user_id", id);
+        List<RoleUser> roleUsers = roleUserMapper.selectList(roleUserWrapper);
+        if (!CollectionUtils.isEmpty(roleUsers)) {
+            user.setRoleId(roleUsers.get(0).getRoleId());
+        }
+        return user;
     }
 
     @Override
-    public SysUser checkUser(String username, String password) {
-        QueryWrapper<SysUser> wrapper = new QueryWrapper<>();
+    @Transactional(rollbackFor = Exception.class)
+    public void removeById(Long id) {
+        userMapper.deleteById(id);
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void removeByIdList(List<Long> idList) {
+        userMapper.deleteBatchIds(idList);
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void changeStatus(Long userId) {
+        QueryWrapper<User> wrapper = new QueryWrapper<>();
+        wrapper.select("status");
+        User user = userMapper.selectById(userId);
+        if (user.getStatus() == 1) {
+            user.setStatus(0);
+        } else if (user.getStatus() == 0) {
+            user.setStatus(1);
+        }
+        user.setId(userId);
+        userMapper.updateById(user);
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void saveOfUpdate(User user) {
+        if (user.getId() == null) {
+            //保存
+            //验证用户名是否唯一
+            QueryWrapper<User> wrapper = new QueryWrapper<>();
+            wrapper.eq("username", user.getUsername());
+            if (null != userMapper.selectOne(wrapper)) {
+                throw new EntityExistException("用户名：" + user.getUsername() + "已存在");
+            }
+            //验证邮箱是否唯一
+            wrapper.clear();
+            wrapper.eq("email", user.getEmail());
+            if (null != userMapper.selectOne(wrapper)) {
+                throw new EntityExistException("邮箱：" + user.getEmail() + "已存在");
+            }
+            //验证手机号码是否唯一
+            wrapper.clear();
+            wrapper.eq("phone", user.getPhone());
+            if (null != userMapper.selectOne(wrapper)) {
+                throw new EntityExistException("手机号码：" + user.getPhone() + "已存在");
+            }
+            userMapper.insert(user);
+            RoleUser roleUser = new RoleUser();
+            roleUser.setRoleId(user.getRoleId());
+            roleUser.setUserId(user.getId());
+            roleUserMapper.insert(roleUser);
+        } else {
+            //更新
+            //验证手机号码是否唯一
+            QueryWrapper<User> userWrapper = new QueryWrapper<>();
+            userWrapper.eq("phone", user.getPhone());
+            List<User> users = userMapper.selectList(userWrapper);
+            users = users.stream().filter(u -> !u.getId().equals(user.getId())).collect(Collectors.toList());
+            if (!CollectionUtils.isEmpty(users)) {
+                throw new EntityExistException("手机号码:" + user.getPhone() + " 已存在");
+            }
+            //验证邮箱是否唯一
+            userWrapper.clear();
+            userWrapper.eq("email", user.getPhone());
+            users = userMapper.selectList(userWrapper);
+            users = users.stream().filter(u -> !u.getId().equals(user.getId())).collect(Collectors.toList());
+            if (!CollectionUtils.isEmpty(users)) {
+                throw new EntityExistException("邮箱:" + user.getEmail() + " 已被注册");
+            }
+            //首先更新用户
+            userMapper.updateById(user);
+            //再添加用户角色关联
+            RoleUser roleUser = new RoleUser();
+            roleUser.setUserId(user.getId());
+            roleUser.setRoleId(user.getRoleId());
+            QueryWrapper<RoleUser> roleUserWrapper = new QueryWrapper<>();
+            roleUserWrapper.eq("user_id", user.getId());
+            if (!CollectionUtils.isEmpty(roleUserMapper.selectList(roleUserWrapper))) {
+                //有记录则先删除
+                roleUserMapper.delete(roleUserWrapper);
+            }
+            //最后添加
+            roleUserMapper.insert(roleUser);
+        }
+    }
+
+    @Override
+    public Page<User> listByPage(int current, int size, UserQuery userQuery) {
+        Page<User> page = new Page<>(current, size);
+        QueryWrapper<User> wrapper = new QueryWrapper<>();
+        wrapper.select("id", "username", "nickname", "sex", "email", "phone", "status", "create_time", "update_time");
+        if (!StringUtils.isEmpty(userQuery.getUsername())) {
+            wrapper.like("username", userQuery.getUsername());
+        }
+        if (!StringUtils.isEmpty(userQuery.getEmail())) {
+            wrapper.like("email", userQuery.getEmail());
+        }
+        if (userQuery.getStartDate() != null && userQuery.getEndDate() != null) {
+            wrapper.between("create_time", userQuery.getStartDate(), userQuery.getEndDate());
+        }
+        return userMapper.selectPage(page, wrapper);
+    }
+
+    @Override
+    public User checkUser(String username, String password) {
+        QueryWrapper<User> wrapper = new QueryWrapper<>();
         wrapper.select("id", "username")
                 .eq("username", username)
                 .eq("password", password);

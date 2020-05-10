@@ -6,7 +6,7 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import site.alanliang.geekblog.entity.SysAccessLog;
+import site.alanliang.geekblog.model.AccessLog;
 import site.alanliang.geekblog.service.AccessLogService;
 import site.alanliang.geekblog.utils.RequestHolder;
 import site.alanliang.geekblog.utils.StringUtils;
@@ -49,7 +49,7 @@ public class AccessLogAspect {
         Object result;
         currentTime.set(System.currentTimeMillis());
         result = joinPoint.proceed();
-        SysAccessLog log = new SysAccessLog("INFO", System.currentTimeMillis() - currentTime.get());
+        AccessLog log = new AccessLog("INFO", System.currentTimeMillis() - currentTime.get());
         currentTime.remove();
         HttpServletRequest request = RequestHolder.getHttpServletRequest();
         accessLogService.save(getUsername(), StringUtils.getBrowser(request), StringUtils.getIp(request), joinPoint, log);
@@ -64,7 +64,7 @@ public class AccessLogAspect {
      */
     @AfterThrowing(pointcut = "logPointcut()", throwing = "e")
     public void logAfterThrowing(JoinPoint joinPoint, Throwable e) {
-        SysAccessLog log = new SysAccessLog("ERROR", System.currentTimeMillis() - currentTime.get());
+        AccessLog log = new AccessLog("ERROR", System.currentTimeMillis() - currentTime.get());
         currentTime.remove();
         log.setExceptionDetail(ThrowableUtil.getStackTrace(e).getBytes());
         HttpServletRequest request = RequestHolder.getHttpServletRequest();

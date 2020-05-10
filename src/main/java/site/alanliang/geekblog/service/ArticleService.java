@@ -2,7 +2,7 @@ package site.alanliang.geekblog.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import site.alanliang.geekblog.entity.Article;
+import site.alanliang.geekblog.model.Article;
 import site.alanliang.geekblog.query.ArticleQuery;
 import site.alanliang.geekblog.query.ArchivesQuery;
 import site.alanliang.geekblog.vo.ArticleDateVO;
@@ -59,7 +59,7 @@ public interface ArticleService {
      *
      * @param idList 文章ID列表
      */
-    void removeByIds(List<Long> idList);
+    void removeByIdList(List<Long> idList);
 
     /**
      * 查询置顶文章

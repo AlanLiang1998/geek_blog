@@ -3,7 +3,7 @@ package site.alanliang.geekblog.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import site.alanliang.geekblog.entity.SysMenu;
+import site.alanliang.geekblog.model.Menu;
 import site.alanliang.geekblog.dao.MenuMapper;
 import site.alanliang.geekblog.service.MenuService;
 import site.alanliang.geekblog.vo.InitInfoVO;
@@ -25,9 +25,9 @@ public class MenuServiceImpl implements MenuService {
 
     @Override
     public InitInfoVO menu() {
-        QueryWrapper<SysMenu> wrapper = new QueryWrapper<>();
+        QueryWrapper<Menu> wrapper = new QueryWrapper<>();
         wrapper.eq("status", true);
-        List<SysMenu> menuList = menuMapper.selectList(wrapper);
+        List<Menu> menuList = menuMapper.selectList(wrapper);
         return InitInfoVO.init(menuList);
 
     }

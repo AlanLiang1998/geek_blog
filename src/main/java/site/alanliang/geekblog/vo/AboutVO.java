@@ -1,8 +1,8 @@
 package site.alanliang.geekblog.vo;
 
 import lombok.Data;
-import site.alanliang.geekblog.entity.Category;
-import site.alanliang.geekblog.entity.Tag;
+import site.alanliang.geekblog.model.Category;
+import site.alanliang.geekblog.model.Tag;
 
 import java.util.List;
 

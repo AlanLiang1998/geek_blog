@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import site.alanliang.geekblog.anntation.AccessLog;
 import site.alanliang.geekblog.common.JsonResult;
-import site.alanliang.geekblog.entity.SysUser;
+import site.alanliang.geekblog.model.User;
 import site.alanliang.geekblog.exception.BadRequestException;
 import site.alanliang.geekblog.service.MenuService;
 import site.alanliang.geekblog.service.UserService;
@@ -52,7 +52,7 @@ public class IndexController {
     public JsonResult toLogin(@RequestParam("username") String username,
                               @RequestParam("password") String password,
                               HttpSession session) {
-        SysUser user = userService.checkUser(username, MD5Util.code(password));
+        User user = userService.checkUser(username, MD5Util.code(password));
         if (user != null) {
             session.setAttribute("user", user);
             return JsonResult.ok();

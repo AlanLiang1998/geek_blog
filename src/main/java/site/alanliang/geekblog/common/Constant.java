@@ -49,4 +49,14 @@ public interface Constant {
     Integer LOW_REQUEST_TIME = 10;
 
     Integer HIGH_REQUEST_TIME = 1000;
+
+    /**
+     * 默认密码
+     */
+    String DEFAULT_PASSWORD = "123456";
+
+    /**
+     * 默认头像
+     */
+    String DEFAULT_AVATAR = "http://q8rsjstig.bkt.clouddn.com/note/default_avatar.jpg";
 }

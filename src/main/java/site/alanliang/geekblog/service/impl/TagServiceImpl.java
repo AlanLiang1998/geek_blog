@@ -7,8 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
-import site.alanliang.geekblog.entity.Tag;
-import site.alanliang.geekblog.exception.NameNotUniqueException;
+import site.alanliang.geekblog.model.Tag;
+import site.alanliang.geekblog.exception.EntityExistException;
 import site.alanliang.geekblog.dao.TagMapper;
 import site.alanliang.geekblog.query.TagQuery;
 import site.alanliang.geekblog.service.TagService;
@@ -50,7 +50,7 @@ public class TagServiceImpl implements TagService {
             //新增
             //检查分类名称是否唯一
             if (tagMapper.selectOne(wrapper) != null) {
-                throw new NameNotUniqueException("标签名称已存在");
+                throw new EntityExistException("标签名称已存在");
             }
             tagMapper.insert(tag);
         } else {
@@ -58,7 +58,7 @@ public class TagServiceImpl implements TagService {
             List<Tag> tags = tagMapper.selectList(wrapper);
             tags = tags.stream().filter(c -> !c.getId().equals(tag.getId())).collect(Collectors.toList());
             if (!CollectionUtils.isEmpty(tags)) {
-                throw new NameNotUniqueException("标签名称已存在");
+                throw new EntityExistException("标签名称已存在");
             }
             tagMapper.updateById(tag);
         }
@@ -72,7 +72,7 @@ public class TagServiceImpl implements TagService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void removeByIds(List<Long> idList) {
+    public void removeByIdList(List<Long> idList) {
         tagMapper.deleteBatchIds(idList);
     }
 
@@ -106,7 +106,7 @@ public class TagServiceImpl implements TagService {
     }
 
     @Override
-    public List<Tag> list() {
+    public List<Tag> listAll() {
         return tagMapper.selectList(null);
     }
 }

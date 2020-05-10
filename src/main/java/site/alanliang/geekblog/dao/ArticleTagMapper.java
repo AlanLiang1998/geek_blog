@@ -3,7 +3,7 @@ package site.alanliang.geekblog.dao;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
-import site.alanliang.geekblog.entity.ArticleTag;
+import site.alanliang.geekblog.model.ArticleTag;
 
 import java.util.List;
 
