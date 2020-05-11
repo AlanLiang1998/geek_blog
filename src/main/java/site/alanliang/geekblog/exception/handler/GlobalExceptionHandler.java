@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.ModelAndView;
 import site.alanliang.geekblog.common.JsonResult;
 import site.alanliang.geekblog.common.ResultEnum;
+import site.alanliang.geekblog.exception.AssociationExistException;
 import site.alanliang.geekblog.exception.BadRequestException;
 import site.alanliang.geekblog.exception.EntityExistException;
 import site.alanliang.geekblog.utils.AjaxUtil;
@@ -29,8 +30,15 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(EntityExistException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public JsonResult handleNameNotUniqueException(EntityExistException exception) {
+    public JsonResult handleEntityExistException(EntityExistException exception) {
         log.error("参数验证失败", exception);
+        return JsonResult.build(HttpStatus.BAD_REQUEST.value(), exception.getMessage());
+    }
+
+    @ExceptionHandler(AssociationExistException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public JsonResult handleAssociationExistException(AssociationExistException exception) {
+        log.error("角色存在关联用户", exception);
         return JsonResult.build(HttpStatus.BAD_REQUEST.value(), exception.getMessage());
     }
 

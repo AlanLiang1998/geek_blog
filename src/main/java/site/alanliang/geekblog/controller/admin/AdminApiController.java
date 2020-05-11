@@ -7,10 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-import site.alanliang.geekblog.service.ArticleService;
-import site.alanliang.geekblog.service.CategoryService;
-import site.alanliang.geekblog.service.TagService;
-import site.alanliang.geekblog.service.UserService;
+import site.alanliang.geekblog.service.*;
 import site.alanliang.geekblog.service.impl.UserServiceImpl;
 
 /**
@@ -31,6 +28,8 @@ public class AdminApiController {
     private CategoryService categoryService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private RoleService roleService;
 
     @GetMapping("/api/{moduleName}/{pageName}")
     public ModelAndView getPage(@PathVariable("moduleName") String moduleName, @PathVariable("pageName") String pageName) {
@@ -62,5 +61,11 @@ public class AdminApiController {
     public String editUser(@PathVariable("id") Long id, Model model) {
         model.addAttribute("user", userService.getById(id));
         return "admin/user/user-edit";
+    }
+
+    @GetMapping("/role/{id}")
+    public String editRole(@PathVariable("id") Long id, Model model) {
+        model.addAttribute("role", roleService.getById(id));
+        return "admin/role/role-edit";
     }
 }

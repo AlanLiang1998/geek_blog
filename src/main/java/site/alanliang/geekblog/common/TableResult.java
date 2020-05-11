@@ -25,7 +25,7 @@ public class TableResult extends JsonResult {
     public static TableResult tableOk(Object data, Long count) {
         TableResult result = new TableResult();
         result.setCode(0);
-        result.setMsg("");
+        result.setMsg("ok");
         result.setCount(count);
         result.setData(data);
         return result;

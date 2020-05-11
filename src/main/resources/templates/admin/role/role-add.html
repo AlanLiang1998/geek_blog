@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>layui</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="/static/admin/layuimini/lib/layui-v2.5.5/css/layui.css" media="all">
+    <link rel="stylesheet" href="/static/admin/layuimini/css/public.css" media="all">
+    <link rel="stylesheet" href="/static/admin/ztree/zTreeStyle/zTreeStyle.css">
+    <style>
+        body {
+            background-color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+<form class="layui-form layuimini-form">
+    <div class="layui-form-item">
+        <label class="layui-form-label required">角色名称</label>
+        <div class="layui-input-block">
+            <input type="text" name="roleName" lay-verify="required|roleName" lay-reqtext="角色名称不能为空"
+                   placeholder="请输入角色名称"
+                   value=""
+                   class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">描述</label>
+        <div class="layui-input-block">
+            <textarea name="description" class="layui-textarea"
+                      placeholder="请输入角色描述" lay-verify="description"></textarea>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label required">级别</label>
+        <div class="layui-input-block">
+            <input type="number" name="rank" placeholder="请输入角色级别" value="" class="layui-input" lay-verify="number|rank"
+                   required="">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="saveBtn">确认保存</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+</form>
+<script src="/static/admin/layuimini/lib/jquery-3.4.1/jquery-3.4.1.min.js"></script>
+<script src="/static/admin/layuimini/lib/layui-v2.5.5/layui.js" charset="utf-8"></script>
+<script src="/static/admin/ztree/jquery.ztree.all-3.5.min.js"></script>
+<script src="/static/admin/ztree/ztree-menu.js"></script>
+<script>
+    layui.use(['form'], function () {
+        var form = layui.form,
+            layer = layui.layer,
+            $ = layui.jquery;
+
+        //自定义验证规则
+        form.verify({
+            //验证用户名
+            roleName: function (value) { //value：表单的值、item：表单的DOM对象
+                if (value.length < 2 || value.length > 16) {
+                    return '角色名称长度为2-16个字符'
+                }
+                if (!new RegExp("^[a-zA-Z0-9_\u4e00-\u9fa5\\s·]+$").test(value)) {
+                    return '角色名称不能有特殊字符';
+                }
+                if (/^\d+\d+\d$/.test(value)) {
+                    return '角色名称不能全为数字';
+                }
+            },
+            //验证描述
+            description: function (value) {
+                if (value.length > 100) {
+                    return '描述长度在100个字符以内'
+                }
+            },
+            //验证级别
+            rank: function (value) { //value：表单的值、item：表单的DOM对象
+                if (value < 1 || value > 1024) {
+                    return '级别数值在1-1024之间'
+                }
+            },
+        });
+
+        //监听提交
+        form.on('submit(saveBtn)', function (data) {
+            $.ajax({
+                url: '/admin/role',
+                type: 'POST',
+                data: JSON.stringify(data.field),
+                contentType: 'application/json',
+                success: function (result) {
+                    if (result.code === 200) {
+                        var parentLayer = parent.layer;
+                        layer.msg('保存成功', {icon: 1, time: 1000}, function () {
+                            var iframeIndex = parentLayer.getFrameIndex(window.name);
+                            parent.location.reload();
+                            parentLayer.close(iframeIndex);
+                        });
+                    }
+                },
+                error: function (XMLHttpRequest) {
+                    var result = JSON.parse(XMLHttpRequest.responseText);
+                    layer.alert(result.msg, {icon: 5});
+                }
+            });
+            return false;
+        });
+        //初始化zTree,第一个参数接收树形组件所在的ul元素ID，第二个参数接收配置项，第三个参数接收后台传来的json形式的菜单树
+        $.fn.zTree.init($("#treeDemo"), getSetting(), getMenuTree());
+    });
+
+</script>
+</body>
+</html>

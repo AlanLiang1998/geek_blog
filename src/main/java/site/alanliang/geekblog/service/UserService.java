@@ -15,7 +15,7 @@ public interface UserService {
      *
      * @param current   当前页码
      * @param size      页面大小
-     * @param userQuery
+     * @param userQuery 条件
      * @return 用户列表
      */
     Page<User> listByPage(int current, int size, UserQuery userQuery);

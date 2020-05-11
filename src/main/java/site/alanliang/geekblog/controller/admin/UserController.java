@@ -69,6 +69,7 @@ public class UserController {
         return JsonResult.ok();
     }
 
+    @OperationLog("修改用户")
     @PutMapping
     public JsonResult update(@Validated @RequestBody User user) {
         if (user.getStatus() == null) {
@@ -79,20 +80,21 @@ public class UserController {
         return JsonResult.ok();
     }
 
+    @OperationLog("修改状态")
     @PutMapping("/status")
     public JsonResult changeStatus(@NotNull @RequestParam("userId") Long userId) {
         userService.changeStatus(userId);
         return JsonResult.ok();
     }
 
-    @OperationLog("删除分类")
+    @OperationLog("删除用户")
     @DeleteMapping("/{id}")
     public JsonResult remove(@NotNull @PathVariable("id") Long id) {
         userService.removeById(id);
         return JsonResult.ok();
     }
 
-    @OperationLog("批量删除分类")
+    @OperationLog("批量删除用户")
     @DeleteMapping
     public JsonResult removeBatch(@NotEmpty @RequestBody List<Long> idList) {
         userService.removeByIdList(idList);
