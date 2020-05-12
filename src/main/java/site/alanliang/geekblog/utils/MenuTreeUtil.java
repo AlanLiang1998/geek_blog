@@ -1,5 +1,6 @@
 package site.alanliang.geekblog.utils;
 
+import site.alanliang.geekblog.vo.MenuSelectVO;
 import site.alanliang.geekblog.vo.MenuVO;
 
 import java.util.ArrayList;
@@ -16,21 +17,45 @@ public class MenuTreeUtil {
         List<MenuVO> retList = new ArrayList<MenuVO>();
         for (MenuVO parent : treeList) {
             if (pid.equals(parent.getPid())) {
-                retList.add(findChildren(parent, treeList));
+                retList.add(findChild(parent, treeList));
             }
         }
         return retList;
     }
-    private static MenuVO findChildren(MenuVO parent, List<MenuVO> treeList) {
+
+    private static MenuVO findChild(MenuVO parent, List<MenuVO> treeList) {
         for (MenuVO child : treeList) {
             if (parent.getId().equals(child.getPid())) {
                 if (parent.getChild() == null) {
                     parent.setChild(new ArrayList<>());
                 }
-                parent.getChild().add(findChildren(child, treeList));
+                parent.getChild().add(findChild(child, treeList));
             }
         }
         return parent;
     }
+
+    public static List<MenuSelectVO> toSelectTree(List<MenuSelectVO> treeList, Long pid) {
+        List<MenuSelectVO> retList = new ArrayList<MenuSelectVO>();
+        for (MenuSelectVO parent : treeList) {
+            if (pid.equals(parent.getPid())) {
+                retList.add(findChildren(parent, treeList));
+            }
+        }
+        return retList;
+    }
+
+    private static MenuSelectVO findChildren(MenuSelectVO parent, List<MenuSelectVO> treeList) {
+        for (MenuSelectVO children : treeList) {
+            if (parent.getValue().equals(children.getPid())) {
+                if (parent.getChildren() == null) {
+                    parent.setChildren(new ArrayList<>());
+                }
+                parent.getChildren().add(findChildren(children, treeList));
+            }
+        }
+        return parent;
+    }
+
 }
 

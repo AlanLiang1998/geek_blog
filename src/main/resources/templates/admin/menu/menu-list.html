@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>menu</title>
+    <link rel="stylesheet" href="/static/admin/layuimini/lib/layui-v2.5.5/css/layui.css" media="all">
+    <link rel="stylesheet" href="/static/admin/layuimini/css/public.css" media="all">
+    <link rel="stylesheet" href="/static/admin/layuimini/lib/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet">
+    <style>
+        .layui-btn:not(.layui-btn-lg ):not(.layui-btn-sm):not(.layui-btn-xs) {
+            height: 34px;
+            line-height: 34px;
+            padding: 0 8px;
+        }
+    </style>
+</head>
+<body>
+<div class="layuimini-container">
+    <div class="layuimini-main">
+        <div>
+            <div class="layui-btn-group">
+                <button class="layui-btn" id="btn-expand">全部展开</button>
+                <button class="layui-btn" id="btn-fold">全部折叠</button>
+                <button class="layui-btn" id="btn-add">添加菜单</button>
+            </div>
+            <table id="munu-table" class="layui-table" lay-filter="munu-table"></table>
+        </div>
+    </div>
+</div>
+<!-- 操作列 -->
+<script type="text/html" id="auth-state">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+
+<script src="/static/admin/layuimini/lib/layui-v2.5.5/layui.js" charset="utf-8"></script>
+<script src="/static/admin/layuimini/js/lay-config.js?v=1.0.4" charset="utf-8"></script>
+<script>
+    layui.use(['table', 'treetable', 'form'], function () {
+        var $ = layui.jquery;
+        var table = layui.table;
+        var treetable = layui.treetable;
+        var form = layui.form;
+
+        // 渲染表格
+        layer.load(2);
+        treetable.render({
+            treeColIndex: 1,
+            treeSpid: 0,
+            treeIdName: 'id',
+            treePidName: 'pid',
+            elem: '#munu-table',
+            url: '/admin/menu',
+            page: false,
+            cols: [
+                [
+                    {type: 'numbers'},
+                    {field: 'title', minWidth: 200, title: '菜单标题'},
+                    {field: 'authority', title: '权限标识'},
+                    {field: 'href', title: '菜单链接'},
+                    {field: 'sort', width: 80, align: 'center', title: '排序'},
+                    {
+                        field: 'icon', width: 80, align: 'center', title: '图标', templet: function (data) {
+                            return '<span><i class="' + data.icon + '"></i></span>'
+                        }
+                    },
+                    {
+                        field: 'type', width: 80, align: 'center', templet: function (data) {
+                            if (data.type === 1) {
+                                return '<span class="layui-badge layui-bg-gray">目录</span>';
+                            } else if (data.type === 2) {
+                                return '<span class="layui-badge layui-bg-blue">菜单</span>';
+                            } else if (data.type === 3) {
+                                return '<span class="layui-badge layui-bg-green">按钮</span>';
+                            }
+                        }, title: '类型'
+                    },
+                    {
+                        field: 'status', width: 80, align: 'center', title: '状态', templet: function (data) {
+                            return data.status ? '显示' : '隐藏';
+                        }
+                    },
+                    {templet: '#auth-state', width: 120, align: 'center', title: '操作'}
+
+                ]
+            ],
+            done: function () {
+                layer.closeAll('loading');
+            }
+        });
+
+        $('#btn-expand').click(function () {
+            treetable.expandAll('#munu-table');
+        });
+
+        $('#btn-fold').click(function () {
+            treetable.foldAll('#munu-table');
+        });
+
+        $('#btn-add').click(function () {
+            var index = layer.open({
+                title: '添加菜单',
+                type: 2,
+                shade: 0.2,
+                maxmin: true,
+                shadeClose: true,
+                area: ['50%', '90%'],
+                content: '/admin/api/menu/menu-add',
+            });
+            $(window).on("resize", function () {
+                layer.full(index);
+            });
+        });
+
+        //监听工具条
+        table.on('tool(munu-table)', function (obj) {
+            var data = obj.data;
+            var layEvent = obj.event;
+
+            if (layEvent === 'del') {
+                layer.confirm('确定删除这个菜单吗？', {icon: 3}, function (index) {
+                    $.ajax({
+                        url: '/admin/menu/' + data.id,
+                        type: 'DELETE',
+                        success: function (result) {
+                            if (result.code === 200) {
+                                obj.del();
+                                layer.close(index);
+                                layer.msg('删除成功', {icon: 1});
+                            }
+                        },
+                        error: function (result) {
+                            let error = JSON.parse(result.responseText);
+                            layer.alert(error.msg, {icon: 2});
+                        }
+                    });
+                });
+            } else if (layEvent === 'edit') {
+                var index = layer.open({
+                    title: '编辑菜单',
+                    type: 2,
+                    shade: 0.2,
+                    maxmin: true,
+                    shadeClose: true,
+                    area: ['50%', '80%'],
+                    content: '/admin/menu/' + data.id,
+                });
+                $(window).on("resize", function () {
+                    layer.full(index);
+                });
+                return false;
+            }
+        });
+    });
+</script>
+</body>
+</html>

@@ -30,6 +30,9 @@ public class AdminApiController {
     private UserService userService;
     @Autowired
     private RoleService roleService;
+    @Autowired
+    private MenuService menuService;
+
 
     @GetMapping("/api/{moduleName}/{pageName}")
     public ModelAndView getPage(@PathVariable("moduleName") String moduleName, @PathVariable("pageName") String pageName) {
@@ -67,5 +70,11 @@ public class AdminApiController {
     public String editRole(@PathVariable("id") Long id, Model model) {
         model.addAttribute("role", roleService.getById(id));
         return "admin/role/role-edit";
+    }
+
+    @GetMapping("/menu/{id}")
+    public String editMenu(@PathVariable("id") Long id, Model model) {
+        model.addAttribute("menu", menuService.getById(id));
+        return "admin/menu/menu-edit";
     }
 }

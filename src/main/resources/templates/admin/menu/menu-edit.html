@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>layui</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="/static/admin/layuimini/lib/layui-v2.5.5/css/layui.css" media="all">
+    <link rel="stylesheet" href="/static/admin/layuimini/css/public.css" media="all">
+    <link rel="stylesheet" href="/static/admin/layuimini/lib/font-awesome-4.7.0/css/font-awesome.min.css">
+    <style>
+        body {
+            background-color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+<form class="layui-form layuimini-form">
+    <input type="hidden" name="id"/>
+    <div class="layui-form-item">
+        <label class="layui-form-label required">菜单标题</label>
+        <div class="layui-input-block">
+            <input type="text" name="title" lay-verify="required|title" lay-reqtext=">菜单标题不能为空"
+                   placeholder="请输入菜单标题"
+                   value=""
+                   class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">权限标识</label>
+        <div class="layui-input-block">
+            <input type="text" name="authority" placeholder="请输入权限标识" value="" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">菜单链接</label>
+        <div class="layui-input-block">
+            <input type="text" name="href" placeholder="请输入菜单链接" value="" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label required">菜单排序</label>
+        <div class="layui-input-block">
+            <input type="number" name="sort" placeholder="请输入排序值(1~1024)" value="" class="layui-input"
+                   lay-verify="number|sort">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label for="iconPicker" class="layui-form-label">菜单图标</label>
+        <div class="layui-input-block">
+            <input type="text" id="iconPicker" lay-filter="iconPicker" class="hide" style="display: none;">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label required">菜单类型</label>
+        <div class="layui-input-block">
+            <input type="radio" name="type" value="1" title="目录">
+            <input type="radio" name="type" value="2" title="菜单">
+            <input type="radio" name="type" value="3" title="按钮">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label required">菜单可见</label>
+        <div class="layui-input-block">
+            <input type="checkbox" name="status" lay-skin="switch" lay-text="显示|隐藏" value="true">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label required">上级菜单</label>
+        <div class="layui-input-block">
+            <div id="menuTree" class="xm-select-demo" lay-verify="pid"></div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="saveBtn">确认保存</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+</form>
+<script src="/static/admin/layuimini/lib/layui-v2.5.5/layui.js" charset="utf-8"></script>
+<script src="/static/admin/layuimini/js/lay-config.js?v=1.0.4" charset="utf-8"></script>
+<script src="/static/admin/xm-select/xm-select.js" charset="utf-8"></script>
+<script th:inline="javascript" type="text/javascript">
+    layui.use(['iconPickerFa', 'form', 'layer'], function () {
+        var iconPickerFa = layui.iconPickerFa,
+            form = layui.form,
+            layer = layui.layer,
+            $ = layui.$;
+
+        //渲染图标选择器
+        let icon = null;
+        iconPickerFa.render({
+            // 选择器，推荐使用input
+            elem: '#iconPicker',
+            // fa 图标接口
+            url: "/static/admin/layuimini/lib/font-awesome-4.7.0/less/variables.less",
+            // 是否开启搜索：true/false，默认true
+            search: true,
+            // 是否开启分页：true/false，默认true
+            page: true,
+            // 每页显示数量，默认12
+            limit: 12,
+            // 点击回调
+            click: function (data) {
+                icon = "fa " + data.icon;
+            },
+        });
+
+        //获取菜单树
+        let data = null;
+        $.ajax({
+            url: '/admin/menu/tree',
+            type: 'GET',
+            async: false,
+            success: function (result) {
+                data = result.data;
+            }
+        });
+
+        //渲染菜单树
+        var tree = xmSelect.render({
+            el: '#menuTree',
+            model: {label: {type: 'text'}},
+            radio: true,
+            clickClose: true,
+            tree: {
+                show: true,
+                strict: false,
+            },
+            height: 'auto',
+            data() {
+                return data;
+            }
+        })
+
+        let menu = [[${menu}]];
+        $('.layui-form input[name="id"]').val(menu.id);
+        $('.layui-form input[name="title"]').val(menu.title);
+        $('.layui-form input[name="authority"]').val(menu.authority);
+        $('.layui-form input[name="href"]').val(menu.href);
+        $('.layui-form input[name="sort"]').val(menu.sort);
+        if (menu.icon != null) {
+            let icon = menu.icon.split(' ')[1];
+            iconPickerFa.checkIcon('iconPicker', icon);
+        }
+        $('.layui-form input[name="type"]').val([menu.type]);
+        $('.layui-form input[name="status"]').prop('checked', menu.status);
+        tree.setValue([menu.pid]);
+        form.render();
+
+        //自定义验证规则
+        form.verify({
+            //验证菜单标题
+            title: function (value) {
+                if (value.length < 2 || value.length > 16) {
+                    return '菜单标题长度为2-16个字符'
+                }
+                if (!new RegExp("^[a-zA-Z0-9_\u4e00-\u9fa5\\s·]+$").test(value)) {
+                    return '菜单标题不能有特殊字符';
+                }
+                if (/^\d+\d+\d$/.test(value)) {
+                    return '菜单标题不能全为数字';
+                }
+            },
+            //验证排序值
+            sort: function (value) {
+                if (value < 1 || value > 1024) {
+                    return '排序值在1-1024之间'
+                }
+            },
+            pid: function () {
+                let value = tree.getValue('value')[0];
+                if (value == null) {
+                    return '请选择上级菜单'
+                }
+            }
+        });
+
+        //监听提交
+        form.on('submit(saveBtn)', function (data) {
+            data.field.pid = tree.getValue('value')[0];
+            data.field.icon = icon;
+            $.ajax({
+                url: '/admin/menu',
+                type: 'PUT',
+                data: JSON.stringify(data.field),
+                contentType: 'application/json',
+                success: function (result) {
+                    if (result.code === 200) {
+                        var parentLayer = parent.layer;
+                        layer.msg('更新成功', {icon: 1, time: 1000}, function () {
+                            var iframeIndex = parentLayer.getFrameIndex(window.name);
+                            parent.location.reload();
+                            parentLayer.close(iframeIndex);
+                        });
+                    }
+                },
+                error: function (XMLHttpRequest) {
+                    var result = JSON.parse(XMLHttpRequest.responseText);
+                    layer.alert(result.msg, {icon: 2});
+                }
+            });
+            return false;
+        });
+    });
+</script>
+</body>
+</html>
