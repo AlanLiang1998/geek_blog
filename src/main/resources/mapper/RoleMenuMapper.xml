@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="site.alanliang.geekblog.dao.RoleMenuMapper">
+    <resultMap id="baseColumnResultMap" type="site.alanliang.geekblog.model.RoleMenu">
+        <id column="role_id" property="roleId"/>
+        <id column="menu_id" property="menuId"/>
+    </resultMap>
+    <sql id="baseColumnSql">
+        role_id, menu_id
+    </sql>
+
+    <insert id="insertBatch">
+        insert into sys_role_menu(<include refid="baseColumnSql"/>) values
+        <foreach collection="menuIdList" item="menuId" separator=",">
+            (#{roleId},#{menuId})
+        </foreach>
+    </insert>
+
+</mapper>

@@ -1,7 +1,6 @@
 package site.alanliang.geekblog.controller.admin;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import site.alanliang.geekblog.anntation.OperationLog;
@@ -32,9 +31,14 @@ public class MenuController {
         return TableResult.tableOk(menuService.listAll(), menuService.countAll());
     }
 
-    @GetMapping("/tree")
-    public JsonResult listByTree() {
-        return JsonResult.ok(menuService.listByTree());
+    @GetMapping("/radio-tree")
+    public JsonResult listByRadioTree() {
+        return JsonResult.ok(menuService.listBySelectTree());
+    }
+
+    @GetMapping("/checkbox-tree")
+    public JsonResult listByCheckboxTree() {
+        return JsonResult.ok(menuService.listByCheckboxTree());
     }
 
     @OperationLog("保存菜单")

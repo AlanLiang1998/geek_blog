@@ -8,7 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="/static/admin/layuimini/lib/layui-v2.5.5/css/layui.css" media="all">
     <link rel="stylesheet" href="/static/admin/layuimini/css/public.css" media="all">
-    <link rel="stylesheet" href="/static/admin/ztree/zTreeStyle/zTreeStyle.css">
+    <link rel="stylesheet" href="/static/admin/dtree/dtree.css">
+    <link rel="stylesheet" href="/static/admin/dtree/font/dtreefont.css">
     <style>
         body {
             background-color: #ffffff;
@@ -41,36 +42,71 @@
                    required="">
         </div>
     </div>
-
+    <div class="layui-form-item">
+        <label class="layui-form-label required">权限</label>
+        <div class="layui-input-block">
+            <div id="treeDiv" style="overflow: auto;" lay-verify="menuTree">
+                <ul id="menuTree" class="dtree" data-id="0"></ul>
+            </div>
+        </div>
+    </div>
     <div class="layui-form-item">
         <div class="layui-input-block">
-            <button class="layui-btn" lay-submit lay-filter="saveBtn">确认保存</button>
+            <button class="layui-btn" lay-submit lay-filter="saveBtn">确认修改</button>
             <button type="reset" class="layui-btn layui-btn-primary">重置</button>
         </div>
     </div>
 </form>
-<script src="/static/admin/layuimini/lib/jquery-3.4.1/jquery-3.4.1.min.js"></script>
 <script src="/static/admin/layuimini/lib/layui-v2.5.5/layui.js" charset="utf-8"></script>
-<script src="/static/admin/ztree/jquery.ztree.all-3.5.min.js"></script>
-<script src="/static/admin/ztree/ztree-menu.js"></script>
+<script src="/static/admin/layuimini/js/lay-config.js?v=1.0.4" charset="utf-8"></script>
 <script th:inline="javascript" type="text/javascript">
-    layui.use(['form'], function () {
+    layui.use(['form', 'dtree'], function () {
         var form = layui.form,
             layer = layui.layer,
-            $ = layui.jquery;
+            $ = layui.jquery,
+            dtree = layui.dtree;
 
+        //渲染数据
         let role = [[${role}]];
         $('.layui-form input[name="id"]').val(role.id);
         $('.layui-form input[name="roleName"]').val(role.roleName);
         $('.layui-form textarea[name="description"]').val(role.description);
         $('.layui-form input[name="rank"]').val(role.rank);
 
+        //获取菜单树
+        let data = null;
+        $.ajax({
+            url: '/admin/menu/checkbox-tree',
+            type: 'GET',
+            async: false,
+            success: function (result) {
+                data = result.data;
+            }
+        });
+
+        let DTree = dtree.render({
+            elem: "#menuTree",
+            initLevel: 2,
+            load: true,
+            line: true,
+            checkbar: true,
+            data: data,
+            done: function (res, $ul, first) {
+                if (first) {
+                    let menuIdList = role.menuIdList;
+                    menuIdList.push(0);
+                    dtree.chooseDataInit("menuTree", menuIdList); // 数组形式
+                }
+            }
+        });
+
+
         //自定义验证规则
         form.verify({
             //验证用户名
             roleName: function (value) { //value：表单的值、item：表单的DOM对象
-                if (value.length < 3 || value.length > 16) {
-                    return '角色名称长度为3-16个字符'
+                if (value.length < 2 || value.length > 16) {
+                    return '角色名称长度为2-16个字符'
                 }
                 if (!new RegExp("^[a-zA-Z0-9_\u4e00-\u9fa5\\s·]+$").test(value)) {
                     return '角色名称不能有特殊字符';
@@ -91,10 +127,34 @@
                     return '级别数值在1-1024之间'
                 }
             },
+            //验证权限
+            menuTree: function () {
+                let checkData = dtree.getCheckbarNodesParam("menuTree");
+                if (checkData.length <= 0) {
+                    return '请选择权限'
+                }
+            }
         });
+
+        //获取选中ID列表
+        function getCheckIdList(checkData) {
+            if (checkData == null || checkData.length <= 0) {
+                return [];
+            }
+            let result = [];
+            for (let i = 0; i < checkData.length; i++) {
+                if (checkData[i].nodeId !== "0") {
+                    result.push(Number(checkData[i].nodeId));
+                }
+            }
+            return result;
+        }
 
         //监听提交
         form.on('submit(saveBtn)', function (data) {
+            //获得选中的ID列表
+            let checkData = dtree.getCheckbarNodesParam("menuTree");
+            data.field.menuIdList = getCheckIdList(checkData);
             $.ajax({
                 url: '/admin/role',
                 type: 'PUT',
@@ -117,8 +177,6 @@
             });
             return false;
         });
-        //初始化zTree,第一个参数接收树形组件所在的ul元素ID，第二个参数接收配置项，第三个参数接收后台传来的json形式的菜单树
-        $.fn.zTree.init($("#treeDemo"), getSetting(), getMenuTree());
     });
 
 </script>

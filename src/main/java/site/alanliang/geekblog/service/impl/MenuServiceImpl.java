@@ -5,13 +5,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
+import site.alanliang.geekblog.common.Constant;
 import site.alanliang.geekblog.exception.EntityExistException;
 import site.alanliang.geekblog.model.Menu;
 import site.alanliang.geekblog.dao.MenuMapper;
-import site.alanliang.geekblog.model.Role;
 import site.alanliang.geekblog.service.MenuService;
 import site.alanliang.geekblog.utils.MenuTreeUtil;
 import site.alanliang.geekblog.vo.InitInfoVO;
+import site.alanliang.geekblog.vo.MenuCheckboxVO;
 import site.alanliang.geekblog.vo.MenuSelectVO;
 
 
@@ -86,7 +87,24 @@ public class MenuServiceImpl implements MenuService {
     }
 
     @Override
-    public List<MenuSelectVO> listByTree() {
+    public List<MenuCheckboxVO> listByCheckboxTree() {
+        QueryWrapper<Menu> wrapper = new QueryWrapper<>();
+        wrapper.select("id", "pid", "title");
+        List<Menu> menus = menuMapper.selectList(wrapper);
+        List<MenuCheckboxVO> treeList = new ArrayList<>();
+        for (Menu menu : menus) {
+            MenuCheckboxVO menuCheckboxVO = new MenuCheckboxVO();
+            menuCheckboxVO.setId(menu.getId());
+            menuCheckboxVO.setParentId(menu.getPid());
+            menuCheckboxVO.setTitle(menu.getTitle());
+            menuCheckboxVO.setCheckArr(Constant.MENU_TREE_NOT_SELECTED);
+            treeList.add(menuCheckboxVO);
+        }
+        return MenuTreeUtil.toCheckBoxTree(treeList, Constant.MENU_TREE_START);
+    }
+
+    @Override
+    public List<MenuSelectVO> listBySelectTree() {
         QueryWrapper<Menu> wrapper = new QueryWrapper<>();
         wrapper.select("id", "pid", "title");
         List<Menu> menus = menuMapper.selectList(wrapper);
@@ -98,7 +116,7 @@ public class MenuServiceImpl implements MenuService {
             menuSelectVO.setPid(menu.getPid());
             treeList.add(menuSelectVO);
         }
-        return MenuTreeUtil.toSelectTree(treeList, 0L);
+        return MenuTreeUtil.toSelectTree(treeList, Constant.MENU_TREE_START);
     }
 
     @Override

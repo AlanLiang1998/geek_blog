@@ -2,6 +2,7 @@ package site.alanliang.geekblog.service;
 
 import site.alanliang.geekblog.model.Menu;
 import site.alanliang.geekblog.vo.InitInfoVO;
+import site.alanliang.geekblog.vo.MenuCheckboxVO;
 import site.alanliang.geekblog.vo.MenuSelectVO;
 
 import java.util.List;
@@ -35,11 +36,11 @@ public interface MenuService {
     Long countAll();
 
     /**
-     * 查询菜单树
+     * 查询菜单树(单选)
      *
      * @return 菜单树
      */
-    List<MenuSelectVO> listByTree();
+    List<MenuSelectVO> listBySelectTree();
 
     /**
      * 保存或者更新菜单
@@ -62,4 +63,11 @@ public interface MenuService {
      * @param id 菜单ID
      */
     void removeById(Long id);
+
+    /**
+     * 查询菜单树（复选）
+     *
+     * @return 菜单树
+     */
+    List<MenuCheckboxVO> listByCheckboxTree();
 }

@@ -59,4 +59,29 @@ public interface Constant {
      * 默认头像
      */
     String DEFAULT_AVATAR = "http://q8rsjstig.bkt.clouddn.com/note/default_avatar.jpg";
+
+    /**
+     * 菜单树根结点
+     */
+    Long MENU_TREE_ROOT = 0L;
+
+    /**
+     * 菜单树根结点名称
+     */
+    String MENU_TREE_ROOT_NAME = "根目录";
+
+    /**
+     * 菜单树开始结点
+     */
+    Long MENU_TREE_START = -1L;
+
+    /**
+     * 菜单树复选框未选中
+     */
+    String MENU_TREE_NOT_SELECTED = "0";
+
+    /**
+     * 菜单树复选框选中
+     */
+    Integer MENU_TREE_SELECTED = 1;
 }
