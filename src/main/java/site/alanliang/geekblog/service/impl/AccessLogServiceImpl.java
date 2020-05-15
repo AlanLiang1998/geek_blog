@@ -64,7 +64,6 @@ public class AccessLogServiceImpl implements AccessLogService {
         if (loginPath.equals(signature.getName())) {
             try {
                 assert argValues != null;
-                username = new JSONObject(argValues[0]).get("username").toString();
             } catch (Exception e) {
                 e.printStackTrace();
             }

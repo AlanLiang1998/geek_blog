@@ -3,6 +3,7 @@ package site.alanliang.geekblog.controller.admin;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
@@ -47,6 +48,7 @@ public class ArticleController {
         binder.registerCustomEditor(Date.class, editor);
     }
 
+    @PreAuthorize("hasAuthority('blog:article:query')")
     @OperationLog("查询文章")
     @GetMapping
     public TableResult listTableByPage(@RequestParam(value = "page", defaultValue = "1") Integer page,
@@ -56,6 +58,7 @@ public class ArticleController {
         return TableResult.tableOk(pageInfo.getRecords(), pageInfo.getTotal());
     }
 
+    @PreAuthorize("hasAuthority('blog:article:add')")
     @OperationLog("新增文章")
     @PostMapping
     public JsonResult save(@Validated @RequestBody Article article) {
@@ -72,6 +75,7 @@ public class ArticleController {
         return JsonResult.ok();
     }
 
+    @PreAuthorize("hasAuthority('blog:article:edit')")
     @OperationLog("更新文章")
     @PutMapping
     public JsonResult update(@Validated @RequestBody ArticleVO articleVo) {
@@ -84,6 +88,7 @@ public class ArticleController {
         return JsonResult.ok();
     }
 
+    @PreAuthorize("hasAuthority('blog:article:delete')")
     @OperationLog("删除文章")
     @DeleteMapping("/{id}")
     public JsonResult remove(@NotNull @PathVariable("id") Long id) {
@@ -91,6 +96,7 @@ public class ArticleController {
         return JsonResult.ok();
     }
 
+    @PreAuthorize("hasAuthority('blog:article:delete')")
     @OperationLog("批量删除文章")
     @DeleteMapping
     public JsonResult batchRemove(@NotEmpty @RequestBody List<Long> idList) {

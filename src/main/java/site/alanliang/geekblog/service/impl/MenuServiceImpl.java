@@ -38,12 +38,9 @@ public class MenuServiceImpl implements MenuService {
     }
 
     @Override
-    public InitInfoVO menu() {
-        QueryWrapper<Menu> wrapper = new QueryWrapper<>();
-        wrapper.eq("status", true);
-        List<Menu> menuList = menuMapper.selectList(wrapper);
+    public InitInfoVO menu(Long userId) {
+        List<Menu> menuList = menuMapper.listMenuByUserId(userId);
         return InitInfoVO.init(menuList);
-
     }
 
     @Override

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="site.alanliang.geekblog.dao.MenuMapper">
+
+    <select id="listMenuByUserId" resultType="site.alanliang.geekblog.model.Menu">
+        select sm.*
+        from (select id, pid, title, icon, href, target
+              from sys_menu
+              where `status` = 1
+                and (type = 1 or type = 2)) sm
+                 left join sys_role_menu srm
+                           on sm.id = srm.menu_id
+                 left join sys_role_user sru
+                           on srm.role_id = sru.role_id
+        where sru.user_id = #{userId}
+    </select>
+    <select id="listPermissionByUserId" resultType="site.alanliang.geekblog.model.Menu">
+        select sm.*
+        from (select id, authority
+              from sys_menu
+              where authority is not null) sm
+                 left join sys_role_menu srm
+                           on sm.id = srm.menu_id
+                 left join sys_role_user sru
+                           on srm.role_id = sru.role_id
+        where sru.user_id = #{userId}
+    </select>
+</mapper>

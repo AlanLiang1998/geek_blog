@@ -15,7 +15,8 @@
           th:href="@{/static/admin/layuimini/lib/layui-v2.5.5/css/layui.css}">
     <link rel="stylesheet" href="../../../static/admin/layuimini/css/layuimini.css?v=2.0.3" media="all"
           th:href="@{/static/admin/layuimini/css/layuimini.css(v=2.0.3)}">
-    <link rel="stylesheet" href="../../../static/admin/layuimini/lib/font-awesome-4.7.0/css/font-awesome.min.css" media="all"
+    <link rel="stylesheet" href="../../../static/admin/layuimini/lib/font-awesome-4.7.0/css/font-awesome.min.css"
+          media="all"
           th:href="@{/static/admin/layuimini/lib/font-awesome-4.7.0/css/font-awesome.min.css}">
     <!--[if lt IE 9]>
     <script type="text/javascript" src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
@@ -153,8 +154,14 @@
         miniAdmin.render(options);
 
         $('.login-out').on("click", function () {
-            layer.msg('退出登录成功', function () {
-                window.location = '../../../static/admin/layuimini/page/login-1.html';
+            $.ajax({
+                url: '/admin/logout',
+                type: 'POST',
+                success: function (result) {
+                    layer.msg('退出登录成功', function () {
+                        window.location = '/admin';
+                    });
+                }
             });
         });
     });

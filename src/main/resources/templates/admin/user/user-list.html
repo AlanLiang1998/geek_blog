@@ -14,11 +14,10 @@
 <body>
 <div class="layuimini-container">
     <div class="layuimini-main">
-
-        <fieldset class="table-search-fieldset">
+        <fieldset class="table-search-fieldset" permission="sys:user:query">
             <legend>搜索信息</legend>
             <div style="margin: 10px 10px 10px 10px">
-                <form class="layui-form layui-form-pane" action="">
+                <form class="layui-form layui-form-pane">
                     <div class="layui-form-item">
                         <div class="layui-inline">
                             <label class="layui-form-label">用户名</label>
@@ -53,8 +52,10 @@
 
         <script type="text/html" id="toolbarDemo">
             <div class="layui-btn-container">
-                <button class="layui-btn layui-btn-sm data-add-btn" lay-event="add"> 添加用户</button>
-                <button class="layui-btn layui-btn-sm layui-btn-danger data-delete-btn" lay-event="delete"> 批量删除
+                <button class="layui-btn layui-btn-sm data-add-btn" lay-event="add" permission="sys:user:add"> 添加用户
+                </button>
+                <button class="layui-btn layui-btn-sm layui-btn-danger data-delete-btn" lay-event="delete"
+                        permission="sys:user:delete"> 批量删除
                 </button>
             </div>
         </script>
@@ -62,14 +63,17 @@
         <table class="layui-hide" id="currentTableId" lay-filter="currentTableFilter"></table>
 
         <script type="text/html" id="currentTableBar">
-            <a class="layui-btn layui-btn-xs data-count-edit" lay-event="edit">编辑</a>
-            <a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete" lay-event="delete">删除</a>
+            <a class="layui-btn layui-btn-xs data-count-edit" lay-event="edit" permission="sys:user:edit">编辑</a>
+            <a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete" lay-event="delete"
+               permission="sys:user:delete">删除</a>
         </script>
 
     </div>
 </div>
 <script src="/static/admin/layuimini/lib/layui-v2.5.5/layui.js" charset="utf-8"
         th:src="@{/static/admin/layuimini/lib/layui-v2.5.5/layui.js}"></script>
+<script src="/static/admin/layuimini/lib/jquery-3.4.1/jquery-3.4.1.min.js"></script>
+<script src="/static/admin/my/js/my.js"></script>
 <script>
     layui.use(['form', 'table', 'laydate'], function () {
         var $ = layui.jquery,
@@ -107,19 +111,34 @@
                     {field: 'email', width: 150, title: '邮箱'},
                     {field: 'phone', width: 150, title: '手机号码'},
                     {
-                        field: 'status', width: 150, title: '状态', sort: true, templet: function (data) {
+                        field: 'status',
+                        width: 150,
+                        title: '状态',
+                        sort: true,
+                        hide: (!hasPermission('sys:user:edit')),
+                        templet: function (data) {
                             let isChecked = data.status == 1 ? "checked" : "";
                             return '<input type="checkbox" lay-skin="switch" lay-text="启用|禁用" lay-filter="status-filter"' + isChecked + '> ';
                         }
                     },
                     {field: 'createTime', title: '创建时间', minWidth: 200, sort: true},
                     {field: 'updateTime', title: '更新时间', minWidth: 200, sort: true},
-                    {title: '操作', minWidth: 150, toolbar: '#currentTableBar', fixed: "right", align: "center"}
+                    {
+                        title: '操作',
+                        minWidth: 150,
+                        toolbar: '#currentTableBar',
+                        fixed: "right",
+                        align: "center",
+                        hide: (!hasPermission('sys:user:edit') && !hasPermission('sys:user:delete'))
+                    }
                 ]
             ],
             limits: [10, 15, 20, 25, 50, 100],
             limit: 15,
-            page: true
+            page: true,
+            done: function () {
+                checkPermission();
+            }
         });
 
         // 监听搜索操作
@@ -171,11 +190,12 @@
                                 form.render();
                             }
                         },
-                        error: function () {
+                        error: function (result) {
                             obj.elem.checked = !x;
                             form.render();
                             layer.close(index);
-                            layer.msg('修改失败', {icon: 2});
+                            let error = JSON.parse(result.responseText);
+                            layer.alert(error.msg, {icon: 2});
                         }
                     });
                 }
@@ -233,6 +253,10 @@
                                 layer.close(index);
                                 layer.msg('删除成功', {icon: 1});
                             }
+                        },
+                        error: function (result) {
+                            let error = JSON.parse(result.responseText);
+                            layer.alert(error.msg, {icon: 2});
                         }
                     });
                 });
@@ -267,6 +291,10 @@
                                 layer.close(index);
                                 layer.msg('删除成功', {icon: 1});
                             }
+                        },
+                        error: function (result) {
+                            let error = JSON.parse(result.responseText);
+                            layer.alert(error.msg, {icon: 2});
                         }
                     });
                 });
@@ -275,9 +303,5 @@
 
     });
 </script>
-<script>
-
-</script>
-
 </body>
 </html>

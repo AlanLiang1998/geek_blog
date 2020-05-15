@@ -10,12 +10,14 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import site.alanliang.geekblog.model.OperationLog;
+import site.alanliang.geekblog.model.User;
 import site.alanliang.geekblog.service.OperationLogService;
 import site.alanliang.geekblog.utils.RequestHolder;
 import site.alanliang.geekblog.utils.StringUtils;
 import site.alanliang.geekblog.utils.ThrowableUtil;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 /**
  * @Descriptin 操作日志切面
@@ -75,6 +77,13 @@ public class OperationLogAspect {
     }
 
     public String getUsername() {
+        HttpServletRequest request = RequestHolder.getHttpServletRequest();
+        HttpSession session = request.getSession();
+        Object o = session.getAttribute("user");
+        if (o != null) {
+            User user = (User) o;
+            return user.getUsername();
+        }
         return "";
     }
 }

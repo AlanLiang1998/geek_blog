@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import site.alanliang.geekblog.anntation.AccessLog;
+import site.alanliang.geekblog.anntation.OperationLog;
 import site.alanliang.geekblog.common.JsonResult;
 import site.alanliang.geekblog.model.User;
 import site.alanliang.geekblog.exception.BadRequestException;
@@ -28,46 +29,23 @@ public class IndexController {
 
     @Autowired
     private MenuService menuService;
-    @Autowired
-    private UserService userService;
-
-    @AccessLog("访问后台登录页")
-    @GetMapping
-    public String toLogin(HttpSession session) {
-        if (session.getAttribute("user") != null) {
-            return "admin/home/index";
-        }
-        return "admin/home/login";
-    }
 
     @ResponseBody
     @GetMapping("/init")
-    public ResponseEntity<Object> init() {
-        InitInfoVO initInfoVO = menuService.menu();
-        return new ResponseEntity<>(initInfoVO, HttpStatus.OK);
-    }
-
-    @ResponseBody
-    @PostMapping("/login")
-    public JsonResult toLogin(@RequestParam("username") String username,
-                              @RequestParam("password") String password,
-                              HttpSession session) {
-        User user = userService.checkUser(username, MD5Util.code(password));
-        if (user != null) {
-            session.setAttribute("user", user);
-            return JsonResult.ok();
+    public ResponseEntity<Object> init(HttpSession session) {
+        Object o = session.getAttribute("user");
+        if (o != null) {
+            User user = (User) o;
+            InitInfoVO initInfoVO = menuService.menu(user.getId());
+            return new ResponseEntity<>(initInfoVO, HttpStatus.OK);
         } else {
-            throw new BadRequestException("用户名或密码错误");
+            return new ResponseEntity<>("当前用户未登录，菜单初始化失败", HttpStatus.BAD_REQUEST);
         }
     }
 
-    @GetMapping("/index")
+    @OperationLog("访问后台首页")
+    @GetMapping("/index.html")
     public String index() {
         return "admin/home/index";
-    }
-
-    @GetMapping("/401")
-    public String unauthorized() {
-        return "error/401";
     }
 }

@@ -3,6 +3,7 @@ package site.alanliang.geekblog.controller.admin;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
@@ -46,6 +47,7 @@ public class UserController {
         binder.registerCustomEditor(Date.class, editor);
     }
 
+    @PreAuthorize("hasAuthority('sys:user:query')")
     @OperationLog("查询用户")
     @GetMapping
     public TableResult listByPage(@RequestParam(value = "page", defaultValue = "1") Integer page,
@@ -55,6 +57,7 @@ public class UserController {
         return TableResult.tableOk(pageInfo.getRecords(), pageInfo.getTotal());
     }
 
+    @PreAuthorize("hasAuthority('sys:user:add')")
     @OperationLog("保存用户")
     @PostMapping
     public JsonResult save(@Validated @RequestBody User user) {
@@ -69,6 +72,7 @@ public class UserController {
         return JsonResult.ok();
     }
 
+    @PreAuthorize("hasAuthority('sys:user:edit')")
     @OperationLog("修改用户")
     @PutMapping
     public JsonResult update(@Validated @RequestBody User user) {
@@ -80,6 +84,7 @@ public class UserController {
         return JsonResult.ok();
     }
 
+    @PreAuthorize("hasAuthority('sys:user:edit')")
     @OperationLog("修改状态")
     @PutMapping("/status")
     public JsonResult changeStatus(@NotNull @RequestParam("userId") Long userId) {
@@ -87,6 +92,7 @@ public class UserController {
         return JsonResult.ok();
     }
 
+    @PreAuthorize("hasAuthority('sys:user:del')")
     @OperationLog("删除用户")
     @DeleteMapping("/{id}")
     public JsonResult remove(@NotNull @PathVariable("id") Long id) {
@@ -94,6 +100,7 @@ public class UserController {
         return JsonResult.ok();
     }
 
+    @PreAuthorize("hasAuthority('sys:user:edit')")
     @OperationLog("批量删除用户")
     @DeleteMapping
     public JsonResult removeBatch(@NotEmpty @RequestBody List<Long> idList) {

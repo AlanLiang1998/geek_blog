@@ -14,8 +14,7 @@
 <body>
 <div class="layuimini-container">
     <div class="layuimini-main">
-
-        <fieldset class="table-search-fieldset">
+        <fieldset class="table-search-fieldset" permission="blog:category:query">
             <legend>搜索信息</legend>
             <div style="margin: 10px 10px 10px 10px">
                 <form class="layui-form layui-form-pane">
@@ -56,8 +55,10 @@
 
         <script type="text/html" id="toolbarDemo">
             <div class="layui-btn-container">
-                <button class="layui-btn layui-btn-sm data-add-btn" lay-event="add">添加</button>
-                <button class="layui-btn layui-btn-sm layui-btn-danger data-delete-btn" lay-event="delete"> 批量删除
+                <button class="layui-btn layui-btn-sm data-add-btn" lay-event="add" permission="blog:category:add">添加
+                </button>
+                <button class="layui-btn layui-btn-sm layui-btn-danger data-delete-btn" lay-event="delete"
+                        permission="blog:category:delete"> 批量删除
                 </button>
             </div>
         </script>
@@ -65,8 +66,9 @@
         <table class="layui-hide" id="currentTableId" lay-filter="currentTableFilter"></table>
 
         <script type="text/html" id="currentTableBar">
-            <a class="layui-btn layui-btn-xs data-count-edit" lay-event="edit">编辑</a>
-            <a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete" lay-event="delete">删除</a>
+            <a class="layui-btn layui-btn-xs data-count-edit" lay-event="edit" permission="blog:category:edit">编辑</a>
+            <a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete" lay-event="delete"
+               permission="blog:category:delete">删除</a>
         </script>
 
     </div>
@@ -77,6 +79,8 @@
         th:src="@{/static/admin/layuimini/js/lay-config.js(v=1.0.4)}"></script>
 <script src="/static/admin/layuimini/js/lay-module/layuimini/miniTab.js"
         th:src="@{/static/admin/layuimini/js/lay-module/layuimini/miniTab.js}"></script>
+<script src="/static/admin/layuimini/lib/jquery-3.4.1/jquery-3.4.1.min.js"></script>
+<script src="/static/admin/my/js/my.js"></script>
 <script>
     layui.use(['layer', 'form', 'table', 'miniTab', 'laydate'], function () {
         var $ = layui.jquery,
@@ -143,12 +147,18 @@
                     },
                     {field: 'createTime', width: 200, title: '创建时间', sort: true},
                     {field: 'updateTime', width: 200, title: '更新时间', sort: true},
-                    {title: '操作', minWidth: 120, toolbar: '#currentTableBar', fixed: "right", align: "center"}
+                    {
+                        title: '操作', minWidth: 120, toolbar: '#currentTableBar', fixed: "right", align: "center",
+                        hide: (!hasPermission('blog:category:edit') && !hasPermission('blog:category:delete'))
+                    }
                 ]
             ],
             limits: [10, 15, 20, 25, 50, 100],
             limit: 15,
-            page: true
+            page: true,
+            done: function () {
+                checkPermission();
+            }
         });
 
         // 监听搜索操作

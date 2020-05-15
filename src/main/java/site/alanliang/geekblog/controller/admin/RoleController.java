@@ -3,6 +3,7 @@ package site.alanliang.geekblog.controller.admin;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
@@ -46,11 +47,13 @@ public class RoleController {
         binder.registerCustomEditor(Date.class, editor);
     }
 
+    @PreAuthorize("hasAuthority('sys:role:query')")
     @GetMapping("/list")
     public JsonResult listAll() {
         return JsonResult.ok(roleService.listAll());
     }
 
+    @PreAuthorize("hasAuthority('sys:role:query')")
     @OperationLog("查询角色")
     @GetMapping
     public JsonResult listByPage(@RequestParam(value = "page", defaultValue = "1") Integer page,
@@ -60,6 +63,7 @@ public class RoleController {
         return TableResult.tableOk(pageInfo.getRecords(), pageInfo.getTotal());
     }
 
+    @PreAuthorize("hasAuthority('sys:role:add')")
     @OperationLog("保存角色")
     @PostMapping
     public JsonResult save(@Validated @RequestBody Role role) {
@@ -72,6 +76,7 @@ public class RoleController {
         return JsonResult.ok();
     }
 
+    @PreAuthorize("hasAuthority('sys:role:edit')")
     @OperationLog("修改角色")
     @PutMapping
     public JsonResult update(@Validated @RequestBody Role role) {
@@ -83,6 +88,7 @@ public class RoleController {
         return JsonResult.ok();
     }
 
+    @PreAuthorize("hasAuthority('sys:role:delete')")
     @OperationLog("删除角色")
     @DeleteMapping("/{id}")
     public JsonResult remove(@NotNull @PathVariable("id") Long id) {
@@ -90,6 +96,7 @@ public class RoleController {
         return JsonResult.ok();
     }
 
+    @PreAuthorize("hasAuthority('sys:role:delete')")
     @OperationLog("批量删除角色")
     @DeleteMapping
     public JsonResult removeBatch(@NotEmpty @RequestBody List<Long> idList) {

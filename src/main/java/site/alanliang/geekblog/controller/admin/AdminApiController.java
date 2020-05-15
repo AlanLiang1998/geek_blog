@@ -1,6 +1,7 @@
 package site.alanliang.geekblog.controller.admin;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,6 +42,7 @@ public class AdminApiController {
         return modelAndView;
     }
 
+    @PreAuthorize("hasAuthority('blog:article:edit')")
     @GetMapping("/article/{id}")
     public String editArticle(@PathVariable("id") Long id, Model model) {
         model.addAttribute("article", articleService.getById(id));
@@ -48,30 +50,35 @@ public class AdminApiController {
         return "admin/article/article-edit";
     }
 
+    @PreAuthorize("hasAuthority('blog:category:edit')")
     @GetMapping("/category/{id}")
     public String editCategory(@PathVariable("id") Long id, Model model) {
         model.addAttribute("category", categoryService.getById(id));
         return "admin/category/category-edit";
     }
 
+    @PreAuthorize("hasAuthority('blog:tag:edit')")
     @GetMapping("/tag/{id}")
     public String editTag(@PathVariable("id") Long id, Model model) {
         model.addAttribute("tag", tagService.getById(id));
         return "admin/tag/tag-edit";
     }
 
+    @PreAuthorize("hasAuthority('sys:user:edit')")
     @GetMapping("/user/{id}")
     public String editUser(@PathVariable("id") Long id, Model model) {
         model.addAttribute("user", userService.getById(id));
         return "admin/user/user-edit";
     }
 
+    @PreAuthorize("hasAuthority('sys:role:edit')")
     @GetMapping("/role/{id}")
     public String editRole(@PathVariable("id") Long id, Model model) {
         model.addAttribute("role", roleService.getById(id));
         return "admin/role/role-edit";
     }
 
+    @PreAuthorize("hasAuthority('sys:menu:edit')")
     @GetMapping("/menu/{id}")
     public String editMenu(@PathVariable("id") Long id, Model model) {
         model.addAttribute("menu", menuService.getById(id));

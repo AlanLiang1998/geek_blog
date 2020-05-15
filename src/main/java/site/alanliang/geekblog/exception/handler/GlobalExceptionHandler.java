@@ -2,6 +2,7 @@ package site.alanliang.geekblog.exception.handler;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -17,6 +18,7 @@ import site.alanliang.geekblog.exception.EntityExistException;
 import site.alanliang.geekblog.utils.AjaxUtil;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * @Descriptin 全局异常处理
@@ -27,6 +29,15 @@ import javax.servlet.http.HttpServletRequest;
 @Slf4j
 @RestControllerAdvice
 public class GlobalExceptionHandler {
+
+    @ExceptionHandler(AccessDeniedException.class)
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    public Object handleAccessDeniedException(HttpServletRequest request, AccessDeniedException exception) {
+        if (AjaxUtil.isAjaxRequest(request)) {
+            return JsonResult.build(HttpStatus.FORBIDDEN.value(), "您没有权限执行该操作");
+        }
+        return new ModelAndView("error/403");
+    }
 
     @ExceptionHandler(EntityExistException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)

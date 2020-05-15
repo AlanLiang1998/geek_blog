@@ -22,7 +22,7 @@
             <div class="layui-btn-group">
                 <button class="layui-btn" id="btn-expand">全部展开</button>
                 <button class="layui-btn" id="btn-fold">全部折叠</button>
-                <button class="layui-btn" id="btn-add">添加菜单</button>
+                <button class="layui-btn" id="btn-add" permission="sys:menu:add">添加菜单</button>
             </div>
             <table id="munu-table" class="layui-table" lay-filter="munu-table"></table>
         </div>
@@ -30,12 +30,14 @@
 </div>
 <!-- 操作列 -->
 <script type="text/html" id="auth-state">
-    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
-    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+    <a class="layui-btn layui-btn-xs" lay-event="edit" permission="sys:menu:edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del" permission="sys:menu:delete">删除</a>
 </script>
 
 <script src="/static/admin/layuimini/lib/layui-v2.5.5/layui.js" charset="utf-8"></script>
 <script src="/static/admin/layuimini/js/lay-config.js?v=1.0.4" charset="utf-8"></script>
+<script src="/static/admin/layuimini/lib/jquery-3.4.1/jquery-3.4.1.min.js"></script>
+<script src="/static/admin/my/js/my.js"></script>
 <script>
     layui.use(['table', 'treetable', 'form'], function () {
         var $ = layui.jquery;
@@ -59,7 +61,7 @@
                     {field: 'title', minWidth: 200, title: '菜单标题'},
                     {field: 'authority', title: '权限标识'},
                     {field: 'href', title: '菜单链接'},
-                    {field: 'sort', width: 80, align: 'center', title: '排序'},
+                    {field: 'sort', width: 80, align: 'center', title: '排序', sort: true},
                     {
                         field: 'icon', width: 80, align: 'center', title: '图标', templet: function (data) {
                             return '<span><i class="' + data.icon + '"></i></span>'
@@ -81,12 +83,19 @@
                             return data.status ? '显示' : '隐藏';
                         }
                     },
-                    {templet: '#auth-state', width: 120, align: 'center', title: '操作'}
+                    {
+                        templet: '#auth-state',
+                        width: 120,
+                        align: 'center',
+                        title: '操作',
+                        hide: (!hasPermission('sys:menu:edit') && !hasPermission('sys:menu:delete'))
+                    }
 
                 ]
             ],
             done: function () {
                 layer.closeAll('loading');
+                checkPermission();
             }
         });
 

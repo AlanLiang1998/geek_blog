@@ -120,7 +120,7 @@
 <div class="layui-container">
     <div class="admin-login-background">
         <div class="layui-form login-form">
-            <form class="layui-form" action="">
+            <form class="layui-form" action="/admin/login">
                 <div class="layui-form-item logo-title">
                     <h1>GeekBlog后台登录</h1>
                 </div>
@@ -135,7 +135,7 @@
                            autocomplete="off" class="layui-input" value="123456">
                 </div>
                 <div class="layui-form-item">
-                    <input type="checkbox" name="rememberMe" value="true" lay-skin="primary" title="记住密码">
+                    <input type="checkbox" name="remember-me" value="true" lay-skin="primary" title="记住密码">
                 </div>
                 <div class="layui-form-item">
                     <button class="layui-btn layui-btn-fluid" lay-submit="" lay-filter="login">登 入</button>
@@ -166,11 +166,11 @@
         // 进行登录操作
         form.on('submit(login)', function (data) {
             data = data.field;
-            if (data.username == '') {
+            if (data.username === '') {
                 layer.msg('用户名不能为空');
                 return false;
             }
-            if (data.password == '') {
+            if (data.password === '') {
                 layer.msg('密码不能为空');
                 return false;
             }
@@ -179,15 +179,32 @@
                 type: 'POST',
                 data: data,
                 success: function (result) {
-                    if (result.code === 200) {
-                        layer.msg('登录成功', function () {
-                            window.location = '/admin/index';
+                    if (result.authenticated) {
+                        localStorage.setItem("id", result.principal.userId);
+                        localStorage.setItem("username", result.principal.username);
+                        localStorage.setItem("nickname", result.principal.nickname);
+                        localStorage.setItem("user", JSON.stringify(result.principal));
+                        var authorities = result.authorities;
+                        var permission = [];
+                        for (var i in authorities) {
+                            permission.push(authorities[i].authority);
+                        }
+                        localStorage.setItem("permission", JSON.stringify(permission));
+                        layer.msg("登录成功", {time: 500}, function () {
+                            location.href = '/admin/index.html'
                         });
+                    } else {
+                        if (result.message !== undefined) {
+                            layer.msg(result.message);
+                        } else {
+                            layer.msg("登录异常，请联系管理员");
+                        }
                     }
                 },
-                error: function (XMLHttpRequest) {
-                    var result = JSON.parse(XMLHttpRequest.responseText);
-                    layer.msg(result.msg);
+                error: function (xhr, textStatus, errorThrown) {
+                    var msg = xhr.responseText;
+                    var response = JSON.parse(msg);
+                    layer.msg(response.message);
                 }
             });
 

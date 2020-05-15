@@ -17,9 +17,10 @@ public interface MenuService {
     /**
      * 获取菜单树
      *
+     * @param userId 用户ID
      * @return 菜单树
      */
-    InitInfoVO menu();
+    InitInfoVO menu(Long userId);
 
     /**
      * 查询所有菜单
