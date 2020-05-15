@@ -1,10 +1,13 @@
 package site.alanliang.geekblog.controller.admin;
 
+import com.wf.captcha.utils.CaptchaUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import site.alanliang.geekblog.anntation.AccessLog;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -25,5 +28,10 @@ public class SecurityController {
     @GetMapping(value = "/403.html")
     public String noPermission() {
         return "error/403";
+    }
+
+    @RequestMapping("/captcha")
+    public void captcha(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        CaptchaUtil.out(request, response);
     }
 }

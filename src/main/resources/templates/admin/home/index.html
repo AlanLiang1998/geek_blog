@@ -61,7 +61,7 @@
                     <a href="javascript:;" data-check-screen="full"><i class="fa fa-arrows-alt"></i></a>
                 </li>
                 <li class="layui-nav-item layuimini-setting">
-                    <a href="javascript:;">admin</a>
+                    <a href="javascript:;" id="username">admin</a>
                     <dl class="layui-nav-child">
                         <dd>
                             <a href="javascript:;" layuimini-content-href="page/user-setting.html" data-title="基本资料"
@@ -130,9 +130,9 @@
 
     </div>
 </div>
-<script src="../../../static/admin/layuimini/lib/layui-v2.5.5/layui.js" charset="utf-8"
+<script src="/static/admin/layuimini/lib/layui-v2.5.5/layui.js" charset="utf-8"
         th:src="@{/static/admin/layuimini/lib/layui-v2.5.5/layui.js}"></script>
-<script src="../../../static/admin/layuimini/js/lay-config.js?v=2.0.0" charset="utf-8"
+<script src="/static/admin/layuimini/js/lay-config.js?v=2.0.0" charset="utf-8"
         th:src="@{/static/admin/layuimini/js/lay-config.js(v=2.0.0)}"></script>
 <script>
     layui.use(['jquery', 'layer', 'miniAdmin'], function () {
@@ -142,7 +142,6 @@
 
         var options = {
             iniUrl: "/admin/init",    // 初始化接口
-            clearUrl: "api/clear.json", // 缓存清理接口
             urlHashLocation: true,      // 是否打开hash定位
             bgColorDefault: 0,          // 主题默认配置
             multiModule: true,          // 是否开启多模块
@@ -153,13 +152,16 @@
         };
         miniAdmin.render(options);
 
+        var username = localStorage.getItem("username");
+        $('#username').text(username);
+
         $('.login-out').on("click", function () {
             $.ajax({
                 url: '/admin/logout',
                 type: 'POST',
                 success: function (result) {
                     layer.msg('退出登录成功', function () {
-                        window.location = '/admin';
+                        window.location = '/admin/login.html';
                     });
                 }
             });

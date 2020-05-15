@@ -120,7 +120,7 @@
 <div class="layui-container">
     <div class="admin-login-background">
         <div class="layui-form login-form">
-            <form class="layui-form" action="/admin/login">
+            <form class="layui-form" id="login-form" action="/admin/login">
                 <div class="layui-form-item logo-title">
                     <h1>GeekBlog后台登录</h1>
                 </div>
@@ -132,10 +132,18 @@
                 <div class="layui-form-item">
                     <label class="layui-icon layui-icon-password"></label>
                     <input type="password" name="password" lay-verify="required|password" placeholder="密码"
-                           autocomplete="off" class="layui-input" value="123456">
+                           autocomplete="off" class="layui-input">
+                </div>
+                <div class="layui-inline">
+                    <div class="layui-input-inline">
+                        <input name="verCode" class="layui-input" lay-verify="required" placeholder="验证码" type="text">
+                    </div>
+                    <div class="layui-input-inline">
+                        <img src="/admin/captcha" width="130px" height="48px" id="verCodeImg"/>
+                    </div>
                 </div>
                 <div class="layui-form-item">
-                    <input type="checkbox" name="remember-me" value="true" lay-skin="primary" title="记住密码">
+                    <input type="checkbox" name="remember-me" value="true" lay-skin="primary" title="记住密码" checked>
                 </div>
                 <div class="layui-form-item">
                     <button class="layui-btn layui-btn-fluid" lay-submit="" lay-filter="login">登 入</button>
@@ -152,7 +160,12 @@
         var form = layui.form,
             layer = layui.layer;
 
-        // 登录过期的时候，跳出ifram框架
+        //刷新验证码
+        $('#verCodeImg').click(function flushVerCode() {
+            this.src = this.src + "?" + Math.random();
+        });
+
+        // 登录过期的时候，跳出iframe框架
         if (top.location != self.location) top.location = self.location;
 
         // 粒子线条背景
@@ -177,7 +190,7 @@
             $.ajax({
                 url: '/admin/login',
                 type: 'POST',
-                data: data,
+                data: $("#login-form").serialize(),
                 success: function (result) {
                     if (result.authenticated) {
                         localStorage.setItem("id", result.principal.userId);
@@ -191,7 +204,7 @@
                         }
                         localStorage.setItem("permission", JSON.stringify(permission));
                         layer.msg("登录成功", {time: 500}, function () {
-                            location.href = '/admin/index.html'
+                            location.href = '/admin'
                         });
                     } else {
                         if (result.message !== undefined) {

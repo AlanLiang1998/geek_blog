@@ -645,7 +645,7 @@
                                 <div class="card">
                                     <a th:href="@{/article/{id}(id=${nextPreview.id})}">
                                         <div class="card-image">
-                                            <img src="/static/web/picture/13.jpg" class="responsive-img"
+                                            <img th:src="@{${nextPreview.cover}}" class="responsive-img"
                                                  alt="Java之ThreadLocal的使用及源码解析">
                                             <span class="card-title" th:text="${nextPreview.title}">文章标题</span>
                                         </div>

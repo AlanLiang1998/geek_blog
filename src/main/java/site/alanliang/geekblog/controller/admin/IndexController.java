@@ -15,6 +15,9 @@ import site.alanliang.geekblog.service.UserService;
 import site.alanliang.geekblog.utils.MD5Util;
 import site.alanliang.geekblog.vo.InitInfoVO;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -32,11 +35,24 @@ public class IndexController {
 
     @ResponseBody
     @GetMapping("/init")
-    public ResponseEntity<Object> init(HttpSession session) {
-        Object o = session.getAttribute("user");
-        if (o != null) {
-            User user = (User) o;
-            InitInfoVO initInfoVO = menuService.menu(user.getId());
+    public ResponseEntity<Object> init(HttpSession session, HttpServletRequest request) {
+        Long userId = null;
+        Cookie[] cookies = request.getCookies();
+        for (Cookie cookie : cookies) {
+            if (cookie.getName().equals("userId")) {
+                userId = Long.valueOf(cookie.getValue());
+                break;
+            }
+        }
+        if (userId == null) {
+            Object o = session.getAttribute("user");
+            if (o != null) {
+                User user = (User) o;
+                userId = user.getId();
+            }
+        }
+        if (userId != null) {
+            InitInfoVO initInfoVO = menuService.menu(userId);
             return new ResponseEntity<>(initInfoVO, HttpStatus.OK);
         } else {
             return new ResponseEntity<>("当前用户未登录，菜单初始化失败", HttpStatus.BAD_REQUEST);
@@ -44,7 +60,7 @@ public class IndexController {
     }
 
     @OperationLog("访问后台首页")
-    @GetMapping("/index.html")
+    @GetMapping
     public String index() {
         return "admin/home/index";
     }

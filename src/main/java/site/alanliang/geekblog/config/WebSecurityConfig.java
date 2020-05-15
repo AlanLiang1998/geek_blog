@@ -12,9 +12,11 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import site.alanliang.geekblog.security.MyAccessDeniedHandler;
 import site.alanliang.geekblog.security.MyAuthenticationFailureHandler;
 import site.alanliang.geekblog.security.MyAuthenticationSuccessHandler;
+import site.alanliang.geekblog.security.ValidateCodeFilter;
 
 /**
  * @Descriptin TODO
@@ -35,15 +37,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final UserDetailsService userDetailsService;
 
+    private final ValidateCodeFilter validateCodeFilter;
+
     @Autowired
     public WebSecurityConfig(MyAuthenticationSuccessHandler myAuthenticationSuccessHandler,
                              MyAuthenticationFailureHandler myAuthenticationFailureHandler,
                              MyAccessDeniedHandler myAccessDeniedHandler,
-                             @Qualifier("userDetailServiceImpl") UserDetailsService userDetailsService) {
+                             @Qualifier("userDetailServiceImpl") UserDetailsService userDetailsService,
+                             ValidateCodeFilter validateCodeFilter) {
         this.myAuthenticationSuccessHandler = myAuthenticationSuccessHandler;
         this.myAuthenticationFailureHandler = myAuthenticationFailureHandler;
         this.myAccessDeniedHandler = myAccessDeniedHandler;
         this.userDetailsService = userDetailsService;
+        this.validateCodeFilter = validateCodeFilter;
     }
 
     @Bean
@@ -59,12 +65,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 //放行静态资源和登录请求
-                .antMatchers("/static/**", "/admin/", "/admin/login").permitAll()
+                .antMatchers("/static/**", "/admin/login", "/admin/login.html", "/admin/captcha").permitAll()
                 //其余请求在认证后访问
-                .anyRequest().authenticated();
+                .antMatchers("/admin/**").authenticated();
 
-        //允许表单登录
-        http.formLogin()
+        //添加图形验证码
+        http.addFilterBefore(validateCodeFilter, UsernamePasswordAuthenticationFilter.class)
+                //允许表单登录
+                .formLogin()
                 //自定义登录页面
                 .loginPage("/admin/login.html")
                 //自定义登录表单提交路径
