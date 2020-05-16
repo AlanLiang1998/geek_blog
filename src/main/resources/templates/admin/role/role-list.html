@@ -103,7 +103,18 @@
                     {field: 'id', width: 80, title: 'ID', sort: true},
                     {field: 'roleName', width: 150, title: '角色名', sort: true},
                     {field: 'description', width: 150, title: '描述'},
-                    {field: 'rank', width: 100, title: '级别', sort: true},
+                    {
+                        field: 'rank', width: 100, title: '级别', sort: true, align: 'center', templet: function (data) {
+                            let rank = data.rank;
+                            return '<span class="layui-badge layui-bg-green">' + rank + '</span>';
+                        }
+                    },
+                    {
+                        field: 'color', width: 100, title: '颜色', align: 'center', templet: function (data) {
+                            let color = 'layui-bg-' + data.color;
+                            return '<span class="layui-badge ' + color + '">&nbsp;&nbsp;</span>';
+                        }
+                    },
                     {field: 'createTime', title: '创建时间', minWidth: 200, sort: true},
                     {field: 'updateTime', title: '更新时间', minWidth: 200, sort: true},
                     {

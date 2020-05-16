@@ -50,7 +50,11 @@ public class User {
     private Date createTime;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date updateTime;
+
     @TableField(exist = false)
     @NotNull(message = "请为用户选择一个角色")
     private Long roleId;
+
+    @TableField(exist = false)
+    private Role role;
 }

@@ -32,7 +32,6 @@ public class ValidateCodeFilter extends OncePerRequestFilter {
         if (StringUtils.pathEquals("/admin/login", httpServletRequest.getRequestURI())) {
             String verCode = httpServletRequest.getParameter("verCode");
             if (!CaptchaUtil.ver(verCode, httpServletRequest)) {
-                CaptchaUtil.clear(httpServletRequest);  // 清除session中的验证码
                 Map<String, Object> map = new HashMap<>();
                 map.put("message", "验证码错误");
                 httpServletResponse.setContentType("application/json;charset=UTF-8");

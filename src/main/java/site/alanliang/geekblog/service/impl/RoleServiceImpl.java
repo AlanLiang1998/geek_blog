@@ -43,7 +43,7 @@ public class RoleServiceImpl implements RoleService {
         Role role = new Role();
         //查询角色信息
         QueryWrapper<Role> roleWrapper = new QueryWrapper<>();
-        roleWrapper.select("id", "role_name", "description", "rank").eq("id", id);
+        roleWrapper.select("id", "role_name", "description", "rank", "color").eq("id", id);
         Role r = roleMapper.selectOne(roleWrapper);
         BeanUtils.copyProperties(r, role);
         //查询角色权限信息
@@ -106,7 +106,7 @@ public class RoleServiceImpl implements RoleService {
             //更新角色权限
             //先删除原有角色权限
             QueryWrapper<RoleMenu> roleMenuWrapper = new QueryWrapper<>();
-            roleMenuWrapper.eq("role_id",role.getId());
+            roleMenuWrapper.eq("role_id", role.getId());
             roleMenuMapper.delete(roleMenuWrapper);
             //再添加新的角色权限
             roleMenuMapper.insertBatch(role.getId(), role.getMenuIdList());

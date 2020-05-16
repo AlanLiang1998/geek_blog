@@ -34,6 +34,8 @@ public class Role {
     @Min(value = 1, message = "角色级别数值不能小于1")
     private Integer rank;
 
+    private String color;
+
     private Date createTime;
 
     private Date updateTime;

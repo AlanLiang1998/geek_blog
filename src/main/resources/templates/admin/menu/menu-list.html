@@ -61,7 +61,12 @@
                     {field: 'title', minWidth: 200, title: '菜单标题'},
                     {field: 'authority', title: '权限标识'},
                     {field: 'href', title: '菜单链接'},
-                    {field: 'sort', width: 80, align: 'center', title: '排序', sort: true},
+                    {
+                        field: 'sort', width: 80, align: 'center', title: '排序', sort: true, templet: function (data) {
+                            let sort = data.sort;
+                            return '<span class="layui-badge layui-bg-green">' + sort + '</span>'
+                        }
+                    },
                     {
                         field: 'icon', width: 80, align: 'center', title: '图标', templet: function (data) {
                             return '<span><i class="' + data.icon + '"></i></span>'
@@ -80,7 +85,10 @@
                     },
                     {
                         field: 'status', width: 80, align: 'center', title: '状态', templet: function (data) {
-                            return data.status ? '显示' : '隐藏';
+                            let status = data.status ? '显示' : '隐藏';
+                            let color = (data.status ? 'green' : 'orange');
+                            let bgColor = 'layui-bg-' + color;
+                            return '<span class="layui-badge ' + bgColor + '">' + status + '</span>';
                         }
                     },
                     {

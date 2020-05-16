@@ -18,7 +18,7 @@ public interface UserService {
      * @param userQuery 条件
      * @return 用户列表
      */
-    Page<User> listByPage(int current, int size, UserQuery userQuery);
+    Page<User> listTableByPage(int current, int size, UserQuery userQuery);
 
     /**
      * 检验用户

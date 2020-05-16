@@ -42,6 +42,14 @@
         </div>
     </div>
     <div class="layui-form-item">
+        <label class="layui-form-label required">颜色</label>
+        <div class="layui-input-block">
+            <div>
+                <div id="color-select" lay-verify="colorVer"></div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
         <label class="layui-form-label required">权限</label>
         <div class="layui-input-block">
             <div id="treeDiv" style="overflow: auto;" lay-verify="menuTree">
@@ -58,12 +66,44 @@
 </form>
 <script src="/static/admin/layuimini/lib/layui-v2.5.5/layui.js" charset="utf-8"></script>
 <script src="/static/admin/layuimini/js/lay-config.js?v=1.0.4" charset="utf-8"></script>
+<script src="/static/admin/xm-select/xm-select.js"></script>
 <script>
     layui.use(['form', 'dtree'], function () {
         var form = layui.form,
             layer = layui.layer,
             $ = layui.jquery,
             dtree = layui.dtree;
+
+        //渲染多选下拉框
+        var colorSelect = xmSelect.render({
+            el: '#color-select',
+            language: 'zn',
+            radio: true,
+            clickClose: true,
+            model: {
+                label: {
+                    type: 'text',
+                    text: {
+                        template: function (item, sels) {
+                            return '<span>' + item.name + '</span>';
+                        },
+                    },
+                }
+            },
+            template({name, value}) {
+                let color = 'layui-bg-' + value;
+                return name + '<span class="' + color + '" style="position: absolute; right: 10px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>'
+            },
+            data: [
+                {name: '赤', value: 'red'},
+                {name: '橙', value: 'orange'},
+                {name: '绿', value: 'green'},
+                {name: '青', value: 'cyan'},
+                {name: '蓝', value: 'blue'},
+                {name: '黑', value: 'black'},
+                {name: '灰', value: 'gray'},
+            ]
+        });
 
         //获取菜单树
         let data = null;
@@ -105,6 +145,12 @@
                     return '描述长度在100个字符以内'
                 }
             },
+            //验证颜色
+            colorVer: function () {
+                if (colorSelect.getValue('value').length <= 0) {
+                    return '请选择颜色';
+                }
+            },
             //验证级别
             rank: function (value) {
                 if (value < 1 || value > 1024) {
@@ -136,7 +182,9 @@
 
         //监听提交
         form.on('submit(saveBtn)', function (data) {
-            //获得选中的ID列表
+            //获取颜色
+            data.field.color = colorSelect.getValue('value')[0];
+            //获得选中的菜单ID列表
             let checkData = dtree.getCheckbarNodesParam("menuTree");
             data.field.menuIdList = getCheckIdList(checkData);
             $.ajax({

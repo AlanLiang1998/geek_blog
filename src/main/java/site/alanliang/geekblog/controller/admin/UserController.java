@@ -53,7 +53,7 @@ public class UserController {
     public TableResult listByPage(@RequestParam(value = "page", defaultValue = "1") Integer page,
                                   @RequestParam(value = "limit", defaultValue = "10") Integer limit,
                                   UserQuery userQuery) {
-        Page<User> pageInfo = userService.listByPage(page, limit, userQuery);
+        Page<User> pageInfo = userService.listTableByPage(page, limit, userQuery);
         return TableResult.tableOk(pageInfo.getRecords(), pageInfo.getTotal());
     }
 
@@ -92,7 +92,7 @@ public class UserController {
         return JsonResult.ok();
     }
 
-    @PreAuthorize("hasAuthority('sys:user:del')")
+    @PreAuthorize("hasAuthority('sys:user:delete')")
     @OperationLog("删除用户")
     @DeleteMapping("/{id}")
     public JsonResult remove(@NotNull @PathVariable("id") Long id) {
@@ -100,7 +100,7 @@ public class UserController {
         return JsonResult.ok();
     }
 
-    @PreAuthorize("hasAuthority('sys:user:edit')")
+    @PreAuthorize("hasAuthority('sys:user:delete')")
     @OperationLog("批量删除用户")
     @DeleteMapping
     public JsonResult removeBatch(@NotEmpty @RequestBody List<Long> idList) {

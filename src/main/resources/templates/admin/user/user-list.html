@@ -10,6 +10,7 @@
           th:href="@{/static/admin/layuimini/lib/layui-v2.5.5/css/layui.css}">
     <link rel="stylesheet" href="/static/admin/layuimini/css/public.css" media="all"
           th:href="@{/static/admin/layuimini/css/public.css}">
+    <link rel="stylesheet" href="/static/admin/layuimini/lib/font-awesome-4.7.0/css/font-awesome.min.css">
 </head>
 <body>
 <div class="layuimini-container">
@@ -52,10 +53,11 @@
 
         <script type="text/html" id="toolbarDemo">
             <div class="layui-btn-container">
-                <button class="layui-btn layui-btn-sm data-add-btn" lay-event="add" permission="sys:user:add"> 添加用户
+                <button class="layui-btn layui-btn-sm data-add-btn" lay-event="add" permission="sys:user:add">
+                    添加用户
                 </button>
                 <button class="layui-btn layui-btn-sm layui-btn-danger data-delete-btn" lay-event="delete"
-                        permission="sys:user:delete"> 批量删除
+                        permission="sys:user:delete">批量删除
                 </button>
             </div>
         </script>
@@ -104,23 +106,38 @@
                     {field: 'username', width: 150, title: '用户名', sort: true},
                     {field: 'nickname', width: 150, title: '昵称'},
                     {
-                        field: 'sex', width: 80, title: '性别', sort: true, templet: function (data) {
-                            return data.sex ? '男' : '女';
+                        field: 'sex', width: 80, title: '性别', sort: true, align: 'center', templet: function (data) {
+                            let sex = data.sex ? '男' : '女';
+                            let color = (data.sex ? 'blue' : 'red');
+                            let bgColor = 'layui-bg-' + color;
+                            return '<span class="layui-badge ' + bgColor + '">' + sex + '</span>';
                         }
                     },
-                    {field: 'email', width: 150, title: '邮箱'},
-                    {field: 'phone', width: 150, title: '手机号码'},
+                    {
+                        field: 'role', title: '角色', width: 100, sort: true, align: 'center', templet: function (data) {
+                            if (data.role !== undefined) {
+                                let roleName = data.role.roleName;
+                                let color = 'layui-bg-' + data.role.color;
+                                return '<span class="layui-badge ' + color + '">' + roleName + '</span>';
+                            } else {
+                                return '-';
+                            }
+                        }
+                    },
                     {
                         field: 'status',
                         width: 150,
                         title: '状态',
                         sort: true,
+                        align: 'center',
                         hide: (!hasPermission('sys:user:edit')),
                         templet: function (data) {
                             let isChecked = data.status == 1 ? "checked" : "";
                             return '<input type="checkbox" lay-skin="switch" lay-text="启用|禁用" lay-filter="status-filter"' + isChecked + '> ';
                         }
                     },
+                    {field: 'email', width: 150, title: '邮箱'},
+                    {field: 'phone', width: 150, title: '手机号码'},
                     {field: 'createTime', title: '创建时间', minWidth: 200, sort: true},
                     {field: 'updateTime', title: '更新时间', minWidth: 200, sort: true},
                     {

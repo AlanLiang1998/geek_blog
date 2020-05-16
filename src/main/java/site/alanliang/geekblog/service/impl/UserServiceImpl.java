@@ -139,10 +139,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Page<User> listByPage(int current, int size, UserQuery userQuery) {
+    public Page<User> listTableByPage(int current, int size, UserQuery userQuery) {
         Page<User> page = new Page<>(current, size);
         QueryWrapper<User> wrapper = new QueryWrapper<>();
-        wrapper.select("id", "username", "nickname", "sex", "email", "phone", "status", "create_time", "update_time");
         if (!StringUtils.isEmpty(userQuery.getUsername())) {
             wrapper.like("username", userQuery.getUsername());
         }
@@ -152,7 +151,7 @@ public class UserServiceImpl implements UserService {
         if (userQuery.getStartDate() != null && userQuery.getEndDate() != null) {
             wrapper.between("create_time", userQuery.getStartDate(), userQuery.getEndDate());
         }
-        return userMapper.selectPage(page, wrapper);
+        return userMapper.listTableByPage(page, wrapper);
     }
 
     @Override
