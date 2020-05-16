@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +16,8 @@ import site.alanliang.geekblog.model.User;
 import site.alanliang.geekblog.query.UserQuery;
 import site.alanliang.geekblog.service.UserService;
 import site.alanliang.geekblog.utils.MD5Util;
+import site.alanliang.geekblog.vo.PasswordVO;
+import site.alanliang.geekblog.vo.UserInfoVO;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -64,7 +67,8 @@ public class UserController {
         if (user.getStatus() == null) {
             user.setStatus(0);
         }
-        user.setPassword(MD5Util.code(Constant.DEFAULT_PASSWORD));
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        user.setPassword(encoder.encode(Constant.DEFAULT_PASSWORD));
         user.setAvatar(Constant.DEFAULT_AVATAR);
         user.setCreateTime(new Date());
         user.setUpdateTime(user.getCreateTime());
@@ -92,6 +96,13 @@ public class UserController {
         return JsonResult.ok();
     }
 
+    @OperationLog("修改密码")
+    @PutMapping("/password")
+    public JsonResult changePassword(@Validated @RequestBody PasswordVO passwordVO) {
+        userService.changePassword(passwordVO);
+        return JsonResult.ok();
+    }
+
     @PreAuthorize("hasAuthority('sys:user:delete')")
     @OperationLog("删除用户")
     @DeleteMapping("/{id}")
@@ -105,6 +116,18 @@ public class UserController {
     @DeleteMapping
     public JsonResult removeBatch(@NotEmpty @RequestBody List<Long> idList) {
         userService.removeByIdList(idList);
+        return JsonResult.ok();
+    }
+
+    @GetMapping("/{id}/info")
+    public JsonResult getInfo(@PathVariable("id") Long id) {
+        return JsonResult.ok(userService.getById(id));
+    }
+
+    @OperationLog("修改信息")
+    @PutMapping("/info")
+    public JsonResult updateInfo(@Validated @RequestBody UserInfoVO userInfoVO) {
+        userService.updateInfo(userInfoVO);
         return JsonResult.ok();
     }
 }

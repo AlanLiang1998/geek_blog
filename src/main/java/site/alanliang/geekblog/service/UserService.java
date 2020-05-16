@@ -3,6 +3,8 @@ package site.alanliang.geekblog.service;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import site.alanliang.geekblog.model.User;
 import site.alanliang.geekblog.query.UserQuery;
+import site.alanliang.geekblog.vo.PasswordVO;
+import site.alanliang.geekblog.vo.UserInfoVO;
 
 import java.util.List;
 
@@ -64,4 +66,18 @@ public interface UserService {
      * @param idList 用户ID列表
      */
     void removeByIdList(List<Long> idList);
+
+    /**
+     * 修改用户密码
+     *
+     * @param passwordVO 用户新旧密码
+     */
+    void changePassword(PasswordVO passwordVO);
+
+    /**
+     * 修改个人信息
+     *
+     * @param userInfoVO 个人信息
+     */
+    void updateInfo(UserInfoVO userInfoVO);
 }

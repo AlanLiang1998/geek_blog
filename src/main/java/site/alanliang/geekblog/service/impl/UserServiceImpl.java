@@ -2,11 +2,15 @@ package site.alanliang.geekblog.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 import site.alanliang.geekblog.dao.RoleUserMapper;
+import site.alanliang.geekblog.exception.BadRequestException;
 import site.alanliang.geekblog.model.RoleUser;
 import site.alanliang.geekblog.model.User;
 import site.alanliang.geekblog.dao.UserMapper;
@@ -14,6 +18,8 @@ import site.alanliang.geekblog.exception.EntityExistException;
 import site.alanliang.geekblog.query.UserQuery;
 import site.alanliang.geekblog.service.UserService;
 import site.alanliang.geekblog.utils.StringUtils;
+import site.alanliang.geekblog.vo.PasswordVO;
+import site.alanliang.geekblog.vo.UserInfoVO;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -136,6 +142,45 @@ public class UserServiceImpl implements UserService {
             //最后添加
             roleUserMapper.insert(roleUser);
         }
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void updateInfo(UserInfoVO userInfoVO) {
+        //验证手机号码是否唯一
+        QueryWrapper<User> wrapper = new QueryWrapper<>();
+        wrapper.eq("phone", userInfoVO.getPhone());
+        List<User> users = userMapper.selectList(wrapper);
+        users = users.stream().filter(u -> !u.getId().equals(userInfoVO.getId())).collect(Collectors.toList());
+        if (!CollectionUtils.isEmpty(users)) {
+            throw new EntityExistException("手机号码:" + userInfoVO.getPhone() + " 已存在");
+        }
+        //验证邮箱是否唯一
+        wrapper.clear();
+        wrapper.eq("email", userInfoVO.getPhone());
+        users = userMapper.selectList(wrapper);
+        users = users.stream().filter(u -> !u.getId().equals(userInfoVO.getId())).collect(Collectors.toList());
+        if (!CollectionUtils.isEmpty(users)) {
+            throw new EntityExistException("邮箱:" + userInfoVO.getEmail() + " 已被注册");
+        }
+        User user = new User();
+        BeanUtils.copyProperties(userInfoVO, user);
+        userMapper.updateById(user);
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void changePassword(PasswordVO passwordVO) {
+        QueryWrapper<User> wrapper = new QueryWrapper<>();
+        wrapper.select("password").eq("id", passwordVO.getUserId());
+        User user = userMapper.selectOne(wrapper);
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        if (!encoder.matches(passwordVO.getOldPassword(), user.getPassword())) {
+            throw new BadRequestException(HttpStatus.BAD_REQUEST, "旧密码输入错误");
+        }
+        user.setId(passwordVO.getUserId());
+        user.setPassword(encoder.encode(passwordVO.getNewPassword()));
+        userMapper.updateById(user);
     }
 
     @Override

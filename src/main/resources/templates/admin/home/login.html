@@ -193,7 +193,7 @@
                 data: $("#login-form").serialize(),
                 success: function (result) {
                     if (result.authenticated) {
-                        localStorage.setItem("id", result.principal.userId);
+                        localStorage.setItem("userId", result.principal.id);
                         localStorage.setItem("username", result.principal.username);
                         localStorage.setItem("nickname", result.principal.nickname);
                         localStorage.setItem("user", JSON.stringify(result.principal));

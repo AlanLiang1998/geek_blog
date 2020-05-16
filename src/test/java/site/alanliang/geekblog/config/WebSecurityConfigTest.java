@@ -12,7 +12,7 @@ class WebSecurityConfigTest {
     @Test
     void passwordEncoder() {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        String encode = encoder.encode("123456");
+        String encode = encoder.encode("80238023");
         System.out.println(encode);
     }
 }
