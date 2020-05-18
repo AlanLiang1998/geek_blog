@@ -183,6 +183,12 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
         return browser.getName();
     }
 
+    public static String getClientOS(HttpServletRequest request) {
+        UserAgent userAgent = UserAgent.parseUserAgentString(request.getHeader("User-Agent"));
+        // 获取客户端操作系统
+        return userAgent.getOperatingSystem().getName();
+    }
+
     /**
      * 获得当天是周几
      */

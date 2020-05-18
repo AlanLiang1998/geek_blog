@@ -90,7 +90,7 @@
                     </div>
                 </div>
                 <div class="cover-btns">
-                    <a class="waves-effect waves-light btn" href="#indexCard">
+                    <a class="waves-effect waves-light btn" onclick="$.scrollTo('#indexCard',500); ">
                         <i class="fa fa-angle-double-down"></i>开始阅读
                     </a>
                 </div>
@@ -313,6 +313,7 @@
                 if (page >= 1 && page <= this.pages) {
                     this.current = page;
                     this.getArticles(page);
+                    $(window).scrollTo('#articleCards', 1000);
                 }
             },
             initCarousel: function () {

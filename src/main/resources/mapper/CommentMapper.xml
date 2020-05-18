@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="site.alanliang.geekblog.dao.CommentMapper">
+    <resultMap id="displayResultMap" type="site.alanliang.geekblog.model.Comment">
+        <id property="id" column="id"/>
+        <result property="pid" column="pid"/>
+        <result property="content" column="content"/>
+        <result property="nickname" column="nickname"/>
+        <result property="avatar" column="avatar"/>
+        <result property="link" column="link"/>
+        <result property="createTime" column="create_time"/>
+        <result property="browser" column="browser"/>
+        <result property="os" column="os"/>
+        <result property="address" column="address"/>
+        <association property="parentComment" javaType="site.alanliang.geekblog.model.Comment">
+            <result property="nickname" column="parent_nickname"/>
+        </association>
+    </resultMap>
+
+    <select id="listRootPageByArticleId" resultMap="displayResultMap"
+            parameterType="com.baomidou.mybatisplus.extension.plugins.pagination.Page">
+        select id,
+               pid,
+               content,
+               nickname,
+               avatar,
+               link,
+               create_time,
+               browser,
+               os,
+               address
+        from t_comment
+        where article_id = #{articleId}
+          and pid = ${@site.alanliang.geekblog.common.Constant@COMMENT_LINKED_LIST_ROOT}
+        order by create_time DESC
+    </select>
+
+    <select id="listByArticleId" resultMap="displayResultMap">
+        select tc1.id,
+               tc1.pid,
+               tc1.content,
+               tc1.nickname,
+               tc1.avatar,
+               tc1.link,
+               tc1.create_time,
+               tc1.browser,
+               tc1.os,
+               tc1.address,
+               tc2.nickname as parent_nickname
+        from (select id,
+                     pid,
+                     content,
+                     nickname,
+                     avatar,
+                     link,
+                     create_time,
+                     browser,
+                     os,
+                     address
+              from t_comment
+              where article_id = #{articleId}) tc1
+                 left join (select id, nickname
+                            from t_comment
+                            where article_id = #{articleId}) tc2
+                           on tc1.pid = tc2.id
+        order by tc1.create_time DESC
+    </select>
+
+    <select id="listRootMessageByPage" resultMap="displayResultMap"
+            parameterType="com.baomidou.mybatisplus.extension.plugins.pagination.Page">
+        select id,
+               pid,
+               content,
+               nickname,
+               avatar,
+               link,
+               create_time,
+               browser,
+               os,
+               address
+        from t_comment
+        where article_id IS NULL
+          and pid = ${@site.alanliang.geekblog.common.Constant@COMMENT_LINKED_LIST_ROOT}
+        order by create_time DESC
+    </select>
+
+    <select id="listMessage" resultMap="displayResultMap">
+        select tc1.id,
+               tc1.pid,
+               tc1.content,
+               tc1.nickname,
+               tc1.avatar,
+               tc1.link,
+               tc1.create_time,
+               tc1.browser,
+               tc1.os,
+               tc1.address,
+               tc2.nickname as parent_nickname
+        from (select id,
+                     pid,
+                     content,
+                     nickname,
+                     avatar,
+                     link,
+                     create_time,
+                     browser,
+                     os,
+                     address
+              from t_comment
+              where article_id IS NULL) tc1
+                 left join (select id, nickname
+                            from t_comment
+                            where article_id IS NULL) tc2
+                           on tc1.pid = tc2.id
+        order by tc1.create_time DESC
+    </select>
+</mapper>

@@ -58,7 +58,7 @@ public interface Constant {
     /**
      * 默认头像
      */
-    String DEFAULT_AVATAR = "http://q8rsjstig.bkt.clouddn.com/note/default_avatar.jpg";
+    String DEFAULT_AVATAR = "https://gravatar.loli.net/avatar/f2c02ce7474e4b228a576f7e47f00bd1?d=mp&v=1.3.10";
 
     /**
      * 菜单树根结点
@@ -84,4 +84,10 @@ public interface Constant {
      * 菜单树复选框选中
      */
     Integer MENU_TREE_SELECTED = 1;
+
+    /**
+     * 评论链表根节点
+     */
+    Long COMMENT_LINKED_LIST_ROOT = 0L;
+
 }

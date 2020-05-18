@@ -2,7 +2,7 @@
 <html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta th:include="web/fragments :: head(~{::title})">
-    <title>标签 | GeekBlog</title>
+    <title>友情链接 | GeekBlog</title>
     <link rel="stylesheet" type="text/css" href="/static/web/css/jqcloud.css"/>
     <style>
         .friends-container {
@@ -469,13 +469,102 @@
         </div>
 
         <div class="card">
-            <div class="card valine-card" data-aos="fade-up">
+            <div class="card valine-card aos-init aos-animate" data-aos="fade-up" id="comment-area">
                 <div class="comment_headling"
                      style="font-size: 20px; font-weight: 700; position: relative; left: 20px; top: 15px; padding-bottom: 5px;">
                     <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
                     <span>留言墙</span>
                 </div>
-                <div id="vcomments" class="card-content" style="display: grid">
+                <div id="comment-form">
+                    <input type="hidden" name="pid" v-model="pid"/>
+                    <div id="vcomments" class="card-content v" style="display: grid">
+                        <div class="vwrap">
+                            <div class="vheader item3">
+                                <input name="nickname" placeholder="昵称(必填)" class="vnick vinput" type="text"
+                                       required v-model="nickname"><input
+                                    name="email" placeholder="邮箱(必填)" class="vmail vinput" type="email"
+                                    required v-model="email"><input
+                                    name="link" placeholder="网址(http://)" class="vlink vinput" type="text"
+                                    v-model="link">
+                            </div>
+                            <div class="vedit">
+                                        <textarea id="veditor" class="veditor vinput"
+                                                  :placeholder="placeholder" name="content"
+                                                  required v-model="content"></textarea>
+                            </div>
+                            <div class="vcontrol" style="float: right">
+                                <div class="col col-80 text-right">
+                                    <button type="button" class="vsubmit vbtn" @click="saveComment">回复</button>
+                                </div>
+                            </div>
+                            <div style="display:none;" class="vmark"></div>
+                        </div>
+                        <div class="vinfo" style="display:block;">
+                            <div class="vcount col"><span class="vnum">{{total}}</span>&nbsp;留言</div>
+                        </div>
+                        <div class="vlist">
+                            <div class="vcard" v-for="(comment, index) in comments" :key="comment.id"
+                                 id="'comment'+comment.id">
+                                <img class="vimg" :src="comment.avatar">
+                                <div class="vh">
+                                    <div class="vhead">
+                                        <a class="vnick" rel="nofollow"
+                                           :href="comment.link"
+                                           target="_blank">{{comment.nickname}}</a>
+                                        <span class="vsys">{{comment.browser}}</span>
+                                        <span class="vsys">{{comment.os}}</span>
+                                        <span class="vsys">{{comment.address}}</span>
+                                    </div>
+                                    <div class="vmeta">
+                                        <span class="vtime">{{comment.createTime | dateFormat}}</span>
+                                        <span class="vat"
+                                              @click="reply(comment.id, comment.nickname)">回复</span>
+                                    </div>
+                                    <div class="vcontent">
+                                        <p>{{comment.content}}</p>
+                                    </div>
+                                    <div class="vquote"
+                                         v-if="comment.children !== undefined && comment.children.length > 0">
+                                        <div class="vcard" v-for="(child, index) in comment.children"
+                                             :key="child.id">
+                                            <img class="vimg"
+                                                 :src="child.avatar">
+                                            <div class="vh">
+                                                <div class="vhead">
+                                                    <a class="vnick" rel="nofollow"
+                                                       :href="child.link"
+                                                       target="_blank">{{child.nickname}}</a>
+                                                    <span class="vsys">{{child.browser}}</span>
+                                                    <span class="vsys">{{child.os}}</span>
+                                                    <span class="vsys">{{child.address}}</span>
+                                                </div>
+                                                <div class="vmeta">
+                                                    <span class="vtime">{{child.createTime | dateFormat}}</span>
+                                                    <span class="vat"
+                                                          @click="reply(child.id, child.nickname)">回复</span>
+                                                </div>
+                                                <div class="vcontent">
+                                                    <p>
+                                                        <a class="at"
+                                                           href="#">@{{child.parentComment.nickname}}</a>&nbsp;&nbsp;{{child.content}}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="vempty" style="display:none;"></div>
+                        <div class="vpage txt-center" v-if="current < pages">
+                            <button type="button" class="vsubmit vbtn" @click="loadMore">加载更多</button>
+                        </div>
+                        <div class="info">
+                            <div class="power txt-right">Powered By <a href="https://valine.js.org"
+                                                                       target="_blank">Valine</a><br>v1.3.10
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -495,20 +584,109 @@
 <!--scripts-->
 <div th:replace="web/fragments :: scripts"></div>
 <!--end scripts-->
-</body>
-<script src="/static/web/js/av-min.js"></script>
 <script src="/static/web/js/Valine.min.js"></script>
-<script>
-    new Valine({
-        el: '#vcomments',
-        appId: 'SDxrhXkjLgCDr5ke5x7qg8gl-gzGzoHsz',
-        appKey: 'S4XFSBkHr5ThpoAuYQvSKKbM',
-        avatar: ('mp'),
-        pageSize: '10',
-        lang: 'zh-cn',
-        placeholder: '你想要对博主说什么呢...',
+<!--vue-->
+<script type="text/javascript">
+    const vm = new Vue({
+        el: '#comment-form',
+        data: {
+            pid: 0,
+            nickname: '',
+            email: '',
+            link: '',
+            content: '',
+            comments: [],
+            placeholder: '你想要对博主说什么呢(必填)...',
+            current: 1,
+            pages: 0,
+            total: 0,
+        },
+        methods: {
+            clearForm: function () {
+                this.nickname = '';
+                this.email = '';
+                this.link = '';
+                this.content = '';
+            },
+            loadMore: function () {
+                this.current += 1;
+                this.getComments();
+            },
+            reply: function (commentId, nickname) {
+                this.placeholder = '@' + nickname;
+                this.pid = commentId;
+                this.clearForm();
+                $.scrollTo('#comment-area', 500);
+                $('#veditor').focus();
+            },
+            validate: function () {
+                if (this.nickname.trim() === '') {
+                    alert('昵称不能为空');
+                    return false;
+                }
+                if (this.email.trim() === '') {
+                    alert('邮箱地址不能为空');
+                    return false;
+                }
+                if (this.content.trim() === '') {
+                    alert('留言内容不能为空');
+                    return false;
+                }
+                if (this.link !== '') {
+                    let pattern = /(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&:/~\+#]*[\w\-\@?^=%&/~\+#])?/;
+                    if (!pattern.test(this.link)) {
+                        alert('请填写完整地址（包含协议）');
+                        return false;
+                    }
+                }
+                return true;
+            },
+            saveComment: function () {
+                if (!this.validate()) {
+                    return false;
+                }
+                let newComment = {
+                    'pid': this.pid,
+                    'nickname': this.nickname,
+                    'email': this.email,
+                    'link': this.link,
+                    'content': this.content,
+                };
+                axios.post('/comment', newComment)
+                    .then((result) => {
+                        this.content = '';
+                        this.comments = this.getComments();
+                        $.scrollTo('.vinfo', 500);
+                    });
+                return false;
+            },
+            getComments: function () {
+                axios({
+                    url: '/comment/listMessage?current=' + this.current,
+                    method: 'GET'
+                }).then((result) => {
+                    this.current = result.data.current;
+                    this.pages = result.data.pages;
+                    this.total = result.data.total;
+                    if (this.current <= 1) {
+                        this.comments = result.data.records;
+                    } else {
+                        this.comments = this.comments.concat(result.data.records);
+                    }
+                })
+            }
+        },
+        created() {
+            this.getComments();
+        },
+        filters: {
+            dateFormat: function (value) {
+                return moment(value).fromNow();
+            }
+        },
     });
 </script>
+
 <script>
     $(function () {
         $('#friends-link').masonry({
@@ -516,4 +694,5 @@
         });
     });
 </script>
+</body>
 </html>
