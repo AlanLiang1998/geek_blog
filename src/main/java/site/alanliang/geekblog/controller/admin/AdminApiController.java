@@ -84,4 +84,16 @@ public class AdminApiController {
         model.addAttribute("menu", menuService.getById(id));
         return "admin/menu/menu-edit";
     }
+
+    @GetMapping("/comment/{pid}")
+    public String replyComment(@PathVariable("pid") Long pid, Model model) {
+        model.addAttribute("pid", pid);
+        return "admin/comment/comment-add";
+    }
+
+    @GetMapping("/message/{pid}")
+    public String replyMessage(@PathVariable("pid") Long pid, Model model) {
+        model.addAttribute("pid", pid);
+        return "admin/message/message-add";
+    }
 }

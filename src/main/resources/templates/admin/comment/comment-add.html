@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>评论回复</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="/static/admin/layuimini/lib/layui-v2.5.5/css/layui.css" media="all">
+    <link rel="stylesheet" href="/static/admin/layuimini/css/public.css" media="all">
+    <style>
+        body {
+            background-color: #ffffff;
+        }
+
+        .layui-input-block {
+            position: relative;
+        }
+
+        .word {
+            position: absolute;
+            right: 10px;
+            bottom: 10px;
+            color: #aaa;
+            font-size: 12px;
+        }
+    </style>
+
+</head>
+<body>
+<form class="layui-form layuimini-form">
+    <div class="layui-form-item layui-form-text">
+        <input type="hidden" id="pid"/>
+        <label class="layui-form-label required">回复内容</label>
+        <div class="layui-input-block">
+            <textarea name="reply" class="layui-textarea" lay-verify="required" lay-reqtext="回复内容不能为空"
+                      placeholder="请输入回复内容" oninput="wordLeg(this);" maxlength="80"></textarea>
+            <div class="word"><span class="text_count">0</span>&nbsp;/&nbsp;<span class="num_count"
+                                                                                  id="numCount">80</span></div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="saveBtn">确认保存</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+</form>
+<script src="/static/admin/layuimini/lib/layui-v2.5.5/layui.js" charset="utf-8"></script>
+<script>
+    layui.use(['form'], function () {
+        var form = layui.form,
+            layer = layui.layer,
+            $ = layui.$;
+
+        window.wordLeg = function (obj) {
+            var currleg = $(obj).val().length;
+            var length = $(obj).attr('maxlength');
+            if (currleg > length) {
+                layer.msg('字数请在' + length + '字以内');
+            } else {
+                $('.text_count').text(currleg);
+            }
+        }
+
+        //自定义验证规则
+        form.verify({
+            reply: function (value) {
+                if (value === '' || value.length <= 0) {
+                    return '回复内容不能为空';
+                }
+                if (value.length > 80) {
+                    return '回复内容长度不能超过80个字符';
+                }
+            }
+        });
+
+        //监听提交
+        form.on('submit(saveBtn)', function (data) {
+            data.field.pid = [[${pid}]];
+            $.ajax({
+                url: '/admin/comment',
+                type: 'POST',
+                data: JSON.stringify(data.field),
+                contentType: 'application/json',
+                success: function (result) {
+                    if (result.code === 200) {
+                        var parentLayer = parent.layer;
+                        layer.msg('保存成功', {icon: 1, time: 1000}, function () {
+                            var iframeIndex = parentLayer.getFrameIndex(window.name);
+                            parent.location.reload();
+                            parentLayer.close(iframeIndex);
+                        });
+                    }
+                },
+                error: function (XMLHttpRequest) {
+                    var result = JSON.parse(XMLHttpRequest.responseText);
+                    layer.alert(result.msg, {icon: 5});
+                }
+            });
+            return false;
+        });
+
+    });
+</script>
+</body>
+</html>

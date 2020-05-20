@@ -469,13 +469,13 @@
         </div>
 
         <div class="card">
-            <div class="card valine-card aos-init aos-animate" data-aos="fade-up" id="comment-area">
+            <div class="card valine-card aos-init aos-animate" data-aos="fade-up" id="message-area">
                 <div class="comment_headling"
                      style="font-size: 20px; font-weight: 700; position: relative; left: 20px; top: 15px; padding-bottom: 5px;">
                     <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
                     <span>留言墙</span>
                 </div>
-                <div id="comment-form">
+                <div id="message-form">
                     <input type="hidden" name="pid" v-model="pid"/>
                     <div id="vcomments" class="card-content v" style="display: grid">
                         <div class="vwrap">
@@ -494,7 +494,7 @@
                             </div>
                             <div class="vcontrol" style="float: right">
                                 <div class="col col-80 text-right">
-                                    <button type="button" class="vsubmit vbtn" @click="saveComment">回复</button>
+                                    <button type="button" class="vsubmit vbtn" @click="saveMessage">回复</button>
                                 </div>
                             </div>
                             <div style="display:none;" class="vmark"></div>
@@ -503,29 +503,29 @@
                             <div class="vcount col"><span class="vnum">{{total}}</span>&nbsp;留言</div>
                         </div>
                         <div class="vlist">
-                            <div class="vcard" v-for="(comment, index) in comments" :key="comment.id"
-                                 id="'comment'+comment.id">
-                                <img class="vimg" :src="comment.avatar">
+                            <div class="vcard" v-for="(message, index) in messages" :key="message.id"
+                                 id="'message'+message.id">
+                                <img class="vimg" :src="message.avatar">
                                 <div class="vh">
                                     <div class="vhead">
                                         <a class="vnick" rel="nofollow"
-                                           :href="comment.link"
-                                           target="_blank">{{comment.nickname}}</a>
-                                        <span class="vsys">{{comment.browser}}</span>
-                                        <span class="vsys">{{comment.os}}</span>
-                                        <span class="vsys">{{comment.address}}</span>
+                                           :href="message.link"
+                                           target="_blank">{{message.nickname}}</a>
+                                        <span class="vsys">{{message.browser}}</span>
+                                        <span class="vsys">{{message.os}}</span>
+                                        <span class="vsys">{{message.address}}</span>
                                     </div>
                                     <div class="vmeta">
-                                        <span class="vtime">{{comment.createTime | dateFormat}}</span>
+                                        <span class="vtime">{{message.createTime | dateFormat}}</span>
                                         <span class="vat"
-                                              @click="reply(comment.id, comment.nickname)">回复</span>
+                                              @click="reply(message.id, message.nickname)">回复</span>
                                     </div>
                                     <div class="vcontent">
-                                        <p>{{comment.content}}</p>
+                                        <p>{{message.content}}</p>
                                     </div>
                                     <div class="vquote"
-                                         v-if="comment.children !== undefined && comment.children.length > 0">
-                                        <div class="vcard" v-for="(child, index) in comment.children"
+                                         v-if="message.children !== undefined && message.children.length > 0">
+                                        <div class="vcard" v-for="(child, index) in message.children"
                                              :key="child.id">
                                             <img class="vimg"
                                                  :src="child.avatar">
@@ -546,7 +546,7 @@
                                                 <div class="vcontent">
                                                     <p>
                                                         <a class="at"
-                                                           href="#">@{{child.parentComment.nickname}}</a>&nbsp;&nbsp;{{child.content}}
+                                                           href="#">@{{child.parentMessage.nickname}}</a>&nbsp;&nbsp;{{child.content}}
                                                     </p>
                                                 </div>
                                             </div>
@@ -588,14 +588,14 @@
 <!--vue-->
 <script type="text/javascript">
     const vm = new Vue({
-        el: '#comment-form',
+        el: '#message-form',
         data: {
             pid: 0,
             nickname: '',
             email: '',
             link: '',
             content: '',
-            comments: [],
+            messages: [],
             placeholder: '你想要对博主说什么呢(必填)...',
             current: 1,
             pages: 0,
@@ -610,13 +610,13 @@
             },
             loadMore: function () {
                 this.current += 1;
-                this.getComments();
+                this.getMessages();
             },
-            reply: function (commentId, nickname) {
+            reply: function (messageId, nickname) {
                 this.placeholder = '@' + nickname;
-                this.pid = commentId;
+                this.pid = messageId;
                 this.clearForm();
-                $.scrollTo('#comment-area', 500);
+                $.scrollTo('#message-area', 500);
                 $('#veditor').focus();
             },
             validate: function () {
@@ -641,43 +641,43 @@
                 }
                 return true;
             },
-            saveComment: function () {
+            saveMessage: function () {
                 if (!this.validate()) {
                     return false;
                 }
-                let newComment = {
+                let newMessage = {
                     'pid': this.pid,
                     'nickname': this.nickname,
                     'email': this.email,
                     'link': this.link,
                     'content': this.content,
                 };
-                axios.post('/comment', newComment)
+                axios.post('/messages', newMessage)
                     .then((result) => {
                         this.content = '';
-                        this.comments = this.getComments();
+                        this.messages = this.getMessages();
                         $.scrollTo('.vinfo', 500);
                     });
                 return false;
             },
-            getComments: function () {
+            getMessages: function () {
                 axios({
-                    url: '/comment/listMessage?current=' + this.current,
+                    url: '/messages/?current=' + this.current,
                     method: 'GET'
                 }).then((result) => {
                     this.current = result.data.current;
                     this.pages = result.data.pages;
                     this.total = result.data.total;
                     if (this.current <= 1) {
-                        this.comments = result.data.records;
+                        this.messages = result.data.records;
                     } else {
-                        this.comments = this.comments.concat(result.data.records);
+                        this.messages = this.messages.concat(result.data.records);
                     }
                 })
             }
         },
         created() {
-            this.getComments();
+            this.getMessages();
         },
         filters: {
             dateFormat: function (value) {

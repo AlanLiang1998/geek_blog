@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="site.alanliang.geekblog.dao.MessageMapper">
+    <resultMap id="displayResultMap" type="site.alanliang.geekblog.model.Message">
+        <id property="id" column="id"/>
+        <result property="pid" column="pid"/>
+        <result property="content" column="content"/>
+        <result property="nickname" column="nickname"/>
+        <result property="avatar" column="avatar"/>
+        <result property="link" column="link"/>
+        <result property="createTime" column="create_time"/>
+        <result property="browser" column="browser"/>
+        <result property="os" column="os"/>
+        <result property="address" column="address"/>
+        <association property="parentMessage" javaType="site.alanliang.geekblog.model.Message">
+            <result property="nickname" column="parent_nickname"/>
+        </association>
+    </resultMap>
+
+    <select id="listRootByPage" resultMap="displayResultMap"
+            parameterType="com.baomidou.mybatisplus.extension.plugins.pagination.Page">
+        select id,
+               pid,
+               content,
+               nickname,
+               avatar,
+               link,
+               create_time,
+               browser,
+               os,
+               address
+        from t_message
+        where pid = ${@site.alanliang.geekblog.common.Constant@COMMENT_LINKED_LIST_ROOT}
+        order by create_time DESC
+    </select>
+
+    <select id="listAll" resultMap="displayResultMap">
+        select tm1.id,
+               tm1.pid,
+               tm1.content,
+               tm1.nickname,
+               tm1.avatar,
+               tm1.link,
+               tm1.create_time,
+               tm1.browser,
+               tm1.os,
+               tm1.address,
+               tm2.nickname as parent_nickname
+        from t_message tm1
+                 left join (select id, nickname
+                            from t_message) tm2
+                           on tm1.pid = tm2.id
+        order by tm1.create_time DESC
+    </select>
+</mapper>

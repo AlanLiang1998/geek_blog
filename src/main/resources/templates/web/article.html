@@ -628,7 +628,7 @@
                                 </div>
                                 <div class="vlist">
                                     <div class="vcard" v-for="(comment, index) in comments" :key="comment.id"
-                                         id="'comment'+comment.id">
+                                         :id="'comment'+comment.id">
                                         <img class="vimg" :src="comment.avatar">
                                         <div class="vh">
                                             <div class="vhead">
@@ -670,7 +670,7 @@
                                                         <div class="vcontent">
                                                             <p>
                                                                 <a class="at"
-                                                                   href="#">@{{child.parentComment.nickname}}</a>&nbsp;&nbsp;{{child.content}}
+                                                                   :href="'#comment'+child.pid">@{{child.parentComment.nickname}}</a>&nbsp;&nbsp;{{child.content}}
                                                             </p>
                                                         </div>
                                                     </div>
@@ -862,7 +862,7 @@
                     'link': this.link,
                     'content': this.content,
                 };
-                axios.post('/comment', newComment)
+                axios.post('/comments', newComment)
                     .then((result) => {
                         this.content = '';
                         this.comments = this.getComments();
@@ -872,7 +872,7 @@
             },
             getComments: function () {
                 axios({
-                    url: '/comment/listByArticleId/' + this.articleId + '?current=' + this.current,
+                    url: '/comments/listByArticleId/' + this.articleId + '?current=' + this.current,
                     method: 'GET'
                 }).then((result) => {
                     this.current = result.data.current;

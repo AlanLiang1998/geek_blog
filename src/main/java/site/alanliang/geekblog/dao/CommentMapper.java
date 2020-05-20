@@ -28,19 +28,4 @@ public interface CommentMapper extends BaseMapper<Comment> {
      * @return 评论列表
      */
     List<Comment> listByArticleId(@Param("articleId") Long articleId);
-
-    /**
-     * 分页查询所有顶级留言
-     *
-     * @param page 分页参数
-     * @return 留言分页
-     */
-    Page<Comment> listRootMessageByPage(Page<Comment> page);
-
-    /**
-     * 查询所有留言
-     *
-     * @return 留言列表
-     */
-    List<Comment> listMessage();
 }

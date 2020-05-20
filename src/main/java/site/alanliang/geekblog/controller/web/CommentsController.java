@@ -22,8 +22,8 @@ import java.util.Date;
  * Version 1.0
  **/
 @RestController
-@RequestMapping("/comment")
-public class CommentController {
+@RequestMapping("/comments")
+public class CommentsController {
 
     @Autowired
     private CommentService commentService;
@@ -50,11 +50,5 @@ public class CommentController {
         return new ResponseEntity<>(pageInfo, HttpStatus.OK);
     }
 
-    @GetMapping("/listMessage")
-    public ResponseEntity<Object> listMessage(@RequestParam(value = "current", defaultValue = "1") Integer current,
-                                              @RequestParam(value = "size", defaultValue = Constant.PAGE_SIZE) Integer size){
-        Page<Comment> page = new Page<>(current, size);
-        Page<Comment> pageInfo = commentService.listMessageByPage(page);
-        return new ResponseEntity<>(pageInfo, HttpStatus.OK);
-    }
+
 }
