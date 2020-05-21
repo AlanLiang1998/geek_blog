@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/static/web/css/prism-tomorrow.css" type="text/css">
     <link rel="stylesheet" href="/static/web/css/prism-line-numbers.css" type="text/css">
     <link rel="stylesheet" href="/static/web/css/tocbot.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style>
         #articleContent h1::before,
         #articleContent h2::before,
@@ -558,7 +559,6 @@
                                         <div class="social-share"
                                              data-sites="qq,qzone,wechat,weibo"
                                              data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
-                                        <script src="/static/web/js/social-share.min.js"></script>
                                     </div>
                                 </div>
                             </div>
@@ -568,7 +568,7 @@
                                    class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red"
                                    th:if="${article.appreciable}">赏</a>
                                 <a class="reward-link btn-floating btn-medium waves-effect waves-light teal"
-                                   id="likeBtn">赞</a>
+                                   id="likeBtn" @click="likeIt">赞</a>
                                 <!-- Modal Structure -->
                                 <div id="rewardModal" class="modal">
                                     <div class="modal-content">
@@ -592,6 +592,103 @@
                             </div>
                         </div>
                     </div>
+                    <div id="loginModal" class="modal">
+                        <div class="modal-content">
+                            <div class="row">
+                                <h4 class="col s12">登录</h4>
+                                <form class="col s12">
+                                    <div class="row">
+                                        <div class="input-field col s12">
+                                            <i class="material-icons prefix">account_circle</i>
+                                            <input id="certificate" type="text" class="validate" required
+                                                   v-model="login.certificate" placeholder="请输入用户名或邮箱">
+                                            <label for="certificate">用户名</label>
+                                        </div>
+                                        <div class="input-field col s12">
+                                            <i class="material-icons prefix">credit_card</i>
+                                            <input id="password" type="password" class="validate" required
+                                                   v-model="login.password" placeholder="请输入密码">
+                                            <label for="password">密码</label>
+                                        </div>
+                                        <div class="input-field col s12">
+                                            <a class="col s12 waves-effect waves-light btn" @click="postLogin">登录</a>
+                                        </div>
+                                        <div class="input-field col s12">
+                                            <a href="#registerModal"
+                                               class="col s12 waves-effect waves-light btn materialize-red modal-trigger">注册</a>
+                                        </div>
+                                        <a class="col s12 center" href="#">忘记密码？</a>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="registerModal" class="modal">
+                        <div class="modal-content">
+                            <div class="row">
+                                <h4 class="col s12">注册</h4>
+                                <form class="col s12">
+                                    <div class="row">
+                                        <div class="input-field col s12">
+                                            <i class="material-icons prefix">account_circle</i>
+                                            <input id="reg-username" type="text" class="validate" required
+                                                   placeholder="请输入用户名"
+                                                   pattern="^[A-Za-z0-9]{4,16}$"
+                                                   v-model="register.username">
+                                            <label for="reg-username">用户名</label>
+                                            <span class="error red-text"
+                                                  id="reg-username-tip"
+                                                  v-show="!checkUsername()">用户名只能为数字或字母，长度为4-16个字符</span>
+                                        </div>
+                                        <div class="input-field col s12">
+                                            <i class="material-icons prefix">credit_card</i>
+                                            <input id="reg-password" type="password" class="validate" required
+                                                   placeholder="请输入密码"
+                                                   pattern="^[A-Za-z0-9]{6,16}$"
+                                                   v-model="register.password">
+                                            <label for="reg-password">密码</label>
+                                            <span class="error red-text"
+                                                  id="reg-password-tip"
+                                                  v-show="!checkPassword()">密码只能为数字或字母，长度为6-16个字符</span>
+                                        </div>
+                                        <div class="input-field col s12">
+                                            <i class="material-icons prefix">verified_user</i>
+                                            <input id="reg-repeat" type="password" required
+                                                   pattern="^[A-Za-z0-9]{6,16}$"
+                                                   v-model="register.repeat">
+                                            <label for="reg-repeat">重复密码</label>
+                                            <span class="error red-text"
+                                                  id="reg-repeat-tip" v-show="!checkRepeat()">两次密码输入不一致</span>
+                                        </div>
+                                        <div class="input-field col s12">
+                                            <i class="material-icons prefix">email</i>
+                                            <input id="reg-email" type="email" class="validate" required
+                                                   v-model="register.email">
+                                            <label for="reg-email">邮件</label>
+                                        </div>
+                                        <div class="input-field col s12">
+                                            <i class="material-icons prefix">perm_identity</i>
+                                            <input type="text" class="validate" required v-model="register.nickname"
+                                                   :class="{invalid: !checkNickname()}">
+                                            <label>昵称</label>
+                                            <span class="error red-text"
+                                                  v-show="!checkNickname()">昵称只能为字母或汉字，长度为2-8个字符</span>
+                                        </div>
+                                        <div class="input-field col s12">
+                                            <i class="material-icons prefix">http</i>
+                                            <input type="url" class="validate" v-model="register.link">
+                                            <label>网址(可选)</label>
+                                        </div>
+                                        <div class="input-field col s12">
+                                            <a type="submit"
+                                               class="col s12 waves-effect waves-light btn materialize-red white-text"
+                                               @click.prevent="postRegister()">注册</a>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                     <!--评论区-->
                     <div class="card valine-card aos-init aos-animate" data-aos="fade-up" id="comment-area">
                         <div class="comment_headling"
@@ -603,18 +700,10 @@
                             <input type="hidden" name="pid" v-model="pid"/>
                             <div id="vcomments" class="card-content v" style="display: grid">
                                 <div class="vwrap">
-                                    <div class="vheader item3">
-                                        <input name="nickname" placeholder="昵称(必填)" class="vnick vinput" type="text"
-                                               required v-model="nickname"><input
-                                            name="email" placeholder="邮箱(必填)" class="vmail vinput" type="email"
-                                            required v-model="email"><input
-                                            name="link" placeholder="网址(http://)" class="vlink vinput" type="text"
-                                            v-model="link">
-                                    </div>
                                     <div class="vedit">
                                         <textarea id="veditor" class="veditor vinput"
                                                   :placeholder="placeholder" name="content"
-                                                  required v-model="content"></textarea>
+                                                  required v-model="content" @focus="toLogin"></textarea>
                                     </div>
                                     <div class="vcontrol" style="float: right">
                                         <div class="col col-80 text-right">
@@ -796,25 +885,156 @@
 <!--vue-->
 <script type="text/javascript">
     const vm = new Vue({
-        el: '#comment-form',
+        el: '#app',
         data: {
             articleId: [[${article.id}]],
             pid: 0,
-            nickname: '',
-            email: '',
-            link: '',
             content: '',
             comments: [],
             placeholder: '你对这篇文章有什么看法呢(必填)...',
             current: 1,
             pages: 0,
             total: 0,
+            register: {
+                username: '',
+                password: '',
+                repeat: '',
+                email: '',
+                nickname: '',
+                link: '',
+            },
+            login: {
+                certificate: '',
+                password: ''
+            },
         },
         methods: {
+            postLogin: function () {
+                if (this.login.username === "" || this.login.password === "") {
+                    swal({
+                        text: "提交失败,请重新检查表单信息!",
+                        icon: "error",
+                        button: {
+                            text: "确定",
+                        },
+                    });
+                } else {
+                    axios({
+                        url: '/visitor/login',
+                        method: 'POST',
+                        data: {
+                            certificate: this.login.certificate,
+                            password: this.login.password,
+                        }
+                    }).then((result) => {
+                        swal({
+                            text: "登录成功",
+                            icon: "success",
+                            timer: 1000,
+                        }).then((value) => {
+                            sessionStorage.setItem("visitor", result.data);
+                            $('#loginModal').modal('close');
+                        });
+                    }).catch(error => {
+                        swal({
+                            text: error.response.data.msg,
+                            icon: "error",
+                            button: {
+                                text: "确定",
+                            },
+                        });
+                    });
+                }
+            },
+            postRegister: function () {
+                let isPass = this.checkUsername() && this.checkPassword() && this.checkRepeat() && this.checkNickname();
+                if (!isPass) {
+                    swal({
+                        text: "提交失败,请重新检查表单信息!",
+                        icon: "error",
+                        button: {
+                            text: "确定",
+                        },
+                    });
+                } else {
+                    axios({
+                        url: '/visitor',
+                        method: 'POST',
+                        data: {
+                            username: this.register.username,
+                            password: this.register.password,
+                            email: this.register.email,
+                            nickname: this.register.nickname,
+                            link: this.register.link,
+                        }
+                    }).then((result) => {
+                        swal({
+                            text: "注册成功,请登录!",
+                            icon: "success",
+                            button: {
+                                text: "确定",
+                            },
+                        }).then((value) => {
+                            $('#registerModal').modal('close');
+                        });
+                    }).catch(error => {
+                        swal({
+                            text: error.response.data.msg,
+                            icon: "error",
+                            button: {
+                                text: "确定",
+                            },
+                        });
+                    });
+                }
+            },
+            checkUsername: function () {
+                if (this.register.username === "") {
+                    return true;
+                }
+                let pattern = /^[A-Za-z0-9]{4,16}$/;
+                return pattern.test(this.register.username);
+            },
+            checkPassword: function () {
+                if (this.register.password === "") {
+                    return true;
+                }
+                let pattern = /^[A-Za-z0-9]{6,16}$/;
+                return pattern.test(this.register.password);
+            },
+            checkRepeat: function () {
+                return this.register.password === this.register.repeat;
+            },
+            checkNickname: function () {
+                if (this.register.nickname === "") {
+                    return true;
+                }
+                let pattern = /^[A-Za-z\u4E00-\u9FA5]{2,8}$/;
+                return pattern.test(this.register.nickname);
+            },
+            toLogin: function () {
+                let visitor = sessionStorage.getItem('visitor');
+                if (visitor !== null) {
+                    return false;
+                }
+                $('#loginModal').modal('open', {
+                    opacity: .5,
+                    in_duration: 300,
+                    out_duration: 200,
+                    starting_top: '4%',
+                    ending_top: '10%',
+                });
+            },
+            likeIt: function () {
+                axios({
+                    url: '/article/' + [[${article.id}]] + '/likes',
+                    method: 'PUT'
+                }).then((result) => {
+                    $('#likeBtn').addClass('disabled');
+                })
+                return false;
+            },
             clearForm: function () {
-                this.nickname = '';
-                this.email = '';
-                this.link = '';
                 this.content = '';
             },
             loadMore: function () {
@@ -829,25 +1049,31 @@
                 $('#veditor').focus();
             },
             validate: function () {
-                if (this.nickname.trim() === '') {
-                    alert('昵称不能为空');
-                    return false;
-                }
-                if (this.email.trim() === '') {
-                    alert('邮箱地址不能为空');
-                    return false;
-                }
+                /* if (this.nickname.trim() === '') {
+                     alert('昵称不能为空');
+                     return false;
+                 }
+                 if (this.email.trim() === '') {
+                     alert('邮箱地址不能为空');
+                     return false;
+                 }*/
                 if (this.content.trim() === '') {
-                    alert('评论内容不能为空');
+                    swal({
+                        text: "评论内容不能为空",
+                        icon: "error",
+                        button: {
+                            text: "确定",
+                        },
+                    });
                     return false;
                 }
-                if (this.link !== '') {
+                /*if (this.link !== '') {
                     let pattern = /(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&:/~\+#]*[\w\-\@?^=%&/~\+#])?/;
                     if (!pattern.test(this.link)) {
                         alert('请填写完整地址（包含协议）');
                         return false;
                     }
-                }
+                }*/
                 return true;
             },
             saveComment: function () {
@@ -857,9 +1083,6 @@
                 let newComment = {
                     'articleId': this.articleId,
                     'pid': this.pid,
-                    'nickname': this.nickname,
-                    'email': this.email,
-                    'link': this.link,
                     'content': this.content,
                 };
                 axios.post('/comments', newComment)
@@ -896,7 +1119,10 @@
         },
     });
 </script>
-
+<!--弹出层-->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<!--社交分享-->
+<script src="/static/web/js/social-share.min.js"></script>
 <!--评论区-->
 <script src="/static/web/js/Valine.min.js"></script>
 <!--目录-->
@@ -1061,17 +1287,6 @@
 </script>
 <script type="text/javascript">
     Prism.highlightAllUnder(document.getElementById("articleContent"));
-</script>
-<script type="text/javascript">
-    $('#likeBtn').click(function () {
-        axios({
-            url: '/article/' + [[${article.id}]] + '/likes',
-            method: 'PUT'
-        }).then((result) => {
-            $('#likeBtn').addClass('disabled');
-        })
-        return false;
-    });
 </script>
 </body>
 </html>

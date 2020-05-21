@@ -13,7 +13,7 @@ import javax.validation.constraints.Pattern;
  * Version 1.0
  **/
 @Data
-public class PasswordVO {
+public class UserLoginVO {
     @NotNull
     private Long userId;
     @NotBlank(message = "旧密码不能为空")

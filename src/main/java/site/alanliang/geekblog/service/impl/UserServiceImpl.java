@@ -18,7 +18,7 @@ import site.alanliang.geekblog.exception.EntityExistException;
 import site.alanliang.geekblog.query.UserQuery;
 import site.alanliang.geekblog.service.UserService;
 import site.alanliang.geekblog.utils.StringUtils;
-import site.alanliang.geekblog.vo.PasswordVO;
+import site.alanliang.geekblog.vo.UserLoginVO;
 import site.alanliang.geekblog.vo.UserInfoVO;
 
 import java.util.List;
@@ -170,7 +170,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void changePassword(PasswordVO passwordVO) {
+    public void changePassword(UserLoginVO passwordVO) {
         QueryWrapper<User> wrapper = new QueryWrapper<>();
         wrapper.select("password").eq("id", passwordVO.getUserId());
         User user = userMapper.selectOne(wrapper);

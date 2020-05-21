@@ -163,10 +163,11 @@
                                             <div class="post-body">
                                                 <!--分类-->
                                                 <div class="post-categories">
-                                                    <a class="category" href="#">{{article.category.name}}</a>
+                                                    <a class="category"
+                                                       :href="'/api/categories?id='+article.category.id">{{article.category.name}}</a>
                                                 </div>
                                                 <!--标题-->
-                                                <a href="#">
+                                                <a :href="'/article/'+article.id">
                                                     <h3 class="post-title">{{article.title}}</h3>
                                                 </a>
                                                 <!--描述-->

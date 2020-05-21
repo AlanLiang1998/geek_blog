@@ -3,7 +3,7 @@ package site.alanliang.geekblog.service;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import site.alanliang.geekblog.model.User;
 import site.alanliang.geekblog.query.UserQuery;
-import site.alanliang.geekblog.vo.PasswordVO;
+import site.alanliang.geekblog.vo.UserLoginVO;
 import site.alanliang.geekblog.vo.UserInfoVO;
 
 import java.util.List;
@@ -72,7 +72,7 @@ public interface UserService {
      *
      * @param passwordVO 用户新旧密码
      */
-    void changePassword(PasswordVO passwordVO);
+    void changePassword(UserLoginVO passwordVO);
 
     /**
      * 修改个人信息

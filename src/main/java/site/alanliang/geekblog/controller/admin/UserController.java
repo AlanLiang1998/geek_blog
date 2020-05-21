@@ -15,8 +15,7 @@ import site.alanliang.geekblog.common.TableResult;
 import site.alanliang.geekblog.model.User;
 import site.alanliang.geekblog.query.UserQuery;
 import site.alanliang.geekblog.service.UserService;
-import site.alanliang.geekblog.utils.MD5Util;
-import site.alanliang.geekblog.vo.PasswordVO;
+import site.alanliang.geekblog.vo.UserLoginVO;
 import site.alanliang.geekblog.vo.UserInfoVO;
 
 import javax.validation.constraints.NotEmpty;
@@ -98,7 +97,7 @@ public class UserController {
 
     @OperationLog("修改密码")
     @PutMapping("/password")
-    public JsonResult changePassword(@Validated @RequestBody PasswordVO passwordVO) {
+    public JsonResult changePassword(@Validated @RequestBody UserLoginVO passwordVO) {
         userService.changePassword(passwordVO);
         return JsonResult.ok();
     }

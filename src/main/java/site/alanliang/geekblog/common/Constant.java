@@ -90,4 +90,8 @@ public interface Constant {
      */
     Long COMMENT_LINKED_LIST_ROOT = 0L;
 
+
+    Integer VISITOR_ENABLE = 1;
+
+    Integer VISITOR_DISABLE = 0;
 }
