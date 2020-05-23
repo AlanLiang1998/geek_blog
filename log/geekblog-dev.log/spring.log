@@ -8839,3 +8839,379 @@ java.lang.ClassCastException: java.lang.String cannot be cast to java.io.ObjectS
 2020-05-23 17:06:03.304 DEBUG 8968 --- [http-nio-8889-exec-3] s.a.g.dao.OperationLogMapper.insert      : ==>  Preparing: INSERT INTO sys_operation_log ( create_time, description, log_type, method, params, request_ip, time, username, browser, address ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ) 
 2020-05-23 17:06:03.306 DEBUG 8968 --- [http-nio-8889-exec-3] s.a.g.dao.OperationLogMapper.insert      : ==> Parameters: 2020-05-23 17:06:03.303(Timestamp), 查询访客(String), INFO(String), site.alanliang.geekblog.controller.admin.VisitorController.listByPage()(String), { page: 1 limit: 15 userQuery: UserQuery(username=null, email=null, startDate=null, endDate=null) }(String), 0:0:0:0:0:0:0:1(String), 36(Long), admin(String), Chrome 8(String), 内网IP(String)
 2020-05-23 17:06:03.307 DEBUG 8968 --- [http-nio-8889-exec-3] s.a.g.dao.OperationLogMapper.insert      : <==    Updates: 1
+2020-05-23 17:11:38.256  INFO 12792 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Starting GeekBlogApplication on DESKTOP-QNDK7AF with PID 12792 (D:\idea\geekblog\target\classes started by AlanLiang in D:\idea\geekblog)
+2020-05-23 17:11:38.259 DEBUG 12792 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Running with Spring Boot v2.2.6.RELEASE, Spring v5.2.5.RELEASE
+2020-05-23 17:11:38.259  INFO 12792 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : The following profiles are active: dev
+2020-05-23 17:11:38.301  INFO 12792 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2020-05-23 17:11:38.302  INFO 12792 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2020-05-23 17:11:39.575  INFO 12792 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8889 (http)
+2020-05-23 17:11:39.582  INFO 12792 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-05-23 17:11:39.583  INFO 12792 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.33]
+2020-05-23 17:11:39.788  INFO 12792 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-05-23 17:11:39.788  INFO 12792 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1486 ms
+2020-05-23 17:11:39.918  INFO 12792 --- [restartedMain] o.s.boot.web.servlet.RegistrationBean    : Filter webStatFilter was not registered (possibly already registered?)
+2020-05-23 17:11:39.920  INFO 12792 --- [restartedMain] o.s.boot.web.servlet.RegistrationBean    : Servlet statViewServlet was not registered (possibly already registered?)
+2020-05-23 17:11:39.932 DEBUG 12792 --- [restartedMain] s.a.g.security.ValidateCodeFilter        : Filter 'validateCodeFilter' configured for use
+2020-05-23 17:11:40.033  INFO 12792 --- [restartedMain] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2020-05-23 17:11:40.423  INFO 12792 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2020-05-23 17:11:41.852  INFO 12792 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@7ba3a5e6, org.springframework.security.web.context.SecurityContextPersistenceFilter@502d6cf8, org.springframework.security.web.header.HeaderWriterFilter@382ecd52, org.springframework.security.web.authentication.logout.LogoutFilter@152b960b, site.alanliang.geekblog.security.ValidateCodeFilter@4c6977d9, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@30bff3e3, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@3322b432, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@154e2302, org.springframework.security.web.authentication.rememberme.RememberMeAuthenticationFilter@39126653, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@458e1c70, org.springframework.security.web.session.SessionManagementFilter@2fba7523, org.springframework.security.web.access.ExceptionTranslationFilter@377c5520, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@15e9d61]
+2020-05-23 17:11:41.950  INFO 12792 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-05-23 17:11:42.329  INFO 12792 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2020-05-23 17:11:42.382  INFO 12792 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8889 (http) with context path ''
+2020-05-23 17:11:42.384  INFO 12792 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Started GeekBlogApplication in 4.816 seconds (JVM running for 5.912)
+2020-05-23 17:11:46.689  INFO 12792 --- [http-nio-8889-exec-1] o.apache.tomcat.util.http.parser.Cookie  : A cookie header was received [1589548518,1589548583,1589553069; JSESSIONID=5D8118AE957F5B095A120595B0C49AD6; remember-me=YWRtaW46MTU5MTQzNDM1ODc5OTo4NDc1NWM0MmU0MDNlNmFkOTYzNmJiODlmYzBhYWM1Ng] that contained an invalid cookie. That cookie will be ignored.
+ Note: further occurrences of this error will be logged at DEBUG level.
+2020-05-23 17:11:46.695  INFO 12792 --- [http-nio-8889-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-05-23 17:11:46.695  INFO 12792 --- [http-nio-8889-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-05-23 17:11:46.707  INFO 12792 --- [http-nio-8889-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 11 ms
+2020-05-23 17:11:46.782 DEBUG 12792 --- [http-nio-8889-exec-1] s.a.geekblog.dao.UserMapper.selectList   : ==>  Preparing: SELECT id,username,password,nickname,avatar,sex,email,phone,status,create_time,update_time FROM sys_user WHERE (username = ?) 
+2020-05-23 17:11:46.881 DEBUG 12792 --- [http-nio-8889-exec-1] s.a.geekblog.dao.UserMapper.selectList   : ==> Parameters: admin(String)
+2020-05-23 17:11:46.903 DEBUG 12792 --- [http-nio-8889-exec-1] s.a.geekblog.dao.UserMapper.selectList   : <==      Total: 1
+2020-05-23 17:11:46.918 DEBUG 12792 --- [http-nio-8889-exec-1] s.a.g.d.M.listPermissionByUserId         : ==>  Preparing: select sm.* from (select id, authority from sys_menu where authority is not null) sm left join sys_role_menu srm on sm.id = srm.menu_id left join sys_role_user sru on srm.role_id = sru.role_id where sru.user_id = ? 
+2020-05-23 17:11:46.924 DEBUG 12792 --- [http-nio-8889-exec-1] s.a.g.d.M.listPermissionByUserId         : ==> Parameters: 1(Long)
+2020-05-23 17:11:46.932 DEBUG 12792 --- [http-nio-8889-exec-1] s.a.g.d.M.listPermissionByUserId         : <==      Total: 50
+2020-05-23 17:11:49.997 DEBUG 12792 --- [http-nio-8889-exec-5] s.a.geekblog.dao.UserMapper.selectList   : ==>  Preparing: SELECT id,username,password,nickname,avatar,sex,email,phone,status,create_time,update_time FROM sys_user WHERE (username = ?) 
+2020-05-23 17:11:49.998 DEBUG 12792 --- [http-nio-8889-exec-5] s.a.geekblog.dao.UserMapper.selectList   : ==> Parameters: admin(String)
+2020-05-23 17:11:50.000 DEBUG 12792 --- [http-nio-8889-exec-5] s.a.geekblog.dao.UserMapper.selectList   : <==      Total: 1
+2020-05-23 17:11:50.027 DEBUG 12792 --- [http-nio-8889-exec-5] s.a.g.d.M.listPermissionByUserId         : ==>  Preparing: select sm.* from (select id, authority from sys_menu where authority is not null) sm left join sys_role_menu srm on sm.id = srm.menu_id left join sys_role_user sru on srm.role_id = sru.role_id where sru.user_id = ? 
+2020-05-23 17:11:50.027 DEBUG 12792 --- [http-nio-8889-exec-5] s.a.g.d.M.listPermissionByUserId         : ==> Parameters: 1(Long)
+2020-05-23 17:11:50.031 DEBUG 12792 --- [http-nio-8889-exec-5] s.a.g.d.M.listPermissionByUserId         : <==      Total: 50
+2020-05-23 17:11:50.122  INFO 12792 --- [http-nio-8889-exec-5] s.a.g.s.MyAuthenticationSuccessHandler   : 登录成功
+2020-05-23 17:11:51.156 DEBUG 12792 --- [http-nio-8889-exec-6] s.a.g.dao.OperationLogMapper.insert      : ==>  Preparing: INSERT INTO sys_operation_log ( create_time, description, log_type, method, params, request_ip, time, username, browser, address ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ) 
+2020-05-23 17:11:51.162 DEBUG 12792 --- [http-nio-8889-exec-6] s.a.g.dao.OperationLogMapper.insert      : ==> Parameters: 2020-05-23 17:11:51.148(Timestamp), 访问后台首页(String), INFO(String), site.alanliang.geekblog.controller.admin.IndexController.index()(String), { }(String), 0:0:0:0:0:0:0:1(String), 7(Long), admin(String), Chrome 8(String), 内网IP(String)
+2020-05-23 17:11:51.164 DEBUG 12792 --- [http-nio-8889-exec-6] s.a.g.dao.OperationLogMapper.insert      : <==    Updates: 1
+2020-05-23 17:11:51.345 DEBUG 12792 --- [http-nio-8889-exec-7] s.a.g.dao.MenuMapper.listMenuByUserId    : ==>  Preparing: select sm.* from (select id, pid, title, icon, href, target from sys_menu where `status` = 1 and (type = 1 or type = 2)) sm left join sys_role_menu srm on sm.id = srm.menu_id left join sys_role_user sru on srm.role_id = sru.role_id where sru.user_id = ? 
+2020-05-23 17:11:51.348 DEBUG 12792 --- [http-nio-8889-exec-7] s.a.g.dao.MenuMapper.listMenuByUserId    : ==> Parameters: 1(Long)
+2020-05-23 17:11:51.354 DEBUG 12792 --- [http-nio-8889-exec-7] s.a.g.dao.MenuMapper.listMenuByUserId    : <==      Total: 15
+2020-05-23 17:11:54.009 DEBUG 12792 --- [http-nio-8889-exec-3] s.a.g.dao.VisitorMapper.selectPage       : ==>  Preparing: SELECT COUNT(1) FROM t_visitor 
+2020-05-23 17:11:54.010 DEBUG 12792 --- [http-nio-8889-exec-3] s.a.g.dao.VisitorMapper.selectPage       : ==> Parameters: 
+2020-05-23 17:11:54.018 DEBUG 12792 --- [http-nio-8889-exec-3] s.a.g.dao.VisitorMapper.selectPage       : ==>  Preparing: SELECT id,username,nickname,status,email,link,create_time,update_time FROM t_visitor LIMIT ?,? 
+2020-05-23 17:11:54.021 DEBUG 12792 --- [http-nio-8889-exec-3] s.a.g.dao.VisitorMapper.selectPage       : ==> Parameters: 0(Long), 15(Long)
+2020-05-23 17:11:54.022 DEBUG 12792 --- [http-nio-8889-exec-3] s.a.g.dao.VisitorMapper.selectPage       : <==      Total: 2
+2020-05-23 17:11:54.025 DEBUG 12792 --- [http-nio-8889-exec-3] s.a.g.dao.OperationLogMapper.insert      : ==>  Preparing: INSERT INTO sys_operation_log ( create_time, description, log_type, method, params, request_ip, time, username, browser, address ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ) 
+2020-05-23 17:11:54.027 DEBUG 12792 --- [http-nio-8889-exec-3] s.a.g.dao.OperationLogMapper.insert      : ==> Parameters: 2020-05-23 17:11:54.025(Timestamp), 查询访客(String), INFO(String), site.alanliang.geekblog.controller.admin.VisitorController.listByPage()(String), { page: 1 limit: 15 userQuery: UserQuery(username=null, email=null, startDate=null, endDate=null) }(String), 0:0:0:0:0:0:0:1(String), 36(Long), admin(String), Chrome 8(String), 内网IP(String)
+2020-05-23 17:11:54.028 DEBUG 12792 --- [http-nio-8889-exec-3] s.a.g.dao.OperationLogMapper.insert      : <==    Updates: 1
+2020-05-23 17:11:56.588 DEBUG 12792 --- [http-nio-8889-exec-6] s.a.g.dao.VisitorMapper.selectById       : ==>  Preparing: SELECT id,username,password,nickname,avatar,email,link,create_time,update_time,status FROM t_visitor WHERE id=? 
+2020-05-23 17:11:56.590 DEBUG 12792 --- [http-nio-8889-exec-6] s.a.g.dao.VisitorMapper.selectById       : ==> Parameters: 7(Long)
+2020-05-23 17:11:56.592 DEBUG 12792 --- [http-nio-8889-exec-6] s.a.g.dao.VisitorMapper.selectById       : <==      Total: 1
+2020-05-23 17:11:56.598 DEBUG 12792 --- [http-nio-8889-exec-6] s.a.g.dao.VisitorMapper.updateById       : ==>  Preparing: UPDATE t_visitor SET username=?, password=?, nickname=?, avatar=?, email=?, link=?, create_time=?, update_time=?, status=? WHERE id=? 
+2020-05-23 17:11:56.602 DEBUG 12792 --- [http-nio-8889-exec-6] s.a.g.dao.VisitorMapper.updateById       : ==> Parameters: test(String), e10adc3949ba59abbe56e057f20f883e(String), 测试(String), https://gravatar.loli.net/avatar/f2c02ce7474e4b228a576f7e47f00bd1?d=mp&v=1.3.10(String), test@geekblog.site(String), (String), 2020-05-21 09:49:32.0(Timestamp), 2020-05-21 09:49:32.0(Timestamp), 0(Integer), 7(Long)
+2020-05-23 17:11:56.604 DEBUG 12792 --- [http-nio-8889-exec-6] s.a.g.dao.VisitorMapper.updateById       : <==    Updates: 1
+2020-05-23 17:11:56.607 DEBUG 12792 --- [http-nio-8889-exec-6] s.a.g.dao.OperationLogMapper.insert      : ==>  Preparing: INSERT INTO sys_operation_log ( create_time, description, log_type, method, params, request_ip, time, username, browser, address ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ) 
+2020-05-23 17:11:56.608 DEBUG 12792 --- [http-nio-8889-exec-6] s.a.g.dao.OperationLogMapper.insert      : ==> Parameters: 2020-05-23 17:11:56.607(Timestamp), 修改访客状态(String), INFO(String), site.alanliang.geekblog.controller.admin.VisitorController.changeStatus()(String), { id: 7 }(String), 0:0:0:0:0:0:0:1(String), 20(Long), admin(String), Chrome 8(String), 内网IP(String)
+2020-05-23 17:11:56.609 DEBUG 12792 --- [http-nio-8889-exec-6] s.a.g.dao.OperationLogMapper.insert      : <==    Updates: 1
+2020-05-23 17:12:09.871 DEBUG 12792 --- [http-nio-8889-exec-5] s.a.g.dao.VisitorMapper.selectById       : ==>  Preparing: SELECT id,username,password,nickname,avatar,email,link,create_time,update_time,status FROM t_visitor WHERE id=? 
+2020-05-23 17:12:09.871 DEBUG 12792 --- [http-nio-8889-exec-5] s.a.g.dao.VisitorMapper.selectById       : ==> Parameters: 7(Long)
+2020-05-23 17:12:09.873 DEBUG 12792 --- [http-nio-8889-exec-5] s.a.g.dao.VisitorMapper.selectById       : <==      Total: 1
+2020-05-23 17:12:09.874 DEBUG 12792 --- [http-nio-8889-exec-5] s.a.g.dao.VisitorMapper.updateById       : ==>  Preparing: UPDATE t_visitor SET username=?, password=?, nickname=?, avatar=?, email=?, link=?, create_time=?, update_time=?, status=? WHERE id=? 
+2020-05-23 17:12:09.874 DEBUG 12792 --- [http-nio-8889-exec-5] s.a.g.dao.VisitorMapper.updateById       : ==> Parameters: test(String), e10adc3949ba59abbe56e057f20f883e(String), 测试(String), https://gravatar.loli.net/avatar/f2c02ce7474e4b228a576f7e47f00bd1?d=mp&v=1.3.10(String), test@geekblog.site(String), (String), 2020-05-21 09:49:32.0(Timestamp), 2020-05-21 09:49:32.0(Timestamp), 1(Integer), 7(Long)
+2020-05-23 17:12:09.875 DEBUG 12792 --- [http-nio-8889-exec-5] s.a.g.dao.VisitorMapper.updateById       : <==    Updates: 1
+2020-05-23 17:12:09.880 DEBUG 12792 --- [http-nio-8889-exec-5] s.a.g.dao.OperationLogMapper.insert      : ==>  Preparing: INSERT INTO sys_operation_log ( create_time, description, log_type, method, params, request_ip, time, username, browser, address ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ) 
+2020-05-23 17:12:09.880 DEBUG 12792 --- [http-nio-8889-exec-5] s.a.g.dao.OperationLogMapper.insert      : ==> Parameters: 2020-05-23 17:12:09.879(Timestamp), 修改访客状态(String), INFO(String), site.alanliang.geekblog.controller.admin.VisitorController.changeStatus()(String), { id: 7 }(String), 0:0:0:0:0:0:0:1(String), 7(Long), admin(String), Chrome 8(String), 内网IP(String)
+2020-05-23 17:12:09.882 DEBUG 12792 --- [http-nio-8889-exec-5] s.a.g.dao.OperationLogMapper.insert      : <==    Updates: 1
+2020-05-23 17:12:16.886 DEBUG 12792 --- [http-nio-8889-exec-7] s.a.geekblog.dao.UserMapper.deleteById   : ==>  Preparing: DELETE FROM sys_user WHERE id=? 
+2020-05-23 17:12:16.887 DEBUG 12792 --- [http-nio-8889-exec-7] s.a.geekblog.dao.UserMapper.deleteById   : ==> Parameters: 7(Long)
+2020-05-23 17:12:16.888 DEBUG 12792 --- [http-nio-8889-exec-7] s.a.geekblog.dao.UserMapper.deleteById   : <==    Updates: 0
+2020-05-23 17:12:16.892 DEBUG 12792 --- [http-nio-8889-exec-7] s.a.g.dao.OperationLogMapper.insert      : ==>  Preparing: INSERT INTO sys_operation_log ( create_time, description, log_type, method, params, request_ip, time, username, browser, address ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ) 
+2020-05-23 17:12:16.892 DEBUG 12792 --- [http-nio-8889-exec-7] s.a.g.dao.OperationLogMapper.insert      : ==> Parameters: 2020-05-23 17:12:16.89(Timestamp), 删除用户(String), INFO(String), site.alanliang.geekblog.controller.admin.UserController.remove()(String), { id: 7 }(String), 0:0:0:0:0:0:0:1(String), 6(Long), admin(String), Chrome 8(String), 内网IP(String)
+2020-05-23 17:12:16.896 DEBUG 12792 --- [http-nio-8889-exec-7] s.a.g.dao.OperationLogMapper.insert      : <==    Updates: 1
+2020-05-23 17:12:33.498 DEBUG 12792 --- [http-nio-8889-exec-8] s.a.g.dao.OperationLogMapper.insert      : ==>  Preparing: INSERT INTO sys_operation_log ( create_time, description, log_type, method, params, request_ip, time, username, browser, address ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ) 
+2020-05-23 17:12:33.499 DEBUG 12792 --- [http-nio-8889-exec-8] s.a.g.dao.OperationLogMapper.insert      : ==> Parameters: 2020-05-23 17:12:33.495(Timestamp), 访问后台首页(String), INFO(String), site.alanliang.geekblog.controller.admin.IndexController.index()(String), { }(String), 0:0:0:0:0:0:0:1(String), 0(Long), admin(String), Chrome 8(String), 内网IP(String)
+2020-05-23 17:12:33.501 DEBUG 12792 --- [http-nio-8889-exec-8] s.a.g.dao.OperationLogMapper.insert      : <==    Updates: 1
+2020-05-23 17:12:33.718 DEBUG 12792 --- [http-nio-8889-exec-9] s.a.g.dao.MenuMapper.listMenuByUserId    : ==>  Preparing: select sm.* from (select id, pid, title, icon, href, target from sys_menu where `status` = 1 and (type = 1 or type = 2)) sm left join sys_role_menu srm on sm.id = srm.menu_id left join sys_role_user sru on srm.role_id = sru.role_id where sru.user_id = ? 
+2020-05-23 17:12:33.718 DEBUG 12792 --- [http-nio-8889-exec-9] s.a.g.dao.MenuMapper.listMenuByUserId    : ==> Parameters: 1(Long)
+2020-05-23 17:12:33.727 DEBUG 12792 --- [http-nio-8889-exec-9] s.a.g.dao.MenuMapper.listMenuByUserId    : <==      Total: 15
+2020-05-23 17:12:33.910 DEBUG 12792 --- [http-nio-8889-exec-7] s.a.g.dao.VisitorMapper.selectPage       : ==>  Preparing: SELECT COUNT(1) FROM t_visitor 
+2020-05-23 17:12:33.910 DEBUG 12792 --- [http-nio-8889-exec-7] s.a.g.dao.VisitorMapper.selectPage       : ==> Parameters: 
+2020-05-23 17:12:33.912 DEBUG 12792 --- [http-nio-8889-exec-7] s.a.g.dao.VisitorMapper.selectPage       : ==>  Preparing: SELECT id,username,nickname,status,email,link,create_time,update_time FROM t_visitor LIMIT ?,? 
+2020-05-23 17:12:33.913 DEBUG 12792 --- [http-nio-8889-exec-7] s.a.g.dao.VisitorMapper.selectPage       : ==> Parameters: 0(Long), 15(Long)
+2020-05-23 17:12:33.914 DEBUG 12792 --- [http-nio-8889-exec-7] s.a.g.dao.VisitorMapper.selectPage       : <==      Total: 2
+2020-05-23 17:12:33.918 DEBUG 12792 --- [http-nio-8889-exec-7] s.a.g.dao.OperationLogMapper.insert      : ==>  Preparing: INSERT INTO sys_operation_log ( create_time, description, log_type, method, params, request_ip, time, username, browser, address ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ) 
+2020-05-23 17:12:33.918 DEBUG 12792 --- [http-nio-8889-exec-7] s.a.g.dao.OperationLogMapper.insert      : ==> Parameters: 2020-05-23 17:12:33.917(Timestamp), 查询访客(String), INFO(String), site.alanliang.geekblog.controller.admin.VisitorController.listByPage()(String), { page: 1 limit: 15 userQuery: UserQuery(username=null, email=null, startDate=null, endDate=null) }(String), 0:0:0:0:0:0:0:1(String), 10(Long), admin(String), Chrome 8(String), 内网IP(String)
+2020-05-23 17:12:33.921 DEBUG 12792 --- [http-nio-8889-exec-7] s.a.g.dao.OperationLogMapper.insert      : <==    Updates: 1
+2020-05-23 17:12:43.417 DEBUG 12792 --- [http-nio-8889-exec-10] s.a.geekblog.dao.UserMapper.deleteById   : ==>  Preparing: DELETE FROM sys_user WHERE id=? 
+2020-05-23 17:12:43.417 DEBUG 12792 --- [http-nio-8889-exec-10] s.a.geekblog.dao.UserMapper.deleteById   : ==> Parameters: 7(Long)
+2020-05-23 17:12:43.419 DEBUG 12792 --- [http-nio-8889-exec-10] s.a.geekblog.dao.UserMapper.deleteById   : <==    Updates: 0
+2020-05-23 17:12:43.422 DEBUG 12792 --- [http-nio-8889-exec-10] s.a.g.dao.OperationLogMapper.insert      : ==>  Preparing: INSERT INTO sys_operation_log ( create_time, description, log_type, method, params, request_ip, time, username, browser, address ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ) 
+2020-05-23 17:12:43.423 DEBUG 12792 --- [http-nio-8889-exec-10] s.a.g.dao.OperationLogMapper.insert      : ==> Parameters: 2020-05-23 17:12:43.421(Timestamp), 删除用户(String), INFO(String), site.alanliang.geekblog.controller.admin.UserController.remove()(String), { id: 7 }(String), 0:0:0:0:0:0:0:1(String), 4(Long), admin(String), Chrome 8(String), 内网IP(String)
+2020-05-23 17:12:43.424 DEBUG 12792 --- [http-nio-8889-exec-10] s.a.g.dao.OperationLogMapper.insert      : <==    Updates: 1
+2020-05-23 17:13:20.914 DEBUG 12792 --- [http-nio-8889-exec-2] s.a.g.dao.OperationLogMapper.insert      : ==>  Preparing: INSERT INTO sys_operation_log ( create_time, description, log_type, method, params, request_ip, time, username, browser, address ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ) 
+2020-05-23 17:13:20.914 DEBUG 12792 --- [http-nio-8889-exec-2] s.a.g.dao.OperationLogMapper.insert      : ==> Parameters: 2020-05-23 17:13:20.913(Timestamp), 访问后台首页(String), INFO(String), site.alanliang.geekblog.controller.admin.IndexController.index()(String), { }(String), 0:0:0:0:0:0:0:1(String), 0(Long), admin(String), Chrome 8(String), 内网IP(String)
+2020-05-23 17:13:20.917 DEBUG 12792 --- [http-nio-8889-exec-2] s.a.g.dao.OperationLogMapper.insert      : <==    Updates: 1
+2020-05-23 17:13:21.056 DEBUG 12792 --- [http-nio-8889-exec-1] s.a.g.dao.MenuMapper.listMenuByUserId    : ==>  Preparing: select sm.* from (select id, pid, title, icon, href, target from sys_menu where `status` = 1 and (type = 1 or type = 2)) sm left join sys_role_menu srm on sm.id = srm.menu_id left join sys_role_user sru on srm.role_id = sru.role_id where sru.user_id = ? 
+2020-05-23 17:13:21.057 DEBUG 12792 --- [http-nio-8889-exec-1] s.a.g.dao.MenuMapper.listMenuByUserId    : ==> Parameters: 1(Long)
+2020-05-23 17:13:21.059 DEBUG 12792 --- [http-nio-8889-exec-1] s.a.g.dao.MenuMapper.listMenuByUserId    : <==      Total: 15
+2020-05-23 17:13:21.202 DEBUG 12792 --- [http-nio-8889-exec-9] s.a.g.dao.VisitorMapper.selectPage       : ==>  Preparing: SELECT COUNT(1) FROM t_visitor 
+2020-05-23 17:13:21.202 DEBUG 12792 --- [http-nio-8889-exec-9] s.a.g.dao.VisitorMapper.selectPage       : ==> Parameters: 
+2020-05-23 17:13:21.204 DEBUG 12792 --- [http-nio-8889-exec-9] s.a.g.dao.VisitorMapper.selectPage       : ==>  Preparing: SELECT id,username,nickname,status,email,link,create_time,update_time FROM t_visitor LIMIT ?,? 
+2020-05-23 17:13:21.205 DEBUG 12792 --- [http-nio-8889-exec-9] s.a.g.dao.VisitorMapper.selectPage       : ==> Parameters: 0(Long), 15(Long)
+2020-05-23 17:13:21.206 DEBUG 12792 --- [http-nio-8889-exec-9] s.a.g.dao.VisitorMapper.selectPage       : <==      Total: 2
+2020-05-23 17:13:21.209 DEBUG 12792 --- [http-nio-8889-exec-9] s.a.g.dao.OperationLogMapper.insert      : ==>  Preparing: INSERT INTO sys_operation_log ( create_time, description, log_type, method, params, request_ip, time, username, browser, address ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ) 
+2020-05-23 17:13:21.210 DEBUG 12792 --- [http-nio-8889-exec-9] s.a.g.dao.OperationLogMapper.insert      : ==> Parameters: 2020-05-23 17:13:21.208(Timestamp), 查询访客(String), INFO(String), site.alanliang.geekblog.controller.admin.VisitorController.listByPage()(String), { page: 1 limit: 15 userQuery: UserQuery(username=null, email=null, startDate=null, endDate=null) }(String), 0:0:0:0:0:0:0:1(String), 5(Long), admin(String), Chrome 8(String), 内网IP(String)
+2020-05-23 17:13:21.215 DEBUG 12792 --- [http-nio-8889-exec-9] s.a.g.dao.OperationLogMapper.insert      : <==    Updates: 1
+2020-05-23 17:13:27.666 DEBUG 12792 --- [http-nio-8889-exec-4] s.a.geekblog.dao.UserMapper.deleteById   : ==>  Preparing: DELETE FROM sys_user WHERE id=? 
+2020-05-23 17:13:27.666 DEBUG 12792 --- [http-nio-8889-exec-4] s.a.geekblog.dao.UserMapper.deleteById   : ==> Parameters: 7(Long)
+2020-05-23 17:13:27.673 DEBUG 12792 --- [http-nio-8889-exec-4] s.a.geekblog.dao.UserMapper.deleteById   : <==    Updates: 0
+2020-05-23 17:13:27.678 DEBUG 12792 --- [http-nio-8889-exec-4] s.a.g.dao.OperationLogMapper.insert      : ==>  Preparing: INSERT INTO sys_operation_log ( create_time, description, log_type, method, params, request_ip, time, username, browser, address ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ) 
+2020-05-23 17:13:27.678 DEBUG 12792 --- [http-nio-8889-exec-4] s.a.g.dao.OperationLogMapper.insert      : ==> Parameters: 2020-05-23 17:13:27.678(Timestamp), 删除用户(String), INFO(String), site.alanliang.geekblog.controller.admin.UserController.remove()(String), { id: 7 }(String), 0:0:0:0:0:0:0:1(String), 9(Long), admin(String), Chrome 8(String), 内网IP(String)
+2020-05-23 17:13:27.679 DEBUG 12792 --- [http-nio-8889-exec-4] s.a.g.dao.OperationLogMapper.insert      : <==    Updates: 1
+2020-05-23 17:14:53.636 DEBUG 12792 --- [http-nio-8889-exec-5] s.a.g.dao.OperationLogMapper.insert      : ==>  Preparing: INSERT INTO sys_operation_log ( create_time, description, log_type, method, params, request_ip, time, username, browser, address ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ) 
+2020-05-23 17:14:53.637 DEBUG 12792 --- [http-nio-8889-exec-5] s.a.g.dao.OperationLogMapper.insert      : ==> Parameters: 2020-05-23 17:14:53.636(Timestamp), 访问后台首页(String), INFO(String), site.alanliang.geekblog.controller.admin.IndexController.index()(String), { }(String), 0:0:0:0:0:0:0:1(String), 0(Long), admin(String), Chrome 8(String), 内网IP(String)
+2020-05-23 17:14:53.640 DEBUG 12792 --- [http-nio-8889-exec-5] s.a.g.dao.OperationLogMapper.insert      : <==    Updates: 1
+2020-05-23 17:14:53.783 DEBUG 12792 --- [http-nio-8889-exec-8] s.a.g.dao.MenuMapper.listMenuByUserId    : ==>  Preparing: select sm.* from (select id, pid, title, icon, href, target from sys_menu where `status` = 1 and (type = 1 or type = 2)) sm left join sys_role_menu srm on sm.id = srm.menu_id left join sys_role_user sru on srm.role_id = sru.role_id where sru.user_id = ? 
+2020-05-23 17:14:53.784 DEBUG 12792 --- [http-nio-8889-exec-8] s.a.g.dao.MenuMapper.listMenuByUserId    : ==> Parameters: 1(Long)
+2020-05-23 17:14:53.786 DEBUG 12792 --- [http-nio-8889-exec-8] s.a.g.dao.MenuMapper.listMenuByUserId    : <==      Total: 15
+2020-05-23 17:14:53.961 DEBUG 12792 --- [http-nio-8889-exec-6] s.a.g.dao.VisitorMapper.selectPage       : ==>  Preparing: SELECT COUNT(1) FROM t_visitor 
+2020-05-23 17:14:53.961 DEBUG 12792 --- [http-nio-8889-exec-6] s.a.g.dao.VisitorMapper.selectPage       : ==> Parameters: 
+2020-05-23 17:14:53.963 DEBUG 12792 --- [http-nio-8889-exec-6] s.a.g.dao.VisitorMapper.selectPage       : ==>  Preparing: SELECT id,username,nickname,status,email,link,create_time,update_time FROM t_visitor LIMIT ?,? 
+2020-05-23 17:14:53.963 DEBUG 12792 --- [http-nio-8889-exec-6] s.a.g.dao.VisitorMapper.selectPage       : ==> Parameters: 0(Long), 15(Long)
+2020-05-23 17:14:53.965 DEBUG 12792 --- [http-nio-8889-exec-6] s.a.g.dao.VisitorMapper.selectPage       : <==      Total: 2
+2020-05-23 17:14:53.969 DEBUG 12792 --- [http-nio-8889-exec-6] s.a.g.dao.OperationLogMapper.insert      : ==>  Preparing: INSERT INTO sys_operation_log ( create_time, description, log_type, method, params, request_ip, time, username, browser, address ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ) 
+2020-05-23 17:14:53.970 DEBUG 12792 --- [http-nio-8889-exec-6] s.a.g.dao.OperationLogMapper.insert      : ==> Parameters: 2020-05-23 17:14:53.968(Timestamp), 查询访客(String), INFO(String), site.alanliang.geekblog.controller.admin.VisitorController.listByPage()(String), { page: 1 limit: 15 userQuery: UserQuery(username=null, email=null, startDate=null, endDate=null) }(String), 0:0:0:0:0:0:0:1(String), 6(Long), admin(String), Chrome 8(String), 内网IP(String)
+2020-05-23 17:14:53.973 DEBUG 12792 --- [http-nio-8889-exec-6] s.a.g.dao.OperationLogMapper.insert      : <==    Updates: 1
+2020-05-23 17:14:57.393 DEBUG 12792 --- [http-nio-8889-exec-7] s.a.g.dao.VisitorMapper.deleteById       : ==>  Preparing: DELETE FROM t_visitor WHERE id=? 
+2020-05-23 17:14:57.393 DEBUG 12792 --- [http-nio-8889-exec-7] s.a.g.dao.VisitorMapper.deleteById       : ==> Parameters: 7(Long)
+2020-05-23 17:14:57.394 DEBUG 12792 --- [http-nio-8889-exec-7] s.a.g.dao.VisitorMapper.deleteById       : <==    Updates: 1
+2020-05-23 17:14:57.398 DEBUG 12792 --- [http-nio-8889-exec-7] s.a.g.dao.OperationLogMapper.insert      : ==>  Preparing: INSERT INTO sys_operation_log ( create_time, description, log_type, method, params, request_ip, time, username, browser, address ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ) 
+2020-05-23 17:14:57.398 DEBUG 12792 --- [http-nio-8889-exec-7] s.a.g.dao.OperationLogMapper.insert      : ==> Parameters: 2020-05-23 17:14:57.397(Timestamp), 删除访客(String), INFO(String), site.alanliang.geekblog.controller.admin.VisitorController.remove()(String), { id: 7 }(String), 0:0:0:0:0:0:0:1(String), 5(Long), admin(String), Chrome 8(String), 内网IP(String)
+2020-05-23 17:14:57.399 DEBUG 12792 --- [http-nio-8889-exec-7] s.a.g.dao.OperationLogMapper.insert      : <==    Updates: 1
+2020-05-23 17:15:13.665 DEBUG 12792 --- [http-nio-8889-exec-5] s.a.g.dao.VisitorMapper.selectPage       : ==>  Preparing: SELECT COUNT(1) FROM t_visitor WHERE (username LIKE ?) 
+2020-05-23 17:15:13.665 DEBUG 12792 --- [http-nio-8889-exec-5] s.a.g.dao.VisitorMapper.selectPage       : ==> Parameters: %a%(String)
+2020-05-23 17:15:13.667 DEBUG 12792 --- [http-nio-8889-exec-5] s.a.g.dao.VisitorMapper.selectPage       : ==>  Preparing: SELECT id,username,nickname,status,email,link,create_time,update_time FROM t_visitor WHERE (username LIKE ?) LIMIT ?,? 
+2020-05-23 17:15:13.669 DEBUG 12792 --- [http-nio-8889-exec-5] s.a.g.dao.VisitorMapper.selectPage       : ==> Parameters: %a%(String), 0(Long), 15(Long)
+2020-05-23 17:15:13.671 DEBUG 12792 --- [http-nio-8889-exec-5] s.a.g.dao.VisitorMapper.selectPage       : <==      Total: 1
+2020-05-23 17:15:13.675 DEBUG 12792 --- [http-nio-8889-exec-5] s.a.g.dao.OperationLogMapper.insert      : ==>  Preparing: INSERT INTO sys_operation_log ( create_time, description, log_type, method, params, request_ip, time, username, browser, address ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ) 
+2020-05-23 17:15:13.676 DEBUG 12792 --- [http-nio-8889-exec-5] s.a.g.dao.OperationLogMapper.insert      : ==> Parameters: 2020-05-23 17:15:13.674(Timestamp), 查询访客(String), INFO(String), site.alanliang.geekblog.controller.admin.VisitorController.listByPage()(String), { page: 1 limit: 15 userQuery: UserQuery(username=a, email=, startDate=null, endDate=null) }(String), 0:0:0:0:0:0:0:1(String), 13(Long), admin(String), Chrome 8(String), 内网IP(String)
+2020-05-23 17:15:13.677 DEBUG 12792 --- [http-nio-8889-exec-5] s.a.g.dao.OperationLogMapper.insert      : <==    Updates: 1
+2020-05-23 17:15:22.453 DEBUG 12792 --- [http-nio-8889-exec-8] s.a.g.dao.VisitorMapper.selectPage       : ==>  Preparing: SELECT COUNT(1) FROM t_visitor WHERE (username LIKE ?) 
+2020-05-23 17:15:22.453 DEBUG 12792 --- [http-nio-8889-exec-8] s.a.g.dao.VisitorMapper.selectPage       : ==> Parameters: %12%(String)
+2020-05-23 17:15:22.457 DEBUG 12792 --- [http-nio-8889-exec-8] s.a.g.dao.OperationLogMapper.insert      : ==>  Preparing: INSERT INTO sys_operation_log ( create_time, description, log_type, method, params, request_ip, time, username, browser, address ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ) 
+2020-05-23 17:15:22.458 DEBUG 12792 --- [http-nio-8889-exec-8] s.a.g.dao.OperationLogMapper.insert      : ==> Parameters: 2020-05-23 17:15:22.456(Timestamp), 查询访客(String), INFO(String), site.alanliang.geekblog.controller.admin.VisitorController.listByPage()(String), { page: 1 limit: 15 userQuery: UserQuery(username=12, email=, startDate=null, endDate=null) }(String), 0:0:0:0:0:0:0:1(String), 3(Long), admin(String), Chrome 8(String), 内网IP(String)
+2020-05-23 17:15:22.460 DEBUG 12792 --- [http-nio-8889-exec-8] s.a.g.dao.OperationLogMapper.insert      : <==    Updates: 1
+2020-05-23 17:15:27.916 DEBUG 12792 --- [http-nio-8889-exec-9] s.a.g.dao.VisitorMapper.selectPage       : ==>  Preparing: SELECT COUNT(1) FROM t_visitor 
+2020-05-23 17:15:27.917 DEBUG 12792 --- [http-nio-8889-exec-9] s.a.g.dao.VisitorMapper.selectPage       : ==> Parameters: 
+2020-05-23 17:15:27.919 DEBUG 12792 --- [http-nio-8889-exec-9] s.a.g.dao.VisitorMapper.selectPage       : ==>  Preparing: SELECT id,username,nickname,status,email,link,create_time,update_time FROM t_visitor LIMIT ?,? 
+2020-05-23 17:15:27.921 DEBUG 12792 --- [http-nio-8889-exec-9] s.a.g.dao.VisitorMapper.selectPage       : ==> Parameters: 0(Long), 15(Long)
+2020-05-23 17:15:27.923 DEBUG 12792 --- [http-nio-8889-exec-9] s.a.g.dao.VisitorMapper.selectPage       : <==      Total: 1
+2020-05-23 17:15:27.927 DEBUG 12792 --- [http-nio-8889-exec-9] s.a.g.dao.OperationLogMapper.insert      : ==>  Preparing: INSERT INTO sys_operation_log ( create_time, description, log_type, method, params, request_ip, time, username, browser, address ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ) 
+2020-05-23 17:15:27.927 DEBUG 12792 --- [http-nio-8889-exec-9] s.a.g.dao.OperationLogMapper.insert      : ==> Parameters: 2020-05-23 17:15:27.926(Timestamp), 查询访客(String), INFO(String), site.alanliang.geekblog.controller.admin.VisitorController.listByPage()(String), { page: 1 limit: 15 userQuery: UserQuery(username=, email=, startDate=null, endDate=null) }(String), 0:0:0:0:0:0:0:1(String), 10(Long), admin(String), Chrome 8(String), 内网IP(String)
+2020-05-23 17:15:27.929 DEBUG 12792 --- [http-nio-8889-exec-9] s.a.g.dao.OperationLogMapper.insert      : <==    Updates: 1
+2020-05-23 17:19:49.575 DEBUG 12792 --- [http-nio-8889-exec-1] s.a.geekblog.dao.MenuMapper.selectList   : ==>  Preparing: SELECT id,pid,title,href,authority,icon,sort,type,status,create_time,update_time FROM sys_menu 
+2020-05-23 17:19:49.576 DEBUG 12792 --- [http-nio-8889-exec-1] s.a.geekblog.dao.MenuMapper.selectList   : ==> Parameters: 
+2020-05-23 17:19:49.592 DEBUG 12792 --- [http-nio-8889-exec-1] s.a.geekblog.dao.MenuMapper.selectList   : <==      Total: 53
+2020-05-23 17:19:49.594 DEBUG 12792 --- [http-nio-8889-exec-1] s.a.geekblog.dao.MenuMapper.selectCount  : ==>  Preparing: SELECT COUNT( 1 ) FROM sys_menu 
+2020-05-23 17:19:49.594 DEBUG 12792 --- [http-nio-8889-exec-1] s.a.geekblog.dao.MenuMapper.selectCount  : ==> Parameters: 
+2020-05-23 17:19:49.595 DEBUG 12792 --- [http-nio-8889-exec-1] s.a.geekblog.dao.MenuMapper.selectCount  : <==      Total: 1
+2020-05-23 17:19:49.599 DEBUG 12792 --- [http-nio-8889-exec-1] s.a.g.dao.OperationLogMapper.insert      : ==>  Preparing: INSERT INTO sys_operation_log ( create_time, description, log_type, method, params, request_ip, time, username, browser, address ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ) 
+2020-05-23 17:19:49.601 DEBUG 12792 --- [http-nio-8889-exec-1] s.a.g.dao.OperationLogMapper.insert      : ==> Parameters: 2020-05-23 17:19:49.598(Timestamp), 查询菜单(String), INFO(String), site.alanliang.geekblog.controller.admin.MenuController.listAll()(String), { }(String), 0:0:0:0:0:0:0:1(String), 29(Long), admin(String), Chrome 8(String), 内网IP(String)
+2020-05-23 17:19:49.603 DEBUG 12792 --- [http-nio-8889-exec-1] s.a.g.dao.OperationLogMapper.insert      : <==    Updates: 1
+2020-05-23 17:19:50.094 DEBUG 12792 --- [http-nio-8889-exec-5] s.a.geekblog.dao.RoleMapper.selectPage   : ==>  Preparing: SELECT COUNT(1) FROM sys_role 
+2020-05-23 17:19:50.095 DEBUG 12792 --- [http-nio-8889-exec-5] s.a.geekblog.dao.RoleMapper.selectPage   : ==> Parameters: 
+2020-05-23 17:19:50.098 DEBUG 12792 --- [http-nio-8889-exec-5] s.a.geekblog.dao.RoleMapper.selectPage   : ==>  Preparing: SELECT id,role_name,description,rank,color,create_time,update_time FROM sys_role LIMIT ?,? 
+2020-05-23 17:19:50.101 DEBUG 12792 --- [http-nio-8889-exec-5] s.a.geekblog.dao.RoleMapper.selectPage   : ==> Parameters: 0(Long), 15(Long)
+2020-05-23 17:19:50.106 DEBUG 12792 --- [http-nio-8889-exec-5] s.a.geekblog.dao.RoleMapper.selectPage   : <==      Total: 7
+2020-05-23 17:19:50.109 DEBUG 12792 --- [http-nio-8889-exec-5] s.a.g.dao.OperationLogMapper.insert      : ==>  Preparing: INSERT INTO sys_operation_log ( create_time, description, log_type, method, params, request_ip, time, username, browser, address ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ) 
+2020-05-23 17:19:50.109 DEBUG 12792 --- [http-nio-8889-exec-5] s.a.g.dao.OperationLogMapper.insert      : ==> Parameters: 2020-05-23 17:19:50.108(Timestamp), 查询角色(String), INFO(String), site.alanliang.geekblog.controller.admin.RoleController.listByPage()(String), { page: 1 limit: 15 roleQuery: RoleQuery(roleName=null, description=null, startDate=null, endDate=null) }(String), 0:0:0:0:0:0:0:1(String), 15(Long), admin(String), Chrome 8(String), 内网IP(String)
+2020-05-23 17:19:50.110 DEBUG 12792 --- [http-nio-8889-exec-5] s.a.g.dao.OperationLogMapper.insert      : <==    Updates: 1
+2020-05-23 17:19:53.893 DEBUG 12792 --- [http-nio-8889-exec-8] s.a.geekblog.dao.RoleMapper.selectOne    : ==>  Preparing: SELECT id,role_name,description,rank,color FROM sys_role WHERE (id = ?) 
+2020-05-23 17:19:53.894 DEBUG 12792 --- [http-nio-8889-exec-8] s.a.geekblog.dao.RoleMapper.selectOne    : ==> Parameters: 7(Long)
+2020-05-23 17:19:53.896 DEBUG 12792 --- [http-nio-8889-exec-8] s.a.geekblog.dao.RoleMapper.selectOne    : <==      Total: 1
+2020-05-23 17:19:53.899 DEBUG 12792 --- [http-nio-8889-exec-8] s.a.g.dao.RoleMenuMapper.selectList      : ==>  Preparing: SELECT menu_id FROM sys_role_menu WHERE (role_id = ?) 
+2020-05-23 17:19:53.900 DEBUG 12792 --- [http-nio-8889-exec-8] s.a.g.dao.RoleMenuMapper.selectList      : ==> Parameters: 7(Long)
+2020-05-23 17:19:53.903 DEBUG 12792 --- [http-nio-8889-exec-8] s.a.g.dao.RoleMenuMapper.selectList      : <==      Total: 53
+2020-05-23 17:19:54.002 DEBUG 12792 --- [http-nio-8889-exec-1] s.a.geekblog.dao.MenuMapper.selectList   : ==>  Preparing: SELECT id,pid,title FROM sys_menu 
+2020-05-23 17:19:54.002 DEBUG 12792 --- [http-nio-8889-exec-1] s.a.geekblog.dao.MenuMapper.selectList   : ==> Parameters: 
+2020-05-23 17:19:54.004 DEBUG 12792 --- [http-nio-8889-exec-1] s.a.geekblog.dao.MenuMapper.selectList   : <==      Total: 53
+2020-05-23 17:20:04.609 DEBUG 12792 --- [http-nio-8889-exec-3] s.a.geekblog.dao.RoleMapper.selectList   : ==>  Preparing: SELECT id,role_name,description,rank,color,create_time,update_time FROM sys_role WHERE (role_name = ?) 
+2020-05-23 17:20:04.609 DEBUG 12792 --- [http-nio-8889-exec-3] s.a.geekblog.dao.RoleMapper.selectList   : ==> Parameters: 管理员(String)
+2020-05-23 17:20:04.611 DEBUG 12792 --- [http-nio-8889-exec-3] s.a.geekblog.dao.RoleMapper.selectList   : <==      Total: 1
+2020-05-23 17:20:04.613 DEBUG 12792 --- [http-nio-8889-exec-3] s.a.geekblog.dao.RoleMapper.updateById   : ==>  Preparing: UPDATE sys_role SET role_name=?, description=?, rank=?, color=?, update_time=? WHERE id=? 
+2020-05-23 17:20:04.614 DEBUG 12792 --- [http-nio-8889-exec-3] s.a.geekblog.dao.RoleMapper.updateById   : ==> Parameters: 管理员(String), admin(String), 1(Integer), red(String), 2020-05-23 17:20:04.607(Timestamp), 7(Long)
+2020-05-23 17:20:04.615 DEBUG 12792 --- [http-nio-8889-exec-3] s.a.geekblog.dao.RoleMapper.updateById   : <==    Updates: 1
+2020-05-23 17:20:04.617 DEBUG 12792 --- [http-nio-8889-exec-3] s.a.geekblog.dao.RoleMenuMapper.delete   : ==>  Preparing: DELETE FROM sys_role_menu WHERE (role_id = ?) 
+2020-05-23 17:20:04.618 DEBUG 12792 --- [http-nio-8889-exec-3] s.a.geekblog.dao.RoleMenuMapper.delete   : ==> Parameters: 7(Long)
+2020-05-23 17:20:04.619 DEBUG 12792 --- [http-nio-8889-exec-3] s.a.geekblog.dao.RoleMenuMapper.delete   : <==    Updates: 53
+2020-05-23 17:20:04.622 DEBUG 12792 --- [http-nio-8889-exec-3] s.a.g.dao.RoleMenuMapper.insertBatch     : ==>  Preparing: insert into sys_role_menu( role_id, menu_id ) values (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) 
+2020-05-23 17:20:04.623 DEBUG 12792 --- [http-nio-8889-exec-3] s.a.g.dao.RoleMenuMapper.insertBatch     : ==> Parameters: 7(Long), 1(Long), 7(Long), 2(Long), 7(Long), 3(Long), 7(Long), 4(Long), 7(Long), 5(Long), 7(Long), 6(Long), 7(Long), 7(Long), 7(Long), 8(Long), 7(Long), 9(Long), 7(Long), 10(Long), 7(Long), 11(Long), 7(Long), 12(Long), 7(Long), 13(Long), 7(Long), 14(Long), 7(Long), 15(Long), 7(Long), 16(Long), 7(Long), 17(Long), 7(Long), 18(Long), 7(Long), 19(Long), 7(Long), 20(Long), 7(Long), 21(Long), 7(Long), 22(Long), 7(Long), 23(Long), 7(Long), 50(Long), 7(Long), 51(Long), 7(Long), 52(Long), 7(Long), 24(Long), 7(Long), 25(Long), 7(Long), 26(Long), 7(Long), 27(Long), 7(Long), 28(Long), 7(Long), 29(Long), 7(Long), 30(Long), 7(Long), 31(Long), 7(Long), 32(Long), 7(Long), 33(Long), 7(Long), 34(Long), 7(Long), 35(Long), 7(Long), 36(Long), 7(Long), 37(Long), 7(Long), 38(Long), 7(Long), 39(Long), 7(Long), 40(Long), 7(Long), 41(Long), 7(Long), 42(Long), 7(Long), 43(Long), 7(Long), 44(Long), 7(Long), 45(Long), 7(Long), 46(Long), 7(Long), 47(Long), 7(Long), 48(Long), 7(Long), 49(Long)
+2020-05-23 17:20:04.625 DEBUG 12792 --- [http-nio-8889-exec-3] s.a.g.dao.RoleMenuMapper.insertBatch     : <==    Updates: 52
+2020-05-23 17:20:04.628 DEBUG 12792 --- [http-nio-8889-exec-3] s.a.g.dao.OperationLogMapper.insert      : ==>  Preparing: INSERT INTO sys_operation_log ( create_time, description, log_type, method, params, request_ip, time, username, browser, address ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ) 
+2020-05-23 17:20:04.629 DEBUG 12792 --- [http-nio-8889-exec-3] s.a.g.dao.OperationLogMapper.insert      : ==> Parameters: 2020-05-23 17:20:04.628(Timestamp), 修改角色(String), INFO(String), site.alanliang.geekblog.controller.admin.RoleController.update()(String), { role: Role(id=7, roleName=管理员, description=admin, rank=1, color=red, createTime=null, updateTime=Sat May 23 17:20:04 CST 2020, menuIdList=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 50, 51, 52, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49]) }(String), 0:0:0:0:0:0:0:1(String), 19(Long), admin(String), Chrome 8(String), 内网IP(String)
+2020-05-23 17:20:04.630 DEBUG 12792 --- [http-nio-8889-exec-3] s.a.g.dao.OperationLogMapper.insert      : <==    Updates: 1
+2020-05-23 17:20:05.935 DEBUG 12792 --- [http-nio-8889-exec-8] s.a.geekblog.dao.RoleMapper.selectPage   : ==>  Preparing: SELECT COUNT(1) FROM sys_role 
+2020-05-23 17:20:05.935 DEBUG 12792 --- [http-nio-8889-exec-8] s.a.geekblog.dao.RoleMapper.selectPage   : ==> Parameters: 
+2020-05-23 17:20:05.937 DEBUG 12792 --- [http-nio-8889-exec-8] s.a.geekblog.dao.RoleMapper.selectPage   : ==>  Preparing: SELECT id,role_name,description,rank,color,create_time,update_time FROM sys_role LIMIT ?,? 
+2020-05-23 17:20:05.937 DEBUG 12792 --- [http-nio-8889-exec-8] s.a.geekblog.dao.RoleMapper.selectPage   : ==> Parameters: 0(Long), 15(Long)
+2020-05-23 17:20:05.939 DEBUG 12792 --- [http-nio-8889-exec-8] s.a.geekblog.dao.RoleMapper.selectPage   : <==      Total: 7
+2020-05-23 17:20:05.943 DEBUG 12792 --- [http-nio-8889-exec-8] s.a.g.dao.OperationLogMapper.insert      : ==>  Preparing: INSERT INTO sys_operation_log ( create_time, description, log_type, method, params, request_ip, time, username, browser, address ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ) 
+2020-05-23 17:20:05.943 DEBUG 12792 --- [http-nio-8889-exec-8] s.a.g.dao.OperationLogMapper.insert      : ==> Parameters: 2020-05-23 17:20:05.942(Timestamp), 查询角色(String), INFO(String), site.alanliang.geekblog.controller.admin.RoleController.listByPage()(String), { page: 1 limit: 15 roleQuery: RoleQuery(roleName=null, description=null, startDate=null, endDate=null) }(String), 0:0:0:0:0:0:0:1(String), 6(Long), admin(String), Chrome 8(String), 内网IP(String)
+2020-05-23 17:20:05.945 DEBUG 12792 --- [http-nio-8889-exec-8] s.a.g.dao.OperationLogMapper.insert      : <==    Updates: 1
+2020-05-23 17:20:16.060 DEBUG 12792 --- [http-nio-8889-exec-3] s.a.geekblog.dao.UserMapper.selectList   : ==>  Preparing: SELECT id,username,password,nickname,avatar,sex,email,phone,status,create_time,update_time FROM sys_user WHERE (username = ?) 
+2020-05-23 17:20:16.061 DEBUG 12792 --- [http-nio-8889-exec-3] s.a.geekblog.dao.UserMapper.selectList   : ==> Parameters: admin(String)
+2020-05-23 17:20:16.064 DEBUG 12792 --- [http-nio-8889-exec-3] s.a.geekblog.dao.UserMapper.selectList   : <==      Total: 1
+2020-05-23 17:20:16.065 DEBUG 12792 --- [http-nio-8889-exec-3] s.a.g.d.M.listPermissionByUserId         : ==>  Preparing: select sm.* from (select id, authority from sys_menu where authority is not null) sm left join sys_role_menu srm on sm.id = srm.menu_id left join sys_role_user sru on srm.role_id = sru.role_id where sru.user_id = ? 
+2020-05-23 17:20:16.065 DEBUG 12792 --- [http-nio-8889-exec-3] s.a.g.d.M.listPermissionByUserId         : ==> Parameters: 1(Long)
+2020-05-23 17:20:16.068 DEBUG 12792 --- [http-nio-8889-exec-3] s.a.g.d.M.listPermissionByUserId         : <==      Total: 49
+2020-05-23 17:20:16.153  INFO 12792 --- [http-nio-8889-exec-3] s.a.g.s.MyAuthenticationSuccessHandler   : 登录成功
+2020-05-23 17:20:16.886 DEBUG 12792 --- [http-nio-8889-exec-6] s.a.g.dao.OperationLogMapper.insert      : ==>  Preparing: INSERT INTO sys_operation_log ( create_time, description, log_type, method, params, request_ip, time, username, browser, address ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ) 
+2020-05-23 17:20:16.887 DEBUG 12792 --- [http-nio-8889-exec-6] s.a.g.dao.OperationLogMapper.insert      : ==> Parameters: 2020-05-23 17:20:16.885(Timestamp), 访问后台首页(String), INFO(String), site.alanliang.geekblog.controller.admin.IndexController.index()(String), { }(String), 0:0:0:0:0:0:0:1(String), 0(Long), admin(String), Chrome 8(String), 内网IP(String)
+2020-05-23 17:20:16.889 DEBUG 12792 --- [http-nio-8889-exec-6] s.a.g.dao.OperationLogMapper.insert      : <==    Updates: 1
+2020-05-23 17:20:17.030 DEBUG 12792 --- [http-nio-8889-exec-6] s.a.g.dao.MenuMapper.listMenuByUserId    : ==>  Preparing: select sm.* from (select id, pid, title, icon, href, target from sys_menu where `status` = 1 and (type = 1 or type = 2)) sm left join sys_role_menu srm on sm.id = srm.menu_id left join sys_role_user sru on srm.role_id = sru.role_id where sru.user_id = ? 
+2020-05-23 17:20:17.030 DEBUG 12792 --- [http-nio-8889-exec-6] s.a.g.dao.MenuMapper.listMenuByUserId    : ==> Parameters: 1(Long)
+2020-05-23 17:20:17.032 DEBUG 12792 --- [http-nio-8889-exec-6] s.a.g.dao.MenuMapper.listMenuByUserId    : <==      Total: 15
+2020-05-23 17:20:19.475 DEBUG 12792 --- [http-nio-8889-exec-4] s.a.g.dao.VisitorMapper.selectPage       : ==>  Preparing: SELECT COUNT(1) FROM t_visitor 
+2020-05-23 17:20:19.476 DEBUG 12792 --- [http-nio-8889-exec-4] s.a.g.dao.VisitorMapper.selectPage       : ==> Parameters: 
+2020-05-23 17:20:19.478 DEBUG 12792 --- [http-nio-8889-exec-4] s.a.g.dao.VisitorMapper.selectPage       : ==>  Preparing: SELECT id,username,nickname,status,email,link,create_time,update_time FROM t_visitor LIMIT ?,? 
+2020-05-23 17:20:19.478 DEBUG 12792 --- [http-nio-8889-exec-4] s.a.g.dao.VisitorMapper.selectPage       : ==> Parameters: 0(Long), 15(Long)
+2020-05-23 17:20:19.479 DEBUG 12792 --- [http-nio-8889-exec-4] s.a.g.dao.VisitorMapper.selectPage       : <==      Total: 1
+2020-05-23 17:20:19.481 DEBUG 12792 --- [http-nio-8889-exec-4] s.a.g.dao.OperationLogMapper.insert      : ==>  Preparing: INSERT INTO sys_operation_log ( create_time, description, log_type, method, params, request_ip, time, username, browser, address ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ) 
+2020-05-23 17:20:19.481 DEBUG 12792 --- [http-nio-8889-exec-4] s.a.g.dao.OperationLogMapper.insert      : ==> Parameters: 2020-05-23 17:20:19.48(Timestamp), 查询访客(String), INFO(String), site.alanliang.geekblog.controller.admin.VisitorController.listByPage()(String), { page: 1 limit: 15 userQuery: UserQuery(username=null, email=null, startDate=null, endDate=null) }(String), 0:0:0:0:0:0:0:1(String), 5(Long), admin(String), Chrome 8(String), 内网IP(String)
+2020-05-23 17:20:19.483 DEBUG 12792 --- [http-nio-8889-exec-4] s.a.g.dao.OperationLogMapper.insert      : <==    Updates: 1
+2020-05-23 17:20:23.157 DEBUG 12792 --- [http-nio-8889-exec-7] s.a.geekblog.dao.RoleMapper.selectPage   : ==>  Preparing: SELECT COUNT(1) FROM sys_role 
+2020-05-23 17:20:23.157 DEBUG 12792 --- [http-nio-8889-exec-7] s.a.geekblog.dao.RoleMapper.selectPage   : ==> Parameters: 
+2020-05-23 17:20:23.159 DEBUG 12792 --- [http-nio-8889-exec-7] s.a.geekblog.dao.RoleMapper.selectPage   : ==>  Preparing: SELECT id,role_name,description,rank,color,create_time,update_time FROM sys_role LIMIT ?,? 
+2020-05-23 17:20:23.160 DEBUG 12792 --- [http-nio-8889-exec-7] s.a.geekblog.dao.RoleMapper.selectPage   : ==> Parameters: 0(Long), 15(Long)
+2020-05-23 17:20:23.162 DEBUG 12792 --- [http-nio-8889-exec-7] s.a.geekblog.dao.RoleMapper.selectPage   : <==      Total: 7
+2020-05-23 17:20:23.165 DEBUG 12792 --- [http-nio-8889-exec-7] s.a.g.dao.OperationLogMapper.insert      : ==>  Preparing: INSERT INTO sys_operation_log ( create_time, description, log_type, method, params, request_ip, time, username, browser, address ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ) 
+2020-05-23 17:20:23.166 DEBUG 12792 --- [http-nio-8889-exec-7] s.a.g.dao.OperationLogMapper.insert      : ==> Parameters: 2020-05-23 17:20:23.164(Timestamp), 查询角色(String), INFO(String), site.alanliang.geekblog.controller.admin.RoleController.listByPage()(String), { page: 1 limit: 15 roleQuery: RoleQuery(roleName=null, description=null, startDate=null, endDate=null) }(String), 0:0:0:0:0:0:0:1(String), 7(Long), admin(String), Chrome 8(String), 内网IP(String)
+2020-05-23 17:20:23.168 DEBUG 12792 --- [http-nio-8889-exec-7] s.a.g.dao.OperationLogMapper.insert      : <==    Updates: 1
+2020-05-23 17:20:28.180 DEBUG 12792 --- [http-nio-8889-exec-10] s.a.geekblog.dao.MenuMapper.selectList   : ==>  Preparing: SELECT id,pid,title,href,authority,icon,sort,type,status,create_time,update_time FROM sys_menu 
+2020-05-23 17:20:28.180 DEBUG 12792 --- [http-nio-8889-exec-10] s.a.geekblog.dao.MenuMapper.selectList   : ==> Parameters: 
+2020-05-23 17:20:28.186 DEBUG 12792 --- [http-nio-8889-exec-10] s.a.geekblog.dao.MenuMapper.selectList   : <==      Total: 53
+2020-05-23 17:20:28.188 DEBUG 12792 --- [http-nio-8889-exec-10] s.a.geekblog.dao.MenuMapper.selectCount  : ==>  Preparing: SELECT COUNT( 1 ) FROM sys_menu 
+2020-05-23 17:20:28.188 DEBUG 12792 --- [http-nio-8889-exec-10] s.a.geekblog.dao.MenuMapper.selectCount  : ==> Parameters: 
+2020-05-23 17:20:28.189 DEBUG 12792 --- [http-nio-8889-exec-10] s.a.geekblog.dao.MenuMapper.selectCount  : <==      Total: 1
+2020-05-23 17:20:28.193 DEBUG 12792 --- [http-nio-8889-exec-10] s.a.g.dao.OperationLogMapper.insert      : ==>  Preparing: INSERT INTO sys_operation_log ( create_time, description, log_type, method, params, request_ip, time, username, browser, address ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ) 
+2020-05-23 17:20:28.193 DEBUG 12792 --- [http-nio-8889-exec-10] s.a.g.dao.OperationLogMapper.insert      : ==> Parameters: 2020-05-23 17:20:28.192(Timestamp), 查询菜单(String), INFO(String), site.alanliang.geekblog.controller.admin.MenuController.listAll()(String), { }(String), 0:0:0:0:0:0:0:1(String), 10(Long), admin(String), Chrome 8(String), 内网IP(String)
+2020-05-23 17:20:28.196 DEBUG 12792 --- [http-nio-8889-exec-10] s.a.g.dao.OperationLogMapper.insert      : <==    Updates: 1
+2020-05-23 17:20:35.526 DEBUG 12792 --- [http-nio-8889-exec-8] s.a.geekblog.dao.RoleMapper.selectOne    : ==>  Preparing: SELECT id,role_name,description,rank,color FROM sys_role WHERE (id = ?) 
+2020-05-23 17:20:35.526 DEBUG 12792 --- [http-nio-8889-exec-8] s.a.geekblog.dao.RoleMapper.selectOne    : ==> Parameters: 7(Long)
+2020-05-23 17:20:35.528 DEBUG 12792 --- [http-nio-8889-exec-8] s.a.geekblog.dao.RoleMapper.selectOne    : <==      Total: 1
+2020-05-23 17:20:35.529 DEBUG 12792 --- [http-nio-8889-exec-8] s.a.g.dao.RoleMenuMapper.selectList      : ==>  Preparing: SELECT menu_id FROM sys_role_menu WHERE (role_id = ?) 
+2020-05-23 17:20:35.530 DEBUG 12792 --- [http-nio-8889-exec-8] s.a.g.dao.RoleMenuMapper.selectList      : ==> Parameters: 7(Long)
+2020-05-23 17:20:35.531 DEBUG 12792 --- [http-nio-8889-exec-8] s.a.g.dao.RoleMenuMapper.selectList      : <==      Total: 52
+2020-05-23 17:20:35.609 DEBUG 12792 --- [http-nio-8889-exec-3] s.a.geekblog.dao.MenuMapper.selectList   : ==>  Preparing: SELECT id,pid,title FROM sys_menu 
+2020-05-23 17:20:35.610 DEBUG 12792 --- [http-nio-8889-exec-3] s.a.geekblog.dao.MenuMapper.selectList   : ==> Parameters: 
+2020-05-23 17:20:35.611 DEBUG 12792 --- [http-nio-8889-exec-3] s.a.geekblog.dao.MenuMapper.selectList   : <==      Total: 53
+2020-05-23 17:20:43.143 DEBUG 12792 --- [http-nio-8889-exec-6] s.a.geekblog.dao.RoleMapper.selectList   : ==>  Preparing: SELECT id,role_name,description,rank,color,create_time,update_time FROM sys_role WHERE (role_name = ?) 
+2020-05-23 17:20:43.143 DEBUG 12792 --- [http-nio-8889-exec-6] s.a.geekblog.dao.RoleMapper.selectList   : ==> Parameters: 管理员(String)
+2020-05-23 17:20:43.144 DEBUG 12792 --- [http-nio-8889-exec-6] s.a.geekblog.dao.RoleMapper.selectList   : <==      Total: 1
+2020-05-23 17:20:43.145 DEBUG 12792 --- [http-nio-8889-exec-6] s.a.geekblog.dao.RoleMapper.updateById   : ==>  Preparing: UPDATE sys_role SET role_name=?, description=?, rank=?, color=?, update_time=? WHERE id=? 
+2020-05-23 17:20:43.145 DEBUG 12792 --- [http-nio-8889-exec-6] s.a.geekblog.dao.RoleMapper.updateById   : ==> Parameters: 管理员(String), admin(String), 1(Integer), red(String), 2020-05-23 17:20:43.141(Timestamp), 7(Long)
+2020-05-23 17:20:43.146 DEBUG 12792 --- [http-nio-8889-exec-6] s.a.geekblog.dao.RoleMapper.updateById   : <==    Updates: 1
+2020-05-23 17:20:43.147 DEBUG 12792 --- [http-nio-8889-exec-6] s.a.geekblog.dao.RoleMenuMapper.delete   : ==>  Preparing: DELETE FROM sys_role_menu WHERE (role_id = ?) 
+2020-05-23 17:20:43.147 DEBUG 12792 --- [http-nio-8889-exec-6] s.a.geekblog.dao.RoleMenuMapper.delete   : ==> Parameters: 7(Long)
+2020-05-23 17:20:43.149 DEBUG 12792 --- [http-nio-8889-exec-6] s.a.geekblog.dao.RoleMenuMapper.delete   : <==    Updates: 52
+2020-05-23 17:20:43.150 DEBUG 12792 --- [http-nio-8889-exec-6] s.a.g.dao.RoleMenuMapper.insertBatch     : ==>  Preparing: insert into sys_role_menu( role_id, menu_id ) values (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) , (?,?) 
+2020-05-23 17:20:43.153 DEBUG 12792 --- [http-nio-8889-exec-6] s.a.g.dao.RoleMenuMapper.insertBatch     : ==> Parameters: 7(Long), 1(Long), 7(Long), 2(Long), 7(Long), 3(Long), 7(Long), 4(Long), 7(Long), 5(Long), 7(Long), 6(Long), 7(Long), 7(Long), 7(Long), 8(Long), 7(Long), 9(Long), 7(Long), 10(Long), 7(Long), 11(Long), 7(Long), 12(Long), 7(Long), 13(Long), 7(Long), 14(Long), 7(Long), 15(Long), 7(Long), 16(Long), 7(Long), 17(Long), 7(Long), 18(Long), 7(Long), 19(Long), 7(Long), 20(Long), 7(Long), 21(Long), 7(Long), 22(Long), 7(Long), 23(Long), 7(Long), 50(Long), 7(Long), 51(Long), 7(Long), 52(Long), 7(Long), 53(Long), 7(Long), 24(Long), 7(Long), 25(Long), 7(Long), 26(Long), 7(Long), 27(Long), 7(Long), 28(Long), 7(Long), 29(Long), 7(Long), 30(Long), 7(Long), 31(Long), 7(Long), 32(Long), 7(Long), 33(Long), 7(Long), 34(Long), 7(Long), 35(Long), 7(Long), 36(Long), 7(Long), 37(Long), 7(Long), 38(Long), 7(Long), 39(Long), 7(Long), 40(Long), 7(Long), 41(Long), 7(Long), 42(Long), 7(Long), 43(Long), 7(Long), 44(Long), 7(Long), 45(Long), 7(Long), 46(Long), 7(Long), 47(Long), 7(Long), 48(Long), 7(Long), 49(Long)
+2020-05-23 17:20:43.154 DEBUG 12792 --- [http-nio-8889-exec-6] s.a.g.dao.RoleMenuMapper.insertBatch     : <==    Updates: 53
+2020-05-23 17:20:43.158 DEBUG 12792 --- [http-nio-8889-exec-6] s.a.g.dao.OperationLogMapper.insert      : ==>  Preparing: INSERT INTO sys_operation_log ( create_time, description, log_type, method, params, request_ip, time, username, browser, address ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ) 
+2020-05-23 17:20:43.158 DEBUG 12792 --- [http-nio-8889-exec-6] s.a.g.dao.OperationLogMapper.insert      : ==> Parameters: 2020-05-23 17:20:43.157(Timestamp), 修改角色(String), INFO(String), site.alanliang.geekblog.controller.admin.RoleController.update()(String), { role: Role(id=7, roleName=管理员, description=admin, rank=1, color=red, createTime=null, updateTime=Sat May 23 17:20:43 CST 2020, menuIdList=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 50, 51, 52, 53, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49]) }(String), 0:0:0:0:0:0:0:1(String), 15(Long), admin(String), Chrome 8(String), 内网IP(String)
+2020-05-23 17:20:43.159 DEBUG 12792 --- [http-nio-8889-exec-6] s.a.g.dao.OperationLogMapper.insert      : <==    Updates: 1
+2020-05-23 17:20:44.449 DEBUG 12792 --- [http-nio-8889-exec-8] s.a.geekblog.dao.RoleMapper.selectPage   : ==>  Preparing: SELECT COUNT(1) FROM sys_role 
+2020-05-23 17:20:44.449 DEBUG 12792 --- [http-nio-8889-exec-8] s.a.geekblog.dao.RoleMapper.selectPage   : ==> Parameters: 
+2020-05-23 17:20:44.450 DEBUG 12792 --- [http-nio-8889-exec-8] s.a.geekblog.dao.RoleMapper.selectPage   : ==>  Preparing: SELECT id,role_name,description,rank,color,create_time,update_time FROM sys_role LIMIT ?,? 
+2020-05-23 17:20:44.450 DEBUG 12792 --- [http-nio-8889-exec-8] s.a.geekblog.dao.RoleMapper.selectPage   : ==> Parameters: 0(Long), 15(Long)
+2020-05-23 17:20:44.451 DEBUG 12792 --- [http-nio-8889-exec-8] s.a.geekblog.dao.RoleMapper.selectPage   : <==      Total: 7
+2020-05-23 17:20:44.454 DEBUG 12792 --- [http-nio-8889-exec-8] s.a.g.dao.OperationLogMapper.insert      : ==>  Preparing: INSERT INTO sys_operation_log ( create_time, description, log_type, method, params, request_ip, time, username, browser, address ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ) 
+2020-05-23 17:20:44.455 DEBUG 12792 --- [http-nio-8889-exec-8] s.a.g.dao.OperationLogMapper.insert      : ==> Parameters: 2020-05-23 17:20:44.454(Timestamp), 查询角色(String), INFO(String), site.alanliang.geekblog.controller.admin.RoleController.listByPage()(String), { page: 1 limit: 15 roleQuery: RoleQuery(roleName=null, description=null, startDate=null, endDate=null) }(String), 0:0:0:0:0:0:0:1(String), 4(Long), admin(String), Chrome 8(String), 内网IP(String)
+2020-05-23 17:20:44.456 DEBUG 12792 --- [http-nio-8889-exec-8] s.a.g.dao.OperationLogMapper.insert      : <==    Updates: 1
+2020-05-23 17:22:25.094  INFO 12792 --- [Thread-13] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2020-05-23 17:22:25.097  INFO 12792 --- [Thread-13] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed
+2020-05-23 17:22:25.825  INFO 12792 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Starting GeekBlogApplication on DESKTOP-QNDK7AF with PID 12792 (D:\idea\geekblog\target\classes started by AlanLiang in D:\idea\geekblog)
+2020-05-23 17:22:25.825 DEBUG 12792 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Running with Spring Boot v2.2.6.RELEASE, Spring v5.2.5.RELEASE
+2020-05-23 17:22:25.825  INFO 12792 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : The following profiles are active: dev
+2020-05-23 17:22:26.226  INFO 12792 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8889 (http)
+2020-05-23 17:22:26.226  INFO 12792 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-05-23 17:22:26.226  INFO 12792 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.33]
+2020-05-23 17:22:26.268  INFO 12792 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-05-23 17:22:26.268  INFO 12792 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 438 ms
+2020-05-23 17:22:26.331  INFO 12792 --- [restartedMain] o.s.boot.web.servlet.RegistrationBean    : Filter webStatFilter was not registered (possibly already registered?)
+2020-05-23 17:22:26.331  INFO 12792 --- [restartedMain] o.s.boot.web.servlet.RegistrationBean    : Servlet statViewServlet was not registered (possibly already registered?)
+2020-05-23 17:22:26.335  WARN 12792 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Cannot deserialize session attribute [user] for session [DDBC17501B6F0268DEE6A91DF4638393]
+2020-05-23 17:22:26.338 ERROR 12792 --- [restartedMain] o.a.catalina.session.StandardManager     : Exception loading sessions from persistent storage
+
+java.lang.ClassCastException: java.lang.String cannot be cast to java.io.ObjectStreamClass
+	at java.io.ObjectInputStream.readClassDesc(ObjectInputStream.java:1745)
+	at java.io.ObjectInputStream.readOrdinaryObject(ObjectInputStream.java:2042)
+	at java.io.ObjectInputStream.readObject0(ObjectInputStream.java:1573)
+	at java.io.ObjectInputStream.readObject(ObjectInputStream.java:431)
+	at java.util.ArrayList.readObject(ArrayList.java:797)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at java.io.ObjectStreamClass.invokeReadObject(ObjectStreamClass.java:1170)
+	at java.io.ObjectInputStream.readSerialData(ObjectInputStream.java:2178)
+	at java.io.ObjectInputStream.readOrdinaryObject(ObjectInputStream.java:2069)
+	at java.io.ObjectInputStream.readObject0(ObjectInputStream.java:1573)
+	at java.io.ObjectInputStream.defaultReadFields(ObjectInputStream.java:2287)
+	at java.io.ObjectInputStream.readSerialData(ObjectInputStream.java:2211)
+	at java.io.ObjectInputStream.readOrdinaryObject(ObjectInputStream.java:2069)
+	at java.io.ObjectInputStream.readObject0(ObjectInputStream.java:1573)
+	at java.io.ObjectInputStream.defaultReadFields(ObjectInputStream.java:2287)
+	at java.io.ObjectInputStream.readSerialData(ObjectInputStream.java:2211)
+	at java.io.ObjectInputStream.readOrdinaryObject(ObjectInputStream.java:2069)
+	at java.io.ObjectInputStream.readObject0(ObjectInputStream.java:1573)
+	at java.io.ObjectInputStream.defaultReadFields(ObjectInputStream.java:2287)
+	at java.io.ObjectInputStream.readSerialData(ObjectInputStream.java:2211)
+	at java.io.ObjectInputStream.readOrdinaryObject(ObjectInputStream.java:2069)
+	at java.io.ObjectInputStream.readObject0(ObjectInputStream.java:1573)
+	at java.io.ObjectInputStream.readObject(ObjectInputStream.java:431)
+	at org.apache.catalina.session.StandardSession.doReadObject(StandardSession.java:1597)
+	at org.apache.catalina.session.StandardSession.readObjectData(StandardSession.java:1049)
+	at org.apache.catalina.session.StandardManager.doLoad(StandardManager.java:218)
+	at org.apache.catalina.session.StandardManager.load(StandardManager.java:162)
+	at org.apache.catalina.session.StandardManager.startInternal(StandardManager.java:354)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183)
+	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:5168)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1384)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1374)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at org.apache.tomcat.util.threads.InlineExecutorService.execute(InlineExecutorService.java:75)
+	at java.util.concurrent.AbstractExecutorService.submit(AbstractExecutorService.java:134)
+	at org.apache.catalina.core.ContainerBase.startInternal(ContainerBase.java:909)
+	at org.apache.catalina.core.StandardHost.startInternal(StandardHost.java:841)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1384)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1374)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at org.apache.tomcat.util.threads.InlineExecutorService.execute(InlineExecutorService.java:75)
+	at java.util.concurrent.AbstractExecutorService.submit(AbstractExecutorService.java:134)
+	at org.apache.catalina.core.ContainerBase.startInternal(ContainerBase.java:909)
+	at org.apache.catalina.core.StandardEngine.startInternal(StandardEngine.java:262)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183)
+	at org.apache.catalina.core.StandardService.startInternal(StandardService.java:421)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183)
+	at org.apache.catalina.core.StandardServer.startInternal(StandardServer.java:930)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183)
+	at org.apache.catalina.startup.Tomcat.start(Tomcat.java:468)
+	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.initialize(TomcatWebServer.java:107)
+	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.<init>(TomcatWebServer.java:88)
+	at org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory.getTomcatWebServer(TomcatServletWebServerFactory.java:438)
+	at org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory.getWebServer(TomcatServletWebServerFactory.java:191)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.createWebServer(ServletWebServerApplicationContext.java:180)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.onRefresh(ServletWebServerApplicationContext.java:153)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:544)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:141)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:747)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:397)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:315)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1226)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1215)
+	at site.alanliang.geekblog.GeekBlogApplication.main(GeekBlogApplication.java:14)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49)
+
+2020-05-23 17:22:26.339 DEBUG 12792 --- [restartedMain] s.a.g.security.ValidateCodeFilter        : Filter 'validateCodeFilter' configured for use
+2020-05-23 17:22:26.364  INFO 12792 --- [restartedMain] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2020-05-23 17:22:26.472  INFO 12792 --- [restartedMain] com.alibaba.druid.pool.DruidDataSource   : {dataSource-2} inited
+2020-05-23 17:22:27.158  INFO 12792 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@1116be5b, org.springframework.security.web.context.SecurityContextPersistenceFilter@7caf1782, org.springframework.security.web.header.HeaderWriterFilter@30c48af2, org.springframework.security.web.authentication.logout.LogoutFilter@4a64ded9, site.alanliang.geekblog.security.ValidateCodeFilter@2e0824cc, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@c9bbc90, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@2d190acd, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@391e9686, org.springframework.security.web.authentication.rememberme.RememberMeAuthenticationFilter@6e4b0118, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@43991599, org.springframework.security.web.session.SessionManagementFilter@1a9da0ef, org.springframework.security.web.access.ExceptionTranslationFilter@10a0daf, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@18f94484]
+2020-05-23 17:22:27.206  INFO 12792 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-05-23 17:22:27.623  INFO 12792 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2020-05-23 17:22:27.658  INFO 12792 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8889 (http) with context path ''
+2020-05-23 17:22:27.659  INFO 12792 --- [restartedMain] s.a.geekblog.GeekBlogApplication         : Started GeekBlogApplication in 1.883 seconds (JVM running for 651.186)
+2020-05-23 17:22:27.662  INFO 12792 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
