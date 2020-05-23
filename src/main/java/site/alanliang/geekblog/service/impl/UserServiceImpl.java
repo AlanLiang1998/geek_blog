@@ -9,6 +9,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
+import site.alanliang.geekblog.common.Constant;
 import site.alanliang.geekblog.dao.RoleUserMapper;
 import site.alanliang.geekblog.exception.BadRequestException;
 import site.alanliang.geekblog.model.RoleUser;
@@ -22,6 +23,7 @@ import site.alanliang.geekblog.vo.UserLoginVO;
 import site.alanliang.geekblog.vo.UserInfoVO;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
@@ -72,10 +74,10 @@ public class UserServiceImpl implements UserService {
         QueryWrapper<User> wrapper = new QueryWrapper<>();
         wrapper.select("status");
         User user = userMapper.selectById(userId);
-        if (user.getStatus() == 1) {
-            user.setStatus(0);
-        } else if (user.getStatus() == 0) {
-            user.setStatus(1);
+        if (Objects.equals(user.getStatus(), Constant.USER_ENABLE)) {
+            user.setStatus(Constant.USER_DISABLE);
+        } else if (Objects.equals(user.getStatus(), Constant.USER_DISABLE)) {
+            user.setStatus(Constant.USER_ENABLE);
         }
         user.setId(userId);
         userMapper.updateById(user);

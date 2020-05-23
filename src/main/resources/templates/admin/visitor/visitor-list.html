@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>用户管理</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="/static/admin/layuimini/lib/layui-v2.5.5/css/layui.css" media="all"
+          th:href="@{/static/admin/layuimini/lib/layui-v2.5.5/css/layui.css}">
+    <link rel="stylesheet" href="/static/admin/layuimini/css/public.css" media="all"
+          th:href="@{/static/admin/layuimini/css/public.css}">
+    <link rel="stylesheet" href="/static/admin/layuimini/lib/font-awesome-4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+<div class="layuimini-container">
+    <div class="layuimini-main">
+        <fieldset class="table-search-fieldset" permission="sys:visitor:query">
+            <legend>搜索信息</legend>
+            <div style="margin: 10px 10px 10px 10px">
+                <form class="layui-form layui-form-pane">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">用户名</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="username" autocomplete="off" class="layui-input"
+                                       placeholder="不输入则忽略用户名筛选">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">邮箱</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="email" autocomplete="off" class="layui-input"
+                                       placeholder="不输入则忽略邮箱筛选">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">日期范围</label>
+                            <div class="layui-input-inline">
+                                <input type="text" class="layui-input" id="date-range" placeholder="不输入则忽略日期范围筛选"
+                                       name="dateRange">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <button type="submit" class="layui-btn layui-btn-primary" lay-submit
+                                    lay-filter="data-search-btn"><i class="layui-icon"></i> 搜 索
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </fieldset>
+
+        <script type="text/html" id="toolbarDemo">
+            <div class="layui-btn-container">
+                <button class="layui-btn layui-btn-sm layui-btn-danger data-delete-btn" lay-event="delete"
+                        permission="sys:visitor:delete">批量删除
+                </button>
+            </div>
+        </script>
+
+        <table class="layui-hide" id="currentTableId" lay-filter="currentTableFilter"></table>
+
+        <script type="text/html" id="currentTableBar">
+            <a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete" lay-event="delete"
+               permission="sys:visitor:delete">删除</a>
+        </script>
+
+    </div>
+</div>
+<script src="/static/admin/layuimini/lib/layui-v2.5.5/layui.js" charset="utf-8"
+        th:src="@{/static/admin/layuimini/lib/layui-v2.5.5/layui.js}"></script>
+<script src="/static/admin/layuimini/lib/jquery-3.4.1/jquery-3.4.1.min.js"></script>
+<script src="/static/admin/my/js/my.js"></script>
+<script>
+    layui.use(['form', 'table', 'laydate'], function () {
+        var $ = layui.jquery,
+            form = layui.form,
+            table = layui.table,
+            laydate = layui.laydate;
+
+        //日期范围
+        laydate.render({
+            elem: '#date-range',
+            range: '~',
+            theme: 'molv'
+        });
+
+        table.render({
+            elem: '#currentTableId',
+            url: '/admin/visitor',
+            toolbar: '#toolbarDemo',
+            defaultToolbar: ['filter', 'exports', 'print', {
+                title: '提示',
+                layEvent: 'LAYTABLE_TIPS',
+                icon: 'layui-icon-tips'
+            }],
+            cols: [
+                [
+                    {type: "checkbox", width: 50, fixed: "left"},
+                    {field: 'id', width: 80, title: 'ID', sort: true},
+                    {field: 'username', width: 150, title: '用户名', sort: true},
+                    {field: 'nickname', width: 150, title: '昵称'},
+                    {
+                        field: 'status',
+                        width: 150,
+                        title: '状态',
+                        sort: true,
+                        align: 'center',
+                        hide: (!hasPermission('sys:visitor:status')),
+                        templet: function (data) {
+                            let isChecked = data.status === 1 ? "checked" : "";
+                            return '<input type="checkbox" lay-skin="switch" lay-text="启用|禁用" lay-filter="status-filter"' + isChecked + '> ';
+                        }
+                    },
+                    {field: 'email', width: 150, title: '邮箱'},
+                    {field: 'link', width: 150, title: '网址'},
+                    {field: 'createTime', title: '创建时间', minWidth: 200, sort: true},
+                    {field: 'updateTime', title: '更新时间', minWidth: 200, sort: true},
+                    {
+                        title: '操作',
+                        minWidth: 150,
+                        toolbar: '#currentTableBar',
+                        fixed: "right",
+                        align: "center",
+                        hide: (!hasPermission('sys:visitor:delete'))
+                    }
+                ]
+            ],
+            limits: [10, 15, 20, 25, 50, 100],
+            limit: 15,
+            page: true,
+            done: function () {
+                checkPermission();
+            }
+        });
+
+        // 监听搜索操作
+        form.on('submit(data-search-btn)', function (data) {
+            let username = data.field.username;
+            let email = data.field.email;
+            let dateRange = data.field.dateRange;
+            let dates = dateRange.split(' ~ ')
+            let startDate = dates[0];
+            let endDate = dates[1];
+
+            //执行搜索重载
+            table.reload('currentTableId', {
+                page: {
+                    curr: 1
+                }
+                , where: {
+                    username: username,
+                    email: email,
+                    startDate: startDate,
+                    endDate: endDate
+                }
+            }, 'data');
+
+            return false;
+        });
+
+        //监听状态开关
+        form.on('switch(status-filter)', function (obj) {
+            let status = obj.elem.checked ? 0 : 1;
+            let id = obj.othis.parents('tr').find("td").eq(1).text();
+            let username = obj.othis.parents('tr').find("td").eq(2).text()
+            let op = (status === 1 ? '停用' : '启用');
+            let msg = '是否' + op + '访客:' + username + '?';
+            let x = obj.elem.checked;
+            layer.open({
+                content: msg
+                , btn: ['确定', '取消']
+                , yes: function (index) {
+                    obj.elem.checked = x;
+                    $.ajax({
+                        url: '/admin/visitor/status',
+                        data: {id: id},
+                        type: 'PUT',
+                        success: function (result) {
+                            if (result.code === 200) {
+                                layer.msg('修改成功', {icon: 1});
+                                layer.close(index);
+                                form.render();
+                            }
+                        },
+                        error: function (result) {
+                            obj.elem.checked = !x;
+                            form.render();
+                            layer.close(index);
+                            let error = JSON.parse(result.responseText);
+                            layer.alert(error.msg, {icon: 2});
+                        }
+                    });
+                }
+                , btn2: function (index) {
+                    obj.elem.checked = !x;
+                    form.render();
+                    layer.close(index);
+                }
+                , cancel: function () {
+                    //右上角关闭回调
+                    obj.elem.checked = !x;
+                    form.render();
+                }
+            });
+            return false;
+
+        });
+
+        /**
+         * toolbar监听事件
+         */
+        table.on('toolbar(currentTableFilter)', function (obj) {
+            if (obj.event === 'delete') {  // 监听删除操作
+                var checkStatus = table.checkStatus('currentTableId')
+                    , data = checkStatus.data;
+                var idList = [];
+                $.each(data, function () {
+                    idList.push($(this)[0].id);
+                });
+                if (idList.length <= 0) {
+                    return false;
+                }
+                layer.confirm('确定删除选中的' + idList.length + '个访客吗？', {icon: 3}, function (index) {
+                    $.ajax({
+                        url: '/admin/visitor',
+                        type: 'DELETE',
+                        data: JSON.stringify(idList),
+                        contentType: 'application/json',
+                        success: function (result) {
+                            if (result.code === 200) {
+                                table.reload('currentTableId');
+                                layer.close(index);
+                                layer.msg('删除成功', {icon: 1});
+                            }
+                        },
+                        error: function (result) {
+                            let error = JSON.parse(result.responseText);
+                            layer.alert(error.msg, {icon: 2});
+                        }
+                    });
+                });
+            }
+        });
+
+        table.on('tool(currentTableFilter)', function (obj) {
+            var data = obj.data;
+            if (obj.event === 'delete') {
+                layer.confirm('确定删除这个访客吗？', {icon: 3}, function (index) {
+                    $.ajax({
+                        url: '/admin/visitor/' + data.id,
+                        type: 'DELETE',
+                        success: function (result) {
+                            if (result.code === 200) {
+                                obj.del();
+                                layer.close(index);
+                                layer.msg('删除成功', {icon: 1});
+                            }
+                        },
+                        error: function (result) {
+                            let error = JSON.parse(result.responseText);
+                            layer.alert(error.msg, {icon: 2});
+                        }
+                    });
+                });
+            }
+        });
+
+    });
+</script>
+</body>
+</html>

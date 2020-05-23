@@ -1,6 +1,7 @@
 package site.alanliang.geekblog.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -8,12 +9,17 @@ import site.alanliang.geekblog.common.Constant;
 import site.alanliang.geekblog.dao.VisitorMapper;
 import site.alanliang.geekblog.exception.BadRequestException;
 import site.alanliang.geekblog.exception.EntityExistException;
+import site.alanliang.geekblog.model.User;
 import site.alanliang.geekblog.model.Visitor;
+import site.alanliang.geekblog.query.UserQuery;
 import site.alanliang.geekblog.service.VisitorService;
+import site.alanliang.geekblog.utils.StringUtils;
 import site.alanliang.geekblog.vo.VisitorLoginVO;
 
 import javax.security.auth.login.Configuration;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * @Descriptin TODO
@@ -72,5 +78,49 @@ public class VisitorServiceImpl implements VisitorService {
         }
         visitor.setPassword(null);
         return visitor;
+    }
+
+    @Override
+    public Page<Visitor> listTableByPage(Integer current, Integer size, UserQuery userQuery) {
+        Page<Visitor> page = new Page<>(current, size);
+        QueryWrapper<Visitor> wrapper = new QueryWrapper<>();
+        wrapper.select("id", "username", "nickname", "status", "email", "link", "create_time", "update_time");
+        if (!StringUtils.isEmpty(userQuery.getUsername())) {
+            wrapper.like("username", userQuery.getUsername());
+        }
+        if (!StringUtils.isEmpty(userQuery.getEmail())) {
+            wrapper.like("email", userQuery.getEmail());
+        }
+        if (userQuery.getStartDate() != null && userQuery.getEndDate() != null) {
+            wrapper.between("create_time", userQuery.getStartDate(), userQuery.getEndDate());
+        }
+        return visitorMapper.selectPage(page, wrapper);
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void changeStatus(Long id) {
+        QueryWrapper<User> wrapper = new QueryWrapper<>();
+        wrapper.select("status");
+        Visitor visitor = visitorMapper.selectById(id);
+        if (Objects.equals(visitor.getStatus(), Constant.VISITOR_ENABLE)) {
+            visitor.setStatus(Constant.VISITOR_DISABLE);
+        } else if (Objects.equals(visitor.getStatus(), Constant.VISITOR_DISABLE)) {
+            visitor.setStatus(Constant.VISITOR_ENABLE);
+        }
+        visitor.setId(id);
+        visitorMapper.updateById(visitor);
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void removeById(Long id) {
+        visitorMapper.deleteById(id);
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void removeByIdList(List<Long> idList) {
+        visitorMapper.deleteBatchIds(idList);
     }
 }

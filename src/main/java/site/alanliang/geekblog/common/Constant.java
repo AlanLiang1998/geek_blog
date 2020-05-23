@@ -106,4 +106,11 @@ public interface Constant {
     Integer COMMENT_WAIT = 1;
 
     Integer COMMENT_NOT_PASS = 0;
+
+    /**
+     * 用户状态
+     */
+    Integer USER_ENABLE = 1;
+
+    Integer USER_DISABLE = 0;
 }
