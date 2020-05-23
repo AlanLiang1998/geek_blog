@@ -4,12 +4,14 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -21,6 +23,7 @@ import java.util.List;
  **/
 @Data
 @TableName("t_comment")
+@JsonIgnoreProperties("handler")
 public class Comment {
     @TableId(type = IdType.AUTO)
     private Long id;
@@ -29,18 +32,14 @@ public class Comment {
 
     private Long articleId;
 
+    @NotNull
+    private Long visitorId;
+
     private Long userId;
-    @NotBlank(message = "昵称不能为空")
-    private String nickname;
+
     @NotBlank(message = "评论内容不能为空")
     @Length(max = 80, message = "评论内容不能超过80个字符")
     private String content;
-
-    private String link;
-
-    private String avatar;
-    @Email
-    private String email;
 
     private Integer status;
 
@@ -49,8 +48,7 @@ public class Comment {
     @TableField(exist = false)
     private List<Comment> children;
 
-    @TableField(exist = false)
-    private Comment parentComment;
+    private String parentNickname;
 
     private String browser;
 
@@ -59,4 +57,7 @@ public class Comment {
     private String address;
 
     private String requestIp;
+
+    @TableField(exist = false)
+    private Visitor visitor;
 }

@@ -6,10 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import site.alanliang.geekblog.dao.MessageMapper;
-import site.alanliang.geekblog.model.Comment;
 import site.alanliang.geekblog.model.Message;
+import site.alanliang.geekblog.query.MessageQuery;
 import site.alanliang.geekblog.service.MessageService;
 import site.alanliang.geekblog.utils.LinkedListUtil;
+import site.alanliang.geekblog.utils.StringUtils;
+import site.alanliang.geekblog.vo.AuditVO;
 
 import java.util.List;
 
@@ -26,10 +28,29 @@ public class MessageServiceImpl implements MessageService {
     private MessageMapper messageMapper;
 
     @Override
-    public Page<Message> listTableByPage(Integer current, Integer size) {
+    @Transactional(rollbackFor = Exception.class)
+    public void audit(AuditVO auditVO) {
+        Message message = new Message();
+        message.setId(auditVO.getId());
+        message.setStatus(auditVO.getStatus());
+        messageMapper.updateById(message);
+    }
+
+    @Override
+    public Page<Message> listTableByPage(Integer current, Integer size, MessageQuery messageQuery) {
         Page<Message> page = new Page<>(current, size);
         QueryWrapper<Message> wrapper = new QueryWrapper<>();
-        wrapper.select("id", "nickname", "pid", "content", "email", "create_time", "request_ip", "address");
+        wrapper.select("id", "nickname", "pid", "content", "email", "create_time", "request_ip", "address", "status");
+        if (!StringUtils.isEmpty(messageQuery.getNickname())) {
+            wrapper.like("nickname", messageQuery.getNickname());
+        }
+        if (messageQuery.getStartDate() != null && messageQuery.getEndDate() != null) {
+            wrapper.between("create_time", messageQuery.getStartDate(), messageQuery.getEndDate());
+        }
+        if (messageQuery.getStatus() != null) {
+            wrapper.eq("status", messageQuery.getStatus());
+        }
+        wrapper.orderByDesc("create_time");
         return messageMapper.selectPage(page, wrapper);
     }
 

@@ -91,7 +91,19 @@ public interface Constant {
     Long COMMENT_LINKED_LIST_ROOT = 0L;
 
 
+    /**
+     * 访客状态
+     */
     Integer VISITOR_ENABLE = 1;
 
     Integer VISITOR_DISABLE = 0;
+
+    /**
+     * 评论状态
+     */
+    Integer COMMENT_PASS = 2;
+
+    Integer COMMENT_WAIT = 1;
+
+    Integer COMMENT_NOT_PASS = 0;
 }

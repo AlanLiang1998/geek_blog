@@ -44,7 +44,7 @@ public class MessagesController {
         message.setOs(StringUtils.getClientOS(request));
         message.setRequestIp(StringUtils.getIp(request));
         message.setAddress(StringUtils.getCityInfo(message.getRequestIp()));
-        message.setStatus(1);
+        message.setStatus(Constant.COMMENT_WAIT);
         messageService.save(message);
         return JsonResult.ok();
     }

@@ -30,11 +30,12 @@
 <body>
 <form class="layui-form layuimini-form">
     <div class="layui-form-item layui-form-text">
-        <input type="hidden" id="pid"/>
+        <input type="hidden" name="pid" th:value="${pid != null ? pid : ''}"/>
+        <input type="hidden" name="articleId" th:value="${articleId}"/>
         <label class="layui-form-label required">回复内容</label>
         <div class="layui-input-block">
             <textarea name="reply" class="layui-textarea" lay-verify="required" lay-reqtext="回复内容不能为空"
-                      placeholder="请输入回复内容" oninput="wordLeg(this);" maxlength="80"></textarea>
+                      placeholder="请输入内容" oninput="wordLeg(this);" maxlength="80"></textarea>
             <div class="word"><span class="text_count">0</span>&nbsp;/&nbsp;<span class="num_count"
                                                                                   id="numCount">80</span></div>
         </div>
@@ -67,17 +68,16 @@
         form.verify({
             reply: function (value) {
                 if (value === '' || value.length <= 0) {
-                    return '回复内容不能为空';
+                    return '内容不能为空';
                 }
                 if (value.length > 80) {
-                    return '回复内容长度不能超过80个字符';
+                    return '内容长度不能超过80个字符';
                 }
             }
         });
 
         //监听提交
         form.on('submit(saveBtn)', function (data) {
-            data.field.pid = [[${pid}]];
             $.ajax({
                 url: '/admin/comment',
                 type: 'POST',

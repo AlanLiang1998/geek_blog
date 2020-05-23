@@ -621,15 +621,33 @@
             },
             validate: function () {
                 if (this.nickname.trim() === '') {
-                    alert('昵称不能为空');
+                    swal({
+                        text: "昵称不能为空",
+                        icon: "error",
+                        button: {
+                            text: "确定",
+                        },
+                    });
                     return false;
                 }
                 if (this.email.trim() === '') {
-                    alert('邮箱地址不能为空');
+                    swal({
+                        text: "邮箱地址不能为空",
+                        icon: "error",
+                        button: {
+                            text: "确定",
+                        },
+                    });
                     return false;
                 }
                 if (this.content.trim() === '') {
-                    alert('留言内容不能为空');
+                    swal({
+                        text: "留言内容不能为空",
+                        icon: "error",
+                        button: {
+                            text: "确定",
+                        },
+                    });
                     return false;
                 }
                 if (this.link !== '') {
@@ -686,7 +704,8 @@
         },
     });
 </script>
-
+<!--弹出层-->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
     $(function () {
         $('#friends-link').masonry({

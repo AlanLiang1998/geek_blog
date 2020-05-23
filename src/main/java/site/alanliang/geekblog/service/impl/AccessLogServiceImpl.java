@@ -96,7 +96,7 @@ public class AccessLogServiceImpl implements AccessLogService {
         wrapper.select("id", "request_ip", "address", "description", "browser", "time", "create_time")
                 .orderByDesc("create_time");
         if (!StringUtils.isEmpty(logQuery.getRequestIp())) {
-            wrapper.eq("request_ip", logQuery.getRequestIp());
+            wrapper.like("request_ip", logQuery.getRequestIp());
         }
         if (!StringUtils.isEmpty(logQuery.getDescription())) {
             wrapper.like("description", logQuery.getDescription());

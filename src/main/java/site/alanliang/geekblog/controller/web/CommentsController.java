@@ -30,13 +30,12 @@ public class CommentsController {
 
     @PostMapping
     public JsonResult save(@Validated @RequestBody Comment comment, HttpServletRequest request) {
-        comment.setAvatar(Constant.DEFAULT_AVATAR);
         comment.setCreateTime(new Date());
         comment.setBrowser(StringUtils.getBrowser(request));
         comment.setOs(StringUtils.getClientOS(request));
         comment.setRequestIp(StringUtils.getIp(request));
         comment.setAddress(StringUtils.getCityInfo(comment.getRequestIp()));
-        comment.setStatus(1);
+        comment.setStatus(Constant.COMMENT_WAIT);
         commentService.save(comment);
         return JsonResult.ok();
     }

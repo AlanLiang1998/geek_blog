@@ -1,8 +1,11 @@
 package site.alanliang.geekblog.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 import site.alanliang.geekblog.model.Visitor;
+
+import java.util.Map;
 
 /**
  * @Descriptin TODO
@@ -12,4 +15,10 @@ import site.alanliang.geekblog.model.Visitor;
  **/
 @Repository
 public interface VisitorMapper extends BaseMapper<Visitor> {
+    /**
+     * 根据ID查询访客
+     *
+     * @return 访客
+     */
+    Visitor selectByVisitorId(Map<String, Object> map);
 }

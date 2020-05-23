@@ -15,30 +15,27 @@
 <body>
 <div class="layuimini-container">
     <div class="layuimini-main">
-        <fieldset class="table-search-fieldset">
+        <fieldset class="table-search-fieldset" permission="blog:comment:query">
             <legend>搜索信息</legend>
             <div style="margin: 10px 10px 10px 10px">
                 <form class="layui-form layui-form-pane">
                     <div class="layui-form-item">
                         <div class="layui-inline">
-                            <label class="layui-form-label">用户名</label>
-                            <div class="layui-input-inline">
-                                <input type="text" name="username" autocomplete="off" class="layui-input"
-                                       placeholder="不输入则忽略用户名筛选">
-                            </div>
-                        </div>
-                        <div class="layui-inline">
-                            <label class="layui-form-label">邮箱</label>
-                            <div class="layui-input-inline">
-                                <input type="text" name="email" autocomplete="off" class="layui-input"
-                                       placeholder="不输入则忽略邮箱筛选">
-                            </div>
-                        </div>
-                        <div class="layui-inline">
                             <label class="layui-form-label">日期范围</label>
                             <div class="layui-input-inline">
                                 <input type="text" class="layui-input" id="date-range" placeholder="不输入则忽略日期范围筛选"
                                        name="dateRange">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">状态</label>
+                            <div class="layui-input-inline">
+                                <select name="status">
+                                    <option value="" selected>所有</option>
+                                    <option value="2">审核通过</option>
+                                    <option value="1">等待审核</option>
+                                    <option value="0">审核未过</option>
+                                </select>
                             </div>
                         </div>
                         <div class="layui-inline">
@@ -53,15 +50,19 @@
 
         <script type="text/html" id="toolbarDemo">
             <div class="layui-btn-container">
-                <button class="layui-btn layui-btn-sm layui-btn-danger data-delete-btn" lay-event="delete">批量删除</button>
+                <button class="layui-btn layui-btn-sm layui-btn-danger data-delete-btn" lay-event="delete"
+                        permission="blog:comment:delete">批量删除
+                </button>
             </div>
         </script>
 
         <table class="layui-hide" id="currentTableId" lay-filter="currentTableFilter"></table>
 
         <script type="text/html" id="currentTableBar">
-            <a class="layui-btn layui-btn-xs data-count-edit" lay-event="add">回复</a>
-            <a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete" lay-event="delete">删除</a>
+            <a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="audit" permission="blog:comment:audit">审核</a>
+            <a class="layui-btn layui-btn-xs data-count-edit" lay-event="add" permission="blog:comment:reply">回复</a>
+            <a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete" lay-event="delete"
+               permission="blog:comment:delete">删除</a>
         </script>
 
     </div>
@@ -70,13 +71,13 @@
         th:src="@{/static/admin/layuimini/lib/layui-v2.5.5/layui.js}"></script>
 <script src="/static/admin/layuimini/lib/jquery-3.4.1/jquery-3.4.1.min.js"></script>
 <script src="/static/admin/my/js/my.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script>
     layui.use(['form', 'table', 'laydate'], function () {
         var $ = layui.jquery,
             form = layui.form,
             table = layui.table,
             laydate = layui.laydate;
-
         //日期范围
         laydate.render({
             elem: '#date-range',
@@ -97,7 +98,11 @@
                 [
                     {type: "checkbox", width: 50, fixed: "left"},
                     {field: 'id', width: 80, title: 'ID', sort: true},
-                    {field: 'nickname', width: 150, title: '昵称'},
+                    {
+                        field: 'visitor.nickname', width: 150, title: '昵称', templet: function (data) {
+                            return data.visitor.nickname;
+                        }
+                    },
                     {
                         field: 'articleId', width: 150, title: '文章链接', templet: function (data) {
                             let href = '/article/' + data.articleId;
@@ -119,43 +124,61 @@
                         }
                     },
                     {field: 'content', width: 200, title: '内容'},
-                    {field: 'email', width: 150, title: '邮箱'},
-                    {field: 'createTime', title: '创建时间', minWidth: 200, sort: true},
+                    {
+                        field: 'status', width: 100, title: '状态', align: 'center', templet: function (data) {
+                            let color, text, status = data.status;
+                            if (status === 2) {
+                                text = '审核通过';
+                                color = 'green';
+                            } else if (status === 1) {
+                                text = '等待审核';
+                                color = 'blue';
+                            } else if (status === 0) {
+                                text = '审核未过';
+                                color = 'red';
+                            }
+                            let bgColor = 'layui-bg-' + color;
+                            return '<span class="layui-badge ' + bgColor + '">' + text + '</span>';
+                        }
+                    },
+                    {field: 'createTime', title: '评论时间', minWidth: 200, sort: true},
                     {field: 'address', width: 150, title: 'IP来源'},
                     {field: 'requestIp', width: 150, title: 'IP地址'},
                     {
                         title: '操作',
                         minWidth: 150,
+                        width: 200,
                         toolbar: '#currentTableBar',
                         fixed: "right",
                         align: "center",
+                        hide: (!hasPermission('blog:comment:audit') && !hasPermission('blog:comment:reply') && !hasPermission('blog:comment:delete'))
                     }
                 ]
             ],
             limits: [10, 15, 20, 25, 50, 100],
             limit: 15,
             page: true,
+            done: function () {
+                checkPermission();
+            }
         });
 
         // 监听搜索操作
         form.on('submit(data-search-btn)', function (data) {
-            let username = data.field.username;
-            let email = data.field.email;
             let dateRange = data.field.dateRange;
             let dates = dateRange.split(' ~ ')
             let startDate = dates[0];
             let endDate = dates[1];
-
+            let status = data.field.status;
             //执行搜索重载
             table.reload('currentTableId', {
                 page: {
                     curr: 1
                 }
                 , where: {
-                    username: username,
-                    email: email,
                     startDate: startDate,
-                    endDate: endDate
+                    endDate: endDate,
+                    status: status
                 }
             }, 'data');
 
@@ -176,24 +199,42 @@
                 if (idList.length <= 0) {
                     return false;
                 }
-                layer.confirm('确定删除选中的' + idList.length + '条评论吗？', {icon: 3}, function (index) {
-                    $.ajax({
-                        url: '/admin/comment',
-                        type: 'DELETE',
-                        data: JSON.stringify(idList),
-                        contentType: 'application/json',
-                        success: function (result) {
-                            if (result.code === 200) {
-                                table.reload('currentTableId');
-                                layer.close(index);
-                                layer.msg('删除成功', {icon: 1});
+                Swal.fire({
+                    title: '确定删除选中的' + idList.length + '条评论吗？',
+                    text: "你将不能撤销该操作!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    showLoaderOnConfirm: true,
+                    confirmButtonText: '删除',
+                    cancelButtonText: '取消',
+                    reverseButtons: true
+                }).then((result) => {
+                    if (result.value) {
+                        $.ajax({
+                            url: '/admin/comment',
+                            type: 'DELETE',
+                            data: JSON.stringify(idList),
+                            contentType: 'application/json',
+                            success: function (result) {
+                                if (result.code === 200) {
+                                    table.reload('currentTableId');
+                                    Swal.fire(
+                                        'Deleted!',
+                                        '删除成功',
+                                        'success'
+                                    );
+                                }
+                            },
+                            error: function (result) {
+                                let error = JSON.parse(result.responseText);
+                                Swal.fire(
+                                    'Error!',
+                                    error.msg,
+                                    'error'
+                                );
                             }
-                        },
-                        error: function (result) {
-                            let error = JSON.parse(result.responseText);
-                            layer.alert(error.msg, {icon: 2});
-                        }
-                    });
+                        });
+                    }
                 });
             }
         });
@@ -201,22 +242,40 @@
         table.on('tool(currentTableFilter)', function (obj) {
             var data = obj.data;
             if (obj.event === 'delete') {
-                layer.confirm('确定删除这条评论吗？', {icon: 3}, function (index) {
-                    $.ajax({
-                        url: '/admin/comment/' + data.id,
-                        type: 'DELETE',
-                        success: function (result) {
-                            if (result.code === 200) {
-                                obj.del();
-                                layer.close(index);
-                                layer.msg('删除成功', {icon: 1});
+                Swal.fire({
+                    title: '确定删除这条评论吗？',
+                    text: "你将不能撤销该操作!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    showLoaderOnConfirm: true,
+                    confirmButtonText: '删除',
+                    cancelButtonText: '取消',
+                    reverseButtons: true
+                }).then((result) => {
+                    if (result.value) {
+                        $.ajax({
+                            url: '/admin/comment/' + data.id,
+                            type: 'DELETE',
+                            success: function (result) {
+                                if (result.code === 200) {
+                                    table.reload('currentTableId');
+                                    Swal.fire(
+                                        'Deleted!',
+                                        '删除成功',
+                                        'success'
+                                    );
+                                }
+                            },
+                            error: function (result) {
+                                let error = JSON.parse(result.responseText);
+                                Swal.fire(
+                                    'Error!',
+                                    error.msg,
+                                    'error'
+                                );
                             }
-                        },
-                        error: function (result) {
-                            let error = JSON.parse(result.responseText);
-                            layer.alert(error.msg, {icon: 2});
-                        }
-                    });
+                        });
+                    }
                 });
             } else if (obj.event === 'add') {
                 var index = layer.open({
@@ -226,14 +285,60 @@
                     maxmin: true,
                     shadeClose: true,
                     area: ['50%', '50%'],
-                    content: '/admin/comment/' + data.id,
+                    content: '/admin/comment/add?pid=' + data.id + '&articleId=' + data.articleId,
                 });
                 $(window).on("resize", function () {
                     layer.full(index);
                 });
+            } else if (obj.event === 'audit') {
+                async function audit() {
+                    const inputOptions = new Promise((resolve) => {
+                        resolve({
+                            '0': '审核未过',
+                            '2': '审核通过',
+                        });
+                    })
+                    const {value: status} = await Swal.fire({
+                        title: '审核结果',
+                        input: 'radio',
+                        inputOptions: inputOptions,
+                        inputValidator: (value) => {
+                            if (!value) {
+                                return '请选择审核结果！'
+                            }
+                        }
+                    })
+                    if (status) {
+                        $.ajax({
+                            url: '/admin/comment/audit',
+                            type: 'POST',
+                            data: JSON.stringify({id: data.id, status: status}),
+                            contentType: 'application/json',
+                            success: function (result) {
+                                if (result.code === 200) {
+                                    table.reload('currentTableId');
+                                    Swal.fire(
+                                        'Audited!',
+                                        '审核成功',
+                                        'success'
+                                    );
+                                }
+                            },
+                            error: function (result) {
+                                let error = JSON.parse(result.responseText);
+                                Swal.fire(
+                                    'Error!',
+                                    error.msg,
+                                    'error'
+                                );
+                            }
+                        })
+                    }
+                }
+
+                audit();
             }
         });
-
     });
 </script>
 </body>

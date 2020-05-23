@@ -718,12 +718,12 @@
                                 <div class="vlist">
                                     <div class="vcard" v-for="(comment, index) in comments" :key="comment.id"
                                          :id="'comment'+comment.id">
-                                        <img class="vimg" :src="comment.avatar">
+                                        <img class="vimg" :src="comment.visitor.avatar">
                                         <div class="vh">
                                             <div class="vhead">
                                                 <a class="vnick" rel="nofollow"
-                                                   :href="comment.link"
-                                                   target="_blank">{{comment.nickname}}</a>
+                                                   :href="comment.visitor.link"
+                                                   target="_blank">{{comment.visitor.nickname}}</a>
                                                 <span class="vsys">{{comment.browser}}</span>
                                                 <span class="vsys">{{comment.os}}</span>
                                                 <span class="vsys">{{comment.address}}</span>
@@ -731,7 +731,7 @@
                                             <div class="vmeta">
                                                 <span class="vtime">{{comment.createTime | dateFormat}}</span>
                                                 <span class="vat"
-                                                      @click="reply(comment.id, comment.nickname)">回复</span>
+                                                      @click="reply(comment.id, comment.visitor.nickname)">回复</span>
                                             </div>
                                             <div class="vcontent">
                                                 <p>{{comment.content}}</p>
@@ -741,12 +741,12 @@
                                                 <div class="vcard" v-for="(child, index) in comment.children"
                                                      :key="child.id">
                                                     <img class="vimg"
-                                                         :src="child.avatar">
+                                                         :src="child.visitor.avatar">
                                                     <div class="vh">
                                                         <div class="vhead">
                                                             <a class="vnick" rel="nofollow"
-                                                               :href="child.link"
-                                                               target="_blank">{{child.nickname}}</a>
+                                                               :href="child.visitor.link"
+                                                               target="_blank">{{child.visitor.nickname}}</a>
                                                             <span class="vsys">{{child.browser}}</span>
                                                             <span class="vsys">{{child.os}}</span>
                                                             <span class="vsys">{{child.address}}</span>
@@ -754,12 +754,12 @@
                                                         <div class="vmeta">
                                                             <span class="vtime">{{child.createTime | dateFormat}}</span>
                                                             <span class="vat"
-                                                                  @click="reply(child.id, child.nickname)">回复</span>
+                                                                  @click="reply(child.visitor.id, child.visitor.nickname)">回复</span>
                                                         </div>
                                                         <div class="vcontent">
                                                             <p>
                                                                 <a class="at"
-                                                                   :href="'#comment'+child.pid">@{{child.parentComment.nickname}}</a>&nbsp;&nbsp;{{child.content}}
+                                                                   :href="'#comment'+child.pid">@{{child.parentNickname}}</a>&nbsp;&nbsp;{{child.content}}
                                                             </p>
                                                         </div>
                                                     </div>
@@ -890,6 +890,7 @@
             articleId: [[${article.id}]],
             pid: 0,
             content: '',
+            parentNickname: '',
             comments: [],
             placeholder: '你对这篇文章有什么看法呢(必填)...',
             current: 1,
@@ -932,7 +933,7 @@
                             icon: "success",
                             timer: 1000,
                         }).then((value) => {
-                            sessionStorage.setItem("visitor", result.data);
+                            localStorage.setItem("visitor", JSON.stringify(result.data));
                             $('#loginModal').modal('close');
                         });
                     }).catch(error => {
@@ -1013,21 +1014,15 @@
                 return pattern.test(this.register.nickname);
             },
             toLogin: function () {
-                let visitor = sessionStorage.getItem('visitor');
+                let visitor = localStorage.getItem('visitor');
                 if (visitor !== null) {
                     return false;
                 }
-                $('#loginModal').modal('open', {
-                    opacity: .5,
-                    in_duration: 300,
-                    out_duration: 200,
-                    starting_top: '4%',
-                    ending_top: '10%',
-                });
+                $('#loginModal').modal('open');
             },
             likeIt: function () {
                 axios({
-                    url: '/article/' + [[${article.id}]] + '/likes',
+                    url: '/article/' + this.articleId + '/likes',
                     method: 'PUT'
                 }).then((result) => {
                     $('#likeBtn').addClass('disabled');
@@ -1044,6 +1039,7 @@
             reply: function (commentId, nickname) {
                 this.placeholder = '@' + nickname;
                 this.pid = commentId;
+                this.parentNickname = nickname;
                 this.clearForm();
                 $.scrollTo('#comment-area', 500);
                 $('#veditor').focus();
@@ -1080,10 +1076,25 @@
                 if (!this.validate()) {
                     return false;
                 }
+                let visitor = JSON.parse(localStorage.getItem("visitor"));
+                if (visitor === null) {
+                    swal({
+                        text: "当前访客未登录",
+                        icon: "error",
+                        button: {
+                            text: "确定",
+                        },
+                    }).then((value) => {
+                        $('#loginModal').modal('open');
+                    });
+                    return false;
+                }
                 let newComment = {
                     'articleId': this.articleId,
                     'pid': this.pid,
                     'content': this.content,
+                    'visitorId': visitor.id,
+                    'parentNickname': this.parentNickname
                 };
                 axios.post('/comments', newComment)
                     .then((result) => {

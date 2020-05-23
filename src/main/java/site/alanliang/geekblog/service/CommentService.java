@@ -2,6 +2,8 @@ package site.alanliang.geekblog.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import site.alanliang.geekblog.model.Comment;
+import site.alanliang.geekblog.query.CommentQuery;
+import site.alanliang.geekblog.vo.AuditVO;
 
 import java.util.List;
 
@@ -23,11 +25,12 @@ public interface CommentService {
     /**
      * 后台分页查询所有评论
      *
-     * @param current 当前页码
-     * @param size    页面大小
+     * @param current      当前页码
+     * @param size         页面大小
+     * @param commentQuery
      * @return 评论列表
      */
-    Page<Comment> listTableByPage(Integer current, Integer size);
+    Page<Comment> listTableByPage(Integer current, Integer size, CommentQuery commentQuery);
 
 
     /**
@@ -50,4 +53,9 @@ public interface CommentService {
      * @param comment 评论
      */
     void reply(Comment comment);
+
+    /**
+     * 根据ID审核评论
+     */
+    void audit(AuditVO auditVO);
 }

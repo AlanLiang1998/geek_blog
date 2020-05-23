@@ -12,6 +12,7 @@
         <result property="browser" column="browser"/>
         <result property="os" column="os"/>
         <result property="address" column="address"/>
+        <result property="status" column="status"/>
         <association property="parentMessage" javaType="site.alanliang.geekblog.model.Message">
             <result property="nickname" column="parent_nickname"/>
         </association>
@@ -31,6 +32,7 @@
                address
         from t_message
         where pid = ${@site.alanliang.geekblog.common.Constant@COMMENT_LINKED_LIST_ROOT}
+          and status &lt;&gt; ${@site.alanliang.geekblog.common.Constant@COMMENT_NOT_PASS}
         order by create_time DESC
     </select>
 
@@ -50,6 +52,7 @@
                  left join (select id, nickname
                             from t_message) tm2
                            on tm1.pid = tm2.id
+        where tm1.status &lt;&gt; ${@site.alanliang.geekblog.common.Constant@COMMENT_NOT_PASS}
         order by tm1.create_time DESC
     </select>
 </mapper>

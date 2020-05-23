@@ -2,6 +2,8 @@ package site.alanliang.geekblog.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import site.alanliang.geekblog.model.Message;
+import site.alanliang.geekblog.query.MessageQuery;
+import site.alanliang.geekblog.vo.AuditVO;
 
 import java.util.List;
 
@@ -9,11 +11,12 @@ public interface MessageService {
     /**
      * 后台分页查询所有留言
      *
-     * @param current 当前页码
-     * @param size    页面大小
+     * @param current      当前页码
+     * @param size         页面大小
+     * @param messageQuery 查询条件
      * @return 留言分页
      */
-    Page<Message> listTableByPage(Integer current, Integer size);
+    Page<Message> listTableByPage(Integer current, Integer size, MessageQuery messageQuery);
 
 
     /**
@@ -47,4 +50,11 @@ public interface MessageService {
      * @param message 留言
      */
     void save(Message message);
+
+    /**
+     * 审核留言
+     *
+     * @param auditVO 留言
+     */
+    void audit(AuditVO auditVO);
 }

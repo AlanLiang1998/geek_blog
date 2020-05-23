@@ -17,7 +17,15 @@ public class ReplyVO {
     @NotNull
     private Long pid;
 
+    private Long visitorId;
+    @NotNull(groups = CommentReply.class)
+    private Long articleId;
+
     @NotBlank(message = "回复内容不能为空")
     @Length(max = 80, message = "回复内容不能超过80个字符")
     private String reply;
+
+    public interface CommentReply {
+
+    }
 }
