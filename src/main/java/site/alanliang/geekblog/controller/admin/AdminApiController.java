@@ -34,7 +34,8 @@ public class AdminApiController {
     private RoleService roleService;
     @Autowired
     private MenuService menuService;
-
+    @Autowired
+    private LinkService linkService;
 
     @GetMapping("/api/{moduleName}/{pageName}")
     public ModelAndView getPage(@PathVariable("moduleName") String moduleName, @PathVariable("pageName") String pageName) {
@@ -86,6 +87,7 @@ public class AdminApiController {
         return "admin/menu/menu-edit";
     }
 
+    @PreAuthorize("hasAuthority('blog:comment:reply')")
     @GetMapping("/comment/add")
     public String replyComment(@RequestParam("pid") Long pid,
                                @RequestParam("articleId") Long articleId,
@@ -95,9 +97,17 @@ public class AdminApiController {
         return "admin/comment/comment-add";
     }
 
+    @PreAuthorize("hasAuthority('blog:message:reply')")
     @GetMapping("/message/{pid}")
     public String replyMessage(@PathVariable("pid") Long pid, Model model) {
         model.addAttribute("pid", pid);
         return "admin/message/message-add";
+    }
+
+    @PreAuthorize("hasAuthority('blog:link:edit')")
+    @GetMapping("/link/{id}")
+    public String editLink(@PathVariable("id") Long id, Model model) {
+        model.addAttribute("link", linkService.getById(id));
+        return "admin/link/link-edit";
     }
 }

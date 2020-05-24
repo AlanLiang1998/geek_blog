@@ -80,7 +80,7 @@ public class MessageServiceImpl implements MessageService {
 
     @Override
     public Page<Message> listByPage(Integer current, Integer size) {
-        Page<Message> page = new Page<>();
+        Page<Message> page = new Page<>(current, size);
         Page<Message> pageInfo = messageMapper.listRootByPage(page);
         List<Message> messages = messageMapper.listAll();
         LinkedListUtil.toMessageLinkedList(pageInfo.getRecords(), messages);

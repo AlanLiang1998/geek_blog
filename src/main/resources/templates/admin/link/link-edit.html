@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>layui</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="/static/admin/layuimini/lib/layui-v2.5.5/css/layui.css" media="all">
+    <link rel="stylesheet" href="/static/admin/layuimini/css/public.css" media="all">
+    <style>
+        body {
+            background-color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+<form class="layui-form layuimini-form">
+    <input type="hidden" name="id"/>
+    <div class="layui-form-item">
+        <label class="layui-form-label required">昵称</label>
+        <div class="layui-input-block">
+            <input type="text" name="nickname" lay-verify="required|nickname" lay-reqtext="昵称不能为空" placeholder="请输入昵称"
+                   value=""
+                   class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label required">头像</label>
+        <div class="layui-input-block">
+            <input type="url" name="avatar" lay-verify="required|url" lay-reqtext="头像url不能为空" placeholder="请输入头像url"
+                   value=""
+                   class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label required">简介</label>
+        <div class="layui-input-block">
+            <textarea name="introduction" lay-verify="required|introduction" lay-reqtext="简介不能为空" placeholder="请输入简介"
+                      class="layui-textarea"></textarea>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label required">网址</label>
+        <div class="layui-input-block">
+            <input type="url" name="link" lay-verify="required|url" lay-reqtext="网址url不能为空" placeholder="请输入网址url"
+                   value=""
+                   class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="saveBtn">确认保存</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+</form>
+<script src="/static/admin/layuimini/lib/layui-v2.5.5/layui.js" charset="utf-8"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<script th:inline="javascript" type="text/javascript">
+    layui.use(['form'], function () {
+        var form = layui.form,
+            layer = layui.layer,
+            $ = layui.$;
+
+
+        var link = [[${link}]];
+        $('.layui-form input[name="id"]').val(link.id);
+        $('.layui-form input[name="nickname"]').val(link.nickname);
+        $('.layui-form input[name="avatar"]').val(link.avatar);
+        $('.layui-form textarea[name="introduction"]').val(link.introduction);
+        $('.layui-form input[name="link"]').val(link.link);
+        form.render();
+
+        //自定义验证规则
+        form.verify({
+            //验证昵称
+            nickname: function (value) { //value：表单的值、item：表单的DOM对象
+                if (value.length < 1 || value.length > 10) {
+                    return '昵称长度为1-10个字符'
+                }
+            },
+            introduction: function (value) {
+                if (value.length > 30) {
+                    return '简介长度在30个字符以内';
+                }
+            }
+        });
+
+        //监听提交
+        form.on('submit(saveBtn)', function (data) {
+            $.ajax({
+                url: '/admin/link',
+                type: 'PUT',
+                data: JSON.stringify(data.field),
+                contentType: 'application/json',
+                success: function (result) {
+                    if (result.code === 200) {
+                        var parentLayer = parent.layer;
+                        layer.msg('修改成功', {icon: 1, time: 1000}, function () {
+                            var iframeIndex = parentLayer.getFrameIndex(window.name);
+                            parent.location.reload();
+                            parentLayer.close(iframeIndex);
+                        });
+                    }
+                },
+                error: function (XMLHttpRequest) {
+                    var result = JSON.parse(XMLHttpRequest.responseText);
+                    layer.alert(result.msg, {icon: 2});
+                }
+            });
+            return false;
+        });
+
+    });
+</script>
+</body>
+</html>

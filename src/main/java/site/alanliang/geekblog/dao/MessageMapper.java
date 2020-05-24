@@ -19,7 +19,7 @@ public interface MessageMapper extends BaseMapper<Message> {
      * @param page 分页参数
      * @return 留言分页
      */
-    Page<Message> listRootByPage(Page<Message> page);
+    Page<Message> listRootByPage(IPage<Message> page);
 
     /**
      * 查询所有留言

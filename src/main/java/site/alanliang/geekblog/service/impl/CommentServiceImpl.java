@@ -5,9 +5,11 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import site.alanliang.geekblog.dao.ArticleMapper;
 import site.alanliang.geekblog.dao.CommentMapper;
 import site.alanliang.geekblog.dao.UserMapper;
 import site.alanliang.geekblog.dao.VisitorMapper;
+import site.alanliang.geekblog.model.Article;
 import site.alanliang.geekblog.model.Comment;
 import site.alanliang.geekblog.model.User;
 import site.alanliang.geekblog.model.Visitor;
@@ -37,21 +39,54 @@ public class CommentServiceImpl implements CommentService {
     @Autowired
     private UserMapper userMapper;
 
+    @Autowired
+    private ArticleMapper articleMapper;
+
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void save(Comment comment) {
         commentMapper.insert(comment);
+        //评论量+1
+        QueryWrapper<Article> articleWrapper = new QueryWrapper<>();
+        articleWrapper.select("comments").eq("id", comment.getArticleId());
+        Article article = articleMapper.selectOne(articleWrapper);
+        article.setComments(article.getComments() + 1);
+        article.setId(comment.getArticleId());
+        articleMapper.updateById(article);
+    }
+
+    /**
+     * 根据评论ID找到对应文章，文章的评论量-1
+     *
+     * @param id 评论ID
+     */
+    public void decreaseArticleComments(Long id) {
+        QueryWrapper<Comment> commentWrapper = new QueryWrapper<>();
+        commentWrapper.select("article_id").eq("id", id);
+        Comment comment = commentMapper.selectOne(commentWrapper);
+
+        QueryWrapper<Article> articleWrapper = new QueryWrapper<>();
+        articleWrapper.select("comments").eq("id", comment.getArticleId());
+        Article article = articleMapper.selectOne(articleWrapper);
+        article.setComments(article.getComments() - 1);
+        article.setId(comment.getArticleId());
+        articleMapper.updateById(article);
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void removeByIdList(List<Long> idList) {
+        for (Long id : idList) {
+            decreaseArticleComments(id);
+        }
         commentMapper.deleteBatchIds(idList);
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void removeById(Long id) {
+        //评论量-1
+        decreaseArticleComments(id);
         commentMapper.deleteById(id);
     }
 

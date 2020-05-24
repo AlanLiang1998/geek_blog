@@ -45,7 +45,7 @@ public class MenuController {
         return JsonResult.ok(menuService.listByCheckboxTree());
     }
 
-    @PreAuthorize("hasAuthority('sys:menu:save')")
+    @PreAuthorize("hasAuthority('sys:menu:add')")
     @OperationLog("保存菜单")
     @PostMapping
     public JsonResult save(@Validated @RequestBody Menu menu) {

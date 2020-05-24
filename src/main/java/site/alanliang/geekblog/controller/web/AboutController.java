@@ -1,5 +1,7 @@
 package site.alanliang.geekblog.controller.web;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -7,11 +9,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import site.alanliang.geekblog.anntation.AccessLog;
-import site.alanliang.geekblog.vo.AboutVO;
 import site.alanliang.geekblog.service.ArticleService;
 import site.alanliang.geekblog.service.CategoryService;
 import site.alanliang.geekblog.service.TagService;
 import site.alanliang.geekblog.utils.DateUtil;
+import site.alanliang.geekblog.vo.AboutVO;
 import site.alanliang.geekblog.vo.ArticleDateVO;
 
 import java.util.List;
@@ -22,6 +24,7 @@ import java.util.List;
  * Date 2020/4/22 20:13
  * Version 1.0
  **/
+@Api(tags = "前台关于我页面")
 @RestController
 public class AboutController {
 
@@ -34,6 +37,7 @@ public class AboutController {
     @Autowired
     private TagService tagService;
 
+    @ApiOperation("查询关于我页数据")
     @AccessLog("访问关于我页")
     @GetMapping("/about")
     public ResponseEntity<Object> about(@RequestParam(value = "dateType", required = false) Integer dateFilterType) {
