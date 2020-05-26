@@ -36,6 +36,8 @@ public class AdminApiController {
     private MenuService menuService;
     @Autowired
     private LinkService linkService;
+    @Autowired
+    private PhotoService photoService;
 
     @GetMapping("/api/{moduleName}/{pageName}")
     public ModelAndView getPage(@PathVariable("moduleName") String moduleName, @PathVariable("pageName") String pageName) {
@@ -109,5 +111,12 @@ public class AdminApiController {
     public String editLink(@PathVariable("id") Long id, Model model) {
         model.addAttribute("link", linkService.getById(id));
         return "admin/link/link-edit";
+    }
+
+    @PreAuthorize("hasAuthority('blog:photo:edit')")
+    @GetMapping("/photo/{id}")
+    public String editPhoto(@PathVariable("id") Long id, Model model) {
+        model.addAttribute("photo", photoService.getById(id));
+        return "admin/photo/photo-edit";
     }
 }

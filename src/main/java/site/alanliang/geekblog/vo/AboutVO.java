@@ -1,9 +1,12 @@
 package site.alanliang.geekblog.vo;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.Data;
 import site.alanliang.geekblog.model.Category;
+import site.alanliang.geekblog.model.Photo;
 import site.alanliang.geekblog.model.Tag;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -13,7 +16,7 @@ import java.util.List;
  * Version 1.0
  **/
 @Data
-public class AboutVO {
+public class AboutVO implements Serializable {
     private Long articleCount;
 
     private Long categoryCount;
@@ -25,4 +28,6 @@ public class AboutVO {
     private List<Tag> tags;
 
     private List<ArticleDateVO> articleDates;
+
+    private List<Photo> photos;
 }

@@ -113,4 +113,14 @@ public interface Constant {
     Integer USER_ENABLE = 1;
 
     Integer USER_DISABLE = 0;
+
+    /**
+     * 显示
+     */
+    Integer DISPLAY = 1;
+
+    /**
+     * 隐藏
+     */
+    Integer HIDDEN = 0;
 }

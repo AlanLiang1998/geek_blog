@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import site.alanliang.geekblog.anntation.AccessLog;
 import site.alanliang.geekblog.service.ArticleService;
 import site.alanliang.geekblog.service.CategoryService;
+import site.alanliang.geekblog.service.PhotoService;
 import site.alanliang.geekblog.service.TagService;
 import site.alanliang.geekblog.utils.DateUtil;
 import site.alanliang.geekblog.vo.AboutVO;
@@ -37,17 +38,20 @@ public class AboutController {
     @Autowired
     private TagService tagService;
 
+    @Autowired
+    private PhotoService photoService;
+
     @ApiOperation("查询关于我页数据")
     @AccessLog("访问关于我页")
     @GetMapping("/about")
     public ResponseEntity<Object> about(@RequestParam(value = "dateType", required = false) Integer dateFilterType) {
-        AboutVO aboutVo = new AboutVO();
-        aboutVo.setArticleCount(articleService.countAll(null));
-        aboutVo.setCategoryCount(categoryService.countAll());
-        aboutVo.setTagCount(tagService.countAll());
-        aboutVo.setCategories(categoryService.listByArticleCount());
-        aboutVo.setTags(tagService.listByArticleCount());
-
+        AboutVO aboutVO = new AboutVO();
+        aboutVO.setArticleCount(articleService.countAll(null));
+        aboutVO.setCategoryCount(categoryService.countAll());
+        aboutVO.setTagCount(tagService.countAll());
+        aboutVO.setCategories(categoryService.listByArticleCount());
+        aboutVO.setTags(tagService.listByArticleCount());
+        aboutVO.setPhotos(photoService.listAll());
         List<ArticleDateVO> articleDates = articleService.countByDate(dateFilterType);
         for (ArticleDateVO articleDate : articleDates) {
             articleDate.setDate(DateUtil.formatDate(articleDate.getYear(), articleDate.getMonth(), articleDate.getDay()));
@@ -55,7 +59,7 @@ public class AboutController {
             articleDate.setMonth(null);
             articleDate.setDay(null);
         }
-        aboutVo.setArticleDates(articleDates);
-        return new ResponseEntity<>(aboutVo, HttpStatus.OK);
+        aboutVO.setArticleDates(articleDates);
+        return new ResponseEntity<>(aboutVO, HttpStatus.OK);
     }
 }

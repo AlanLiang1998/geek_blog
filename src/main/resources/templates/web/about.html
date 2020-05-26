@@ -239,40 +239,9 @@
                             <i class="far fa-image"></i>&nbsp;&nbsp;相册
                         </div>
                         <div class="row">
-                            <div class="photo col s12 m6 l4" data-aos="fade-up">
-                                <div class="img-item" data-src="http://q8rsjstig.bkt.clouddn.com/note/oilpainting1.jpg">
-                                    <img src="http://q8rsjstig.bkt.clouddn.com/note/oilpainting1.jpg"
-                                         class="responsive-img">
-                                </div>
-                            </div>
-                            <div class="photo col s12 m6 l4" data-aos="fade-up">
-                                <div class="img-item" data-src="http://q8rsjstig.bkt.clouddn.com/note/oilpainting2.jpg">
-                                    <img src="http://q8rsjstig.bkt.clouddn.com/note/oilpainting2.jpg"
-                                         class="responsive-img">
-                                </div>
-                            </div>
-                            <div class="photo col s12 m6 l4" data-aos="fade-up">
-                                <div class="img-item" data-src="http://q8rsjstig.bkt.clouddn.com/note/oilpainting3.jpg">
-                                    <img src="http://q8rsjstig.bkt.clouddn.com/note/oilpainting3.jpg"
-                                         class="responsive-img">
-                                </div>
-                            </div>
-                            <div class="photo col s12 m6 l4" data-aos="fade-up">
-                                <div class="img-item" data-src="http://q8rsjstig.bkt.clouddn.com/note/oilpainting4.jpg">
-                                    <img src="http://q8rsjstig.bkt.clouddn.com/note/oilpainting4.jpg"
-                                         class="responsive-img">
-                                </div>
-                            </div>
-                            <div class="photo col s12 m6 l4" data-aos="fade-up">
-                                <div class="img-item" data-src="http://q8rsjstig.bkt.clouddn.com/note/oilpainting5.jpg">
-                                    <img src="http://q8rsjstig.bkt.clouddn.com/note/oilpainting5.jpg"
-                                         class="responsive-img">
-                                </div>
-                            </div>
-                            <div class="photo col s12 m6 l4" data-aos="fade-up">
-                                <div class="img-item" data-src="http://q8rsjstig.bkt.clouddn.com/note/oilpainting6.jpg">
-                                    <img src="http://q8rsjstig.bkt.clouddn.com/note/oilpainting6.jpg"
-                                         class="responsive-img">
+                            <div class="photo col s12 m6 l4" data-aos="fade-up" v-for="(photo, index) in photos">
+                                <div class="img-item" :data-src="photo.url">
+                                    <img :src="photo.url" :alt="photo.description" class="responsive-img">
                                 </div>
                             </div>
                         </div>
@@ -294,6 +263,7 @@
             categories: [],
             tags: [],
             articleDates: [],
+            photos: [],
         },
         methods: {
             getAboutData: function () {
@@ -312,6 +282,7 @@
                     this.categories = aboutData.categories;
                     this.tags = aboutData.tags;
                     this.articleDates = aboutData.articleDates;
+                    this.photos = aboutData.photos;
 
                     this.$nextTick(function () {
                         this.initCharts();
