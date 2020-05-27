@@ -27,7 +27,7 @@ public interface CommentService {
      *
      * @param current      当前页码
      * @param size         页面大小
-     * @param commentQuery
+     * @param commentQuery 查询条件
      * @return 评论列表
      */
     Page<Comment> listTableByPage(Integer current, Integer size, CommentQuery commentQuery);
@@ -58,4 +58,18 @@ public interface CommentService {
      * 根据ID审核评论
      */
     void audit(AuditVO auditVO);
+
+    /**
+     * 统计评论总数
+     *
+     * @return 评论总数
+     */
+    Integer countAll();
+
+    /**
+     * 查询最近的评论
+     *
+     * @return 评论列表
+     */
+    List<Comment> listNewest();
 }

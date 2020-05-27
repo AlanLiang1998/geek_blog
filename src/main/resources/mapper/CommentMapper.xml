@@ -17,13 +17,19 @@
 
     <resultMap id="tableResultMap" type="site.alanliang.geekblog.model.Comment">
         <id property="id" column="id"/>
-        <result property="pid" column="pid"/>
         <result property="articleId" column="article_id"/>
         <result property="content" column="content"/>
         <result property="createTime" column="create_time"/>
-        <result property="browser" column="browser"/>
-        <result property="os" column="os"/>
         <result property="address" column="address"/>
+        <association property="visitor" column="{visitorId=visitor_id,userId=user_id}"
+                     select="site.alanliang.geekblog.dao.VisitorMapper.selectByVisitorId"/>
+    </resultMap>
+
+    <resultMap id="newestResultMap" type="site.alanliang.geekblog.model.Comment">
+        <id property="id" column="id"/>
+        <result property="articleId" column="article_id"/>
+        <result property="content" column="content"/>
+        <result property="createTime" column="create_time"/>
         <result property="status" column="status"/>
         <association property="visitor" column="{visitorId=visitor_id,userId=user_id}"
                      select="site.alanliang.geekblog.dao.VisitorMapper.selectByVisitorId"/>
@@ -83,5 +89,18 @@
             ${ew.customSqlSegment}
         </if>
         order by create_time DESC
+    </select>
+
+    <select id="listNewest" resultMap="newestResultMap">
+        select id,
+               user_id,
+               article_id,
+               visitor_id,
+               content,
+               create_time,
+               status
+        from t_comment
+        order by create_time DESC
+        limit #{limit}
     </select>
 </mapper>

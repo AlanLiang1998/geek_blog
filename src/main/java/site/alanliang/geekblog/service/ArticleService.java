@@ -1,6 +1,5 @@
 package site.alanliang.geekblog.service;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import site.alanliang.geekblog.model.Article;
 import site.alanliang.geekblog.query.ArticleQuery;
@@ -34,10 +33,9 @@ public interface ArticleService {
     /**
      * 查询记录总数
      *
-     * @param wrapper 条件
      * @return 记录总数
      */
-    long countAll(QueryWrapper<Article> wrapper);
+    long countAll();
 
     /**
      * 根据ID查询文章
@@ -176,4 +174,11 @@ public interface ArticleService {
      * @return 布尔值
      */
     Boolean reachedMaxRecommend();
+
+    /**
+     * 查询最近的文章
+     *
+     * @return 文章列表
+     */
+    List<Article> listNewest();
 }

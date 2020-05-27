@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import site.alanliang.geekblog.common.Constant;
 import site.alanliang.geekblog.dao.ArticleMapper;
 import site.alanliang.geekblog.dao.CommentMapper;
 import site.alanliang.geekblog.dao.UserMapper;
@@ -16,7 +17,6 @@ import site.alanliang.geekblog.model.Visitor;
 import site.alanliang.geekblog.query.CommentQuery;
 import site.alanliang.geekblog.service.CommentService;
 import site.alanliang.geekblog.utils.LinkedListUtil;
-import site.alanliang.geekblog.utils.StringUtils;
 import site.alanliang.geekblog.vo.AuditVO;
 
 import java.util.List;
@@ -108,6 +108,16 @@ public class CommentServiceImpl implements CommentService {
             comment.setParentNickname(user.getNickname());
         }
         commentMapper.insert(comment);
+    }
+
+    @Override
+    public List<Comment> listNewest() {
+        return commentMapper.listNewest(Constant.NEWEST_PAGE_SIZE);
+    }
+
+    @Override
+    public Integer countAll() {
+        return commentMapper.selectCount(null);
     }
 
     @Override

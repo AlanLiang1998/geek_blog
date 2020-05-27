@@ -9,6 +9,7 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import site.alanliang.geekblog.common.Constant;
 import site.alanliang.geekblog.model.OperationLog;
 import site.alanliang.geekblog.model.User;
 import site.alanliang.geekblog.service.OperationLogService;
@@ -57,6 +58,7 @@ public class OperationLogAspect {
         OperationLog log = new OperationLog("INFO", System.currentTimeMillis() - currentTime.get());
         currentTime.remove();
         HttpServletRequest request = RequestHolder.getHttpServletRequest();
+        log.setStatus(Constant.SUCCESS);
         operationLogService.save(getUsername(), StringUtils.getBrowser(request), StringUtils.getIp(request), joinPoint, log);
         return result;
     }
@@ -73,6 +75,7 @@ public class OperationLogAspect {
         currentTime.remove();
         log.setExceptionDetail(ThrowableUtil.getStackTrace(e).getBytes());
         HttpServletRequest request = RequestHolder.getHttpServletRequest();
+        log.setStatus(Constant.FAILURE);
         operationLogService.save(getUsername(), StringUtils.getBrowser(request), StringUtils.getIp(request), (ProceedingJoinPoint) joinPoint, log);
     }
 

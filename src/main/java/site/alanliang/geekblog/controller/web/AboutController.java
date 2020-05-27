@@ -46,7 +46,7 @@ public class AboutController {
     @GetMapping("/about")
     public ResponseEntity<Object> about(@RequestParam(value = "dateType", required = false) Integer dateFilterType) {
         AboutVO aboutVO = new AboutVO();
-        aboutVO.setArticleCount(articleService.countAll(null));
+        aboutVO.setArticleCount(articleService.countAll());
         aboutVO.setCategoryCount(categoryService.countAll());
         aboutVO.setTagCount(tagService.countAll());
         aboutVO.setCategories(categoryService.listByArticleCount());

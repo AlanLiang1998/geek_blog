@@ -28,4 +28,6 @@ public class LogQuery {
     private String address;
 
     private Integer timeRank;
+
+    private String username;
 }

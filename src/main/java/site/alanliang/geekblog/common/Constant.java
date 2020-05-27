@@ -123,4 +123,11 @@ public interface Constant {
      * 隐藏
      */
     Integer HIDDEN = 0;
+
+
+    Integer SUCCESS = 1;
+
+    Integer FAILURE = 0;
+
+    Integer NEWEST_PAGE_SIZE = 10;
 }

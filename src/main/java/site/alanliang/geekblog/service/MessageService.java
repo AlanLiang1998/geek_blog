@@ -57,4 +57,18 @@ public interface MessageService {
      * @param auditVO 留言
      */
     void audit(AuditVO auditVO);
+
+    /**
+     * 统计留言总数
+     *
+     * @return 留言总数
+     */
+    Integer countAll();
+
+    /**
+     * 查询最近的留言
+     *
+     * @return 留言列表
+     */
+    List<Message> listNewest();
 }

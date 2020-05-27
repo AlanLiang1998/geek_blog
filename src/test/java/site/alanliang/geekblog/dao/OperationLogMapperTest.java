@@ -1,0 +1,25 @@
+package site.alanliang.geekblog.dao;
+
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import site.alanliang.geekblog.vo.ViewDateVO;
+
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+@SpringBootTest
+class OperationLogMapperTest {
+
+    @Autowired
+    private OperationLogMapper operationLogMapper;
+
+    @Test
+    void countByLast7Days() {
+        List<ViewDateVO> viewDateVOS =
+                operationLogMapper.countByLast7Days();
+        System.out.println(viewDateVOS);
+    }
+}

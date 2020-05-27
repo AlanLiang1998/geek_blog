@@ -118,8 +118,8 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public long countAll(QueryWrapper<Article> wrapper) {
-        return articleMapper.selectCount(wrapper);
+    public long countAll() {
+        return articleMapper.selectCount(null);
     }
 
     @Override
@@ -175,6 +175,15 @@ public class ArticleServiceImpl implements ArticleService {
             wrapper.between(Constant.TABLE_ALIAS_ARTICLE + "create_time", articleQuery.getStartDate(), articleQuery.getEndDate());
         }
         return articleMapper.listTableByPage(page, wrapper);
+    }
+
+    @Override
+    public List<Article> listNewest() {
+        QueryWrapper<Article> wrapper = new QueryWrapper<>();
+        wrapper.select("id", "title", "summary", "create_time")
+                .orderByDesc("create_time")
+                .last("limit " + Constant.NEWEST_PAGE_SIZE);
+        return articleMapper.selectList(wrapper);
     }
 
     @Override

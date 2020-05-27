@@ -6,6 +6,7 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import site.alanliang.geekblog.common.Constant;
 import site.alanliang.geekblog.model.AccessLog;
 import site.alanliang.geekblog.model.User;
 import site.alanliang.geekblog.service.AccessLogService;
@@ -54,6 +55,7 @@ public class AccessLogAspect {
         AccessLog log = new AccessLog("INFO", System.currentTimeMillis() - currentTime.get());
         currentTime.remove();
         HttpServletRequest request = RequestHolder.getHttpServletRequest();
+        log.setStatus(Constant.SUCCESS);
         accessLogService.save(getUsername(), StringUtils.getBrowser(request), StringUtils.getIp(request), joinPoint, log);
         return result;
     }
@@ -70,6 +72,7 @@ public class AccessLogAspect {
         currentTime.remove();
         log.setExceptionDetail(ThrowableUtil.getStackTrace(e).getBytes());
         HttpServletRequest request = RequestHolder.getHttpServletRequest();
+        log.setStatus(Constant.FAILURE);
         accessLogService.save(getUsername(), StringUtils.getBrowser(request), StringUtils.getIp(request), (ProceedingJoinPoint) joinPoint, log);
     }
 

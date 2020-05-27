@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import site.alanliang.geekblog.common.Constant;
 import site.alanliang.geekblog.dao.MessageMapper;
 import site.alanliang.geekblog.model.Message;
 import site.alanliang.geekblog.query.MessageQuery;
@@ -26,6 +27,15 @@ public class MessageServiceImpl implements MessageService {
 
     @Autowired
     private MessageMapper messageMapper;
+
+    @Override
+    public List<Message> listNewest() {
+        QueryWrapper<Message> wrapper = new QueryWrapper<>();
+        wrapper.select("id", "nickname", "content", "create_time", "status")
+                .orderByDesc("create_time")
+                .last("limit " + Constant.NEWEST_PAGE_SIZE);
+        return messageMapper.selectList(wrapper);
+    }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -70,6 +80,11 @@ public class MessageServiceImpl implements MessageService {
     @Transactional(rollbackFor = Exception.class)
     public void reply(Message message) {
         messageMapper.insert(message);
+    }
+
+    @Override
+    public Integer countAll() {
+        return messageMapper.selectCount(null);
     }
 
     @Override

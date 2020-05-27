@@ -54,4 +54,11 @@ public interface VisitorService {
      * @param idList 访客ID列表
      */
     void removeByIdList(List<Long> idList);
+
+    /**
+     * 统计访客总数
+     *
+     * @return 访客总数
+     */
+    Integer countAll();
 }

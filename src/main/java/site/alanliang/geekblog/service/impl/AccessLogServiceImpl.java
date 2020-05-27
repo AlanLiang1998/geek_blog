@@ -1,6 +1,5 @@
 package site.alanliang.geekblog.service.impl;
 
-import cn.hutool.json.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -14,6 +13,7 @@ import site.alanliang.geekblog.model.AccessLog;
 import site.alanliang.geekblog.query.LogQuery;
 import site.alanliang.geekblog.service.AccessLogService;
 import site.alanliang.geekblog.utils.StringUtils;
+import site.alanliang.geekblog.vo.ViewDateVO;
 
 import java.lang.reflect.Method;
 import java.util.Date;
@@ -31,6 +31,15 @@ public class AccessLogServiceImpl implements AccessLogService {
 
     @Autowired
     private AccessLogMapper accessLogMapper;
+
+    @Override
+    public List<AccessLog> listNewest() {
+        QueryWrapper<AccessLog> wrapper = new QueryWrapper<>();
+        wrapper.select("id", "request_ip", "address", "create_time", "description", "status")
+                .orderByDesc("create_time")
+                .last("limit " + Constant.NEWEST_PAGE_SIZE);
+        return accessLogMapper.selectList(wrapper);
+    }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -78,6 +87,16 @@ public class AccessLogServiceImpl implements AccessLogService {
     }
 
     @Override
+    public Integer countAll() {
+        return accessLogMapper.selectCount(null);
+    }
+
+    @Override
+    public List<ViewDateVO> countByLast7Days() {
+        return accessLogMapper.countByLast7Days();
+    }
+
+    @Override
     @Transactional(rollbackFor = Exception.class)
     public void removeByIdList(List<Long> idList) {
         accessLogMapper.deleteBatchIds(idList);
@@ -93,7 +112,7 @@ public class AccessLogServiceImpl implements AccessLogService {
     public Page<AccessLog> listByPage(Integer current, Integer size, LogQuery logQuery) {
         Page<AccessLog> page = new Page<>(current, size);
         QueryWrapper<AccessLog> wrapper = new QueryWrapper<>();
-        wrapper.select("id", "request_ip", "address", "description", "browser", "time", "create_time")
+        wrapper.select("id", "request_ip", "address", "description", "browser", "time", "create_time", "status")
                 .orderByDesc("create_time");
         if (!StringUtils.isEmpty(logQuery.getRequestIp())) {
             wrapper.like("request_ip", logQuery.getRequestIp());

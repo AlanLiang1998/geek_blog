@@ -5,6 +5,7 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.springframework.scheduling.annotation.Async;
 import site.alanliang.geekblog.model.OperationLog;
 import site.alanliang.geekblog.query.LogQuery;
+import site.alanliang.geekblog.vo.ViewDateVO;
 
 import java.util.List;
 
@@ -24,8 +25,8 @@ public interface OperationLogService {
     /**
      * 分页获取所有日志
      *
-     * @param current 当前页码
-     * @param size    页码大小
+     * @param current  当前页码
+     * @param size     页码大小
      * @param logQuery
      * @return 日志列表
      */
@@ -44,4 +45,16 @@ public interface OperationLogService {
      * @param idList 日志ID列表
      */
     void removeByIdList(List<Long> idList);
+
+    /**
+     * 查询最近的操作日志
+     *
+     * @return 操作日志列表
+     */
+    List<OperationLog> listNewest();
+
+    /**
+     * 统计最近7天的访问量
+     */
+    List<ViewDateVO> countByLast7Days();
 }

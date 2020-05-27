@@ -171,6 +171,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public Integer countAll() {
+        return userMapper.selectCount(null);
+    }
+
+    @Override
     @Transactional(rollbackFor = Exception.class)
     public void changePassword(UserLoginVO passwordVO) {
         QueryWrapper<User> wrapper = new QueryWrapper<>();

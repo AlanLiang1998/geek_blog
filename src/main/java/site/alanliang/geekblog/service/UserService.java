@@ -80,4 +80,10 @@ public interface UserService {
      * @param userInfoVO 个人信息
      */
     void updateInfo(UserInfoVO userInfoVO);
+
+    /**
+     * 统计用户总数
+     * @return  用户总数
+     */
+    Integer countAll();
 }

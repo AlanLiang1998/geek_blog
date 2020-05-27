@@ -30,6 +30,11 @@ import java.util.Objects;
 @Service
 public class VisitorServiceImpl implements VisitorService {
 
+    @Override
+    public Integer countAll() {
+        return visitorMapper.selectCount(null);
+    }
+
     @Autowired
     private VisitorMapper visitorMapper;
 

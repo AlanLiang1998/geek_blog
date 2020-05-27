@@ -4,7 +4,9 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -15,7 +17,8 @@ import java.util.Date;
  **/
 @TableName("sys_access_log")
 @Data
-public class AccessLog {
+@NoArgsConstructor
+public class AccessLog implements Serializable {
     @TableId(type = IdType.AUTO)
     private Long id;
 
@@ -40,6 +43,8 @@ public class AccessLog {
     private String browser;
 
     private String address;
+
+    private Integer status;
 
     public AccessLog(String logType, Long time) {
         this.logType = logType;

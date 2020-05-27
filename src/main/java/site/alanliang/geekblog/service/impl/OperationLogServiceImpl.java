@@ -10,10 +10,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import site.alanliang.geekblog.common.Constant;
 import site.alanliang.geekblog.dao.OperationLogMapper;
+import site.alanliang.geekblog.model.AccessLog;
 import site.alanliang.geekblog.model.OperationLog;
 import site.alanliang.geekblog.query.LogQuery;
 import site.alanliang.geekblog.service.OperationLogService;
 import site.alanliang.geekblog.utils.StringUtils;
+import site.alanliang.geekblog.vo.ViewDateVO;
 
 import java.lang.reflect.Method;
 import java.util.Date;
@@ -91,10 +93,24 @@ public class OperationLogServiceImpl implements OperationLogService {
     }
 
     @Override
+    public List<ViewDateVO> countByLast7Days() {
+        return operationLogMapper.countByLast7Days();
+    }
+
+    @Override
+    public List<OperationLog> listNewest() {
+        QueryWrapper<OperationLog> wrapper = new QueryWrapper<>();
+        wrapper.select("id", "request_ip", "username", "address", "create_time", "description", "status")
+                .orderByDesc("create_time")
+                .last("limit " + Constant.NEWEST_PAGE_SIZE);
+        return operationLogMapper.selectList(wrapper);
+    }
+
+    @Override
     public Page<OperationLog> listByPage(Integer current, Integer size, LogQuery logQuery) {
         Page<OperationLog> page = new Page<>(current, size);
         QueryWrapper<OperationLog> wrapper = new QueryWrapper<>();
-        wrapper.select("id", "request_ip", "address", "description", "browser", "time", "create_time")
+        wrapper.select("id", "request_ip", "address", "username", "description", "browser", "time", "create_time", "status")
                 .orderByDesc("create_time");
         if (!StringUtils.isEmpty(logQuery.getRequestIp())) {
             wrapper.like("request_ip", logQuery.getRequestIp());
@@ -102,8 +118,8 @@ public class OperationLogServiceImpl implements OperationLogService {
         if (!StringUtils.isEmpty(logQuery.getDescription())) {
             wrapper.like("description", logQuery.getDescription());
         }
-        if (!StringUtils.isEmpty(logQuery.getBrowser())) {
-            wrapper.like("browser", logQuery.getBrowser());
+        if (!StringUtils.isEmpty(logQuery.getUsername())) {
+            wrapper.like("username", logQuery.getUsername());
         }
         if (!StringUtils.isEmpty(logQuery.getAddress())) {
             wrapper.like("address", logQuery.getAddress());

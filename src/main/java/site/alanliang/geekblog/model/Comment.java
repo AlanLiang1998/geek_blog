@@ -24,7 +24,7 @@ import java.util.List;
 @Data
 @TableName("t_comment")
 @JsonIgnoreProperties("handler")
-public class Comment {
+public class Comment implements Serializable {
     @TableId(type = IdType.AUTO)
     private Long id;
 

@@ -38,4 +38,12 @@ public interface CommentMapper extends BaseMapper<Comment> {
      * @return 评论分页
      */
     Page<Comment> listTableByPage(IPage<Comment> page, @Param("ew") QueryWrapper<Comment> wrapper);
+
+    /**
+     * 后台主页查询最近评论
+     *
+     * @param limit 显示数量
+     * @return 评论列表
+     */
+    List<Comment> listNewest(@Param("limit") Integer limit);
 }
