@@ -5,11 +5,9 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 import site.alanliang.geekblog.common.Constant;
-import site.alanliang.geekblog.dao.ArticleMapper;
-import site.alanliang.geekblog.dao.CommentMapper;
-import site.alanliang.geekblog.dao.UserMapper;
-import site.alanliang.geekblog.dao.VisitorMapper;
+import site.alanliang.geekblog.dao.*;
 import site.alanliang.geekblog.model.Article;
 import site.alanliang.geekblog.model.Comment;
 import site.alanliang.geekblog.model.User;
@@ -17,8 +15,11 @@ import site.alanliang.geekblog.model.Visitor;
 import site.alanliang.geekblog.query.CommentQuery;
 import site.alanliang.geekblog.service.CommentService;
 import site.alanliang.geekblog.utils.LinkedListUtil;
+import site.alanliang.geekblog.utils.RequestHolder;
+import site.alanliang.geekblog.utils.UserInfoUtil;
 import site.alanliang.geekblog.vo.AuditVO;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -41,6 +42,9 @@ public class CommentServiceImpl implements CommentService {
 
     @Autowired
     private ArticleMapper articleMapper;
+
+    @Autowired
+    private OperationLogMapper operationLogMapper;
 
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -108,6 +112,18 @@ public class CommentServiceImpl implements CommentService {
             comment.setParentNickname(user.getNickname());
         }
         commentMapper.insert(comment);
+    }
+
+    @Override
+    public Integer countByLastIndexViewToNow() {
+        String username = UserInfoUtil.getUsername();
+        if (StringUtils.isEmpty(username)) {
+            return 0;
+        }
+        Date date = operationLogMapper.selectLastIndexViewTimeByUsername(username);
+        QueryWrapper<Comment> wrapper = new QueryWrapper<>();
+        wrapper.between("create_time", date, new Date());
+        return commentMapper.selectCount(wrapper);
     }
 
     @Override

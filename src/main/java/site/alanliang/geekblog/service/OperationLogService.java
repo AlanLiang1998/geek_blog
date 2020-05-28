@@ -7,6 +7,7 @@ import site.alanliang.geekblog.model.OperationLog;
 import site.alanliang.geekblog.query.LogQuery;
 import site.alanliang.geekblog.vo.ViewDateVO;
 
+import java.util.Date;
 import java.util.List;
 
 public interface OperationLogService {
@@ -57,4 +58,5 @@ public interface OperationLogService {
      * 统计最近7天的访问量
      */
     List<ViewDateVO> countByLast7Days();
+
 }

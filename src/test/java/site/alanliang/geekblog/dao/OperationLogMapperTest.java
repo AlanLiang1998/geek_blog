@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import site.alanliang.geekblog.vo.ViewDateVO;
 
+import java.util.Date;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -21,5 +22,11 @@ class OperationLogMapperTest {
         List<ViewDateVO> viewDateVOS =
                 operationLogMapper.countByLast7Days();
         System.out.println(viewDateVOS);
+    }
+
+    @Test
+    void selectLastIndexViewTimeByUsername() {
+        Date date = operationLogMapper.selectLastIndexViewTimeByUsername("admin");
+        System.out.println(date);
     }
 }

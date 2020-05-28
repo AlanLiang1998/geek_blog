@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
-    <title>相册管理</title>
+    <title>公告管理</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -15,16 +15,23 @@
 <body>
 <div class="layuimini-container">
     <div class="layuimini-main">
-        <fieldset class="table-search-fieldset" permission="blog:photo:query">
+        <fieldset class="table-search-fieldset" permission="sys:notice:query">
             <legend>搜索信息</legend>
             <div style="margin: 10px 10px 10px 10px">
                 <form class="layui-form layui-form-pane">
                     <div class="layui-form-item">
                         <div class="layui-inline">
-                            <label class="layui-form-label">描述</label>
+                            <label class="layui-form-label">标题</label>
                             <div class="layui-input-inline">
-                                <input type="text" name="description" autocomplete="off" class="layui-input"
-                                       placeholder="不输入则忽略描述筛选">
+                                <input type="text" name="title" autocomplete="off" class="layui-input"
+                                       placeholder="不输入则忽略标题筛选">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">内容</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="content" autocomplete="off" class="layui-input"
+                                       placeholder="不输入则忽略内容筛选">
                             </div>
                         </div>
                         <div class="layui-inline">
@@ -35,7 +42,7 @@
                             </div>
                         </div>
                         <div class="layui-inline">
-                            <label class="layui-form-label">前台显示</label>
+                            <label class="layui-form-label">是否显示</label>
                             <div class="layui-input-inline">
                                 <select name="display">
                                     <option value="" selected>所有</option>
@@ -56,10 +63,10 @@
 
         <script type="text/html" id="toolbarDemo">
             <div class="layui-btn-container">
-                <button class="layui-btn layui-btn-sm data-add-btn" lay-event="add" permission="blog:photo:add">添加照片
+                <button class="layui-btn layui-btn-sm data-add-btn" lay-event="add" permission="sys:notice:add">添加公告
                 </button>
                 <button class="layui-btn layui-btn-sm layui-btn-danger data-delete-btn" lay-event="delete"
-                        permission="blog:photo:delete">批量删除
+                        permission="sys:notice:delete">批量删除
                 </button>
             </div>
         </script>
@@ -67,9 +74,9 @@
         <table class="layui-hide" id="currentTableId" lay-filter="currentTableFilter"></table>
 
         <script type="text/html" id="currentTableBar">
-            <a class="layui-btn layui-btn-xs data-count-edit" lay-event="edit" permission="blog:photo:edit">编辑</a>
+            <a class="layui-btn layui-btn-xs data-count-edit" lay-event="edit" permission="sys:notice:edit">编辑</a>
             <a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete" lay-event="delete"
-               permission="blog:photo:delete">删除</a>
+               permission="sys:notice:delete">删除</a>
         </script>
 
     </div>
@@ -94,7 +101,7 @@
 
         table.render({
             elem: '#currentTableId',
-            url: '/admin/photo',
+            url: '/admin/notice',
             toolbar: '#toolbarDemo',
             defaultToolbar: ['filter', 'exports', 'print', {
                 title: '提示',
@@ -105,13 +112,8 @@
                 [
                     {type: "checkbox", width: 50, fixed: "left"},
                     {field: 'id', width: 80, title: 'ID', sort: true},
-                    {
-                        field: 'url', width: 150, title: '照片', templet: function (data) {
-                            let url = data.url;
-                            return '<img src=' + url + '></img>'
-                        }
-                    },
-                    {field: 'description', width: 250, title: '描述'},
+                    {field: 'title', width: 150, title: '标题'},
+                    {field: 'content', width: 250, title: '内容'},
                     {
                         field: 'sort', width: 100, title: '排序', align: 'center', sort: true, templet: function (data) {
                             let sort = data.sort;
@@ -140,7 +142,7 @@
                         toolbar: '#currentTableBar',
                         fixed: "right",
                         align: "center",
-                        hide: (!hasPermission('blog:photo:audit') && !hasPermission('blog:photo:edit') && !hasPermission('blog:photo:delete'))
+                        hide: (!hasPermission('sys:notice:audit') && !hasPermission('sys:notice:edit') && !hasPermission('sys:notice:delete'))
                     }
                 ]
             ],
@@ -154,7 +156,8 @@
 
         // 监听搜索操作
         form.on('submit(data-search-btn)', function (data) {
-            let description = data.field.description;
+            let title = data.field.title;
+            let content = data.field.content;
             let dateRange = data.field.dateRange;
             let dates = dateRange.split(' ~ ')
             let startDate = dates[0];
@@ -167,7 +170,8 @@
                     curr: 1
                 }
                 , where: {
-                    description: description,
+                    title: title,
+                    content: content,
                     startDate: startDate,
                     endDate: endDate,
                     display: display,
@@ -192,7 +196,7 @@
                     return false;
                 }
                 Swal.fire({
-                    title: '确定删除选中的' + idList.length + '张照片吗？',
+                    title: '确定删除选中的' + idList.length + '条公告吗？',
                     text: "你将不能撤销该操作!",
                     icon: 'warning',
                     showCancelButton: true,
@@ -203,7 +207,7 @@
                 }).then((result) => {
                     if (result.value) {
                         $.ajax({
-                            url: '/admin/photo',
+                            url: '/admin/notice',
                             type: 'DELETE',
                             data: JSON.stringify(idList),
                             contentType: 'application/json',
@@ -230,13 +234,13 @@
                 });
             } else if (obj.event === 'add') {
                 var index = layer.open({
-                    title: '添加照片',
+                    title: '添加公告',
                     type: 2,
                     shade: 0.2,
                     maxmin: true,
                     shadeClose: true,
                     area: ['50%', '60%'],
-                    content: '/admin/api/photo/photo-add',
+                    content: '/admin/api/notice/notice-add',
                 });
                 $(window).on("resize", function () {
                     layer.full(index);
@@ -248,7 +252,7 @@
             var data = obj.data;
             if (obj.event === 'delete') {
                 Swal.fire({
-                    title: '确定删除这张照片吗？',
+                    title: '确定删除这条公告吗？',
                     text: "你将不能撤销该操作!",
                     icon: 'warning',
                     showCancelButton: true,
@@ -259,7 +263,7 @@
                 }).then((result) => {
                     if (result.value) {
                         $.ajax({
-                            url: '/admin/photo/' + data.id,
+                            url: '/admin/notice/' + data.id,
                             type: 'DELETE',
                             success: function (result) {
                                 if (result.code === 200) {
@@ -284,13 +288,13 @@
                 });
             } else if (obj.event === 'edit') {
                 var index = layer.open({
-                    title: '编辑照片',
+                    title: '编辑公告',
                     type: 2,
                     shade: 0.2,
                     maxmin: true,
                     shadeClose: true,
                     area: ['50%', '80%'],
-                    content: '/admin/photo/' + data.id,
+                    content: '/admin/notice/' + data.id,
                 });
                 $(window).on("resize", function () {
                     layer.full(index);

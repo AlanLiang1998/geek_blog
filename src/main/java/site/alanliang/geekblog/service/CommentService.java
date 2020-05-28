@@ -72,4 +72,9 @@ public interface CommentService {
      * @return 评论列表
      */
     List<Comment> listNewest();
+
+    /**
+     * 统计上次访问首页至现在增加的评论数
+     */
+    Integer countByLastIndexViewToNow();
 }

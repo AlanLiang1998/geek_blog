@@ -130,4 +130,6 @@ public interface Constant {
     Integer FAILURE = 0;
 
     Integer NEWEST_PAGE_SIZE = 10;
+
+    String USER = "user";
 }

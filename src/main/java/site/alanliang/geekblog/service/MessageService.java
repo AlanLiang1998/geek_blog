@@ -71,4 +71,9 @@ public interface MessageService {
      * @return 留言列表
      */
     List<Message> listNewest();
+
+    /**
+     * 统计上次访问首页至现在增加的留言数
+     */
+    Integer countByLastIndexViewToNow();
 }

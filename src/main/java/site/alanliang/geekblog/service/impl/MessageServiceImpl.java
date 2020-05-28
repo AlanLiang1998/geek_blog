@@ -7,13 +7,19 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import site.alanliang.geekblog.common.Constant;
 import site.alanliang.geekblog.dao.MessageMapper;
+import site.alanliang.geekblog.dao.OperationLogMapper;
+import site.alanliang.geekblog.model.Article;
 import site.alanliang.geekblog.model.Message;
+import site.alanliang.geekblog.model.User;
 import site.alanliang.geekblog.query.MessageQuery;
 import site.alanliang.geekblog.service.MessageService;
 import site.alanliang.geekblog.utils.LinkedListUtil;
+import site.alanliang.geekblog.utils.RequestHolder;
 import site.alanliang.geekblog.utils.StringUtils;
+import site.alanliang.geekblog.utils.UserInfoUtil;
 import site.alanliang.geekblog.vo.AuditVO;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -27,6 +33,21 @@ public class MessageServiceImpl implements MessageService {
 
     @Autowired
     private MessageMapper messageMapper;
+
+    @Autowired
+    private OperationLogMapper operationLogMapper;
+
+    @Override
+    public Integer countByLastIndexViewToNow() {
+        String username = UserInfoUtil.getUsername();
+        if (org.springframework.util.StringUtils.isEmpty(username)) {
+            return 0;
+        }
+        Date date = operationLogMapper.selectLastIndexViewTimeByUsername(username);
+        QueryWrapper<Message> wrapper = new QueryWrapper<>();
+        wrapper.between("create_time", date, new Date());
+        return messageMapper.selectCount(wrapper);
+    }
 
     @Override
     public List<Message> listNewest() {

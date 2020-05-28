@@ -37,4 +37,14 @@ public class IndexVO implements Serializable {
     private List<ViewDateVO> frontViews;
 
     private List<ViewDateVO> backViews;
+
+    private Integer increasedViews;
+
+    private Integer increasedArticles;
+
+    private Integer increasedMessages;
+
+    private Integer increasedComments;
+
+    private List<Notice> notices;
 }

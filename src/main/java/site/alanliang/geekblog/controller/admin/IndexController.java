@@ -4,23 +4,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import site.alanliang.geekblog.anntation.AccessLog;
 import site.alanliang.geekblog.anntation.OperationLog;
-import site.alanliang.geekblog.common.JsonResult;
 import site.alanliang.geekblog.model.User;
-import site.alanliang.geekblog.exception.BadRequestException;
 import site.alanliang.geekblog.service.*;
-import site.alanliang.geekblog.utils.MD5Util;
 import site.alanliang.geekblog.vo.IndexVO;
 import site.alanliang.geekblog.vo.InitInfoVO;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.List;
 
 /**
  * @Descriptin TODO
@@ -52,6 +45,8 @@ public class IndexController {
     private MessageService messageService;
     @Autowired
     private OperationLogService operationLogService;
+    @Autowired
+    private NoticeService noticeService;
 
     @ResponseBody
     @GetMapping("/init")
@@ -104,6 +99,11 @@ public class IndexController {
         indexVO.setArticles(articleService.listNewest());
         indexVO.setFrontViews(accessLogService.countByLast7Days());
         indexVO.setBackViews(operationLogService.countByLast7Days());
+        indexVO.setIncreasedViews(accessLogService.countByLastIndexViewToNow());
+        indexVO.setIncreasedArticles(articleService.countByLastIndexViewToNow());
+        indexVO.setIncreasedMessages(messageService.countByLastIndexViewToNow());
+        indexVO.setIncreasedComments(commentService.countByLastIndexViewToNow());
+        indexVO.setNotices(noticeService.listNewest());
         return new ResponseEntity<>(indexVO, HttpStatus.OK);
     }
 

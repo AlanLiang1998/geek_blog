@@ -9,4 +9,13 @@
               WHERE DATE_SUB(CURDATE(), INTERVAL 7 DAY) &lt;= date(create_time)) as sal
         GROUP BY date;
     </select>
+
+    <select id="selectLastIndexViewTimeByUsername" resultType="date">
+        SELECT create_time
+        FROM sys_operation_log
+        WHERE username = #{username}
+          and description like '%首页%'
+        ORDER BY create_time DESC
+        LIMIT 1, 1
+    </select>
 </mapper>

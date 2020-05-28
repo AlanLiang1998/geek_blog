@@ -9,10 +9,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import site.alanliang.geekblog.common.Constant;
 import site.alanliang.geekblog.dao.AccessLogMapper;
+import site.alanliang.geekblog.dao.OperationLogMapper;
+import site.alanliang.geekblog.exception.BadRequestException;
 import site.alanliang.geekblog.model.AccessLog;
+import site.alanliang.geekblog.model.User;
 import site.alanliang.geekblog.query.LogQuery;
 import site.alanliang.geekblog.service.AccessLogService;
+import site.alanliang.geekblog.utils.RequestHolder;
 import site.alanliang.geekblog.utils.StringUtils;
+import site.alanliang.geekblog.utils.UserInfoUtil;
 import site.alanliang.geekblog.vo.ViewDateVO;
 
 import java.lang.reflect.Method;
@@ -31,6 +36,9 @@ public class AccessLogServiceImpl implements AccessLogService {
 
     @Autowired
     private AccessLogMapper accessLogMapper;
+
+    @Autowired
+    private OperationLogMapper operationLogMapper;
 
     @Override
     public List<AccessLog> listNewest() {
@@ -89,6 +97,18 @@ public class AccessLogServiceImpl implements AccessLogService {
     @Override
     public Integer countAll() {
         return accessLogMapper.selectCount(null);
+    }
+
+    @Override
+    public Integer countByLastIndexViewToNow() {
+        String username = UserInfoUtil.getUsername();
+        if (org.springframework.util.StringUtils.isEmpty(username)) {
+            return 0;
+        }
+        Date date = operationLogMapper.selectLastIndexViewTimeByUsername(username);
+        QueryWrapper<AccessLog> wrapper = new QueryWrapper<>();
+        wrapper.between("create_time", date, new Date());
+        return accessLogMapper.selectCount(wrapper);
     }
 
     @Override

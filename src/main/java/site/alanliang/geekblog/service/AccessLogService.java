@@ -64,4 +64,9 @@ public interface AccessLogService {
      * 统计最近7天的访问数
      */
     List<ViewDateVO> countByLast7Days();
+
+    /**
+     * 统计上次访问首页至现在增加的浏览次数
+     */
+    Integer countByLastIndexViewToNow();
 }

@@ -38,6 +38,8 @@ public class AdminApiController {
     private LinkService linkService;
     @Autowired
     private PhotoService photoService;
+    @Autowired
+    private NoticeService noticeService;
 
     @GetMapping("/api/{moduleName}/{pageName}")
     public ModelAndView getPage(@PathVariable("moduleName") String moduleName, @PathVariable("pageName") String pageName) {
@@ -118,5 +120,12 @@ public class AdminApiController {
     public String editPhoto(@PathVariable("id") Long id, Model model) {
         model.addAttribute("photo", photoService.getById(id));
         return "admin/photo/photo-edit";
+    }
+
+    @PreAuthorize("hasAuthority('sys:notice:edit')")
+    @GetMapping("/notice/{id}")
+    public String editNotice(@PathVariable("id") Long id, Model model) {
+        model.addAttribute("notice", noticeService.getById(id));
+        return "admin/notice/notice-edit";
     }
 }

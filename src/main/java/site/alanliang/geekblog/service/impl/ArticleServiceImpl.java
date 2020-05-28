@@ -7,15 +7,16 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import site.alanliang.geekblog.common.Constant;
+import site.alanliang.geekblog.dao.OperationLogMapper;
 import site.alanliang.geekblog.dao.TagMapper;
-import site.alanliang.geekblog.model.Article;
-import site.alanliang.geekblog.model.ArticleTag;
-import site.alanliang.geekblog.model.Tag;
+import site.alanliang.geekblog.model.*;
 import site.alanliang.geekblog.query.ArticleQuery;
 import site.alanliang.geekblog.dao.ArticleMapper;
 import site.alanliang.geekblog.dao.ArticleTagMapper;
 import site.alanliang.geekblog.query.ArchivesQuery;
 import site.alanliang.geekblog.service.ArticleService;
+import site.alanliang.geekblog.utils.RequestHolder;
+import site.alanliang.geekblog.utils.UserInfoUtil;
 import site.alanliang.geekblog.vo.ArticleDateVO;
 
 import java.util.Date;
@@ -39,6 +40,9 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Autowired
     private TagMapper tagMapper;
+
+    @Autowired
+    private OperationLogMapper operationLogMapper;
 
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -184,6 +188,18 @@ public class ArticleServiceImpl implements ArticleService {
                 .orderByDesc("create_time")
                 .last("limit " + Constant.NEWEST_PAGE_SIZE);
         return articleMapper.selectList(wrapper);
+    }
+
+    @Override
+    public Integer countByLastIndexViewToNow() {
+        String username = UserInfoUtil.getUsername();
+        if (StringUtils.isEmpty(username)) {
+            return 0;
+        }
+        Date date = operationLogMapper.selectLastIndexViewTimeByUsername(username);
+        QueryWrapper<Article> wrapper = new QueryWrapper<>();
+        wrapper.between("create_time", date, new Date());
+        return articleMapper.selectCount(wrapper);
     }
 
     @Override

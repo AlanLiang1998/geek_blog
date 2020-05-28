@@ -181,4 +181,9 @@ public interface ArticleService {
      * @return 文章列表
      */
     List<Article> listNewest();
+
+    /**
+     * 统计上次访问首页至现在增加的文章数
+     */
+    Integer countByLastIndexViewToNow();
 }

@@ -171,7 +171,8 @@
                                 </div>
                                 <div class="panel-content">
                                     <h1 class="no-margins" v-text="articleCount">0</h1>
-                                    <div class="stat-percent font-bold text-gray"><i class="fa fa-commenting"></i> 1234
+                                    <div class="stat-percent font-bold text-gray">
+                                        <i class="fa fa-commenting"></i>&nbsp;{{increasedArticles}}
                                     </div>
                                     <small>当前分类总记录数</small>
                                 </div>
@@ -189,7 +190,7 @@
                                 </div>
                                 <div class="panel-content">
                                     <h1 class="no-margins" v-text="viewCount">0</h1>
-                                    <div class="stat-percent font-bold text-gray"><i class="fa fa-commenting"></i> 1234
+                                    <div class="stat-percent font-bold text-gray"><i class="fa fa-commenting"></i>&nbsp;{{increasedViews}}
                                     </div>
                                     <small>当前分类总记录数</small>
                                 </div>
@@ -207,7 +208,7 @@
                                 </div>
                                 <div class="panel-content">
                                     <h1 class="no-margins" id="tag-count" v-text="messageCount">0</h1>
-                                    <div class="stat-percent font-bold text-gray"><i class="fa fa-commenting"></i> 1234
+                                    <div class="stat-percent font-bold text-gray"><i class="fa fa-commenting"></i>&nbsp;{{increasedMessages}}
                                     </div>
                                     <small>当前分类总记录数</small>
                                 </div>
@@ -224,7 +225,7 @@
                                 </div>
                                 <div class="panel-content">
                                     <h1 class="no-margins" v-text="commentCount">0</h1>
-                                    <div class="stat-percent font-bold text-gray"><i class="fa fa-commenting"></i> 1234
+                                    <div class="stat-percent font-bold text-gray"><i class="fa fa-commenting"></i>&nbsp;{{increasedComments}}
                                     </div>
                                     <small>当前分类总记录数</small>
                                 </div>
@@ -306,7 +307,7 @@
                             <div class="layui-card-body">
                                 <div class="welcome-module">
                                     <div class="layui-row layui-col-space10 layuimini-qiuck">
-                                        <div class="layui-col-xs3 layuimini-qiuck-module">
+                                        <div class="layui-col-xs3 layuimini-qiuck-module" permission="blog:article:add">
                                             <a href="javascript:;"
                                                layuimini-content-href="/admin/api/article/article-add"
                                                data-title="文章发布" data-icon="fa fa-pencil-square-o">
@@ -314,7 +315,8 @@
                                                 <cite>文章发布</cite>
                                             </a>
                                         </div>
-                                        <div class="layui-col-xs3 layuimini-qiuck-module">
+                                        <div class="layui-col-xs3 layuimini-qiuck-module"
+                                             permission="blog:article:query">
                                             <a href="javascript:;"
                                                layuimini-content-href="/admin/api/article/article-list"
                                                data-title="文章管理" data-icon="fa fa-file-text">
@@ -322,7 +324,8 @@
                                                 <cite>文章管理</cite>
                                             </a>
                                         </div>
-                                        <div class="layui-col-xs3 layuimini-qiuck-module">
+                                        <div class="layui-col-xs3 layuimini-qiuck-module"
+                                             permission="blog:comment:query">
                                             <a href="javascript:;"
                                                layuimini-content-href="/admin/api/comment/comment-list"
                                                data-title="评论管理" data-icon="fa fa-comments">
@@ -330,7 +333,8 @@
                                                 <cite>评论管理</cite>
                                             </a>
                                         </div>
-                                        <div class="layui-col-xs3 layuimini-qiuck-module">
+                                        <div class="layui-col-xs3 layuimini-qiuck-module"
+                                             permission="blog:message:query">
                                             <a href="javascript:;"
                                                layuimini-content-href="/admin/api/message/message-list"
                                                data-title="留言管理" data-icon="fa fa-comment">
@@ -338,14 +342,15 @@
                                                 <cite>留言管理</cite>
                                             </a>
                                         </div>
-                                        <div class="layui-col-xs3 layuimini-qiuck-module">
+                                        <div class="layui-col-xs3 layuimini-qiuck-module" permission="sys:user:query">
                                             <a href="javascript:;" layuimini-content-href="/admin/api/user/user-list"
                                                data-title="用户管理" data-icon="fa fa-users">
                                                 <i class="fa fa-users"></i>
                                                 <cite>用户管理</cite>
                                             </a>
                                         </div>
-                                        <div class="layui-col-xs3 layuimini-qiuck-module">
+                                        <div class="layui-col-xs3 layuimini-qiuck-module"
+                                             permission="sys:visitor:query">
                                             <a href="javascript:;"
                                                layuimini-content-href="/admin/api/visitor/visitor-list"
                                                data-title="访客管理" data-icon="fa fa-user">
@@ -353,14 +358,16 @@
                                                 <cite>访客管理</cite>
                                             </a>
                                         </div>
-                                        <div class="layui-col-xs3 layuimini-qiuck-module">
+                                        <div class="layui-col-xs3 layuimini-qiuck-module"
+                                             permission="sys:accesslog:query">
                                             <a href="javascript:;" layuimini-content-href="/admin/api/log/access-list"
                                                data-title="访问日志" data-icon="fa fa-eye">
                                                 <i class="fa fa-eye"></i>
                                                 <cite>访问日志</cite>
                                             </a>
                                         </div>
-                                        <div class="layui-col-xs3 layuimini-qiuck-module">
+                                        <div class="layui-col-xs3 layuimini-qiuck-module"
+                                             permission="sys:operationlog:query">
                                             <a href="javascript:;"
                                                layuimini-content-href="/admin/api/log/operation-list"
                                                data-title="操作日志" data-icon="fa fa-gears">
@@ -379,14 +386,14 @@
                             <div class="layui-row layui-col-space10">
                                 <div class="layui-tab layui-tab-brief">
                                     <ul class="layui-tab-title">
-                                        <li class="layui-this">访问日志</li>
-                                        <li>操作日志</li>
-                                        <li>最新评论</li>
-                                        <li>最新留言</li>
+                                        <li class="layui-this" permission="sys:accesslog:query">访问日志</li>
+                                        <li permission="sys:operationlog:query">操作日志</li>
+                                        <li permission="blog:comment:query">最新评论</li>
+                                        <li permission="blog:message:query">最新留言</li>
                                     </ul>
                                     <div class="layui-tab-content">
                                         <div class="layui-tab-item layui-show">
-                                            <table class="layui-table">
+                                            <table class="layui-table" permission="sys:accesslog:query">
                                                 <colgroup>
                                                     <col width="150">
                                                     <col width="100">
@@ -419,7 +426,7 @@
                                         </div>
                                         <div class="layui-tab-item">
                                             <div class="layui-tab-item layui-show">
-                                                <table class="layui-table">
+                                                <table class="layui-table" permission="sys:operationlog:query">
                                                     <colgroup>
                                                         <col width="150">
                                                         <col width="100">
@@ -456,7 +463,7 @@
                                         </div>
                                         <div class="layui-tab-item">
                                             <div class="layui-tab-item layui-show">
-                                                <table class="layui-table">
+                                                <table class="layui-table" permission="blog:comment:query">
                                                     <colgroup>
                                                         <col width="100">
                                                         <col width="200">
@@ -497,7 +504,7 @@
                                         </div>
                                         <div class="layui-tab-item">
                                             <div class="layui-tab-item layui-show">
-                                                <table class="layui-table">
+                                                <table class="layui-table" permission="blog:message:query">
                                                     <colgroup>
                                                         <col width="100">
                                                         <col width="200">
@@ -546,96 +553,19 @@
             </div>
 
             <div class="layui-col-md4">
-                <div class="layui-card">
+                <div class="layui-card" permission="sys:notice:query">
                     <div class="layui-card-header"><i class="fa fa-bullhorn icon icon-tip"></i>系统公告</div>
                     <div class="layui-card-body layui-text">
-                        <div class="layuimini-notice">
-                            <div class="layuimini-notice-title">修改选项卡样式</div>
-                            <div class="layuimini-notice-extra">2019-07-11 23:06</div>
+                        <div class="layuimini-notice" v-for="(notice, index) in notices" :key="notice.id">
+                            <div class="layuimini-notice-title">{{notice.title}}</div>
+                            <div class="layuimini-notice-extra">{{notice.createTime}}</div>
                             <div class="layuimini-notice-content layui-hide">
-                                界面足够简洁清爽。<br>
-                                一个接口几行代码而已直接初始化整个框架，无需复杂操作。<br>
-                                支持多tab，可以打开多窗口。<br>
-                                支持无限级菜单和对font-awesome图标库的完美支持。<br>
-                                失效以及报错菜单无法直接打开，并给出弹出层提示完美的线上用户体验。<br>
-                                url地址hash定位，可以清楚看到当前tab的地址信息。<br>
-                                刷新页面会保留当前的窗口，并且会定位当前窗口对应左侧菜单栏。<br>
-                                移动端的友好支持。<br>
-                            </div>
-                        </div>
-                        <div class="layuimini-notice">
-                            <div class="layuimini-notice-title">新增系统404模板</div>
-                            <div class="layuimini-notice-extra">2019-07-11 12:57</div>
-                            <div class="layuimini-notice-content layui-hide">
-                                界面足够简洁清爽。<br>
-                                一个接口几行代码而已直接初始化整个框架，无需复杂操作。<br>
-                                支持多tab，可以打开多窗口。<br>
-                                支持无限级菜单和对font-awesome图标库的完美支持。<br>
-                                失效以及报错菜单无法直接打开，并给出弹出层提示完美的线上用户体验。<br>
-                                url地址hash定位，可以清楚看到当前tab的地址信息。<br>
-                                刷新页面会保留当前的窗口，并且会定位当前窗口对应左侧菜单栏。<br>
-                                移动端的友好支持。<br>
-                            </div>
-                        </div>
-                        <div class="layuimini-notice">
-                            <div class="layuimini-notice-title">新增treetable插件和菜单管理样式</div>
-                            <div class="layuimini-notice-extra">2019-07-05 14:28</div>
-                            <div class="layuimini-notice-content layui-hide">
-                                界面足够简洁清爽。<br>
-                                一个接口几行代码而已直接初始化整个框架，无需复杂操作。<br>
-                                支持多tab，可以打开多窗口。<br>
-                                支持无限级菜单和对font-awesome图标库的完美支持。<br>
-                                失效以及报错菜单无法直接打开，并给出弹出层提示完美的线上用户体验。<br>
-                                url地址hash定位，可以清楚看到当前tab的地址信息。<br>
-                                刷新页面会保留当前的窗口，并且会定位当前窗口对应左侧菜单栏。<br>
-                                移动端的友好支持。<br>
-                            </div>
-                        </div>
-                        <div class="layuimini-notice">
-                            <div class="layuimini-notice-title">修改logo缩放问题</div>
-                            <div class="layuimini-notice-extra">2019-07-04 11:02</div>
-                            <div class="layuimini-notice-content layui-hide">
-                                界面足够简洁清爽。<br>
-                                一个接口几行代码而已直接初始化整个框架，无需复杂操作。<br>
-                                支持多tab，可以打开多窗口。<br>
-                                支持无限级菜单和对font-awesome图标库的完美支持。<br>
-                                失效以及报错菜单无法直接打开，并给出弹出层提示完美的线上用户体验。<br>
-                                url地址hash定位，可以清楚看到当前tab的地址信息。<br>
-                                刷新页面会保留当前的窗口，并且会定位当前窗口对应左侧菜单栏。<br>
-                                移动端的友好支持。<br>
-                            </div>
-                        </div>
-                        <div class="layuimini-notice">
-                            <div class="layuimini-notice-title">修复左侧菜单缩放tab无法移动</div>
-                            <div class="layuimini-notice-extra">2019-06-17 11:55</div>
-                            <div class="layuimini-notice-content layui-hide">
-                                界面足够简洁清爽。<br>
-                                一个接口几行代码而已直接初始化整个框架，无需复杂操作。<br>
-                                支持多tab，可以打开多窗口。<br>
-                                支持无限级菜单和对font-awesome图标库的完美支持。<br>
-                                失效以及报错菜单无法直接打开，并给出弹出层提示完美的线上用户体验。<br>
-                                url地址hash定位，可以清楚看到当前tab的地址信息。<br>
-                                刷新页面会保留当前的窗口，并且会定位当前窗口对应左侧菜单栏。<br>
-                                移动端的友好支持。<br>
-                            </div>
-                        </div>
-                        <div class="layuimini-notice">
-                            <div class="layuimini-notice-title">修复多模块菜单栏展开有问题</div>
-                            <div class="layuimini-notice-extra">2019-06-13 14:53</div>
-                            <div class="layuimini-notice-content layui-hide">
-                                界面足够简洁清爽。<br>
-                                一个接口几行代码而已直接初始化整个框架，无需复杂操作。<br>
-                                支持多tab，可以打开多窗口。<br>
-                                支持无限级菜单和对font-awesome图标库的完美支持。<br>
-                                失效以及报错菜单无法直接打开，并给出弹出层提示完美的线上用户体验。<br>
-                                url地址hash定位，可以清楚看到当前tab的地址信息。<br>
-                                刷新页面会保留当前的窗口，并且会定位当前窗口对应左侧菜单栏。<br>
-                                移动端的友好支持。<br>
+                                {{notice.content}}
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="layui-card">
+                <div class="layui-card" permission="blog:article:query">
                     <div class="layui-card-header"><i class="fa fa-book icon icon-cray"></i>最新文章</div>
                     <div class="layui-card-body">
                         <ul class="layui-timeline">
@@ -658,6 +588,8 @@
 </div>
 <script src="/static/admin/layuimini/lib/layui-v2.5.5/layui.js" charset="utf-8"></script>
 <script src="/static/admin/layuimini/js/lay-config.js?v=1.0.4" charset="utf-8"></script>
+<script src="/static/admin/layuimini/lib/jquery-3.4.1/jquery-3.4.1.min.js"></script>
+<script src="/static/admin/my/js/my.js" charset="utf-8"></script>
 <!--vue-->
 <script type="text/javascript" src="/static/web/js/vue.js"></script>
 <!--axios异步工具-->
@@ -768,7 +700,6 @@
             layer = layui.layer,
             miniTab = layui.miniTab,
             echarts = layui.echarts;
-
         const vm = new Vue({
             el: '#app',
             data: {
@@ -787,6 +718,11 @@
                 articles: [],
                 frontViews: [],
                 backViews: [],
+                increasedViews: 0,
+                increasedArticles: 0,
+                increasedMessages: 0,
+                increasedComments: 0,
+                notices: [],
             },
             methods: {
                 getData: function () {
@@ -810,6 +746,11 @@
                         this.articles = data.articles;
                         this.frontViews = data.frontViews;
                         this.backViews = data.backViews;
+                        this.increasedViews = data.increasedViews;
+                        this.increasedArticles = data.increasedArticles;
+                        this.increasedMessages = data.increasedMessages;
+                        this.increasedComments = data.increasedComments;
+                        this.notices = data.notices;
                         this.$nextTick(function () {
                             this.initChart();
                         })
@@ -945,20 +886,14 @@
                 area: '300px;',
                 shade: 0.8,
                 id: 'layuimini-notice',
-                btn: ['查看', '取消'],
+                btn: ['取消'],
                 btnAlign: 'c',
                 moveType: 1,
                 content: html,
-                success: function (layero) {
-                    var btn = layero.find('.layui-layer-btn');
-                    btn.find('.layui-layer-btn0').attr({
-                        href: 'https://gitee.com/zhongshaofa/layuimini',
-                        target: '_blank'
-                    });
-                }
             });
         });
 
+        checkPermission();
     });
 </script>
 </body>
