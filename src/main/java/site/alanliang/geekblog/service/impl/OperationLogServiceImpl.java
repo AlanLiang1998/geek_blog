@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import site.alanliang.geekblog.common.Constant;
 import site.alanliang.geekblog.dao.OperationLogMapper;
-import site.alanliang.geekblog.model.AccessLog;
 import site.alanliang.geekblog.model.OperationLog;
 import site.alanliang.geekblog.query.LogQuery;
 import site.alanliang.geekblog.service.OperationLogService;

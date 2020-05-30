@@ -7,9 +7,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
-import site.alanliang.geekblog.model.Category;
-import site.alanliang.geekblog.exception.EntityExistException;
 import site.alanliang.geekblog.dao.CategoryMapper;
+import site.alanliang.geekblog.exception.EntityExistException;
+import site.alanliang.geekblog.model.Category;
 import site.alanliang.geekblog.query.CategoryQuery;
 import site.alanliang.geekblog.service.CategoryService;
 

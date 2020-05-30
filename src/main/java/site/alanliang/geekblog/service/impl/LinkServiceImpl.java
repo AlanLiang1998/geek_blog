@@ -1,6 +1,5 @@
 package site.alanliang.geekblog.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,9 +9,7 @@ import org.springframework.util.CollectionUtils;
 import site.alanliang.geekblog.common.Constant;
 import site.alanliang.geekblog.dao.LinkMapper;
 import site.alanliang.geekblog.exception.EntityExistException;
-import site.alanliang.geekblog.model.Comment;
 import site.alanliang.geekblog.model.Link;
-import site.alanliang.geekblog.model.User;
 import site.alanliang.geekblog.query.LinkQuery;
 import site.alanliang.geekblog.service.LinkService;
 import site.alanliang.geekblog.utils.StringUtils;

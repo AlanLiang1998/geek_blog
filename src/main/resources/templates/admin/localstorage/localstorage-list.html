@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
-    <title>公告管理</title>
+    <title>本地存储</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -11,27 +11,26 @@
     <link rel="stylesheet" href="/static/admin/layuimini/css/public.css" media="all"
           th:href="@{/static/admin/layuimini/css/public.css}">
     <link rel="stylesheet" href="/static/admin/layuimini/lib/font-awesome-4.7.0/css/font-awesome.min.css">
+    <style>
+        .layui-table-cell {
+            height: 100%;
+            max-width: 100%;
+        }
+    </style>
 </head>
 <body>
 <div class="layuimini-container">
     <div class="layuimini-main">
-        <fieldset class="table-search-fieldset" permission="sys:notice:query">
+        <fieldset class="table-search-fieldset" permission="sys:localstorage:query">
             <legend>搜索信息</legend>
             <div style="margin: 10px 10px 10px 10px">
                 <form class="layui-form layui-form-pane">
                     <div class="layui-form-item">
                         <div class="layui-inline">
-                            <label class="layui-form-label">标题</label>
+                            <label class="layui-form-label">文件名</label>
                             <div class="layui-input-inline">
-                                <input type="text" name="title" autocomplete="off" class="layui-input"
-                                       placeholder="不输入则忽略标题筛选">
-                            </div>
-                        </div>
-                        <div class="layui-inline">
-                            <label class="layui-form-label">内容</label>
-                            <div class="layui-input-inline">
-                                <input type="text" name="content" autocomplete="off" class="layui-input"
-                                       placeholder="不输入则忽略内容筛选">
+                                <input type="text" name="name" autocomplete="off" class="layui-input"
+                                       placeholder="不输入则忽略文件名筛选">
                             </div>
                         </div>
                         <div class="layui-inline">
@@ -39,16 +38,6 @@
                             <div class="layui-input-inline">
                                 <input type="text" class="layui-input" id="date-range" placeholder="不输入则忽略日期范围筛选"
                                        name="dateRange">
-                            </div>
-                        </div>
-                        <div class="layui-inline">
-                            <label class="layui-form-label">是否显示</label>
-                            <div class="layui-input-inline">
-                                <select name="display">
-                                    <option value="" selected>所有</option>
-                                    <option value="true">是</option>
-                                    <option value="false">否</option>
-                                </select>
                             </div>
                         </div>
                         <div class="layui-inline">
@@ -63,10 +52,11 @@
 
         <script type="text/html" id="toolbarDemo">
             <div class="layui-btn-container">
-                <button class="layui-btn layui-btn-sm data-add-btn" lay-event="add" permission="sys:notice:add">添加公告
+                <button class="layui-btn layui-btn-sm data-add-btn" lay-event="add" permission="sys:localstorage:add">
+                    上传文件
                 </button>
                 <button class="layui-btn layui-btn-sm layui-btn-danger data-delete-btn" lay-event="delete"
-                        permission="sys:notice:delete">批量删除
+                        permission="sys:localstorage:delete">批量删除
                 </button>
             </div>
         </script>
@@ -74,9 +64,9 @@
         <table class="layui-hide" id="currentTableId" lay-filter="currentTableFilter"></table>
 
         <script type="text/html" id="currentTableBar">
-            <a class="layui-btn layui-btn-xs data-count-edit" lay-event="edit" permission="sys:notice:edit">编辑</a>
+            <a class="layui-btn layui-btn-xs data-count-edit" lay-event="edit" permission="sys:localstorage:edit">编辑</a>
             <a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete" lay-event="delete"
-               permission="sys:notice:delete">删除</a>
+               permission="sys:localstorage:delete">删除</a>
         </script>
 
     </div>
@@ -101,7 +91,7 @@
 
         table.render({
             elem: '#currentTableId',
-            url: '/admin/notice',
+            url: '/admin/localStorage',
             toolbar: '#toolbarDemo',
             defaultToolbar: ['filter', 'exports', 'print', {
                 title: '提示',
@@ -110,29 +100,25 @@
             }],
             cols: [
                 [
-                    {type: "checkbox", width: 50, fixed: "left"},
+                    {type: "checkbox", width: 50},
                     {field: 'id', width: 80, title: 'ID', sort: true},
-                    {field: 'title', width: 150, title: '标题'},
-                    {field: 'content', width: 250, title: '内容'},
+                    {field: 'name', width: 250, title: '文件名'},
                     {
-                        field: 'sort', width: 100, title: '排序', align: 'center', sort: true, templet: function (data) {
-                            let sort = data.sort;
-                            return '<span class="layui-badge layui-bg-green">' + sort + '</span>';
+                        field: 'realName', width: 150, title: '预览图', align: 'center', templet: function (data) {
+                            let type = data.type;
+                            let realName = data.realName;
+                            let src = "";
+                            if (type === '图片') {
+                                src = "/file/" + type + "/" + realName;
+                            } else {
+                                src = "/file/placeholder.jpg";
+                            }
+                            return '<a onclick="show_img(this)" ><img src="' + src + '"></img></a>';
                         }
                     },
-                    {
-                        field: 'display',
-                        width: 150,
-                        title: '是否前台显示',
-                        sort: true,
-                        align: 'center',
-                        templet: function (data) {
-                            let text = data.display ? '是' : '否';
-                            let color = data.display ? 'green' : 'orange';
-                            let bgColor = 'layui-bg-' + color;
-                            return '<span class="layui-badge ' + bgColor + '">' + text + '</span>';
-                        }
-                    },
+                    {field: 'suffix', width: 120, title: '文件类型', sort: true},
+                    {field: 'type', width: 120, title: '类别', sort: true},
+                    {field: 'size', width: 120, title: '大小', sort: true},
                     {field: 'createTime', title: '创建时间', minWidth: 200, sort: true},
                     {field: 'updateTime', title: '更新时间', minWidth: 200, sort: true},
                     {
@@ -140,9 +126,8 @@
                         minWidth: 150,
                         width: 200,
                         toolbar: '#currentTableBar',
-                        fixed: "right",
                         align: "center",
-                        hide: (!hasPermission('sys:notice:edit') && !hasPermission('sys:notice:delete'))
+                        hide: (!hasPermission('sys:localstorage:edit') && !hasPermission('sys:localstorage:delete'))
                     }
                 ]
             ],
@@ -156,13 +141,11 @@
 
         // 监听搜索操作
         form.on('submit(data-search-btn)', function (data) {
-            let title = data.field.title;
-            let content = data.field.content;
+            let name = data.field.name;
             let dateRange = data.field.dateRange;
             let dates = dateRange.split(' ~ ')
             let startDate = dates[0];
             let endDate = dates[1];
-            let display = data.field.display;
 
             //执行搜索重载
             table.reload('currentTableId', {
@@ -170,11 +153,9 @@
                     curr: 1
                 }
                 , where: {
-                    title: title,
-                    content: content,
+                    name: name,
                     startDate: startDate,
                     endDate: endDate,
-                    display: display,
                 }
             }, 'data');
 
@@ -196,7 +177,7 @@
                     return false;
                 }
                 Swal.fire({
-                    title: '确定删除选中的' + idList.length + '条公告吗？',
+                    title: '确定删除选中的' + idList.length + '个文件吗？',
                     text: "你将不能撤销该操作!",
                     icon: 'warning',
                     showCancelButton: true,
@@ -207,7 +188,7 @@
                 }).then((result) => {
                     if (result.value) {
                         $.ajax({
-                            url: '/admin/notice',
+                            url: '/admin/localStorage',
                             type: 'DELETE',
                             data: JSON.stringify(idList),
                             contentType: 'application/json',
@@ -234,13 +215,13 @@
                 });
             } else if (obj.event === 'add') {
                 var index = layer.open({
-                    title: '添加公告',
+                    title: '添加文件',
                     type: 2,
                     shade: 0.2,
                     maxmin: true,
                     shadeClose: true,
-                    area: ['50%', '60%'],
-                    content: '/admin/api/notice/notice-add',
+                    area: ['50%', '90%'],
+                    content: '/admin/api/localstorage/localstorage-add',
                 });
                 $(window).on("resize", function () {
                     layer.full(index);
@@ -252,7 +233,7 @@
             var data = obj.data;
             if (obj.event === 'delete') {
                 Swal.fire({
-                    title: '确定删除这条公告吗？',
+                    title: '确定删除这个文件吗？',
                     text: "你将不能撤销该操作!",
                     icon: 'warning',
                     showCancelButton: true,
@@ -263,7 +244,7 @@
                 }).then((result) => {
                     if (result.value) {
                         $.ajax({
-                            url: '/admin/notice/' + data.id,
+                            url: '/admin/localStorage/' + data.id,
                             type: 'DELETE',
                             success: function (result) {
                                 if (result.code === 200) {
@@ -288,20 +269,38 @@
                 });
             } else if (obj.event === 'edit') {
                 var index = layer.open({
-                    title: '编辑公告',
+                    title: '编辑文件',
                     type: 2,
                     shade: 0.2,
                     maxmin: true,
                     shadeClose: true,
-                    area: ['50%', '80%'],
-                    content: '/admin/notice/' + data.id,
+                    area: ['50%', '30%'],
+                    content: '/admin/localStorage/' + data.id,
                 });
                 $(window).on("resize", function () {
                     layer.full(index);
                 });
             }
         });
+
     });
+
+    //显示大图片
+    function show_img(t) {
+        var t = $(t).find("img");
+        //页面层
+        layer.open({
+            type: 1,
+            title: '图片',
+            skin: 'layui-layer-rim', //加上边框
+            area: ['80%', '80%'], //宽高
+            shadeClose: true, //开启遮罩关闭
+            end: function (index, layero) {
+                return false;
+            },
+            content: '<div style="text-align:center"><img src="' + $(t).attr('src') + '" /></div>'
+        });
+    }
 </script>
 </body>
 </html>

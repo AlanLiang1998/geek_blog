@@ -1,32 +1,21 @@
 package site.alanliang.geekblog.controller.web;
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import site.alanliang.geekblog.anntation.AccessLog;
-import site.alanliang.geekblog.anntation.OperationLog;
 import site.alanliang.geekblog.common.Constant;
-import site.alanliang.geekblog.common.JsonResult;
-import site.alanliang.geekblog.common.TableResult;
-import site.alanliang.geekblog.model.User;
 import site.alanliang.geekblog.model.Visitor;
-import site.alanliang.geekblog.query.UserQuery;
 import site.alanliang.geekblog.service.VisitorService;
 import site.alanliang.geekblog.utils.MD5Util;
 import site.alanliang.geekblog.vo.VisitorLoginVO;
 
-import javax.servlet.http.HttpSession;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 /**
  * @Descriptin TODO

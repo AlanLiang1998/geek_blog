@@ -1,11 +1,9 @@
 package site.alanliang.geekblog.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import site.alanliang.geekblog.interceptor.LoginInterceptor;
-import site.alanliang.geekblog.interceptor.LoginPageInterceptor;
 
 /**
  * @Descriptin WebMvc配置
@@ -15,6 +13,10 @@ import site.alanliang.geekblog.interceptor.LoginPageInterceptor;
  **/
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
+
+    @Value("${file.path}")
+    private String path;
+
     /**
      * 添加静态资源文件，外部可以直接访问地址
      *
@@ -23,6 +25,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
+        registry.addResourceHandler("/file/**").addResourceLocations("file:" + path);
     }
 
    /* @Override

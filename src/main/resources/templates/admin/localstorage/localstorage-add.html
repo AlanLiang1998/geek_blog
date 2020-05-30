@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>layui</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="/static/admin/layuimini/lib/layui-v2.5.5/css/layui.css" media="all">
+    <link rel="stylesheet" href="/static/admin/layuimini/css/public.css" media="all">
+    <link rel="stylesheet" href="/static/admin/layuimini/lib/jq-module/zyupload/zyupload-1.0.0.min.css" media="all">
+    <style>
+        body {
+            background-color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+<div class="layuimini-container">
+    <div class="layuimini-main">
+        <div id="zyupload" class="zyupload"></div>
+    </div>
+</div>
+<script src="/static/admin/layuimini/lib/layui-v2.5.5/layui.js" charset="utf-8"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<script src="/static/admin/layuimini/lib/jquery-3.4.1/jquery-3.4.1.min.js"></script>
+<script src="/static/admin/layuimini/lib/jq-module/zyupload/zyupload-1.0.0.min.js" charset="utf-8"></script>
+<script>
+    layui.use(['form'], function () {
+        var form = layui.form,
+            layer = layui.layer,
+            $ = layui.$;
+
+        $("#zyupload").zyUpload({
+            width: "650px",                 // 宽度
+            height: "400px",                 // 宽度
+            itemWidth: "140px",                 // 文件项的宽度
+            itemHeight: "115px",                 // 文件项的高度
+            url: "/admin/localStorage",  // 上传文件的路径
+            fileType: ["jpg", "png", "md", "txt", "js", "exe"],// 上传文件的类型
+            fileSize: 51200000,                // 上传文件的大小
+            multiple: true,                    // 是否可以多个文件上传
+            dragDrop: true,                    // 是否可以拖动上传文件
+            tailor: true,                    // 是否可以裁剪图片
+            del: true,                    // 是否可以删除文件
+            finishDel: false,  				  // 是否在上传文件完成后删除预览
+            onSuccess: function (file, response) {          // 文件上传成功的回调方法
+                $("#uploadInf").append("<p>" + file.name + "上传成功！</p>");
+            },
+            onFailure: function (file, response) {          // 文件上传失败的回调方法
+                $("#uploadInf").append("<p>" + file.name + "上传失败！</p>");
+            },
+            onComplete: function (response) {           	  // 上传完成的回调方法
+                Swal.fire(
+                    'success!',
+                    '上传成功',
+                    'success'
+                ).then((value) => {
+                    var parentLayer = parent.layer;
+                    var iframeIndex = parentLayer.getFrameIndex(window.name);
+                    parent.location.reload();
+                    parentLayer.close(iframeIndex);
+                })
+            }
+        });
+
+        //自定义验证规则
+        form.verify({
+            name: function (value) {
+                if (value.length > 20) {
+                    return '标题长度在20个字符以内';
+                }
+            },
+        });
+
+        //监听提交
+        form.on('submit(saveBtn)', function (data) {
+            $.ajax({
+                url: '/admin/LocalStorage',
+                type: 'POST',
+                data: JSON.stringify(data.field),
+                contentType: 'application/json',
+                success: function (result) {
+                    if (result.code === 200) {
+                        var parentLayer = parent.layer;
+                        layer.msg('保存成功', {icon: 1, time: 1000}, function () {
+                            var iframeIndex = parentLayer.getFrameIndex(window.name);
+                            parent.location.reload();
+                            parentLayer.close(iframeIndex);
+                        });
+                    }
+                },
+                error: function (XMLHttpRequest) {
+                    var result = JSON.parse(XMLHttpRequest.responseText);
+                    layer.alert(result.msg, {icon: 2});
+                }
+            });
+            return false;
+        });
+
+    });
+</script>
+</body>
+</html>

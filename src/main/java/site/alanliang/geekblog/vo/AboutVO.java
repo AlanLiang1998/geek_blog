@@ -1,6 +1,5 @@
 package site.alanliang.geekblog.vo;
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.Data;
 import site.alanliang.geekblog.model.Category;
 import site.alanliang.geekblog.model.Photo;

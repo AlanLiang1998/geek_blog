@@ -7,8 +7,6 @@ import site.alanliang.geekblog.model.Menu;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @SpringBootTest
 class MenuMapperTest {
 

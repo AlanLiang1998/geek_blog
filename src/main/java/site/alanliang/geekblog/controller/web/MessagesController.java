@@ -8,7 +8,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import site.alanliang.geekblog.common.Constant;
 import site.alanliang.geekblog.common.JsonResult;
-import site.alanliang.geekblog.model.Comment;
 import site.alanliang.geekblog.model.Message;
 import site.alanliang.geekblog.service.MessageService;
 import site.alanliang.geekblog.utils.StringUtils;

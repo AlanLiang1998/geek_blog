@@ -15,8 +15,8 @@ import site.alanliang.geekblog.common.TableResult;
 import site.alanliang.geekblog.model.User;
 import site.alanliang.geekblog.query.UserQuery;
 import site.alanliang.geekblog.service.UserService;
-import site.alanliang.geekblog.vo.UserLoginVO;
 import site.alanliang.geekblog.vo.UserInfoVO;
+import site.alanliang.geekblog.vo.UserLoginVO;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;

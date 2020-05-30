@@ -12,7 +12,6 @@ import site.alanliang.geekblog.common.JsonResult;
 import site.alanliang.geekblog.common.TableResult;
 import site.alanliang.geekblog.model.Role;
 import site.alanliang.geekblog.query.RoleQuery;
-import site.alanliang.geekblog.query.UserQuery;
 import site.alanliang.geekblog.service.RoleService;
 import site.alanliang.geekblog.utils.StringUtils;
 

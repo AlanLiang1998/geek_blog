@@ -7,9 +7,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
-import site.alanliang.geekblog.model.Tag;
-import site.alanliang.geekblog.exception.EntityExistException;
 import site.alanliang.geekblog.dao.TagMapper;
+import site.alanliang.geekblog.exception.EntityExistException;
+import site.alanliang.geekblog.model.Tag;
 import site.alanliang.geekblog.query.TagQuery;
 import site.alanliang.geekblog.service.TagService;
 

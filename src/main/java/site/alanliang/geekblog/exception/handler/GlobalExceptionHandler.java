@@ -18,7 +18,6 @@ import site.alanliang.geekblog.exception.EntityExistException;
 import site.alanliang.geekblog.utils.AjaxUtil;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 /**
  * @Descriptin 全局异常处理

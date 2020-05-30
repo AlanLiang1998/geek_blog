@@ -2,10 +2,6 @@ package site.alanliang.geekblog.common;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-
-import java.io.Serializable;
 
 /**
  * @Descriptin 数据表格响应实体

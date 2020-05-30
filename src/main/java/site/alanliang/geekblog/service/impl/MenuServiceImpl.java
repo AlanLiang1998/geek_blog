@@ -6,15 +6,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 import site.alanliang.geekblog.common.Constant;
+import site.alanliang.geekblog.dao.MenuMapper;
 import site.alanliang.geekblog.exception.EntityExistException;
 import site.alanliang.geekblog.model.Menu;
-import site.alanliang.geekblog.dao.MenuMapper;
 import site.alanliang.geekblog.service.MenuService;
 import site.alanliang.geekblog.utils.MenuTreeUtil;
 import site.alanliang.geekblog.vo.InitInfoVO;
 import site.alanliang.geekblog.vo.MenuCheckboxVO;
 import site.alanliang.geekblog.vo.MenuSelectVO;
-
 
 import java.util.ArrayList;
 import java.util.List;

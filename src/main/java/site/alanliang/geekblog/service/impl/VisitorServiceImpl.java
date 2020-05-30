@@ -16,8 +16,6 @@ import site.alanliang.geekblog.service.VisitorService;
 import site.alanliang.geekblog.utils.StringUtils;
 import site.alanliang.geekblog.vo.VisitorLoginVO;
 
-import javax.security.auth.login.Configuration;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 

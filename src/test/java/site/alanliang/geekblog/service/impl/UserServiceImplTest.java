@@ -7,8 +7,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import site.alanliang.geekblog.dao.UserMapper;
 import site.alanliang.geekblog.model.User;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @SpringBootTest
 class UserServiceImplTest {
 

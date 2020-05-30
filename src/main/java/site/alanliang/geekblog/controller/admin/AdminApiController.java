@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import site.alanliang.geekblog.service.*;
-import site.alanliang.geekblog.service.impl.UserServiceImpl;
 
 /**
  * @Descriptin TODO
@@ -40,6 +39,8 @@ public class AdminApiController {
     private PhotoService photoService;
     @Autowired
     private NoticeService noticeService;
+    @Autowired
+    private LocalStorageService localStorageService;
 
     @GetMapping("/api/{moduleName}/{pageName}")
     public ModelAndView getPage(@PathVariable("moduleName") String moduleName, @PathVariable("pageName") String pageName) {
@@ -127,5 +128,12 @@ public class AdminApiController {
     public String editNotice(@PathVariable("id") Long id, Model model) {
         model.addAttribute("notice", noticeService.getById(id));
         return "admin/notice/notice-edit";
+    }
+
+    @PreAuthorize("hasAuthority('sys:localstorage:edit')")
+    @GetMapping("/localStorage/{id}")
+    public String editLocalStorage(@PathVariable("id") Long id, Model model) {
+        model.addAttribute("localStorage", localStorageService.getById(id));
+        return "admin/localstorage/localstorage-edit";
     }
 }

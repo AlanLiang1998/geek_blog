@@ -15,7 +15,6 @@ import site.alanliang.geekblog.model.Visitor;
 import site.alanliang.geekblog.query.CommentQuery;
 import site.alanliang.geekblog.service.CommentService;
 import site.alanliang.geekblog.utils.LinkedListUtil;
-import site.alanliang.geekblog.utils.RequestHolder;
 import site.alanliang.geekblog.utils.UserInfoUtil;
 import site.alanliang.geekblog.vo.AuditVO;
 

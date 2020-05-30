@@ -12,13 +12,9 @@ import org.springframework.web.bind.annotation.*;
 import site.alanliang.geekblog.anntation.OperationLog;
 import site.alanliang.geekblog.common.JsonResult;
 import site.alanliang.geekblog.common.TableResult;
-import site.alanliang.geekblog.dao.NoticeMapper;
 import site.alanliang.geekblog.model.Notice;
-import site.alanliang.geekblog.model.Photo;
 import site.alanliang.geekblog.query.NoticeQuery;
-import site.alanliang.geekblog.query.PhotoQuery;
 import site.alanliang.geekblog.service.NoticeService;
-import site.alanliang.geekblog.service.PhotoService;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;

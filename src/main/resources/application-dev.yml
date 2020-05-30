@@ -56,4 +56,11 @@ mybatis-plus:
     lazy-loading-enabled: true
     aggressive-lazy-loading: false
 
+# 文件存储路径
+file:
+  path: D:\geeblog\
+  avatar: D:\geeblog\avatar\
+  # 文件大小 /M
+  maxSize: 100
+  avatarMaxSize: 5
 
