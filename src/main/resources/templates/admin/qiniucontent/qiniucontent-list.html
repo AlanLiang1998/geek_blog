@@ -47,22 +47,22 @@
 
         <script type="text/html" id="toolbarDemo">
             <div class="layui-btn-container">
-                <button class="layui-btn layui-btn-sm data-add-btn" lay-event="add" permission="sys:localstorage:add">
-                    上传文件
+                <button class="layui-btn layui-btn-sm data-add-btn layui-btn-normal" lay-event="add"
+                        permission="sys:qiniu:add"><i class="layui-icon layui-icon-upload"></i>&nbsp;上传
+                </button>
+                <button class="layui-btn layui-btn-sm layui-btn-warm" lay-event="sync"
+                        permission="sys:qiniu:sync"><i class="layui-icon layui-icon-refresh"></i>&nbsp;同步
+                </button>
+                <button class="layui-btn layui-btn-sm" lay-event="config"
+                        permission="sys:qiniu:sync"><i class="layui-icon layui-icon-set-fill"></i>&nbsp;配置
                 </button>
                 <button class="layui-btn layui-btn-sm layui-btn-danger data-delete-btn" lay-event="delete"
-                        permission="sys:localstorage:delete">批量删除
+                        permission="sys:qiniu:delete"><i class="layui-icon layui-icon-delete"></i>&nbsp;删除
                 </button>
             </div>
         </script>
 
         <table class="layui-hide" id="currentTableId" lay-filter="currentTableFilter"></table>
-
-        <script type="text/html" id="currentTableBar">
-            <a class="layui-btn layui-btn-xs data-count-edit" lay-event="edit" permission="sys:localstorage:edit">编辑</a>
-            <a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete" lay-event="delete"
-               permission="sys:localstorage:delete">删除</a>
-        </script>
 
     </div>
 </div>
@@ -95,7 +95,7 @@
 
         table.render({
             elem: '#currentTableId',
-            url: '/admin/localStorage',
+            url: '/admin/qiNiuContent',
             toolbar: '#toolbarDemo',
             defaultToolbar: ['filter', 'exports', 'print', {
                 title: '提示',
@@ -109,43 +109,33 @@
                     {
                         field: 'name', width: 250, title: '文件名', templet: function (data) {
                             let name = data.name;
-                            let url = '/file/' + data.type + '/' + data.realName;
+                            let url = data.url;
                             return '<a href=' + url + ' style="color: #1890FF;" target="_blank">' + name + '</a>'
                         }
                     },
                     {
-                        field: 'realName', width: 150, title: '预览图', align: 'center', templet: function (data) {
-                            let type = data.type;
-                            let realName = data.realName;
-                            if (type === '图片') {
-                                let src = "/file/" + type + "/" + realName;
-                                return '<a onclick="show_img(this)" ><img class="layui-nav-img" src="' + src + '"></img></a>';
+                        width: 150, title: '预览图', align: 'center', templet: function (data) {
+                            let fileType = data.fileType;
+                            let url = data.url;
+                            if (fileType === '图片') {
+                                return '<a onclick="show_img(this)" ><img class="layui-nav-img" src="' + url + '"></img></a>';
                             } else {
                                 return '<div class="layui-nav-img"><i class="fa fa-file"></i></div>';
                             }
-
                         }
                     },
                     {field: 'suffix', width: 120, title: '文件类型', sort: true},
-                    {field: 'type', width: 120, title: '类别', sort: true},
+                    {field: 'fileType', width: 120, title: '类别', sort: true},
                     {field: 'size', width: 120, title: '大小', sort: true},
                     {
-                        width: 350, title: 'url', templet: function (data) {
-                            let url = '/file/' + data.type + '/' + data.realName;
+                        field: 'url', width: 350, title: 'url', templet: function (data) {
+                            let url = data.url;
                             return '<a class="clip-btn layui-btn-primary" data-clipboard-text="' + url + '"><i class="layui-icon layui-icon-link" alt="复制至剪切板"></i></a>&nbsp&nbsp;<span>' + url + '</span>';
                         }
                     },
-                    {field: 'createTime', title: '创建时间', minWidth: 200, sort: true},
-                    {field: 'updateTime', title: '更新时间', minWidth: 200, sort: true},
-                    {
-                        title: '操作',
-                        minWidth: 150,
-                        width: 200,
-                        toolbar: '#currentTableBar',
-                        align: "center",
-                        fixed: "right",
-                        hide: (!hasPermission('sys:localstorage:edit') && !hasPermission('sys:localstorage:delete'))
-                    }
+                    {field: 'bucket', width: 200, title: '空间名称', sort: true},
+                    {field: 'type', width: 120, title: '空间类型', sort: true},
+                    {field: 'updateTime', title: '创建时间', minWidth: 200, sort: true},
                 ]
             ],
             limits: [10, 15, 20, 25, 50, 100],
@@ -213,19 +203,17 @@
                 }).then((result) => {
                     if (result.value) {
                         $.ajax({
-                            url: '/admin/localStorage',
+                            url: '/admin/qiNiuContent',
                             type: 'DELETE',
                             data: JSON.stringify(idList),
                             contentType: 'application/json',
                             success: function (result) {
-                                if (result.code === 200) {
-                                    table.reload('currentTableId');
-                                    Swal.fire(
-                                        'Deleted!',
-                                        '删除成功',
-                                        'success'
-                                    );
-                                }
+                                table.reload('currentTableId');
+                                Swal.fire(
+                                    'Deleted!',
+                                    '删除成功',
+                                    'success'
+                                );
                             },
                             error: function (result) {
                                 let error = JSON.parse(result.responseText);
@@ -240,70 +228,39 @@
                 });
             } else if (obj.event === 'add') {
                 var index = layer.open({
-                    title: '添加文件',
+                    title: '上传文件',
                     type: 2,
                     shade: 0.2,
                     maxmin: true,
                     shadeClose: true,
-                    area: ['50%', '90%'],
-                    content: '/admin/api/localstorage/localstorage-add',
+                    area: ['60%', '90%'],
+                    content: '/admin/api/qiniucontent/qiniucontent-add',
                 });
                 $(window).on("resize", function () {
                     layer.full(index);
                 });
-            }
-        });
-
-        table.on('tool(currentTableFilter)', function (obj) {
-            var data = obj.data;
-            if (obj.event === 'delete') {
-                Swal.fire({
-                    title: '确定删除这个文件吗？',
-                    text: "你将不能撤销该操作!",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    showLoaderOnConfirm: true,
-                    confirmButtonText: '删除',
-                    cancelButtonText: '取消',
-                    reverseButtons: true
-                }).then((result) => {
-                    if (result.value) {
-                        $.ajax({
-                            url: '/admin/localStorage/' + data.id,
-                            type: 'DELETE',
-                            success: function (result) {
-                                if (result.code === 200) {
-                                    table.reload('currentTableId');
-                                    Swal.fire(
-                                        'Deleted!',
-                                        '删除成功',
-                                        'success'
-                                    );
-                                }
-                            },
-                            error: function (result) {
-                                let error = JSON.parse(result.responseText);
-                                Swal.fire(
-                                    'Error!',
-                                    error.msg,
-                                    'error'
-                                );
-                            }
-                        });
+            } else if (obj.event === 'sync') {
+                $.ajax({
+                    url: '/admin/qiNiuContent/synchronize',
+                    type: 'POST',
+                    success: function (result) {
+                        table.reload('currentTableId');
+                        Swal.fire(
+                            'success!',
+                            '同步成功',
+                            'success'
+                        );
                     }
-                });
-            } else if (obj.event === 'edit') {
+                })
+            } else if (obj.event === 'config') {
                 var index = layer.open({
-                    title: '编辑文件',
+                    title: '配置七牛云',
                     type: 2,
                     shade: 0.2,
                     maxmin: true,
                     shadeClose: true,
-                    area: ['50%', '30%'],
-                    content: '/admin/localStorage/' + data.id,
-                });
-                $(window).on("resize", function () {
-                    layer.full(index);
+                    area: ['50%', '80%'],
+                    content: '/admin/api/qiniucontent/qiniucontent-config',
                 });
             }
         });
@@ -315,15 +272,16 @@
         var t = $(t).find("img");
         //页面层
         layer.open({
-            type: 1,
             title: '图片',
-            skin: 'layui-layer-rim', //加上边框
-            area: ['80%', '80%'], //宽高
-            shadeClose: true, //开启遮罩关闭
-            end: function (index, layero) {
-                return false;
-            },
+            type: 1,
+            shade: 0.2,
+            maxmin: true,
+            shadeClose: true,
+            area: ['80%', '80%'],
             content: '<div style="text-align:center"><img src="' + $(t).attr('src') + '" /></div>'
+        });
+        $(window).on("resize", function () {
+            layer.full(index);
         });
     }
 </script>

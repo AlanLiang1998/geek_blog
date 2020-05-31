@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>layui</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="/static/admin/layuimini/lib/layui-v2.5.5/css/layui.css" media="all">
+    <link rel="stylesheet" href="/static/admin/layuimini/css/public.css" media="all">
+    <style>
+        body {
+            background-color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+<form class="layui-form layuimini-form">
+    <input type="hidden" name="id"/>
+    <div class="layui-form-item">
+        <label class="layui-form-label required">Access Key</label>
+        <div class="layui-input-block">
+            <input type="text" name="accessKey" lay-verify="required" lay-reqtext="Access Key不能为空"
+                   placeholder="请输入Access Key"
+                   value=""
+                   class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label required">Secret Key</label>
+        <div class="layui-input-block">
+            <input type="password" name="secretKey" lay-verify="required" lay-reqtext="Secret Key不能为空"
+                   placeholder="请输入Secret Key"
+                   value=""
+                   class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label required">空间名称</label>
+        <div class="layui-input-block">
+            <input type="text" name="bucket" lay-verify="required" lay-reqtext="空间名称不能为空" placeholder="请输入空间名称"
+                   value=""
+                   class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label required">外链域名</label>
+        <div class="layui-input-block">
+            <input type="url" name="host" lay-verify="required|url" lay-reqtext="外链域名不能为空" placeholder="请输入外链域名"
+                   value=""
+                   class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">存储区域</label>
+        <div class="layui-input-block">
+            <select name="zone">
+                <option value="华南">华南</option>
+                <option value="华东">华东</option>
+                <option value="华北">华北</option>
+                <option value="北美">北美</option>
+                <option value="东南亚">东南亚</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label required">空间类型</label>
+        <div class="layui-input-block">
+            <input type="radio" name="type" value="公开" title="公开" checked>
+            <input type="radio" name="type" value="私有" title="私有">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="saveBtn">确认保存</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+</form>
+<script src="/static/admin/layuimini/lib/layui-v2.5.5/layui.js" charset="utf-8"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<script type="text/javascript" th:inline="javascript">
+    layui.use(['form'], function () {
+        var form = layui.form,
+            layer = layui.layer,
+            $ = layui.$;
+
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 1000,
+            timerProgressBar: true,
+        })
+
+        $.ajax({
+            url: '/admin/qiNiuContent/config',
+            type: 'GET',
+            success: function (result) {
+                $('.layui-form input[name="accessKey"]').val(result.accessKey);
+                $('.layui-form input[name="secretKey"]').val(result.secretKey);
+                $('.layui-form input[name="bucket"]').val(result.bucket);
+                $('.layui-form input[name="host"]').val(result.host);
+                $('.layui-form select[name="zone"]').val([result.zone]);
+                $('.layui-form input[name="type"]').val([result.type]);
+                form.render();
+            }
+        });
+
+        //自定义验证规则
+        form.verify({
+            name: function (value) {
+                if (value.length > 20) {
+                    return '文件名长度在20个字符以内';
+                }
+            },
+        });
+
+        //监听提交
+        form.on('submit(saveBtn)', function (data) {
+            $.ajax({
+                url: '/admin/qiNiuContent/config',
+                type: 'PUT',
+                data: JSON.stringify(data.field),
+                contentType: 'application/json',
+                success: function (result) {
+                    var parentLayer = parent.layer;
+                    Toast.fire({
+                        icon: 'success',
+                        title: '修改成功！'
+                    }).then(() => {
+                        var iframeIndex = parentLayer.getFrameIndex(window.name);
+                        parent.location.reload();
+                        parentLayer.close(iframeIndex);
+                    })
+                },
+                error: function (XMLHttpRequest) {
+                    var result = JSON.parse(XMLHttpRequest.responseText);
+                    layer.alert(result.msg, {icon: 2});
+                }
+            });
+            return false;
+        });
+
+    });
+</script>
+</body>
+</html>

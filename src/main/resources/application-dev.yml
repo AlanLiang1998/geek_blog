@@ -64,3 +64,8 @@ file:
   maxSize: 100
   avatarMaxSize: 5
 
+#七牛云
+qiniu:
+  # 文件大小 /M
+  max-size: 15
+
