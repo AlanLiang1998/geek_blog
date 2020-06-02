@@ -13,6 +13,9 @@ import com.qiniu.storage.model.FileInfo;
 import com.qiniu.util.Auth;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -36,6 +39,7 @@ import java.util.*;
  * @date 2018-12-31
  */
 @Service
+@CacheConfig(cacheNames = "qiniu")
 public class QiNiuServiceImpl implements QiNiuService {
 
     @Autowired
@@ -48,6 +52,7 @@ public class QiNiuServiceImpl implements QiNiuService {
     private Long maxSize;
 
     @Override
+    @Cacheable(key = "'table'+#current")
     public Page<QiniuContent> queryAll(Integer current, Integer size, QiNiuQuery qiNiuQuery) {
         Page<QiniuContent> page = new Page<>(current, size);
         QueryWrapper<QiniuContent> wrapper = new QueryWrapper<>();
@@ -61,16 +66,19 @@ public class QiNiuServiceImpl implements QiNiuService {
     }
 
     @Override
+    @Cacheable
     public List<QiniuContent> queryAll(QiNiuQuery qiNiuQuery) {
         return qiNiuContentMapper.selectList(null);
     }
 
     @Override
+    @Cacheable(key = "'1'")
     public QiniuConfig find() {
         return qiNiuConfigMapper.selectById(1L);
     }
 
     @Override
+    @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Exception.class)
     public void update(QiniuConfig qiniuConfig) {
         String http = "http://", https = "https://";
@@ -82,6 +90,7 @@ public class QiNiuServiceImpl implements QiNiuService {
     }
 
     @Override
+    @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Exception.class)
     public void upload(MultipartFile[] files, QiniuConfig qiniuConfig) {
         for (MultipartFile file : files) {
@@ -123,6 +132,7 @@ public class QiNiuServiceImpl implements QiNiuService {
     }
 
     @Override
+    @Cacheable
     public QiniuContent findByContentId(Long id) {
         return qiNiuContentMapper.selectById(id);
     }
@@ -143,6 +153,7 @@ public class QiNiuServiceImpl implements QiNiuService {
     }
 
     @Override
+    @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Exception.class)
     public void delete(Long id, QiniuConfig config) {
         QiniuContent content = qiNiuContentMapper.selectById(id);
@@ -159,6 +170,7 @@ public class QiNiuServiceImpl implements QiNiuService {
     }
 
     @Override
+    @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Exception.class)
     public void synchronize(QiniuConfig config) {
         if (config.getId() == null) {
@@ -200,6 +212,7 @@ public class QiNiuServiceImpl implements QiNiuService {
     }
 
     @Override
+    @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Exception.class)
     public void deleteAll(List<Long> idList, QiniuConfig config) {
         for (Long id : idList) {
@@ -208,6 +221,7 @@ public class QiNiuServiceImpl implements QiNiuService {
     }
 
     @Override
+    @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Exception.class)
     public void update(String type) {
         QiniuContent content = new QiniuContent();

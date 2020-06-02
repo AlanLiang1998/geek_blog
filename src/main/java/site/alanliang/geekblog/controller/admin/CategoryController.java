@@ -56,7 +56,7 @@ public class CategoryController {
     public TableResult listByPage(@RequestParam(value = "page", defaultValue = "1") Integer page,
                                   @RequestParam(value = "limit", defaultValue = "10") Integer limit,
                                   CategoryQuery categoryQuery) {
-        Page<Category> categoryPage = categoryService.listByPage(page, limit, categoryQuery);
+        Page<Category> categoryPage = categoryService.listTableByPage(page, limit, categoryQuery);
         return TableResult.tableOk(categoryPage.getRecords(), categoryPage.getTotal());
     }
 

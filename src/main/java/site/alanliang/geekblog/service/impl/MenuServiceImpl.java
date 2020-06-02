@@ -2,6 +2,9 @@ package site.alanliang.geekblog.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
@@ -26,23 +29,27 @@ import java.util.stream.Collectors;
  * Version 1.0
  **/
 @Service
+@CacheConfig(cacheNames = "menu")
 public class MenuServiceImpl implements MenuService {
 
     @Autowired
     private MenuMapper menuMapper;
 
     @Override
+    @Cacheable(key="'count'")
     public Long countAll() {
         return Long.valueOf(menuMapper.selectCount(null));
     }
 
     @Override
+    @Cacheable(key = "'userId:'+#userId")
     public InitInfoVO menu(Long userId) {
         List<Menu> menuList = menuMapper.listMenuByUserId(userId);
         return InitInfoVO.init(menuList);
     }
 
     @Override
+    @Cacheable(key="#id")
     public Menu getById(Long id) {
         QueryWrapper<Menu> wrapper = new QueryWrapper<>();
         wrapper.select("id", "pid", "title", "href", "icon", "authority", "sort", "type", "status")
@@ -51,12 +58,14 @@ public class MenuServiceImpl implements MenuService {
     }
 
     @Override
+    @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Exception.class)
     public void removeById(Long id) {
         menuMapper.deleteById(id);
     }
 
     @Override
+    @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Exception.class)
     public void saveOfUpdate(Menu menu) {
         if (menu.getId() == null) {
@@ -116,6 +125,7 @@ public class MenuServiceImpl implements MenuService {
     }
 
     @Override
+    @Cacheable
     public List<Menu> listAll() {
         QueryWrapper<Menu> wrapper = new QueryWrapper<>();
         wrapper.select("id", "pid", "title", "href", "authority", "icon", "sort", "type", "status", "create_time", "update_time");

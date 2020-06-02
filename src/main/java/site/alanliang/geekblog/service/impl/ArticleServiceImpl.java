@@ -3,6 +3,9 @@ package site.alanliang.geekblog.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
@@ -31,6 +34,7 @@ import java.util.stream.Collectors;
  * Version 1.0
  **/
 @Service
+@CacheConfig(cacheNames = "article")
 public class ArticleServiceImpl implements ArticleService {
 
     @Autowired
@@ -70,11 +74,13 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
+    @Cacheable(key = "'countByDate'")
     public List<ArticleDateVO> countByDate(Integer dateFilterType) {
         if (dateFilterType == null) {
             dateFilterType = Constant.FILTER_BY_DAY;
         }
-        return articleMapper.countByDate(dateFilterType);
+        List<ArticleDateVO> articleDateVOS = articleMapper.countByDate(dateFilterType);
+        return articleDateVOS;
     }
 
     @Override
@@ -100,6 +106,7 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
+    @Cacheable(key = "#id")
     public Article getDetailById(Long id) {
         //浏览次数加1
         increaseViews(id);
@@ -123,11 +130,13 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
+    @Cacheable(key = "'count'")
     public long countAll() {
         return articleMapper.selectCount(null);
     }
 
     @Override
+    @Cacheable(key = "'top'")
     public List<Article> listTop() {
         QueryWrapper<Article> wrapper = new QueryWrapper<>();
         wrapper.select("id", "title", "summary", "cover")
@@ -138,29 +147,34 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
+    @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Exception.class)
     public void removeByIdList(List<Long> idList) {
         articleMapper.deleteBatchIds(idList);
     }
 
     @Override
+    @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Exception.class)
     public void removeById(Long id) {
         articleMapper.deleteById(id);
     }
 
     @Override
+    @Cacheable(key = "'preview:'+#current")
     public Page<Article> listPreviewByPage(Integer current, Integer size) {
         Page<Article> articlePage = new Page<>(current, size);
         return articleMapper.listPreviewByPage(articlePage);
     }
 
     @Override
+    @Cacheable(key = "'recommend'")
     public List<Article> listRecommend() {
         return articleMapper.listRecommend(Constant.MAX_RECOMMEND_ARTICLES);
     }
 
     @Override
+    @Cacheable(key = "'table:'+#current")
     public Page<Article> listTableByPage(Integer current, Integer size, ArticleQuery articleQuery) {
         Page<Article> page = new Page<>(current, size);
         QueryWrapper<Article> wrapper = new QueryWrapper<>();
@@ -183,6 +197,7 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
+    @Cacheable(key = "'newest'")
     public List<Article> listNewest() {
         QueryWrapper<Article> wrapper = new QueryWrapper<>();
         wrapper.select("id", "title", "summary", "create_time")
@@ -220,6 +235,7 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
+    @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Exception.class)
     public void saveOrUpdate(Article article) {
         QueryWrapper<Tag> tagWrapper = new QueryWrapper<>();

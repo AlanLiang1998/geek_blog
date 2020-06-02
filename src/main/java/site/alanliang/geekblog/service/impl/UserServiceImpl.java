@@ -4,6 +4,9 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -33,6 +36,7 @@ import java.util.stream.Collectors;
  * Version 1.0
  **/
 @Service
+@CacheConfig(cacheNames = "user")
 public class UserServiceImpl implements UserService {
 
     @Autowired
@@ -41,6 +45,7 @@ public class UserServiceImpl implements UserService {
     private RoleUserMapper roleUserMapper;
 
     @Override
+    @Cacheable(key = "#id")
     public User getById(Long id) {
         QueryWrapper<User> userWrapper = new QueryWrapper<>();
         userWrapper.select("id", "username", "nickname", "sex", "phone", "email", "status")
@@ -57,18 +62,21 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Exception.class)
     public void removeById(Long id) {
         userMapper.deleteById(id);
     }
 
     @Override
+    @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Exception.class)
     public void removeByIdList(List<Long> idList) {
         userMapper.deleteBatchIds(idList);
     }
 
     @Override
+    @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Exception.class)
     public void changeStatus(Long userId) {
         QueryWrapper<User> wrapper = new QueryWrapper<>();
@@ -84,6 +92,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Exception.class)
     public void saveOfUpdate(User user) {
         if (user.getId() == null) {
@@ -147,6 +156,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Exception.class)
     public void updateInfo(UserInfoVO userInfoVO) {
         //验证手机号码是否唯一
@@ -171,11 +181,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Cacheable(key="'count'")
     public Integer countAll() {
         return userMapper.selectCount(null);
     }
 
     @Override
+    @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Exception.class)
     public void changePassword(UserLoginVO passwordVO) {
         QueryWrapper<User> wrapper = new QueryWrapper<>();
@@ -191,6 +203,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Cacheable(key = "'table'+#current")
     public Page<User> listTableByPage(int current, int size, UserQuery userQuery) {
         Page<User> page = new Page<>(current, size);
         QueryWrapper<User> wrapper = new QueryWrapper<>();
@@ -207,6 +220,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Cacheable(key = "#username")
     public User checkUser(String username, String password) {
         QueryWrapper<User> wrapper = new QueryWrapper<>();
         wrapper.select("id", "username")

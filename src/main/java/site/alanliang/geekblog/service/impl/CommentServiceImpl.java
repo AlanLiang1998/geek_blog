@@ -3,6 +3,9 @@ package site.alanliang.geekblog.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
@@ -28,6 +31,7 @@ import java.util.List;
  * Version 1.0
  **/
 @Service
+@CacheConfig(cacheNames = "comment")
 public class CommentServiceImpl implements CommentService {
 
     @Autowired
@@ -47,6 +51,7 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
+    @CacheEvict(allEntries = true)
     public void save(Comment comment) {
         commentMapper.insert(comment);
         //评论量+1
@@ -63,6 +68,7 @@ public class CommentServiceImpl implements CommentService {
      *
      * @param id 评论ID
      */
+    @Override
     public void decreaseArticleComments(Long id) {
         QueryWrapper<Comment> commentWrapper = new QueryWrapper<>();
         commentWrapper.select("article_id").eq("id", id);
@@ -77,6 +83,7 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
+    @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Exception.class)
     public void removeByIdList(List<Long> idList) {
         for (Long id : idList) {
@@ -86,6 +93,7 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
+    @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Exception.class)
     public void removeById(Long id) {
         //评论量-1
@@ -94,6 +102,7 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
+    @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Exception.class)
     public void reply(Comment comment) {
         if (comment.getVisitorId() != null) {
@@ -126,16 +135,19 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
+    @Cacheable(key = "'newest'")
     public List<Comment> listNewest() {
         return commentMapper.listNewest(Constant.NEWEST_PAGE_SIZE);
     }
 
     @Override
+    @Cacheable(key = "'count'")
     public Integer countAll() {
         return commentMapper.selectCount(null);
     }
 
     @Override
+    @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Exception.class)
     public void audit(AuditVO auditVO) {
         Comment comment = new Comment();
@@ -145,6 +157,7 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
+    @Cacheable(key = "'table:'+#current")
     public Page<Comment> listTableByPage(Integer current, Integer size, CommentQuery commentQuery) {
         Page<Comment> page = new Page<>(current, size);
         QueryWrapper<Comment> wrapper = new QueryWrapper<>();
@@ -158,6 +171,7 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
+    @Cacheable(key = "'articleId:'+#articleId")
     public Page<Comment> listByArticleId(Long articleId, Page<Comment> page) {
         Page<Comment> pageInfo = commentMapper.listRootPageByArticleId(page, articleId);
         List<Comment> comments = commentMapper.listByArticleId(articleId);

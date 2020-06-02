@@ -40,6 +40,19 @@ spring:
     date-format: yyyy-MM-dd HH:mm:ss
     #不序列化为null的属性
     default-property-inclusion: non_null
+  redis:
+    #数据库索引
+    database: 0
+    host: 127.0.0.1
+    port: 6379
+    password:
+    #连接超时时间
+    timeout: 5000
+  servlet:
+    #文件上传限制
+    multipart:
+      max-file-size: 15MB
+      max-request-size: 15MB
 #日志配置
 logging:
   level:

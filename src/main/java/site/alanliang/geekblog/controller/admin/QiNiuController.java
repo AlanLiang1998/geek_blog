@@ -6,6 +6,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -35,6 +36,7 @@ public class QiNiuController {
     }
 
     @OperationLog("查询文件")
+    @PreAuthorize("hasAuthority('sys:qiniu:query')")
     @ApiOperation("查询文件")
     @GetMapping
     public TableResult listTableByPage(@RequestParam(value = "page", defaultValue = "1") Integer page,
@@ -45,6 +47,7 @@ public class QiNiuController {
     }
 
     @OperationLog("配置七牛云存储")
+    @PreAuthorize("hasAuthority('sys:qiniu:config')")
     @ApiOperation("配置七牛云存储")
     @PutMapping(value = "/config")
     public ResponseEntity<Object> config(@Validated @RequestBody QiniuConfig qiniuConfig) {
@@ -54,6 +57,7 @@ public class QiNiuController {
     }
 
     @OperationLog("导出数据")
+    @PreAuthorize("hasAuthority('sys:qiniu:query')")
     @ApiOperation("导出数据")
     @GetMapping(value = "/download")
     public void download(HttpServletResponse response, QiNiuQuery qiNiuQuery) throws IOException {
@@ -61,6 +65,7 @@ public class QiNiuController {
     }
 
     @OperationLog("上传文件")
+    @PreAuthorize("hasAuthority('sys:qiniu:add')")
     @ApiOperation("上传文件")
     @PostMapping
     public ResponseEntity<Object> upload(@RequestParam("file") MultipartFile[] files) {
@@ -69,6 +74,7 @@ public class QiNiuController {
     }
 
     @OperationLog("同步七牛云数据")
+    @PreAuthorize("hasAuthority('sys:qiniu:sync')")
     @ApiOperation("同步七牛云数据")
     @PostMapping(value = "/synchronize")
     public ResponseEntity<Object> synchronize() {
@@ -77,6 +83,7 @@ public class QiNiuController {
     }
 
     @OperationLog("下载文件")
+    @PreAuthorize("hasAuthority('sys:qiniu:query')")
     @ApiOperation("下载文件")
     @GetMapping(value = "/download/{id}")
     public ResponseEntity<Object> download(@PathVariable Long id) {
@@ -86,6 +93,7 @@ public class QiNiuController {
     }
 
     @OperationLog("删除文件")
+    @PreAuthorize("hasAuthority('sys:qiniu:delete')")
     @ApiOperation("删除文件")
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Object> delete(@PathVariable Long id) {
@@ -94,6 +102,7 @@ public class QiNiuController {
     }
 
     @OperationLog("删除多张图片")
+    @PreAuthorize("hasAuthority('sys:qiniu:delete')")
     @ApiOperation("删除多张图片")
     @DeleteMapping
     public ResponseEntity<Object> deleteAll(@RequestBody List<Long> idList) {

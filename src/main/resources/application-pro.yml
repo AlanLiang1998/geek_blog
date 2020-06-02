@@ -37,6 +37,11 @@ spring:
     date-format: yyyy-MM-dd HH:mm:ss
     #不序列化为null的属性
     default-property-inclusion: non_null
+  servlet:
+    #文件上传限制
+    multipart:
+      max-file-size: 15MB
+      max-request-size: 15MB
 #日志配置
 logging:
   level:
@@ -52,5 +57,18 @@ mybatis-plus:
     map-underscore-to-camel-case: true
     lazy-loading-enabled: true
     aggressive-lazy-loading: false
+
+# 文件存储路径
+file:
+  path: /home/www/
+  avatar: /home/www/avatar/
+  # 文件大小 /M
+  maxSize: 100
+  avatarMaxSize: 5
+
+#七牛云
+qiniu:
+  # 文件大小 /M
+  max-size: 15
 
 

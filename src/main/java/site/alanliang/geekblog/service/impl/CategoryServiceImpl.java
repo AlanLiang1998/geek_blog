@@ -3,6 +3,9 @@ package site.alanliang.geekblog.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
@@ -23,13 +26,15 @@ import java.util.stream.Collectors;
  * Version 1.0
  **/
 @Service
+@CacheConfig(cacheNames = "category")
 public class CategoryServiceImpl implements CategoryService {
 
     @Autowired
     private CategoryMapper categoryMapper;
 
     @Override
-    public Page<Category> listByPage(Integer current, Integer size, CategoryQuery categoryQuery) {
+    @Cacheable(key = "'table:'+#current")
+    public Page<Category> listTableByPage(Integer current, Integer size, CategoryQuery categoryQuery) {
         Page<Category> page = new Page<>(current, size);
         QueryWrapper<Category> wrapper = new QueryWrapper<>();
         if (!StringUtils.isEmpty(categoryQuery.getName())) {
@@ -45,18 +50,21 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
+    @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Exception.class)
     public void removeById(Long id) {
         categoryMapper.deleteById(id);
     }
 
     @Override
+    @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Exception.class)
     public void removeByIdList(List<Long> idList) {
         categoryMapper.deleteBatchIds(idList);
     }
 
     @Override
+    @Cacheable(key = "'count'")
     public long countAll() {
         return categoryMapper.selectCount(null);
     }
@@ -71,11 +79,13 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
+    @Cacheable(key = "'articleCount'")
     public List<Category> listByArticleCount() {
         return categoryMapper.listByArticleCount();
     }
 
     @Override
+    @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Exception.class)
     public void saveOfUpdate(Category category) {
         QueryWrapper<Category> wrapper = new QueryWrapper<>();
@@ -104,6 +114,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
+    @Cacheable
     public List<Category> listAll() {
         QueryWrapper<Category> wrapper = new QueryWrapper<>();
         wrapper.select("id", "name");

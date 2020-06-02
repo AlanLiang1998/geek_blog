@@ -5,6 +5,9 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -21,6 +24,7 @@ import java.util.Date;
 import java.util.List;
 
 @Service
+@CacheConfig(cacheNames = "localStorage")
 public class LocalStorageServiceImpl implements LocalStorageService {
 
     @Value("${file.path}")
@@ -33,6 +37,7 @@ public class LocalStorageServiceImpl implements LocalStorageService {
     private LocalStorageMapper localStorageMapper;
 
     @Override
+    @Cacheable(key = "'table:'+#current")
     public Page<LocalStorage> listTableByPage(Integer current, Integer size, LocalStorageQuery localStorageQuery) {
         Page<LocalStorage> page = new Page<>(current, size);
         QueryWrapper<LocalStorage> wrapper = new QueryWrapper<>();
@@ -47,6 +52,7 @@ public class LocalStorageServiceImpl implements LocalStorageService {
     }
 
     @Override
+    @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Exception.class)
     public void removeById(Long id) {
         LocalStorage localStorage = localStorageMapper.selectById(id);
@@ -55,6 +61,7 @@ public class LocalStorageServiceImpl implements LocalStorageService {
     }
 
     @Override
+    @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Exception.class)
     public void removeByIdList(List<Long> idList) {
         List<LocalStorage> localStorages = localStorageMapper.selectBatchIds(idList);
@@ -65,6 +72,7 @@ public class LocalStorageServiceImpl implements LocalStorageService {
     }
 
     @Override
+    @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Exception.class)
     public void upload(MultipartFile[] multipartFiles) {
         for (MultipartFile multipartFile : multipartFiles) {
@@ -95,12 +103,14 @@ public class LocalStorageServiceImpl implements LocalStorageService {
     }
 
     @Override
+    @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Exception.class)
     public void update(LocalStorage localStorage) {
         localStorageMapper.updateById(localStorage);
     }
 
     @Override
+    @Cacheable(key = "#id")
     public LocalStorage getById(Long id) {
         QueryWrapper<LocalStorage> wrapper = new QueryWrapper<>();
         wrapper.select("id", "name").eq("id", id);

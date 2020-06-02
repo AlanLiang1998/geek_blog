@@ -4,6 +4,9 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
@@ -29,6 +32,7 @@ import java.util.stream.Collectors;
  * Version 1.0
  **/
 @Service
+@CacheConfig(cacheNames = "role")
 public class RoleServiceImpl implements RoleService {
 
     @Autowired
@@ -39,6 +43,7 @@ public class RoleServiceImpl implements RoleService {
     private RoleMenuMapper roleMenuMapper;
 
     @Override
+    @Cacheable(key = "#id")
     public Role getById(Long id) {
         Role role = new Role();
         //查询角色信息
@@ -57,6 +62,7 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
+    @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Exception.class)
     public void removeById(Long id) {
         QueryWrapper<RoleUser> wrapper = new QueryWrapper<>();
@@ -69,6 +75,7 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
+    @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Exception.class)
     public void removeByIdList(List<Long> idList) {
         for (Long id : idList) {
@@ -77,6 +84,7 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
+    @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Exception.class)
     public void saveOfUpdate(Role role) {
         if (role.getId() == null) {
@@ -114,6 +122,7 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
+    @Cacheable(key = "'table'+#current")
     public Page<Role> listByPage(Integer current, Integer size, RoleQuery roleQuery) {
         Page<Role> page = new Page<>(current, size);
         QueryWrapper<Role> wrapper = new QueryWrapper<>();
@@ -130,6 +139,7 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
+    @Cacheable
     public List<Role> listAll() {
         QueryWrapper<Role> wrapper = new QueryWrapper<>();
         wrapper.select("id", "role_name");

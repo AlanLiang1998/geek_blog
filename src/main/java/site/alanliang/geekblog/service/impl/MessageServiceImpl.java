@@ -3,6 +3,9 @@ package site.alanliang.geekblog.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import site.alanliang.geekblog.common.Constant;
@@ -26,6 +29,7 @@ import java.util.List;
  * Version 1.0
  **/
 @Service
+@CacheConfig(cacheNames = "message")
 public class MessageServiceImpl implements MessageService {
 
     @Autowired
@@ -47,6 +51,7 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @Override
+    @Cacheable(key = "'newest'")
     public List<Message> listNewest() {
         QueryWrapper<Message> wrapper = new QueryWrapper<>();
         wrapper.select("id", "nickname", "content", "create_time", "status")
@@ -56,6 +61,7 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @Override
+    @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Exception.class)
     public void audit(AuditVO auditVO) {
         Message message = new Message();
@@ -65,6 +71,7 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @Override
+    @Cacheable(key = "'table'+#current")
     public Page<Message> listTableByPage(Integer current, Integer size, MessageQuery messageQuery) {
         Page<Message> page = new Page<>(current, size);
         QueryWrapper<Message> wrapper = new QueryWrapper<>();
@@ -83,35 +90,41 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @Override
+    @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Exception.class)
     public void removeById(Long id) {
         messageMapper.deleteById(id);
     }
 
     @Override
+    @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Exception.class)
     public void removeByIdList(List<Long> idList) {
         messageMapper.deleteBatchIds(idList);
     }
 
     @Override
+    @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Exception.class)
     public void reply(Message message) {
         messageMapper.insert(message);
     }
 
     @Override
+    @Cacheable(key="'count'")
     public Integer countAll() {
         return messageMapper.selectCount(null);
     }
 
     @Override
+    @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Exception.class)
     public void save(Message message) {
         messageMapper.insert(message);
     }
 
     @Override
+    @Cacheable
     public Page<Message> listByPage(Integer current, Integer size) {
         Page<Message> page = new Page<>(current, size);
         Page<Message> pageInfo = messageMapper.listRootByPage(page);

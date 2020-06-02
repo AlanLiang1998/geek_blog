@@ -25,7 +25,7 @@ public interface CategoryService {
      * @param categoryQuery 条件
      * @return 分类列表
      */
-    Page<Category> listByPage(Integer current, Integer size, CategoryQuery categoryQuery);
+    Page<Category> listTableByPage(Integer current, Integer size, CategoryQuery categoryQuery);
 
     /**
      * 新增或者更新分类

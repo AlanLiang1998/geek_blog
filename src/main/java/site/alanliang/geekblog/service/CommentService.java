@@ -34,6 +34,13 @@ public interface CommentService {
 
 
     /**
+     * 根据文章ID减少评论量
+     *
+     * @param id 文章ID
+     */
+    void decreaseArticleComments(Long id);
+
+    /**
      * 根据ID列表批量删除评论
      *
      * @param idList 评论ID列表

@@ -12,7 +12,7 @@ public interface Constant {
 
     String LOGO_IMAGE = "/static/admin/layuimini/images/logo.png";
 
-    Integer MAX_TOP_ARTICLES = 5;
+    Integer MAX_TOP_ARTICLES = 6;
 
     Integer MAX_RECOMMEND_ARTICLES = 4;
 

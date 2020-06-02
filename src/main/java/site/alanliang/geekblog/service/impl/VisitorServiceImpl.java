@@ -3,6 +3,9 @@ package site.alanliang.geekblog.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import site.alanliang.geekblog.common.Constant;
@@ -26,17 +29,21 @@ import java.util.Objects;
  * Version 1.0
  **/
 @Service
+@CacheConfig(cacheNames = "visitor")
 public class VisitorServiceImpl implements VisitorService {
-
-    @Override
-    public Integer countAll() {
-        return visitorMapper.selectCount(null);
-    }
 
     @Autowired
     private VisitorMapper visitorMapper;
 
     @Override
+    @Cacheable(key = "'count'")
+    public Integer countAll() {
+        return visitorMapper.selectCount(null);
+    }
+
+
+    @Override
+    @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Exception.class)
     public void save(Visitor visitor) {
         //保存
@@ -84,6 +91,7 @@ public class VisitorServiceImpl implements VisitorService {
     }
 
     @Override
+    @Cacheable(key = "'table'+#current")
     public Page<Visitor> listTableByPage(Integer current, Integer size, UserQuery userQuery) {
         Page<Visitor> page = new Page<>(current, size);
         QueryWrapper<Visitor> wrapper = new QueryWrapper<>();
@@ -101,6 +109,7 @@ public class VisitorServiceImpl implements VisitorService {
     }
 
     @Override
+    @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Exception.class)
     public void changeStatus(Long id) {
         QueryWrapper<User> wrapper = new QueryWrapper<>();
@@ -116,12 +125,14 @@ public class VisitorServiceImpl implements VisitorService {
     }
 
     @Override
+    @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Exception.class)
     public void removeById(Long id) {
         visitorMapper.deleteById(id);
     }
 
     @Override
+    @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Exception.class)
     public void removeByIdList(List<Long> idList) {
         visitorMapper.deleteBatchIds(idList);

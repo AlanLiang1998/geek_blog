@@ -22,7 +22,7 @@ public interface PhotoService {
      * @param photoQuery 查询条件
      * @return 照片分页
      */
-    Page<Photo> listTableByPage(int current, int size, PhotoQuery photoQuery);
+    Page<Photo> listTableByPage(Integer current, Integer size, PhotoQuery photoQuery);
 
     /**
      * 根据ID删除照片
@@ -51,4 +51,5 @@ public interface PhotoService {
      * @param id 照片ID
      */
     Photo getById(Long id);
+
 }

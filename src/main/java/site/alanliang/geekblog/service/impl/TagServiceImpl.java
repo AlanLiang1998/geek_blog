@@ -3,6 +3,9 @@ package site.alanliang.geekblog.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
@@ -23,12 +26,14 @@ import java.util.stream.Collectors;
  * Version 1.0
  **/
 @Service
+@CacheConfig(cacheNames = "tag")
 public class TagServiceImpl implements TagService {
 
     @Autowired
     private TagMapper tagMapper;
 
     @Override
+    @Cacheable(key = "'table'+#current")
     public Page<Tag> listTableByPage(Integer current, Integer size, TagQuery tagQuery) {
         Page<Tag> tagPage = new Page<>(current, size);
         QueryWrapper<Tag> wrapper = new QueryWrapper<>();
@@ -42,6 +47,7 @@ public class TagServiceImpl implements TagService {
     }
 
     @Override
+    @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Exception.class)
     public void saveOfUpdate(Tag tag) {
         QueryWrapper<Tag> wrapper = new QueryWrapper<>();
@@ -65,12 +71,14 @@ public class TagServiceImpl implements TagService {
     }
 
     @Override
+    @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Exception.class)
     public void removeById(Long id) {
         tagMapper.deleteById(id);
     }
 
     @Override
+    @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Exception.class)
     public void removeByIdList(List<Long> idList) {
         tagMapper.deleteBatchIds(idList);
@@ -82,11 +90,13 @@ public class TagServiceImpl implements TagService {
     }
 
     @Override
+    @Cacheable(key = "'articleCount'")
     public List<Tag> listByArticleCount() {
         return tagMapper.listByArticleCount();
     }
 
     @Override
+    @Cacheable(key = "'count'")
     public long countAll() {
         return tagMapper.selectCount(null);
     }
@@ -106,6 +116,7 @@ public class TagServiceImpl implements TagService {
     }
 
     @Override
+    @Cacheable
     public List<Tag> listAll() {
         return tagMapper.selectList(null);
     }

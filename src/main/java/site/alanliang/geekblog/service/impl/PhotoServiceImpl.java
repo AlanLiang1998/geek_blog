@@ -3,6 +3,9 @@ package site.alanliang.geekblog.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import site.alanliang.geekblog.common.Constant;
@@ -15,12 +18,14 @@ import site.alanliang.geekblog.utils.StringUtils;
 import java.util.List;
 
 @Service
+@CacheConfig(cacheNames = "photo")
 public class PhotoServiceImpl implements PhotoService {
 
     @Autowired
     private PhotoMapper photoMapper;
 
     @Override
+    @Cacheable
     public List<Photo> listAll() {
         QueryWrapper<Photo> wrapper = new QueryWrapper<>();
         wrapper.select("url", "description").orderByAsc("sort").eq("display", Constant.DISPLAY);
@@ -28,23 +33,27 @@ public class PhotoServiceImpl implements PhotoService {
     }
 
     @Override
+    @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Exception.class)
     public void removeById(Long id) {
         photoMapper.deleteById(id);
     }
 
     @Override
+    @Cacheable(key = "#id")
     public Photo getById(Long id) {
         return photoMapper.selectById(id);
     }
 
     @Override
+    @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Exception.class)
     public void removeByIdList(List<Long> idList) {
         photoMapper.deleteBatchIds(idList);
     }
 
     @Override
+    @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Exception.class)
     public void saveOfUpdate(Photo photo) {
         if (photo.getId() == null) {
@@ -55,7 +64,8 @@ public class PhotoServiceImpl implements PhotoService {
     }
 
     @Override
-    public Page<Photo> listTableByPage(int current, int size, PhotoQuery photoQuery) {
+    @Cacheable(key = "'table'+#current")
+    public Page<Photo> listTableByPage(Integer current, Integer size, PhotoQuery photoQuery) {
         Page<Photo> page = new Page<>(current, size);
         QueryWrapper<Photo> wrapper = new QueryWrapper<>();
         if (!StringUtils.isEmpty(photoQuery.getDescription())) {
