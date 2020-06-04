@@ -240,8 +240,9 @@
                         </div>
                         <div class="row">
                             <div class="photo col s12 m6 l4" data-aos="fade-up" v-for="(photo, index) in photos">
-                                <div class="img-item" :data-src="photo.url">
-                                    <img :src="photo.url" :alt="photo.description" class="responsive-img">
+                                <div class="img-item">
+                                    <img class="responsive-img lazy" src="http://cdn.alanliang.site/loading.png"
+                                         :data-src="photo.url" :alt="photo.description">
                                 </div>
                             </div>
                         </div>
@@ -286,6 +287,7 @@
 
                     this.$nextTick(function () {
                         this.initCharts();
+                        lazyLoadInstance.update();
                     })
                 })
             },

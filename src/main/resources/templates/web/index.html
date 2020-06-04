@@ -113,8 +113,9 @@
         </div>
         <!--end carousel-item-first-->
         <div v-for="(article, index) in topArticles" :key="article.id">
-            <div class="carousel-item  white-text carousel-post bg-cover"
-                 :style="{backgroundImage: 'url(' + article.cover + ')' }">
+            <div class="carousel-item  white-text carousel-post bg-cover lazy"
+                 :style="{backgroundImage: 'url(http://cdn.alanliang.site/loading.png)' }"
+                 :data-bg="article.cover">
                 <div class="container">
                     <div class="row">
                         <div class="col s10 offset-s1">
@@ -158,8 +159,9 @@
                             <div class="row">
                                 <div v-for="(article, index) in recommendArticles" :key="article.id">
                                     <div class="col s12 m6" data-aos="zoom-in-up">
-                                        <div class="post-card"
-                                             :style="{backgroundImage: 'url(' + article.cover + ')' }">
+                                        <div class="post-card lazy"
+                                             :style="{backgroundImage: 'url(http://cdn.alanliang.site/loading.png)' }"
+                                             :data-bg="article.cover">
                                             <div class="post-body">
                                                 <!--分类-->
                                                 <div class="post-categories">
@@ -199,7 +201,8 @@
                             <a :href="'/article/'+article.id" target="_blank">
                                 <div class="card-image">
                                     <!--文章图片-->
-                                    <img class="responsive-img" :src="article.cover">
+                                    <img class="responsive-img lazy" src="http://cdn.alanliang.site/loading.png"
+                                         :data-src="article.cover">
                                     <!--文章标题-->
                                     <span class="card-title">{{article.title}}</span>
                                 </div>
@@ -308,6 +311,9 @@
                     this.articles = result.data.records;
                     this.current = result.data.current;
                     this.pages = result.data.pages;
+                    this.$nextTick(function () {
+                        lazyLoadInstance.update();
+                    });
                 })
             },
             toPage: function (page) {

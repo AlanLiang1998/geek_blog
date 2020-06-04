@@ -54,7 +54,8 @@
                         <div class="card">
                             <a :href="'/article/'+article.id">
                                 <div class="card-image">
-                                    <img :src="article.cover" class="responsive-img">
+                                    <img class="responsive-img lazy" src="http://cdn.alanliang.site/loading.png"
+                                         :data-src="article.cover">
                                     <span class="card-title">{{article.title}}</span>
                                 </div>
                             </a>
@@ -155,7 +156,6 @@
                     this.articles = pageInfo.records;
                     this.current = pageInfo.current;
                     this.pages = pageInfo.pages;
-
                     this.$nextTick(function () {
                         this.initCalendar(this.calendarData);
                     })
@@ -273,6 +273,9 @@
                     this.current = result.data.current;
                     this.pages = result.data.pages;
                     curYear = 0, curMonth = 0;
+                    this.$nextTick(function () {
+                        lazyLoadInstance.update();
+                    });
                 })
             },
             getSpecific: function (date, type) {

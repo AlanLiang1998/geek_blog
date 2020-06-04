@@ -395,8 +395,6 @@
             zindex="-1"></script>
     <script color="122 103 238" count="200" opacity='0.7' src="/static/web/js/canvas-nest.min.js" type="text/javascript"
             zindex="-2"></script>
-    <!--搜索-->
-    <script src="/static/web/js/search.js"></script>
     <script type="text/javascript">
         new Vue({
             el: '#searchModal',
@@ -499,6 +497,13 @@
     </script>
     <!--平滑滚动-->
     <script src="/static/web/js/jquery.scrollTo.min.js"></script>
+    <!--图片懒加载-->
+    <script src="/static/web/js/lazyload.min.js"></script>
+    <script type="text/javascript">
+        var lazyLoadInstance = new LazyLoad({
+            elements_selector: ".lazy"
+        });
+    </script>
 </div>
 <!--scripts-->
 </body>

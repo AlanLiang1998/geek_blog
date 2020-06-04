@@ -82,7 +82,8 @@
                             <a :href="'/article/'+article.id" target="_blank">
                                 <div class="card-image">
                                     <!--文章图片-->
-                                    <img class="responsive-img" :src="article.cover">
+                                    <img class="responsive-img lazy" src="http://cdn.alanliang.site/loading.png"
+                                         :data-src="article.cover">
                                     <!--文章标题-->
                                     <span class="card-title">{{article.title}}</span>
                                 </div>
@@ -183,6 +184,9 @@
                     this.current = result.data.current;
                     this.pages = result.data.pages;
                     this.tagId = tagId;
+                    this.$nextTick(function () {
+                        lazyLoadInstance.update();
+                    });
                 })
             },
             toPage: function (page) {
