@@ -1,11 +1,13 @@
 package site.alanliang.geekblog.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import site.alanliang.geekblog.dto.ArticleDocument;
 import site.alanliang.geekblog.model.Article;
 import site.alanliang.geekblog.query.ArchivesQuery;
 import site.alanliang.geekblog.query.ArticleQuery;
 import site.alanliang.geekblog.vo.ArticleDateVO;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -158,8 +160,9 @@ public interface ArticleService {
      * 根据关键词获取文章
      *
      * @return 文章列表
+     * @param keyword
      */
-    List<Article> listByKeyword();
+    List<ArticleDocument> listByKeyword(String keyword) throws IOException;
 
     /**
      * 判断置顶文章是否达到上限

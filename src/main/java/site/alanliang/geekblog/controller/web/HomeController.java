@@ -9,10 +9,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import site.alanliang.geekblog.anntation.AccessLog;
 import site.alanliang.geekblog.common.Constant;
+import site.alanliang.geekblog.dto.ArticleDocument;
+import site.alanliang.geekblog.exception.BadRequestException;
 import site.alanliang.geekblog.model.Article;
 import site.alanliang.geekblog.service.ArticleService;
 import site.alanliang.geekblog.vo.HomeVO;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -46,7 +49,14 @@ public class HomeController {
 
     @AccessLog("搜索文章")
     @GetMapping(value = "/articles/search")
-    public List<Article> search(@RequestParam(value = "keyword", required = false) String keyword) {
-        return articleService.listByKeyword();
+    public ResponseEntity<Object> search(@RequestParam(value = "keyword") String keyword) {
+        List<ArticleDocument> articleDocuments;
+        try {
+            articleDocuments = articleService.listByKeyword(keyword);
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new BadRequestException("搜索失败");
+        }
+        return new ResponseEntity<>(articleDocuments, HttpStatus.OK);
     }
 }

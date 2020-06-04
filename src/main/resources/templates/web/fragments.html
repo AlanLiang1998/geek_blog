@@ -63,6 +63,7 @@
                 transform: rotate(10deg);
             }
         }
+
     </style>
     <script src="/static/web/js/jquery.min.js"></script>
     <!--vue-->
@@ -358,9 +359,23 @@
         <div class="modal-content">
             <div class="search-header">
                 <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
-                <input class="search-input" id="searchInput" name="s" placeholder="请输入搜索的关键字" type="search">
+                <input class="search-input" id="searchInput" name="s" placeholder="请输入搜索的关键字" type="search"
+                       v-model="keyword" @change="toSearch()">
             </div>
-            <div id="searchResult"></div>
+            <div id="searchResult">
+                <ul class="search-result-list" v-if="searchResult.length > 0">
+                    <li v-for="item in searchResult" :key="item.id">
+                        <a :href="'/article/'+item.id" class="search-result-title" v-html="item.title"></a>
+                        <p class="search-result" v-html="item.summary"></p>
+                        <p class="search-result" v-html="item.content"></p>
+                    </li>
+                </ul>
+                <ul class="search-result-list" v-if="searchResult.length <= 0">
+                    <li>
+                        <span class="search-result-title">没有搜索到结果</span>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
     <!-- 回到顶部按钮 -->
@@ -383,8 +398,30 @@
     <!--搜索-->
     <script src="/static/web/js/search.js"></script>
     <script type="text/javascript">
-        $('#searchBtn').click(function () {
-            searchFunc('/articles/search', 'searchInput', 'searchResult');
+        new Vue({
+            el: '#searchModal',
+            data: {
+                keyword: '',
+                searchResult: [],
+            },
+            methods: {
+                toSearch: function (keyword) {
+                    if (keyword == null || keyword === '') {
+                        return false;
+                    }
+                    axios({
+                        url: '/articles/search?keyword=' + keyword,
+                        method: 'GET'
+                    }).then((result) => {
+                        this.searchResult = result.data;
+                    })
+                },
+            },
+            watch: {
+                keyword: function (value) {
+                    this.toSearch(value);
+                }
+            },
         });
     </script>
     <!--materialize框架-->

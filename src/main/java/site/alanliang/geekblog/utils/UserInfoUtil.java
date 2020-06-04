@@ -13,4 +13,14 @@ public class UserInfoUtil {
         }
         return username;
     }
+
+    public static Long getId() {
+        Object o = RequestHolder.getHttpServletRequest().getSession().getAttribute(Constant.USER);
+        Long id = null;
+        if (o != null) {
+            User user = (User) o;
+            id = user.getId();
+        }
+        return id;
+    }
 }

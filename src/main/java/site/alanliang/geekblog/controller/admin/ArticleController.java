@@ -14,6 +14,7 @@ import site.alanliang.geekblog.common.TableResult;
 import site.alanliang.geekblog.model.Article;
 import site.alanliang.geekblog.query.ArticleQuery;
 import site.alanliang.geekblog.service.ArticleService;
+import site.alanliang.geekblog.utils.UserInfoUtil;
 import site.alanliang.geekblog.vo.ArticleVO;
 
 import javax.validation.constraints.NotEmpty;
@@ -71,6 +72,7 @@ public class ArticleController {
         article.setRecommend(article.getRecommend() != null);
         article.setCreateTime(new Date());
         article.setUpdateTime(article.getCreateTime());
+        article.setAuthorId(UserInfoUtil.getId());
         articleService.saveOrUpdate(article);
         return JsonResult.ok();
     }

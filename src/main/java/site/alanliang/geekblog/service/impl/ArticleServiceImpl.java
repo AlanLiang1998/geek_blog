@@ -2,6 +2,18 @@ package site.alanliang.geekblog.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import org.elasticsearch.action.search.SearchRequest;
+import org.elasticsearch.action.search.SearchResponse;
+import org.elasticsearch.client.RequestOptions;
+import org.elasticsearch.client.RestHighLevelClient;
+import org.elasticsearch.index.query.BoolQueryBuilder;
+import org.elasticsearch.index.query.MultiMatchQueryBuilder;
+import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.index.query.TermQueryBuilder;
+import org.elasticsearch.search.SearchHit;
+import org.elasticsearch.search.builder.SearchSourceBuilder;
+import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
@@ -14,17 +26,23 @@ import site.alanliang.geekblog.dao.ArticleMapper;
 import site.alanliang.geekblog.dao.ArticleTagMapper;
 import site.alanliang.geekblog.dao.OperationLogMapper;
 import site.alanliang.geekblog.dao.TagMapper;
+import site.alanliang.geekblog.dto.ArticleDocument;
 import site.alanliang.geekblog.model.Article;
 import site.alanliang.geekblog.model.ArticleTag;
 import site.alanliang.geekblog.model.Tag;
 import site.alanliang.geekblog.query.ArchivesQuery;
 import site.alanliang.geekblog.query.ArticleQuery;
+import site.alanliang.geekblog.repository.ArticleDocumentRepository;
 import site.alanliang.geekblog.service.ArticleService;
+import site.alanliang.geekblog.utils.HighLightUtil;
 import site.alanliang.geekblog.utils.UserInfoUtil;
 import site.alanliang.geekblog.vo.ArticleDateVO;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -49,6 +67,12 @@ public class ArticleServiceImpl implements ArticleService {
     @Autowired
     private OperationLogMapper operationLogMapper;
 
+    @Autowired
+    private RestHighLevelClient restHighLevelClient;
+
+    @Autowired
+    private ArticleDocumentRepository articleDocumentRepository;
+
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void increaseLikes(Long id) {
@@ -67,11 +91,42 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public List<Article> listByKeyword() {
-        QueryWrapper<Article> wrapper = new QueryWrapper<>();
-        wrapper.select("id", "title", "content");
-        return articleMapper.selectList(wrapper);
+    public List<ArticleDocument> listByKeyword(String keyword) throws IOException {
+        SearchRequest searchRequest = new SearchRequest("article_document");
+        //匹配查询
+        SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
+        MultiMatchQueryBuilder multiMatchQueryBuilder = QueryBuilders.multiMatchQuery(keyword, "title", "summary", "content");
+        TermQueryBuilder termQueryBuilder = QueryBuilders.termQuery("published", true);
+        BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery().must(multiMatchQueryBuilder).must(termQueryBuilder);
+        sourceBuilder.query(boolQueryBuilder);
+        //高亮
+        HighlightBuilder highlightBuilder = new HighlightBuilder();
+        highlightBuilder.field("title").field("summary").field("content");
+        highlightBuilder.preTags("<em class='search-keyword'>");
+        highlightBuilder.postTags("</em>");
+        sourceBuilder.highlighter(highlightBuilder);
+        //执行搜索
+        searchRequest.source(sourceBuilder);
+        SearchResponse searchResponse = restHighLevelClient.search(searchRequest, RequestOptions.DEFAULT);
+        //解析结果
+        List<ArticleDocument> articleDocuments = new ArrayList<>();
+        for (SearchHit hit : searchResponse.getHits().getHits()) {
+            Map<String, Object> map = hit.getSourceAsMap();//原来的结果
+            //解析高亮的字段
+            HighLightUtil.parseField(hit, "title");
+            HighLightUtil.parseField(hit, "summary");
+            HighLightUtil.parseField(hit, "content");
+
+            ArticleDocument articleDocument = new ArticleDocument();
+            articleDocument.setId(Long.valueOf((Integer) map.get("id")));
+            articleDocument.setTitle((String) map.get("title"));
+            articleDocument.setSummary((String) map.get("summary"));
+            articleDocument.setContent((String) map.get("content"));
+            articleDocuments.add(articleDocument);
+        }
+        return articleDocuments;
     }
+
 
     @Override
     @Cacheable(key = "'countByDate'")
@@ -151,6 +206,14 @@ public class ArticleServiceImpl implements ArticleService {
     @Transactional(rollbackFor = Exception.class)
     public void removeByIdList(List<Long> idList) {
         articleMapper.deleteBatchIds(idList);
+        //从ElasticSearch中删除
+        ArrayList<ArticleDocument> articleDocuments = new ArrayList<>();
+        for (Long id : idList) {
+            ArticleDocument articleDocument = new ArticleDocument();
+            articleDocument.setId(id);
+            articleDocuments.add(articleDocument);
+        }
+        articleDocumentRepository.deleteAll(articleDocuments);
     }
 
     @Override
@@ -158,6 +221,8 @@ public class ArticleServiceImpl implements ArticleService {
     @Transactional(rollbackFor = Exception.class)
     public void removeById(Long id) {
         articleMapper.deleteById(id);
+        //从ElasticSearch中删除
+        articleDocumentRepository.deleteById(id);
     }
 
     @Override
@@ -254,14 +319,29 @@ public class ArticleServiceImpl implements ArticleService {
             //新增
             articleMapper.insert(article);
         } else {
-            //编辑
+            //更新
+            //更新文章信息
             articleMapper.updateById(article);
-            QueryWrapper<ArticleTag> wrapper = new QueryWrapper<>();
-            wrapper.eq("article_id", article.getId());
-            articleTagMapper.delete(wrapper);
+            //删除原有标签
+            QueryWrapper<ArticleTag> articleTagWrapper = new QueryWrapper<>();
+            articleTagWrapper.eq("article_id", article.getId());
+            articleTagMapper.delete(articleTagWrapper);
+            //从ElasticSearch中删除
+            articleDocumentRepository.deleteById(article.getId());
         }
+        //添加新标签
         List<Long> tagIdList = article.getTagList().stream().map(Tag::getId).collect(Collectors.toList());
         articleTagMapper.insertBatch(article.getId(), tagIdList);
+        //添加到ElasticSearch中
+        ArticleDocument articleDocument = new ArticleDocument();
+        BeanUtils.copyProperties(article, articleDocument);
+        if (articleDocument.getPublished() == null) {
+            QueryWrapper<Article> wrapper = new QueryWrapper<>();
+            wrapper.select("published").eq("id", article.getId());
+            Article temp = articleMapper.selectOne(wrapper);
+            articleDocument.setPublished(temp.getPublished());
+        }
+        articleDocumentRepository.save(articleDocument);
     }
 
 }
