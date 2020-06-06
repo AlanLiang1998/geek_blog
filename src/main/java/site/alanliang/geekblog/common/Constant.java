@@ -32,6 +32,12 @@ public interface Constant {
      */
     String TABLE_ALIAS_ARTICLE = "ta.";
 
+    String TABLE_ALIAS_USER = "su.";
+
+    String TABLE_ALIAS_CATE = "tc.";
+
+    String TABLE_ALIAS_TAG = "tt.";
+
     /**
      * 默认颜色
      */

@@ -3,6 +3,9 @@ package site.alanliang.geekblog.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
@@ -25,12 +28,14 @@ import java.util.stream.Collectors;
  * Version 1.0
  **/
 @Service
+@CacheConfig(cacheNames = "link")
 public class LinkServiceImpl implements LinkService {
 
     @Autowired
     private LinkMapper linkMapper;
 
     @Override
+    @Cacheable
     public Page<Link> listTableByPage(int current, int size, LinkQuery linkQuery) {
         Page<Link> page = new Page<>(current, size);
         QueryWrapper<Link> wrapper = new QueryWrapper<>();
@@ -47,6 +52,7 @@ public class LinkServiceImpl implements LinkService {
     }
 
     @Override
+    @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Exception.class)
     public void audit(AuditVO auditVO) {
         Link link = new Link();
@@ -56,12 +62,14 @@ public class LinkServiceImpl implements LinkService {
     }
 
     @Override
+    @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Exception.class)
     public void removeByIdList(List<Long> idList) {
         linkMapper.deleteBatchIds(idList);
     }
 
     @Override
+    @Cacheable(key = "'listByPage:'+#current")
     public Page<Link> listByPage(Integer current, Integer size) {
         Page<Link> page = new Page<>(current, size);
         QueryWrapper<Link> wrapper = new QueryWrapper<>();
@@ -71,11 +79,13 @@ public class LinkServiceImpl implements LinkService {
     }
 
     @Override
+    @Cacheable(key = "'getById:'+#id")
     public Link getById(Long id) {
         return linkMapper.selectById(id);
     }
 
     @Override
+    @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Exception.class)
     public void saveOfUpdate(Link link) {
         if (link.getId() == null) {
@@ -102,6 +112,7 @@ public class LinkServiceImpl implements LinkService {
     }
 
     @Override
+    @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Exception.class)
     public void removeById(Long id) {
         linkMapper.deleteById(id);

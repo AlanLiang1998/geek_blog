@@ -43,7 +43,7 @@ public class RoleServiceImpl implements RoleService {
     private RoleMenuMapper roleMenuMapper;
 
     @Override
-    @Cacheable(key = "#id")
+    @Cacheable(key = "'getById:'+#id")
     public Role getById(Long id) {
         Role role = new Role();
         //查询角色信息
@@ -122,7 +122,7 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    @Cacheable(key = "'table'+#current")
+    @Cacheable
     public Page<Role> listByPage(Integer current, Integer size, RoleQuery roleQuery) {
         Page<Role> page = new Page<>(current, size);
         QueryWrapper<Role> wrapper = new QueryWrapper<>();
@@ -139,7 +139,7 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    @Cacheable
+    @Cacheable(key = "'listAll'")
     public List<Role> listAll() {
         QueryWrapper<Role> wrapper = new QueryWrapper<>();
         wrapper.select("id", "role_name");

@@ -2,8 +2,6 @@ package site.alanliang.geekblog.query;
 
 import lombok.Data;
 
-import java.util.Date;
-
 /**
  * @Descriptin TODO
  * @Author AlanLiang
@@ -20,7 +18,7 @@ public class ArticleQuery {
 
     private Boolean published;
 
-    private Date startDate;
+    private String startDate;
 
-    private Date endDate;
+    private String endDate;
 }

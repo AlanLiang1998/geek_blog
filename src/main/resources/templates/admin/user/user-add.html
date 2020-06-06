@@ -156,7 +156,7 @@
                 },
                 error: function (XMLHttpRequest) {
                     var result = JSON.parse(XMLHttpRequest.responseText);
-                    layer.alert(result.msg, {icon: 5});
+                    layer.alert(result.message, {icon: 5});
                 }
             });
             return false;

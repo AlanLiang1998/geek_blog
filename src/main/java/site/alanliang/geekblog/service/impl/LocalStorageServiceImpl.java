@@ -37,7 +37,7 @@ public class LocalStorageServiceImpl implements LocalStorageService {
     private LocalStorageMapper localStorageMapper;
 
     @Override
-    @Cacheable(key = "'table:'+#current")
+    @Cacheable
     public Page<LocalStorage> listTableByPage(Integer current, Integer size, LocalStorageQuery localStorageQuery) {
         Page<LocalStorage> page = new Page<>(current, size);
         QueryWrapper<LocalStorage> wrapper = new QueryWrapper<>();
@@ -110,7 +110,7 @@ public class LocalStorageServiceImpl implements LocalStorageService {
     }
 
     @Override
-    @Cacheable(key = "#id")
+    @Cacheable(key = "'getById:'+#id")
     public LocalStorage getById(Long id) {
         QueryWrapper<LocalStorage> wrapper = new QueryWrapper<>();
         wrapper.select("id", "name").eq("id", id);

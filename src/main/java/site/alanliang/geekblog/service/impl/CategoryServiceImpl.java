@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
+import site.alanliang.geekblog.common.Constant;
 import site.alanliang.geekblog.dao.CategoryMapper;
 import site.alanliang.geekblog.exception.EntityExistException;
 import site.alanliang.geekblog.model.Category;
@@ -33,7 +34,7 @@ public class CategoryServiceImpl implements CategoryService {
     private CategoryMapper categoryMapper;
 
     @Override
-    @Cacheable(key = "'table:'+#current")
+    @Cacheable
     public Page<Category> listTableByPage(Integer current, Integer size, CategoryQuery categoryQuery) {
         Page<Category> page = new Page<>(current, size);
         QueryWrapper<Category> wrapper = new QueryWrapper<>();
@@ -44,7 +45,7 @@ public class CategoryServiceImpl implements CategoryService {
             wrapper.eq("display", categoryQuery.getDisplay());
         }
         if (categoryQuery.getStartDate() != null && categoryQuery.getEndDate() != null) {
-            wrapper.between("create_time", categoryQuery.getStartDate(), categoryQuery.getEndDate());
+            wrapper.between(Constant.TABLE_ALIAS_CATE + "create_time", categoryQuery.getStartDate(), categoryQuery.getEndDate());
         }
         return categoryMapper.listTableByPage(page, wrapper);
     }
@@ -64,12 +65,13 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    @Cacheable(key = "'count'")
+    @Cacheable(key = "'countAll'")
     public long countAll() {
         return categoryMapper.selectCount(null);
     }
 
     @Override
+    @Cacheable(key = "'listColor'")
     public List<String> listColor() {
         QueryWrapper<Category> wrapper = new QueryWrapper<>();
         wrapper.select("color")
@@ -79,7 +81,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    @Cacheable(key = "'articleCount'")
+    @Cacheable(key = "'listByArticleCount'")
     public List<Category> listByArticleCount() {
         return categoryMapper.listByArticleCount();
     }
@@ -109,12 +111,13 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
+    @Cacheable(key = "'getById:'+#id")
     public Category getById(Long id) {
         return categoryMapper.selectById(id);
     }
 
     @Override
-    @Cacheable
+    @Cacheable(key = "'listAll'")
     public List<Category> listAll() {
         QueryWrapper<Category> wrapper = new QueryWrapper<>();
         wrapper.select("id", "name");

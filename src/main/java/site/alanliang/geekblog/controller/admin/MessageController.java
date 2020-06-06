@@ -2,10 +2,8 @@ package site.alanliang.geekblog.controller.admin;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import site.alanliang.geekblog.anntation.OperationLog;
 import site.alanliang.geekblog.common.Constant;
@@ -23,7 +21,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -38,18 +35,6 @@ import java.util.List;
 public class MessageController {
     @Autowired
     private MessageService messageService;
-
-    /**
-     * 将日期格式的String类型转为Date类型
-     *
-     * @param binder 数据绑定
-     */
-    @InitBinder
-    public void dateBinder(WebDataBinder binder) {
-        String pattern = "yyyy-MM-dd";
-        CustomDateEditor editor = new CustomDateEditor(new SimpleDateFormat(pattern), true);
-        binder.registerCustomEditor(Date.class, editor);
-    }
 
     @PreAuthorize("hasAuthority('blog:message:query')")
     @OperationLog("查询留言")

@@ -2,17 +2,15 @@ package site.alanliang.geekblog.query;
 
 import lombok.Data;
 
-import java.util.Date;
-
 @Data
 public class NoticeQuery {
     private String title;
 
     private String content;
 
-    private Date startDate;
+    private String startDate;
 
-    private Date endDate;
+    private String endDate;
 
     private Boolean display;
 }

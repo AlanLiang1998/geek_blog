@@ -3,7 +3,6 @@ package site.alanliang.geekblog.query;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * @Descriptin TODO
@@ -15,9 +14,9 @@ import java.util.Date;
 public class PhotoQuery implements Serializable {
     private String description;
 
-    private Date startDate;
+    private String startDate;
 
-    private Date endDate;
+    private String endDate;
 
     private Boolean display;
 }

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
+import site.alanliang.geekblog.common.Constant;
 import site.alanliang.geekblog.dao.TagMapper;
 import site.alanliang.geekblog.exception.EntityExistException;
 import site.alanliang.geekblog.model.Tag;
@@ -33,7 +34,7 @@ public class TagServiceImpl implements TagService {
     private TagMapper tagMapper;
 
     @Override
-    @Cacheable(key = "'table'+#current")
+    @Cacheable
     public Page<Tag> listTableByPage(Integer current, Integer size, TagQuery tagQuery) {
         Page<Tag> tagPage = new Page<>(current, size);
         QueryWrapper<Tag> wrapper = new QueryWrapper<>();
@@ -41,7 +42,7 @@ public class TagServiceImpl implements TagService {
             wrapper.like("name", tagQuery.getName());
         }
         if (tagQuery.getStartDate() != null && tagQuery.getEndDate() != null) {
-            wrapper.between("create_time", tagQuery.getStartDate(), tagQuery.getEndDate());
+            wrapper.between(Constant.TABLE_ALIAS_TAG + "create_time", tagQuery.getStartDate(), tagQuery.getEndDate());
         }
         return tagMapper.listTableByPage(tagPage, wrapper);
     }
@@ -85,23 +86,25 @@ public class TagServiceImpl implements TagService {
     }
 
     @Override
+    @Cacheable(key = "'getById:'+#id")
     public Tag getById(Long id) {
         return tagMapper.selectById(id);
     }
 
     @Override
-    @Cacheable(key = "'articleCount'")
+    @Cacheable(key = "'listByArticleCount'")
     public List<Tag> listByArticleCount() {
         return tagMapper.listByArticleCount();
     }
 
     @Override
-    @Cacheable(key = "'count'")
+    @Cacheable(key = "'countAll'")
     public long countAll() {
         return tagMapper.selectCount(null);
     }
 
     @Override
+    @Cacheable(key = "'listColor'")
     public List<String> listColor() {
         QueryWrapper<Tag> wrapper = new QueryWrapper<>();
         wrapper.select("color")
@@ -111,12 +114,13 @@ public class TagServiceImpl implements TagService {
     }
 
     @Override
+    @Cacheable(key = "'listByArticleId:'+#id")
     public List<Tag> listByArticleId(Long id) {
         return tagMapper.selectByArticleId(id);
     }
 
     @Override
-    @Cacheable
+    @Cacheable(key = "'listAll'")
     public List<Tag> listAll() {
         return tagMapper.selectList(null);
     }

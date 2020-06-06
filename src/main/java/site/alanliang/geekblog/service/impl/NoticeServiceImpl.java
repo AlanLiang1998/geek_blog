@@ -25,7 +25,7 @@ public class NoticeServiceImpl implements NoticeService {
     private NoticeMapper noticeMapper;
 
     @Override
-    @Cacheable(key = "'table'+#current")
+    @Cacheable
     public Page<Notice> listTableByPage(Integer current, Integer size, NoticeQuery noticeQuery) {
         Page<Notice> page = new Page<>(current, size);
         QueryWrapper<Notice> wrapper = new QueryWrapper<>();
@@ -71,7 +71,7 @@ public class NoticeServiceImpl implements NoticeService {
     }
 
     @Override
-    @Cacheable(key = "#id")
+    @Cacheable(key = "'getById:'+#id")
     public Notice getById(Long id) {
         QueryWrapper<Notice> wrapper = new QueryWrapper<>();
         wrapper.select("id", "title", "content", "sort", "display")
@@ -80,7 +80,7 @@ public class NoticeServiceImpl implements NoticeService {
     }
 
     @Override
-    @Cacheable(key = "'newest'")
+    @Cacheable(key = "'listNewest'")
     public List<Notice> listNewest() {
         QueryWrapper<Notice> wrapper = new QueryWrapper<>();
         wrapper.select("id", "title", "content", "create_time")

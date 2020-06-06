@@ -2,8 +2,6 @@ package site.alanliang.geekblog.query;
 
 import lombok.Data;
 
-import java.util.Date;
-
 /**
  * @Descriptin TODO
  * @Author AlanLiang
@@ -14,7 +12,7 @@ import java.util.Date;
 public class TagQuery {
     private String name;
 
-    private Date startDate;
+    private String startDate;
 
-    private Date endDate;
+    private String endDate;
 }

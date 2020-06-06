@@ -45,7 +45,7 @@ public class UserServiceImpl implements UserService {
     private RoleUserMapper roleUserMapper;
 
     @Override
-    @Cacheable(key = "#id")
+    @Cacheable(key = "'getById:'+#id")
     public User getById(Long id) {
         QueryWrapper<User> userWrapper = new QueryWrapper<>();
         userWrapper.select("id", "username", "nickname", "sex", "phone", "email", "status")
@@ -101,19 +101,19 @@ public class UserServiceImpl implements UserService {
             QueryWrapper<User> wrapper = new QueryWrapper<>();
             wrapper.eq("username", user.getUsername());
             if (null != userMapper.selectOne(wrapper)) {
-                throw new EntityExistException("用户名：" + user.getUsername() + "已存在");
+                throw new EntityExistException("用户", "用户名", user.getUsername());
             }
             //验证邮箱是否唯一
             wrapper.clear();
             wrapper.eq("email", user.getEmail());
             if (null != userMapper.selectOne(wrapper)) {
-                throw new EntityExistException("邮箱：" + user.getEmail() + "已存在");
+                throw new EntityExistException("用户", "邮箱", user.getEmail());
             }
             //验证手机号码是否唯一
             wrapper.clear();
             wrapper.eq("phone", user.getPhone());
             if (null != userMapper.selectOne(wrapper)) {
-                throw new EntityExistException("手机号码：" + user.getPhone() + "已存在");
+                throw new EntityExistException("用户", "手机号码", user.getPhone());
             }
             userMapper.insert(user);
             RoleUser roleUser = new RoleUser();
@@ -128,7 +128,7 @@ public class UserServiceImpl implements UserService {
             List<User> users = userMapper.selectList(userWrapper);
             users = users.stream().filter(u -> !u.getId().equals(user.getId())).collect(Collectors.toList());
             if (!CollectionUtils.isEmpty(users)) {
-                throw new EntityExistException("手机号码:" + user.getPhone() + " 已存在");
+                throw new EntityExistException("用户", "手机号码", user.getPhone());
             }
             //验证邮箱是否唯一
             userWrapper.clear();
@@ -136,7 +136,7 @@ public class UserServiceImpl implements UserService {
             users = userMapper.selectList(userWrapper);
             users = users.stream().filter(u -> !u.getId().equals(user.getId())).collect(Collectors.toList());
             if (!CollectionUtils.isEmpty(users)) {
-                throw new EntityExistException("邮箱:" + user.getEmail() + " 已被注册");
+                throw new EntityExistException("用户", "邮箱", user.getEmail());
             }
             //首先更新用户
             userMapper.updateById(user);
@@ -165,7 +165,7 @@ public class UserServiceImpl implements UserService {
         List<User> users = userMapper.selectList(wrapper);
         users = users.stream().filter(u -> !u.getId().equals(userInfoVO.getId())).collect(Collectors.toList());
         if (!CollectionUtils.isEmpty(users)) {
-            throw new EntityExistException("手机号码:" + userInfoVO.getPhone() + " 已存在");
+            throw new EntityExistException("用户", "手机号码", userInfoVO.getPhone());
         }
         //验证邮箱是否唯一
         wrapper.clear();
@@ -173,7 +173,7 @@ public class UserServiceImpl implements UserService {
         users = userMapper.selectList(wrapper);
         users = users.stream().filter(u -> !u.getId().equals(userInfoVO.getId())).collect(Collectors.toList());
         if (!CollectionUtils.isEmpty(users)) {
-            throw new EntityExistException("邮箱:" + userInfoVO.getEmail() + " 已被注册");
+            throw new EntityExistException("用户", "邮箱", userInfoVO.getEmail());
         }
         User user = new User();
         BeanUtils.copyProperties(userInfoVO, user);
@@ -181,7 +181,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    @Cacheable(key="'count'")
+    @Cacheable(key = "'countAll'")
     public Integer countAll() {
         return userMapper.selectCount(null);
     }
@@ -195,7 +195,7 @@ public class UserServiceImpl implements UserService {
         User user = userMapper.selectOne(wrapper);
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         if (!encoder.matches(passwordVO.getOldPassword(), user.getPassword())) {
-            throw new BadRequestException(HttpStatus.BAD_REQUEST, "旧密码输入错误");
+            throw new BadRequestException(HttpStatus.BAD_REQUEST, "旧密码输入不正确");
         }
         user.setId(passwordVO.getUserId());
         user.setPassword(encoder.encode(passwordVO.getNewPassword()));
@@ -203,7 +203,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    @Cacheable(key = "'table'+#current")
+    @Cacheable
     public Page<User> listTableByPage(int current, int size, UserQuery userQuery) {
         Page<User> page = new Page<>(current, size);
         QueryWrapper<User> wrapper = new QueryWrapper<>();
@@ -214,13 +214,13 @@ public class UserServiceImpl implements UserService {
             wrapper.like("email", userQuery.getEmail());
         }
         if (userQuery.getStartDate() != null && userQuery.getEndDate() != null) {
-            wrapper.between("create_time", userQuery.getStartDate(), userQuery.getEndDate());
+            wrapper.between(Constant.TABLE_ALIAS_USER + "create_time", userQuery.getStartDate(), userQuery.getEndDate());
         }
         return userMapper.listTableByPage(page, wrapper);
     }
 
     @Override
-    @Cacheable(key = "#username")
+    @Cacheable(key = "'checkUser:'+#username")
     public User checkUser(String username, String password) {
         QueryWrapper<User> wrapper = new QueryWrapper<>();
         wrapper.select("id", "username")

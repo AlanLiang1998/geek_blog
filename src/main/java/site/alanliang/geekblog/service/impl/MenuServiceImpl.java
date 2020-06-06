@@ -36,7 +36,7 @@ public class MenuServiceImpl implements MenuService {
     private MenuMapper menuMapper;
 
     @Override
-    @Cacheable(key="'count'")
+    @Cacheable(key = "'countAll'")
     public Long countAll() {
         return Long.valueOf(menuMapper.selectCount(null));
     }
@@ -49,7 +49,7 @@ public class MenuServiceImpl implements MenuService {
     }
 
     @Override
-    @Cacheable(key="#id")
+    @Cacheable(key = "'getById:'+#id")
     public Menu getById(Long id) {
         QueryWrapper<Menu> wrapper = new QueryWrapper<>();
         wrapper.select("id", "pid", "title", "href", "icon", "authority", "sort", "type", "status")
@@ -92,6 +92,7 @@ public class MenuServiceImpl implements MenuService {
     }
 
     @Override
+    @Cacheable(key = "'listByCheckboxTree'")
     public List<MenuCheckboxVO> listByCheckboxTree() {
         QueryWrapper<Menu> wrapper = new QueryWrapper<>();
         wrapper.select("id", "pid", "title");
@@ -109,6 +110,7 @@ public class MenuServiceImpl implements MenuService {
     }
 
     @Override
+    @Cacheable(key = "'listBySelectTree'")
     public List<MenuSelectVO> listBySelectTree() {
         QueryWrapper<Menu> wrapper = new QueryWrapper<>();
         wrapper.select("id", "pid", "title");

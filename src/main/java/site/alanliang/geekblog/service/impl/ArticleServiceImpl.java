@@ -85,6 +85,7 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
+    @Cacheable(key = "'listPreviewPageByDate:'+#current")
     public Page<Article> listPreviewPageByDate(Integer current, Integer size, ArchivesQuery archivesQuery) {
         Page<Article> articlePage = new Page<>(current, size);
         return articleMapper.listPreviewPageByDate(articlePage);
@@ -129,7 +130,7 @@ public class ArticleServiceImpl implements ArticleService {
 
 
     @Override
-    @Cacheable(key = "'countByDate'+#dateFilterType")
+    @Cacheable(key = "'countByDate:'+#dateFilterType")
     public List<ArticleDateVO> countByDate(Integer dateFilterType) {
         if (dateFilterType == null) {
             dateFilterType = Constant.FILTER_BY_DAY;
@@ -138,12 +139,14 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
+    @Cacheable(key = "'listPreviewPageByTagId:'+#tagId+':'+#current")
     public Page<Article> listPreviewPageByTagId(Integer current, Integer size, Long tagId) {
         Page<Article> articlePage = new Page<>(current, size);
         return articleMapper.listPreviewPageByTagId(articlePage, tagId);
     }
 
     @Override
+    @Cacheable(key = "'listPreviewPageByCategoryId:'+#categoryId+':'+#current")
     public Page<Article> listPreviewPageByCategoryId(Integer current, Integer size, Long categoryId) {
         Page<Article> articlePage = new Page<>(current, size);
         return articleMapper.listPreviewPageByCategoryId(articlePage, categoryId);
@@ -160,7 +163,7 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    @Cacheable(key = "#id")
+    @Cacheable(key = "'getDetailById:'+#id")
     public Article getDetailById(Long id) {
         //浏览次数加1
         increaseViews(id);
@@ -179,18 +182,19 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
+    @Cacheable(key = "'getById:'+#id")
     public Article getById(Long id) {
         return articleMapper.selectById(id);
     }
 
     @Override
-    @Cacheable(key = "'count'")
+    @Cacheable(key = "'countAll'")
     public long countAll() {
         return articleMapper.selectCount(null);
     }
 
     @Override
-    @Cacheable(key = "'top'")
+    @Cacheable(key = "'listTop'")
     public List<Article> listTop() {
         QueryWrapper<Article> wrapper = new QueryWrapper<>();
         wrapper.select("id", "title", "summary", "cover")
@@ -225,21 +229,22 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    @Cacheable(key = "'preview:'+#current")
+    @Cacheable(key = "'listPreviewByPage:'+#current")
     public Page<Article> listPreviewByPage(Integer current, Integer size) {
         Page<Article> articlePage = new Page<>(current, size);
         return articleMapper.listPreviewByPage(articlePage);
     }
 
     @Override
-    @Cacheable(key = "'recommend'")
+    @Cacheable(key = "'listRecommend'")
     public List<Article> listRecommend() {
         return articleMapper.listRecommend(Constant.MAX_RECOMMEND_ARTICLES);
     }
 
     @Override
-    @Cacheable(key = "'table:'+#current")
+    @Cacheable
     public Page<Article> listTableByPage(Integer current, Integer size, ArticleQuery articleQuery) {
+        System.out.println("查询数据库");
         Page<Article> page = new Page<>(current, size);
         QueryWrapper<Article> wrapper = new QueryWrapper<>();
         if (!StringUtils.isEmpty(articleQuery.getTitle())) {
@@ -261,7 +266,7 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    @Cacheable(key = "'newest'")
+    @Cacheable(key = "'listNewest'")
     public List<Article> listNewest() {
         QueryWrapper<Article> wrapper = new QueryWrapper<>();
         wrapper.select("id", "title", "summary", "create_time")

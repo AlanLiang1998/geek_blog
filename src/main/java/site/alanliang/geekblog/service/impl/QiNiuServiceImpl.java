@@ -52,7 +52,7 @@ public class QiNiuServiceImpl implements QiNiuService {
     private Long maxSize;
 
     @Override
-    @Cacheable(key = "'table'+#current")
+    @Cacheable
     public Page<QiniuContent> queryAll(Integer current, Integer size, QiNiuQuery qiNiuQuery) {
         Page<QiniuContent> page = new Page<>(current, size);
         QueryWrapper<QiniuContent> wrapper = new QueryWrapper<>();
@@ -66,7 +66,7 @@ public class QiNiuServiceImpl implements QiNiuService {
     }
 
     @Override
-    @Cacheable
+    @Cacheable(key = "'queryAll'")
     public List<QiniuContent> queryAll(QiNiuQuery qiNiuQuery) {
         return qiNiuContentMapper.selectList(null);
     }
@@ -132,7 +132,7 @@ public class QiNiuServiceImpl implements QiNiuService {
     }
 
     @Override
-    @Cacheable
+    @Cacheable(key = "'findByContentId:'+#id")
     public QiniuContent findByContentId(Long id) {
         return qiNiuContentMapper.selectById(id);
     }

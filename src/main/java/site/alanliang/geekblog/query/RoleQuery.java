@@ -2,8 +2,6 @@ package site.alanliang.geekblog.query;
 
 import lombok.Data;
 
-import java.util.Date;
-
 /**
  * @Descriptin TODO
  * @Author AlanLiang
@@ -16,7 +14,7 @@ public class RoleQuery {
 
     private String description;
 
-    private Date startDate;
+    private String startDate;
 
-    private Date endDate;
+    private String endDate;
 }

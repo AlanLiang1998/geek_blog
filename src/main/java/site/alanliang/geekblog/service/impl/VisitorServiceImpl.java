@@ -36,7 +36,7 @@ public class VisitorServiceImpl implements VisitorService {
     private VisitorMapper visitorMapper;
 
     @Override
-    @Cacheable(key = "'count'")
+    @Cacheable(key = "'countAll'")
     public Integer countAll() {
         return visitorMapper.selectCount(null);
     }
@@ -92,7 +92,7 @@ public class VisitorServiceImpl implements VisitorService {
     }
 
     @Override
-    @Cacheable(key = "'table'+#current")
+    @Cacheable
     public Page<Visitor> listTableByPage(Integer current, Integer size, UserQuery userQuery) {
         Page<Visitor> page = new Page<>(current, size);
         QueryWrapper<Visitor> wrapper = new QueryWrapper<>();
