@@ -71,7 +71,7 @@ public class VisitorServiceImpl implements VisitorService {
     @Override
     public Visitor login(VisitorLoginVO visitorLoginVO) {
         QueryWrapper<Visitor> wrapper = new QueryWrapper<>();
-        wrapper.select("id", "username", "password", "nickname", "avatar", "link", "status")
+        wrapper.select("id", "username", "password", "nickname", "avatar", "link", "email", "status")
                 .eq("username", visitorLoginVO.getCertificate())
                 .or()
                 .eq("email", visitorLoginVO.getCertificate());
@@ -87,6 +87,7 @@ public class VisitorServiceImpl implements VisitorService {
             throw new BadRequestException("用户名/邮箱不存在");
         }
         visitor.setPassword(null);
+        visitor.setStatus(null);
         return visitor;
     }
 

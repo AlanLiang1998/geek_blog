@@ -461,7 +461,7 @@
                     <div class="tag-title center-align">
                         <i class="fas fa-address-book"></i>&nbsp;&nbsp;友情链接
                     </div>
-                    <article id="friends-link" style="position: relative; height: 732px;">
+                    <article id="friends-link" style="position: relative;">
                         <div class="row tags-posts friend-all">
                             <div class="col s12 m6 l4 friend-div aos-init" data-aos="zoom-in-up"
                                  v-for="(friend, index) in friends" :key="friend.id">
@@ -627,9 +627,17 @@
                 total: 0,
             },
             friends: [],
-
         },
         methods: {
+            getForm: function () {
+                let item = localStorage.getItem("visitor");
+                if (item != null) {
+                    let visitor = JSON.parse(item)
+                    this.message.nickname = visitor.nickname;
+                    this.message.email = visitor.email;
+                    this.message.link = visitor.link;
+                }
+            },
             clearForm: function () {
                 this.message.nickname = '';
                 this.message.email = '';
@@ -744,6 +752,7 @@
             }
         },
         created() {
+            this.getForm();
             this.getMessages();
             this.getLinks();
         },
@@ -755,13 +764,6 @@
     });
 </script>
 <!--弹出层-->
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<script>
-    $(function () {
-        $('#friends-link').masonry({
-            itemSelector: '.friend-div'
-        });
-    });
-</script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 </body>
 </html>

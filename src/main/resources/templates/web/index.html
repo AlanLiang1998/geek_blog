@@ -299,6 +299,7 @@
                     this.pages = pageInfo.pages;
                     this.$nextTick(function () {
                         this.initCarousel();
+                        lazyLoadInstance.update();
                     });
                 })
             },
@@ -386,9 +387,7 @@
         },
         filters: {
             dateFormat: function (value) {
-                if (!value) return ''
-                value = value.toString()
-                return value.split(' ')[0];
+                return moment(value).format("YYYY-MM-DD");
             }
         },
     });

@@ -34,7 +34,7 @@ spring:
   #禁用thymeleaf模板缓存
   thymeleaf:
     cache: false
-  jackson:
+    jackson:
     #设置JSON数据的时区和格式
     time-zone: GMT+8
     date-format: yyyy-MM-dd HH:mm:ss

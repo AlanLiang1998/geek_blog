@@ -240,6 +240,7 @@
                 if (page >= 1 && page <= this.pages) {
                     this.current = page;
                     this.getArticlesByCategoryId(this.categoryId, page);
+                    $(window).scrollTo('#articleCards', 1000);
                 }
             },
             getQueryString: function (name) {
@@ -259,9 +260,7 @@
         },
         filters: {
             dateFormat: function (value) {
-                if (!value) return ''
-                value = value.toString();
-                return value.split(' ')[0];
+                return moment(value).format("YYYY-MM-DD");
             }
         },
     });
