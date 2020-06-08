@@ -41,8 +41,8 @@ public class VisitorController {
 
     @PreAuthorize("hasAuthority('sys:visitor:status')")
     @OperationLog("修改访客状态")
-    @PutMapping("/status")
-    public JsonResult changeStatus(@NotNull @RequestParam("id") Long id) {
+    @PutMapping("/status/{id}")
+    public JsonResult changeStatus(@PathVariable("id") Long id) {
         visitorService.changeStatus(id);
         return JsonResult.ok();
     }

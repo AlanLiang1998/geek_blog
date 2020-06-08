@@ -137,6 +137,10 @@
         th:src="@{/static/admin/layuimini/lib/layui-v2.5.5/layui.js}"></script>
 <script src="/static/admin/layuimini/js/lay-config.js?v=2.0.0" charset="utf-8"
         th:src="@{/static/admin/layuimini/js/lay-config.js(v=2.0.0)}"></script>
+<!--sweetalert2弹出层-->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<!--axios异步工具-->
+<script src="https://cdn.bootcdn.net/ajax/libs/axios/0.19.2/axios.js"></script>
 <script>
     layui.use(['jquery', 'layer', 'miniAdmin'], function () {
         var $ = layui.jquery,
@@ -159,14 +163,25 @@
         $('#username').text(username);
 
         $('.login-out').on("click", function () {
-            $.ajax({
+            axios({
+                method: 'post',
                 url: '/admin/logout',
-                type: 'POST',
-                success: function (result) {
-                    layer.msg('退出登录成功', function () {
-                        window.location = '/admin/login.html';
-                    });
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
                 }
+            }).then((response) => {
+                Swal.fire({
+                    toast: true,
+                    position: 'center',
+                    icon: 'success',
+                    title: '退出登录成功!',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    onClose: () => {
+                        window.location = '/admin/login.html';
+                    }
+                });
             });
         });
     });

@@ -133,12 +133,17 @@
         th:src="@{/static/admin/layuimini/js/lay-module/layuimini/miniTab.js}"></script>
 <script src="/static/admin/layuimini/lib/jquery-3.4.1/jquery-3.4.1.min.js"></script>
 <script src="/static/admin/editormd/editormd.min.js"></script>
+<!--sweetalert2弹出层-->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<!--axios异步工具-->
+<script src="https://cdn.bootcdn.net/ajax/libs/axios/0.19.2/axios.js"></script>
 <script type="text/javascript" th:inline="javascript">
     layui.use(['layer', 'form', 'miniTab'], function () {
         var $ = layui.jquery,
             layer = layui.layer,
             form = layui.form,
             miniTab = layui.miniTab;
+
         //渲染多选下拉框
         var tagSelect = xmSelect.render({
             el: '#tag-select',
@@ -231,9 +236,76 @@
                 }
             }
         });
+        //监听置顶
+        form.on('switch(top)', function (data) {
+            if (data.elem.checked) {
+                axios({
+                    method: 'get',
+                    url: '/admin/article/reachedMaxTop',
+                }).then((response) => {
+                    let result = response.data;
+                    if (result.data.reached) {
+                        data.elem.checked = false;
+                        form.render('checkbox');
+                        Swal.fire({
+                            toast: true,
+                            position: 'top-end',
+                            icon: 'warning',
+                            title: '置顶文章已达到最大限制数量: ' + result.data.maxTop,
+                            showConfirmButton: false,
+                            timer: 3000,
+                            timerProgressBar: true,
+                        });
+                    }
+                })
+            }
+        });
+        //监听推荐
+        form.on('switch(recommend)', function (data) {
+            if (data.elem.checked) {
+                axios({
+                    method: 'get',
+                    url: '/admin/article/reachedMaxRecommend',
+                }).then((response) => {
+                    let result = response.data;
+                    if (result.data.reached) {
+                        data.elem.checked = false;
+                        form.render('checkbox');
+                        Swal.fire({
+                            toast: true,
+                            position: 'top-end',
+                            icon: 'warning',
+                            title: '推荐文章已达到最大限制数量: ' + result.data.maxRecommend,
+                            showConfirmButton: false,
+                            timer: 3000,
+                            timerProgressBar: true,
+                        });
+                    }
+                })
+                /*  $.ajax({
+                      url: '/admin/article/reachedMaxTop',
+                      type: 'GET',
+                      success: function (result) {
+                          if (result.data.reached) {
+                              data.elem.checked = false;
+                              form.render('checkbox');
+                              Swal.fire({
+                                  toast: true,
+                                  position: 'top-end',
+                                  icon: 'warning',
+                                  title: '置顶文章已达到最大限制数量',
+                                  showConfirmButton: false,
+                                  timer: 3000,
+                                  timerProgressBar: true,
+                              });
+                          }
+                      }
+                  });*/
+            }
+        });
 
-        //保存文章
-        function saveArticle(data, isPublish) {
+        //获取输入
+        function getField(data, isPublish) {
             //获取标签列表
             data.field.tagList = tagSelect.getValue().map(item => {
                 return {
@@ -247,80 +319,85 @@
             data.field.textContent = editor.getMarkdown();
             //获取是否发布
             data.field.published = isPublish;
-
-            var saveResult = false;
-
-            $.ajax({
-                url: '/admin/article',
-                type: 'POST',
-                contentType: 'application/json',
-                data: JSON.stringify(data.field),
-                async: false,
-                success: function (result) {
-                    if (result.code == 200) {
-                        saveResult = true;
-                    }
-                },
-                error: function (XMLHttpRequest) {
-                    var result = JSON.parse(XMLHttpRequest.responseText);
-                    layer.alert(result.msg, {icon: 5});
-                }
-            });
-            return saveResult;
+            return data.field;
         };
-        //监听置顶
-        form.on('switch(top)', function (data) {
-            if (data.elem.checked) {
-                $.ajax({
-                    url: '/admin/article/reachedMaxTop',
-                    type: 'GET',
-                    success: function (result) {
-                        if (result.data.reached) {
-                            layer.msg('置顶文章已达到最大限制数量：' + result.data.maxTop);
-                            data.elem.checked = false;
-                            form.render();
-                        }
-                    }
-                });
-            }
-        });
-        //监听推荐
-        form.on('switch(recommend)', function (data) {
-            if (data.elem.checked) {
-                $.ajax({
-                    url: '/admin/article/reachedMaxRecommend',
-                    type: 'GET',
-                    success: function (result) {
-                        if (result.data.reached) {
-                            layer.msg('推荐文章已达到最大限制数量：' + result.data.maxRecommend);
-                            data.elem.checked = false;
-                            form.render();
-                        }
-                    }
-                });
-            }
-        });
         //监听保存草稿按钮
         form.on('submit(draft)', function (data) {
-            var result = saveArticle(data, false);
-            if (result == true) {
-                layer.msg('保存成功', {icon: 6});
-            }
+            let fields = getField(data, false);
+            axios({
+                method: 'post',
+                url: '/admin/article',
+                data: fields,
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                },
+            }).then((response) => {
+                Swal.fire({
+                    icon: 'success',
+                    title: '保存成功',
+                    showConfirmButton: false,
+                    timer: 1500,
+                    onClose: () => {
+                        miniTab.openNewTabByIframe({
+                            href: "/admin/api/article/article-list?rad=" + Math.random(),
+                            title: "文章管理",
+                        });
+                        //miniTab.deleteCurrentByIframe();
+                    }
+                });
+            }).catch((error) => {
+                Swal.fire({
+                    icon: 'error',
+                    title: '保存失败！',
+                    text: `${error.response.data.message}`,
+                });
+            })
             return false;
         });
         //监听发布文章按钮
         form.on('submit(publish)', function (data) {
-            var result = saveArticle(data, true);
-            if (result == true) {
-                var index = layer.confirm('发布成功,是否查看文章？', {icon: 6}, function () {
-                    layer.close(index);
-                    miniTab.openNewTabByIframe({
-                        href: "/admin/api/article/article-list?rad=" + Math.random(),
-                        title: "所有文章",
-                    });
-                });
-
-            }
+            let fields = getField(data, true);
+            Swal.fire({
+                title: '是否确定发布该文章？',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: '确定发布！',
+                cancelButtonText: '取消发布！',
+                showLoaderOnConfirm: true,
+                preConfirm: () => {
+                    return new Promise((resolve, reject) => {
+                        axios({
+                            method: 'post',
+                            url: '/admin/article',
+                            data: fields,
+                            headers: {
+                                'X-Requested-With': 'XMLHttpRequest'
+                            }
+                        }).then(response => {
+                            resolve(response.data);
+                        }, error => {
+                            reject(error);
+                        })
+                    }).then(res => {
+                        Swal.fire({
+                            icon: 'success',
+                            title: '发布成功',
+                            showConfirmButton: false,
+                            timer: 1500,
+                            onClose: () => {
+                                miniTab.openNewTabByIframe({
+                                    href: "/admin/api/article/article-list?rad=" + Math.random(),
+                                    title: "文章管理",
+                                });
+                            }
+                        });
+                    }).catch(error => {
+                        Swal.showValidationMessage(`发布失败: ${error.response.data.message}`);
+                    })
+                }
+            });
             return false;
         });
 
@@ -332,7 +409,6 @@
             saveHTMLToTextarea: true,
             path: "/static/admin/editormd/lib/"
         });
-
     });
 </script>
 </body>

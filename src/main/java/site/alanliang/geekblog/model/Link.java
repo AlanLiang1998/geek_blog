@@ -38,7 +38,6 @@ public class Link {
     @URL
     private String link;
 
-    @NotNull
     private Integer status;
 
     private Date createTime;

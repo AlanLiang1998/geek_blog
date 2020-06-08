@@ -80,7 +80,10 @@
         th:src="@{/static/admin/layuimini/lib/layui-v2.5.5/layui.js}"></script>
 <script src="/static/admin/layuimini/lib/jquery-3.4.1/jquery-3.4.1.min.js"></script>
 <script src="/static/admin/my/js/my.js"></script>
+<!--sweetalert2弹出层-->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<!--axios异步工具-->
+<script src="https://cdn.bootcdn.net/ajax/libs/axios/0.19.2/axios.js"></script>
 <script>
     layui.use(['form', 'table', 'laydate'], function () {
         var $ = layui.jquery,
@@ -195,39 +198,40 @@
                 }
                 Swal.fire({
                     title: '确定删除选中的' + idList.length + '张照片吗？',
-                    text: "你将不能撤销该操作!",
+                    text: '你将无法恢复它！',
                     icon: 'warning',
                     showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: '确定删除！',
+                    cancelButtonText: '取消删除！',
                     showLoaderOnConfirm: true,
-                    confirmButtonText: '删除',
-                    cancelButtonText: '取消',
-                    reverseButtons: true
-                }).then((result) => {
-                    if (result.value) {
-                        $.ajax({
-                            url: '/admin/photo',
-                            type: 'DELETE',
-                            data: JSON.stringify(idList),
-                            contentType: 'application/json',
-                            success: function (result) {
-                                if (result.code === 200) {
-                                    table.reload('currentTableId');
-                                    Swal.fire(
-                                        'Deleted!',
-                                        '删除成功',
-                                        'success'
-                                    );
+                    preConfirm: () => {
+                        return new Promise((resolve, reject) => {
+                            axios({
+                                method: 'delete',
+                                url: '/admin/photo',
+                                data: idList,
+                                headers: {
+                                    'X-Requested-With': 'XMLHttpRequest'
                                 }
-                            },
-                            error: function (result) {
-                                let error = JSON.parse(result.responseText);
-                                Swal.fire(
-                                    'Error!',
-                                    error.msg,
-                                    'error'
-                                );
-                            }
-                        });
+                            })
+                                .then(response => {
+                                    table.reload('currentTableId');
+                                    resolve(response.data);
+                                }, error => {
+                                    reject(error);
+                                })
+                        }).then(res => {
+                            Swal.fire({
+                                icon: 'success',
+                                title: '删除成功！',
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                        }).catch(error => {
+                            Swal.showValidationMessage(`删除失败: ${error.response.data.message}`);
+                        })
                     }
                 });
             } else if (obj.event === 'add') {
@@ -250,38 +254,40 @@
             var data = obj.data;
             if (obj.event === 'delete') {
                 Swal.fire({
-                    title: '确定删除这张照片吗？',
-                    text: "你将不能撤销该操作!",
+                    title: '确定删除选中的这张照片吗？',
+                    text: '你将无法恢复它！',
                     icon: 'warning',
                     showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: '确定删除！',
+                    cancelButtonText: '取消删除！',
                     showLoaderOnConfirm: true,
-                    confirmButtonText: '删除',
-                    cancelButtonText: '取消',
-                    reverseButtons: true
-                }).then((result) => {
-                    if (result.value) {
-                        $.ajax({
-                            url: '/admin/photo/' + data.id,
-                            type: 'DELETE',
-                            success: function (result) {
-                                if (result.code === 200) {
-                                    table.reload('currentTableId');
-                                    Swal.fire(
-                                        'Deleted!',
-                                        '删除成功',
-                                        'success'
-                                    );
+                    preConfirm: () => {
+                        return new Promise((resolve, reject) => {
+                            axios({
+                                method: 'delete',
+                                url: '/admin/link/' + data.id,
+                                headers: {
+                                    'X-Requested-With': 'XMLHttpRequest'
                                 }
-                            },
-                            error: function (result) {
-                                let error = JSON.parse(result.responseText);
-                                Swal.fire(
-                                    'Error!',
-                                    error.msg,
-                                    'error'
-                                );
-                            }
-                        });
+                            })
+                                .then(response => {
+                                    obj.del();
+                                    resolve(response.data);
+                                }, error => {
+                                    reject(error);
+                                })
+                        }).then(res => {
+                            Swal.fire({
+                                icon: 'success',
+                                title: '删除成功！',
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                        }).catch(error => {
+                            Swal.showValidationMessage(`删除失败: ${error.response.data.message}`);
+                        })
                     }
                 });
             } else if (obj.event === 'edit') {

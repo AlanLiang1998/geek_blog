@@ -74,9 +74,9 @@ public class UserController {
 
     @PreAuthorize("hasAuthority('sys:user:edit')")
     @OperationLog("修改用户状态")
-    @PutMapping("/status")
-    public JsonResult changeStatus(@NotNull @RequestParam("userId") Long userId) {
-        userService.changeStatus(userId);
+    @PutMapping("/status/{id}")
+    public JsonResult changeStatus(@PathVariable("id") Long id) {
+        userService.changeStatus(id);
         return JsonResult.ok();
     }
 

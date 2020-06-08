@@ -57,7 +57,7 @@
 
         <script type="text/html" id="toolbarDemo">
             <div class="layui-btn-container">
-                <button class="layui-btn layui-btn-sm data-add-btn" lay-event="add" permission="blog:category:add">添加
+                <button class="layui-btn layui-btn-sm data-add-btn" lay-event="add" permission="blog:category:add">添加分类
                 </button>
                 <button class="layui-btn layui-btn-sm layui-btn-danger data-delete-btn" lay-event="delete"
                         permission="blog:category:delete"> 批量删除
@@ -83,6 +83,10 @@
         th:src="@{/static/admin/layuimini/js/lay-module/layuimini/miniTab.js}"></script>
 <script src="/static/admin/layuimini/lib/jquery-3.4.1/jquery-3.4.1.min.js"></script>
 <script src="/static/admin/my/js/my.js"></script>
+<!--sweetalert2弹出层-->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<!--axios异步工具-->
+<script src="https://cdn.bootcdn.net/ajax/libs/axios/0.19.2/axios.js"></script>
 <script>
     layui.use(['layer', 'form', 'table', 'miniTab', 'laydate'], function () {
         var $ = layui.jquery,
@@ -200,20 +204,43 @@
                 if (idList.length <= 0) {
                     return false;
                 }
-                layer.confirm('确定删除选中的' + idList.length + '个分类吗？', {icon: 3}, function (index) {
-                    $.ajax({
-                        url: '/admin/category',
-                        type: 'DELETE',
-                        data: JSON.stringify(idList),
-                        contentType: 'application/json',
-                        success: function (result) {
-                            if (result.code == 200) {
-                                table.reload('currentTableId');
-                                layer.close(index);
-                                layer.msg('删除成功', {icon: 1});
-                            }
-                        }
-                    });
+                Swal.fire({
+                    title: '确定删除选中的' + idList.length + '个分类吗？',
+                    text: '你将无法恢复它！',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: '确定删除！',
+                    cancelButtonText: '取消删除！',
+                    showLoaderOnConfirm: true,
+                    preConfirm: () => {
+                        return new Promise((resolve, reject) => {
+                            axios({
+                                method: 'delete',
+                                url: '/admin/category',
+                                data: idList,
+                                headers: {
+                                    'X-Requested-With': 'XMLHttpRequest'
+                                }
+                            })
+                                .then(response => {
+                                    table.reload('currentTableId');
+                                    resolve(response.data);
+                                }, error => {
+                                    reject(error);
+                                })
+                        }).then(res => {
+                            Swal.fire({
+                                icon: 'success',
+                                title: '删除成功！',
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                        }).catch(error => {
+                            Swal.showValidationMessage(`删除失败: ${error.response.data.message}`);
+                        })
+                    }
                 });
             } else if (obj.event === 'add') {  // 监听添加操作
                 var index = layer.open({
@@ -248,18 +275,42 @@
                 });
                 return false;
             } else if (obj.event === 'delete') {
-                layer.confirm('确定删除这个分类吗？', {icon: 3}, function (index) {
-                    $.ajax({
-                        url: '/admin/category/' + data.id,
-                        type: 'DELETE',
-                        success: function (result) {
-                            if (result.code == 200) {
-                                obj.del();
-                                layer.close(index);
-                                layer.msg('删除成功', {icon: 1});
-                            }
-                        }
-                    });
+                Swal.fire({
+                    title: '确定删除选中的这个分类吗？',
+                    text: '你将无法恢复它！',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: '确定删除！',
+                    cancelButtonText: '取消删除！',
+                    showLoaderOnConfirm: true,
+                    preConfirm: () => {
+                        return new Promise((resolve, reject) => {
+                            axios({
+                                method: 'delete',
+                                url: '/admin/category/' + data.id,
+                                headers: {
+                                    'X-Requested-With': 'XMLHttpRequest'
+                                }
+                            })
+                                .then(response => {
+                                    obj.del();
+                                    resolve(response.data);
+                                }, error => {
+                                    reject(error);
+                                })
+                        }).then(res => {
+                            Swal.fire({
+                                icon: 'success',
+                                title: '删除成功！',
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                        }).catch(error => {
+                            Swal.showValidationMessage(`删除失败: ${error.response.data.message}`);
+                        })
+                    }
                 });
             }
         });

@@ -4,7 +4,7 @@
 
     <select id="listMenuByUserId" resultType="site.alanliang.geekblog.model.Menu">
         select sm.*
-        from (select id, pid, title, icon, href, target
+        from (select id, pid, title, icon, href, target, sort
               from sys_menu
               where `status` = 1
                 and (type = 1 or type = 2)) sm
@@ -13,6 +13,7 @@
                  left join sys_role_user sru
                            on srm.role_id = sru.role_id
         where sru.user_id = #{userId}
+        order by sm.sort
     </select>
     <select id="listPermissionByUserId" resultType="site.alanliang.geekblog.model.Menu">
         select sm.*

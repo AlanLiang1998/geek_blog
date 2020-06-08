@@ -49,7 +49,7 @@ public class LinkController {
     @ApiOperation("审核友链")
     @PreAuthorize("hasAuthority('blog:link:audit')")
     @OperationLog("审核友链")
-    @PostMapping("/audit")
+    @PutMapping("/audit")
     public JsonResult audit(@Validated @RequestBody AuditVO auditVO) {
         linkService.audit(auditVO);
         return JsonResult.ok();

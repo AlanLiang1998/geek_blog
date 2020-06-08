@@ -244,7 +244,6 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     @Cacheable
     public Page<Article> listTableByPage(Integer current, Integer size, ArticleQuery articleQuery) {
-        System.out.println("查询数据库");
         Page<Article> page = new Page<>(current, size);
         QueryWrapper<Article> wrapper = new QueryWrapper<>();
         if (!StringUtils.isEmpty(articleQuery.getTitle())) {
@@ -308,8 +307,6 @@ public class ArticleServiceImpl implements ArticleService {
     @Transactional(rollbackFor = Exception.class)
     public void saveOrUpdate(Article article) {
         QueryWrapper<Tag> tagWrapper = new QueryWrapper<>();
-        tagWrapper.select("id", "name");
-        List<Tag> tagList = tagMapper.selectList(tagWrapper);
         //存在新标签则添加新标签
         List<Tag> newTagList = article.getTagList().stream().filter(t -> (t.getId() == null)).collect(Collectors.toList());
         for (Tag newTag : newTagList) {

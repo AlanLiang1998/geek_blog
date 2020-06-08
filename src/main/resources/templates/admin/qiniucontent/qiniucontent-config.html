@@ -78,7 +78,10 @@
     </div>
 </form>
 <script src="/static/admin/layuimini/lib/layui-v2.5.5/layui.js" charset="utf-8"></script>
+<!--sweetalert2弹出层-->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<!--axios异步工具-->
+<script src="https://cdn.bootcdn.net/ajax/libs/axios/0.19.2/axios.js"></script>
 <script type="text/javascript" th:inline="javascript">
     layui.use(['form'], function () {
         var form = layui.form,
@@ -118,27 +121,33 @@
 
         //监听提交
         form.on('submit(saveBtn)', function (data) {
-            $.ajax({
+            axios({
+                method: 'put',
                 url: '/admin/qiNiuContent/config',
-                type: 'PUT',
-                data: JSON.stringify(data.field),
-                contentType: 'application/json',
-                success: function (result) {
-                    var parentLayer = parent.layer;
-                    Toast.fire({
-                        icon: 'success',
-                        title: '修改成功！'
-                    }).then(() => {
+                data: data.field,
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                },
+            }).then((response) => {
+                Swal.fire({
+                    icon: 'success',
+                    title: '保存成功',
+                    showConfirmButton: false,
+                    timer: 1500,
+                    onClose: () => {
+                        var parentLayer = parent.layer;
                         var iframeIndex = parentLayer.getFrameIndex(window.name);
                         parent.location.reload();
                         parentLayer.close(iframeIndex);
-                    })
-                },
-                error: function (XMLHttpRequest) {
-                    var result = JSON.parse(XMLHttpRequest.responseText);
-                    layer.alert(result.msg, {icon: 2});
-                }
-            });
+                    }
+                });
+            }).catch((error) => {
+                Swal.fire({
+                    icon: 'error',
+                    title: '保存失败！',
+                    text: `${error.response.data.message}`,
+                });
+            })
             return false;
         });
 

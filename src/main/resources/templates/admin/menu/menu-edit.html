@@ -82,6 +82,10 @@
 <script src="/static/admin/layuimini/lib/layui-v2.5.5/layui.js" charset="utf-8"></script>
 <script src="/static/admin/layuimini/js/lay-config.js?v=1.0.4" charset="utf-8"></script>
 <script src="/static/admin/xm-select/xm-select.js" charset="utf-8"></script>
+<!--sweetalert2弹出层-->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<!--axios异步工具-->
+<script src="https://cdn.bootcdn.net/ajax/libs/axios/0.19.2/axios.js"></script>
 <script th:inline="javascript" type="text/javascript">
     layui.use(['iconPickerFa', 'form', 'layer'], function () {
         var iconPickerFa = layui.iconPickerFa,
@@ -182,26 +186,33 @@
         form.on('submit(saveBtn)', function (data) {
             data.field.pid = tree.getValue('value')[0];
             data.field.icon = icon;
-            $.ajax({
+            axios({
+                method: 'put',
                 url: '/admin/menu',
-                type: 'PUT',
-                data: JSON.stringify(data.field),
-                contentType: 'application/json',
-                success: function (result) {
-                    if (result.code === 200) {
-                        var parentLayer = parent.layer;
-                        layer.msg('更新成功', {icon: 1, time: 1000}, function () {
-                            var iframeIndex = parentLayer.getFrameIndex(window.name);
-                            parent.location.reload();
-                            parentLayer.close(iframeIndex);
-                        });
-                    }
+                data: data.field,
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
                 },
-                error: function (XMLHttpRequest) {
-                    var result = JSON.parse(XMLHttpRequest.responseText);
-                    layer.alert(result.msg, {icon: 2});
-                }
-            });
+            }).then((response) => {
+                Swal.fire({
+                    icon: 'success',
+                    title: '保存成功',
+                    showConfirmButton: false,
+                    timer: 1500,
+                    onClose: () => {
+                        var parentLayer = parent.layer;
+                        var iframeIndex = parentLayer.getFrameIndex(window.name);
+                        parent.location.reload();
+                        parentLayer.close(iframeIndex);
+                    }
+                });
+            }).catch((error) => {
+                Swal.fire({
+                    icon: 'error',
+                    title: '保存失败！',
+                    text: `${error.response.data.message}`,
+                });
+            })
             return false;
         });
     });

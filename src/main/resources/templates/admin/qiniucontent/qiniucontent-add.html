@@ -51,16 +51,18 @@
                 $("#uploadInf").append("<p>" + file.name + "上传失败！</p>");
             },
             onComplete: function (response) {           	  // 上传完成的回调方法
-                Swal.fire(
-                    'success!',
-                    '上传成功',
-                    'success'
-                ).then((value) => {
-                    var parentLayer = parent.layer;
-                    var iframeIndex = parentLayer.getFrameIndex(window.name);
-                    parent.location.reload();
-                    parentLayer.close(iframeIndex);
-                })
+                Swal.fire({
+                    icon: 'success',
+                    title: '上传成功',
+                    showConfirmButton: false,
+                    timer: 1500,
+                    onClose: () => {
+                        var parentLayer = parent.layer;
+                        var iframeIndex = parentLayer.getFrameIndex(window.name);
+                        parent.location.reload();
+                        parentLayer.close(iframeIndex);
+                    }
+                });
             }
         });
 

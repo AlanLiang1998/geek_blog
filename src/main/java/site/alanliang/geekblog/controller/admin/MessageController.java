@@ -89,7 +89,7 @@ public class MessageController {
 
     @PreAuthorize("hasAuthority('blog:message:audit')")
     @OperationLog("审核留言")
-    @PostMapping("/audit")
+    @PutMapping("/audit")
     public JsonResult audit(@Validated @RequestBody AuditVO auditVO) {
         messageService.audit(auditVO);
         return JsonResult.ok();

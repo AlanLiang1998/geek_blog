@@ -10,10 +10,10 @@ import site.alanliang.geekblog.common.Constant;
 import site.alanliang.geekblog.common.JsonResult;
 import site.alanliang.geekblog.common.TableResult;
 import site.alanliang.geekblog.model.Comment;
-import site.alanliang.geekblog.model.User;
 import site.alanliang.geekblog.query.CommentQuery;
 import site.alanliang.geekblog.service.CommentService;
 import site.alanliang.geekblog.utils.StringUtils;
+import site.alanliang.geekblog.utils.UserInfoUtil;
 import site.alanliang.geekblog.vo.AuditVO;
 import site.alanliang.geekblog.vo.ReplyVO;
 
@@ -77,18 +77,14 @@ public class CommentController {
         comment.setAddress(StringUtils.getCityInfo(comment.getRequestIp()));
         comment.setStatus(Constant.COMMENT_WAIT);
         comment.setCreateTime(new Date());
-        Object o = session.getAttribute("user");
-        if (o != null) {
-            User user = (User) o;
-            comment.setUserId(user.getId());
-        }
+        comment.setUserId(UserInfoUtil.getId());
         commentService.reply(comment);
         return JsonResult.ok();
     }
 
     @PreAuthorize("hasAuthority('blog:comment:audit')")
     @OperationLog("审核评论")
-    @PostMapping("/audit")
+    @PutMapping("/audit")
     public JsonResult audit(@Validated @RequestBody AuditVO auditVO) {
         commentService.audit(auditVO);
         return JsonResult.ok();

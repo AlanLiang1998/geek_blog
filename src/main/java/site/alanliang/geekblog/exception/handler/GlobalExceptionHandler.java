@@ -13,6 +13,7 @@ import site.alanliang.geekblog.exception.AssociationExistException;
 import site.alanliang.geekblog.exception.BadRequestException;
 import site.alanliang.geekblog.exception.EntityExistException;
 import site.alanliang.geekblog.utils.AjaxUtil;
+import site.alanliang.geekblog.utils.RequestHolder;
 import site.alanliang.geekblog.utils.ThrowableUtil;
 
 import javax.servlet.http.HttpServletRequest;
@@ -89,11 +90,12 @@ public class GlobalExceptionHandler {
      * 处理所有不可知的异常
      */
     @ExceptionHandler(Throwable.class)
-    public Object handleException(HttpServletRequest request, Throwable e) {
+    public Object handleException(Throwable e) {
         // 打印堆栈信息
         log.error(ThrowableUtil.getStackTrace(e));
+        HttpServletRequest request = RequestHolder.getHttpServletRequest();
         if (AjaxUtil.isAjaxRequest(request)) {
-            return buildResponseEntity(ApiError.error(e.getMessage()));
+            return buildResponseEntity(ApiError.error(500, e.getMessage()));
         } else {
             return new ModelAndView("error/500");
         }

@@ -73,6 +73,10 @@
 </div>
 <script src="/static/admin/layuimini/lib/layui-v2.5.5/layui.js" charset="utf-8"></script>
 <script src="/static/admin/layuimini/js/lay-config.js?v=1.0.4" charset="utf-8"></script>
+<!--sweetalert2弹出层-->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<!--axios异步工具-->
+<script src="https://cdn.bootcdn.net/ajax/libs/axios/0.19.2/axios.js"></script>
 <script>
     layui.use(['form', 'miniTab'], function () {
         var form = layui.form,
@@ -117,23 +121,30 @@
 
         //监听提交
         form.on('submit(saveBtn)', function (data) {
-            $.ajax({
+            axios({
+                method: 'put',
                 url: '/admin/user/info',
-                type: 'PUT',
-                data: JSON.stringify(data.field),
-                contentType: 'application/json',
-                success: function (result) {
-                    if (result.code === 200) {
-                        layer.msg('修改成功', {icon: 1, time: 1000}, function () {
-                            miniTab.deleteCurrentByIframe();
-                        });
-                    }
+                data: data.field,
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
                 },
-                error: function (XMLHttpRequest) {
-                    var result = JSON.parse(XMLHttpRequest.responseText);
-                    layer.alert(result.msg, {icon: 2});
-                }
-            });
+            }).then((response) => {
+                Swal.fire({
+                    icon: 'success',
+                    title: '修改成功',
+                    showConfirmButton: false,
+                    timer: 1500,
+                    onClose: () => {
+                        miniTab.deleteCurrentByIframe();
+                    }
+                });
+            }).catch((error) => {
+                Swal.fire({
+                    icon: 'error',
+                    title: '修改失败！',
+                    text: ` ${error.response.data.message}`,
+                });
+            })
             return false;
         });
 

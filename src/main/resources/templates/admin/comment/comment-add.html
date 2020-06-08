@@ -48,22 +48,33 @@
     </div>
 </form>
 <script src="/static/admin/layuimini/lib/layui-v2.5.5/layui.js" charset="utf-8"></script>
+<!--sweetalert2弹出层-->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<!--axios异步工具-->
+<script src="https://cdn.bootcdn.net/ajax/libs/axios/0.19.2/axios.js"></script>
 <script>
     layui.use(['form'], function () {
         var form = layui.form,
             layer = layui.layer,
             $ = layui.$;
-
+        //字数校验
         window.wordLeg = function (obj) {
             var currleg = $(obj).val().length;
             var length = $(obj).attr('maxlength');
             if (currleg > length) {
-                layer.msg('字数请在' + length + '字以内');
+                Swal.fire({
+                    toast: true,
+                    position: 'center',
+                    icon: 'warning',
+                    title: '字数请在' + length + '字以内',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                });
             } else {
                 $('.text_count').text(currleg);
             }
         }
-
         //自定义验证规则
         form.verify({
             reply: function (value) {
@@ -75,29 +86,35 @@
                 }
             }
         });
-
         //监听提交
         form.on('submit(saveBtn)', function (data) {
-            $.ajax({
+            axios({
+                method: 'post',
                 url: '/admin/comment',
-                type: 'POST',
-                data: JSON.stringify(data.field),
-                contentType: 'application/json',
-                success: function (result) {
-                    if (result.code === 200) {
-                        var parentLayer = parent.layer;
-                        layer.msg('保存成功', {icon: 1, time: 1000}, function () {
-                            var iframeIndex = parentLayer.getFrameIndex(window.name);
-                            parent.location.reload();
-                            parentLayer.close(iframeIndex);
-                        });
-                    }
+                data: data.field,
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
                 },
-                error: function (XMLHttpRequest) {
-                    var result = JSON.parse(XMLHttpRequest.responseText);
-                    layer.alert(result.msg, {icon: 5});
-                }
-            });
+            }).then((response) => {
+                Swal.fire({
+                    icon: 'success',
+                    title: '保存成功',
+                    showConfirmButton: false,
+                    timer: 1500,
+                    onClose: () => {
+                        var parentLayer = parent.layer;
+                        var iframeIndex = parentLayer.getFrameIndex(window.name);
+                        parent.location.reload();
+                        parentLayer.close(iframeIndex);
+                    }
+                });
+            }).catch((error) => {
+                Swal.fire({
+                    icon: 'error',
+                    title: '保存失败！',
+                    text: `${error.response.data.message}`,
+                });
+            })
             return false;
         });
 

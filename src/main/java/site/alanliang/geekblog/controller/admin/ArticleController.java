@@ -15,7 +15,6 @@ import site.alanliang.geekblog.service.ArticleService;
 import site.alanliang.geekblog.utils.UserInfoUtil;
 import site.alanliang.geekblog.vo.ArticleVO;
 
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.HashMap;
@@ -86,7 +85,7 @@ public class ArticleController {
     @PreAuthorize("hasAuthority('blog:article:delete')")
     @OperationLog("批量删除文章")
     @DeleteMapping
-    public JsonResult batchRemove(@NotEmpty @RequestBody List<Long> idList) {
+    public JsonResult batchRemove(@RequestBody List<Long> idList) {
         articleService.removeByIdList(idList);
         return JsonResult.ok();
     }
