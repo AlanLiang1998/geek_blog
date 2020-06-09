@@ -23,7 +23,7 @@ public interface RoleService {
      * @param roleQuery 条件
      * @return 角色列表
      */
-    Page<Role> listByPage(Integer current, Integer size, RoleQuery roleQuery);
+    Page<Role> listTableByPage(Integer current, Integer size, RoleQuery roleQuery);
 
     /**
      * 保存或者更新角色

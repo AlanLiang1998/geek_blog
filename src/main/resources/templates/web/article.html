@@ -716,6 +716,21 @@
                                 <div class="vinfo" style="display:block;">
                                     <div class="vcount col"><span class="vnum">{{total}}</span>&nbsp;评论</div>
                                 </div>
+                                <div class="center-align">
+                                    <div class="preloader-wrapper big active" v-show="loading">
+                                        <div class="spinner-layer spinner-blue">
+                                            <div class="circle-clipper left">
+                                                <div class="circle"></div>
+                                            </div>
+                                            <div class="gap-patch">
+                                                <div class="circle"></div>
+                                            </div>
+                                            <div class="circle-clipper right">
+                                                <div class="circle"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="vlist">
                                     <div class="vcard" v-for="(comment, index) in comments" :key="comment.id"
                                          :id="'comment'+comment.id">
@@ -909,6 +924,7 @@
                 certificate: '',
                 password: ''
             },
+            loading: false,
         },
         methods: {
             postLogin: function () {
@@ -1097,11 +1113,15 @@
                     'visitorId': visitor.id,
                     'parentNickname': this.parentNickname
                 };
+                this.loading = true;
                 axios.post('/comments', newComment)
                     .then((result) => {
-                        this.content = '';
-                        this.comments = this.getComments();
-                        $.scrollTo('.vinfo', 500);
+                        setTimeout(() => {
+                            this.loading = false;
+                            this.current = 1;
+                            this.content = '';
+                            this.getComments();
+                        }, 1000);
                     });
                 return false;
             },

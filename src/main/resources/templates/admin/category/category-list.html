@@ -47,7 +47,8 @@
                             <button type="submit" class="layui-btn layui-btn-primary" lay-submit
                                     lay-filter="data-search-btn"><i class="layui-icon"></i> 搜 索
                             </button>
-                            <button type="reset" class="layui-btn layui-btn-primary"><i class="layui-icon"></i>清 空
+                            <button type="reset" class="layui-btn layui-btn-primary"><i
+                                    class="layui-icon layui-icon-fonts-clear"></i> 清 空
                             </button>
                         </div>
                     </div>
@@ -199,7 +200,17 @@
                     , data = checkStatus.data;
                 var idList = [];
                 $.each(data, function () {
-                    idList.push($(this)[0].id);
+                    let id = $(this)[0].id;
+                    let articleCount = $(this)[0].articleCount;
+                    let name = $(this)[0].name;
+                    if (articleCount >= 1) {
+                        Swal.fire({
+                            text: `分类: ${name}下存在文章，不能删除！`,
+                            icon: 'warning',
+                        })
+                        return false;
+                    }
+                    idList.push(id);
                 });
                 if (idList.length <= 0) {
                     return false;
@@ -275,6 +286,14 @@
                 });
                 return false;
             } else if (obj.event === 'delete') {
+                let articleCount = data.articleCount;
+                if (articleCount >= 1) {
+                    Swal.fire({
+                        text: `分类下存在文章，不能删除！`,
+                        icon: 'warning',
+                    })
+                    return false;
+                }
                 Swal.fire({
                     title: '确定删除选中的这个分类吗？',
                     text: '你将无法恢复它！',

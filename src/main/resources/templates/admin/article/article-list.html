@@ -57,6 +57,26 @@
                             </div>
                         </div>
                         <div class="layui-inline">
+                            <label class="layui-form-label">置顶</label>
+                            <div class="layui-input-inline">
+                                <select name="top">
+                                    <option value="" selected>所有</option>
+                                    <option value="true">是</option>
+                                    <option value="false">否</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">推荐</label>
+                            <div class="layui-input-inline">
+                                <select name="recommend">
+                                    <option value="" selected>所有</option>
+                                    <option value="true">是</option>
+                                    <option value="false">否</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layui-inline">
                             <label class="layui-form-label">日期范围</label>
                             <div class="layui-input-inline">
                                 <input type="text" class="layui-input" id="date-range" placeholder="不输入则忽略日期范围筛选"
@@ -67,7 +87,8 @@
                             <button type="submit" class="layui-btn layui-btn-primary" lay-submit
                                     lay-filter="data-search-btn"><i class="layui-icon"></i> 搜 索
                             </button>
-                            <button type="reset" class="layui-btn layui-btn-primary"><i class="layui-icon"></i>清 空
+                            <button type="reset" class="layui-btn layui-btn-primary"><i
+                                    class="layui-icon layui-icon-fonts-clear"></i> 清 空
                             </button>
                         </div>
                     </div>
@@ -210,6 +231,32 @@
                         }
                     },
                     {
+                        field: 'top',
+                        width: 80,
+                        title: '置顶',
+                        align: 'center',
+                        sort: true,
+                        templet: function (data) {
+                            let str = (data.top ? '是' : '否');
+                            let color = (data.top ? 'green' : 'orange');
+                            let bgColor = 'layui-bg-' + color;
+                            return '<span class="layui-badge ' + bgColor + '">' + str + '</span>';
+                        }
+                    },
+                    {
+                        field: 'recommend',
+                        width: 80,
+                        title: '推荐',
+                        align: 'center',
+                        sort: true,
+                        templet: function (data) {
+                            let str = (data.recommend ? '是' : '否');
+                            let color = (data.recommend ? 'green' : 'orange');
+                            let bgColor = 'layui-bg-' + color;
+                            return '<span class="layui-badge ' + bgColor + '">' + str + '</span>';
+                        }
+                    },
+                    {
                         field: 'views',
                         width: 100,
                         title: '浏览量',
@@ -274,10 +321,13 @@
             let type = data.field.type;
             let categoryId = data.field.categoryId;
             let published = data.field.published;
+            let top = data.field.top;
+            let recommend = data.field.recommend;
             let dateRange = data.field.dateRange;
             let dates = dateRange.split(' ~ ')
             let startDate = dates[0];
             let endDate = dates[1];
+            console.log(top);
             //执行搜索重载
             table.reload('currentTableId', {
                 page: {
@@ -288,6 +338,8 @@
                     type: type,
                     categoryId: categoryId,
                     published: published,
+                    top: top,
+                    recommend: recommend,
                     startDate: startDate,
                     endDate: endDate,
                 }

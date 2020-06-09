@@ -124,7 +124,7 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @Override
-    @Cacheable(key = "'listByPage:'+current")
+    @Cacheable(key = "'listByPage:'+#current")
     public Page<Message> listByPage(Integer current, Integer size) {
         Page<Message> page = new Page<>(current, size);
         Page<Message> pageInfo = messageMapper.listRootByPage(page);

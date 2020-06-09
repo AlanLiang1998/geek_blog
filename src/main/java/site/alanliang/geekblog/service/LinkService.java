@@ -16,7 +16,7 @@ public interface LinkService {
      * @param linkQuery 查询条件
      * @return 友情链接分页
      */
-    Page<Link> listTableByPage(int current, int size, LinkQuery linkQuery);
+    Page<Link> listTableByPage(Integer current, Integer size, LinkQuery linkQuery);
 
     /**
      * 审核友链

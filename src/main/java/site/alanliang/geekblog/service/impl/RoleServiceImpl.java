@@ -68,7 +68,8 @@ public class RoleServiceImpl implements RoleService {
         QueryWrapper<RoleUser> wrapper = new QueryWrapper<>();
         wrapper.eq("role_id", id);
         //角色存在关联用户则不允许删除
-        if (!CollectionUtils.isEmpty(roleUserMapper.selectList(wrapper))) {
+        Integer count = roleUserMapper.selectCount(wrapper);
+        if (count >= 1) {
             throw new AssociationExistException("该角色存在关联用户，不能删除");
         }
         roleMapper.deleteById(id);
@@ -79,7 +80,16 @@ public class RoleServiceImpl implements RoleService {
     @Transactional(rollbackFor = Exception.class)
     public void removeByIdList(List<Long> idList) {
         for (Long id : idList) {
-            removeById(id);
+            QueryWrapper<RoleUser> roleUserWrapper = new QueryWrapper<>();
+            roleUserWrapper.eq("role_id", id);
+            //角色存在关联用户则不允许删除
+            Integer count = roleUserMapper.selectCount(roleUserWrapper);
+            if (count >= 1) {
+                QueryWrapper<Role> roleWrapper = new QueryWrapper<>();
+                roleWrapper.select("role_name").eq("id", id);
+                Role role = roleMapper.selectOne(roleWrapper);
+                throw new AssociationExistException("角色: " + role.getRoleName() + "存在关联用户，不能删除");
+            }
         }
     }
 
@@ -123,19 +133,27 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     @Cacheable
-    public Page<Role> listByPage(Integer current, Integer size, RoleQuery roleQuery) {
+    public Page<Role> listTableByPage(Integer current, Integer size, RoleQuery roleQuery) {
         Page<Role> page = new Page<>(current, size);
-        QueryWrapper<Role> wrapper = new QueryWrapper<>();
+        QueryWrapper<Role> roleWrapper = new QueryWrapper<>();
         if (!StringUtils.isEmpty(roleQuery.getRoleName())) {
-            wrapper.like("role_name", roleQuery.getRoleName());
+            roleWrapper.like("role_name", roleQuery.getRoleName());
         }
         if (!StringUtils.isEmpty(roleQuery.getDescription())) {
-            wrapper.like("description", roleQuery.getDescription());
+            roleWrapper.like("description", roleQuery.getDescription());
         }
         if (roleQuery.getStartDate() != null && roleQuery.getEndDate() != null) {
-            wrapper.between("create_time", roleQuery.getStartDate(), roleQuery.getEndDate());
+            roleWrapper.between("create_time", roleQuery.getStartDate(), roleQuery.getEndDate());
         }
-        return roleMapper.selectPage(page, wrapper);
+        //查询关联用户
+        Page<Role> pageInfo = roleMapper.selectPage(page, roleWrapper);
+        for (Role role : pageInfo.getRecords()) {
+            QueryWrapper<RoleUser> roleUserWrapper = new QueryWrapper<>();
+            roleUserWrapper.eq("role_id", role.getId());
+            Integer count = roleUserMapper.selectCount(roleUserWrapper);
+            role.setUserCount(count);
+        }
+        return pageInfo;
     }
 
     @Override

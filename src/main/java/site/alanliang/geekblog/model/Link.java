@@ -43,4 +43,6 @@ public class Link {
     private Date createTime;
 
     private Date updateTime;
+
+    private Integer sort;
 }

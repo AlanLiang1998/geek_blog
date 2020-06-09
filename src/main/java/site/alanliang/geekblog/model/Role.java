@@ -43,4 +43,7 @@ public class Role {
     @NotEmpty(message = "权限不能为空")
     @TableField(exist = false)
     private List<Long> menuIdList;
+
+    @TableField(exist = false)
+    private Integer userCount;
 }

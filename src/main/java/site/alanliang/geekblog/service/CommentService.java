@@ -20,7 +20,7 @@ public interface CommentService {
      *
      * @return 评论分页
      */
-    Page<Comment> listByArticleId(Long articleId, Page<Comment> page);
+    Page<Comment> listByArticleId(Long articleId, Integer current, Integer size);
 
     /**
      * 后台分页查询所有评论

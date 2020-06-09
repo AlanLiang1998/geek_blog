@@ -49,7 +49,8 @@
                             <button type="submit" class="layui-btn layui-btn-primary" lay-submit
                                     lay-filter="data-search-btn"><i class="layui-icon"></i> 搜 索
                             </button>
-                            <button type="reset" class="layui-btn layui-btn-primary"><i class="layui-icon"></i>清 空
+                            <button type="reset" class="layui-btn layui-btn-primary"><i
+                                    class="layui-icon layui-icon-fonts-clear"></i> 清 空
                             </button>
                         </div>
                     </div>
@@ -118,6 +119,12 @@
                         field: 'link', title: '网址', minWidth: 200, templet: function (data) {
                             let link = data.link;
                             return '<a href=' + link + ' style="color: #01AAED;" target="_blank">' + link + '</a>'
+                        }
+                    },
+                    {
+                        field: 'sort', width: 80, align: 'center', title: '排序', sort: true, templet: function (data) {
+                            let sort = data.sort;
+                            return '<span class="layui-badge layui-bg-green">' + sort + '</span>'
                         }
                     },
                     {

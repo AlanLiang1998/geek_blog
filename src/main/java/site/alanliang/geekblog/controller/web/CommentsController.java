@@ -45,7 +45,7 @@ public class CommentsController {
                                                   @RequestParam(value = "current", defaultValue = "1") Integer current,
                                                   @RequestParam(value = "size", defaultValue = Constant.PAGE_SIZE) Integer size) {
         Page<Comment> page = new Page<>(current, size);
-        Page<Comment> pageInfo = commentService.listByArticleId(articleId, page);
+        Page<Comment> pageInfo = commentService.listByArticleId(articleId, current, size);
         return new ResponseEntity<>(pageInfo, HttpStatus.OK);
     }
 

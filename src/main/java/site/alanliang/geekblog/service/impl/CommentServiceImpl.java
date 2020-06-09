@@ -171,8 +171,9 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    @Cacheable(key = "'listByArticleId:'+#articleId")
-    public Page<Comment> listByArticleId(Long articleId, Page<Comment> page) {
+    @Cacheable(key = "'listByArticleId:'+#articleId+':'+#current")
+    public Page<Comment> listByArticleId(Long articleId, Integer current, Integer size) {
+        Page<Comment> page = new Page<>(current, size);
         Page<Comment> pageInfo = commentMapper.listRootPageByArticleId(page, articleId);
         List<Comment> comments = commentMapper.listByArticleId(articleId);
         LinkedListUtil.toCommentLinkedList(pageInfo.getRecords(), comments);

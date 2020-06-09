@@ -18,6 +18,10 @@ public class ArticleQuery {
 
     private Boolean published;
 
+    private Boolean top;
+
+    private Boolean recommend;
+
     private String startDate;
 
     private String endDate;

@@ -35,6 +35,7 @@ import site.alanliang.geekblog.query.ArticleQuery;
 import site.alanliang.geekblog.repository.ArticleDocumentRepository;
 import site.alanliang.geekblog.service.ArticleService;
 import site.alanliang.geekblog.utils.HighLightUtil;
+import site.alanliang.geekblog.utils.RedisUtils;
 import site.alanliang.geekblog.utils.UserInfoUtil;
 import site.alanliang.geekblog.vo.ArticleDateVO;
 
@@ -72,6 +73,9 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Autowired
     private ArticleDocumentRepository articleDocumentRepository;
+
+    @Autowired
+    private RedisUtils redisUtils;
 
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -258,6 +262,12 @@ public class ArticleServiceImpl implements ArticleService {
         if (articleQuery.getPublished() != null) {
             wrapper.eq("published", articleQuery.getPublished());
         }
+        if (articleQuery.getTop() != null) {
+            wrapper.eq("top", articleQuery.getTop());
+        }
+        if (articleQuery.getRecommend() != null) {
+            wrapper.eq("recommend", articleQuery.getRecommend());
+        }
         if (articleQuery.getStartDate() != null && articleQuery.getEndDate() != null) {
             wrapper.between(Constant.TABLE_ALIAS_ARTICLE + "create_time", articleQuery.getStartDate(), articleQuery.getEndDate());
         }
@@ -306,7 +316,6 @@ public class ArticleServiceImpl implements ArticleService {
     @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Exception.class)
     public void saveOrUpdate(Article article) {
-        QueryWrapper<Tag> tagWrapper = new QueryWrapper<>();
         //存在新标签则添加新标签
         List<Tag> newTagList = article.getTagList().stream().filter(t -> (t.getId() == null)).collect(Collectors.toList());
         for (Tag newTag : newTagList) {
@@ -327,6 +336,8 @@ public class ArticleServiceImpl implements ArticleService {
             QueryWrapper<ArticleTag> articleTagWrapper = new QueryWrapper<>();
             articleTagWrapper.eq("article_id", article.getId());
             articleTagMapper.delete(articleTagWrapper);
+            //手动清除文章标签缓存
+            redisUtils.del("tag::listByArticleId:" + article.getId());
             //从ElasticSearch中删除
             articleDocumentRepository.deleteById(article.getId());
         }

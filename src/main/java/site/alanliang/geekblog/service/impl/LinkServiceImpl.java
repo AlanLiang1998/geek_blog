@@ -36,7 +36,7 @@ public class LinkServiceImpl implements LinkService {
 
     @Override
     @Cacheable
-    public Page<Link> listTableByPage(int current, int size, LinkQuery linkQuery) {
+    public Page<Link> listTableByPage(Integer current, Integer size, LinkQuery linkQuery) {
         Page<Link> page = new Page<>(current, size);
         QueryWrapper<Link> wrapper = new QueryWrapper<>();
         if (!StringUtils.isEmpty(linkQuery.getNickname())) {
@@ -74,7 +74,8 @@ public class LinkServiceImpl implements LinkService {
         Page<Link> page = new Page<>(current, size);
         QueryWrapper<Link> wrapper = new QueryWrapper<>();
         wrapper.select("id", "nickname", "avatar", "introduction", "link")
-                .eq("status", Constant.COMMENT_PASS);
+                .eq("status", Constant.COMMENT_PASS)
+                .orderByAsc("sort");
         return linkMapper.selectPage(page, wrapper);
     }
 

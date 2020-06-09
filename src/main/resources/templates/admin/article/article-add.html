@@ -237,31 +237,31 @@
             }
         });
         //监听置顶
-        form.on('switch(top)', function (data) {
-            if (data.elem.checked) {
-                axios({
-                    method: 'get',
-                    url: '/admin/article/reachedMaxTop',
-                }).then((response) => {
-                    let result = response.data;
-                    if (result.data.reached) {
-                        data.elem.checked = false;
-                        form.render('checkbox');
-                        Swal.fire({
-                            toast: true,
-                            position: 'top-end',
-                            icon: 'warning',
-                            title: '置顶文章已达到最大限制数量: ' + result.data.maxTop,
-                            showConfirmButton: false,
-                            timer: 3000,
-                            timerProgressBar: true,
-                        });
-                    }
-                })
-            }
-        });
+        /* form.on('switch(top)', function (data) {
+             if (data.elem.checked) {
+                 axios({
+                     method: 'get',
+                     url: '/admin/article/reachedMaxTop',
+                 }).then((response) => {
+                     let result = response.data;
+                     if (result.data.reached) {
+                         data.elem.checked = false;
+                         form.render('checkbox');
+                         Swal.fire({
+                             toast: true,
+                             position: 'top-end',
+                             icon: 'warning',
+                             title: '置顶文章已达到最大限制数量: ' + result.data.maxTop,
+                             showConfirmButton: false,
+                             timer: 3000,
+                             timerProgressBar: true,
+                         });
+                     }
+                 })
+             }
+         });*/
         //监听推荐
-        form.on('switch(recommend)', function (data) {
+        /*form.on('switch(recommend)', function (data) {
             if (data.elem.checked) {
                 axios({
                     method: 'get',
@@ -282,27 +282,8 @@
                         });
                     }
                 })
-                /*  $.ajax({
-                      url: '/admin/article/reachedMaxTop',
-                      type: 'GET',
-                      success: function (result) {
-                          if (result.data.reached) {
-                              data.elem.checked = false;
-                              form.render('checkbox');
-                              Swal.fire({
-                                  toast: true,
-                                  position: 'top-end',
-                                  icon: 'warning',
-                                  title: '置顶文章已达到最大限制数量',
-                                  showConfirmButton: false,
-                                  timer: 3000,
-                                  timerProgressBar: true,
-                              });
-                          }
-                      }
-                  });*/
             }
-        });
+        });*/
 
         //获取输入
         function getField(data, isPublish) {

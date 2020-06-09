@@ -43,7 +43,7 @@ public class RoleController {
     public JsonResult listByPage(@RequestParam(value = "page", defaultValue = "1") Integer page,
                                  @RequestParam(value = "limit", defaultValue = "10") Integer limit,
                                  RoleQuery roleQuery) {
-        Page<Role> pageInfo = roleService.listByPage(page, limit, roleQuery);
+        Page<Role> pageInfo = roleService.listTableByPage(page, limit, roleQuery);
         return TableResult.tableOk(pageInfo.getRecords(), pageInfo.getTotal());
     }
 

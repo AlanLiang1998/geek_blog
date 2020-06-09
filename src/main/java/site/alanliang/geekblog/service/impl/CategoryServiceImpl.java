@@ -11,8 +11,10 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 import site.alanliang.geekblog.common.Constant;
+import site.alanliang.geekblog.dao.ArticleMapper;
 import site.alanliang.geekblog.dao.CategoryMapper;
 import site.alanliang.geekblog.exception.EntityExistException;
+import site.alanliang.geekblog.model.Article;
 import site.alanliang.geekblog.model.Category;
 import site.alanliang.geekblog.query.CategoryQuery;
 import site.alanliang.geekblog.service.CategoryService;
@@ -32,6 +34,9 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Autowired
     private CategoryMapper categoryMapper;
+
+    @Autowired
+    private ArticleMapper articleMapper;
 
     @Override
     @Cacheable
@@ -54,6 +59,8 @@ public class CategoryServiceImpl implements CategoryService {
     @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Exception.class)
     public void removeById(Long id) {
+        QueryWrapper<Article> wrapper = new QueryWrapper<>();
+        wrapper.eq("category_id", id);
         categoryMapper.deleteById(id);
     }
 
