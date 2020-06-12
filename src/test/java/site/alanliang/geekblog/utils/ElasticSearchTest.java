@@ -64,6 +64,7 @@ class ElasticSearchTest {
             articleDocument.setSummary(article.getSummary());
             articleDocument.setContent(HtmlUtil.removeTag(article.getContent()));
             articleDocument.setPublished(article.getPublished());
+            articleDocument.setStatus(article.getStatus());
             articleDocuments.add(articleDocument);
         }
         articleDocumentRepository.saveAll(articleDocuments);

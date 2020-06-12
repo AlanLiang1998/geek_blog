@@ -25,4 +25,7 @@ public class ArticleDocument implements Serializable {
 
     @Field(type = FieldType.Boolean)
     private Boolean published;//是否已发布
+
+    @Field(type = FieldType.Integer)
+    private Integer status;//审核状态
 }

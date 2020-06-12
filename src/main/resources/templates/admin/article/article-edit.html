@@ -72,9 +72,6 @@
                         </select>
                     </div>
                 </div>
-            </div>
-
-            <div class="layui-form-item">
                 <div class="layui-inline">
                     <div class="layui-form-item">
                         <label class="layui-form-label">开启赞赏</label>
@@ -110,6 +107,14 @@
                                lay-filter="recommend">
                     </div>
                 </div>
+                <div class="layui-inline">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">文章排序</label>
+                        <div class="layui-input-inline rate-pane">
+                            <div id="rateSort"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div>
@@ -139,51 +144,13 @@
 <!--axios异步工具-->
 <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.19.2/axios.js"></script>
 <script type="text/javascript" th:inline="javascript">
-    layui.use(['layer', 'form', 'miniTab'], function () {
+    layui.use(['layer', 'form', 'miniTab', 'rate'], function () {
         var $ = layui.jquery,
             layer = layui.layer,
             form = layui.form,
-            miniTab = layui.miniTab;
-        //渲染文章内容
-        var article = [[${article}]];
-        $('#article-form input[name="id"]').val(article.id);
-        $('#article-form input[name="summary"]').val(article.summary);
-        $('#article-form input[name="cover"]').val(article.cover);
-        $('#article-form input[name="title"]').val(article.title);
-        $('#article-form textarea[name="summary"]').val(article.summary);
-        $('#article-form textarea[name="content"]').val(article.textContent);
-        $('#article-form select[name="type"]').val([article.type]);
-        $('#article-form input[name="appreciable"]').prop('checked', article.appreciable);
-        $('#article-form input[name="commentable"]').prop('checked', article.commentable);
-        $('#article-form input[name="top"]').prop('checked', article.top);
-        $('#article-form input[name="recommend"]').prop('checked', article.recommend);
-        $('#article-form select[name="categoryId"]').val([article.categoryId]);
-        form.render();
-        //渲染多选下拉框
-        var tagSelect = xmSelect.render({
-            el: '#tag-select',
-            language: 'zn',
-            //自动换行
-            autoRow: true,
-            //开启搜索
-            filterable: true,
-            max: 5,
-            theme: {
-                maxColor: 'orange',
-            },
-            create: function (val, arr) {
-                if (arr.length === 0) {
-                    return {
-                        name: val,
-                        value: null
-                    }
-                }
-            },
-            maxMethod() {
-                layer.msg('标签数量不能超过5个');
-            },
-            data: []
-        });
+            miniTab = layui.miniTab,
+            rate = layui.rate;
+
         //获取分类列表
         $.ajax({
             url: '/admin/category',
@@ -236,6 +203,62 @@
                 }
             }
         });
+
+        //渲染文章内容
+        var article = [[${article}]];
+        $('#article-form input[name="id"]').val(article.id);
+        $('#article-form input[name="summary"]').val(article.summary);
+        $('#article-form input[name="cover"]').val(article.cover);
+        $('#article-form input[name="title"]').val(article.title);
+        $('#article-form textarea[name="summary"]').val(article.summary);
+        $('#article-form textarea[name="content"]').val(article.textContent);
+        $('#article-form select[name="type"]').val([article.type]);
+        $('#article-form input[name="appreciable"]').prop('checked', article.appreciable);
+        $('#article-form input[name="commentable"]').prop('checked', article.commentable);
+        $('#article-form input[name="top"]').prop('checked', article.top);
+        $('#article-form input[name="recommend"]').prop('checked', article.recommend);
+        $('#article-form select[name="categoryId"]').val([article.categoryId]);
+        //渲染评分
+        var rateSort = rate.render({
+            elem: '#rateSort',
+            theme: '#009688',
+            value: article.sort,
+        });
+        //渲染多选下拉框
+        var tagSelect = xmSelect.render({
+            el: '#tag-select',
+            language: 'zn',
+            //自动换行
+            autoRow: true,
+            //开启搜索
+            filterable: true,
+            max: 5,
+            theme: {
+                maxColor: 'orange',
+            },
+            create: function (val, arr) {
+                if (arr.length === 0) {
+                    return {
+                        name: val,
+                        value: null
+                    }
+                }
+            },
+            maxMethod() {
+                layer.msg('标签数量不能超过5个');
+            },
+            data: []
+        });
+        //渲染编辑器
+        var editor = editormd("test-editor", {
+            placeholder: '本编辑器支持Markdown编辑，左边编写，右边预览',  //默认显示的文字，这里就不解释了
+            width: "100%",
+            height: "500px",
+            saveHTMLToTextarea: true,
+            path: "/static/admin/editormd/lib/"
+        });
+        form.render();
+
         //表单验证
         form.verify({
             verTitle: function (value) {
@@ -269,94 +292,94 @@
             }
         });
         //监听置顶
-        form.on('switch(top)', function (data) {
-            if (data.elem.checked) {
-                axios({
-                    method: 'get',
-                    url: '/admin/article/reachedMaxTop',
-                }).then((response) => {
-                    let result = response.data;
-                    if (result.data.reached) {
-                        data.elem.checked = false;
-                        form.render('checkbox');
-                        Swal.fire({
-                            toast: true,
-                            position: 'top-end',
-                            icon: 'warning',
-                            title: '置顶文章已达到最大限制数量',
-                            showConfirmButton: false,
-                            timer: 3000,
-                            timerProgressBar: true,
-                        });
-                    }
-                })
-                /*  $.ajax({
-                      url: '/admin/article/reachedMaxTop',
-                      type: 'GET',
-                      success: function (result) {
-                          if (result.data.reached) {
-                              data.elem.checked = false;
-                              form.render('checkbox');
-                              Swal.fire({
-                                  toast: true,
-                                  position: 'top-end',
-                                  icon: 'warning',
-                                  title: '置顶文章已达到最大限制数量',
-                                  showConfirmButton: false,
-                                  timer: 3000,
-                                  timerProgressBar: true,
-                              });
-                          }
-                      }
-                  });*/
-            }
-        });
+        /*   form.on('switch(top)', function (data) {
+               if (data.elem.checked) {
+                   axios({
+                       method: 'get',
+                       url: '/admin/article/reachedMaxTop',
+                   }).then((response) => {
+                       let result = response.data;
+                       if (result.data.reached) {
+                           data.elem.checked = false;
+                           form.render('checkbox');
+                           Swal.fire({
+                               toast: true,
+                               position: 'top-end',
+                               icon: 'warning',
+                               title: '置顶文章已达到最大限制数量',
+                               showConfirmButton: false,
+                               timer: 3000,
+                               timerProgressBar: true,
+                           });
+                       }
+                   })
+                   /!*  $.ajax({
+                         url: '/admin/article/reachedMaxTop',
+                         type: 'GET',
+                         success: function (result) {
+                             if (result.data.reached) {
+                                 data.elem.checked = false;
+                                 form.render('checkbox');
+                                 Swal.fire({
+                                     toast: true,
+                                     position: 'top-end',
+                                     icon: 'warning',
+                                     title: '置顶文章已达到最大限制数量',
+                                     showConfirmButton: false,
+                                     timer: 3000,
+                                     timerProgressBar: true,
+                                 });
+                             }
+                         }
+                     });*!/
+               }
+           });*/
         //监听推荐
-        form.on('switch(recommend)', function (data) {
-            if (data.elem.checked) {
-                axios({
-                    method: 'get',
-                    url: '/admin/article/reachedMaxRecommend',
-                }).then((response) => {
-                    let result = response.data;
-                    if (result.data.reached) {
-                        data.elem.checked = false;
-                        form.render('checkbox');
-                        Swal.fire({
-                            toast: true,
-                            position: 'top-end',
-                            icon: 'warning',
-                            title: '推荐文章已达到最大限制数量',
-                            showConfirmButton: false,
-                            timer: 3000,
-                            timerProgressBar: true,
-                        });
-                    }
-                })
-                /*  $.ajax({
-                      url: '/admin/article/reachedMaxTop',
-                      type: 'GET',
-                      success: function (result) {
-                          if (result.data.reached) {
-                              data.elem.checked = false;
-                              form.render('checkbox');
-                              Swal.fire({
-                                  toast: true,
-                                  position: 'top-end',
-                                  icon: 'warning',
-                                  title: '置顶文章已达到最大限制数量',
-                                  showConfirmButton: false,
-                                  timer: 3000,
-                                  timerProgressBar: true,
-                              });
-                          }
-                      }
-                  });*/
-            }
-        });
+        /* form.on('switch(recommend)', function (data) {
+             if (data.elem.checked) {
+                 axios({
+                     method: 'get',
+                     url: '/admin/article/reachedMaxRecommend',
+                 }).then((response) => {
+                     let result = response.data;
+                     if (result.data.reached) {
+                         data.elem.checked = false;
+                         form.render('checkbox');
+                         Swal.fire({
+                             toast: true,
+                             position: 'top-end',
+                             icon: 'warning',
+                             title: '推荐文章已达到最大限制数量',
+                             showConfirmButton: false,
+                             timer: 3000,
+                             timerProgressBar: true,
+                         });
+                     }
+                 })
+                 /!*  $.ajax({
+                       url: '/admin/article/reachedMaxTop',
+                       type: 'GET',
+                       success: function (result) {
+                           if (result.data.reached) {
+                               data.elem.checked = false;
+                               form.render('checkbox');
+                               Swal.fire({
+                                   toast: true,
+                                   position: 'top-end',
+                                   icon: 'warning',
+                                   title: '置顶文章已达到最大限制数量',
+                                   showConfirmButton: false,
+                                   timer: 3000,
+                                   timerProgressBar: true,
+                               });
+                           }
+                       }
+                   });*!/
+             }
+         });*/
 
         //获取输入
-        function getField(data, isPublish) {
+        function getField(data) {
             //获取标签列表
             data.field.tagList = tagSelect.getValue().map(item => {
                 return {
@@ -368,13 +391,15 @@
             data.field.content = editor.getHTML();
             //获取文章markdown
             data.field.textContent = editor.getMarkdown();
-            //获取是否发布
-            data.field.published = isPublish;
+            //获取文章排序
+            data.field.sort = rateSort.config.value;
             return data.field;
         };
         //监听保存草稿按钮
         form.on('submit(draft)', function (data) {
-            let fields = getField(data, false);
+            let fields = getField(data);
+            //获取是否发布
+            fields.published = false;
             axios({
                 method: 'put',
                 url: '/admin/article',
@@ -407,7 +432,9 @@
         });
         //监听发布文章按钮
         form.on('submit(publish)', function (data) {
-            let fields = getField(data, true);
+            let fields = getField(data);
+            //获取是否发布
+            fields.published = true;
             Swal.fire({
                 title: '是否确定发布该文章',
                 icon: 'question',
@@ -453,7 +480,7 @@
         });
         //监听更新文章按钮
         form.on('submit(edit)', function (data) {
-            let fields = getField(data, false);
+            let fields = getField(data);
             axios({
                 method: 'put',
                 url: '/admin/article',
@@ -476,14 +503,6 @@
                 });
             })
             return false;
-        });
-        //编辑器
-        var editor = editormd("test-editor", {
-            placeholder: '本编辑器支持Markdown编辑，左边编写，右边预览',  //默认显示的文字，这里就不解释了
-            width: "100%",
-            height: "500px",
-            saveHTMLToTextarea: true,
-            path: "/static/admin/editormd/lib/"
         });
     });
 </script>

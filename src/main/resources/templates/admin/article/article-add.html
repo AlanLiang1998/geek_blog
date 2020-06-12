@@ -71,6 +71,20 @@
                         </select>
                     </div>
                 </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">是否置顶</label>
+                    <div class="layui-input-inline pane">
+                        <input type="checkbox" name="top" lay-skin="switch" lay-text="是|否" value="true"
+                               lay-filter="top">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">是否推荐</label>
+                    <div class="layui-input-inline pane">
+                        <input type="checkbox" name="recommend" lay-skin="switch" lay-text="是|否" value="true"
+                               lay-filter="recommend">
+                    </div>
+                </div>
             </div>
 
             <div class="layui-form-item">
@@ -92,25 +106,15 @@
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="layui-form-item">
                 <div class="layui-inline">
-                    <label class="layui-form-label">是否置顶</label>
-                    <div class="layui-input-inline pane">
-                        <input type="checkbox" name="top" lay-skin="switch" lay-text="是|否" value="true"
-                               lay-filter="top">
-                    </div>
-                </div>
-                <div class="layui-inline">
-                    <label class="layui-form-label">是否推荐</label>
-                    <div class="layui-input-inline pane">
-                        <input type="checkbox" name="recommend" lay-skin="switch" lay-text="是|否" value="true"
-                               lay-filter="recommend">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">文章排序</label>
+                        <div class="layui-input-inline rate-pane">
+                            <div id="rateSort"></div>
+                        </div>
                     </div>
                 </div>
             </div>
-
             <div>
                 <button type="button" class="layui-btn layui-btn-warm" lay-filter="draft" lay-submit="">
                     保存草稿
@@ -138,37 +142,13 @@
 <!--axios异步工具-->
 <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.19.2/axios.js"></script>
 <script type="text/javascript" th:inline="javascript">
-    layui.use(['layer', 'form', 'miniTab'], function () {
+    layui.use(['layer', 'form', 'miniTab', 'rate'], function () {
         var $ = layui.jquery,
             layer = layui.layer,
             form = layui.form,
-            miniTab = layui.miniTab;
+            miniTab = layui.miniTab,
+            rate = layui.rate;
 
-        //渲染多选下拉框
-        var tagSelect = xmSelect.render({
-            el: '#tag-select',
-            language: 'zn',
-            //自动换行
-            autoRow: true,
-            //开启搜索
-            filterable: true,
-            max: 5,
-            theme: {
-                maxColor: 'orange',
-            },
-            create: function (val, arr) {
-                if (arr.length === 0) {
-                    return {
-                        name: val,
-                        value: null
-                    }
-                }
-            },
-            maxMethod() {
-                layer.msg('标签数量不能超过5个');
-            },
-            data: []
-        });
         //获取分类列表
         $.ajax({
             url: '/admin/category',
@@ -204,6 +184,47 @@
                 }
             }
         });
+
+        //渲染评分
+        var rateSort = rate.render({
+            elem: '#rateSort',
+            theme: '#009688',
+            value: 1,
+        });
+        //渲染多选下拉框
+        var tagSelect = xmSelect.render({
+            el: '#tag-select',
+            language: 'zn',
+            //自动换行
+            autoRow: true,
+            //开启搜索
+            filterable: true,
+            max: 5,
+            theme: {
+                maxColor: 'orange',
+            },
+            create: function (val, arr) {
+                if (arr.length === 0) {
+                    return {
+                        name: val,
+                        value: null
+                    }
+                }
+            },
+            maxMethod() {
+                layer.msg('标签数量不能超过5个');
+            },
+            data: []
+        });
+        //渲染编辑器
+        var editor = editormd("test-editor", {
+            placeholder: '本编辑器支持Markdown编辑，左边编写，右边预览',  //默认显示的文字，这里就不解释了
+            width: "100%",
+            height: "500px",
+            saveHTMLToTextarea: true,
+            path: "/static/admin/editormd/lib/"
+        });
+
         //表单验证
         form.verify({
             verTitle: function (value) {
@@ -286,7 +307,7 @@
         });*/
 
         //获取输入
-        function getField(data, isPublish) {
+        function getField(data) {
             //获取标签列表
             data.field.tagList = tagSelect.getValue().map(item => {
                 return {
@@ -298,13 +319,15 @@
             data.field.content = editor.getHTML();
             //获取文章markdown
             data.field.textContent = editor.getMarkdown();
-            //获取是否发布
-            data.field.published = isPublish;
+            //获取文章排序
+            data.field.sort = rateSort.config.value;
             return data.field;
         };
         //监听保存草稿按钮
         form.on('submit(draft)', function (data) {
-            let fields = getField(data, false);
+            let fields = getField(data);
+            //获取是否发布
+            fields.published = false;
             axios({
                 method: 'post',
                 url: '/admin/article',
@@ -337,7 +360,9 @@
         });
         //监听发布文章按钮
         form.on('submit(publish)', function (data) {
-            let fields = getField(data, true);
+            let fields = getField(data);
+            //获取是否发布
+            fields.published = true;
             Swal.fire({
                 title: '是否确定发布该文章？',
                 icon: 'question',
@@ -380,15 +405,6 @@
                 }
             });
             return false;
-        });
-
-        //编辑器
-        var editor = editormd("test-editor", {
-            placeholder: '本编辑器支持Markdown编辑，左边编写，右边预览',  //默认显示的文字，这里就不解释了
-            width: "100%",
-            height: "500px",
-            saveHTMLToTextarea: true,
-            path: "/static/admin/editormd/lib/"
         });
     });
 </script>

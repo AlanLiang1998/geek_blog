@@ -58,6 +58,7 @@ public class ArticleController {
         article.setCreateTime(new Date());
         article.setUpdateTime(article.getCreateTime());
         article.setAuthorId(UserInfoUtil.getId());
+        article.setStatus(Constant.AUDIT_WAIT);
         articleService.saveOrUpdate(article);
         return JsonResult.ok();
     }

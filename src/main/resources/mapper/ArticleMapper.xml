@@ -17,6 +17,7 @@
         <result property="createTime" column="create_time"/>
         <result property="updateTime" column="update_time"/>
         <result property="status" column="status"/>
+        <result property="sort" column="sort"/>
         <association property="category" javaType="site.alanliang.geekblog.model.Category">
             <id property="id" column="cid"/>
             <id property="name" column="cname"/>
@@ -80,7 +81,7 @@
             parameterType="com.baomidou.mybatisplus.extension.plugins.pagination.Page">
         select ta.id, ta.title, ta.type, ta.cover, ta.comments, ta.views, ta.likes, ta.published, ta.commentable,
         ta.appreciable,
-        ta.top, ta.recommend, ta.status,
+        ta.top, ta.recommend, ta.status, ta.sort,
         ta.create_time, ta.update_time, tc.id as cid, tc.name as cname, tc.color
         from t_article ta
         left join t_category tc
@@ -98,6 +99,7 @@
         where ta.recommend = 1
         and ta.published = 1
         and ta.status = 2
+        order by ta.sort desc
         limit #{limit}
     </select>
 
@@ -110,7 +112,7 @@
         on ta.category_id = tc.id
         where ta.published = 1
         and ta.status = 2
-        order by ta.create_time desc
+        order by ta.sort desc, ta.create_time desc
     </select>
 
     <select id="selectDetailById" resultMap="detailResultMap">
@@ -151,6 +153,7 @@
         on ta.category_id = tc.id
         where tc.id = #{categoryId}
         and ta.published = 1 and ta.status = 2
+        order by ta.sort desc
     </select>
 
     <select id="listPreviewPageByTagId" resultMap="previewResultMap"
@@ -164,6 +167,7 @@
         on ta.id = tat.article_id
         where tat.tag_id = #{tagId}
         and ta.published = 1 and ta.status = 2
+        order by ta.sort desc
     </select>
 
     <select id="countByDate" resultType="site.alanliang.geekblog.vo.ArticleDateVO">

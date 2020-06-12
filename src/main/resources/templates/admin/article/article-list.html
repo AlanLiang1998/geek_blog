@@ -286,6 +286,12 @@
                         }
                     },
                     {
+                        field: 'sort', width: 80, align: 'center', title: '排序', sort: true, templet: function (data) {
+                            let sort = data.sort;
+                            return '<span class="layui-badge layui-bg-green">' + sort + '&nbsp;<i class="layui-icon layui-icon-star-fill"></i></span>'
+                        }
+                    },
+                    {
                         field: 'views',
                         width: 100,
                         title: '浏览量',

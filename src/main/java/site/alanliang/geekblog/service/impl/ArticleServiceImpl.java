@@ -20,6 +20,7 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 import site.alanliang.geekblog.common.Constant;
 import site.alanliang.geekblog.dao.ArticleMapper;
@@ -102,8 +103,9 @@ public class ArticleServiceImpl implements ArticleService {
         //匹配查询
         SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
         MultiMatchQueryBuilder multiMatchQueryBuilder = QueryBuilders.multiMatchQuery(keyword, "title", "summary", "content");
-        TermQueryBuilder termQueryBuilder = QueryBuilders.termQuery("published", true);
-        BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery().must(multiMatchQueryBuilder).must(termQueryBuilder);
+        TermQueryBuilder termQueryBuilder1 = QueryBuilders.termQuery("published", true);
+        TermQueryBuilder termQueryBuilder2 = QueryBuilders.termQuery("status", Constant.AUDIT_PASS);
+        BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery().must(multiMatchQueryBuilder).must(termQueryBuilder1).must(termQueryBuilder2);
         sourceBuilder.query(boolQueryBuilder);
         //高亮
         HighlightBuilder highlightBuilder = new HighlightBuilder();
@@ -203,8 +205,10 @@ public class ArticleServiceImpl implements ArticleService {
     public List<Article> listTop() {
         QueryWrapper<Article> wrapper = new QueryWrapper<>();
         wrapper.select("id", "title", "summary", "cover")
-                .eq("published", true)
                 .eq("top", true)
+                .eq("published", true)
+                .eq("status", Constant.AUDIT_PASS)
+                .orderByDesc("sort")
                 .last("limit " + Constant.MAX_TOP_ARTICLES);
         return articleMapper.selectList(wrapper);
     }
@@ -296,6 +300,14 @@ public class ArticleServiceImpl implements ArticleService {
         article.setId(auditVO.getId());
         article.setStatus(auditVO.getStatus());
         articleMapper.updateById(article);
+        //从ElasticSearch中删除
+        articleDocumentRepository.deleteById(article.getId());
+        //重新添加
+        QueryWrapper<Article> wrapper = new QueryWrapper<>();
+        wrapper.select("id", "title", "summary", "content", "published", "status")
+                .eq("id", auditVO.getId());
+        Article art = articleMapper.selectOne(wrapper);
+        saveToElasticSearch(art);
     }
 
     @Override
@@ -326,6 +338,24 @@ public class ArticleServiceImpl implements ArticleService {
         return count >= Constant.MAX_TOP_ARTICLES;
     }
 
+    public void saveToElasticSearch(Article article) {
+        ArticleDocument articleDocument = new ArticleDocument();
+        BeanUtils.copyProperties(article, articleDocument);
+        if (articleDocument.getPublished() == null) {
+            QueryWrapper<Article> wrapper = new QueryWrapper<>();
+            wrapper.select("published").eq("id", article.getId());
+            Article temp = articleMapper.selectOne(wrapper);
+            articleDocument.setPublished(temp.getPublished());
+        }
+        if (articleDocument.getStatus() == null) {
+            QueryWrapper<Article> wrapper = new QueryWrapper<>();
+            wrapper.select("status").eq("id", article.getId());
+            Article temp = articleMapper.selectOne(wrapper);
+            articleDocument.setStatus(temp.getStatus());
+        }
+        articleDocumentRepository.save(articleDocument);
+    }
+
     @Override
     @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Exception.class)
@@ -351,7 +381,12 @@ public class ArticleServiceImpl implements ArticleService {
             articleTagWrapper.eq("article_id", article.getId());
             articleTagMapper.delete(articleTagWrapper);
             //手动清空标签缓存
-            redisUtils.del("tag::listByArticleId:" + article.getId());
+            List<String> list = redisUtils.scan("tag*");
+            if (!CollectionUtils.isEmpty(list)) {
+                String[] keys = new String[list.size()];
+                list.toArray(keys);
+                redisUtils.del(keys);
+            }
             //从ElasticSearch中删除
             articleDocumentRepository.deleteById(article.getId());
         }
@@ -359,15 +394,7 @@ public class ArticleServiceImpl implements ArticleService {
         List<Long> tagIdList = article.getTagList().stream().map(Tag::getId).collect(Collectors.toList());
         articleTagMapper.insertBatch(article.getId(), tagIdList);
         //添加到ElasticSearch中
-        ArticleDocument articleDocument = new ArticleDocument();
-        BeanUtils.copyProperties(article, articleDocument);
-        if (articleDocument.getPublished() == null) {
-            QueryWrapper<Article> wrapper = new QueryWrapper<>();
-            wrapper.select("published").eq("id", article.getId());
-            Article temp = articleMapper.selectOne(wrapper);
-            articleDocument.setPublished(temp.getPublished());
-        }
-        articleDocumentRepository.save(articleDocument);
+        saveToElasticSearch(article);
     }
 
 }

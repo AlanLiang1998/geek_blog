@@ -12,6 +12,17 @@
     padding-bottom: 6px;
 }
 
+#article-form .rate-pane {
+    border: 1px solid #e6e6e6;
+    background-color: #fff;
+}
+
 .article-href {
     color: #0c3483 !important;
+}
+
+.layui-rate {
+    padding-top: 4px !important;
+    padding-bottom: 0 !important;
+    padding-right: 0 !important;
 }

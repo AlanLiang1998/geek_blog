@@ -77,4 +77,6 @@ public class Article implements Serializable {
     private User author;
 
     private Integer status;
+
+    private Integer sort;
 }
