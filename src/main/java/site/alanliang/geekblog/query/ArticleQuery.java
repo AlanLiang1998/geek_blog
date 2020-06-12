@@ -18,6 +18,8 @@ public class ArticleQuery {
 
     private Boolean published;
 
+    private Integer status;
+
     private Boolean top;
 
     private Boolean recommend;

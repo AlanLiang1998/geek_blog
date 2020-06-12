@@ -127,6 +127,18 @@
                         }
                     },
                     {
+                        field: 'status',
+                        width: 150,
+                        title: '状态',
+                        sort: true,
+                        align: 'center',
+                        hide: (!hasPermission('sys:role:edit')),
+                        templet: function (data) {
+                            let isChecked = data.status == 1 ? "checked" : "";
+                            return '<input type="checkbox" lay-skin="switch" lay-text="启用|禁用" lay-filter="status-filter"' + isChecked + '> ';
+                        }
+                    },
+                    {
                         field: 'color', width: 100, title: '颜色', align: 'center', templet: function (data) {
                             let color = 'layui-bg-' + data.color;
                             return '<span class="layui-badge ' + color + '">&nbsp;&nbsp;</span>';
@@ -176,6 +188,63 @@
 
             return false;
         });
+
+        //监听状态开关
+        form.on('switch(status-filter)', function (obj) {
+            let status = obj.elem.checked ? 1 : 0;
+            let roleId = obj.othis.parents('tr').find("td").eq(1).text();
+            let roleName = obj.othis.parents('tr').find("td").eq(2).text()
+            let op = (status === 1 ? '启用' : '停用');
+            let msg = '是否' + op + '角色:' + roleName + '?';
+            let x = obj.elem.checked;
+            Swal.fire({
+                title: msg,
+                text: `该角色下的所有用户都将被${op}!`,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: '确定！',
+                cancelButtonText: '取消！',
+                showLoaderOnConfirm: true,
+                preConfirm: () => {
+                    return new Promise((resolve, reject) => {
+                        axios({
+                            method: 'put',
+                            url: '/admin/role/status',
+                            data: {
+                                id: roleId,
+                                status: status,
+                            },
+                            headers: {
+                                'X-Requested-With': 'XMLHttpRequest'
+                            }
+                        })
+                            .then(response => {
+                                resolve(response.data);
+                            }, error => {
+                                reject(error);
+                            })
+                    }).then(res => {
+                        Swal.fire({
+                            icon: 'success',
+                            title: '修改成功！',
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                    }).catch(error => {
+                        Swal.showValidationMessage(`修改失败: ${error}`);
+                    })
+                }
+            }).then((result) => {
+                if (result.dismiss === Swal.DismissReason.cancel) {
+                    obj.elem.checked = !x;
+                }
+                form.render();
+            })
+            return false;
+        });
+
 
         /**
          * toolbar监听事件

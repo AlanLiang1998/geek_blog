@@ -110,7 +110,7 @@ public class LocalStorageServiceImpl implements LocalStorageService {
     }
 
     @Override
-    @Cacheable(key = "'getById:'+#id")
+    @Cacheable
     public LocalStorage getById(Long id) {
         QueryWrapper<LocalStorage> wrapper = new QueryWrapper<>();
         wrapper.select("id", "name").eq("id", id);

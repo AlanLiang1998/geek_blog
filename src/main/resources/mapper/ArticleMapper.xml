@@ -16,6 +16,7 @@
         <result property="recommend" column="recommend"/>
         <result property="createTime" column="create_time"/>
         <result property="updateTime" column="update_time"/>
+        <result property="status" column="status"/>
         <association property="category" javaType="site.alanliang.geekblog.model.Category">
             <id property="id" column="cid"/>
             <id property="name" column="cname"/>
@@ -79,7 +80,7 @@
             parameterType="com.baomidou.mybatisplus.extension.plugins.pagination.Page">
         select ta.id, ta.title, ta.type, ta.cover, ta.comments, ta.views, ta.likes, ta.published, ta.commentable,
         ta.appreciable,
-        ta.top, ta.recommend,
+        ta.top, ta.recommend, ta.status,
         ta.create_time, ta.update_time, tc.id as cid, tc.name as cname, tc.color
         from t_article ta
         left join t_category tc
@@ -94,8 +95,9 @@
         from t_article ta
         left join t_category tc
         on ta.category_id = tc.id
-        where recommend = 1
-        and published = 1
+        where ta.recommend = 1
+        and ta.published = 1
+        and ta.status = 2
         limit #{limit}
     </select>
 
@@ -107,6 +109,7 @@
         left join t_category tc
         on ta.category_id = tc.id
         where ta.published = 1
+        and ta.status = 2
         order by ta.create_time desc
     </select>
 
@@ -126,6 +129,7 @@
         left join t_category tc
         on ta.category_id = tc.id
         where ta.id = (select max(id) from t_article where id &lt; #{id})
+        and ta.published = 1 and ta.status = 2
     </select>
 
     <select id="selectNextPreviewById" resultMap="previewResultMap">
@@ -135,6 +139,7 @@
         left join t_category tc
         on ta.category_id = tc.id
         where ta.id = (select min(id) from t_article where id &gt; #{id})
+        and ta.published = 1 and ta.status = 2
     </select>
 
     <select id="listPreviewPageByCategoryId" resultMap="previewResultMap"
@@ -145,6 +150,7 @@
         left join t_category tc
         on ta.category_id = tc.id
         where tc.id = #{categoryId}
+        and ta.published = 1 and ta.status = 2
     </select>
 
     <select id="listPreviewPageByTagId" resultMap="previewResultMap"
@@ -157,6 +163,7 @@
         left join t_article_tag tat
         on ta.id = tat.article_id
         where tat.tag_id = #{tagId}
+        and ta.published = 1 and ta.status = 2
     </select>
 
     <select id="countByDate" resultType="site.alanliang.geekblog.vo.ArticleDateVO">
@@ -172,6 +179,7 @@
         , count(id) 'articleCount'
         from t_article
         where create_time >= DATE_SUB(CURDATE(), INTERVAL 1 YEAR)
+        and published = 1 and status = 2
         <choose>
             <when test="dft == 3">
                 group by year(create_time)
@@ -192,6 +200,7 @@
         from t_article ta
         left join t_category tc
         on ta.category_id = tc.id
+        and ta.published = 1 and ta.status = 2
         order by ta.create_time desc
     </select>
 </mapper>

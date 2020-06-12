@@ -75,4 +75,6 @@ public class Article implements Serializable {
 
     @TableField(exist = false)
     private User author;
+
+    private Integer status;
 }

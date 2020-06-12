@@ -71,7 +71,7 @@ public class NoticeServiceImpl implements NoticeService {
     }
 
     @Override
-    @Cacheable(key = "'getById:'+#id")
+    @Cacheable
     public Notice getById(Long id) {
         QueryWrapper<Notice> wrapper = new QueryWrapper<>();
         wrapper.select("id", "title", "content", "sort", "display")
@@ -80,7 +80,7 @@ public class NoticeServiceImpl implements NoticeService {
     }
 
     @Override
-    @Cacheable(key = "'listNewest'")
+    @Cacheable
     public List<Notice> listNewest() {
         QueryWrapper<Notice> wrapper = new QueryWrapper<>();
         wrapper.select("id", "title", "content", "create_time")

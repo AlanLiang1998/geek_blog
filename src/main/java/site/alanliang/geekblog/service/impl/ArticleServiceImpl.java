@@ -38,6 +38,7 @@ import site.alanliang.geekblog.utils.HighLightUtil;
 import site.alanliang.geekblog.utils.RedisUtils;
 import site.alanliang.geekblog.utils.UserInfoUtil;
 import site.alanliang.geekblog.vo.ArticleDateVO;
+import site.alanliang.geekblog.vo.AuditVO;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -89,7 +90,7 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    @Cacheable(key = "'listPreviewPageByDate:'+#current")
+    @Cacheable
     public Page<Article> listPreviewPageByDate(Integer current, Integer size, ArchivesQuery archivesQuery) {
         Page<Article> articlePage = new Page<>(current, size);
         return articleMapper.listPreviewPageByDate(articlePage);
@@ -132,9 +133,8 @@ public class ArticleServiceImpl implements ArticleService {
         return articleDocuments;
     }
 
-
     @Override
-    @Cacheable(key = "'countByDate:'+#dateFilterType")
+    @Cacheable
     public List<ArticleDateVO> countByDate(Integer dateFilterType) {
         if (dateFilterType == null) {
             dateFilterType = Constant.FILTER_BY_DAY;
@@ -143,31 +143,32 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    @Cacheable(key = "'listPreviewPageByTagId:'+#tagId+':'+#current")
+    @Cacheable
     public Page<Article> listPreviewPageByTagId(Integer current, Integer size, Long tagId) {
         Page<Article> articlePage = new Page<>(current, size);
         return articleMapper.listPreviewPageByTagId(articlePage, tagId);
     }
 
     @Override
-    @Cacheable(key = "'listPreviewPageByCategoryId:'+#categoryId+':'+#current")
+    @Cacheable
     public Page<Article> listPreviewPageByCategoryId(Integer current, Integer size, Long categoryId) {
         Page<Article> articlePage = new Page<>(current, size);
         return articleMapper.listPreviewPageByCategoryId(articlePage, categoryId);
     }
 
     @Override
+    @Cacheable
     public Article getNextPreviewById(Long id) {
         return articleMapper.selectNextPreviewById(id);
     }
 
     @Override
+    @Cacheable
     public Article getPrevPreviewById(Long id) {
         return articleMapper.selectPrevPreviewById(id);
     }
 
     @Override
-    @Cacheable(key = "'getDetailById:'+#id")
     public Article getDetailById(Long id) {
         //浏览次数加1
         increaseViews(id);
@@ -186,19 +187,19 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    @Cacheable(key = "'getById:'+#id")
+    @Cacheable
     public Article getById(Long id) {
         return articleMapper.selectById(id);
     }
 
     @Override
-    @Cacheable(key = "'countAll'")
+    @Cacheable
     public long countAll() {
         return articleMapper.selectCount(null);
     }
 
     @Override
-    @Cacheable(key = "'listTop'")
+    @Cacheable
     public List<Article> listTop() {
         QueryWrapper<Article> wrapper = new QueryWrapper<>();
         wrapper.select("id", "title", "summary", "cover")
@@ -233,14 +234,14 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    @Cacheable(key = "'listPreviewByPage:'+#current")
+    @Cacheable
     public Page<Article> listPreviewByPage(Integer current, Integer size) {
         Page<Article> articlePage = new Page<>(current, size);
         return articleMapper.listPreviewByPage(articlePage);
     }
 
     @Override
-    @Cacheable(key = "'listRecommend'")
+    @Cacheable
     public List<Article> listRecommend() {
         return articleMapper.listRecommend(Constant.MAX_RECOMMEND_ARTICLES);
     }
@@ -262,6 +263,9 @@ public class ArticleServiceImpl implements ArticleService {
         if (articleQuery.getPublished() != null) {
             wrapper.eq("published", articleQuery.getPublished());
         }
+        if (articleQuery.getStatus() != null) {
+            wrapper.eq("status", articleQuery.getStatus());
+        }
         if (articleQuery.getTop() != null) {
             wrapper.eq("top", articleQuery.getTop());
         }
@@ -275,13 +279,23 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    @Cacheable(key = "'listNewest'")
+    @Cacheable
     public List<Article> listNewest() {
         QueryWrapper<Article> wrapper = new QueryWrapper<>();
         wrapper.select("id", "title", "summary", "create_time")
                 .orderByDesc("create_time")
                 .last("limit " + Constant.NEWEST_PAGE_SIZE);
         return articleMapper.selectList(wrapper);
+    }
+
+    @Override
+    @CacheEvict(allEntries = true)
+    @Transactional(rollbackFor = Exception.class)
+    public void audit(AuditVO auditVO) {
+        Article article = new Article();
+        article.setId(auditVO.getId());
+        article.setStatus(auditVO.getStatus());
+        articleMapper.updateById(article);
     }
 
     @Override
@@ -336,7 +350,7 @@ public class ArticleServiceImpl implements ArticleService {
             QueryWrapper<ArticleTag> articleTagWrapper = new QueryWrapper<>();
             articleTagWrapper.eq("article_id", article.getId());
             articleTagMapper.delete(articleTagWrapper);
-            //手动清除文章标签缓存
+            //手动清空标签缓存
             redisUtils.del("tag::listByArticleId:" + article.getId());
             //从ElasticSearch中删除
             articleDocumentRepository.deleteById(article.getId());

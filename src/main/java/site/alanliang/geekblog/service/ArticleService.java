@@ -6,6 +6,7 @@ import site.alanliang.geekblog.model.Article;
 import site.alanliang.geekblog.query.ArchivesQuery;
 import site.alanliang.geekblog.query.ArticleQuery;
 import site.alanliang.geekblog.vo.ArticleDateVO;
+import site.alanliang.geekblog.vo.AuditVO;
 
 import java.io.IOException;
 import java.util.List;
@@ -159,8 +160,8 @@ public interface ArticleService {
     /**
      * 根据关键词获取文章
      *
-     * @return 文章列表
      * @param keyword
+     * @return 文章列表
      */
     List<ArticleDocument> listByKeyword(String keyword) throws IOException;
 
@@ -189,4 +190,9 @@ public interface ArticleService {
      * 统计上次访问首页至现在增加的文章数
      */
     Integer countByLastIndexViewToNow();
+
+    /**
+     * 审核文章
+     */
+    void audit(AuditVO auditVO);
 }

@@ -86,25 +86,25 @@ public class TagServiceImpl implements TagService {
     }
 
     @Override
-    @Cacheable(key = "'getById:'+#id")
+    @Cacheable
     public Tag getById(Long id) {
         return tagMapper.selectById(id);
     }
 
     @Override
-    @Cacheable(key = "'listByArticleCount'")
+    @Cacheable
     public List<Tag> listByArticleCount() {
         return tagMapper.listByArticleCount();
     }
 
     @Override
-    @Cacheable(key = "'countAll'")
+    @Cacheable
     public long countAll() {
         return tagMapper.selectCount(null);
     }
 
     @Override
-    @Cacheable(key = "'listColor'")
+    @Cacheable
     public List<String> listColor() {
         QueryWrapper<Tag> wrapper = new QueryWrapper<>();
         wrapper.select("color")
@@ -120,7 +120,7 @@ public class TagServiceImpl implements TagService {
     }
 
     @Override
-    @Cacheable(key = "'listAll'")
+    @Cacheable
     public List<Tag> listAll() {
         return tagMapper.selectList(null);
     }

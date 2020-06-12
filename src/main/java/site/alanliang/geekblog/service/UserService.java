@@ -49,9 +49,9 @@ public interface UserService {
     /**
      * 改变用户状态
      *
-     * @param userId 用户ID
+     * @param user 用户
      */
-    void changeStatus(Long userId);
+    void changeStatus(User user);
 
     /**
      * 根据id删除用户
@@ -83,7 +83,8 @@ public interface UserService {
 
     /**
      * 统计用户总数
-     * @return  用户总数
+     *
+     * @return 用户总数
      */
     Integer countAll();
 }

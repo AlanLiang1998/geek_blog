@@ -73,7 +73,7 @@ public class MessageController {
         message.setBrowser(StringUtils.getBrowser(request));
         message.setRequestIp(StringUtils.getIp(request));
         message.setAddress(StringUtils.getCityInfo(message.getRequestIp()));
-        message.setStatus(Constant.COMMENT_WAIT);
+        message.setStatus(Constant.AUDIT_WAIT);
         message.setCreateTime(new Date());
         Object o = session.getAttribute("user");
         if (o != null) {

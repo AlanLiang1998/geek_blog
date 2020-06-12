@@ -11,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 import site.alanliang.geekblog.common.Constant;
-import site.alanliang.geekblog.dao.ArticleMapper;
 import site.alanliang.geekblog.dao.CategoryMapper;
 import site.alanliang.geekblog.exception.EntityExistException;
 import site.alanliang.geekblog.model.Article;
@@ -34,9 +33,6 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Autowired
     private CategoryMapper categoryMapper;
-
-    @Autowired
-    private ArticleMapper articleMapper;
 
     @Override
     @Cacheable
@@ -72,13 +68,13 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    @Cacheable(key = "'countAll'")
+    @Cacheable
     public long countAll() {
         return categoryMapper.selectCount(null);
     }
 
     @Override
-    @Cacheable(key = "'listColor'")
+    @Cacheable
     public List<String> listColor() {
         QueryWrapper<Category> wrapper = new QueryWrapper<>();
         wrapper.select("color")
@@ -88,7 +84,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    @Cacheable(key = "'listByArticleCount'")
+    @Cacheable
     public List<Category> listByArticleCount() {
         return categoryMapper.listByArticleCount();
     }
@@ -118,13 +114,13 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    @Cacheable(key = "'getById:'+#id")
+    @Cacheable
     public Category getById(Long id) {
         return categoryMapper.selectById(id);
     }
 
     @Override
-    @Cacheable(key = "'listAll'")
+    @Cacheable
     public List<Category> listAll() {
         QueryWrapper<Category> wrapper = new QueryWrapper<>();
         wrapper.select("id", "name");

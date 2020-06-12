@@ -51,7 +51,7 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @Override
-    @Cacheable(key = "'listNewest'")
+    @Cacheable
     public List<Message> listNewest() {
         QueryWrapper<Message> wrapper = new QueryWrapper<>();
         wrapper.select("id", "nickname", "content", "create_time", "status")
@@ -111,7 +111,7 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @Override
-    @Cacheable(key = "'countAll'")
+    @Cacheable
     public Integer countAll() {
         return messageMapper.selectCount(null);
     }
@@ -124,7 +124,7 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @Override
-    @Cacheable(key = "'listByPage:'+#current")
+    @Cacheable
     public Page<Message> listByPage(Integer current, Integer size) {
         Page<Message> page = new Page<>(current, size);
         Page<Message> pageInfo = messageMapper.listRootByPage(page);

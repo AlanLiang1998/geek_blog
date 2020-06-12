@@ -51,6 +51,12 @@
         </div>
     </div>
     <div class="layui-form-item">
+        <label class="layui-form-label required">状态</label>
+        <div class="layui-input-block">
+            <input type="checkbox" name="status" lay-skin="switch" lay-text="启用|停用" value="1" checked/>
+        </div>
+    </div>
+    <div class="layui-form-item">
         <label class="layui-form-label required">权限</label>
         <div class="layui-input-block">
             <div id="treeDiv" style="overflow: auto;" lay-verify="menuTree">
@@ -116,8 +122,9 @@
         $('.layui-form input[name="roleName"]').val(role.roleName);
         $('.layui-form textarea[name="description"]').val(role.description);
         $('.layui-form input[name="rank"]').val(role.rank);
-        let color = role.color;
-        colorSelect.setValue([color]);
+        $('.layui-form input[name="status"]').prop('checked', (role.status === 1));
+        colorSelect.setValue([role.color]);
+        form.render();
 
         //获取菜单树
         let data = null;

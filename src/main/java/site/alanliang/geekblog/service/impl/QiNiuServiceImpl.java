@@ -66,7 +66,7 @@ public class QiNiuServiceImpl implements QiNiuService {
     }
 
     @Override
-    @Cacheable(key = "'queryAll'")
+    @Cacheable
     public List<QiniuContent> queryAll(QiNiuQuery qiNiuQuery) {
         return qiNiuContentMapper.selectList(null);
     }
@@ -132,7 +132,7 @@ public class QiNiuServiceImpl implements QiNiuService {
     }
 
     @Override
-    @Cacheable(key = "'findByContentId:'+#id")
+    @Cacheable
     public QiniuContent findByContentId(Long id) {
         return qiNiuContentMapper.selectById(id);
     }

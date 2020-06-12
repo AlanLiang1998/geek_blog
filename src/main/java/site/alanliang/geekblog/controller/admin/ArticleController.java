@@ -14,6 +14,7 @@ import site.alanliang.geekblog.query.ArticleQuery;
 import site.alanliang.geekblog.service.ArticleService;
 import site.alanliang.geekblog.utils.UserInfoUtil;
 import site.alanliang.geekblog.vo.ArticleVO;
+import site.alanliang.geekblog.vo.AuditVO;
 
 import javax.validation.constraints.NotNull;
 import java.util.Date;
@@ -70,6 +71,7 @@ public class ArticleController {
         articleVo.setTop(articleVo.getTop() != null);
         articleVo.setRecommend(articleVo.getRecommend() != null);
         articleVo.setUpdateTime(new Date());
+        articleVo.setStatus(Constant.AUDIT_WAIT);
         articleService.saveOrUpdate(articleVo);
         return JsonResult.ok();
     }
@@ -104,5 +106,13 @@ public class ArticleController {
         map.put("reached", articleService.reachedMaxRecommend());
         map.put("maxRecommend", Constant.MAX_RECOMMEND_ARTICLES);
         return JsonResult.ok(map);
+    }
+
+    @PreAuthorize("hasAuthority('blog:article:audit')")
+    @OperationLog("审核文章")
+    @PutMapping("/audit")
+    public JsonResult audit(@Validated @RequestBody AuditVO auditVO) {
+        articleService.audit(auditVO);
+        return JsonResult.ok();
     }
 }

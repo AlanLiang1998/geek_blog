@@ -73,7 +73,6 @@ public class CommentServiceImpl implements CommentService {
         QueryWrapper<Comment> commentWrapper = new QueryWrapper<>();
         commentWrapper.select("article_id").eq("id", id);
         Comment comment = commentMapper.selectOne(commentWrapper);
-
         QueryWrapper<Article> articleWrapper = new QueryWrapper<>();
         articleWrapper.select("comments").eq("id", comment.getArticleId());
         Article article = articleMapper.selectOne(articleWrapper);
@@ -135,13 +134,13 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    @Cacheable(key = "'listNewest'")
+    @Cacheable
     public List<Comment> listNewest() {
         return commentMapper.listNewest(Constant.NEWEST_PAGE_SIZE);
     }
 
     @Override
-    @Cacheable(key = "'countAll'")
+    @Cacheable
     public Integer countAll() {
         return commentMapper.selectCount(null);
     }
@@ -171,7 +170,7 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    @Cacheable(key = "'listByArticleId:'+#articleId+':'+#current")
+    @Cacheable
     public Page<Comment> listByArticleId(Long articleId, Integer current, Integer size) {
         Page<Comment> page = new Page<>(current, size);
         Page<Comment> pageInfo = commentMapper.listRootPageByArticleId(page, articleId);

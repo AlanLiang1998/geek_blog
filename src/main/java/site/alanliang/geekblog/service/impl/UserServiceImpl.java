@@ -26,7 +26,6 @@ import site.alanliang.geekblog.vo.UserInfoVO;
 import site.alanliang.geekblog.vo.UserLoginVO;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
@@ -45,7 +44,7 @@ public class UserServiceImpl implements UserService {
     private RoleUserMapper roleUserMapper;
 
     @Override
-    @Cacheable(key = "'getById:'+#id")
+    @Cacheable
     public User getById(Long id) {
         QueryWrapper<User> userWrapper = new QueryWrapper<>();
         userWrapper.select("id", "username", "nickname", "sex", "phone", "email", "status")
@@ -78,16 +77,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Exception.class)
-    public void changeStatus(Long userId) {
-        QueryWrapper<User> wrapper = new QueryWrapper<>();
-        wrapper.select("status");
-        User user = userMapper.selectById(userId);
-        if (Objects.equals(user.getStatus(), Constant.USER_ENABLE)) {
-            user.setStatus(Constant.USER_DISABLE);
-        } else if (Objects.equals(user.getStatus(), Constant.USER_DISABLE)) {
-            user.setStatus(Constant.USER_ENABLE);
-        }
-        user.setId(userId);
+    public void changeStatus(User user) {
         userMapper.updateById(user);
     }
 
@@ -181,7 +171,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    @Cacheable(key = "'countAll'")
+    @Cacheable
     public Integer countAll() {
         return userMapper.selectCount(null);
     }
@@ -220,7 +210,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    @Cacheable(key = "'checkUser:'+#username")
+    @Cacheable
     public User checkUser(String username, String password) {
         QueryWrapper<User> wrapper = new QueryWrapper<>();
         wrapper.select("id", "username")

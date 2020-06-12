@@ -47,12 +47,23 @@
                             </div>
                         </div>
                         <div class="layui-inline">
-                            <label class="layui-form-label">状态</label>
+                            <label class="layui-form-label">发布状态</label>
                             <div class="layui-input-inline">
                                 <select name="published">
                                     <option value="" selected>所有</option>
                                     <option value="true">发布</option>
                                     <option value="false">草稿</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">审核状态</label>
+                            <div class="layui-input-inline">
+                                <select name="status">
+                                    <option value="" selected>所有</option>
+                                    <option value="0">审核未过</option>
+                                    <option value="1">等待审核</option>
+                                    <option value="2">审核通过</option>
                                 </select>
                             </div>
                         </div>
@@ -107,6 +118,7 @@
         <table class="layui-hide" id="currentTableId" lay-filter="currentTableFilter"></table>
 
         <script type="text/html" id="currentTableBar">
+            <a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="audit" permission="blog:article:audit">审核</a>
             <a class="layui-btn layui-btn-xs data-count-edit" lay-event="edit" permission="blog:article:edit">编辑</a>
             <a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete" lay-event="delete"
                permission="blog:article:delete">删除</a>
@@ -219,8 +231,8 @@
                     },
                     {
                         field: 'published',
-                        width: 80,
-                        title: '状态',
+                        width: 120,
+                        title: '发布状态',
                         align: 'center',
                         sort: true,
                         templet: function (data) {
@@ -228,6 +240,23 @@
                             let color = (data.published ? 'green' : 'orange');
                             let bgColor = 'layui-bg-' + color;
                             return '<span class="layui-badge ' + bgColor + '">' + str + '</span>';
+                        }
+                    },
+                    {
+                        field: 'status', width: 100, title: '审核状态', align: 'center', templet: function (data) {
+                            let color, text, status = data.status;
+                            if (status === 2) {
+                                text = '审核通过';
+                                color = 'green';
+                            } else if (status === 1) {
+                                text = '等待审核';
+                                color = 'blue';
+                            } else if (status === 0) {
+                                text = '审核未过';
+                                color = 'red';
+                            }
+                            let bgColor = 'layui-bg-' + color;
+                            return '<span class="layui-badge ' + bgColor + '">' + text + '</span>';
                         }
                     },
                     {
@@ -299,11 +328,11 @@
                     {field: 'updateTime', width: 200, title: '更新时间', sort: true},
                     {
                         title: '操作',
-                        minWidth: 120,
+                        minWidth: 180,
                         toolbar: '#currentTableBar',
                         fixed: "right",
                         align: "center",
-                        hide: (!hasPermission('blog:article:edit') && !hasPermission('blog:article:delete'))
+                        hide: (!hasPermission('blog:article:audit') && !hasPermission('blog:article:edit') && !hasPermission('blog:article:delete'))
                     }
                 ]
             ],
@@ -321,13 +350,13 @@
             let type = data.field.type;
             let categoryId = data.field.categoryId;
             let published = data.field.published;
+            let status = data.field.status;
             let top = data.field.top;
             let recommend = data.field.recommend;
             let dateRange = data.field.dateRange;
             let dates = dateRange.split(' ~ ')
             let startDate = dates[0];
             let endDate = dates[1];
-            console.log(top);
             //执行搜索重载
             table.reload('currentTableId', {
                 page: {
@@ -338,6 +367,7 @@
                     type: type,
                     categoryId: categoryId,
                     published: published,
+                    status: status,
                     top: top,
                     recommend: recommend,
                     startDate: startDate,
@@ -449,6 +479,48 @@
                         })
                     }
                 });
+            } else if (obj.event === 'audit') {
+                async function audit() {
+                    const inputOptions = new Promise((resolve) => {
+                        resolve({
+                            '0': '审核未过',
+                            '2': '审核通过',
+                        });
+                    })
+                    const {value: status} = await Swal.fire({
+                        title: '审核结果',
+                        input: 'radio',
+                        inputOptions: inputOptions,
+                        inputValidator: (value) => {
+                            if (!value) {
+                                return '请选择审核结果！'
+                            }
+                        }
+                    })
+                    if (status) {
+                        axios({
+                            method: 'put',
+                            url: '/admin/article/audit',
+                            data: {id: data.id, status: status}
+                        }).then((response) => {
+                            table.reload('currentTableId');
+                            Swal.fire({
+                                icon: 'success',
+                                title: '审核成功',
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                        }).catch((error) => {
+                            Swal.fire({
+                                icon: 'error',
+                                title: '保存失败！',
+                                text: `${error.response.data.message}`,
+                            });
+                        });
+                    }
+                }
+
+                audit();
             }
         });
 

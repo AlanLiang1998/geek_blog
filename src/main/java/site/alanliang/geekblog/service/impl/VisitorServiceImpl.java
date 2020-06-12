@@ -36,7 +36,7 @@ public class VisitorServiceImpl implements VisitorService {
     private VisitorMapper visitorMapper;
 
     @Override
-    @Cacheable(key = "'countAll'")
+    @Cacheable
     public Integer countAll() {
         return visitorMapper.selectCount(null);
     }

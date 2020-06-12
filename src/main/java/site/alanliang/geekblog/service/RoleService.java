@@ -53,4 +53,11 @@ public interface RoleService {
      * @param idList 角色ID列表
      */
     void removeByIdList(List<Long> idList);
+
+    /**
+     * 修改角色状态
+     *
+     * @param role 角色
+     */
+    void changeStatus(Role role);
 }

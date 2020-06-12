@@ -46,4 +46,6 @@ public class Role {
 
     @TableField(exist = false)
     private Integer userCount;
+
+    private Integer status;
 }

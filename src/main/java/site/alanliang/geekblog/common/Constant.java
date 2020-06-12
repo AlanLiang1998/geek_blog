@@ -105,13 +105,13 @@ public interface Constant {
     Integer VISITOR_DISABLE = 0;
 
     /**
-     * 评论状态
+     * 审核状态
      */
-    Integer COMMENT_PASS = 2;
+    Integer AUDIT_PASS = 2;
 
-    Integer COMMENT_WAIT = 1;
+    Integer AUDIT_WAIT = 1;
 
-    Integer COMMENT_NOT_PASS = 0;
+    Integer AUDIT_NOT_PASS = 0;
 
     /**
      * 用户状态

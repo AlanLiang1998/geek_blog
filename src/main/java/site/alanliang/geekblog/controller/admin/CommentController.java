@@ -75,7 +75,7 @@ public class CommentController {
         comment.setOs(StringUtils.getClientOS(request));
         comment.setRequestIp(StringUtils.getIp(request));
         comment.setAddress(StringUtils.getCityInfo(comment.getRequestIp()));
-        comment.setStatus(Constant.COMMENT_WAIT);
+        comment.setStatus(Constant.AUDIT_WAIT);
         comment.setCreateTime(new Date());
         comment.setUserId(UserInfoUtil.getId());
         commentService.reply(comment);

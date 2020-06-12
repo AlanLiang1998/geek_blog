@@ -78,7 +78,7 @@ public class LinkController {
     @OperationLog("添加友链")
     @PostMapping
     public JsonResult save(@Validated @RequestBody Link link) {
-        link.setStatus(Constant.COMMENT_WAIT);
+        link.setStatus(Constant.AUDIT_WAIT);
         link.setCreateTime(new Date());
         link.setUpdateTime(link.getCreateTime());
         linkService.saveOfUpdate(link);
@@ -90,7 +90,7 @@ public class LinkController {
     @OperationLog("修改友链")
     @PutMapping
     public JsonResult update(@Validated @RequestBody Link link) {
-        link.setStatus(Constant.COMMENT_WAIT);
+        link.setStatus(Constant.AUDIT_WAIT);
         link.setUpdateTime(new Date());
         linkService.saveOfUpdate(link);
         return JsonResult.ok();

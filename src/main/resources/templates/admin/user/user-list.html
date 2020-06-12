@@ -192,10 +192,10 @@
 
         //监听状态开关
         form.on('switch(status-filter)', function (obj) {
-            let status = obj.elem.checked ? 0 : 1;
+            let status = obj.elem.checked ? 1 : 0;
             let userId = obj.othis.parents('tr').find("td").eq(1).text();
             let username = obj.othis.parents('tr').find("td").eq(2).text()
-            let op = (status === 1 ? '停用' : '启用');
+            let op = (status === 1 ? '启用' : '停用');
             let msg = '是否' + op + '用户:' + username + '?';
             let x = obj.elem.checked;
             Swal.fire({
@@ -211,7 +211,11 @@
                     return new Promise((resolve, reject) => {
                         axios({
                             method: 'put',
-                            url: '/admin/user/status/' + userId,
+                            url: '/admin/user/status',
+                            data: {
+                                id: userId,
+                                status: status,
+                            },
                             headers: {
                                 'X-Requested-With': 'XMLHttpRequest'
                             }

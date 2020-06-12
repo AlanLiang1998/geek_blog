@@ -92,6 +92,7 @@ public class RedisConfig extends CachingConfigurerSupport {
             container.put("package", targetClassClass.getPackage());
             // 参数列表
             for (int i = 0; i < params.length; i++) {
+                System.out.println(params[i]);
                 container.put(String.valueOf(i), params[i]);
             }
             // 转为JSON字符串

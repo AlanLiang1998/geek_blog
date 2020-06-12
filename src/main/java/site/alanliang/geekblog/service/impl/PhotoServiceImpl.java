@@ -25,7 +25,7 @@ public class PhotoServiceImpl implements PhotoService {
     private PhotoMapper photoMapper;
 
     @Override
-    @Cacheable(key = "'listAll'")
+    @Cacheable
     public List<Photo> listAll() {
         QueryWrapper<Photo> wrapper = new QueryWrapper<>();
         wrapper.select("url", "description").orderByAsc("sort").eq("display", Constant.DISPLAY);
@@ -40,7 +40,7 @@ public class PhotoServiceImpl implements PhotoService {
     }
 
     @Override
-    @Cacheable(key = "'getById:'+#id")
+    @Cacheable
     public Photo getById(Long id) {
         return photoMapper.selectById(id);
     }

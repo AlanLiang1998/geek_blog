@@ -13,13 +13,16 @@ import org.springframework.util.CollectionUtils;
 import site.alanliang.geekblog.dao.RoleMapper;
 import site.alanliang.geekblog.dao.RoleMenuMapper;
 import site.alanliang.geekblog.dao.RoleUserMapper;
+import site.alanliang.geekblog.dao.UserMapper;
 import site.alanliang.geekblog.exception.AssociationExistException;
 import site.alanliang.geekblog.exception.EntityExistException;
 import site.alanliang.geekblog.model.Role;
 import site.alanliang.geekblog.model.RoleMenu;
 import site.alanliang.geekblog.model.RoleUser;
+import site.alanliang.geekblog.model.User;
 import site.alanliang.geekblog.query.RoleQuery;
 import site.alanliang.geekblog.service.RoleService;
+import site.alanliang.geekblog.utils.RedisUtils;
 import site.alanliang.geekblog.utils.StringUtils;
 
 import java.util.List;
@@ -41,14 +44,18 @@ public class RoleServiceImpl implements RoleService {
     private RoleUserMapper roleUserMapper;
     @Autowired
     private RoleMenuMapper roleMenuMapper;
+    @Autowired
+    private UserMapper userMapper;
+    @Autowired
+    private RedisUtils redisUtils;
 
     @Override
-    @Cacheable(key = "'getById:'+#id")
+    @Cacheable
     public Role getById(Long id) {
         Role role = new Role();
         //查询角色信息
         QueryWrapper<Role> roleWrapper = new QueryWrapper<>();
-        roleWrapper.select("id", "role_name", "description", "rank", "color").eq("id", id);
+        roleWrapper.select("id", "role_name", "description", "rank", "color", "status").eq("id", id);
         Role r = roleMapper.selectOne(roleWrapper);
         BeanUtils.copyProperties(r, role);
         //查询角色权限信息
@@ -90,6 +97,31 @@ public class RoleServiceImpl implements RoleService {
                 Role role = roleMapper.selectOne(roleWrapper);
                 throw new AssociationExistException("角色: " + role.getRoleName() + "存在关联用户，不能删除");
             }
+        }
+    }
+
+    @Override
+    @CacheEvict(allEntries = true)
+    @Transactional(rollbackFor = Exception.class)
+    public void changeStatus(Role role) {
+        //手动清除用户缓存
+        List<String> list = redisUtils.scan("user*");
+        if (!CollectionUtils.isEmpty(list)) {
+            String[] keys = new String[list.size()];
+            list.toArray(keys);
+            redisUtils.del(keys);
+        }
+        //更新角色状态
+        roleMapper.updateById(role);
+        //更新用户状态
+        QueryWrapper<RoleUser> wrapper = new QueryWrapper<>();
+        wrapper.select("user_id").eq("role_id", role.getId());
+        List<RoleUser> roleUsers = roleUserMapper.selectList(wrapper);
+        for (RoleUser roleUser : roleUsers) {
+            User user = new User();
+            user.setId(roleUser.getUserId());
+            user.setStatus(role.getStatus());
+            userMapper.updateById(user);
         }
     }
 
@@ -157,7 +189,7 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    @Cacheable(key = "'listAll'")
+    @Cacheable
     public List<Role> listAll() {
         QueryWrapper<Role> wrapper = new QueryWrapper<>();
         wrapper.select("id", "role_name");

@@ -49,6 +49,13 @@
         </div>
     </div>
     <div class="layui-form-item">
+        <label class="layui-form-label required">排序</label>
+        <div class="layui-input-block">
+            <input type="number" name="sort" placeholder="请输入排序值" value="" class="layui-input" lay-verify="number|sort"
+                   required="">
+        </div>
+    </div>
+    <div class="layui-form-item">
         <div class="layui-input-block">
             <button class="layui-btn" lay-submit lay-filter="saveBtn">确认保存</button>
             <button type="reset" class="layui-btn layui-btn-primary">重置</button>
@@ -66,13 +73,14 @@
             layer = layui.layer,
             $ = layui.$;
 
-
+        //渲染数据
         var link = [[${link}]];
         $('.layui-form input[name="id"]').val(link.id);
         $('.layui-form input[name="nickname"]').val(link.nickname);
         $('.layui-form input[name="avatar"]').val(link.avatar);
         $('.layui-form textarea[name="introduction"]').val(link.introduction);
         $('.layui-form input[name="link"]').val(link.link);
+        $('.layui-form input[name="sort"]').val(link.sort);
         form.render();
 
         //自定义验证规则

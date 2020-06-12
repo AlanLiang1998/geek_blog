@@ -48,6 +48,13 @@
         </div>
     </div>
     <div class="layui-form-item">
+        <label class="layui-form-label required">排序</label>
+        <div class="layui-input-block">
+            <input type="number" name="sort" placeholder="请输入排序值" value="" class="layui-input" lay-verify="number|sort"
+                   required="">
+        </div>
+    </div>
+    <div class="layui-form-item">
         <div class="layui-input-block">
             <button class="layui-btn" lay-submit lay-filter="saveBtn">确认保存</button>
             <button type="reset" class="layui-btn layui-btn-primary">重置</button>
@@ -64,7 +71,6 @@
         var form = layui.form,
             layer = layui.layer,
             $ = layui.$;
-
         //自定义验证规则
         form.verify({
             //验证昵称
@@ -76,6 +82,11 @@
             introduction: function (value) {
                 if (value.length > 30) {
                     return '简介长度在30个字符以内';
+                }
+            },
+            sort: function (value) {
+                if (value < 1 || value > 1024) {
+                    return '排序值在1-1024之间'
                 }
             }
         });

@@ -51,6 +51,9 @@ public class RoleController {
     @OperationLog("保存角色")
     @PostMapping
     public JsonResult save(@Validated @RequestBody Role role) {
+        if (role.getStatus() == null) {
+            role.setStatus(0);
+        }
         if (StringUtils.isEmpty(role.getDescription())) {
             role.setDescription("-");
         }
@@ -64,6 +67,9 @@ public class RoleController {
     @OperationLog("修改角色")
     @PutMapping
     public JsonResult update(@Validated @RequestBody Role role) {
+        if (role.getStatus() == null) {
+            role.setStatus(0);
+        }
         if (StringUtils.isEmpty(role.getDescription())) {
             role.setDescription("-");
         }
@@ -85,6 +91,14 @@ public class RoleController {
     @DeleteMapping
     public JsonResult removeBatch(@NotEmpty @RequestBody List<Long> idList) {
         roleService.removeByIdList(idList);
+        return JsonResult.ok();
+    }
+
+    @PreAuthorize("hasAuthority('sys:role:edit')")
+    @OperationLog("修改角色状态")
+    @PutMapping("/status")
+    public JsonResult changeStatus(@RequestBody Role role) {
+        roleService.changeStatus(role);
         return JsonResult.ok();
     }
 }

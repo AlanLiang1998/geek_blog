@@ -69,18 +69,18 @@ public class LinkServiceImpl implements LinkService {
     }
 
     @Override
-    @Cacheable(key = "'listByPage:'+#current")
+    @Cacheable
     public Page<Link> listByPage(Integer current, Integer size) {
         Page<Link> page = new Page<>(current, size);
         QueryWrapper<Link> wrapper = new QueryWrapper<>();
         wrapper.select("id", "nickname", "avatar", "introduction", "link")
-                .eq("status", Constant.COMMENT_PASS)
+                .eq("status", Constant.AUDIT_PASS)
                 .orderByAsc("sort");
         return linkMapper.selectPage(page, wrapper);
     }
 
     @Override
-    @Cacheable(key = "'getById:'+#id")
+    @Cacheable
     public Link getById(Long id) {
         return linkMapper.selectById(id);
     }

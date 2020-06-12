@@ -47,7 +47,6 @@ public class HomeController {
         return new ResponseEntity<>(articlePage, HttpStatus.OK);
     }
 
-    @AccessLog("搜索文章")
     @GetMapping(value = "/articles/search")
     public ResponseEntity<Object> search(@RequestParam(value = "keyword") String keyword) {
         List<ArticleDocument> articleDocuments;

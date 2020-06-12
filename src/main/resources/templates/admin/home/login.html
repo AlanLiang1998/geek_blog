@@ -231,6 +231,9 @@
                     } else {
                         title = '登录异常，请联系管理员';
                     }
+                    let verCodeImg = $('#verCodeImg');
+                    let src = verCodeImg.prop('src');
+                    verCodeImg.prop('src', src + "?" + Math.random());
                     Swal.fire({
                         toast: true,
                         position: 'center',
@@ -255,40 +258,6 @@
                     timerProgressBar: true,
                 });
             })
-            /*  $.ajax({
-                  url: '/admin/login',
-                  type: 'POST',
-                  data: $("#login-form").serialize(),
-                  success: function (result) {
-                      if (result.authenticated) {
-                          localStorage.setItem("userId", result.principal.id);
-                          localStorage.setItem("username", result.principal.username);
-                          localStorage.setItem("nickname", result.principal.nickname);
-                          localStorage.setItem("user", JSON.stringify(result.principal));
-                          var authorities = result.authorities;
-                          var permission = [];
-                          for (var i in authorities) {
-                              permission.push(authorities[i].authority);
-                          }
-                          localStorage.setItem("permission", JSON.stringify(permission));
-                          layer.msg("登录成功", {time: 500}, function () {
-                              location.href = '/admin'
-                          });
-                      } else {
-                          if (result.message !== undefined) {
-                              layer.msg(result.message);
-                          } else {
-                              layer.msg("登录异常，请联系管理员");
-                          }
-                      }
-                  },
-                  error: function (xhr, textStatus, errorThrown) {
-                      var msg = xhr.responseText;
-                      var response = JSON.parse(msg);
-                      layer.msg(response.message);
-                  }
-              });*/
-
             return false;
         });
     });
