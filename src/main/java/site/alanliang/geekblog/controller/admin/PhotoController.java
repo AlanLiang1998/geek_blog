@@ -25,7 +25,7 @@ import java.util.List;
  * Date 2020/5/24 10:16
  * Version 1.0
  **/
-@Api(tags = "相册管理")
+@Api(tags = "后台：相册管理")
 @RestController
 @RequestMapping("/admin/photo")
 public class PhotoController {
@@ -33,9 +33,9 @@ public class PhotoController {
     @Autowired
     private PhotoService photoService;
 
-    @ApiOperation("分页查询所有照片")
+    @ApiOperation("查询照片")
     @PreAuthorize("hasAuthority('blog:photo:query')")
-    @OperationLog("查询相册")
+    @OperationLog("查询照片")
     @GetMapping
     public TableResult listTableByPage(@RequestParam(value = "page", defaultValue = "1") Integer page,
                                        @RequestParam(value = "limit", defaultValue = "10") Integer limit,
@@ -62,9 +62,9 @@ public class PhotoController {
         return JsonResult.ok();
     }
 
-    @ApiOperation("添加照片")
+    @ApiOperation("新增照片")
     @PreAuthorize("hasAuthority('blog:photo:add')")
-    @OperationLog("添加照片")
+    @OperationLog("新增照片")
     @PostMapping
     public JsonResult save(@Validated @RequestBody Photo photo) {
         photo.setCreateTime(new Date());
@@ -73,9 +73,9 @@ public class PhotoController {
         return JsonResult.ok();
     }
 
-    @ApiOperation("修改照片")
+    @ApiOperation("更新照片")
     @PreAuthorize("hasAuthority('blog:photo:edit')")
-    @OperationLog("修改照片")
+    @OperationLog("更新照片")
     @PutMapping
     public JsonResult update(@Validated @RequestBody Photo photo) {
         photo.setUpdateTime(new Date());

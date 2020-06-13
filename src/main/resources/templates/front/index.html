@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta th:include="web/fragments :: head(~{::title})"/>
+    <meta th:include="front/fragments :: head(~{::title})"/>
     <title>GeekBlog - 个人博客</title>
     <style>
         .carousel-control {
@@ -61,7 +61,7 @@
 
 <body>
 <!--navbar-->
-<header th:replace="web/fragments :: header"></header>
+<header th:replace="front/fragments :: header"></header>
 <!--end navbar-->
 
 <div id="app">
@@ -166,7 +166,7 @@
                                                 <!--分类-->
                                                 <div class="post-categories">
                                                     <a class="category"
-                                                       :href="'/api/categories?id='+article.category.id">{{article.category.name}}</a>
+                                                       :href="'/page/categories?id='+article.category.id">{{article.category.name}}</a>
                                                 </div>
                                                 <!--标题-->
                                                 <a :href="'/article/'+article.id">
@@ -220,13 +220,13 @@
                                     <!--文章分类-->
                                     <span class="publish-author">
                                         <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                        <a class="post-category" :href="'/api/categories?id='+article.category.id">{{article.category.name}}</a>
+                                        <a class="post-category" :href="'/page/categories?id='+article.category.id">{{article.category.name}}</a>
                                     </span>
                                 </div>
                             </div>
                             <!--文章标签-->
                             <div class="card-action article-tags">
-                                <a :href="'/api/tags?id='+tag.id" v-for="(tag, index) in article.tagList">
+                                <a :href="'/page/tags?id='+tag.id" v-for="(tag, index) in article.tagList">
                                     <span class="chip bg-color">{{tag.name}}</span>
                                 </a>
                             </div>
@@ -266,11 +266,11 @@
 </div>
 
 <!--footer-->
-<footer th:replace="web/fragments :: footer"></footer>
+<footer th:replace="front/fragments :: footer"></footer>
 <!--end footer-->
 
 <!--commons-->
-<div th:replace="web/fragments :: commons"></div>
+<div th:replace="front/fragments :: commons"></div>
 <!--end commons-->
 
 <!--vue-->
@@ -392,6 +392,6 @@
         },
     });
 </script>
-<div th:replace="web/fragments :: scripts"></div>
+<div th:replace="front/fragments :: scripts"></div>
 </body>
 </html>

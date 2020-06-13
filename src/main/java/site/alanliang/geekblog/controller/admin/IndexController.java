@@ -1,5 +1,7 @@
 package site.alanliang.geekblog.controller.admin;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +25,7 @@ import javax.servlet.http.HttpSession;
  * Date 2020/4/6 11:46
  * Version 1.0
  **/
+@Api(tags = "后台：控制面板")
 @Controller
 @RequestMapping("/admin")
 public class IndexController {
@@ -50,6 +53,7 @@ public class IndexController {
     @Autowired
     private NoticeService noticeService;
 
+    @ApiOperation("初始化菜单")
     @ResponseBody
     @GetMapping("/init")
     public ResponseEntity<Object> init(HttpSession session, HttpServletRequest request) {
@@ -76,12 +80,14 @@ public class IndexController {
         }
     }
 
+    @ApiOperation("访问后台首页")
     @OperationLog("访问后台首页")
     @GetMapping
     public String toIndex() {
         return "admin/home/index";
     }
 
+    @ApiOperation("查询控制面板数据")
     @ResponseBody
     @GetMapping("/indexData")
     public ResponseEntity<Object> index() {

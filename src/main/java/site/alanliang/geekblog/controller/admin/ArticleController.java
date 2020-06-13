@@ -1,6 +1,8 @@
 package site.alanliang.geekblog.controller.admin;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -27,6 +29,7 @@ import java.util.List;
  * Date 2020/4/7 23:02
  * Version 1.0
  **/
+@Api(tags = "后台：文章管理")
 @RestController
 @RequestMapping("/admin/article")
 public class ArticleController {
@@ -34,6 +37,7 @@ public class ArticleController {
     @Autowired
     private ArticleService articleService;
 
+    @ApiOperation("查询文章")
     @PreAuthorize("hasAuthority('blog:article:query')")
     @OperationLog("查询文章")
     @GetMapping
@@ -44,6 +48,7 @@ public class ArticleController {
         return TableResult.tableOk(pageInfo.getRecords(), pageInfo.getTotal());
     }
 
+    @ApiOperation("新增文章")
     @PreAuthorize("hasAuthority('blog:article:add')")
     @OperationLog("新增文章")
     @PostMapping
@@ -63,6 +68,7 @@ public class ArticleController {
         return JsonResult.ok();
     }
 
+    @ApiOperation("更新文章")
     @PreAuthorize("hasAuthority('blog:article:edit')")
     @OperationLog("更新文章")
     @PutMapping
@@ -77,6 +83,7 @@ public class ArticleController {
         return JsonResult.ok();
     }
 
+    @ApiOperation("删除文章")
     @PreAuthorize("hasAuthority('blog:article:delete')")
     @OperationLog("删除文章")
     @DeleteMapping("/{id}")
@@ -85,6 +92,7 @@ public class ArticleController {
         return JsonResult.ok();
     }
 
+    @ApiOperation("批量删除文章")
     @PreAuthorize("hasAuthority('blog:article:delete')")
     @OperationLog("批量删除文章")
     @DeleteMapping
@@ -93,6 +101,7 @@ public class ArticleController {
         return JsonResult.ok();
     }
 
+    @ApiOperation("置顶文章是否到达限制")
     @GetMapping("/reachedMaxTop")
     public JsonResult reachedMaxTop() {
         HashMap<String, Object> map = new HashMap<>();
@@ -101,6 +110,7 @@ public class ArticleController {
         return JsonResult.ok(map);
     }
 
+    @ApiOperation("推荐文章是否到达限制")
     @GetMapping("/reachedMaxRecommend")
     public JsonResult reachedMaxRecommend() {
         HashMap<String, Object> map = new HashMap<>();
@@ -109,6 +119,7 @@ public class ArticleController {
         return JsonResult.ok(map);
     }
 
+    @ApiOperation("审核文章")
     @PreAuthorize("hasAuthority('blog:article:audit')")
     @OperationLog("审核文章")
     @PutMapping("/audit")

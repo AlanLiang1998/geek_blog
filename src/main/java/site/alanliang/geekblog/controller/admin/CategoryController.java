@@ -1,6 +1,8 @@
 package site.alanliang.geekblog.controller.admin;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -23,6 +25,7 @@ import java.util.List;
  * Date 2020/4/7 19:41
  * Version 1.0
  **/
+@Api(tags = "后台：分类管理")
 @RestController
 @RequestMapping("/admin/category")
 public class CategoryController {
@@ -35,6 +38,7 @@ public class CategoryController {
         return JsonResult.ok(categoryService.listAll());
     }
 
+    @ApiOperation("查询分类")
     @PreAuthorize("hasAuthority('blog:category:query')")
     @OperationLog("查询分类")
     @GetMapping("/list")
@@ -45,6 +49,7 @@ public class CategoryController {
         return TableResult.tableOk(categoryPage.getRecords(), categoryPage.getTotal());
     }
 
+    @ApiOperation("新增分类")
     @PreAuthorize("hasAuthority('blog:category:add')")
     @OperationLog("新增分类")
     @PostMapping
@@ -55,6 +60,7 @@ public class CategoryController {
         return JsonResult.ok();
     }
 
+    @ApiOperation("更新分类")
     @PreAuthorize("hasAuthority('blog:category:edit')")
     @OperationLog("更新分类")
     @PutMapping
@@ -64,6 +70,7 @@ public class CategoryController {
         return JsonResult.ok();
     }
 
+    @ApiOperation("删除分类")
     @PreAuthorize("hasAuthority('blog:category:delete')")
     @OperationLog("删除分类")
     @DeleteMapping("/{id}")
@@ -72,6 +79,7 @@ public class CategoryController {
         return JsonResult.ok();
     }
 
+    @ApiOperation("批量删除分类")
     @PreAuthorize("hasAuthority('blog:category:delete')")
     @OperationLog("批量删除分类")
     @DeleteMapping
@@ -80,6 +88,7 @@ public class CategoryController {
         return JsonResult.ok();
     }
 
+    @ApiOperation("查询分类颜色")
     @GetMapping("/colors")
     public JsonResult getColors() {
         return JsonResult.ok(categoryService.listColor());

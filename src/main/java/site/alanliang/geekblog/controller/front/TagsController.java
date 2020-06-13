@@ -1,6 +1,8 @@
-package site.alanliang.geekblog.controller.web;
+package site.alanliang.geekblog.controller.front;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +25,7 @@ import java.util.List;
  * Date 2020/4/20 16:55
  * Version 1.0
  **/
+@Api(tags = "前台：标签页面")
 @RestController
 public class TagsController {
 
@@ -32,6 +35,7 @@ public class TagsController {
     @Autowired
     private ArticleService articleService;
 
+    @ApiOperation("查询标签")
     @AccessLog("访问标签页")
     @GetMapping("/tags")
     public ResponseEntity<Object> tags() {
@@ -39,6 +43,7 @@ public class TagsController {
         return new ResponseEntity<>(tags, HttpStatus.OK);
     }
 
+    @ApiOperation("查询标签文章")
     @GetMapping("/tag/{id}/articles")
     public ResponseEntity<Object> tagArticles(@PathVariable("id") Long id,
                                               @RequestParam(value = "current", defaultValue = "1") Integer current,

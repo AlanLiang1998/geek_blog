@@ -1,6 +1,8 @@
-package site.alanliang.geekblog.controller.web;
+package site.alanliang.geekblog.controller.front;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,13 +26,15 @@ import java.util.List;
  * Date 2020/4/22 9:12
  * Version 1.0
  **/
+@Api(tags = "前台：归档页面")
 @RestController
 public class ArchivesController {
 
     @Autowired
     private ArticleService articleService;
 
-    @AccessLog("访问归档页")
+    @ApiOperation("查询归档页面数据")
+    @AccessLog("访问归档页面")
     @GetMapping("/archives")
     public ResponseEntity<Object> archives(@RequestParam(value = "dataType", required = false) Integer dateFilterType) {
 
@@ -50,6 +54,7 @@ public class ArchivesController {
         return new ResponseEntity<>(archivesVo, HttpStatus.OK);
     }
 
+    @ApiOperation("查询文章数据")
     @GetMapping("/archives-articles")
     public ResponseEntity<Object> archivesArticles(@RequestParam(value = "current", defaultValue = "1") Integer current,
                                                    @RequestParam(value = "size", defaultValue = Constant.PAGE_SIZE) Integer size,

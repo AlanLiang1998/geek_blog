@@ -1,6 +1,8 @@
-package site.alanliang.geekblog.controller.web;
+package site.alanliang.geekblog.controller.front;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +23,7 @@ import java.util.Date;
  * Date 2020/5/19 20:40
  * Version 1.0
  **/
+@Api(tags = "前台：留言管理")
 @RestController
 @RequestMapping("/messages")
 public class MessagesController {
@@ -28,6 +31,7 @@ public class MessagesController {
     @Autowired
     private MessageService messageService;
 
+    @ApiOperation("查询留言")
     @GetMapping
     public ResponseEntity<Object> listByPage(@RequestParam(value = "current", defaultValue = "1") Integer current,
                                              @RequestParam(value = "size", defaultValue = Constant.PAGE_SIZE) Integer size) {

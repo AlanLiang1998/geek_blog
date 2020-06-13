@@ -1,10 +1,13 @@
 package site.alanliang.geekblog.vo;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import site.alanliang.geekblog.common.Constant;
 import site.alanliang.geekblog.model.Menu;
 import site.alanliang.geekblog.utils.MenuTreeUtil;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,12 +17,16 @@ import java.util.List;
  * Date 2020/4/6 10:49
  * Version 1.0
  **/
+@ApiModel("初始化数据")
 @Data
-public class InitInfoVO {
+public class InitInfoVO implements Serializable {
+    @ApiModelProperty("菜单列表")
     private List<MenuVO> menuInfo;
 
+    @ApiModelProperty("主页信息")
     private HomeInfo homeInfo;
 
+    @ApiModelProperty("logo信息")
     private LogoInfo logoInfo;
 
 

@@ -1,6 +1,8 @@
-package site.alanliang.geekblog.controller.web;
+package site.alanliang.geekblog.controller.front;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,12 +26,14 @@ import java.util.List;
  * Date 2020/4/14 17:47
  * Version 1.0
  **/
+@Api(tags = "前台：首页")
 @RestController
 public class HomeController {
 
     @Autowired
     private ArticleService articleService;
 
+    @ApiOperation("查询首页数据")
     @AccessLog("访问首页")
     @GetMapping("/home")
     public ResponseEntity<Object> home() {
@@ -40,6 +44,8 @@ public class HomeController {
         return new ResponseEntity<>(homeVo, HttpStatus.OK);
     }
 
+
+    @ApiOperation("查询文章")
     @GetMapping("/articles")
     public ResponseEntity<Object> articles(@RequestParam(value = "current", defaultValue = "1") Integer current,
                                            @RequestParam(value = "size", defaultValue = Constant.PAGE_SIZE) Integer size) {
@@ -47,6 +53,7 @@ public class HomeController {
         return new ResponseEntity<>(articlePage, HttpStatus.OK);
     }
 
+    @ApiOperation("搜索文章")
     @GetMapping(value = "/articles/search")
     public ResponseEntity<Object> search(@RequestParam(value = "keyword") String keyword) {
         List<ArticleDocument> articleDocuments;

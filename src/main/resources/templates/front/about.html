@@ -1,9 +1,9 @@
 <!DOCTYPE HTML>
 <html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta th:include="web/fragments :: head(~{::title})">
+    <meta th:include="front/fragments :: head(~{::title})">
     <title>关于我 | GeekBlog</title>
-    <link rel="stylesheet" type="text/css" href="/static/web/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/front/css/lightgallery.min.css">
     <style type="text/css">
         /* don't remove. */
         .about-cover {
@@ -44,16 +44,16 @@
             });
         });
     </script>
-    <script type="text/javascript" src="/static/web/js/echarts.min.js"></script>
+    <script type="text/javascript" src="/static/front/js/echarts.min.js"></script>
 </head>
 
 <body>
 <!--header-->
-<header th:replace="web/fragments :: header"></header>
+<header th:replace="front/fragments :: header"></header>
 <!--end header-->
 
 <!--bgcover-->
-<div th:replace="web/fragments :: bgcover"></div>
+<div th:replace="front/fragments :: bgcover"></div>
 <!--end bgcover-->
 
 <div id="app">
@@ -68,11 +68,11 @@
                                 <span class="name">文章</span>
                             </div>
                             <div class="statis">
-                                <span class="count"><a href="/api/categories">{{categoryCount}}</a></span>
+                                <span class="count"><a href="/page/categories">{{categoryCount}}</a></span>
                                 <span class="name">分类</span>
                             </div>
                             <div class="statis">
-                                <span class="count"><a href="/api/tags">{{tagCount}}</a></span>
+                                <span class="count"><a href="/page/tags">{{tagCount}}</a></span>
                                 <span class="name">标签</span>
                             </div>
                         </div>
@@ -89,11 +89,11 @@
                                             <span class="name">文章</span>
                                         </div>
                                         <div class="statis">
-                                            <span class="count"><a href="/api/categories">{{categoryCount}}</a></span>
+                                            <span class="count"><a href="/page/categories">{{categoryCount}}</a></span>
                                             <span class="name">分类</span>
                                         </div>
                                         <div class="statis">
-                                            <span class="count"><a href="/api/tags">{{tagCount}}</a></span>
+                                            <span class="count"><a href="/page/tags">{{tagCount}}</a></span>
                                             <span class="name">标签</span>
                                         </div>
                                     </div>
@@ -228,7 +228,7 @@
                         <div class="other-skills chip-container" data-aos="zoom-in-up">
                             <div class="sub-title center-align"><i class="fa fa-book"></i>&nbsp;&nbsp;其他技能</div>
                             <div class="tag-chips center-align">
-                                <a :href="'/api/tags?id='+tag.id" v-for="(tag, index) in tags">
+                                <a :href="'/page/tags?id='+tag.id" v-for="(tag, index) in tags">
                                     <span class="chip center-align waves-effect waves-light chip-default">{{tag.name}}</span>
                                 </a>
                             </div>
@@ -516,15 +516,15 @@
 </script>
 
 <!--footer-->
-<footer th:replace="web/fragments :: footer"></footer>
+<footer th:replace="front/fragments :: footer"></footer>
 <!--end footer-->
 
 <!--commons-->
-<div th:replace="web/fragments :: commons"></div>
+<div th:replace="front/fragments :: commons"></div>
 <!--end commons-->
 
 <!--scripts-->
-<div th:replace="web/fragments :: scripts"></div>
+<div th:replace="front/fragments :: scripts"></div>
 <!--end scripts-->
 </body>
 

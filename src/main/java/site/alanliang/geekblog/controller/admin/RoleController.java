@@ -1,6 +1,8 @@
 package site.alanliang.geekblog.controller.admin;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -24,6 +26,7 @@ import java.util.List;
  * Date 2020/5/10 10:39
  * Version 1.0
  **/
+@Api(tags = "后台：角色管理")
 @RestController
 @RequestMapping("/admin/role")
 public class RoleController {
@@ -31,12 +34,14 @@ public class RoleController {
     @Autowired
     private RoleService roleService;
 
+    @ApiOperation("查询所有角色")
     @PreAuthorize("hasAuthority('sys:role:query')")
     @GetMapping("/list")
     public JsonResult listAll() {
         return JsonResult.ok(roleService.listAll());
     }
 
+    @ApiOperation("查询角色")
     @PreAuthorize("hasAuthority('sys:role:query')")
     @OperationLog("查询角色")
     @GetMapping
@@ -47,8 +52,9 @@ public class RoleController {
         return TableResult.tableOk(pageInfo.getRecords(), pageInfo.getTotal());
     }
 
+    @ApiOperation("新增角色")
     @PreAuthorize("hasAuthority('sys:role:add')")
-    @OperationLog("保存角色")
+    @OperationLog("新增角色")
     @PostMapping
     public JsonResult save(@Validated @RequestBody Role role) {
         if (role.getStatus() == null) {
@@ -63,8 +69,9 @@ public class RoleController {
         return JsonResult.ok();
     }
 
+    @ApiOperation("更新角色")
     @PreAuthorize("hasAuthority('sys:role:edit')")
-    @OperationLog("修改角色")
+    @OperationLog("更新角色")
     @PutMapping
     public JsonResult update(@Validated @RequestBody Role role) {
         if (role.getStatus() == null) {
@@ -78,6 +85,7 @@ public class RoleController {
         return JsonResult.ok();
     }
 
+    @ApiOperation("删除角色")
     @PreAuthorize("hasAuthority('sys:role:delete')")
     @OperationLog("删除角色")
     @DeleteMapping("/{id}")
@@ -86,6 +94,7 @@ public class RoleController {
         return JsonResult.ok();
     }
 
+    @ApiOperation("批量删除角色")
     @PreAuthorize("hasAuthority('sys:role:delete')")
     @OperationLog("批量删除角色")
     @DeleteMapping
@@ -94,8 +103,9 @@ public class RoleController {
         return JsonResult.ok();
     }
 
+    @ApiOperation("更新角色状态")
     @PreAuthorize("hasAuthority('sys:role:edit')")
-    @OperationLog("修改角色状态")
+    @OperationLog("更新角色状态")
     @PutMapping("/status")
     public JsonResult changeStatus(@RequestBody Role role) {
         roleService.changeStatus(role);

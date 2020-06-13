@@ -26,7 +26,7 @@ import java.util.List;
  * Date 2020/5/24 10:16
  * Version 1.0
  **/
-@Api(tags = "本地存储管理")
+@Api(tags = "后台：本地存储管理")
 @RestController
 @RequestMapping("/admin/localStorage")
 public class LocalStorageController {
@@ -34,7 +34,7 @@ public class LocalStorageController {
     @Autowired
     private LocalStorageService localStorageService;
 
-    @ApiOperation("分页查询所有本地文件")
+    @ApiOperation("查询本地文件")
     @PreAuthorize("hasAuthority('sys:localstorage:query')")
     @OperationLog("查询本地文件")
     @GetMapping

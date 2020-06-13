@@ -13,12 +13,12 @@
 
     <title th:replace="${title}">GeekBlog - 个人博客</title>
 
-    <link href="/static/web/css/all.css" rel="stylesheet" type="text/css">
-    <link href="/static/web/css/materialize.min.css" rel="stylesheet">
-    <link href="/static/web/css/aos.css" rel="stylesheet" type="text/css">
-    <link href="/static/web/css/animate.min.css" rel="stylesheet" type="text/css">
-    <link href="/static/web/css/matery.css" rel="stylesheet" type="text/css">
-    <link href="/static/web/css/my.css" rel="stylesheet" type="text/css">
+    <link href="/static/front/css/all.css" rel="stylesheet" type="text/css">
+    <link href="/static/front/css/materialize.min.css" rel="stylesheet">
+    <link href="/static/front/css/aos.css" rel="stylesheet" type="text/css">
+    <link href="/static/front/css/animate.min.css" rel="stylesheet" type="text/css">
+    <link href="/static/front/css/matery.css" rel="stylesheet" type="text/css">
+    <link href="/static/front/css/my.css" rel="stylesheet" type="text/css">
     <style>
         .nav-transparent .github-corner {
             display: none !important;
@@ -70,7 +70,7 @@
     <!--axios异步工具-->
     <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.19.2/axios.js"></script>
     <!--时间格式化工具-->
-    <script src="/static/web/js/moment.js"></script>
+    <script src="/static/front/js/moment.js"></script>
     <!--时间汉化-->
     <script async type="text/javascript">
         moment.locale('zh-cn', {
@@ -170,7 +170,7 @@
         });
     </script>
     <!--图片懒加载-->
-    <script src="/static/web/js/lazyload.min.js"></script>
+    <script src="/static/front/js/lazyload.min.js"></script>
     <script type="text/javascript">
         var lazyLoadInstance = new LazyLoad({
             elements_selector: ".lazy"
@@ -200,31 +200,31 @@
                     </a>
                 </li>
                 <li class="hide-on-med-and-down nav-item">
-                    <a class="waves-effect waves-light" th:href="@{/api/tags}">
+                    <a class="waves-effect waves-light" th:href="@{/page/tags}">
                         <i class="fas fa-tags" style="zoom: 0.6;"></i>
                         <span>标签</span>
                     </a>
                 </li>
                 <li class="hide-on-med-and-down nav-item">
-                    <a class="waves-effect waves-light" th:href="@{/api/categories}">
+                    <a class="waves-effect waves-light" th:href="@{/page/categories}">
                         <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
                         <span>分类</span>
                     </a>
                 </li>
                 <li class="hide-on-med-and-down nav-item">
-                    <a class="waves-effect waves-light" th:href="@{/api/archives}">
+                    <a class="waves-effect waves-light" th:href="@{/page/archives}">
                         <i class="fas fa-calendar" style="zoom: 0.6;"></i>
                         <span>归档</span>
                     </a>
                 </li>
                 <li class="hide-on-med-and-down nav-item">
-                    <a class="waves-effect waves-light" th:href="@{/api/about}">
+                    <a class="waves-effect waves-light" th:href="@{/page/about}">
                         <i class="fas fa-paper-plane" style="zoom: 0.6;"></i>
                         <span>关于</span>
                     </a>
                 </li>
                 <li class="hide-on-med-and-down nav-item">
-                    <a class="waves-effect waves-light" th:href="@{/api/friends}">
+                    <a class="waves-effect waves-light" th:href="@{/page/friends}">
                         <i class="fas fa-comment" style="zoom: 0.6;"></i>
                         <span>友情链接</span>
                     </a>
@@ -250,23 +250,23 @@
                         <a class="waves-effect waves-light" th:href="@{/}"><i class="fa-fw fas fa-home"></i>首页</a>
                     </li>
                     <li class="m-nav-item">
-                        <a class="waves-effect waves-light" th:href="@{/api/tags}"><i
+                        <a class="waves-effect waves-light" th:href="@{/page/tags}"><i
                                 class="fa-fw fas fa-tags"></i>标签</a>
                     </li>
                     <li class="m-nav-item">
-                        <a class="waves-effect waves-light" th:href="@{/api/categories}"><i
+                        <a class="waves-effect waves-light" th:href="@{/page/categories}"><i
                                 class="fa-fw fas fa-bookmark"></i>分类</a>
                     </li>
                     <li class="m-nav-item">
-                        <a class="waves-effect waves-light" th:href="@{/api/archives}"><i
+                        <a class="waves-effect waves-light" th:href="@{/page/archives}"><i
                                 class="fa-fw fas fa-calendar"></i>归档</a>
                     </li>
                     <li class="m-nav-item">
-                        <a class="waves-effect waves-light" th:href="@{/api/about}"><i
+                        <a class="waves-effect waves-light" th:href="@{/page/about}"><i
                                 class="fa-fw fas fa-paper-plane"></i>关于</a>
                     </li>
                     <li class="m-nav-item">
-                        <a class="waves-effect waves-light" th:href="@{/api/friends}"><i
+                        <a class="waves-effect waves-light" th:href="@{/page/friends}"><i
                                 class="fa-fw fas fa-comment"></i>友情链接</a>
                     </li>
                     <li>
@@ -396,10 +396,10 @@
 <!--scripts--->
 <div th:fragment="scripts">
     <!--网页离子背景-->
-    <script color="0,0,255" count="99" opacity='0.7' pointcolor="0,0,255" src="/static/web/js/canvas-nest.js"
+    <script color="0,0,255" count="99" opacity='0.7' pointcolor="0,0,255" src="/static/front/js/canvas-nest.js"
             type="text/javascript"
             zindex="-1"></script>
-    <script color="122 103 238" count="200" opacity='0.7' src="/static/web/js/canvas-nest.min.js"
+    <script color="122 103 238" count="200" opacity='0.7' src="/static/front/js/canvas-nest.min.js"
             type="text/javascript"
             zindex="-2"></script>
     <script type="text/javascript">
@@ -430,21 +430,21 @@
         });
     </script>
     <!--materialize框架-->
-    <script src="/static/web/js/materialize.min.js"></script>
+    <script src="/static/front/js/materialize.min.js"></script>
     <!--瀑布流-->
-    <script src="/static/web/js/masonry.pkgd.min.js"></script>
+    <script src="/static/front/js/masonry.pkgd.min.js"></script>
     <!--页面滚动动画-->
-    <script src="/static/web/js/aos.js"></script>
+    <script src="/static/front/js/aos.js"></script>
     <!--滚动进度条-->
-    <script src="/static/web/js/scrollProgress.min.js"></script>
+    <script src="/static/front/js/scrollProgress.min.js"></script>
     <!--matery主题-->
-    <script src="/static/web/js/matery.js"></script>
+    <script src="/static/front/js/matery.js"></script>
     <!--鼠标点击特效-->
-    <script async="async" src="/static/web/js/clicklove.js"></script>
+    <script async="async" src="/static/front/js/clicklove.js"></script>
     <!--网页计数器-->
-    <script async="async" src="/static/web/js/busuanzi.pure.mini.js"></script>
+    <script async="async" src="/static/front/js/busuanzi.pure.mini.js"></script>
     <!--未知-->
-    <script async="async" src="/static/web/js/ribbon-dynamic.js" type="text/javascript"></script>
+    <script async="async" src="/static/front/js/ribbon-dynamic.js" type="text/javascript"></script>
     <!--网站标题切换-->
     <script type="text/javascript">
         var OriginTitile = document.title, st;
@@ -455,9 +455,9 @@
         })
     </script>
     <!--多媒体播放-->
-    <script src="/static/web/js/lightgallery-all.min.js"></script>
+    <script src="/static/front/js/lightgallery-all.min.js"></script>
     <!--url参数获取-->
-    <script src="/static/web/js/queryString.js"></script>
+    <script src="/static/front/js/queryString.js"></script>
     <!--网站计时-->
     <script async type="text/javascript">
         function siteTime() {
@@ -503,7 +503,7 @@
         setInterval(siteTime, 1000);
     </script>
     <!--平滑滚动-->
-    <script src="/static/web/js/jquery.scrollTo.min.js"></script>
+    <script src="/static/front/js/jquery.scrollTo.min.js"></script>
 </div>
 <!--scripts-->
 </body>

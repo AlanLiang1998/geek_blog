@@ -1,6 +1,8 @@
 package site.alanliang.geekblog.controller.admin;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +23,7 @@ import java.util.List;
  * Date 2020/4/26 17:22
  * Version 1.0
  **/
+@Api(tags = "后台：访问日志管理")
 @RestController
 @RequestMapping("/admin/access-log")
 public class AccessLogController {
@@ -28,6 +31,7 @@ public class AccessLogController {
     @Autowired
     private AccessLogService accessLogService;
 
+    @ApiOperation("查询访问日志")
     @PreAuthorize("hasAuthority('sys:accesslog:query')")
     @OperationLog("查询访问日志")
     @GetMapping
@@ -38,6 +42,7 @@ public class AccessLogController {
         return TableResult.tableOk(pageInfo.getRecords(), pageInfo.getTotal());
     }
 
+    @ApiOperation("删除访问日志")
     @PreAuthorize("hasAuthority('sys:accesslog:delete')")
     @OperationLog("删除访问日志")
     @DeleteMapping("/{id}")
@@ -46,6 +51,7 @@ public class AccessLogController {
         return JsonResult.ok();
     }
 
+    @ApiOperation("批量删除访问日志")
     @PreAuthorize("hasAuthority('sys:accesslog:delete')")
     @OperationLog("批量删除访问日志")
     @DeleteMapping

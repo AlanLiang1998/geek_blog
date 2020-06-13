@@ -25,7 +25,7 @@ import java.util.List;
  * Date 2020/5/24 10:16
  * Version 1.0
  **/
-@Api(tags = "公告管理")
+@Api(tags = "后台：公告管理")
 @RestController
 @RequestMapping("/admin/notice")
 public class NoticeController {
@@ -33,7 +33,7 @@ public class NoticeController {
     @Autowired
     private NoticeService noticeService;
 
-    @ApiOperation("分页查询所有公告")
+    @ApiOperation("查询公告")
     @PreAuthorize("hasAuthority('sys:notice:query')")
     @OperationLog("查询公告")
     @GetMapping
@@ -62,9 +62,9 @@ public class NoticeController {
         return JsonResult.ok();
     }
 
-    @ApiOperation("添加公告")
+    @ApiOperation("新增公告")
     @PreAuthorize("hasAuthority('sys:notice:add')")
-    @OperationLog("添加公告")
+    @OperationLog("新增公告")
     @PostMapping
     public JsonResult save(@Validated @RequestBody Notice notice) {
         notice.setCreateTime(new Date());
@@ -73,9 +73,9 @@ public class NoticeController {
         return JsonResult.ok();
     }
 
-    @ApiOperation("修改公告")
+    @ApiOperation("更新公告")
     @PreAuthorize("hasAuthority('sys:notice:edit')")
-    @OperationLog("修改公告")
+    @OperationLog("更新公告")
     @PutMapping
     public JsonResult update(@Validated @RequestBody Notice notice) {
         notice.setUpdateTime(new Date());

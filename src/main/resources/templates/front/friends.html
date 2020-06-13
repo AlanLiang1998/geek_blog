@@ -1,9 +1,9 @@
 <!DOCTYPE HTML>
 <html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta th:include="web/fragments :: head(~{::title})">
+    <meta th:include="front/fragments :: head(~{::title})">
     <title>友情链接 | GeekBlog</title>
-    <link rel="stylesheet" type="text/css" href="/static/web/css/jqcloud.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/front/css/jqcloud.css"/>
     <style>
         .friends-container {
             margin-top: -100px;
@@ -203,7 +203,7 @@
 
         #vcomments textarea {
             box-sizing: border-box;
-            background: url("/static/web/image/comment_bg.png") 100% 100% no-repeat;
+            background: url("/static/front/image/comment_bg.png") 100% 100% no-repeat;
         }
 
         #vcomments p {
@@ -446,11 +446,11 @@
 
 <body>
 <!--header-->
-<header th:replace="web/fragments :: header"></header>
+<header th:replace="front/fragments :: header"></header>
 <!--end header-->
 
 <!--bgcover-->
-<div th:replace="web/fragments :: bgcover"></div>
+<div th:replace="front/fragments :: bgcover"></div>
 <!--end bgcover-->
 
 <div id="app">
@@ -593,17 +593,17 @@
 </div>
 
 <!--footer-->
-<footer th:replace="web/fragments :: footer"></footer>
+<footer th:replace="front/fragments :: footer"></footer>
 <!--end footer-->
 
 <!--commons-->
-<div th:replace="web/fragments :: commons"></div>
+<div th:replace="front/fragments :: commons"></div>
 <!--end commons-->
 
 <!--scripts-->
-<div th:replace="web/fragments :: scripts"></div>
+<div th:replace="front/fragments :: scripts"></div>
 <!--end scripts-->
-<script src="/static/web/js/Valine.min.js"></script>
+<script src="/static/front/js/Valine.min.js"></script>
 <!--vue-->
 <script type="text/javascript">
     const vm = new Vue({

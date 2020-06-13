@@ -1,6 +1,8 @@
-package site.alanliang.geekblog.controller.web;
+package site.alanliang.geekblog.controller.front;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +25,7 @@ import java.util.List;
  * Date 2020/4/20 16:55
  * Version 1.0
  **/
+@Api(tags = "前台：分类页面")
 @RestController
 public class CategoriesController {
 
@@ -32,13 +35,15 @@ public class CategoriesController {
     @Autowired
     private ArticleService articleService;
 
-    @AccessLog("访问分类页")
+    @ApiOperation("查询分类页面数据")
+    @AccessLog("访问分类页面")
     @GetMapping("/categories")
     public ResponseEntity<Object> categories() {
         List<Category> categories = categoryService.listByArticleCount();
         return new ResponseEntity<>(categories, HttpStatus.OK);
     }
 
+    @ApiOperation("查询分类文章")
     @GetMapping("/category/{id}/articles")
     public ResponseEntity<Object> categoryArticles(@PathVariable("id") Long id,
                                                    @RequestParam(value = "current", defaultValue = "1") Integer current,

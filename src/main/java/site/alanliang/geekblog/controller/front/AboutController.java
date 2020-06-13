@@ -1,4 +1,4 @@
-package site.alanliang.geekblog.controller.web;
+package site.alanliang.geekblog.controller.front;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -25,7 +25,7 @@ import java.util.List;
  * Date 2020/4/22 20:13
  * Version 1.0
  **/
-@Api(tags = "前台关于我页面")
+@Api(tags = "前台：关于我页面")
 @RestController
 public class AboutController {
 
@@ -41,8 +41,8 @@ public class AboutController {
     @Autowired
     private PhotoService photoService;
 
-    @ApiOperation("查询关于我页数据")
-    @AccessLog("访问关于我页")
+    @ApiOperation("查询关于我页面数据")
+    @AccessLog("访问关于我页面")
     @GetMapping("/about")
     public ResponseEntity<Object> about(@RequestParam(value = "dateType", required = false) Integer dateFilterType) {
         AboutVO aboutVO = new AboutVO();

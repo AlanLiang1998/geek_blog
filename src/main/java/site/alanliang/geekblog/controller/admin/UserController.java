@@ -1,6 +1,8 @@
 package site.alanliang.geekblog.controller.admin;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -27,6 +29,7 @@ import java.util.List;
  * Date 2020/4/6 20:45
  * Version 1.0
  **/
+@Api(tags = "后台：用户管理")
 @RestController
 @RequestMapping("/admin/user")
 public class UserController {
@@ -34,6 +37,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @ApiOperation("查询用户")
     @PreAuthorize("hasAuthority('sys:user:query')")
     @OperationLog("查询用户")
     @GetMapping
@@ -44,8 +48,9 @@ public class UserController {
         return TableResult.tableOk(pageInfo.getRecords(), pageInfo.getTotal());
     }
 
+    @ApiOperation("新增用户")
     @PreAuthorize("hasAuthority('sys:user:add')")
-    @OperationLog("保存用户")
+    @OperationLog("新增用户")
     @PostMapping
     public JsonResult save(@Validated @RequestBody User user) {
         if (user.getStatus() == null) {
@@ -60,8 +65,9 @@ public class UserController {
         return JsonResult.ok();
     }
 
+    @ApiOperation("更新用户")
     @PreAuthorize("hasAuthority('sys:user:edit')")
-    @OperationLog("修改用户")
+    @OperationLog("更新用户")
     @PutMapping
     public JsonResult update(@Validated @RequestBody User user) {
         if (user.getStatus() == null) {
@@ -72,14 +78,16 @@ public class UserController {
         return JsonResult.ok();
     }
 
+    @ApiOperation("更新用户状态")
     @PreAuthorize("hasAuthority('sys:user:edit')")
-    @OperationLog("修改用户状态")
+    @OperationLog("更新用户状态")
     @PutMapping("/status")
     public JsonResult changeStatus(@RequestBody User user) {
         userService.changeStatus(user);
         return JsonResult.ok();
     }
 
+    @ApiOperation("修改密码")
     @OperationLog("修改密码")
     @PutMapping("/password")
     public JsonResult changePassword(@Validated @RequestBody UserLoginVO passwordVO) {
@@ -87,6 +95,7 @@ public class UserController {
         return JsonResult.ok();
     }
 
+    @ApiOperation("删除用户")
     @PreAuthorize("hasAuthority('sys:user:delete')")
     @OperationLog("删除用户")
     @DeleteMapping("/{id}")
@@ -95,6 +104,7 @@ public class UserController {
         return JsonResult.ok();
     }
 
+    @ApiOperation("批量删除用户")
     @PreAuthorize("hasAuthority('sys:user:delete')")
     @OperationLog("批量删除用户")
     @DeleteMapping
@@ -103,12 +113,14 @@ public class UserController {
         return JsonResult.ok();
     }
 
+    @ApiOperation("查询个人信息")
     @GetMapping("/{id}/info")
     public JsonResult getInfo(@PathVariable("id") Long id) {
         return JsonResult.ok(userService.getById(id));
     }
 
-    @OperationLog("修改信息")
+    @ApiOperation("更新个人信息")
+    @OperationLog("更新个人信息")
     @PutMapping("/info")
     public JsonResult updateInfo(@Validated @RequestBody UserInfoVO userInfoVO) {
         userService.updateInfo(userInfoVO);

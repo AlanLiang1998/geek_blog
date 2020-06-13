@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta th:include="web/fragments :: head(~{::title})">
+    <meta th:include="front/fragments :: head(~{::title})">
     <title>归档 | GeekBlog</title>
     <!--打字机效果-->
     <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"></script>
@@ -17,16 +17,16 @@
             });
         });
     </script>
-    <script type="text/javascript" src="/static/web/js/echarts.min.js"></script>
+    <script type="text/javascript" src="/static/front/js/echarts.min.js"></script>
 </head>
 
 <body>
 <!--header-->
-<header th:replace="web/fragments :: header"></header>
+<header th:replace="front/fragments :: header"></header>
 <!--end header-->
 
 <!--bgcover-->
-<div th:replace="web/fragments :: bgcover"></div>
+<div th:replace="front/fragments :: bgcover"></div>
 <!--end bgcover-->
 
 <div id="app">
@@ -66,12 +66,12 @@
                                         <i class="far fa-clock fa-fw icon-date"></i>{{article.createTime | dateFormat}}</span>
                                     <span class="publish-author">
                                         <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                        <a :href="'/api/categories?id='+article.category.id" class="post-category">{{article.category.name}}</a>
+                                        <a :href="'/page/categories?id='+article.category.id" class="post-category">{{article.category.name}}</a>
                                      </span>
                                 </div>
                             </div>
                             <div class="card-action article-tags">
-                                <a :href="'/api/tags?id='+tag.id" v-for="(tag, index) in article.tagList"><span
+                                <a :href="'/page/tags?id='+tag.id" v-for="(tag, index) in article.tagList"><span
                                         class="chip bg-color">{{tag.name}}</span></a>
                             </div>
                         </div>
@@ -109,11 +109,11 @@
 </div>
 
 <!--footer-->
-<footer th:replace="web/fragments :: footer"></footer>
+<footer th:replace="front/fragments :: footer"></footer>
 <!--end footer-->
 
 <!--commons-->
-<div th:replace="web/fragments :: commons"></div>
+<div th:replace="front/fragments :: commons"></div>
 <!--end commons-->
 
 <!--vue-->
@@ -323,7 +323,7 @@
 </script>
 
 <!--scripts-->
-<div th:replace="web/fragments :: scripts"></div>
+<div th:replace="front/fragments :: scripts"></div>
 <!--end scripts-->
 </body>
 

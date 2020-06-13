@@ -1,6 +1,8 @@
 package site.alanliang.geekblog.controller.admin;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -23,6 +25,7 @@ import java.util.List;
  * Date 2020/4/7 20:34
  * Version 1.0
  **/
+@Api(tags = "后台：标签管理")
 @RestController
 @RequestMapping("/admin/tag")
 public class TagController {
@@ -30,11 +33,13 @@ public class TagController {
     @Autowired
     private TagService tagService;
 
+    @ApiOperation("查询所有标签")
     @GetMapping
     public JsonResult listAll() {
         return JsonResult.ok(tagService.listAll());
     }
 
+    @ApiOperation("查询标签")
     @PreAuthorize("hasAuthority('blog:tag:query')")
     @OperationLog("查询标签")
     @GetMapping("/list")
@@ -45,6 +50,7 @@ public class TagController {
         return TableResult.tableOk(tagPage.getRecords(), tagPage.getTotal());
     }
 
+    @ApiOperation("新增标签")
     @PreAuthorize("hasAuthority('blog:tag:add')")
     @OperationLog("新增标签")
     @PostMapping
@@ -55,6 +61,7 @@ public class TagController {
         return JsonResult.ok();
     }
 
+    @ApiOperation("更新标签")
     @PreAuthorize("hasAuthority('blog:tag:edit')")
     @OperationLog("更新标签")
     @PutMapping
@@ -64,6 +71,7 @@ public class TagController {
         return JsonResult.ok();
     }
 
+    @ApiOperation("删除标签")
     @PreAuthorize("hasAuthority('blog:tag:delete')")
     @OperationLog("删除标签")
     @DeleteMapping("/{id}")
@@ -72,6 +80,7 @@ public class TagController {
         return JsonResult.ok();
     }
 
+    @ApiOperation("批量删除标签")
     @PreAuthorize("hasAuthority('blog:tag:delete')")
     @OperationLog("批量删除标签")
     @DeleteMapping
@@ -80,6 +89,7 @@ public class TagController {
         return JsonResult.ok();
     }
 
+    @ApiOperation("查询标签颜色")
     @GetMapping("/colors")
     public JsonResult getColors() {
         return JsonResult.ok(tagService.listColor());

@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta th:include="web/fragments :: head(~{::title})">
+    <meta th:include="front/fragments :: head(~{::title})">
     <title>分类 | GeekBlog</title>
     <style type="text/css">
         #category-radar {
@@ -15,7 +15,7 @@
 
     </style>
     <!--雷达图-->
-    <script type="text/javascript" src="/static/web/js/echarts.min.js"></script>
+    <script type="text/javascript" src="/static/front/js/echarts.min.js"></script>
     <!--打字机效果-->
     <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"></script>
     <script>
@@ -35,11 +35,11 @@
 
 <body>
 <!--header-->
-<header th:replace="web/fragments :: header"></header>
+<header th:replace="front/fragments :: header"></header>
 <!--end header-->
 
 <!--bgcover-->
-<div th:replace="web/fragments :: bgcover"></div>
+<div th:replace="front/fragments :: bgcover"></div>
 <!--end bgcover-->
 
 <div id="app">
@@ -101,13 +101,13 @@
                                     <!--文章分类-->
                                     <span class="publish-author">
                                 <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                <a class="post-category" :href="'/api/categories?id='+article.category.id">{{article.category.name}}</a>
+                                <a class="post-category" :href="'/page/categories?id='+article.category.id">{{article.category.name}}</a>
                             </span>
                                 </div>
                             </div>
                             <!--文章标签-->
                             <div class="card-action article-tags">
-                                <a :href="'/api/tags?id='+tag.id" v-for="(tag, index) in article.tagList">
+                                <a :href="'/page/tags?id='+tag.id" v-for="(tag, index) in article.tagList">
                                     <span class="chip bg-color">{{tag.name}}</span>
                                 </a>
                             </div>
@@ -267,15 +267,15 @@
 </script>
 
 <!--footer-->
-<footer th:replace="web/fragments :: footer"></footer>
+<footer th:replace="front/fragments :: footer"></footer>
 <!--end footer-->
 
 <!--commons-->
-<div th:replace="web/fragments :: commons"></div>
+<div th:replace="front/fragments :: commons"></div>
 <!--end commons-->
 
 <!--scripts-->
-<div th:replace="web/fragments :: scripts"></div>
+<div th:replace="front/fragments :: scripts"></div>
 <!--end scripts-->
 </body>
 </html>

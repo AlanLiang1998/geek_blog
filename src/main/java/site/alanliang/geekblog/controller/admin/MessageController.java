@@ -1,6 +1,8 @@
 package site.alanliang.geekblog.controller.admin;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -30,12 +32,14 @@ import java.util.List;
  * Date 2020/5/19 20:24
  * Version 1.0
  **/
+@Api(tags = "后台：留言管理")
 @RestController
 @RequestMapping("/admin/message")
 public class MessageController {
     @Autowired
     private MessageService messageService;
 
+    @ApiOperation("查询留言")
     @PreAuthorize("hasAuthority('blog:message:query')")
     @OperationLog("查询留言")
     @GetMapping
@@ -46,6 +50,7 @@ public class MessageController {
         return TableResult.tableOk(pageInfo.getRecords(), pageInfo.getTotal());
     }
 
+    @ApiOperation("删除留言")
     @PreAuthorize("hasAuthority('blog:message:delete')")
     @OperationLog("删除留言")
     @DeleteMapping("/{id}")
@@ -54,6 +59,7 @@ public class MessageController {
         return JsonResult.ok();
     }
 
+    @ApiOperation("批量删除留言")
     @PreAuthorize("hasAuthority('blog:message:delete')")
     @OperationLog("批量删除留言")
     @DeleteMapping
@@ -62,6 +68,7 @@ public class MessageController {
         return JsonResult.ok();
     }
 
+    @ApiOperation("回复留言")
     @PreAuthorize("hasAuthority('blog:message:reply')")
     @OperationLog("回复留言")
     @PostMapping
@@ -87,6 +94,7 @@ public class MessageController {
         return JsonResult.ok();
     }
 
+    @ApiOperation("审核留言")
     @PreAuthorize("hasAuthority('blog:message:audit')")
     @OperationLog("审核留言")
     @PutMapping("/audit")

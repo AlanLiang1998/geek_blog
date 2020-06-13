@@ -1,5 +1,7 @@
-package site.alanliang.geekblog.controller.web;
+package site.alanliang.geekblog.controller.front;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,20 +21,23 @@ import javax.validation.constraints.NotNull;
  * Date 2020/4/18 10:52
  * Version 1.0
  **/
+@Api(tags = "前台：文章详情页面")
 @Controller
 public class ArticleDetailController {
 
     @Autowired
     private ArticleService articleService;
 
+    @ApiOperation("文章详情页面")
     @GetMapping("/article/{id}")
     public String articleDetail(@PathVariable("id") Long id, Model model) {
         model.addAttribute("article", articleService.getDetailById(id));
         model.addAttribute("prevPreview", articleService.getPrevPreviewById(id));
         model.addAttribute("nextPreview", articleService.getNextPreviewById(id));
-        return "web/article";
+        return "front/article";
     }
 
+    @ApiOperation("点赞文章")
     @ResponseBody
     @PutMapping("/article/{id}/likes")
     public ResponseEntity<Object> likes(@NotNull @PathVariable("id") Long id) {
@@ -40,7 +45,8 @@ public class ArticleDetailController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @AccessLog("阅读文章")
+    @ApiOperation("查询文章详情")
+    @AccessLog("查询文章详情")
     @ResponseBody
     @GetMapping("/article")
     public ResponseEntity<Object> article(@RequestParam("id") Long id) {

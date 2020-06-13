@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import site.alanliang.geekblog.exception.AssociationExistException;
 import site.alanliang.geekblog.exception.BadRequestException;
 import site.alanliang.geekblog.exception.EntityExistException;
+import site.alanliang.geekblog.exception.StatusExpiredException;
 import site.alanliang.geekblog.utils.AjaxUtil;
 import site.alanliang.geekblog.utils.RequestHolder;
 import site.alanliang.geekblog.utils.ThrowableUtil;
@@ -28,6 +29,19 @@ import java.util.Objects;
 @Slf4j
 @ControllerAdvice
 public class GlobalExceptionHandler {
+
+    /**
+     * 身份信息过期
+     *
+     * @param e
+     * @return
+     */
+    @ExceptionHandler(StatusExpiredException.class)
+    public ModelAndView handleStatusExpiredException(StatusExpiredException e) {
+        // 打印堆栈信息
+        log.error(ThrowableUtil.getStackTrace(e));
+        return new ModelAndView("admin/home/login");
+    }
 
     @ExceptionHandler(AccessDeniedException.class)
     public Object handleAccessDeniedException(HttpServletRequest request, AccessDeniedException e) {

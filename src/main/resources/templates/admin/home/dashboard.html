@@ -309,7 +309,7 @@
                                     <div class="layui-row layui-col-space10 layuimini-qiuck">
                                         <div class="layui-col-xs3 layuimini-qiuck-module" permission="blog:article:add">
                                             <a href="javascript:;"
-                                               layuimini-content-href="/admin/api/article/article-add"
+                                               layuimini-content-href="/admin/page/article/article-add"
                                                data-title="文章发布" data-icon="fa fa-pencil-square-o">
                                                 <i class="fa fa-pencil-square-o"></i>
                                                 <cite>文章发布</cite>
@@ -318,7 +318,7 @@
                                         <div class="layui-col-xs3 layuimini-qiuck-module"
                                              permission="blog:article:query">
                                             <a href="javascript:;"
-                                               layuimini-content-href="/admin/api/article/article-list"
+                                               layuimini-content-href="/admin/page/article/article-list"
                                                data-title="文章管理" data-icon="fa fa-file-text">
                                                 <i class="fa fa-file-text"></i>
                                                 <cite>文章管理</cite>
@@ -327,7 +327,7 @@
                                         <div class="layui-col-xs3 layuimini-qiuck-module"
                                              permission="blog:comment:query">
                                             <a href="javascript:;"
-                                               layuimini-content-href="/admin/api/comment/comment-list"
+                                               layuimini-content-href="/admin/page/comment/comment-list"
                                                data-title="评论管理" data-icon="fa fa-comments">
                                                 <i class="fa fa-comments"></i>
                                                 <cite>评论管理</cite>
@@ -336,14 +336,14 @@
                                         <div class="layui-col-xs3 layuimini-qiuck-module"
                                              permission="blog:message:query">
                                             <a href="javascript:;"
-                                               layuimini-content-href="/admin/api/message/message-list"
+                                               layuimini-content-href="/admin/page/message/message-list"
                                                data-title="留言管理" data-icon="fa fa-comment">
                                                 <i class="fa fa-comment"></i>
                                                 <cite>留言管理</cite>
                                             </a>
                                         </div>
                                         <div class="layui-col-xs3 layuimini-qiuck-module" permission="sys:user:query">
-                                            <a href="javascript:;" layuimini-content-href="/admin/api/user/user-list"
+                                            <a href="javascript:;" layuimini-content-href="/admin/page/user/user-list"
                                                data-title="用户管理" data-icon="fa fa-users">
                                                 <i class="fa fa-users"></i>
                                                 <cite>用户管理</cite>
@@ -352,7 +352,7 @@
                                         <div class="layui-col-xs3 layuimini-qiuck-module"
                                              permission="sys:visitor:query">
                                             <a href="javascript:;"
-                                               layuimini-content-href="/admin/api/visitor/visitor-list"
+                                               layuimini-content-href="/admin/page/visitor/visitor-list"
                                                data-title="访客管理" data-icon="fa fa-user">
                                                 <i class="fa fa-user"></i>
                                                 <cite>访客管理</cite>
@@ -360,7 +360,7 @@
                                         </div>
                                         <div class="layui-col-xs3 layuimini-qiuck-module"
                                              permission="sys:accesslog:query">
-                                            <a href="javascript:;" layuimini-content-href="/admin/api/log/access-list"
+                                            <a href="javascript:;" layuimini-content-href="/admin/page/log/access-list"
                                                data-title="访问日志" data-icon="fa fa-eye">
                                                 <i class="fa fa-eye"></i>
                                                 <cite>访问日志</cite>
@@ -369,7 +369,7 @@
                                         <div class="layui-col-xs3 layuimini-qiuck-module"
                                              permission="sys:operationlog:query">
                                             <a href="javascript:;"
-                                               layuimini-content-href="/admin/api/log/operation-list"
+                                               layuimini-content-href="/admin/page/log/operation-list"
                                                data-title="操作日志" data-icon="fa fa-gears">
                                                 <i class="fa fa-gears"></i>
                                                 <cite>操作日志</cite>
@@ -591,11 +591,11 @@
 <script src="/static/admin/layuimini/lib/jquery-3.4.1/jquery-3.4.1.min.js"></script>
 <script src="/static/admin/my/js/my.js" charset="utf-8"></script>
 <!--vue-->
-<script type="text/javascript" src="/static/web/js/vue.js"></script>
+<script type="text/javascript" src="/static/front/js/vue.js"></script>
 <!--axios异步工具-->
 <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.19.2/axios.js"></script>
 <!--时间格式化工具-->
-<script src="/static/web/js/moment.js"></script>
+<script src="/static/front/js/moment.js"></script>
 <!--时间汉化-->
 <script type="text/javascript">
     moment.locale('zh-cn', {

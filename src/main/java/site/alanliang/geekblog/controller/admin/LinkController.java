@@ -27,7 +27,7 @@ import java.util.List;
  * Date 2020/5/24 10:16
  * Version 1.0
  **/
-@Api(tags = "友链管理")
+@Api(tags = "后台：友链管理")
 @RestController
 @RequestMapping("/admin/link")
 public class LinkController {
@@ -35,7 +35,7 @@ public class LinkController {
     @Autowired
     private LinkService linkService;
 
-    @ApiOperation("分页查询所有友链")
+    @ApiOperation("查询友链")
     @PreAuthorize("hasAuthority('blog:link:query')")
     @OperationLog("查询友链")
     @GetMapping
@@ -73,9 +73,9 @@ public class LinkController {
         return JsonResult.ok();
     }
 
-    @ApiOperation("添加友链")
+    @ApiOperation("新增友链")
     @PreAuthorize("hasAuthority('blog:link:add')")
-    @OperationLog("添加友链")
+    @OperationLog("新增友链")
     @PostMapping
     public JsonResult save(@Validated @RequestBody Link link) {
         link.setStatus(Constant.AUDIT_WAIT);
@@ -85,9 +85,9 @@ public class LinkController {
         return JsonResult.ok();
     }
 
-    @ApiOperation("修改友链")
+    @ApiOperation("更新友链")
     @PreAuthorize("hasAuthority('blog:link:edit')")
-    @OperationLog("修改友链")
+    @OperationLog("更新友链")
     @PutMapping
     public JsonResult update(@Validated @RequestBody Link link) {
         link.setStatus(Constant.AUDIT_WAIT);

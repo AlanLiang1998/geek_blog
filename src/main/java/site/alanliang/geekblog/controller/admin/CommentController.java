@@ -1,6 +1,8 @@
 package site.alanliang.geekblog.controller.admin;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -30,6 +32,7 @@ import java.util.List;
  * Date 2020/5/19 15:37
  * Version 1.0
  **/
+@Api(tags = "后台：评论管理")
 @RestController
 @RequestMapping("/admin/comment")
 public class CommentController {
@@ -37,6 +40,7 @@ public class CommentController {
     @Autowired
     private CommentService commentService;
 
+    @ApiOperation("查询评论")
     @PreAuthorize("hasAuthority('blog:comment:query')")
     @OperationLog("查询评论")
     @GetMapping
@@ -47,6 +51,7 @@ public class CommentController {
         return TableResult.tableOk(pageInfo.getRecords(), pageInfo.getTotal());
     }
 
+    @ApiOperation("删除评论")
     @PreAuthorize("hasAuthority('blog:comment:delete')")
     @OperationLog("删除评论")
     @DeleteMapping("/{id}")
@@ -55,6 +60,7 @@ public class CommentController {
         return JsonResult.ok();
     }
 
+    @ApiOperation("批量删除评论")
     @PreAuthorize("hasAuthority('blog:comment:delete')")
     @OperationLog("批量删除评论")
     @DeleteMapping
@@ -63,6 +69,7 @@ public class CommentController {
         return JsonResult.ok();
     }
 
+    @ApiOperation("回复评论")
     @PreAuthorize("hasAuthority('blog:comment:reply')")
     @OperationLog("回复评论")
     @PostMapping
@@ -82,6 +89,7 @@ public class CommentController {
         return JsonResult.ok();
     }
 
+    @ApiOperation("审核评论")
     @PreAuthorize("hasAuthority('blog:comment:audit')")
     @OperationLog("审核评论")
     @PutMapping("/audit")

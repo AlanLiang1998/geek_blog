@@ -1,4 +1,4 @@
-package site.alanliang.geekblog.controller.web;
+package site.alanliang.geekblog.controller.front;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -17,7 +17,7 @@ import site.alanliang.geekblog.service.LinkService;
  * Date 2020/5/24 17:05
  * Version 1.0
  **/
-@Api(tags = "前台友链页面")
+@Api(tags = "前台：友链页面")
 @RestController
 @RequestMapping("/links")
 public class LinksController {
@@ -25,7 +25,7 @@ public class LinksController {
     @Autowired
     private LinkService linkService;
 
-    @ApiOperation("分页查询友链")
+    @ApiOperation("查询友链")
     @GetMapping
     public ResponseEntity<Object> listByPage(@RequestParam(value = "current", defaultValue = "1") Integer current,
                                              @RequestParam(value = "size", defaultValue = "10") Integer size) {

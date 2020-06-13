@@ -23,9 +23,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Api(tags = "后台：七牛云存储管理")
 @RestController
 @RequestMapping("/admin/qiNiuContent")
-@Api(tags = "七牛云存储管理")
 public class QiNiuController {
     @Autowired
     private QiNiuService qiNiuService;
@@ -101,9 +101,9 @@ public class QiNiuController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @OperationLog("删除多张图片")
+    @OperationLog("删除多个文件")
     @PreAuthorize("hasAuthority('sys:qiniu:delete')")
-    @ApiOperation("删除多张图片")
+    @ApiOperation("删除多个文件")
     @DeleteMapping
     public ResponseEntity<Object> deleteAll(@RequestBody List<Long> idList) {
         qiNiuService.deleteAll(idList, qiNiuService.find());

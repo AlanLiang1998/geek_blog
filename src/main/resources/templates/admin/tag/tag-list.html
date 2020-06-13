@@ -107,7 +107,7 @@
                     {field: 'id', width: 80, title: 'ID', sort: true},
                     {
                         field: 'name', width: 150, title: '名称', templet: function (data) {
-                            let href = '/api/tags?id=' + data.id;
+                            let href = '/page/tags?id=' + data.id;
                             return '<a href=' + href + ' style="color: #01AAED;" target="_blank">' + data.name + '</a>';
                         }
                     },
@@ -230,7 +230,7 @@
                     maxmin: true,
                     shadeClose: true,
                     area: ['40%', '60%'],
-                    content: '/admin/api/tag/tag-add',
+                    content: '/admin/page/tag/tag-add',
                 });
                 $(window).on("resize", function () {
                     layer.full(index);

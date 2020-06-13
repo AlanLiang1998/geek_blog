@@ -1,6 +1,8 @@
 package site.alanliang.geekblog.controller.admin;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +23,7 @@ import java.util.List;
  * Date 2020/5/20 22:05
  * Version 1.0
  **/
+@Api(tags = "后台：访客管理")
 @RestController
 @RequestMapping("/admin/visitor")
 public class VisitorController {
@@ -28,6 +31,7 @@ public class VisitorController {
     @Autowired
     private VisitorService visitorService;
 
+    @ApiOperation("查询访客")
     @PreAuthorize("hasAuthority('sys:visitor:query')")
     @OperationLog("查询访客")
     @GetMapping
@@ -38,7 +42,7 @@ public class VisitorController {
         return TableResult.tableOk(pageInfo.getRecords(), pageInfo.getTotal());
     }
 
-
+    @ApiOperation("修改访客状态")
     @PreAuthorize("hasAuthority('sys:visitor:status')")
     @OperationLog("修改访客状态")
     @PutMapping("/status/{id}")
@@ -47,6 +51,7 @@ public class VisitorController {
         return JsonResult.ok();
     }
 
+    @ApiOperation("删除访客")
     @PreAuthorize("hasAuthority('sys:visitor:delete')")
     @OperationLog("删除访客")
     @DeleteMapping("/{id}")
@@ -55,6 +60,7 @@ public class VisitorController {
         return JsonResult.ok();
     }
 
+    @ApiOperation("批量删除访客")
     @PreAuthorize("hasAuthority('sys:visitor:delete')")
     @OperationLog("批量删除访客")
     @DeleteMapping

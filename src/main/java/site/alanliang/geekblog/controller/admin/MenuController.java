@@ -1,5 +1,7 @@
 package site.alanliang.geekblog.controller.admin;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -19,6 +21,7 @@ import java.util.Date;
  * Date 2020/4/6 8:53
  * Version 1.0
  **/
+@Api(tags = "后台：菜单管理")
 @RestController
 @RequestMapping("/admin/menu")
 public class MenuController {
@@ -26,6 +29,7 @@ public class MenuController {
     @Autowired
     private MenuService menuService;
 
+    @ApiOperation("查询菜单")
     @PreAuthorize("hasAuthority('sys:menu:query')")
     @OperationLog("查询菜单")
     @GetMapping
@@ -33,20 +37,23 @@ public class MenuController {
         return TableResult.tableOk(menuService.listAll(), menuService.countAll());
     }
 
+    @ApiOperation("查询单选菜单")
     @PreAuthorize("hasAuthority('sys:menu:query')")
     @GetMapping("/radio-tree")
     public JsonResult listByRadioTree() {
         return JsonResult.ok(menuService.listBySelectTree());
     }
 
+    @ApiOperation("查询多选菜单")
     @PreAuthorize("hasAuthority('sys:menu:query')")
     @GetMapping("/checkbox-tree")
     public JsonResult listByCheckboxTree() {
         return JsonResult.ok(menuService.listByCheckboxTree());
     }
 
+    @ApiOperation("新增菜单")
     @PreAuthorize("hasAuthority('sys:menu:add')")
-    @OperationLog("保存菜单")
+    @OperationLog("新增菜单")
     @PostMapping
     public JsonResult save(@Validated @RequestBody Menu menu) {
         menu.setStatus(menu.getStatus() != null);
@@ -56,8 +63,9 @@ public class MenuController {
         return JsonResult.ok();
     }
 
+    @ApiOperation("更新菜单")
     @PreAuthorize("hasAuthority('sys:menu:edit')")
-    @OperationLog("修改菜单")
+    @OperationLog("更新菜单")
     @PutMapping
     public JsonResult update(@Validated @RequestBody Menu menu) {
         menu.setStatus(menu.getStatus() != null);
@@ -66,6 +74,7 @@ public class MenuController {
         return JsonResult.ok();
     }
 
+    @ApiOperation("删除菜单")
     @PreAuthorize("hasAuthority('sys:menu:delete')")
     @OperationLog("删除菜单")
     @DeleteMapping("/{id}")

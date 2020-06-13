@@ -1,12 +1,12 @@
 <!DOCTYPE HTML>
 <html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta th:include="web/fragments :: head(~{::title})">
+    <meta th:include="front/fragments :: head(~{::title})">
     <title>文章详情</title>
     <!--代码高亮-->
-    <link rel="stylesheet" href="/static/web/css/prism-tomorrow.css" type="text/css">
-    <link rel="stylesheet" href="/static/web/css/prism-line-numbers.css" type="text/css">
-    <link rel="stylesheet" href="/static/web/css/tocbot.css">
+    <link rel="stylesheet" href="/static/front/css/prism-tomorrow.css" type="text/css">
+    <link rel="stylesheet" href="/static/front/css/prism-line-numbers.css" type="text/css">
+    <link rel="stylesheet" href="/static/front/css/tocbot.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style>
         #articleContent h1::before,
@@ -203,7 +203,7 @@
 
         #vcomments textarea {
             box-sizing: border-box;
-            background: url("/static/web/image/comment_bg.png") 100% 100% no-repeat;
+            background: url("/static/front/image/comment_bg.png") 100% 100% no-repeat;
         }
 
         #vcomments p {
@@ -431,7 +431,7 @@
 
 <body>
 <!--navbar-->
-<header th:replace="web/fragments :: header"></header>
+<header th:replace="front/fragments :: header"></header>
 <!--end navbar-->
 <div id="app">
     <!--bgcover-->
@@ -554,7 +554,7 @@
                                 <!--文章分享-->
                                 <div class="post_share"
                                      style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
-                                    <link rel="stylesheet" type="text/css" href="/static/web/css/share.min.css">
+                                    <link rel="stylesheet" type="text/css" href="/static/front/css/share.min.css">
                                     <div id="article-share">
                                         <div class="social-share"
                                              data-sites="qq,qzone,wechat,weibo"
@@ -582,7 +582,7 @@
                                                 </ul>
                                                 <div id="wechat">
                                                     <img src="http://cdn.alanliang.site/loading.png"
-                                                         data-src="/static/web/image/wepay.jpg" class="reward-img lazy"
+                                                         data-src="/static/front/image/wepay.jpg" class="reward-img lazy"
                                                          alt="微信打赏二维码">
                                                 </div>
 
@@ -887,15 +887,15 @@
 </div>
 
 <!--footer-->
-<footer th:replace="web/fragments :: footer"></footer>
+<footer th:replace="front/fragments :: footer"></footer>
 <!--end footer-->
 
 <!--commons-->
-<div th:replace="web/fragments :: commons"></div>
+<div th:replace="front/fragments :: commons"></div>
 <!--end commons-->
 
 <!--scripts-->
-<div th:replace="web/fragments :: scripts"></div>
+<div th:replace="front/fragments :: scripts"></div>
 <!--end scripts-->
 
 <!--vue-->
@@ -1154,11 +1154,11 @@
 <!--弹出层-->
 <script src="https://cdn.bootcdn.net/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
 <!--社交分享-->
-<script src="/static/web/js/social-share.min.js"></script>
+<script src="/static/front/js/social-share.min.js"></script>
 <!--评论区-->
-<script src="/static/web/js/Valine.min.js"></script>
+<script src="/static/front/js/Valine.min.js"></script>
 <!--目录-->
-<script src="/static/web/js/tocbot.min.js"></script>
+<script src="/static/front/js/tocbot.min.js"></script>
 <script>
     $(function () {
         tocbot.init({
@@ -1283,13 +1283,13 @@
     });
 </script>
 <!-- 代码块功能依赖 -->
-<script type="text/javascript" src="/static/web/js/codeBlockFuction.js"></script>
+<script type="text/javascript" src="/static/front/js/codeBlockFuction.js"></script>
 <!-- 代码语言 -->
-<script type="text/javascript" src="/static/web/js/codeLang.js"></script>
+<script type="text/javascript" src="/static/front/js/codeLang.js"></script>
 <!-- 代码块复制 -->
-<script type="text/javascript" src="/static/web/js/codeCopy.js"></script>
+<script type="text/javascript" src="/static/front/js/codeCopy.js"></script>
 <!-- 代码块收缩 -->
-<script type="text/javascript" src="/static/web/js/codeShrink.js"></script>
+<script type="text/javascript" src="/static/front/js/codeShrink.js"></script>
 <!-- 代码块折行 -->
 <style type="text/css">
     code[class*="language-"], pre[class*="language-"] {
@@ -1299,7 +1299,7 @@
 <!--代码高亮-->
 <script src="https://cdn.jsdelivr.net/npm/prismjs@1.17.1/prism.min.js"></script>
 <script src="https://cdn.bootcss.com/prism/1.17.1/components/prism-java.js"></script>
-<script src="/static/web/js/prism-line-numbers.js"></script>
+<script src="/static/front/js/prism-line-numbers.js"></script>
 <!--打赏tab-->
 <script>
     $(function () {

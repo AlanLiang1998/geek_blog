@@ -1,5 +1,7 @@
 package site.alanliang.geekblog.common;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,20 +13,17 @@ import java.io.Serializable;
  * Date 2020/4/6 17:33
  * Version 1.0
  **/
+@ApiModel("统一返回结果")
 @Getter
 @Setter
 public class JsonResult implements Serializable {
-    /**
-     * 响应码
-     */
+    @ApiModelProperty("响应码")
     private Integer code;
-    /**
-     * 响应消息
-     */
+
+    @ApiModelProperty("响应消息")
     private String msg;
-    /**
-     * 响应数据
-     */
+
+    @ApiModelProperty("响应数据")
     private Object data;
 
     public JsonResult() {
