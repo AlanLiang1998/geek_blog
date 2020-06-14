@@ -40,4 +40,14 @@ public class Photo implements Serializable {
 
     @ApiModelProperty("更新时间")
     private Date updateTime;
+
+    public interface Table {
+        String ID = "id";
+        String URL = "url";
+        String DESCRIPTION = "description";
+        String SORT = "sort";
+        String DISPLAY = "display";
+        String CREATE_TIME = "create_time";
+        String UPDATE_TIME = "update_time";
+    }
 }

@@ -25,4 +25,9 @@ public class RoleMenu implements Serializable {
     @ApiModelProperty("主键:菜单ID")
     @TableId
     private Long menuId;
+
+    public interface Table {
+        String ROLE_ID = "role_id";
+        String MENU_ID = "menu_id";
+    }
 }

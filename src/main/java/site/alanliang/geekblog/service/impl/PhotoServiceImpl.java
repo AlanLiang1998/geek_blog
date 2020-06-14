@@ -28,7 +28,7 @@ public class PhotoServiceImpl implements PhotoService {
     @Cacheable
     public List<Photo> listAll() {
         QueryWrapper<Photo> wrapper = new QueryWrapper<>();
-        wrapper.select("url", "description").orderByAsc("sort").eq("display", Constant.DISPLAY);
+        wrapper.select(Photo.Table.URL,Photo.Table.DESCRIPTION).orderByAsc(Photo.Table.SORT).eq(Photo.Table.DISPLAY, Constant.DISPLAY);
         return photoMapper.selectList(wrapper);
     }
 
@@ -69,13 +69,13 @@ public class PhotoServiceImpl implements PhotoService {
         Page<Photo> page = new Page<>(current, size);
         QueryWrapper<Photo> wrapper = new QueryWrapper<>();
         if (!StringUtils.isEmpty(photoQuery.getDescription())) {
-            wrapper.like("description", photoQuery.getDescription());
+            wrapper.like(Photo.Table.DESCRIPTION, photoQuery.getDescription());
         }
         if (photoQuery.getStartDate() != null && photoQuery.getEndDate() != null) {
-            wrapper.between("create_time", photoQuery.getStartDate(), photoQuery.getEndDate());
+            wrapper.between(Photo.Table.CREATE_TIME, photoQuery.getStartDate(), photoQuery.getEndDate());
         }
         if (photoQuery.getDisplay() != null) {
-            wrapper.eq("display", photoQuery.getDisplay());
+            wrapper.eq(Photo.Table.DISPLAY, photoQuery.getDisplay());
         }
         return photoMapper.selectPage(page, wrapper);
     }

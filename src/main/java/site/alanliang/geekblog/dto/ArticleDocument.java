@@ -28,4 +28,13 @@ public class ArticleDocument implements Serializable {
 
     @Field(type = FieldType.Integer)
     private Integer status;//审核状态
+
+    public interface Table {
+        String ID = "ID";
+        String TITLE = "title";
+        String SUMMARY = "summary";
+        String CONTENT = "content";
+        String PUBLISHED = "published";
+        String STATUS = "status";
+    }
 }

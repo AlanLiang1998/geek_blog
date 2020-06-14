@@ -55,13 +55,13 @@ public class RoleServiceImpl implements RoleService {
         Role role = new Role();
         //查询角色信息
         QueryWrapper<Role> roleWrapper = new QueryWrapper<>();
-        roleWrapper.select("id", "role_name", "description", "rank", "color", "status").eq("id", id);
+        roleWrapper.select(Role.Table.ID, Role.Table.ROLE_NAME, Role.Table.DESCRIPTION, Role.Table.RANK, Role.Table.COLOR, Role.Table.STATUS).eq(Role.Table.ID, id);
         Role r = roleMapper.selectOne(roleWrapper);
         BeanUtils.copyProperties(r, role);
         //查询角色权限信息
         QueryWrapper<RoleMenu> roleMenuWrapper = new QueryWrapper<>();
-        roleMenuWrapper.select("menu_id")
-                .eq("role_id", id);
+        roleMenuWrapper.select(RoleMenu.Table.MENU_ID)
+                .eq(RoleMenu.Table.ROLE_ID, id);
         List<RoleMenu> roleMenus = roleMenuMapper.selectList(roleMenuWrapper);
         List<Long> menuIdList = roleMenus.stream().map(RoleMenu::getMenuId).collect(Collectors.toList());
         role.setMenuIdList(menuIdList);
@@ -73,7 +73,7 @@ public class RoleServiceImpl implements RoleService {
     @Transactional(rollbackFor = Exception.class)
     public void removeById(Long id) {
         QueryWrapper<RoleUser> wrapper = new QueryWrapper<>();
-        wrapper.eq("role_id", id);
+        wrapper.eq(RoleUser.Table.ROLE_ID, id);
         //角色存在关联用户则不允许删除
         Integer count = roleUserMapper.selectCount(wrapper);
         if (count >= 1) {
@@ -88,12 +88,12 @@ public class RoleServiceImpl implements RoleService {
     public void removeByIdList(List<Long> idList) {
         for (Long id : idList) {
             QueryWrapper<RoleUser> roleUserWrapper = new QueryWrapper<>();
-            roleUserWrapper.eq("role_id", id);
+            roleUserWrapper.eq(RoleUser.Table.ROLE_ID, id);
             //角色存在关联用户则不允许删除
             Integer count = roleUserMapper.selectCount(roleUserWrapper);
             if (count >= 1) {
                 QueryWrapper<Role> roleWrapper = new QueryWrapper<>();
-                roleWrapper.select("role_name").eq("id", id);
+                roleWrapper.select(Role.Table.ROLE_NAME).eq(Role.Table.ID, id);
                 Role role = roleMapper.selectOne(roleWrapper);
                 throw new AssociationExistException("角色: " + role.getRoleName() + "存在关联用户，不能删除");
             }
@@ -115,7 +115,7 @@ public class RoleServiceImpl implements RoleService {
         roleMapper.updateById(role);
         //更新用户状态
         QueryWrapper<RoleUser> wrapper = new QueryWrapper<>();
-        wrapper.select("user_id").eq("role_id", role.getId());
+        wrapper.select(RoleUser.Table.USER_ID).eq(RoleUser.Table.ROLE_ID, role.getId());
         List<RoleUser> roleUsers = roleUserMapper.selectList(wrapper);
         for (RoleUser roleUser : roleUsers) {
             User user = new User();
@@ -133,7 +133,7 @@ public class RoleServiceImpl implements RoleService {
             //保存
             //检查角色名称是否唯一
             QueryWrapper<Role> wrapper = new QueryWrapper<>();
-            wrapper.eq("role_name", role.getRoleName());
+            wrapper.eq(Role.Table.ROLE_NAME, role.getRoleName());
             if (!CollectionUtils.isEmpty(roleMapper.selectList(wrapper))) {
                 throw new EntityExistException("角色名称：" + role.getRoleName() + "已存在");
             }
@@ -145,7 +145,7 @@ public class RoleServiceImpl implements RoleService {
             //更新
             //检查角色名称是否唯一
             QueryWrapper<Role> roleWrapper = new QueryWrapper<>();
-            roleWrapper.eq("role_name", role.getRoleName());
+            roleWrapper.eq(Role.Table.ROLE_NAME, role.getRoleName());
             List<Role> roles = roleMapper.selectList(roleWrapper);
             roles = roles.stream().filter(r -> !r.getId().equals(role.getId())).collect(Collectors.toList());
             if (!CollectionUtils.isEmpty(roles)) {
@@ -156,7 +156,7 @@ public class RoleServiceImpl implements RoleService {
             //更新角色权限
             //先删除原有角色权限
             QueryWrapper<RoleMenu> roleMenuWrapper = new QueryWrapper<>();
-            roleMenuWrapper.eq("role_id", role.getId());
+            roleMenuWrapper.eq(RoleMenu.Table.ROLE_ID, role.getId());
             roleMenuMapper.delete(roleMenuWrapper);
             //再添加新的角色权限
             roleMenuMapper.insertBatch(role.getId(), role.getMenuIdList());
@@ -169,19 +169,19 @@ public class RoleServiceImpl implements RoleService {
         Page<Role> page = new Page<>(current, size);
         QueryWrapper<Role> roleWrapper = new QueryWrapper<>();
         if (!StringUtils.isEmpty(roleQuery.getRoleName())) {
-            roleWrapper.like("role_name", roleQuery.getRoleName());
+            roleWrapper.like(Role.Table.ROLE_NAME, roleQuery.getRoleName());
         }
         if (!StringUtils.isEmpty(roleQuery.getDescription())) {
-            roleWrapper.like("description", roleQuery.getDescription());
+            roleWrapper.like(Role.Table.DESCRIPTION, roleQuery.getDescription());
         }
         if (roleQuery.getStartDate() != null && roleQuery.getEndDate() != null) {
-            roleWrapper.between("create_time", roleQuery.getStartDate(), roleQuery.getEndDate());
+            roleWrapper.between(Role.Table.CREATE_TIME, roleQuery.getStartDate(), roleQuery.getEndDate());
         }
         //查询关联用户
         Page<Role> pageInfo = roleMapper.selectPage(page, roleWrapper);
         for (Role role : pageInfo.getRecords()) {
             QueryWrapper<RoleUser> roleUserWrapper = new QueryWrapper<>();
-            roleUserWrapper.eq("role_id", role.getId());
+            roleUserWrapper.eq(RoleUser.Table.ROLE_ID, role.getId());
             Integer count = roleUserMapper.selectCount(roleUserWrapper);
             role.setUserCount(count);
         }
@@ -192,7 +192,7 @@ public class RoleServiceImpl implements RoleService {
     @Cacheable
     public List<Role> listAll() {
         QueryWrapper<Role> wrapper = new QueryWrapper<>();
-        wrapper.select("id", "role_name");
+        wrapper.select(Role.Table.ID, Role.Table.ROLE_NAME);
         return roleMapper.selectList(wrapper);
     }
 }

@@ -52,8 +52,8 @@ public class MenuServiceImpl implements MenuService {
     @Cacheable
     public Menu getById(Long id) {
         QueryWrapper<Menu> wrapper = new QueryWrapper<>();
-        wrapper.select("id", "pid", "title", "href", "icon", "authority", "sort", "type", "status")
-                .eq("id", id);
+        wrapper.select(Menu.Table.ID, Menu.Table.PID, Menu.Table.TITLE, Menu.Table.HREF, Menu.Table.ICON, Menu.Table.AUTHORITY, Menu.Table.SORT, Menu.Table.TYPE, Menu.Table.STATUS)
+                .eq(Menu.Table.ID, id);
         return menuMapper.selectOne(wrapper);
     }
 
@@ -72,7 +72,7 @@ public class MenuServiceImpl implements MenuService {
             //保存
             //检查菜单标题是否唯一
             QueryWrapper<Menu> wrapper = new QueryWrapper<>();
-            wrapper.eq("title", menu.getTitle());
+            wrapper.eq(Menu.Table.TITLE, menu.getTitle());
             if (!CollectionUtils.isEmpty(menuMapper.selectList(wrapper))) {
                 throw new EntityExistException("菜单标题：" + menu.getTitle() + "已存在");
             }
@@ -81,7 +81,7 @@ public class MenuServiceImpl implements MenuService {
             //更新
             //检查菜单标题是否唯一
             QueryWrapper<Menu> wrapper = new QueryWrapper<>();
-            wrapper.eq("title", menu.getTitle());
+            wrapper.eq(Menu.Table.TITLE, menu.getTitle());
             List<Menu> menus = menuMapper.selectList(wrapper);
             menus = menus.stream().filter(m -> !m.getId().equals(menu.getId())).collect(Collectors.toList());
             if (!CollectionUtils.isEmpty(menus)) {
@@ -95,7 +95,7 @@ public class MenuServiceImpl implements MenuService {
     @Cacheable
     public List<MenuCheckboxVO> listByCheckboxTree() {
         QueryWrapper<Menu> wrapper = new QueryWrapper<>();
-        wrapper.select("id", "pid", "title");
+        wrapper.select(Menu.Table.ID, Menu.Table.PID, Menu.Table.TITLE);
         List<Menu> menus = menuMapper.selectList(wrapper);
         List<MenuCheckboxVO> treeList = new ArrayList<>();
         for (Menu menu : menus) {
@@ -113,7 +113,7 @@ public class MenuServiceImpl implements MenuService {
     @Cacheable
     public List<MenuSelectVO> listBySelectTree() {
         QueryWrapper<Menu> wrapper = new QueryWrapper<>();
-        wrapper.select("id", "pid", "title");
+        wrapper.select(Menu.Table.ID, Menu.Table.PID, Menu.Table.TITLE);
         List<Menu> menus = menuMapper.selectList(wrapper);
         List<MenuSelectVO> treeList = new ArrayList<>();
         for (Menu menu : menus) {
@@ -130,7 +130,7 @@ public class MenuServiceImpl implements MenuService {
     @Cacheable
     public List<Menu> listAll() {
         QueryWrapper<Menu> wrapper = new QueryWrapper<>();
-        wrapper.select("id", "pid", "title", "href", "authority", "icon", "sort", "type", "status", "create_time", "update_time");
+        wrapper.select(Menu.Table.ID, Menu.Table.PID, Menu.Table.TITLE, Menu.Table.HREF, Menu.Table.AUTHORITY, Menu.Table.ICON, Menu.Table.SORT, Menu.Table.TYPE, Menu.Table.STATUS, Menu.Table.CREATE_TIME, Menu.Table.UPDATE_TIME);
         return menuMapper.selectList(wrapper);
     }
 }

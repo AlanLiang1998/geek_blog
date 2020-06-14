@@ -9,6 +9,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import site.alanliang.geekblog.common.Constant;
+import site.alanliang.geekblog.common.TableConstant;
 import site.alanliang.geekblog.dao.MessageMapper;
 import site.alanliang.geekblog.dao.OperationLogMapper;
 import site.alanliang.geekblog.model.Message;
@@ -46,7 +47,7 @@ public class MessageServiceImpl implements MessageService {
         }
         Date date = operationLogMapper.selectLastIndexViewTimeByUsername(username);
         QueryWrapper<Message> wrapper = new QueryWrapper<>();
-        wrapper.between("create_time", date, new Date());
+        wrapper.between(Message.Table.CREATE_TIME, date, new Date());
         return messageMapper.selectCount(wrapper);
     }
 
@@ -54,9 +55,9 @@ public class MessageServiceImpl implements MessageService {
     @Cacheable
     public List<Message> listNewest() {
         QueryWrapper<Message> wrapper = new QueryWrapper<>();
-        wrapper.select("id", "nickname", "content", "create_time", "status")
-                .orderByDesc("create_time")
-                .last("limit " + Constant.NEWEST_PAGE_SIZE);
+        wrapper.select(Message.Table.ID, Message.Table.NICKNAME, Message.Table.CONTENT, Message.Table.CREATE_TIME, Message.Table.STATUS)
+                .orderByDesc(Message.Table.CREATE_TIME)
+                .last(TableConstant.LIMIT + Constant.NEWEST_PAGE_SIZE);
         return messageMapper.selectList(wrapper);
     }
 
@@ -75,17 +76,17 @@ public class MessageServiceImpl implements MessageService {
     public Page<Message> listTableByPage(Integer current, Integer size, MessageQuery messageQuery) {
         Page<Message> page = new Page<>(current, size);
         QueryWrapper<Message> wrapper = new QueryWrapper<>();
-        wrapper.select("id", "nickname", "pid", "content", "email", "create_time", "request_ip", "address", "status");
+        wrapper.select(Message.Table.ID, Message.Table.NICKNAME, Message.Table.PID, Message.Table.CONTENT, Message.Table.EMAIL, Message.Table.CREATE_TIME, Message.Table.REQUEST_IP, Message.Table.ADDRESS, Message.Table.STATUS);
         if (!StringUtils.isEmpty(messageQuery.getNickname())) {
-            wrapper.like("nickname", messageQuery.getNickname());
+            wrapper.like(Message.Table.NICKNAME, messageQuery.getNickname());
         }
         if (messageQuery.getStartDate() != null && messageQuery.getEndDate() != null) {
-            wrapper.between("create_time", messageQuery.getStartDate(), messageQuery.getEndDate());
+            wrapper.between(Message.Table.CREATE_TIME, messageQuery.getStartDate(), messageQuery.getEndDate());
         }
         if (messageQuery.getStatus() != null) {
-            wrapper.eq("status", messageQuery.getStatus());
+            wrapper.eq(Message.Table.STATUS, messageQuery.getStatus());
         }
-        wrapper.orderByDesc("create_time");
+        wrapper.orderByDesc(Message.Table.CREATE_TIME);
         return messageMapper.selectPage(page, wrapper);
     }
 

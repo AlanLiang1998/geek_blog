@@ -65,4 +65,15 @@ public class Role implements Serializable {
     @ApiModelProperty("关联用户数量")
     @TableField(exist = false)
     private Integer userCount;
+
+    public interface Table {
+        String ID = "id";
+        String ROLE_NAME = "role_name";
+        String DESCRIPTION = "description";
+        String RANK = "rank";
+        String COLOR = "color";
+        String STATUS = "status";
+        String CREATE_TIME = "create_time";
+        String UPDATE_TIME = "update_time";
+    }
 }

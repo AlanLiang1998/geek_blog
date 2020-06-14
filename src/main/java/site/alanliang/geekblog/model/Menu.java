@@ -70,4 +70,20 @@ public class Menu implements Serializable {
 
     @ApiModelProperty("更新时间")
     private Date updateTime;
+
+    public interface Table {
+        String ID = "id";
+        String TITLE = "title";
+        String HREF = "href";
+        String PID = "pid";
+        String ICON = "icon";
+        String AUTHORITY = "authority";
+        String SORT = "sort";
+        String TYPE = "type";
+        String STATUS = "status";
+        String REMARK = "remark";
+        String TARGET = "target";
+        String CREATE_TIME = "create_time";
+        String UPDATE_TIME = "update_time";
+    }
 }

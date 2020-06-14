@@ -25,4 +25,9 @@ public class RoleUser implements Serializable {
     @ApiModelProperty("主键:用户ID")
     @TableId
     private Long userId;
+
+    public interface Table {
+        String ROLE_ID = "role_id";
+        String USER_ID = "user_id";
+    }
 }

@@ -77,4 +77,20 @@ public class Comment implements Serializable {
     @ApiModelProperty("回复评论列表")
     @TableField(exist = false)
     private List<Comment> children;
+
+    public interface Table {
+        String ID = "id";
+        String PID = "pid";
+        String ARTICLE_ID = "article_id";
+        String VISITOR_ID = "visitor_id";
+        String USER_ID = "user_id";
+        String CONTENT = "content";
+        String STATUS = "status";
+        String CREATE_TIME = "create_time";
+        String BROWSER = "browser";
+        String OS = "os";
+        String ADDRESS = "address";
+        String REQUEST_IP = "request_ip";
+        String PARENT_NICKNAME = "parent_nickname";
+    }
 }

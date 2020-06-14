@@ -57,10 +57,10 @@ public class QiNiuServiceImpl implements QiNiuService {
         Page<QiniuContent> page = new Page<>(current, size);
         QueryWrapper<QiniuContent> wrapper = new QueryWrapper<>();
         if (!StringUtils.isEmpty(qiNiuQuery.getName())) {
-            wrapper.like("name", qiNiuQuery.getName());
+            wrapper.like(QiniuContent.Table.NAME, qiNiuQuery.getName());
         }
         if (!StringUtils.isEmpty(qiNiuQuery.getStartDate()) && !StringUtils.isEmpty(qiNiuQuery.getEndDate())) {
-            wrapper.between("update_time", qiNiuQuery.getStartDate(), qiNiuQuery.getEndDate());
+            wrapper.between(QiniuContent.Table.UPDATE_TIME, qiNiuQuery.getStartDate(), qiNiuQuery.getEndDate());
         }
         return qiNiuContentMapper.selectPage(page, wrapper);
     }
@@ -106,7 +106,7 @@ public class QiNiuServiceImpl implements QiNiuService {
             try {
                 String name = file.getOriginalFilename();
                 QueryWrapper<QiniuContent> wrapper = new QueryWrapper<>();
-                wrapper.eq("name", name);
+                wrapper.eq(QiniuContent.Table.NAME, name);
                 if (qiNiuContentMapper.selectOne(wrapper) != null) {
                     name = QiNiuUtil.getKey(name);
                 }
@@ -194,7 +194,7 @@ public class QiNiuServiceImpl implements QiNiuService {
             FileInfo[] items = fileListIterator.next();
             for (FileInfo item : items) {
                 QueryWrapper<QiniuContent> wrapper = new QueryWrapper<>();
-                wrapper.eq("name", FileUtil.getFileNameNoEx(item.key));
+                wrapper.eq(QiniuContent.Table.NAME, FileUtil.getFileNameNoEx(item.key));
                 if (qiNiuContentMapper.selectOne(wrapper) == null) {
                     qiniuContent = new QiniuContent();
                     qiniuContent.setSize(FileUtil.getSize(Integer.parseInt(item.fsize + "")));

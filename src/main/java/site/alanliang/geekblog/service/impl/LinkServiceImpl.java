@@ -40,13 +40,13 @@ public class LinkServiceImpl implements LinkService {
         Page<Link> page = new Page<>(current, size);
         QueryWrapper<Link> wrapper = new QueryWrapper<>();
         if (!StringUtils.isEmpty(linkQuery.getNickname())) {
-            wrapper.like("nickname", linkQuery.getNickname());
+            wrapper.like(Link.Table.NICKNAME, linkQuery.getNickname());
         }
         if (linkQuery.getStartDate() != null && linkQuery.getEndDate() != null) {
-            wrapper.between("create_time", linkQuery.getStartDate(), linkQuery.getEndDate());
+            wrapper.between(Link.Table.CREATE_TIME, linkQuery.getStartDate(), linkQuery.getEndDate());
         }
         if (linkQuery.getStatus() != null) {
-            wrapper.eq("status", linkQuery.getStatus());
+            wrapper.eq(Link.Table.STATUS, linkQuery.getStatus());
         }
         return linkMapper.selectPage(page, wrapper);
     }
@@ -73,9 +73,9 @@ public class LinkServiceImpl implements LinkService {
     public Page<Link> listByPage(Integer current, Integer size) {
         Page<Link> page = new Page<>(current, size);
         QueryWrapper<Link> wrapper = new QueryWrapper<>();
-        wrapper.select("id", "nickname", "avatar", "introduction", "link")
-                .eq("status", Constant.AUDIT_PASS)
-                .orderByAsc("sort");
+        wrapper.select(Link.Table.ID, Link.Table.NICKNAME, Link.Table.AVATAR, Link.Table.INTRODUCTION, Link.Table.LINK)
+                .eq(Link.Table.STATUS, Constant.AUDIT_PASS)
+                .orderByAsc(Link.Table.SORT);
         return linkMapper.selectPage(page, wrapper);
     }
 
@@ -93,7 +93,7 @@ public class LinkServiceImpl implements LinkService {
             //保存
             //验证昵称是否唯一
             QueryWrapper<Link> wrapper = new QueryWrapper<>();
-            wrapper.eq("nickname", link.getNickname());
+            wrapper.eq(Link.Table.NICKNAME, link.getNickname());
             if (null != linkMapper.selectOne(wrapper)) {
                 throw new EntityExistException("昵称：" + link.getNickname() + "已存在");
             }
@@ -102,7 +102,7 @@ public class LinkServiceImpl implements LinkService {
             //更新
             //验证昵称是否唯一
             QueryWrapper<Link> wrapper = new QueryWrapper<>();
-            wrapper.eq("nickname", link.getNickname());
+            wrapper.eq(Link.Table.NICKNAME, link.getNickname());
             List<Link> links = linkMapper.selectList(wrapper);
             links = links.stream().filter(u -> !u.getId().equals(link.getId())).collect(Collectors.toList());
             if (!CollectionUtils.isEmpty(links)) {

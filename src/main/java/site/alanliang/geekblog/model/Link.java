@@ -58,4 +58,16 @@ public class Link implements Serializable {
 
     @ApiModelProperty("更新时间")
     private Date updateTime;
+
+    public interface Table {
+        String ID = "id";
+        String NICKNAME = "nickname";
+        String AVATAR = "avatar";
+        String INTRODUCTION = "introduction";
+        String LINK = "link";
+        String SORT = "sort";
+        String STATUS = "status";
+        String CREATE_TIME = "create_time";
+        String UPDATE_TIME = "update_time";
+    }
 }

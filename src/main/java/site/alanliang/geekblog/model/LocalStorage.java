@@ -41,4 +41,16 @@ public class LocalStorage implements Serializable {
 
     @ApiModelProperty("更新时间")
     private Date updateTime;
+
+    public interface Table {
+        String ID = "id";
+        String REAL_NAME = "real_name";
+        String NAME = "name";
+        String SUFFIX = "suffix";
+        String PATH = "path";
+        String TYPE = "type";
+        String SIZE = "size";
+        String CREATE_TIME = "create_time";
+        String UPDATE_TIME = "update_time";
+    }
 }

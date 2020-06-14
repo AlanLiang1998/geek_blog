@@ -49,19 +49,19 @@ public class VisitorServiceImpl implements VisitorService {
         //保存
         //验证用户名是否唯一
         QueryWrapper<Visitor> wrapper = new QueryWrapper<>();
-        wrapper.eq("username", visitor.getUsername());
+        wrapper.eq(Visitor.Table.USERNAME, visitor.getUsername());
         if (null != visitorMapper.selectOne(wrapper)) {
             throw new EntityExistException("用户名：" + visitor.getUsername() + "已存在");
         }
         //验证邮箱是否唯一
         wrapper.clear();
-        wrapper.eq("email", visitor.getEmail());
+        wrapper.eq(Visitor.Table.EMAIL, visitor.getEmail());
         if (null != visitorMapper.selectOne(wrapper)) {
             throw new EntityExistException("邮箱：" + visitor.getEmail() + "已存在");
         }
         //验证昵称是否唯一
         wrapper.clear();
-        wrapper.eq("nickname", visitor.getNickname());
+        wrapper.eq(Visitor.Table.NICKNAME, visitor.getNickname());
         if (null != visitorMapper.selectOne(wrapper)) {
             throw new EntityExistException("昵称：" + visitor.getNickname() + "已存在");
         }
@@ -71,10 +71,10 @@ public class VisitorServiceImpl implements VisitorService {
     @Override
     public Visitor login(VisitorLoginVO visitorLoginVO) {
         QueryWrapper<Visitor> wrapper = new QueryWrapper<>();
-        wrapper.select("id", "username", "password", "nickname", "avatar", "link", "email", "status")
-                .eq("username", visitorLoginVO.getCertificate())
+        wrapper.select(Visitor.Table.ID, Visitor.Table.USERNAME, Visitor.Table.PASSWORD, Visitor.Table.NICKNAME, Visitor.Table.AVATAR, Visitor.Table.LINK, Visitor.Table.EMAIL, Visitor.Table.STATUS)
+                .eq(Visitor.Table.USERNAME, visitorLoginVO.getCertificate())
                 .or()
-                .eq("email", visitorLoginVO.getCertificate());
+                .eq(Visitor.Table.EMAIL, visitorLoginVO.getCertificate());
         Visitor visitor = visitorMapper.selectOne(wrapper);
         try {
             if (visitor.getStatus().equals(Constant.VISITOR_DISABLE)) {
@@ -96,15 +96,15 @@ public class VisitorServiceImpl implements VisitorService {
     public Page<Visitor> listTableByPage(Integer current, Integer size, UserQuery userQuery) {
         Page<Visitor> page = new Page<>(current, size);
         QueryWrapper<Visitor> wrapper = new QueryWrapper<>();
-        wrapper.select("id", "username", "nickname", "status", "email", "link", "create_time", "update_time");
+        wrapper.select(Visitor.Table.ID, Visitor.Table.USERNAME, Visitor.Table.NICKNAME, Visitor.Table.STATUS, Visitor.Table.EMAIL, Visitor.Table.LINK, Visitor.Table.CREATE_TIME, Visitor.Table.UPDATE_TIME);
         if (!StringUtils.isEmpty(userQuery.getUsername())) {
-            wrapper.like("username", userQuery.getUsername());
+            wrapper.like(Visitor.Table.USERNAME, userQuery.getUsername());
         }
         if (!StringUtils.isEmpty(userQuery.getEmail())) {
-            wrapper.like("email", userQuery.getEmail());
+            wrapper.like(Visitor.Table.EMAIL, userQuery.getEmail());
         }
         if (userQuery.getStartDate() != null && userQuery.getEndDate() != null) {
-            wrapper.between("create_time", userQuery.getStartDate(), userQuery.getEndDate());
+            wrapper.between(Visitor.Table.CREATE_TIME, userQuery.getStartDate(), userQuery.getEndDate());
         }
         return visitorMapper.selectPage(page, wrapper);
     }
@@ -114,7 +114,7 @@ public class VisitorServiceImpl implements VisitorService {
     @Transactional(rollbackFor = Exception.class)
     public void changeStatus(Long id) {
         QueryWrapper<User> wrapper = new QueryWrapper<>();
-        wrapper.select("status");
+        wrapper.select(Visitor.Table.STATUS);
         Visitor visitor = visitorMapper.selectById(id);
         if (Objects.equals(visitor.getStatus(), Constant.VISITOR_ENABLE)) {
             visitor.setStatus(Constant.VISITOR_DISABLE);

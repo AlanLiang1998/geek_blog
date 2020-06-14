@@ -40,4 +40,12 @@ public class Tag implements Serializable {
     @ApiModelProperty("关联文章数量")
     @TableField(exist = false)
     private Integer articleCount;
+
+    public interface Table {
+        String ID = "id";
+        String NAME = "name";
+        String COLOR = "color";
+        String CREATE_TIME = "create_time";
+        String UPDATE_TIME = "update_time";
+    }
 }

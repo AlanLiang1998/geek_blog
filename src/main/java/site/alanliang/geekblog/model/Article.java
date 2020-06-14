@@ -107,4 +107,28 @@ public class Article implements Serializable {
     @ApiModelProperty("作者")
     @TableField(exist = false)
     private User author;
+
+    public interface Table {
+        String ID = "id";
+        String TITLE = "title";
+        String SUMMARY = "summary";
+        String CONTENT = "content";
+        String TEXT_CONTENT = "text_content";
+        String COVER = "cover";
+        String TYPE = "type";
+        String VIEWS = "views";
+        String LIKES = "likes";
+        String COMMENTS = "comments";
+        String APPRECIABLE = "appreciable";
+        String COMMENTABLE = "commentable";
+        String TOP = "top";
+        String RECOMMEND = "recommend";
+        String PUBLISHED = "published";
+        String SORT = "sort";
+        String AUTHOR_ID = "author_id";
+        String CATEGORY_ID = "category_id";
+        String STATUS = "status";
+        String CREATE_TIME = "create_time";
+        String UPDATE_TIME = "update_time";
+    }
 }

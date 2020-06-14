@@ -41,12 +41,12 @@ public class LocalStorageServiceImpl implements LocalStorageService {
     public Page<LocalStorage> listTableByPage(Integer current, Integer size, LocalStorageQuery localStorageQuery) {
         Page<LocalStorage> page = new Page<>(current, size);
         QueryWrapper<LocalStorage> wrapper = new QueryWrapper<>();
-        wrapper.select("id", "name", "real_name", "suffix", "type", "size", "create_time", "update_time");
+        wrapper.select(LocalStorage.Table.ID, LocalStorage.Table.NAME, LocalStorage.Table.REAL_NAME, LocalStorage.Table.SUFFIX, LocalStorage.Table.TYPE, LocalStorage.Table.SIZE, LocalStorage.Table.CREATE_TIME, LocalStorage.Table.UPDATE_TIME);
         if (!StringUtils.isEmpty(localStorageQuery.getName())) {
-            wrapper.like("name", localStorageQuery.getName());
+            wrapper.like(LocalStorage.Table.NAME, localStorageQuery.getName());
         }
         if (localStorageQuery.getStartDate() != null && localStorageQuery.getEndDate() != null) {
-            wrapper.between("create_time", localStorageQuery.getStartDate(), localStorageQuery.getEndDate());
+            wrapper.between(LocalStorage.Table.CREATE_TIME, localStorageQuery.getStartDate(), localStorageQuery.getEndDate());
         }
         return localStorageMapper.selectPage(page, wrapper);
     }
@@ -113,7 +113,7 @@ public class LocalStorageServiceImpl implements LocalStorageService {
     @Cacheable
     public LocalStorage getById(Long id) {
         QueryWrapper<LocalStorage> wrapper = new QueryWrapper<>();
-        wrapper.select("id", "name").eq("id", id);
+        wrapper.select(LocalStorage.Table.ID, LocalStorage.Table.NAME).eq(LocalStorage.Table.ID, id);
         return localStorageMapper.selectOne(wrapper);
     }
 }

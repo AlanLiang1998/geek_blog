@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
-import site.alanliang.geekblog.common.Constant;
+import site.alanliang.geekblog.common.TableConstant;
 import site.alanliang.geekblog.dao.TagMapper;
 import site.alanliang.geekblog.exception.EntityExistException;
 import site.alanliang.geekblog.model.Tag;
@@ -39,10 +39,10 @@ public class TagServiceImpl implements TagService {
         Page<Tag> tagPage = new Page<>(current, size);
         QueryWrapper<Tag> wrapper = new QueryWrapper<>();
         if (!StringUtils.isEmpty(tagQuery.getName())) {
-            wrapper.like("name", tagQuery.getName());
+            wrapper.like(Tag.Table.NAME, tagQuery.getName());
         }
         if (tagQuery.getStartDate() != null && tagQuery.getEndDate() != null) {
-            wrapper.between(Constant.TABLE_ALIAS_TAG + "create_time", tagQuery.getStartDate(), tagQuery.getEndDate());
+            wrapper.between(TableConstant.TAG_ALIAS +Tag.Table.CREATE_TIME, tagQuery.getStartDate(), tagQuery.getEndDate());
         }
         return tagMapper.listTableByPage(tagPage, wrapper);
     }
@@ -52,7 +52,7 @@ public class TagServiceImpl implements TagService {
     @Transactional(rollbackFor = Exception.class)
     public void saveOfUpdate(Tag tag) {
         QueryWrapper<Tag> wrapper = new QueryWrapper<>();
-        wrapper.eq("name", tag.getName());
+        wrapper.eq(Tag.Table.NAME, tag.getName());
         if (tag.getId() == null) {
             //新增
             //检查分类名称是否唯一
@@ -107,8 +107,8 @@ public class TagServiceImpl implements TagService {
     @Cacheable
     public List<String> listColor() {
         QueryWrapper<Tag> wrapper = new QueryWrapper<>();
-        wrapper.select("color")
-                .groupBy("color");
+        wrapper.select(Tag.Table.COLOR)
+                .groupBy(Tag.Table.COLOR);
         List<Tag> tags = tagMapper.selectList(wrapper);
         return tags.stream().map(Tag::getColor).collect(Collectors.toList());
     }

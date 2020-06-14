@@ -19,24 +19,15 @@ public interface Constant {
     String PAGE_SIZE = "6";
 
     Integer FILTER_BY_DAY = 1;
+
     Integer FILTER_BY_MONTH = 2;
+
     Integer FILTER_BY_YEAR = 3;
 
     /**
      * 用于IP定位转换
      */
     String REGION = "内网IP|内网IP";
-
-    /**
-     * 表别名前缀
-     */
-    String TABLE_ALIAS_ARTICLE = "ta.";
-
-    String TABLE_ALIAS_USER = "su.";
-
-    String TABLE_ALIAS_CATE = "tc.";
-
-    String TABLE_ALIAS_TAG = "tt.";
 
     /**
      * 默认颜色
@@ -138,4 +129,11 @@ public interface Constant {
     Integer NEWEST_PAGE_SIZE = 10;
 
     String USER = "user";
+
+    /**
+     * 搜索高亮前标签
+     */
+    String HIGH_LIGHT_PRE_TAGS = "<em class='search-keyword'>";
+
+    String HIGH_LIGHT_POST_TAGS = "</em>";
 }

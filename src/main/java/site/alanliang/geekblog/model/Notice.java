@@ -44,4 +44,14 @@ public class Notice implements Serializable {
 
     @ApiModelProperty("更新时间")
     private Date updateTime;
+
+    public interface Table {
+        String ID = "id";
+        String TITLE = "TITLE";
+        String CONTENT = "content";
+        String SORT = "sort";
+        String DISPLAY = "display";
+        String CREATE_TIME = "create_time";
+        String UPDATE_TIME = "update_time";
+    }
 }

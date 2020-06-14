@@ -49,4 +49,14 @@ public class Category implements Serializable {
     @ApiModelProperty("关联文章数量")
     @TableField(exist = false)
     private Integer articleCount;
+
+    public interface Table {
+        String ID = "id";
+        String NAME = "name";
+        String DISPLAY = "display";
+        String INTRODUCTION = "introduction";
+        String COLOR = "color";
+        String CREATE_TIME = "create_time";
+        String UPDATE_TIME = "update_time";
+    }
 }

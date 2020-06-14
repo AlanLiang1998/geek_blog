@@ -56,7 +56,7 @@ public class CommentServiceImpl implements CommentService {
         commentMapper.insert(comment);
         //评论量+1
         QueryWrapper<Article> articleWrapper = new QueryWrapper<>();
-        articleWrapper.select("comments").eq("id", comment.getArticleId());
+        articleWrapper.select(Article.Table.COMMENTS).eq(Article.Table.ID, comment.getArticleId());
         Article article = articleMapper.selectOne(articleWrapper);
         article.setComments(article.getComments() + 1);
         article.setId(comment.getArticleId());
@@ -71,10 +71,10 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public void decreaseArticleComments(Long id) {
         QueryWrapper<Comment> commentWrapper = new QueryWrapper<>();
-        commentWrapper.select("article_id").eq("id", id);
+        commentWrapper.select(Comment.Table.ARTICLE_ID).eq(Comment.Table.ID, id);
         Comment comment = commentMapper.selectOne(commentWrapper);
         QueryWrapper<Article> articleWrapper = new QueryWrapper<>();
-        articleWrapper.select("comments").eq("id", comment.getArticleId());
+        articleWrapper.select(Article.Table.COMMENTS).eq(Article.Table.ID, comment.getArticleId());
         Article article = articleMapper.selectOne(articleWrapper);
         article.setComments(article.getComments() - 1);
         article.setId(comment.getArticleId());
@@ -106,15 +106,15 @@ public class CommentServiceImpl implements CommentService {
     public void reply(Comment comment) {
         if (comment.getVisitorId() != null) {
             QueryWrapper<Comment> commentWrapper = new QueryWrapper<>();
-            commentWrapper.select("visitor_id").eq("id", comment.getPid());
+            commentWrapper.select(Comment.Table.VISITOR_ID).eq(Comment.Table.ID, comment.getPid());
             Comment parentComment = commentMapper.selectOne(commentWrapper);
             QueryWrapper<Visitor> visitorWrapper = new QueryWrapper<>();
-            visitorWrapper.select("nickname").eq("id", parentComment.getVisitorId());
+            visitorWrapper.select(Visitor.Table.NICKNAME).eq(Visitor.Table.ID, parentComment.getVisitorId());
             Visitor visitor = visitorMapper.selectOne(visitorWrapper);
             comment.setParentNickname(visitor.getNickname());
         } else {
             QueryWrapper<User> userWrapper = new QueryWrapper<>();
-            userWrapper.select("nickname").eq("id", comment.getUserId());
+            userWrapper.select(User.Table.NICKNAME).eq(User.Table.ID, comment.getUserId());
             User user = userMapper.selectOne(userWrapper);
             comment.setParentNickname(user.getNickname());
         }
@@ -129,7 +129,7 @@ public class CommentServiceImpl implements CommentService {
         }
         Date date = operationLogMapper.selectLastIndexViewTimeByUsername(username);
         QueryWrapper<Comment> wrapper = new QueryWrapper<>();
-        wrapper.between("create_time", date, new Date());
+        wrapper.between(Comment.Table.CREATE_TIME, date, new Date());
         return commentMapper.selectCount(wrapper);
     }
 
@@ -161,10 +161,10 @@ public class CommentServiceImpl implements CommentService {
         Page<Comment> page = new Page<>(current, size);
         QueryWrapper<Comment> wrapper = new QueryWrapper<>();
         if (commentQuery.getStartDate() != null && commentQuery.getEndDate() != null) {
-            wrapper.between("create_time", commentQuery.getStartDate(), commentQuery.getEndDate());
+            wrapper.between(Comment.Table.CREATE_TIME, commentQuery.getStartDate(), commentQuery.getEndDate());
         }
         if (commentQuery.getStatus() != null) {
-            wrapper.eq("status", commentQuery.getStatus());
+            wrapper.eq(Comment.Table.STATUS, commentQuery.getStatus());
         }
         return commentMapper.listTableByPage(page, wrapper);
     }

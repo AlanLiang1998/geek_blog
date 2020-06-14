@@ -63,4 +63,15 @@ public class QiniuConfig implements Serializable {
      */
     @ApiModelProperty("空间类型")
     private String type = "公开";
+
+    public interface Table {
+        String ID = "id";
+        String ACCESS_KEY = "access_key";
+        String BUCKET = "bucket";
+        String HOST = "host";
+        String SECRET_KEY = "secret_key";
+        String TYPE = "type";
+        String ZONE = "zone";
+
+    }
 }

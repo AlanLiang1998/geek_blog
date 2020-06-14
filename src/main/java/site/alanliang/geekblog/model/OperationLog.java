@@ -66,4 +66,20 @@ public class OperationLog implements Serializable {
         this.logType = logType;
         this.time = time;
     }
+
+    public interface Table {
+        String ID = "id";
+        String CREATE_TIME = "create_time";
+        String DESCRIPTION = "description";
+        String EXCEPTION_DETAIL = "exception_detail";
+        String LOG_TYPE = "log_type";
+        String METHOD = "method";
+        String PARAMS = "params";
+        String REQUEST_IP = "request_ip";
+        String TIME = "time";
+        String USERNAME = "username";
+        String BROWSER = "browser";
+        String ADDRESS = "address";
+        String STATUS = "status";
+    }
 }

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import site.alanliang.geekblog.common.Constant;
+import site.alanliang.geekblog.common.TableConstant;
 import site.alanliang.geekblog.dao.OperationLogMapper;
 import site.alanliang.geekblog.model.OperationLog;
 import site.alanliang.geekblog.query.LogQuery;
@@ -100,9 +101,9 @@ public class OperationLogServiceImpl implements OperationLogService {
     @Override
     public List<OperationLog> listNewest() {
         QueryWrapper<OperationLog> wrapper = new QueryWrapper<>();
-        wrapper.select("id", "request_ip", "username", "address", "create_time", "description", "status")
-                .orderByDesc("create_time")
-                .last("limit " + Constant.NEWEST_PAGE_SIZE);
+        wrapper.select(OperationLog.Table.ID, OperationLog.Table.REQUEST_IP, OperationLog.Table.USERNAME, OperationLog.Table.ADDRESS, OperationLog.Table.CREATE_TIME, OperationLog.Table.DESCRIPTION, OperationLog.Table.STATUS)
+                .orderByDesc(OperationLog.Table.CREATE_TIME)
+                .last(TableConstant.LIMIT + Constant.NEWEST_PAGE_SIZE);
         return operationLogMapper.selectList(wrapper);
     }
 
@@ -110,32 +111,32 @@ public class OperationLogServiceImpl implements OperationLogService {
     public Page<OperationLog> listByPage(Integer current, Integer size, LogQuery logQuery) {
         Page<OperationLog> page = new Page<>(current, size);
         QueryWrapper<OperationLog> wrapper = new QueryWrapper<>();
-        wrapper.select("id", "request_ip", "address", "username", "description", "browser", "time", "create_time", "status")
-                .orderByDesc("create_time");
+        wrapper.select(OperationLog.Table.ID, OperationLog.Table.REQUEST_IP, OperationLog.Table.ADDRESS, OperationLog.Table.USERNAME, OperationLog.Table.DESCRIPTION, OperationLog.Table.BROWSER, OperationLog.Table.TIME, OperationLog.Table.CREATE_TIME, OperationLog.Table.STATUS)
+                .orderByDesc(OperationLog.Table.CREATE_TIME);
         if (!StringUtils.isEmpty(logQuery.getRequestIp())) {
-            wrapper.like("request_ip", logQuery.getRequestIp());
+            wrapper.like(OperationLog.Table.REQUEST_IP, logQuery.getRequestIp());
         }
         if (!StringUtils.isEmpty(logQuery.getDescription())) {
-            wrapper.like("description", logQuery.getDescription());
+            wrapper.like(OperationLog.Table.DESCRIPTION, logQuery.getDescription());
         }
         if (!StringUtils.isEmpty(logQuery.getUsername())) {
-            wrapper.like("username", logQuery.getUsername());
+            wrapper.like(OperationLog.Table.USERNAME, logQuery.getUsername());
         }
         if (!StringUtils.isEmpty(logQuery.getAddress())) {
-            wrapper.like("address", logQuery.getAddress());
+            wrapper.like(OperationLog.Table.ADDRESS, logQuery.getAddress());
         }
         if (logQuery.getStartDate() != null && logQuery.getEndDate() != null) {
-            wrapper.between("create_time", logQuery.getStartDate(), logQuery.getEndDate());
+            wrapper.between(OperationLog.Table.CREATE_TIME, logQuery.getStartDate(), logQuery.getEndDate());
         }
         if (logQuery.getTimeRank() != null) {
             if (Objects.equals(logQuery.getTimeRank(), Constant.LOW_REQUEST_TIME_RANK)) {
-                wrapper.lt("time", Constant.LOW_REQUEST_TIME);
+                wrapper.lt(OperationLog.Table.TIME, Constant.LOW_REQUEST_TIME);
             }
             if (Objects.equals(logQuery.getTimeRank(), Constant.MID_REQUEST_TIME_RANK)) {
-                wrapper.between("time", Constant.LOW_REQUEST_TIME, Constant.HIGH_REQUEST_TIME);
+                wrapper.between(OperationLog.Table.TIME, Constant.LOW_REQUEST_TIME, Constant.HIGH_REQUEST_TIME);
             }
             if (Objects.equals(logQuery.getTimeRank(), Constant.HIGH_REQUEST_TIME_RANK)) {
-                wrapper.gt("time", Constant.HIGH_REQUEST_TIME);
+                wrapper.gt(OperationLog.Table.TIME, Constant.HIGH_REQUEST_TIME);
             }
         }
         return operationLogMapper.selectPage(page, wrapper);

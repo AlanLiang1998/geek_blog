@@ -62,4 +62,17 @@ public class QiniuContent implements Serializable {
 
     @ApiModelProperty("文件格式")
     private String fileType;
+
+    public interface Table {
+        String ID = "id";
+        String BUCKET = "bucket";
+        String NAME = "name";
+        String SIZE = "size";
+        String TYPE = "type";
+        String UPDATE_TIME = "update_time";
+        String URL = "url";
+        String SUFFIX = "suffix";
+        String FILE_TYPE = "file_type";
+
+    }
 }

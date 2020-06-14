@@ -10,10 +10,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
-import site.alanliang.geekblog.common.Constant;
+import site.alanliang.geekblog.common.TableConstant;
 import site.alanliang.geekblog.dao.CategoryMapper;
 import site.alanliang.geekblog.exception.EntityExistException;
-import site.alanliang.geekblog.model.Article;
 import site.alanliang.geekblog.model.Category;
 import site.alanliang.geekblog.query.CategoryQuery;
 import site.alanliang.geekblog.service.CategoryService;
@@ -40,13 +39,13 @@ public class CategoryServiceImpl implements CategoryService {
         Page<Category> page = new Page<>(current, size);
         QueryWrapper<Category> wrapper = new QueryWrapper<>();
         if (!StringUtils.isEmpty(categoryQuery.getName())) {
-            wrapper.like("name", categoryQuery.getName());
+            wrapper.like(Category.Table.NAME, categoryQuery.getName());
         }
         if (categoryQuery.getDisplay() != null) {
-            wrapper.eq("display", categoryQuery.getDisplay());
+            wrapper.eq(Category.Table.DISPLAY, categoryQuery.getDisplay());
         }
         if (categoryQuery.getStartDate() != null && categoryQuery.getEndDate() != null) {
-            wrapper.between(Constant.TABLE_ALIAS_CATE + "create_time", categoryQuery.getStartDate(), categoryQuery.getEndDate());
+            wrapper.between(TableConstant.CATE_ALIAS + Category.Table.CREATE_TIME, categoryQuery.getStartDate(), categoryQuery.getEndDate());
         }
         return categoryMapper.listTableByPage(page, wrapper);
     }
@@ -55,8 +54,6 @@ public class CategoryServiceImpl implements CategoryService {
     @CacheEvict(allEntries = true)
     @Transactional(rollbackFor = Exception.class)
     public void removeById(Long id) {
-        QueryWrapper<Article> wrapper = new QueryWrapper<>();
-        wrapper.eq("category_id", id);
         categoryMapper.deleteById(id);
     }
 
@@ -77,8 +74,8 @@ public class CategoryServiceImpl implements CategoryService {
     @Cacheable
     public List<String> listColor() {
         QueryWrapper<Category> wrapper = new QueryWrapper<>();
-        wrapper.select("color")
-                .groupBy("color");
+        wrapper.select(Category.Table.COLOR)
+                .groupBy(Category.Table.COLOR);
         List<Category> categories = categoryMapper.selectList(wrapper);
         return categories.stream().map(Category::getColor).collect(Collectors.toList());
     }
@@ -94,7 +91,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Transactional(rollbackFor = Exception.class)
     public void saveOfUpdate(Category category) {
         QueryWrapper<Category> wrapper = new QueryWrapper<>();
-        wrapper.eq("name", category.getName());
+        wrapper.eq(Category.Table.NAME, category.getName());
         if (category.getId() == null) {
             //新增
             //检查分类名称是否唯一
@@ -123,7 +120,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Cacheable
     public List<Category> listAll() {
         QueryWrapper<Category> wrapper = new QueryWrapper<>();
-        wrapper.select("id", "name");
+        wrapper.select(Category.Table.ID, Category.Table.NAME);
         return categoryMapper.selectList(wrapper);
     }
 }

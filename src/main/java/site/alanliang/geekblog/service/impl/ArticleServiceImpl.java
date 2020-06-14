@@ -23,6 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 import site.alanliang.geekblog.common.Constant;
+import site.alanliang.geekblog.common.TableConstant;
 import site.alanliang.geekblog.dao.ArticleMapper;
 import site.alanliang.geekblog.dao.ArticleTagMapper;
 import site.alanliang.geekblog.dao.OperationLogMapper;
@@ -83,7 +84,7 @@ public class ArticleServiceImpl implements ArticleService {
     @Transactional(rollbackFor = Exception.class)
     public void increaseLikes(Long id) {
         QueryWrapper<Article> wrapper = new QueryWrapper<>();
-        wrapper.select("likes").eq("id", id);
+        wrapper.select(Article.Table.LIKES).eq(Article.Table.ID, id);
         Article article = articleMapper.selectOne(wrapper);
         article.setId(id);
         article.setLikes(article.getLikes() + 1);
@@ -99,19 +100,19 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public List<ArticleDocument> listByKeyword(String keyword) throws IOException {
-        SearchRequest searchRequest = new SearchRequest("article_document");
+        SearchRequest searchRequest = new SearchRequest(TableConstant.ARTICLE_DOCUMENT);
         //匹配查询
         SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
-        MultiMatchQueryBuilder multiMatchQueryBuilder = QueryBuilders.multiMatchQuery(keyword, "title", "summary", "content");
-        TermQueryBuilder termQueryBuilder1 = QueryBuilders.termQuery("published", true);
-        TermQueryBuilder termQueryBuilder2 = QueryBuilders.termQuery("status", Constant.AUDIT_PASS);
+        MultiMatchQueryBuilder multiMatchQueryBuilder = QueryBuilders.multiMatchQuery(keyword, ArticleDocument.Table.TITLE, ArticleDocument.Table.SUMMARY, ArticleDocument.Table.CONTENT);
+        TermQueryBuilder termQueryBuilder1 = QueryBuilders.termQuery(ArticleDocument.Table.PUBLISHED, true);
+        TermQueryBuilder termQueryBuilder2 = QueryBuilders.termQuery(ArticleDocument.Table.STATUS, Constant.AUDIT_PASS);
         BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery().must(multiMatchQueryBuilder).must(termQueryBuilder1).must(termQueryBuilder2);
         sourceBuilder.query(boolQueryBuilder);
         //高亮
         HighlightBuilder highlightBuilder = new HighlightBuilder();
-        highlightBuilder.field("title").field("summary").field("content");
-        highlightBuilder.preTags("<em class='search-keyword'>");
-        highlightBuilder.postTags("</em>");
+        highlightBuilder.field(ArticleDocument.Table.TITLE).field(ArticleDocument.Table.SUMMARY).field(ArticleDocument.Table.CONTENT);
+        highlightBuilder.preTags(Constant.HIGH_LIGHT_PRE_TAGS);
+        highlightBuilder.postTags(Constant.HIGH_LIGHT_POST_TAGS);
         sourceBuilder.highlighter(highlightBuilder);
         //执行搜索
         searchRequest.source(sourceBuilder);
@@ -121,15 +122,15 @@ public class ArticleServiceImpl implements ArticleService {
         for (SearchHit hit : searchResponse.getHits().getHits()) {
             Map<String, Object> map = hit.getSourceAsMap();//原来的结果
             //解析高亮的字段
-            HighLightUtil.parseField(hit, "title");
-            HighLightUtil.parseField(hit, "summary");
-            HighLightUtil.parseField(hit, "content");
+            HighLightUtil.parseField(hit, ArticleDocument.Table.TITLE);
+            HighLightUtil.parseField(hit, ArticleDocument.Table.SUMMARY);
+            HighLightUtil.parseField(hit, ArticleDocument.Table.CONTENT);
 
             ArticleDocument articleDocument = new ArticleDocument();
-            articleDocument.setId(Long.valueOf((Integer) map.get("id")));
-            articleDocument.setTitle((String) map.get("title"));
-            articleDocument.setSummary((String) map.get("summary"));
-            articleDocument.setContent((String) map.get("content"));
+            articleDocument.setId(Long.valueOf((Integer) map.get(ArticleDocument.Table.ID)));
+            articleDocument.setTitle((String) map.get(ArticleDocument.Table.TITLE));
+            articleDocument.setSummary((String) map.get(ArticleDocument.Table.SUMMARY));
+            articleDocument.setContent((String) map.get(ArticleDocument.Table.CONTENT));
             articleDocuments.add(articleDocument);
         }
         return articleDocuments;
@@ -181,7 +182,7 @@ public class ArticleServiceImpl implements ArticleService {
     @Transactional(rollbackFor = Exception.class)
     public void increaseViews(Long id) {
         QueryWrapper<Article> wrapper = new QueryWrapper<>();
-        wrapper.select("views").eq("id", id);
+        wrapper.select(Article.Table.VIEWS).eq(Article.Table.ID, id);
         Article article = articleMapper.selectOne(wrapper);
         article.setId(id);
         article.setViews(article.getViews() + 1);
@@ -204,12 +205,12 @@ public class ArticleServiceImpl implements ArticleService {
     @Cacheable
     public List<Article> listTop() {
         QueryWrapper<Article> wrapper = new QueryWrapper<>();
-        wrapper.select("id", "title", "summary", "cover")
-                .eq("top", true)
-                .eq("published", true)
-                .eq("status", Constant.AUDIT_PASS)
-                .orderByDesc("sort")
-                .last("limit " + Constant.MAX_TOP_ARTICLES);
+        wrapper.select(Article.Table.ID, Article.Table.TITLE, Article.Table.SUMMARY, Article.Table.COVER)
+                .eq(Article.Table.TOP, true)
+                .eq(Article.Table.PUBLISHED, true)
+                .eq(Article.Table.STATUS, Constant.AUDIT_PASS)
+                .orderByDesc(Article.Table.SORT)
+                .last(TableConstant.LIMIT + Constant.MAX_TOP_ARTICLES);
         return articleMapper.selectList(wrapper);
     }
 
@@ -256,28 +257,28 @@ public class ArticleServiceImpl implements ArticleService {
         Page<Article> page = new Page<>(current, size);
         QueryWrapper<Article> wrapper = new QueryWrapper<>();
         if (!StringUtils.isEmpty(articleQuery.getTitle())) {
-            wrapper.like("title", articleQuery.getTitle());
+            wrapper.like(Article.Table.TITLE, articleQuery.getTitle());
         }
         if (articleQuery.getType() != null) {
-            wrapper.eq("type", articleQuery.getType());
+            wrapper.eq(Article.Table.TYPE, articleQuery.getType());
         }
         if (articleQuery.getCategoryId() != null) {
-            wrapper.eq("category_id", articleQuery.getCategoryId());
+            wrapper.eq(Article.Table.CATEGORY_ID, articleQuery.getCategoryId());
         }
         if (articleQuery.getPublished() != null) {
-            wrapper.eq("published", articleQuery.getPublished());
+            wrapper.eq(Article.Table.PUBLISHED, articleQuery.getPublished());
         }
         if (articleQuery.getStatus() != null) {
-            wrapper.eq("status", articleQuery.getStatus());
+            wrapper.eq(Article.Table.STATUS, articleQuery.getStatus());
         }
         if (articleQuery.getTop() != null) {
-            wrapper.eq("top", articleQuery.getTop());
+            wrapper.eq(Article.Table.TOP, articleQuery.getTop());
         }
         if (articleQuery.getRecommend() != null) {
-            wrapper.eq("recommend", articleQuery.getRecommend());
+            wrapper.eq(Article.Table.RECOMMEND, articleQuery.getRecommend());
         }
         if (articleQuery.getStartDate() != null && articleQuery.getEndDate() != null) {
-            wrapper.between(Constant.TABLE_ALIAS_ARTICLE + "create_time", articleQuery.getStartDate(), articleQuery.getEndDate());
+            wrapper.between(TableConstant.ARTICLE_ALIAS + Article.Table.CREATE_TIME, articleQuery.getStartDate(), articleQuery.getEndDate());
         }
         return articleMapper.listTableByPage(page, wrapper);
     }
@@ -286,9 +287,9 @@ public class ArticleServiceImpl implements ArticleService {
     @Cacheable
     public List<Article> listNewest() {
         QueryWrapper<Article> wrapper = new QueryWrapper<>();
-        wrapper.select("id", "title", "summary", "create_time")
-                .orderByDesc("create_time")
-                .last("limit " + Constant.NEWEST_PAGE_SIZE);
+        wrapper.select(Article.Table.ID, Article.Table.TITLE, Article.Table.SUMMARY, Article.Table.CREATE_TIME)
+                .orderByDesc(Article.Table.CREATE_TIME)
+                .last(TableConstant.LIMIT + Constant.NEWEST_PAGE_SIZE);
         return articleMapper.selectList(wrapper);
     }
 
@@ -304,8 +305,8 @@ public class ArticleServiceImpl implements ArticleService {
         articleDocumentRepository.deleteById(article.getId());
         //重新添加
         QueryWrapper<Article> wrapper = new QueryWrapper<>();
-        wrapper.select("id", "title", "summary", "content", "published", "status")
-                .eq("id", auditVO.getId());
+        wrapper.select(Article.Table.ID, Article.Table.TITLE, Article.Table.SUMMARY, Article.Table.CONTENT, Article.Table.PUBLISHED, Article.Table.STATUS)
+                .eq(Article.Table.ID, auditVO.getId());
         Article art = articleMapper.selectOne(wrapper);
         saveToElasticSearch(art);
     }
@@ -318,14 +319,14 @@ public class ArticleServiceImpl implements ArticleService {
         }
         Date date = operationLogMapper.selectLastIndexViewTimeByUsername(username);
         QueryWrapper<Article> wrapper = new QueryWrapper<>();
-        wrapper.between("create_time", date, new Date());
+        wrapper.between(Article.Table.CREATE_TIME, date, new Date());
         return articleMapper.selectCount(wrapper);
     }
 
     @Override
     public Boolean reachedMaxRecommend() {
         QueryWrapper<Article> wrapper = new QueryWrapper<>();
-        wrapper.eq("recommend", true);
+        wrapper.eq(Article.Table.RECOMMEND, true);
         Integer count = articleMapper.selectCount(wrapper);
         return count >= Constant.MAX_RECOMMEND_ARTICLES;
     }
@@ -333,7 +334,7 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public Boolean reachedMaxTop() {
         QueryWrapper<Article> wrapper = new QueryWrapper<>();
-        wrapper.eq("top", true);
+        wrapper.eq(Article.Table.TOP, true);
         Integer count = articleMapper.selectCount(wrapper);
         return count >= Constant.MAX_TOP_ARTICLES;
     }
@@ -343,13 +344,13 @@ public class ArticleServiceImpl implements ArticleService {
         BeanUtils.copyProperties(article, articleDocument);
         if (articleDocument.getPublished() == null) {
             QueryWrapper<Article> wrapper = new QueryWrapper<>();
-            wrapper.select("published").eq("id", article.getId());
+            wrapper.select(Article.Table.PUBLISHED).eq(Article.Table.ID, article.getId());
             Article temp = articleMapper.selectOne(wrapper);
             articleDocument.setPublished(temp.getPublished());
         }
         if (articleDocument.getStatus() == null) {
             QueryWrapper<Article> wrapper = new QueryWrapper<>();
-            wrapper.select("status").eq("id", article.getId());
+            wrapper.select(Article.Table.STATUS).eq(Article.Table.ID, article.getId());
             Article temp = articleMapper.selectOne(wrapper);
             articleDocument.setStatus(temp.getStatus());
         }
@@ -378,7 +379,7 @@ public class ArticleServiceImpl implements ArticleService {
             articleMapper.updateById(article);
             //删除原有标签
             QueryWrapper<ArticleTag> articleTagWrapper = new QueryWrapper<>();
-            articleTagWrapper.eq("article_id", article.getId());
+            articleTagWrapper.eq(ArticleTag.Table.ARTICLE_ID, article.getId());
             articleTagMapper.delete(articleTagWrapper);
             //手动清空标签缓存
             List<String> list = redisUtils.scan("tag*");

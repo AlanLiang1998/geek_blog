@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import site.alanliang.geekblog.common.Constant;
+import site.alanliang.geekblog.common.TableConstant;
 import site.alanliang.geekblog.dao.AccessLogMapper;
 import site.alanliang.geekblog.dao.OperationLogMapper;
 import site.alanliang.geekblog.model.AccessLog;
@@ -40,9 +41,9 @@ public class AccessLogServiceImpl implements AccessLogService {
     @Override
     public List<AccessLog> listNewest() {
         QueryWrapper<AccessLog> wrapper = new QueryWrapper<>();
-        wrapper.select("id", "request_ip", "address", "create_time", "description", "status")
-                .orderByDesc("create_time")
-                .last("limit " + Constant.NEWEST_PAGE_SIZE);
+        wrapper.select(AccessLog.Table.ID, AccessLog.Table.REQUEST_IP, AccessLog.Table.ADDRESS, AccessLog.Table.CREATE_TIME, AccessLog.Table.DESCRIPTION, AccessLog.Table.STATUS)
+                .orderByDesc(AccessLog.Table.CREATE_TIME)
+                .last(TableConstant.LIMIT + Constant.NEWEST_PAGE_SIZE);
         return accessLogMapper.selectList(wrapper);
     }
 
@@ -104,7 +105,7 @@ public class AccessLogServiceImpl implements AccessLogService {
         }
         Date date = operationLogMapper.selectLastIndexViewTimeByUsername(username);
         QueryWrapper<AccessLog> wrapper = new QueryWrapper<>();
-        wrapper.between("create_time", date, new Date());
+        wrapper.between(AccessLog.Table.CREATE_TIME, date, new Date());
         return accessLogMapper.selectCount(wrapper);
     }
 
@@ -129,32 +130,32 @@ public class AccessLogServiceImpl implements AccessLogService {
     public Page<AccessLog> listByPage(Integer current, Integer size, LogQuery logQuery) {
         Page<AccessLog> page = new Page<>(current, size);
         QueryWrapper<AccessLog> wrapper = new QueryWrapper<>();
-        wrapper.select("id", "request_ip", "address", "description", "browser", "time", "create_time", "status")
-                .orderByDesc("create_time");
+        wrapper.select(AccessLog.Table.ID, AccessLog.Table.REQUEST_IP, AccessLog.Table.ADDRESS, AccessLog.Table.DESCRIPTION, AccessLog.Table.BROWSER, AccessLog.Table.TIME, AccessLog.Table.CREATE_TIME, AccessLog.Table.STATUS)
+                .orderByDesc(AccessLog.Table.CREATE_TIME);
         if (!StringUtils.isEmpty(logQuery.getRequestIp())) {
-            wrapper.like("request_ip", logQuery.getRequestIp());
+            wrapper.like(AccessLog.Table.REQUEST_IP, logQuery.getRequestIp());
         }
         if (!StringUtils.isEmpty(logQuery.getDescription())) {
-            wrapper.like("description", logQuery.getDescription());
+            wrapper.like(AccessLog.Table.DESCRIPTION, logQuery.getDescription());
         }
         if (!StringUtils.isEmpty(logQuery.getBrowser())) {
-            wrapper.like("browser", logQuery.getBrowser());
+            wrapper.like(AccessLog.Table.BROWSER, logQuery.getBrowser());
         }
         if (!StringUtils.isEmpty(logQuery.getAddress())) {
-            wrapper.like("address", logQuery.getAddress());
+            wrapper.like(AccessLog.Table.ADDRESS, logQuery.getAddress());
         }
         if (logQuery.getStartDate() != null && logQuery.getEndDate() != null) {
-            wrapper.between("create_time", logQuery.getStartDate(), logQuery.getEndDate());
+            wrapper.between(AccessLog.Table.CREATE_TIME, logQuery.getStartDate(), logQuery.getEndDate());
         }
         if (logQuery.getTimeRank() != null) {
             if (Objects.equals(logQuery.getTimeRank(), Constant.LOW_REQUEST_TIME_RANK)) {
-                wrapper.lt("time", Constant.LOW_REQUEST_TIME);
+                wrapper.lt(AccessLog.Table.TIME, Constant.LOW_REQUEST_TIME);
             }
             if (Objects.equals(logQuery.getTimeRank(), Constant.MID_REQUEST_TIME_RANK)) {
-                wrapper.between("time", Constant.LOW_REQUEST_TIME, Constant.HIGH_REQUEST_TIME);
+                wrapper.between(AccessLog.Table.TIME, Constant.LOW_REQUEST_TIME, Constant.HIGH_REQUEST_TIME);
             }
             if (Objects.equals(logQuery.getTimeRank(), Constant.HIGH_REQUEST_TIME_RANK)) {
-                wrapper.gt("time", Constant.HIGH_REQUEST_TIME);
+                wrapper.gt(AccessLog.Table.TIME, Constant.HIGH_REQUEST_TIME);
             }
         }
         return accessLogMapper.selectPage(page, wrapper);

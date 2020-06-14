@@ -25,4 +25,9 @@ public class ArticleTag implements Serializable {
     @ApiModelProperty("主键:标签ID")
     @TableId
     private Long tagId;
+
+    public interface Table {
+        String ARTICLE_ID = "article_id";
+        String TAG_ID = "tag_id";
+    }
 }

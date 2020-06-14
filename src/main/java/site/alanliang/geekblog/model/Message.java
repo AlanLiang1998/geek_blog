@@ -77,4 +77,21 @@ public class Message implements Serializable {
 
     @TableField(exist = false)
     private Message parentMessage;
+
+    public interface Table {
+        String ID = "id";
+        String PID = "pid";
+        String USER_ID = "user_id";
+        String CONTENT = "content";
+        String NICKNAME = "nickname";
+        String LINK = "link";
+        String AVATAR = "avatar";
+        String EMAIL = "email";
+        String STATUS = "status";
+        String CREATE_TIME = "create_time";
+        String BROWSER = "browser";
+        String OS = "os";
+        String ADDRESS = "address";
+        String REQUEST_IP = "request_ip";
+    }
 }
