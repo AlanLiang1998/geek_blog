@@ -160,7 +160,10 @@
             getCategories: function () {
                 axios({
                     url: '/categories',
-                    method: 'GET'
+                    method: 'GET',
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest'
+                    },
                 }).then((result) => {
                     this.categories = result.data;
                     this.$nextTick(function () {
@@ -225,7 +228,10 @@
             getArticlesByCategoryId: function (categoryId, current) {
                 axios({
                     url: '/category/' + categoryId + '/articles?current=' + current,
-                    method: 'GET'
+                    method: 'GET',
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest'
+                    },
                 }).then((result) => {
                     this.articles = result.data.records;
                     this.current = result.data.current;

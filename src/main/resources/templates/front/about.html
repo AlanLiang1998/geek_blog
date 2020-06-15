@@ -274,6 +274,9 @@
                     params: {
                         dateType: 2,
                     },
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest'
+                    },
                     method: 'GET'
                 }).then((result) => {
                     let aboutData = result.data;

@@ -169,7 +169,10 @@
             getTags: function () {
                 axios({
                     url: '/tags',
-                    method: 'GET'
+                    method: 'GET',
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest'
+                    },
                 }).then((result) => {
                     this.tags = result.data;
                     this.getWordArray();
@@ -178,7 +181,10 @@
             getArticlesByTagId: function (tagId, current) {
                 axios({
                     url: '/tag/' + tagId + '/articles?current=' + current,
-                    method: 'GET'
+                    method: 'GET',
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest'
+                    },
                 }).then((result) => {
                     this.articles = result.data.records;
                     this.current = result.data.current;

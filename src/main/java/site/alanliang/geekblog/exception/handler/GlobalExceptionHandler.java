@@ -9,6 +9,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 import site.alanliang.geekblog.exception.AssociationExistException;
 import site.alanliang.geekblog.exception.BadRequestException;
 import site.alanliang.geekblog.exception.EntityExistException;
@@ -37,10 +38,10 @@ public class GlobalExceptionHandler {
      * @return
      */
     @ExceptionHandler(StatusExpiredException.class)
-    public ModelAndView handleStatusExpiredException(StatusExpiredException e) {
+    public RedirectView handleStatusExpiredException(StatusExpiredException e) {
         // 打印堆栈信息
         log.error(ThrowableUtil.getStackTrace(e));
-        return new ModelAndView("admin/home/login");
+        return new RedirectView("/admin/login.html");
     }
 
     @ExceptionHandler(AccessDeniedException.class)

@@ -381,19 +381,19 @@ public class ArticleServiceImpl implements ArticleService {
             QueryWrapper<ArticleTag> articleTagWrapper = new QueryWrapper<>();
             articleTagWrapper.eq(ArticleTag.Table.ARTICLE_ID, article.getId());
             articleTagMapper.delete(articleTagWrapper);
-            //手动清空标签缓存
-            List<String> list = redisUtils.scan("tag*");
-            if (!CollectionUtils.isEmpty(list)) {
-                String[] keys = new String[list.size()];
-                list.toArray(keys);
-                redisUtils.del(keys);
-            }
             //从ElasticSearch中删除
             articleDocumentRepository.deleteById(article.getId());
         }
         //添加新标签
         List<Long> tagIdList = article.getTagList().stream().map(Tag::getId).collect(Collectors.toList());
         articleTagMapper.insertBatch(article.getId(), tagIdList);
+        //手动清空标签缓存
+        List<String> list = redisUtils.scan("tag*");
+        if (!CollectionUtils.isEmpty(list)) {
+            String[] keys = new String[list.size()];
+            list.toArray(keys);
+            redisUtils.del(keys);
+        }
         //添加到ElasticSearch中
         saveToElasticSearch(article);
     }

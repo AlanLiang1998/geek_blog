@@ -582,7 +582,8 @@
                                                 </ul>
                                                 <div id="wechat">
                                                     <img src="http://cdn.alanliang.site/loading.png"
-                                                         data-src="/static/front/image/wepay.jpg" class="reward-img lazy"
+                                                         data-src="/static/front/image/wepay.jpg"
+                                                         class="reward-img lazy"
                                                          alt="微信打赏二维码">
                                                 </div>
 
@@ -940,6 +941,9 @@
                     axios({
                         url: '/visitor/login',
                         method: 'POST',
+                        headers: {
+                            'X-Requested-With': 'XMLHttpRequest'
+                        },
                         data: {
                             certificate: this.login.certificate,
                             password: this.login.password,
@@ -955,7 +959,7 @@
                         });
                     }).catch(error => {
                         swal({
-                            text: error.response.data.msg,
+                            text: `${error.response.data.message}`,
                             icon: "error",
                             button: {
                                 text: "确定",
@@ -978,6 +982,9 @@
                     axios({
                         url: '/visitor',
                         method: 'POST',
+                        headers: {
+                            'X-Requested-With': 'XMLHttpRequest'
+                        },
                         data: {
                             username: this.register.username,
                             password: this.register.password,
@@ -997,7 +1004,7 @@
                         });
                     }).catch(error => {
                         swal({
-                            text: error.response.data.msg,
+                            text: `${error.response.data.message}`,
                             icon: "error",
                             button: {
                                 text: "确定",
@@ -1040,7 +1047,10 @@
             likeIt: function () {
                 axios({
                     url: '/article/' + this.articleId + '/likes',
-                    method: 'PUT'
+                    method: 'PUT',
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest'
+                    },
                 }).then((result) => {
                     $('#likeBtn').addClass('disabled');
                 })
@@ -1114,7 +1124,12 @@
                     'parentNickname': this.parentNickname
                 };
                 this.loading = true;
-                axios.post('/comments', newComment)
+                axios.post('/comments', newComment,
+                    {
+                        headers: {
+                            'X-Requested-With': 'XMLHttpRequest'
+                        }
+                    })
                     .then((result) => {
                         setTimeout(() => {
                             this.loading = false;
@@ -1122,13 +1137,22 @@
                             this.content = '';
                             this.getComments();
                         }, 1000);
+                    }).catch((error) => {
+                    Swal.fire({
+                        icon: 'error',
+                        title: '提交失败！',
+                        text: `${error.response.data.message}`,
                     });
+                })
                 return false;
             },
             getComments: function () {
                 axios({
                     url: '/comments/listByArticleId/' + this.articleId + '?current=' + this.current,
-                    method: 'GET'
+                    method: 'GET',
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest'
+                    },
                 }).then((result) => {
                     this.current = result.data.current;
                     this.pages = result.data.pages;

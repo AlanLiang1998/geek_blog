@@ -30,7 +30,7 @@ public class ArticleDocument implements Serializable {
     private Integer status;//审核状态
 
     public interface Table {
-        String ID = "ID";
+        String ID = "id";
         String TITLE = "title";
         String SUMMARY = "summary";
         String CONTENT = "content";

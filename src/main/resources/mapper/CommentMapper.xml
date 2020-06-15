@@ -49,8 +49,8 @@
                address
         from t_comment tc
         where article_id = #{articleId}
-          and pid = ${@site.alanliang.geekblog.common.Constant@COMMENT_LINKED_LIST_ROOT}
-          and tc.status &lt;&gt; ${@site.alanliang.geekblog.common.Constant@COMMENT_NOT_PASS}
+          and pid = 0
+          and tc.status &lt;&gt; 0
         order by create_time DESC
     </select>
 
@@ -68,7 +68,7 @@
                address
         from t_comment tc
         where article_id = #{articleId}
-          and tc.status &lt;&gt; ${@site.alanliang.geekblog.common.Constant@COMMENT_NOT_PASS}
+          and tc.status &lt;&gt; 0
         order by create_time DESC
     </select>
     <select id="listTableByPage" resultMap="tableResultMap">

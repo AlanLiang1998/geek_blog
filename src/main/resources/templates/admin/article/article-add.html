@@ -1,17 +1,14 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
 <head>
     <meta charset="utf-8">
-    <title>GeekBlog-内容发布</title>
+    <title>发布文章</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link rel="stylesheet" href="/static/admin/layuimini/lib/layui-v2.5.5/css/layui.css" media="all"
-          th:href="@{/static/admin/layuimini/lib/layui-v2.5.5/css/layui.css}">
-    <link rel="stylesheet" href="/static/admin/layuimini/css/public.css" media="all"
-          th:href="@{/static/admin/layuimini/css/public.css}">
-    <link rel="stylesheet" href="/static/admin/layuimini/lib/font-awesome-4.7.0/css/font-awesome.min.css"
-          th:href="@{/static/admin/layuimini/lib/font-awesome-4.7.0/css/font-awesome.min.css}">
+    <link rel="stylesheet" href="/static/admin/layuimini/lib/layui-v2.5.5/css/layui.css" media="all">
+    <link rel="stylesheet" href="/static/admin/layuimini/css/public.css" media="all">
+    <link rel="stylesheet" href="/static/admin/layuimini/lib/font-awesome-4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/static/admin/editormd/css/editormd.min.css">
     <link rel="stylesheet" href="/static/admin/my/css/my.css">
 </head>
@@ -124,24 +121,15 @@
         </form>
     </div>
 </div>
-</div>
-
-
-<!-- 注意， 只需要引用 JS，无需引用任何 CSS ！！！-->
-<script src="/static/admin/layuimini/lib/layui-v2.5.5/layui.js" charset="utf-8"
-        th:src="@{/static/admin/layuimini/lib/layui-v2.5.5/layui.js}"></script>
-<script src="/static/admin/layuimini/js/lay-config.js?v=1.0.4" charset="utf-8"
-        th:src="@{/static/admin/layuimini/js/lay-config.js(v=1.0.4)}"></script>
-<script src="/static/admin/xm-select/xm-select.js" th:src="@{/static/admin/xm-select/xm-select.js}"></script>
-<script src="/static/admin/layuimini/js/lay-module/layuimini/miniTab.js"
-        th:src="@{/static/admin/layuimini/js/lay-module/layuimini/miniTab.js}"></script>
+<script src="/static/admin/layuimini/lib/layui-v2.5.5/layui.js" charset="utf-8"></script>
+<script src="/static/admin/layuimini/js/lay-config.js?v=1.0.4" charset="utf-8"></script>
+<script src="/static/admin/xm-select/xm-select.js"></script>
+<script src="/static/admin/layuimini/js/lay-module/layuimini/miniTab.js"></script>
 <script src="/static/admin/layuimini/lib/jquery-3.4.1/jquery-3.4.1.min.js"></script>
 <script src="/static/admin/editormd/editormd.min.js"></script>
-<!--sweetalert2弹出层-->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-<!--axios异步工具-->
 <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.19.2/axios.js"></script>
-<script type="text/javascript" th:inline="javascript">
+<script type="text/javascript">
     layui.use(['layer', 'form', 'miniTab', 'rate'], function () {
         var $ = layui.jquery,
             layer = layui.layer,
@@ -204,11 +192,9 @@
                 maxColor: 'orange',
             },
             create: function (val, arr) {
-                if (arr.length === 0) {
-                    return {
-                        name: val,
-                        value: null
-                    }
+                return {
+                    name: val,
+                    value: val
                 }
             },
             maxMethod() {
@@ -310,11 +296,15 @@
         function getField(data) {
             //获取标签列表
             data.field.tagList = tagSelect.getValue().map(item => {
+                if (item.value === item.name) {
+                    item.value = null;
+                }
                 return {
                     id: item.value,
                     name: item.name,
                 }
             });
+            console.log(data.field.tagList);
             //获取文章内容
             data.field.content = editor.getHTML();
             //获取文章markdown
@@ -363,47 +353,47 @@
             let fields = getField(data);
             //获取是否发布
             fields.published = true;
-            Swal.fire({
-                title: '是否确定发布该文章？',
-                icon: 'question',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: '确定发布！',
-                cancelButtonText: '取消发布！',
-                showLoaderOnConfirm: true,
-                preConfirm: () => {
-                    return new Promise((resolve, reject) => {
-                        axios({
-                            method: 'post',
-                            url: '/admin/article',
-                            data: fields,
-                            headers: {
-                                'X-Requested-With': 'XMLHttpRequest'
-                            }
-                        }).then(response => {
-                            resolve(response.data);
-                        }, error => {
-                            reject(error);
-                        })
-                    }).then(res => {
-                        Swal.fire({
-                            icon: 'success',
-                            title: '发布成功',
-                            showConfirmButton: false,
-                            timer: 1500,
-                            onClose: () => {
-                                miniTab.openNewTabByIframe({
-                                    href: "/admin/page/article/article-list?rad=" + Math.random(),
-                                    title: "文章管理",
-                                });
-                            }
-                        });
-                    }).catch(error => {
-                        Swal.showValidationMessage(`发布失败: ${error.response.data.message}`);
-                    })
-                }
-            });
+             Swal.fire({
+                 title: '是否确定发布该文章？',
+                 icon: 'question',
+                 showCancelButton: true,
+                 confirmButtonColor: '#3085d6',
+                 cancelButtonColor: '#d33',
+                 confirmButtonText: '确定发布！',
+                 cancelButtonText: '取消发布！',
+                 showLoaderOnConfirm: true,
+                 preConfirm: () => {
+                     return new Promise((resolve, reject) => {
+                         axios({
+                             method: 'post',
+                             url: '/admin/article',
+                             data: fields,
+                             headers: {
+                                 'X-Requested-With': 'XMLHttpRequest'
+                             }
+                         }).then(response => {
+                             resolve(response.data);
+                         }, error => {
+                             reject(error);
+                         })
+                     }).then(res => {
+                         Swal.fire({
+                             icon: 'success',
+                             title: '发布成功',
+                             showConfirmButton: false,
+                             timer: 1500,
+                             onClose: () => {
+                                 miniTab.openNewTabByIframe({
+                                     href: "/admin/page/article/article-list?rad=" + Math.random(),
+                                     title: "文章管理",
+                                 });
+                             }
+                         });
+                     }).catch(error => {
+                         Swal.showValidationMessage(`发布失败: ${error.response.data.message}`);
+                     })
+                 }
+             });
             return false;
         });
     });

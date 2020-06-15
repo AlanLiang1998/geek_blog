@@ -2,8 +2,10 @@ package site.alanliang.geekblog.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import site.alanliang.geekblog.interceptor.WebInterceptor;
 
 /**
  * @Descriptin WebMvc配置
@@ -28,15 +30,10 @@ public class WebMvcConfig implements WebMvcConfigurer {
         registry.addResourceHandler("/file/**").addResourceLocations("file:" + path);
     }
 
-   /* @Override
+    @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new LoginInterceptor())
+        registry.addInterceptor(new WebInterceptor())
                 .addPathPatterns("/admin/**")
-                .excludePathPatterns("/admin/login")
-                .excludePathPatterns("/admin")
-                .excludePathPatterns("/admin/401");
-
-        registry.addInterceptor(new LoginPageInterceptor())
-                .addPathPatterns("/admin");
-    }*/
+                .excludePathPatterns("/admin/login", "/admin/login.html", "/admin/captcha");
+    }
 }

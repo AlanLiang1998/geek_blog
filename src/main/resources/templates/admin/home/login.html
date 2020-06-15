@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
 <head>
     <meta charset="UTF-8">
     <title>后台管理-登录</title>
@@ -9,8 +9,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="format-detection" content="telephone=no">
-    <link rel="stylesheet" href="../lib/layui-v2.5.5/css/layui.css" media="all"
-          th:href="@{/static/admin/layuimini/lib/layui-v2.5.5/css/layui.css}">
+    <link rel="stylesheet" href="/static/admin/layuimini/lib/layui-v2.5.5/css/layui.css" media="all">
     <!--[if lt IE 9]>
     <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
     <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
@@ -152,12 +151,10 @@
         </div>
     </div>
 </div>
-<script charset="utf-8" th:src="@{/static/admin/layuimini/lib/jquery-3.4.1/jquery-3.4.1.min.js}"></script>
-<script th:src="@{/static/admin/layuimini/lib/layui-v2.5.5/layui.js}"></script>
-<script charset="utf-8" th:src="@{/static/admin/layuimini/lib/jq-module/jquery.particleground.min.js}"></script>
-<!--sweetalert2弹出层-->
+<script charset="utf-8" src="/static/admin/layuimini/lib/jquery-3.4.1/jquery-3.4.1.min.js"></script>
+<script charset="utf-8" src="/static/admin/layuimini/lib/layui-v2.5.5/layui.js"></script>
+<script charset="utf-8" src="/static/admin/layuimini/lib/jq-module/jquery.particleground.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-<!--axios异步工具-->
 <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.19.2/axios.js"></script>
 <script>
     layui.use(['form'], function () {

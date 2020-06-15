@@ -288,7 +288,10 @@
             getHomeArticles: function () {
                 axios({
                     url: '/home',
-                    method: 'GET'
+                    method: 'GET',
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest'
+                    },
                 }).then((result) => {
                     let homeArticles = result.data;
                     this.topArticles = homeArticles.topArticles;
@@ -307,7 +310,9 @@
                 axios({
                     url: '/articles?current=' + current,
                     method: 'GET',
-
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest'
+                    },
                 }).then((result) => {
                     this.articles = result.data.records;
                     this.current = result.data.current;

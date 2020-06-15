@@ -146,7 +146,10 @@
             getCalendarData: function () {
                 axios({
                     url: '/archives',
-                    method: 'GET'
+                    method: 'GET',
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest'
+                    },
                 }).then((result) => {
                     let archivesData = result.data;
                     this.calendarData = archivesData.articleDates.map(item => {
@@ -268,6 +271,9 @@
                     url: '/archives-articles',
                     params: {
                         current: current,
+                    },
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest'
                     },
                     method: 'GET'
                 }).then((result) => {

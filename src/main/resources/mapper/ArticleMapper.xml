@@ -23,6 +23,10 @@
             <id property="name" column="cname"/>
             <id property="color" column="color"/>
         </association>
+        <association property="author" javaType="site.alanliang.geekblog.model.User">
+            <id property="id" column="aid"/>
+            <id property="username" column="username"/>
+        </association>
         <collection property="tagList" column="id" select="site.alanliang.geekblog.dao.TagMapper.selectByArticleId"/>
     </resultMap>
 
@@ -63,7 +67,6 @@
         <result property="appreciable" column="appreciable"/>
         <result property="createTime" column="create_time"/>
         <association property="author" javaType="site.alanliang.geekblog.model.User">
-            <id property="id" column="uid"/>
             <result property="username" column="username"/>
         </association>
         <association property="category" javaType="site.alanliang.geekblog.model.Category">
@@ -80,12 +83,14 @@
     <select id="listTableByPage" resultMap="tableResultMap"
             parameterType="com.baomidou.mybatisplus.extension.plugins.pagination.Page">
         select ta.id, ta.title, ta.type, ta.cover, ta.comments, ta.views, ta.likes, ta.published, ta.commentable,
-        ta.appreciable,
-        ta.top, ta.recommend, ta.status, ta.sort,
-        ta.create_time, ta.update_time, tc.id as cid, tc.name as cname, tc.color
+        ta.appreciable,ta.top, ta.recommend, ta.status, ta.sort, ta.create_time, ta.update_time,
+        tc.id as cid, tc.name as cname, tc.color,
+        su.username
         from t_article ta
         left join t_category tc
         on ta.category_id = tc.id
+        left join sys_user su
+        on ta.author_id = su.id
         <if test="ew != null and ew.emptyOfWhere == false">
             ${ew.customSqlSegment}
         </if>

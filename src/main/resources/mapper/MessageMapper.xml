@@ -31,8 +31,8 @@
                os,
                address
         from t_message
-        where pid = ${@site.alanliang.geekblog.common.Constant@COMMENT_LINKED_LIST_ROOT}
-          and status &lt;&gt; ${@site.alanliang.geekblog.common.Constant@COMMENT_NOT_PASS}
+        where pid =0
+          and status &lt;&gt; 0
         order by create_time DESC
     </select>
 
@@ -52,7 +52,7 @@
                  left join (select id, nickname
                             from t_message) tm2
                            on tm1.pid = tm2.id
-        where tm1.status &lt;&gt; ${@site.alanliang.geekblog.common.Constant@COMMENT_NOT_PASS}
+        where tm1.status &lt;&gt; 0
         order by tm1.create_time DESC
     </select>
 </mapper>

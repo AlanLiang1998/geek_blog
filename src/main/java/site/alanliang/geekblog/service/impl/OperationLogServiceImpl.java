@@ -52,6 +52,9 @@ public class OperationLogServiceImpl implements OperationLogService {
         String[] argNames = ((MethodSignature) joinPoint.getSignature()).getParameterNames();
         if (argValues != null) {
             for (int i = 0; i < argValues.length; i++) {
+                if (argValues[i].toString().length() > 100) {
+                    argValues[i] = "...";
+                }
                 params.append(" ").append(argNames[i]).append(": ").append(argValues[i]);
             }
         }

@@ -23,6 +23,8 @@ public class UserInfoUtil {
         if (o != null) {
             User user = (User) o;
             id = user.getId();
+        } else {
+            throw new BadRequestException("用户未登录");
         }
         return id;
     }

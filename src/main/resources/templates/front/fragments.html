@@ -416,7 +416,10 @@
                     }
                     axios({
                         url: '/articles/search?keyword=' + keyword,
-                        method: 'GET'
+                        method: 'GET',
+                        headers: {
+                            'X-Requested-With': 'XMLHttpRequest'
+                        },
                     }).then((result) => {
                         this.searchResult = result.data;
                     })

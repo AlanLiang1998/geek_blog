@@ -1,6 +1,9 @@
 #服务器端口
 server:
   port: 8889
+  servlet:
+    session:
+      timeout: 3600s
 #配置数据源
 spring:
   datasource:

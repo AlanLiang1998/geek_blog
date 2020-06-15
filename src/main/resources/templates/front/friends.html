@@ -522,6 +522,21 @@
                             <div class="vinfo" style="display:block;">
                                 <div class="vcount col"><span class="vnum">{{message.total}}</span>&nbsp;留言</div>
                             </div>
+                            <div class="center-align">
+                                <div class="preloader-wrapper big active" v-show="loading">
+                                    <div class="spinner-layer spinner-blue">
+                                        <div class="circle-clipper left">
+                                            <div class="circle"></div>
+                                        </div>
+                                        <div class="gap-patch">
+                                            <div class="circle"></div>
+                                        </div>
+                                        <div class="circle-clipper right">
+                                            <div class="circle"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="vlist">
                                 <div class="vcard" v-for="(message, index) in messages" :key="message.id"
                                      id="'message'+message.id">
@@ -627,6 +642,7 @@
                 total: 0,
             },
             friends: [],
+            loading: false,
         },
         methods: {
             getForm: function () {
@@ -712,18 +728,39 @@
                     'link': this.message.link,
                     'content': this.message.content,
                 };
-                axios.post('/messages', newMessage)
+                this.loading = true;
+                axios.post('/messages', newMessage,
+                    {
+                        headers: {
+                            'X-Requested-With': 'XMLHttpRequest'
+                        },
+                    })
                     .then((result) => {
+                        setTimeout(() => {
+                            this.loading = false;
+                            this.current = 1;
+                            this.content = '';
+                            this.getComments();
+                        }, 1000);
                         this.message.content = '';
                         this.messages = this.getMessages();
                         $.scrollTo('.vinfo', 500);
+                    }).catch((error) => {
+                    Swal.fire({
+                        icon: 'error',
+                        title: '提交失败！',
+                        text: `${error.response.data.message}`,
                     });
+                })
                 return false;
             },
             getMessages: function () {
                 axios({
                     url: '/messages/?current=' + this.message.current,
-                    method: 'GET'
+                    method: 'GET',
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest'
+                    },
                 }).then((result) => {
                     this.message.current = result.data.current;
                     this.message.pages = result.data.pages;
@@ -738,7 +775,10 @@
             getLinks: function () {
                 axios({
                     url: '/links/?current=' + this.friend.current,
-                    method: 'GET'
+                    method: 'GET',
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest'
+                    },
                 }).then((result) => {
                     this.friend.current = result.data.current;
                     this.friend.pages = result.data.pages;

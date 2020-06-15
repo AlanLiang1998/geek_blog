@@ -23,7 +23,7 @@ public class Notice implements Serializable {
 
     @ApiModelProperty("标题")
     @NotNull(message = "标题不能为空")
-    @Length(max = 20, message = "标题长度在20个字符以内")
+    @Length(max = 30, message = "标题长度在30个字符以内")
     private String title;
 
     @ApiModelProperty("内容")
