@@ -14,6 +14,7 @@ import org.springframework.data.elasticsearch.core.EntityMapper;
 public class RestClientConfig extends AbstractElasticsearchConfiguration {
     @Override
     public RestHighLevelClient elasticsearchClient() {
+        //ClientConfiguration clientConfiguration = ClientConfiguration.create("47.115.8.41:9200");
         return RestClients.create(ClientConfiguration.localhost()).rest();
     }
 

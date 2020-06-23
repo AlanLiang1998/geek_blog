@@ -740,10 +740,9 @@
                             this.loading = false;
                             this.current = 1;
                             this.content = '';
-                            this.getComments();
+                            this.getMessages();
                         }, 1000);
                         this.message.content = '';
-                        this.messages = this.getMessages();
                         $.scrollTo('.vinfo', 500);
                     }).catch((error) => {
                     Swal.fire({

@@ -242,7 +242,7 @@
                         <div class="row">
                             <div class="photo col s12 m6 l4" data-aos="fade-up" v-for="(photo, index) in photos">
                                 <div class="img-item">
-                                    <img class="responsive-img lazy" src="http://cdn.alanliang.site/loading.png"
+                                    <img class="responsive-img lazy" :src="photo.url"
                                          :data-src="photo.url" :alt="photo.description">
                                 </div>
                             </div>
