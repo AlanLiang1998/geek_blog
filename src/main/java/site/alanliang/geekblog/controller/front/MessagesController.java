@@ -39,6 +39,7 @@ public class MessagesController {
         return new ResponseEntity<>(pageInfo, HttpStatus.OK);
     }
 
+    @ApiOperation("新增留言")
     @PostMapping
     public JsonResult save(@Validated @RequestBody Message message, HttpServletRequest request) {
         message.setCreateTime(new Date());
