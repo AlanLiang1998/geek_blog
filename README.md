@@ -188,7 +188,10 @@ Maven版本：Maven
 
 修改application-dev.yml文件中的配置信息，比如数据库用户名和密码，Redis服务器的主机地址和端口、文件存储路径等等信息请根据自己实际情况修改。
 
-##### 6、启动项目
+##### 6、导入数据到ElasticSearch中
+如果ELasticSearch服务器地址不是本地，请先修改RestClientConfig中的服务器地址，是则忽略。然后在测试代码中找到src/test/java/...目录下中ElasticSearchTest，依次执行方法testCreateIndex()、testSave()创建并导入数据。
+
+##### 7、启动项目
 
 成功启动项目后便可在浏览器中访问项目。
 
