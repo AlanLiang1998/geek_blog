@@ -1,6 +1,7 @@
 package site.alanliang.geekblog.config;
 
 import org.elasticsearch.client.RestHighLevelClient;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.convert.support.DefaultConversionService;
@@ -11,11 +12,19 @@ import org.springframework.data.elasticsearch.core.ElasticsearchEntityMapper;
 import org.springframework.data.elasticsearch.core.EntityMapper;
 
 @Configuration
-public class RestClientConfig extends AbstractElasticsearchConfiguration {
+public class ElasticSearchConfig extends AbstractElasticsearchConfiguration {
+
+    @Value("${elasticsearch.host}")
+    private String host;
+
+    @Value("${elasticsearch.port}")
+    private String port;
+
     @Override
     public RestHighLevelClient elasticsearchClient() {
-        //ClientConfiguration clientConfiguration = ClientConfiguration.create("47.115.8.41:9200");
-        return RestClients.create(ClientConfiguration.localhost()).rest();
+        ClientConfiguration clientConfiguration = ClientConfiguration.create(host + ":" + port);
+        return RestClients.create(clientConfiguration).rest();
+//        return RestClients.create(ClientConfiguration.localhost()).rest();
     }
 
     // no special bean creation needed

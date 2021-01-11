@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import site.alanliang.geekblog.common.Constant;
@@ -35,6 +36,7 @@ public class OperationLogServiceImpl implements OperationLogService {
     private OperationLogMapper operationLogMapper;
 
     @Override
+    @Async
     @Transactional(rollbackFor = Exception.class)
     public void save(String username, String browser, String ip, ProceedingJoinPoint joinPoint, OperationLog log) {
 

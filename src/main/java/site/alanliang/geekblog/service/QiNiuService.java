@@ -45,7 +45,8 @@ public interface QiNiuService {
 
     /**
      * 上传文件
-     *  @param file        文件
+     *
+     * @param files       文件
      * @param qiniuConfig 配置
      */
     void upload(MultipartFile[] files, QiniuConfig qiniuConfig);

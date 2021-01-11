@@ -49,6 +49,15 @@ class ElasticSearchTest {
     }
 
     @Test
+    public void testIndexExists() {
+//        if (elasticsearchOperations.indexExists("article_document")) {
+//            System.out.println("存在");
+//        } else {
+//            System.out.println("不存在");
+//        }
+    }
+
+    @Test
     public void TestDeleteIndex() {
         elasticsearchOperations.deleteIndex(ArticleDocument.class);
     }

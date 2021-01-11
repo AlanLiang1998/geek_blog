@@ -2,18 +2,6 @@ package site.alanliang.geekblog.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import org.elasticsearch.action.search.SearchRequest;
-import org.elasticsearch.action.search.SearchResponse;
-import org.elasticsearch.client.RequestOptions;
-import org.elasticsearch.client.RestHighLevelClient;
-import org.elasticsearch.index.query.BoolQueryBuilder;
-import org.elasticsearch.index.query.MultiMatchQueryBuilder;
-import org.elasticsearch.index.query.QueryBuilders;
-import org.elasticsearch.index.query.TermQueryBuilder;
-import org.elasticsearch.search.SearchHit;
-import org.elasticsearch.search.builder.SearchSourceBuilder;
-import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
@@ -34,9 +22,8 @@ import site.alanliang.geekblog.model.ArticleTag;
 import site.alanliang.geekblog.model.Tag;
 import site.alanliang.geekblog.query.ArchivesQuery;
 import site.alanliang.geekblog.query.ArticleQuery;
-import site.alanliang.geekblog.repository.ArticleDocumentRepository;
 import site.alanliang.geekblog.service.ArticleService;
-import site.alanliang.geekblog.utils.HighLightUtil;
+import site.alanliang.geekblog.utils.ElasticSearchUtil;
 import site.alanliang.geekblog.utils.RedisUtils;
 import site.alanliang.geekblog.utils.UserInfoUtil;
 import site.alanliang.geekblog.vo.ArticleDateVO;
@@ -46,7 +33,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -71,11 +57,9 @@ public class ArticleServiceImpl implements ArticleService {
     @Autowired
     private OperationLogMapper operationLogMapper;
 
-    @Autowired
-    private RestHighLevelClient restHighLevelClient;
 
     @Autowired
-    private ArticleDocumentRepository articleDocumentRepository;
+    private ElasticSearchUtil elasticSearchUtil;
 
     @Autowired
     private RedisUtils redisUtils;
@@ -100,40 +84,7 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public List<ArticleDocument> listByKeyword(String keyword) throws IOException {
-        SearchRequest searchRequest = new SearchRequest(TableConstant.ARTICLE_DOCUMENT);
-        //匹配查询
-        SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
-        MultiMatchQueryBuilder multiMatchQueryBuilder = QueryBuilders.multiMatchQuery(keyword, ArticleDocument.Table.TITLE, ArticleDocument.Table.SUMMARY, ArticleDocument.Table.CONTENT);
-        TermQueryBuilder termQueryBuilder1 = QueryBuilders.termQuery(ArticleDocument.Table.PUBLISHED, true);
-        TermQueryBuilder termQueryBuilder2 = QueryBuilders.termQuery(ArticleDocument.Table.STATUS, Constant.AUDIT_PASS);
-        BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery().must(multiMatchQueryBuilder).must(termQueryBuilder1).must(termQueryBuilder2);
-        sourceBuilder.query(boolQueryBuilder);
-        //高亮
-        HighlightBuilder highlightBuilder = new HighlightBuilder();
-        highlightBuilder.field(ArticleDocument.Table.TITLE).field(ArticleDocument.Table.SUMMARY).field(ArticleDocument.Table.CONTENT);
-        highlightBuilder.preTags(Constant.HIGH_LIGHT_PRE_TAGS);
-        highlightBuilder.postTags(Constant.HIGH_LIGHT_POST_TAGS);
-        sourceBuilder.highlighter(highlightBuilder);
-        //执行搜索
-        searchRequest.source(sourceBuilder);
-        SearchResponse searchResponse = restHighLevelClient.search(searchRequest, RequestOptions.DEFAULT);
-        //解析结果
-        List<ArticleDocument> articleDocuments = new ArrayList<>();
-        for (SearchHit hit : searchResponse.getHits().getHits()) {
-            Map<String, Object> map = hit.getSourceAsMap();//原来的结果
-            //解析高亮的字段
-            HighLightUtil.parseField(hit, ArticleDocument.Table.TITLE);
-            HighLightUtil.parseField(hit, ArticleDocument.Table.SUMMARY);
-            HighLightUtil.parseField(hit, ArticleDocument.Table.CONTENT);
-
-            ArticleDocument articleDocument = new ArticleDocument();
-            articleDocument.setId(Long.valueOf((Integer) map.get(ArticleDocument.Table.ID)));
-            articleDocument.setTitle((String) map.get(ArticleDocument.Table.TITLE));
-            articleDocument.setSummary((String) map.get(ArticleDocument.Table.SUMMARY));
-            articleDocument.setContent((String) map.get(ArticleDocument.Table.CONTENT));
-            articleDocuments.add(articleDocument);
-        }
-        return articleDocuments;
+        return elasticSearchUtil.listByKeyword(keyword);
     }
 
     @Override
@@ -226,7 +177,7 @@ public class ArticleServiceImpl implements ArticleService {
             articleDocument.setId(id);
             articleDocuments.add(articleDocument);
         }
-        articleDocumentRepository.deleteAll(articleDocuments);
+        elasticSearchUtil.deleteAll(articleDocuments);
     }
 
     @Override
@@ -235,7 +186,7 @@ public class ArticleServiceImpl implements ArticleService {
     public void removeById(Long id) {
         articleMapper.deleteById(id);
         //从ElasticSearch中删除
-        articleDocumentRepository.deleteById(id);
+        elasticSearchUtil.deleteById(id);
     }
 
     @Override
@@ -302,13 +253,13 @@ public class ArticleServiceImpl implements ArticleService {
         article.setStatus(auditVO.getStatus());
         articleMapper.updateById(article);
         //从ElasticSearch中删除
-        articleDocumentRepository.deleteById(article.getId());
+        elasticSearchUtil.deleteById(article.getId());
         //重新添加
         QueryWrapper<Article> wrapper = new QueryWrapper<>();
         wrapper.select(Article.Table.ID, Article.Table.TITLE, Article.Table.SUMMARY, Article.Table.CONTENT, Article.Table.PUBLISHED, Article.Table.STATUS)
                 .eq(Article.Table.ID, auditVO.getId());
         Article art = articleMapper.selectOne(wrapper);
-        saveToElasticSearch(art);
+        elasticSearchUtil.save(art);
     }
 
     @Override
@@ -339,23 +290,6 @@ public class ArticleServiceImpl implements ArticleService {
         return count >= Constant.MAX_TOP_ARTICLES;
     }
 
-    public void saveToElasticSearch(Article article) {
-        ArticleDocument articleDocument = new ArticleDocument();
-        BeanUtils.copyProperties(article, articleDocument);
-        if (articleDocument.getPublished() == null) {
-            QueryWrapper<Article> wrapper = new QueryWrapper<>();
-            wrapper.select(Article.Table.PUBLISHED).eq(Article.Table.ID, article.getId());
-            Article temp = articleMapper.selectOne(wrapper);
-            articleDocument.setPublished(temp.getPublished());
-        }
-        if (articleDocument.getStatus() == null) {
-            QueryWrapper<Article> wrapper = new QueryWrapper<>();
-            wrapper.select(Article.Table.STATUS).eq(Article.Table.ID, article.getId());
-            Article temp = articleMapper.selectOne(wrapper);
-            articleDocument.setStatus(temp.getStatus());
-        }
-        articleDocumentRepository.save(articleDocument);
-    }
 
     @Override
     @CacheEvict(allEntries = true)
@@ -382,7 +316,7 @@ public class ArticleServiceImpl implements ArticleService {
             articleTagWrapper.eq(ArticleTag.Table.ARTICLE_ID, article.getId());
             articleTagMapper.delete(articleTagWrapper);
             //从ElasticSearch中删除
-            articleDocumentRepository.deleteById(article.getId());
+            elasticSearchUtil.deleteById(article.getId());
         }
         //添加新标签
         List<Long> tagIdList = article.getTagList().stream().map(Tag::getId).collect(Collectors.toList());
@@ -395,7 +329,7 @@ public class ArticleServiceImpl implements ArticleService {
             redisUtils.del(keys);
         }
         //添加到ElasticSearch中
-        saveToElasticSearch(article);
+        elasticSearchUtil.save(article);
     }
 
 }

@@ -85,3 +85,6 @@ qiniu:
   # 文件大小 /M
   max-size: 15
 
+elasticsearch:
+  host: 127.0.0.1
+  port: 9200
