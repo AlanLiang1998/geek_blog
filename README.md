@@ -1,6 +1,8 @@
-###GeekBlog个人博客系统说明
+### GeekBlog个人博客系统说明
 
-####目录
+> 图片无法访问请移步：http://www.alanliang.site/article/15
+
+#### 目录
 
 [toc]
 
@@ -14,16 +16,16 @@
 - 前台静态页面来自：Hexo博客Matery主题（项目地址：https://github.com/blinkfox/hexo-theme-matery)，后台模板来自layuimini（主页：http://layuimini.99php.cn/）。
 - 页面使用响应式框架：Materialize（前台）和Layui（后台），支持电脑、平板、手机等所有主流设备访问。
 
-####技术栈
+#### 技术栈
 
-#####前端主要技术栈
+##### 前端主要技术栈
 
 - CSS框架：Materialize（前台）、Layui（后台）
 - JS框架：Vue（前台）
 - HTTP客户端：Axios
 - 主要插件：Echarts（数据图表）、SweetAlert2（页面弹出层）、Editormd（Markdown编辑器）、Jqcloud（标签云）、moment（日期处理类库）、zyupload（文件上传）、Lazyload(图片懒加载)、aos（页面滚动动画）、busuanzi（网站统计）等等
 
-#####后端主要技术栈
+##### 后端主要技术栈
 
 - 主体框架：SpringBoot
 - 持久层框架：Mybatis（整合MybatisPlus插件）
@@ -80,7 +82,7 @@
 
 ![系统功能模块图](http://cdn.alanliang.site/系统功能模块图.jpg)
 
-#####后台功能
+##### 后台功能
 
 后台主要包括以下几个功能：
 
@@ -124,7 +126,7 @@
 
 - 相册管理：用户可以查看系统的照片信息，根据特定列进行排序，并可以输入日期范围等信息进行搜索，可以添加新的照片、修改照片信息、删除照片，可以导出和打印照片数据。
 
-#####前台功能
+##### 前台功能
 
 前台主要包括以下功能：
 
@@ -180,11 +182,11 @@ Maven版本：Maven
 
 克隆或者下载项目到本地，解压，其中geekblog是完整项目源码, 可以使用 IDEA 导入或者打开。而sql文件下的geek_blog.sql是数据库文件。
 
-#####3、使用IDEA导入项目
+##### 3、使用IDEA导入项目
 
 确保你安装了 Maven，导入项目时，选择已存在的项目，类型是 Maven 项目。
 
-#####4、导入数据库
+##### 4、导入数据库
 
 新建数据库geek_blog，注意数据库的编码和排序规则是utf-8和utf-8_general_ci，然后执行geek_blog.sql导入数据库。
 
@@ -192,7 +194,7 @@ Maven版本：Maven
 
 修改application-dev.yml文件中的配置信息，比如数据库用户名和密码，Redis服务器的主机地址和端口、文件存储路径等等信息请根据自己实际情况修改。
 
-#####6、启动项目
+##### 6、启动项目
 
 成功启动项目后便可在浏览器中访问项目。
 
